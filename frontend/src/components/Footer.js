@@ -70,7 +70,7 @@ const Footer = () => {
             <div className="lg:col-span-1">
               <Link to="/" className="inline-block mb-4">
                 <div className="font-serif text-2xl font-black tracking-tight">
-                  JUST <span className="text-gold-500">URBANE</span>
+                  URBANE
                 </div>
               </Link>
               <p className="text-primary-200 mb-6 leading-relaxed">
