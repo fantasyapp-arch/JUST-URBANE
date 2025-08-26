@@ -172,40 +172,7 @@ const Header = () => {
       </div>
 
       {/* Search Modal */}
-      {isSearchOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-start justify-center pt-20">
-          <div className="bg-white w-full max-w-2xl mx-4 rounded-lg shadow-xl">
-            <form onSubmit={handleSearch} className="p-6">
-              <div className="flex items-center space-x-4">
-                <div className="flex-1">
-                  <input
-                    type="text"
-                    placeholder="Search articles, authors, topics..."
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gold-500 focus:border-transparent outline-none text-lg"
-                    autoFocus
-                  />
-                </div>
-                <button
-                  type="submit"
-                  className="btn-primary"
-                  disabled={!searchQuery.trim()}
-                >
-                  Search
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setIsSearchOpen(false)}
-                  className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
-                >
-                  <X className="h-6 w-6 text-gray-600" />
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      )}
+      <SearchModal isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
     </header>
   );
 };
