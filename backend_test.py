@@ -339,6 +339,101 @@ class JustUrbaneAPITester:
         except Exception as e:
             self.log_test("CORS Configuration", False, f"CORS test error: {str(e)}")
     
+    def test_payment_packages(self):
+        """Test Stripe payment packages endpoint"""
+        try:
+            response = self.session.get(f"{self.base_url}/api/payments/packages", timeout=10)
+            if response.status_code == 200:
+                packages = response.json()
+                if isinstance(packages, dict):
+                    # Check for expected packages
+                    expected_packages = ["premium_monthly", "premium_annual"]
+                    missing_packages = [pkg for pkg in expected_packages if pkg not in packages]
+                    
+                    if not missing_packages:
+                        # Check pricing
+                        monthly = packages.get("premium_monthly", {})
+                        annual = packages.get("premium_annual", {})
+                        
+                        monthly_price = monthly.get("amount")
+                        annual_price = annual.get("amount")
+                        
+                        if monthly_price == 499.0 and annual_price == 4999.0:
+                            self.log_test("Payment Packages", True, f"Correct INR pricing: Monthly ₹{monthly_price}, Annual ₹{annual_price}")
+                        else:
+                            self.log_test("Payment Packages", False, f"Incorrect pricing: Monthly ₹{monthly_price}, Annual ₹{annual_price}")
+                        
+                        # Check currency
+                        if monthly.get("currency") == "inr" and annual.get("currency") == "inr":
+                            self.log_test("Payment Currency", True, "Currency set to INR for both packages")
+                        else:
+                            self.log_test("Payment Currency", False, f"Currency issue: Monthly {monthly.get('currency')}, Annual {annual.get('currency')}")
+                    else:
+                        self.log_test("Payment Packages", False, f"Missing packages: {missing_packages}")
+                    
+                    return packages
+                else:
+                    self.log_test("Payment Packages", False, f"Expected dict, got: {type(packages)}")
+                    return None
+            else:
+                self.log_test("Payment Packages", False, f"HTTP {response.status_code}: {response.text}")
+                return None
+        except Exception as e:
+            self.log_test("Payment Packages", False, f"Payment packages error: {str(e)}")
+            return None
+    
+    def test_payment_checkout_creation(self):
+        """Test Stripe checkout session creation"""
+        try:
+            checkout_data = {
+                "package_id": "premium_monthly",
+                "origin_url": "https://urbane-nexus.preview.emergentagent.com"
+            }
+            
+            response = self.session.post(
+                f"{self.base_url}/api/payments/create-checkout",
+                json=checkout_data,
+                headers={"Content-Type": "application/json"},
+                timeout=15
+            )
+            
+            if response.status_code == 200:
+                data = response.json()
+                if data.get("checkout_url") and data.get("session_id"):
+                    self.log_test("Payment Checkout Creation", True, f"Checkout session created with ID: {data.get('session_id')}")
+                    return data
+                else:
+                    self.log_test("Payment Checkout Creation", False, f"Invalid checkout response: {data}")
+                    return None
+            else:
+                self.log_test("Payment Checkout Creation", False, f"HTTP {response.status_code}: {response.text}")
+                return None
+        except Exception as e:
+            self.log_test("Payment Checkout Creation", False, f"Checkout creation error: {str(e)}")
+            return None
+    
+    def test_articles_with_new_categories(self):
+        """Test articles endpoint with new GQ-style categories"""
+        try:
+            # Test with new category names
+            new_categories = ["fashion", "business", "technology", "finance", "travel", "health", "culture", "art", "entertainment"]
+            
+            for category in new_categories:
+                response = self.session.get(f"{self.base_url}/api/articles?category={category}&limit=5", timeout=10)
+                if response.status_code == 200:
+                    articles = response.json()
+                    if isinstance(articles, list):
+                        self.log_test(f"Articles - {category.title()} Category", True, f"Retrieved {len(articles)} {category} articles")
+                    else:
+                        self.log_test(f"Articles - {category.title()} Category", False, f"Invalid response type for {category}")
+                else:
+                    self.log_test(f"Articles - {category.title()} Category", False, f"HTTP {response.status_code} for {category}")
+            
+            return True
+        except Exception as e:
+            self.log_test("Articles New Categories", False, f"New categories test error: {str(e)}")
+            return False
+    
     def run_comprehensive_tests(self):
         """Run all tests in sequence"""
         print("🚀 Starting Just Urbane API Comprehensive Testing")
