@@ -26,13 +26,13 @@ const HomePage = () => {
   const PremiumArticleCard = ({ article, layout = 'standard', index = 0 }) => {
     const layoutStyles = {
       hero: {
-        container: 'relative group cursor-pointer overflow-hidden rounded-xl bg-white shadow-lg hover:shadow-2xl transition-all duration-500',
-        image: 'w-full h-96 lg:h-[500px] object-cover group-hover:scale-105 transition-transform duration-700',
-        overlay: 'absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent',
-        content: 'absolute bottom-0 left-0 right-0 p-8 text-white z-10',
-        category: 'inline-block bg-white/20 backdrop-blur-sm text-white px-4 py-2 rounded-full text-sm font-medium mb-4 uppercase tracking-wide',
-        title: 'text-4xl lg:text-5xl font-bold leading-tight mb-4 font-serif',
-        dek: 'text-lg lg:text-xl text-white/90 mb-6 leading-relaxed max-w-2xl',
+        container: 'relative group cursor-pointer overflow-hidden rounded-2xl bg-white shadow-2xl hover:shadow-3xl transition-all duration-500',
+        image: 'w-full h-96 lg:h-[600px] object-cover group-hover:scale-105 transition-transform duration-700',
+        overlay: 'absolute inset-0 hero-overlay',
+        content: 'hero-content',
+        category: 'inline-block bg-white/20 backdrop-blur-sm text-white px-4 py-2 rounded-full text-sm font-bold mb-6 uppercase tracking-wide',
+        title: 'text-3xl lg:text-5xl font-bold leading-tight mb-6 font-serif max-w-4xl',
+        dek: 'text-lg lg:text-xl text-white/90 mb-8 leading-relaxed max-w-3xl',
         meta: 'flex items-center space-x-6 text-white/80 text-sm'
       },
       large: {
