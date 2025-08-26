@@ -36,7 +36,7 @@ const ArticleCard = ({ article, size = 'medium', showCategory = true }) => {
   const classes = getSizeClasses();
 
   return (
-    <Link to={`/article/${article.slug || article.id}`} className={classes.container}>
+    <Link to={`/article/${article.slug || article.id}`} className={`${classes.container} group`}>
       <div className={`relative overflow-hidden ${size === 'large' ? 'lg:order-1' : ''}`}>
         <img
           src={article.hero_image || '/placeholder-image.jpg'}
