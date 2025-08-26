@@ -54,7 +54,19 @@ const Header = () => {
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <Link to="/" className="flex items-center">
-            <div className="font-serif text-3xl font-black text-gray-900 tracking-tight">
+            <img 
+              src="https://customer-assets.emergentagent.com/job_urbane-nexus/artifacts/eon7rzvr_1.svg" 
+              alt="URBANE" 
+              className="h-10 w-auto"
+              onError={(e) => {
+                e.target.style.display = 'none';
+                e.target.nextSibling.style.display = 'block';
+              }}
+            />
+            <div 
+              className="font-serif text-3xl font-black text-gray-900 tracking-tight" 
+              style={{ display: 'none' }}
+            >
               URBANE
             </div>
           </Link>
