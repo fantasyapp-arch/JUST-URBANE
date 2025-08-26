@@ -68,21 +68,21 @@ const Footer = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
             {/* Brand */}
             <div className="lg:col-span-1">
-              <Link to="/" className="inline-block mb-4">
+              <Link to="/" className="inline-block mb-6">
                 <img 
-                  src="https://customer-assets.emergentagent.com/job_urbane-nexus/artifacts/eon7rzvr_1.svg" 
-                  alt="URBANE" 
-                  className="h-8 w-auto"
+                  src="https://customer-assets.emergentagent.com/job_urbane-nexus/artifacts/w4pbaa92_Untitled%20design-10.png" 
+                  alt="JUST URBANE" 
+                  className="h-12 w-auto max-w-[250px] object-contain"
                   onError={(e) => {
                     e.target.style.display = 'none';
                     e.target.nextSibling.style.display = 'block';
                   }}
                 />
                 <div 
-                  className="font-serif text-2xl font-black tracking-tight" 
+                  className="font-serif text-2xl font-black tracking-tight text-white" 
                   style={{ display: 'none' }}
                 >
-                  URBANE
+                  JUST URBANE
                 </div>
               </Link>
               <p className="text-primary-200 mb-6 leading-relaxed">
