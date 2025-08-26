@@ -189,21 +189,75 @@ const HomePage = () => {
       {/* Main Content Container */}
       <div className="container mx-auto px-4 py-12">
         
-        {/* Hero Section - Perfect GQ Style */}
-        <section className="mb-16">
+        {/* Hero Section - FIXED PERFECT ALIGNMENT */}
+        <section className="mb-20">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-            {/* Main Hero Article - Large Featured */}
+            {/* Main Hero Article - FIXED TEXT POSITIONING */}
             {featuredArticles[0] && (
               <div className="lg:col-span-8">
-                <PremiumArticleCard 
-                  article={featuredArticles[0]} 
-                  layout="hero"
-                  index={0}
-                />
+                <div className="relative group cursor-pointer overflow-hidden rounded-2xl bg-white shadow-2xl hover:shadow-3xl transition-all duration-500">
+                  <img
+                    src={featuredArticles[0].hero_image}
+                    alt={featuredArticles[0].title}
+                    className="w-full h-96 lg:h-[600px] object-cover group-hover:scale-105 transition-transform duration-700"
+                    onError={(e) => {
+                      e.target.src = '/placeholder-image.jpg';
+                    }}
+                  />
+                  
+                  {/* Perfect gradient overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent"></div>
+                  
+                  {/* Premium badge - fixed positioning */}
+                  {featuredArticles[0].is_premium && (
+                    <div className="absolute top-6 right-6 z-20">
+                      <span className="bg-gold-500 text-black px-4 py-2 rounded-full text-sm font-bold flex items-center shadow-lg">
+                        <Crown className="h-4 w-4 mr-2" />
+                        Premium
+                      </span>
+                    </div>
+                  )}
+                  
+                  {/* PERFECTLY POSITIONED TEXT CONTENT */}
+                  <div className="absolute bottom-0 left-0 right-0 p-6 lg:p-8 z-10">
+                    <div className="max-w-4xl">
+                      {/* Category */}
+                      <span className="inline-block bg-primary-600 text-white px-4 py-2 rounded-full text-sm font-bold mb-6 uppercase tracking-wide">
+                        {featuredArticles[0].category}
+                      </span>
+                      
+                      {/* Title - FIXED TO STAY IN BOUNDS */}
+                      <h1 className="text-3xl lg:text-5xl font-bold leading-tight mb-6 font-serif text-white max-w-full">
+                        {featuredArticles[0].title}
+                      </h1>
+                      
+                      {/* Description */}
+                      {featuredArticles[0].dek && (
+                        <p className="text-lg lg:text-xl text-white/90 mb-8 leading-relaxed max-w-3xl">
+                          {featuredArticles[0].dek}
+                        </p>
+                      )}
+                      
+                      {/* Meta info */}
+                      <div className="flex flex-wrap items-center space-x-6 text-white/80 text-sm lg:text-base">
+                        <span className="font-semibold">By {featuredArticles[0].author_name}</span>
+                        <span>{formatDateShort(featuredArticles[0].published_at)}</span>
+                        <span className="flex items-center">
+                          <Clock className="h-4 w-4 mr-1" />
+                          {formatReadingTime(featuredArticles[0].reading_time)}
+                        </span>
+                        <span className="flex items-center">
+                          <Eye className="h-4 w-4 mr-1" />
+                          {featuredArticles[0].view_count?.toLocaleString()}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             )}
 
-            {/* Side Articles */}
+            {/* Side Articles - IMPROVED LAYOUT */}
             <div className="lg:col-span-4 space-y-6">
               {featuredArticles.slice(1, 4).map((article, index) => (
                 <PremiumArticleCard 
