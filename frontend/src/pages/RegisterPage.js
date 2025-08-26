@@ -78,9 +78,21 @@ const RegisterPage = () => {
     <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
         <div className="text-center">
-          <Link to="/" className="inline-block">
-            <div className="font-serif text-3xl font-black text-primary-900 tracking-tight">
-              JUST <span className="text-gold-500">URBANE</span>
+          <Link to="/" className="inline-block mb-8">
+            <img 
+              src="https://customer-assets.emergentagent.com/job_urbane-nexus/artifacts/w4pbaa92_Untitled%20design-10.png" 
+              alt="JUST URBANE" 
+              className="h-16 w-auto max-w-[300px] object-contain mx-auto"
+              onError={(e) => {
+                e.target.style.display = 'none';
+                e.target.nextSibling.style.display = 'block';
+              }}
+            />
+            <div 
+              className="font-serif text-4xl font-black text-primary-700 tracking-tight" 
+              style={{ display: 'none' }}
+            >
+              JUST URBANE
             </div>
           </Link>
           <h2 className="mt-6 text-3xl font-serif font-bold text-gray-900">
