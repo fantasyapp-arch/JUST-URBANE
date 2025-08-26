@@ -513,7 +513,7 @@ class JustUrbaneAPITester:
 def main():
     """Main testing function"""
     # Use the backend URL from frontend environment (production URL)
-    backend_url = "https://urbane-nexus.preview.emergentagent.com/api"
+    backend_url = "https://urbane-nexus.preview.emergentagent.com"
     tester = JustUrbaneAPITester(backend_url)
     report = tester.run_comprehensive_tests()
     
