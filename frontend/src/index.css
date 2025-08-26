@@ -28,7 +28,11 @@
   }
   
   .article-card {
-    @apply card overflow-hidden group cursor-pointer;
+    @apply card overflow-hidden cursor-pointer;
+  }
+  
+  .article-card {
+    @apply group;
   }
   
   .article-card-image {
