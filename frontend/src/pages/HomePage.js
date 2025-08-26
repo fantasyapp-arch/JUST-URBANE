@@ -317,18 +317,18 @@ const HomePage = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.7 }}
           >
-            <div className="flex items-center justify-between mb-8">
+            <div className="flex items-center justify-between mb-10">
               <div>
-                <h2 className="text-4xl font-serif font-bold text-gray-900 mb-2">
+                <h2 className="text-4xl lg:text-5xl font-serif font-bold text-gray-900 mb-3">
                   Technology
                 </h2>
-                <p className="text-gray-600 text-lg">
+                <p className="text-gray-600 text-lg lg:text-xl">
                   Latest gadgets and innovation
                 </p>
               </div>
               <Link
                 to="/category/technology"
-                className="flex items-center text-gray-700 hover:text-gray-900 font-semibold group transition-colors"
+                className="flex items-center bg-primary-600 hover:bg-primary-700 text-white px-6 py-3 rounded-lg font-semibold group transition-all duration-200 transform hover:scale-105"
               >
                 View All
                 <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
