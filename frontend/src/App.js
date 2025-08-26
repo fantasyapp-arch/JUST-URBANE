@@ -61,6 +61,7 @@ function App() {
                 <Route path="/contact" element={<ContactPage />} />
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/register" element={<RegisterPage />} />
+                <Route path="/payment-success" element={<PaymentSuccessPage />} />
               </Routes>
             </main>
             <Footer />
