@@ -18,8 +18,8 @@ const Header = () => {
   };
 
   const mainCategories = [
-    'Style', 'Grooming', 'Culture', 'Watches', 
-    'Tech', 'Fitness', 'Travel', 'Entertainment'
+    'Fashion', 'Business', 'Technology', 'Finance', 
+    'Travel', 'Health', 'Culture', 'Art', 'Entertainment'
   ];
 
   return (
