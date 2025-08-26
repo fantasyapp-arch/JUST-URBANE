@@ -1,30 +1,54 @@
-import api from './api';
+import { api } from './api';
 
-// Payment API functions
-const paymentApi = {
-  async getSubscriptionPackages() {
+// Payment utility functions
+export const paymentApi = {
+  createCheckout: async (packageId) => {
+    try {
+      const originUrl = window.location.origin;
+      
+      const response = await api.post('/payments/create-checkout', {
+        package_id: packageId,
+        origin_url: originUrl
+      });
+      
+      return response.data;
+    } catch (error) {
+      throw new Error(error.response?.data?.detail || 'Failed to create payment session');
+    }
+  },
+
+  getPaymentStatus: async (sessionId) => {
+    try {
+      const response = await api.get(`/payments/status/${sessionId}`);
+      return response.data;
+    } catch (error) {
+      throw new Error(error.response?.data?.detail || 'Failed to get payment status');
+    }
+  },
+
+  getSubscriptionPackages: async () => {
     try {
       const response = await api.get('/payments/packages');
       return response.data;
     } catch (error) {
-      console.error('Error fetching subscription packages:', error);
-      throw error;
+      throw new Error(error.response?.data?.detail || 'Failed to get subscription packages');
     }
   }
 };
 
-// Initiate payment function
+// Helper function to initiate payment
 export const initiatePayment = async (packageId) => {
   try {
-    const response = await api.post('/payments/create-session', {
-      package_id: packageId
-    });
+    const checkoutData = await paymentApi.createCheckout(packageId);
     
-    if (response.data.checkout_url) {
-      window.location.href = response.data.checkout_url;
+    if (checkoutData.checkout_url) {
+      // Redirect to Stripe checkout
+      window.location.href = checkoutData.checkout_url;
+    } else {
+      throw new Error('No checkout URL received');
     }
   } catch (error) {
-    console.error('Error initiating payment:', error);
+    console.error('Payment initiation error:', error);
     throw error;
   }
 };
