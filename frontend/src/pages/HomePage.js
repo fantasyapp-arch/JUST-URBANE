@@ -46,13 +46,13 @@ const HomePage = () => {
         meta: 'flex items-center justify-between text-sm text-gray-500'
       },
       standard: {
-        container: 'group cursor-pointer bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300',
-        image: 'w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500',
+        container: 'group cursor-pointer bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1',
+        image: 'w-full h-48 lg:h-56 object-cover group-hover:scale-105 transition-transform duration-500',
         overlay: '',
         content: 'p-5',
-        category: 'inline-block bg-gray-100 text-gray-800 px-2 py-1 rounded text-xs font-medium mb-2 uppercase tracking-wide',
-        title: 'text-lg font-semibold text-gray-900 mb-2 leading-tight font-serif group-hover:text-blue-600 transition-colors line-clamp-2',
-        dek: 'text-gray-600 mb-3 text-sm line-clamp-2',
+        category: 'inline-block bg-primary-100 text-primary-800 px-3 py-1 rounded-full text-xs font-bold mb-3 uppercase tracking-wide',
+        title: 'text-lg lg:text-xl font-semibold text-gray-900 mb-3 leading-tight font-serif group-hover:text-primary-600 transition-colors line-clamp-2',
+        dek: 'text-gray-600 mb-4 text-sm line-clamp-2 leading-relaxed',
         meta: 'flex items-center justify-between text-xs text-gray-500'
       }
     };
