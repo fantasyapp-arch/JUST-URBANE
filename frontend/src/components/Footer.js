@@ -69,7 +69,19 @@ const Footer = () => {
             {/* Brand */}
             <div className="lg:col-span-1">
               <Link to="/" className="inline-block mb-4">
-                <div className="font-serif text-2xl font-black tracking-tight">
+                <img 
+                  src="https://customer-assets.emergentagent.com/job_urbane-nexus/artifacts/eon7rzvr_1.svg" 
+                  alt="URBANE" 
+                  className="h-8 w-auto"
+                  onError={(e) => {
+                    e.target.style.display = 'none';
+                    e.target.nextSibling.style.display = 'block';
+                  }}
+                />
+                <div 
+                  className="font-serif text-2xl font-black tracking-tight" 
+                  style={{ display: 'none' }}
+                >
                   URBANE
                 </div>
               </Link>
