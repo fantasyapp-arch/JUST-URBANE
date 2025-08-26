@@ -29,22 +29,60 @@ def clear_database():
     print("Database cleared.")
 
 def seed_categories():
-    """Create categories"""
+    """Create categories matching GQ India structure"""
     categories = [
         {
             "_id": str(uuid.uuid4()),
-            "name": "Style",
-            "slug": "style",
-            "description": "Fashion trends, designer insights, and timeless style advice for the modern gentleman",
-            "hero_image": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800",
+            "name": "Fashion",
+            "slug": "fashion",
+            "description": "Latest trends, designer collections, and style inspiration for the modern individual",
+            "hero_image": "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800",
+            "color": "from-purple-600 to-pink-600",
             "created_at": datetime.utcnow()
         },
         {
             "_id": str(uuid.uuid4()),
-            "name": "Grooming",
-            "slug": "grooming",
-            "description": "Personal care, skincare, and grooming essentials for refined living",
-            "hero_image": "https://images.unsplash.com/photo-1582095133179-bfd08e2fc6b3?w=800",
+            "name": "Business",
+            "slug": "business",
+            "description": "Entrepreneurship, leadership insights, and success stories from industry leaders",
+            "hero_image": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800",
+            "color": "from-blue-600 to-indigo-600",
+            "created_at": datetime.utcnow()
+        },
+        {
+            "_id": str(uuid.uuid4()),
+            "name": "Technology",
+            "slug": "technology",
+            "description": "Latest gadgets, innovations, and tech trends for the luxury lifestyle",
+            "hero_image": "https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=800",
+            "color": "from-cyan-600 to-blue-600",
+            "created_at": datetime.utcnow()
+        },
+        {
+            "_id": str(uuid.uuid4()),
+            "name": "Finance",
+            "slug": "finance",
+            "description": "Investment strategies, wealth management, and financial insights for affluent readers",
+            "hero_image": "https://images.unsplash.com/photo-1559526324-4b87b5e36e44?w=800",
+            "color": "from-green-600 to-emerald-600",
+            "created_at": datetime.utcnow()
+        },
+        {
+            "_id": str(uuid.uuid4()),
+            "name": "Travel",
+            "slug": "travel",
+            "description": "Luxury destinations, exclusive experiences, and premium travel insights",
+            "hero_image": "https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=800",
+            "color": "from-teal-600 to-cyan-600",
+            "created_at": datetime.utcnow()
+        },
+        {
+            "_id": str(uuid.uuid4()),
+            "name": "Health",
+            "slug": "health",
+            "description": "Wellness, fitness, and health optimization for peak performance",
+            "hero_image": "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800",
+            "color": "from-red-600 to-rose-600",
             "created_at": datetime.utcnow()
         },
         {
@@ -53,46 +91,25 @@ def seed_categories():
             "slug": "culture",
             "description": "Arts, music, literature, and cultural movements shaping our world",
             "hero_image": "https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=800",
+            "color": "from-amber-600 to-orange-600",
             "created_at": datetime.utcnow()
         },
         {
             "_id": str(uuid.uuid4()),
-            "name": "Watches",
-            "slug": "watches",
-            "description": "Horological excellence, timepiece reviews, and watchmaking craftsmanship",
-            "hero_image": "https://images.unsplash.com/photo-1524592094714-0f0654e20314?w=800",
-            "created_at": datetime.utcnow()
-        },
-        {
-            "_id": str(uuid.uuid4()),
-            "name": "Tech",
-            "slug": "tech",
-            "description": "Latest gadgets, innovations, and technology trends for the luxury lifestyle",
-            "hero_image": "https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=800",
-            "created_at": datetime.utcnow()
-        },
-        {
-            "_id": str(uuid.uuid4()),
-            "name": "Fitness",
-            "slug": "fitness",
-            "description": "Health, wellness, and fitness for optimal performance and vitality",
-            "hero_image": "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800",
-            "created_at": datetime.utcnow()
-        },
-        {
-            "_id": str(uuid.uuid4()),
-            "name": "Travel",
-            "slug": "travel",
-            "description": "Luxury destinations, exclusive experiences, and travel insights",
-            "hero_image": "https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=800",
+            "name": "Art",
+            "slug": "art",
+            "description": "Contemporary art, gallery exhibitions, and artistic expressions worldwide",
+            "hero_image": "https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=800",
+            "color": "from-indigo-600 to-purple-600",
             "created_at": datetime.utcnow()
         },
         {
             "_id": str(uuid.uuid4()),
             "name": "Entertainment",
             "slug": "entertainment",
-            "description": "Movies, music, celebrities, and entertainment industry insights",
+            "description": "Movies, shows, celebrities, and entertainment industry insights",
             "hero_image": "https://images.unsplash.com/photo-1489599735225-8e6c9b2b8e6e?w=800",
+            "color": "from-violet-600 to-fuchsia-600",
             "created_at": datetime.utcnow()
         }
     ]
