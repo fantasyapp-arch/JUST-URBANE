@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Menu, X, Search, User, Crown } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { useCategories } from '../hooks/useCategories';
+import SearchModal from './SearchModal';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
