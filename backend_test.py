@@ -435,8 +435,8 @@ class JustUrbaneAPITester:
             return False
     
     def run_comprehensive_tests(self):
-        """Run all tests in sequence"""
-        print("🚀 Starting Just Urbane API Comprehensive Testing")
+        """Run all tests in sequence - Updated for GQ-style testing"""
+        print("🚀 Starting Just Urbane GQ-Style API Comprehensive Testing")
         print("=" * 60)
         
         # 1. Health Check
@@ -449,20 +449,33 @@ class JustUrbaneAPITester:
         if user_credentials:
             self.test_user_login(user_credentials)
         
-        # 3. Content API Tests
+        # 3. NEW: Payment System Tests (Critical Priority)
+        print("\n💳 Testing Stripe Payment Integration...")
+        self.test_payment_packages()
+        self.test_payment_checkout_creation()
+        
+        # 4. NEW: Updated Category System Tests (Critical Priority)
+        print("\n📂 Testing Updated Category System...")
+        categories = self.test_categories_endpoint()
+        
+        # 5. Content API Tests with New Categories
+        print("\n📰 Testing Articles with New Categories...")
         articles = self.test_articles_endpoint()
         if articles:
             self.test_single_article(articles)
         
-        categories = self.test_categories_endpoint()
+        # Test articles with new category filters
+        self.test_articles_with_new_categories()
+        
+        # 6. Other Content APIs
         reviews = self.test_reviews_endpoint()
         issues = self.test_magazine_issues_endpoint()
         destinations = self.test_destinations_endpoint()
         
-        # 4. Protected Endpoint Test
+        # 7. Protected Endpoint Test
         self.test_protected_endpoint()
         
-        # 5. CORS Configuration Test
+        # 8. CORS Configuration Test
         self.test_cors_configuration()
         
         return self.generate_report()
