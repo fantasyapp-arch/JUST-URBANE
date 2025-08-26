@@ -126,19 +126,19 @@ const HomePage = () => {
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Premium Subscription Banner */}
-      <div className="bg-black text-white py-3">
+      {/* Premium Subscription Banner - FIXED STYLING */}
+      <div className="bg-primary-900 text-white py-3 border-b border-primary-800">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-center gap-4 text-sm">
             <div className="flex items-center gap-3">
-              <div className="w-8 h-10 bg-gradient-to-b from-blue-500 to-blue-700 rounded flex items-center justify-center text-white text-xs font-bold">
+              <div className="w-8 h-8 bg-primary-600 rounded flex items-center justify-center text-white text-xs font-bold">
                 U
               </div>
               <span className="font-medium">Limited Time Offer! Flat 55% OFF on Premium Subscription. Save ₹3000</span>
             </div>
             <Link 
               to="/pricing" 
-              className="bg-red-600 hover:bg-red-700 px-6 py-2 rounded font-bold text-white transition-colors transform hover:scale-105"
+              className="bg-accent-600 hover:bg-accent-700 px-6 py-2 rounded-lg font-bold text-white transition-colors transform hover:scale-105 shadow-lg"
             >
               Subscribe Now!
             </Link>
