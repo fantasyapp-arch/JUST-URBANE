@@ -164,16 +164,28 @@ const PricingPage = () => {
                   ))}
                 </ul>
 
-                <Link
-                  to="/register"
+                <button
+                  onClick={() => plan.packageId ? handleSubscribe(plan.packageId) : null}
+                  disabled={loadingPackage === plan.packageId || (!plan.packageId && plan.id !== 'free')}
                   className={`w-full block text-center py-3 px-6 rounded-lg font-semibold transition-all duration-200 ${
                     plan.buttonVariant === 'primary'
-                      ? 'bg-gold-500 hover:bg-gold-600 text-white transform hover:scale-105'
+                      ? 'bg-gold-500 hover:bg-gold-600 text-white transform hover:scale-105 disabled:bg-gray-400 disabled:transform-none'
                       : 'bg-gray-100 hover:bg-gray-200 text-gray-900'
-                  }`}
+                  } ${loadingPackage === plan.packageId ? 'cursor-not-allowed' : ''}`}
                 >
-                  {plan.buttonText}
-                </Link>
+                  {loadingPackage === plan.packageId ? (
+                    <div className="flex items-center justify-center">
+                      <Loader className="h-4 w-4 animate-spin mr-2" />
+                      Processing...
+                    </div>
+                  ) : plan.id === 'free' ? (
+                    <Link to="/register" className="block">
+                      {plan.buttonText}
+                    </Link>
+                  ) : (
+                    plan.buttonText
+                  )}
+                </button>
               </div>
             </div>
           ))}
