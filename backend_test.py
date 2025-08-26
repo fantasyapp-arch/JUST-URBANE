@@ -186,12 +186,28 @@ class JustUrbaneAPITester:
             self.log_test("Single Article", False, f"Single article error: {str(e)}")
     
     def test_categories_endpoint(self):
-        """Test categories listing endpoint"""
+        """Test categories listing endpoint - Updated for GQ-style 9 categories"""
         try:
             response = self.session.get(f"{self.base_url}/api/categories", timeout=10)
             if response.status_code == 200:
                 categories = response.json()
                 if isinstance(categories, list):
+                    # Check for expected 9 GQ-style categories
+                    expected_categories = ["Fashion", "Business", "Technology", "Finance", "Travel", "Health", "Culture", "Art", "Entertainment"]
+                    category_names = [cat.get("name", "") for cat in categories]
+                    
+                    if len(categories) == 9:
+                        self.log_test("Categories Count", True, f"Retrieved expected 9 categories")
+                    else:
+                        self.log_test("Categories Count", False, f"Expected 9 categories, got {len(categories)}")
+                    
+                    # Check if all expected categories are present
+                    missing_categories = [cat for cat in expected_categories if cat not in category_names]
+                    if not missing_categories:
+                        self.log_test("GQ Categories Structure", True, "All 9 GQ-style categories present: " + ", ".join(category_names))
+                    else:
+                        self.log_test("GQ Categories Structure", False, f"Missing categories: {missing_categories}. Found: {category_names}")
+                    
                     self.log_test("Categories Listing", True, f"Retrieved {len(categories)} categories")
                     return categories
                 else:
