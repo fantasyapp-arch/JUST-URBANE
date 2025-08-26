@@ -427,10 +427,10 @@ const HomePage = () => {
             <div className="text-center mt-12">
               <Link 
                 to="/people-of-the-year" 
-                className="inline-flex items-center bg-yellow-500 text-black font-bold px-8 py-4 rounded-xl hover:bg-yellow-400 transition-all duration-200 transform hover:scale-105"
+                className="inline-flex items-center bg-primary-600 hover:bg-primary-700 text-white font-bold px-10 py-4 rounded-xl transition-all duration-200 transform hover:scale-105 shadow-xl"
               >
                 View All Winners
-                <ArrowRight className="ml-2 h-5 w-5" />
+                <ArrowRight className="ml-3 h-6 w-6" />
               </Link>
             </div>
           </div>
