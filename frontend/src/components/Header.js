@@ -54,8 +54,8 @@ const Header = () => {
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <Link to="/" className="flex items-center">
-            <div className="font-serif text-3xl font-black text-primary-900 tracking-tight">
-              JUST <span className="text-gold-500">URBANE</span>
+            <div className="font-serif text-3xl font-black text-gray-900 tracking-tight">
+              URBANE
             </div>
           </Link>
 
