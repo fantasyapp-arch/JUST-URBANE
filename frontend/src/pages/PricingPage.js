@@ -42,6 +42,7 @@ const PricingPage = () => {
   };
   const plans = [
     {
+      id: 'free',
       name: 'Free',
       price: '₹0',
       period: 'Forever',
@@ -54,14 +55,16 @@ const PricingPage = () => {
       ],
       buttonText: 'Get Started',
       buttonVariant: 'secondary',
-      popular: false
+      popular: false,
+      packageId: null
     },
     {
+      id: 'premium_monthly',
       name: 'Premium',
-      price: '₹499',
+      price: packages?.premium_monthly ? formatINR(packages.premium_monthly.amount) : '₹499',
       period: 'per month',
       description: 'Full access to premium lifestyle content',
-      features: [
+      features: packages?.premium_monthly?.features || [
         'Unlimited premium articles',
         'Weekly premium newsletter',
         'Full magazine archive',
@@ -69,16 +72,18 @@ const PricingPage = () => {
         'Exclusive events access',
         'No advertisements'
       ],
-      buttonText: 'Start Free Trial',
+      buttonText: 'Start Premium',
       buttonVariant: 'primary',
-      popular: true
+      popular: true,
+      packageId: 'premium_monthly'
     },
     {
+      id: 'premium_annual',
       name: 'Annual',
-      price: '₹4,999',
+      price: packages?.premium_annual ? formatINR(packages.premium_annual.amount) : '₹4,999',
       period: 'per year',
       description: 'Best value for committed readers',
-      features: [
+      features: packages?.premium_annual?.features || [
         'Everything in Premium',
         '2 months free',
         'Print magazine delivery',
@@ -89,7 +94,8 @@ const PricingPage = () => {
       buttonText: 'Save 17%',
       buttonVariant: 'primary',
       popular: false,
-      savings: 'Save ₹988'
+      savings: 'Save ₹988',
+      packageId: 'premium_annual'
     }
   ];
 
