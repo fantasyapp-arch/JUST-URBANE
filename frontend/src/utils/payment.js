@@ -29,4 +29,13 @@ export const initiatePayment = async (packageId) => {
   }
 };
 
+// Format Indian currency
+export const formatINR = (amount) => {
+  return new Intl.NumberFormat('en-IN', {
+    style: 'currency',
+    currency: 'INR',
+    maximumFractionDigits: 0,
+  }).format(amount);
+};
+
 export default paymentApi;
