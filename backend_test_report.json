@@ -1,26 +1,26 @@
 {
-  "total": 14,
-  "passed": 14,
-  "failed": 0,
-  "success_rate": 100.0,
+  "total": 28,
+  "passed": 27,
+  "failed": 1,
+  "success_rate": 96.42857142857143,
   "results": [
     {
       "test": "Health Check",
       "success": true,
       "message": "API is healthy and responding",
-      "timestamp": "2025-08-26T10:41:37.480336",
+      "timestamp": "2025-08-26T13:53:08.178959",
       "response_data": null
     },
     {
       "test": "User Registration",
       "success": true,
       "message": "User registered successfully",
-      "timestamp": "2025-08-26T10:41:37.778844",
+      "timestamp": "2025-08-26T13:53:08.452329",
       "response_data": {
-        "email": "testuser_1756204897@justurbane.com",
+        "email": "testuser_1756216388@justurbane.com",
         "name": "Premium Test User",
-        "id": "1e4cce49-250a-4bad-a6ee-3f432e4c3a26",
-        "created_at": "2025-08-26T10:41:37.736636",
+        "id": "5d8fc13b-44ff-46e2-b3a8-376e4df27f4c",
+        "created_at": "2025-08-26T13:53:08.445620",
         "is_premium": false,
         "subscription_status": "inactive"
       }
@@ -29,84 +29,182 @@
       "test": "User Login",
       "success": true,
       "message": "Login successful, JWT token received",
-      "timestamp": "2025-08-26T10:41:38.051916",
+      "timestamp": "2025-08-26T13:53:08.718722",
+      "response_data": null
+    },
+    {
+      "test": "Payment Packages",
+      "success": true,
+      "message": "Correct INR pricing: Monthly \u20b9499.0, Annual \u20b94999.0",
+      "timestamp": "2025-08-26T13:53:08.734331",
+      "response_data": null
+    },
+    {
+      "test": "Payment Currency",
+      "success": true,
+      "message": "Currency set to INR for both packages",
+      "timestamp": "2025-08-26T13:53:08.734372",
+      "response_data": null
+    },
+    {
+      "test": "Payment Checkout Creation",
+      "success": false,
+      "message": "HTTP 500: {\"detail\":\"Failed to create payment session\"}",
+      "timestamp": "2025-08-26T13:53:08.747312",
+      "response_data": null
+    },
+    {
+      "test": "Categories Count",
+      "success": true,
+      "message": "Retrieved expected 9 categories",
+      "timestamp": "2025-08-26T13:53:08.756003",
+      "response_data": null
+    },
+    {
+      "test": "GQ Categories Structure",
+      "success": true,
+      "message": "All 9 GQ-style categories present: Fashion, Business, Technology, Finance, Travel, Health, Culture, Art, Entertainment",
+      "timestamp": "2025-08-26T13:53:08.756042",
+      "response_data": null
+    },
+    {
+      "test": "Categories Listing",
+      "success": true,
+      "message": "Retrieved 9 categories",
+      "timestamp": "2025-08-26T13:53:08.756050",
       "response_data": null
     },
     {
       "test": "Articles Listing",
       "success": true,
       "message": "Retrieved 14 articles",
-      "timestamp": "2025-08-26T10:41:38.097021",
+      "timestamp": "2025-08-26T13:53:08.765820",
       "response_data": null
     },
     {
       "test": "Articles Category Filter",
       "success": true,
-      "message": "Retrieved 2 style articles",
-      "timestamp": "2025-08-26T10:41:38.140881",
+      "message": "Retrieved 1 style articles",
+      "timestamp": "2025-08-26T13:53:08.774637",
       "response_data": null
     },
     {
       "test": "Featured Articles",
       "success": true,
       "message": "Retrieved 5 featured articles",
-      "timestamp": "2025-08-26T10:41:38.184892",
+      "timestamp": "2025-08-26T13:53:08.783566",
       "response_data": null
     },
     {
       "test": "Trending Articles",
       "success": true,
       "message": "Retrieved 4 trending articles",
-      "timestamp": "2025-08-26T10:41:38.228869",
+      "timestamp": "2025-08-26T13:53:08.793934",
       "response_data": null
     },
     {
       "test": "Single Article",
       "success": true,
-      "message": "Retrieved article: The Rise of Indian Cinema Globally",
-      "timestamp": "2025-08-26T10:41:38.272838",
+      "message": "Retrieved article: The Future of Luxury Tech: AI Meets Artisanal Craftsmanship",
+      "timestamp": "2025-08-26T13:53:08.807321",
       "response_data": null
     },
     {
-      "test": "Categories Listing",
+      "test": "Articles - Fashion Category",
       "success": true,
-      "message": "Retrieved 8 categories",
-      "timestamp": "2025-08-26T10:41:38.315810",
+      "message": "Retrieved 1 fashion articles",
+      "timestamp": "2025-08-26T13:53:08.816287",
+      "response_data": null
+    },
+    {
+      "test": "Articles - Business Category",
+      "success": true,
+      "message": "Retrieved 1 business articles",
+      "timestamp": "2025-08-26T13:53:08.865902",
+      "response_data": null
+    },
+    {
+      "test": "Articles - Technology Category",
+      "success": true,
+      "message": "Retrieved 2 technology articles",
+      "timestamp": "2025-08-26T13:53:08.877328",
+      "response_data": null
+    },
+    {
+      "test": "Articles - Finance Category",
+      "success": true,
+      "message": "Retrieved 0 finance articles",
+      "timestamp": "2025-08-26T13:53:08.886394",
+      "response_data": null
+    },
+    {
+      "test": "Articles - Travel Category",
+      "success": true,
+      "message": "Retrieved 2 travel articles",
+      "timestamp": "2025-08-26T13:53:08.894818",
+      "response_data": null
+    },
+    {
+      "test": "Articles - Health Category",
+      "success": true,
+      "message": "Retrieved 1 health articles",
+      "timestamp": "2025-08-26T13:53:08.910286",
+      "response_data": null
+    },
+    {
+      "test": "Articles - Culture Category",
+      "success": true,
+      "message": "Retrieved 2 culture articles",
+      "timestamp": "2025-08-26T13:53:08.918460",
+      "response_data": null
+    },
+    {
+      "test": "Articles - Art Category",
+      "success": true,
+      "message": "Retrieved 1 art articles",
+      "timestamp": "2025-08-26T13:53:08.926727",
+      "response_data": null
+    },
+    {
+      "test": "Articles - Entertainment Category",
+      "success": true,
+      "message": "Retrieved 0 entertainment articles",
+      "timestamp": "2025-08-26T13:53:08.975984",
       "response_data": null
     },
     {
       "test": "Reviews Listing",
       "success": true,
       "message": "Retrieved 1 reviews",
-      "timestamp": "2025-08-26T10:41:38.358867",
+      "timestamp": "2025-08-26T13:53:08.985859",
       "response_data": null
     },
     {
       "test": "Magazine Issues",
       "success": true,
       "message": "Retrieved 2 magazine issues",
-      "timestamp": "2025-08-26T10:41:38.402821",
+      "timestamp": "2025-08-26T13:53:09.034260",
       "response_data": null
     },
     {
       "test": "Travel Destinations",
       "success": true,
       "message": "Retrieved 2 destinations",
-      "timestamp": "2025-08-26T10:41:38.445816",
+      "timestamp": "2025-08-26T13:53:09.083589",
       "response_data": null
     },
     {
       "test": "Protected Endpoint",
       "success": true,
       "message": "Article created successfully with authentication",
-      "timestamp": "2025-08-26T10:41:38.490867",
+      "timestamp": "2025-08-26T13:53:09.099191",
       "response_data": null
     },
     {
       "test": "CORS Configuration",
       "success": true,
       "message": "CORS headers present and configured",
-      "timestamp": "2025-08-26T10:41:38.532784",
+      "timestamp": "2025-08-26T13:53:09.106318",
       "response_data": null
     }
   ]
