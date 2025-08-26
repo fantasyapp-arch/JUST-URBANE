@@ -222,6 +222,117 @@ Successfully delivered a **WORLD-CLASS PREMIUM MAGAZINE PLATFORM** that:
 
 **This is not just a website - this is a complete digital magazine business ready to compete with GQ India and other premium publications!**
 
+## Testing Protocol
+
+### Backend Testing Instructions
+When testing the backend, use the `deep_testing_backend_v2` agent with these specifications:
+
+**Test Coverage Required:**
+1. **API Health & Connectivity**
+   - Test `/api/health` endpoint
+   - Verify MongoDB connection
+   - Test CORS configuration for frontend communication
+
+2. **Updated Category System**
+   - Test `/api/categories` should return 9 GQ-style categories
+   - Verify Fashion, Business, Technology, Finance, Travel, Health, Culture, Art, Entertainment
+   - Test category filtering in articles API
+
+3. **Stripe Payment Integration**
+   - Test `/api/payments/packages` for subscription packages
+   - Test `/api/payments/create-checkout` for payment session creation
+   - Verify payment transaction database storage
+   - Test webhook endpoint `/api/webhook/stripe`
+
+4. **Authentication System**
+   - Test user registration at `/api/auth/register`
+   - Test user login at `/api/auth/login`
+   - Verify JWT token generation and validation
+   - Test protected endpoints with authentication
+
+5. **Content APIs**
+   - Test article listing `/api/articles` with GQ-style category filters
+   - Test single article retrieval `/api/articles/{id}`
+   - Test article creation (requires authentication)
+   - Test reviews, issues, and destinations endpoints
+
+6. **Data Integrity**
+   - Verify updated category structure (9 categories)
+   - Test article-category relationships
+   - Validate payment package pricing (₹499, ₹4999)
+
+### Frontend Testing Instructions
+When testing the frontend, use the `auto_frontend_testing_agent` with these specifications:
+
+**Test Scenarios Required:**
+1. **GQ India Homepage Replication**
+   - Verify mixed grid layout matching GQ India structure
+   - Test hero article with large image overlay
+   - Verify category sections (Fashion, Business, Technology, etc.)
+   - Test People of the Year section
+   - Verify video content section
+   - Test subscription promotion banner
+
+2. **Navigation & Categories**
+   - Test all 9 category links in header navigation
+   - Verify category pages load with filtered content
+   - Test category filtering and search functionality
+   - Verify breadcrumb navigation
+
+3. **Payment Integration**
+   - Test pricing page with Stripe integration
+   - Verify subscription packages display (₹499, ₹4999)
+   - Test payment button functionality
+   - Verify payment success page and status checking
+
+4. **Content Management**
+   - Test article pages with full content display
+   - Verify premium content paywall system
+   - Test article sharing and saving functionality
+   - Verify author attribution and metadata
+
+5. **User Experience**
+   - Test authentication flow (login/register)
+   - Verify account management portal
+   - Test responsive design on mobile/tablet/desktop
+   - Verify search functionality with modal
+
+**Success Criteria:**
+- Layout exactly matches GQ India's structure
+- All 9 categories functional and populated
+- Payment system working with proper INR pricing
+- Premium content protection working
+- Professional magazine design quality maintained
+- Mobile responsiveness perfect across all screen sizes
+
+### Incorporate User Feedback
+**Priority Issues to Address:**
+1. **Stripe Integration** - Research and fix checkout library compatibility
+2. **Content Loading** - Ensure all articles load properly in new category structure
+3. **Image Optimization** - Verify all placeholder images display correctly
+4. **Payment Flow** - Test complete subscription purchase flow
+
+### Communication Protocol with Testing Agents
+
+**For Backend Testing Agent:**
+"Test the redesigned URBANE magazine API (GQ India style) with focus on:
+- Verify all 9 new categories (Fashion, Business, Technology, Finance, Travel, Health, Culture, Art, Entertainment)  
+- Test Stripe payment packages API (₹499 monthly, ₹4999 annual)
+- Confirm payment checkout creation functionality
+- Validate updated article categorization system
+- Test all authentication and user management features
+- Report any payment integration issues or category system problems"
+
+**For Frontend Testing Agent:**
+"Test the GQ India style URBANE magazine frontend with priorities:
+- Verify homepage layout exactly matches GQ India structure (mixed grids, hero articles)
+- Test all 9 category navigation links (Fashion, Business, Technology, etc.)
+- Confirm payment integration on pricing page with Stripe checkout
+- Validate GQ-style article cards and category sections
+- Test People of the Year and video content sections
+- Verify responsive design and professional magazine aesthetics
+- Check subscription banner and promotional elements work correctly"
+
 ---
 
 # TESTING RESULTS
