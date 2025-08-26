@@ -8,7 +8,6 @@ import SearchModal from './SearchModal';
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
-  const [searchQuery, setSearchQuery] = useState('');
   const { user, logout, isAuthenticated } = useAuth();
   const { data: categories = [] } = useCategories();
   const navigate = useNavigate();
