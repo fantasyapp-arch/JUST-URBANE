@@ -80,7 +80,16 @@ const AboutPage = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <h1 className="font-serif text-5xl md:text-6xl font-black mb-6">
+            {/* HERO LOGO ON ABOUT PAGE */}
+            <div className="mb-12">
+              <img 
+                src="https://customer-assets.emergentagent.com/job_urbane-nexus/artifacts/w4pbaa92_Untitled%20design-10.png" 
+                alt="JUST URBANE" 
+                className="h-20 lg:h-24 w-auto max-w-[400px] object-contain mx-auto mb-8"
+              />
+            </div>
+            
+            <h1 className="font-serif text-5xl md:text-6xl font-black mb-6 text-white">
               About Just Urbane
             </h1>
             <p className="text-xl md:text-2xl opacity-90 mb-8 max-w-3xl mx-auto leading-relaxed">
