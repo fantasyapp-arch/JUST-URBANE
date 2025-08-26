@@ -1,0 +1,113 @@
+{
+  "total": 14,
+  "passed": 13,
+  "failed": 1,
+  "success_rate": 92.85714285714286,
+  "results": [
+    {
+      "test": "Health Check",
+      "success": true,
+      "message": "API is healthy and responding",
+      "timestamp": "2025-08-26T10:41:18.534464",
+      "response_data": null
+    },
+    {
+      "test": "User Registration",
+      "success": true,
+      "message": "User registered successfully",
+      "timestamp": "2025-08-26T10:41:18.843872",
+      "response_data": {
+        "email": "testuser_1756204878@justurbane.com",
+        "name": "Premium Test User",
+        "id": "5ba1e04f-0e3e-4542-a0ed-51ba27244820",
+        "created_at": "2025-08-26T10:41:18.791036",
+        "is_premium": false,
+        "subscription_status": "inactive"
+      }
+    },
+    {
+      "test": "User Login",
+      "success": true,
+      "message": "Login successful, JWT token received",
+      "timestamp": "2025-08-26T10:41:19.117879",
+      "response_data": null
+    },
+    {
+      "test": "Articles Listing",
+      "success": true,
+      "message": "Retrieved 14 articles",
+      "timestamp": "2025-08-26T10:41:19.163055",
+      "response_data": null
+    },
+    {
+      "test": "Articles Category Filter",
+      "success": true,
+      "message": "Retrieved 2 style articles",
+      "timestamp": "2025-08-26T10:41:19.206896",
+      "response_data": null
+    },
+    {
+      "test": "Featured Articles",
+      "success": true,
+      "message": "Retrieved 5 featured articles",
+      "timestamp": "2025-08-26T10:41:19.250913",
+      "response_data": null
+    },
+    {
+      "test": "Trending Articles",
+      "success": true,
+      "message": "Retrieved 4 trending articles",
+      "timestamp": "2025-08-26T10:41:19.294875",
+      "response_data": null
+    },
+    {
+      "test": "Single Article",
+      "success": true,
+      "message": "Retrieved article: The Rise of Indian Cinema Globally",
+      "timestamp": "2025-08-26T10:41:19.338829",
+      "response_data": null
+    },
+    {
+      "test": "Categories Listing",
+      "success": true,
+      "message": "Retrieved 8 categories",
+      "timestamp": "2025-08-26T10:41:19.381775",
+      "response_data": null
+    },
+    {
+      "test": "Reviews Listing",
+      "success": true,
+      "message": "Retrieved 1 reviews",
+      "timestamp": "2025-08-26T10:41:19.424801",
+      "response_data": null
+    },
+    {
+      "test": "Magazine Issues",
+      "success": true,
+      "message": "Retrieved 2 magazine issues",
+      "timestamp": "2025-08-26T10:41:19.467810",
+      "response_data": null
+    },
+    {
+      "test": "Travel Destinations",
+      "success": true,
+      "message": "Retrieved 2 destinations",
+      "timestamp": "2025-08-26T10:41:19.510821",
+      "response_data": null
+    },
+    {
+      "test": "Protected Endpoint",
+      "success": false,
+      "message": "HTTP 500: Internal Server Error",
+      "timestamp": "2025-08-26T10:41:19.516529",
+      "response_data": null
+    },
+    {
+      "test": "CORS Configuration",
+      "success": true,
+      "message": "CORS headers present and configured",
+      "timestamp": "2025-08-26T10:41:19.518619",
+      "response_data": null
+    }
+  ]
+}
