@@ -52,19 +52,19 @@ const Header = () => {
       {/* Main Header */}
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-20">
-          {/* Logo - MUCH BIGGER */}
+          {/* HERO LOGO - MUCH BIGGER AND PROMINENT */}
           <Link to="/" className="flex items-center">
             <img 
-              src="https://customer-assets.emergentagent.com/job_urbane-nexus/artifacts/tv33qoqr_JUST%20URBANE%20BG%20REMOVED.png" 
+              src="https://customer-assets.emergentagent.com/job_urbane-nexus/artifacts/w4pbaa92_Untitled%20design-10.png" 
               alt="JUST URBANE" 
-              className="h-12 w-auto max-w-[200px] object-contain"
+              className="h-16 lg:h-20 w-auto max-w-[300px] object-contain"
               onError={(e) => {
                 e.target.style.display = 'none';
                 e.target.nextSibling.style.display = 'block';
               }}
             />
             <div 
-              className="font-serif text-3xl font-black text-primary-700 tracking-tight" 
+              className="font-serif text-4xl lg:text-5xl font-black text-primary-700 tracking-tight" 
               style={{ display: 'none' }}
             >
               JUST URBANE
