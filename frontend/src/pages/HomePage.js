@@ -75,50 +75,90 @@ const HomePage = () => {
                 e.target.src = '/placeholder-image.jpg';
               }}
             />
-            {styles.overlay && <div className={styles.overlay}></div>}
+            {/* Fixed overlay for hero layout */}
+            {layout === 'hero' && (
+              <>
+                <div className={styles.overlay}></div>
+                <div className={styles.content}>
+                  <div className={styles.category}>
+                    {article.category}
+                  </div>
+                  
+                  <h3 className={styles.title}>
+                    {article.title}
+                  </h3>
+                  
+                  {article.dek && (
+                    <p className={styles.dek}>
+                      {article.dek}
+                    </p>
+                  )}
+                  
+                  <div className={styles.meta}>
+                    <div className="flex items-center space-x-4">
+                      <span className="font-semibold">By {article.author_name}</span>
+                      <span>{formatDateShort(article.published_at)}</span>
+                    </div>
+                    <div className="flex items-center space-x-3">
+                      <span className="flex items-center">
+                        <Clock className="h-4 w-4 mr-1" />
+                        {formatReadingTime(article.reading_time)}
+                      </span>
+                      <span className="flex items-center">
+                        <Eye className="h-4 w-4 mr-1" />
+                        {article.view_count?.toLocaleString()}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </>
+            )}
             
             {article.is_premium && (
-              <div className="absolute top-4 right-4 z-10">
-                <span className="bg-yellow-500 text-black px-3 py-1 rounded-full text-xs font-bold flex items-center">
-                  <Crown className="h-3 w-3 mr-1" />
+              <div className="absolute top-6 right-6 z-20">
+                <span className="bg-gold-500 text-black px-4 py-2 rounded-full text-sm font-bold flex items-center shadow-lg">
+                  <Crown className="h-4 w-4 mr-2" />
                   Premium
                 </span>
               </div>
             )}
           </div>
 
-          <div className={styles.content}>
-            <div className={styles.category}>
-              {article.category}
-            </div>
-            
-            <h3 className={styles.title}>
-              {article.title}
-            </h3>
-            
-            {article.dek && layout !== 'standard' && (
-              <p className={styles.dek}>
-                {article.dek}
-              </p>
-            )}
-            
-            <div className={styles.meta}>
-              <div className="flex items-center space-x-4">
-                <span className="font-medium">By {article.author_name}</span>
-                <span>{formatDateShort(article.published_at)}</span>
+          {/* Content for non-hero layouts */}
+          {layout !== 'hero' && (
+            <div className={styles.content}>
+              <div className={styles.category}>
+                {article.category}
               </div>
-              <div className="flex items-center space-x-3">
-                <span className="flex items-center">
-                  <Clock className="h-3 w-3 mr-1" />
-                  {formatReadingTime(article.reading_time)}
-                </span>
-                <span className="flex items-center">
-                  <Eye className="h-3 w-3 mr-1" />
-                  {article.view_count?.toLocaleString()}
-                </span>
+              
+              <h3 className={styles.title}>
+                {article.title}
+              </h3>
+              
+              {article.dek && layout !== 'standard' && (
+                <p className={styles.dek}>
+                  {article.dek}
+                </p>
+              )}
+              
+              <div className={styles.meta}>
+                <div className="flex items-center space-x-4">
+                  <span className="font-medium">By {article.author_name}</span>
+                  <span>{formatDateShort(article.published_at)}</span>
+                </div>
+                <div className="flex items-center space-x-3">
+                  <span className="flex items-center">
+                    <Clock className="h-3 w-3 mr-1" />
+                    {formatReadingTime(article.reading_time)}
+                  </span>
+                  <span className="flex items-center">
+                    <Eye className="h-3 w-3 mr-1" />
+                    {article.view_count?.toLocaleString()}
+                  </span>
+                </div>
               </div>
             </div>
-          </div>
+          )}
         </Link>
       </motion.div>
     );
