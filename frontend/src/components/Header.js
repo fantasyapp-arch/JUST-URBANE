@@ -49,9 +49,9 @@ const Header = () => {
         </div>
       </div>
 
-      {/* Main Header */}
+      {/* Main Header - BIGGER HEIGHT FOR BIGGER LOGO */}
       <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-20">
+        <div className="flex items-center justify-between h-24 lg:h-28">
           {/* HERO LOGO - MUCH BIGGER AND PROMINENT */}
           <Link to="/" className="flex items-center">
             <img 
