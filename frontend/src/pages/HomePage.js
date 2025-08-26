@@ -36,14 +36,14 @@ const HomePage = () => {
         meta: 'flex items-center space-x-6 text-white/80 text-sm'
       },
       large: {
-        container: 'group cursor-pointer bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300',
-        image: 'w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500',
+        container: 'group cursor-pointer bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2',
+        image: 'w-full h-64 lg:h-72 object-cover group-hover:scale-105 transition-transform duration-500',
         overlay: '',
         content: 'p-6',
-        category: 'inline-block bg-gray-100 text-gray-800 px-3 py-1 rounded-full text-xs font-medium mb-3 uppercase tracking-wide',
-        title: 'text-xl font-bold text-gray-900 mb-3 leading-tight font-serif group-hover:text-blue-600 transition-colors',
-        dek: 'text-gray-600 mb-4 line-clamp-2 leading-relaxed',
-        meta: 'flex items-center justify-between text-xs text-gray-500'
+        category: 'inline-block bg-primary-100 text-primary-800 px-3 py-1.5 rounded-full text-xs font-bold mb-4 uppercase tracking-wide',
+        title: 'text-xl lg:text-2xl font-bold text-gray-900 mb-4 leading-tight font-serif group-hover:text-primary-600 transition-colors',
+        dek: 'text-gray-600 mb-6 line-clamp-2 leading-relaxed text-base',
+        meta: 'flex items-center justify-between text-sm text-gray-500'
       },
       standard: {
         container: 'group cursor-pointer bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300',
