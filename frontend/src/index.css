@@ -31,10 +31,6 @@
     @apply card overflow-hidden cursor-pointer;
   }
   
-  .article-card {
-    @apply group;
-  }
-  
   .article-card-image {
     @apply w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500;
   }
