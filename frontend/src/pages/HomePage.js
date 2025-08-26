@@ -527,13 +527,13 @@ const HomePage = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 1.3 }}
           >
-            <div className="flex items-center mb-8">
-              <TrendingUp className="h-8 w-8 text-red-500 mr-4" />
+            <div className="flex items-center mb-10">
+              <TrendingUp className="h-10 w-10 text-accent-500 mr-4" />
               <div>
-                <h2 className="text-4xl font-serif font-bold text-gray-900 mb-2">
+                <h2 className="text-4xl lg:text-5xl font-serif font-bold text-gray-900 mb-3">
                   Trending Now
                 </h2>
-                <p className="text-gray-600 text-lg">
+                <p className="text-gray-600 text-lg lg:text-xl">
                   Most popular stories this week
                 </p>
               </div>
