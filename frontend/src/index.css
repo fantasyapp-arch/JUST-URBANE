@@ -1,0 +1,144 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Playfair Display', Georgia, serif;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-gold-500 hover:bg-gold-600 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl;
+  }
+  
+  .btn-secondary {
+    @apply bg-white hover:bg-gray-50 text-primary-900 font-semibold py-3 px-6 rounded-lg border-2 border-primary-200 hover:border-primary-300 transition-all duration-200;
+  }
+  
+  .card {
+    @apply bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1;
+  }
+  
+  .article-card {
+    @apply card overflow-hidden group cursor-pointer;
+  }
+  
+  .article-card-image {
+    @apply w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500;
+  }
+  
+  .article-card-content {
+    @apply p-6;
+  }
+  
+  .article-title {
+    @apply font-serif text-xl font-semibold text-primary-900 group-hover:text-gold-600 transition-colors duration-200 line-clamp-2;
+  }
+  
+  .article-dek {
+    @apply text-gray-600 mt-2 text-sm line-clamp-3 leading-relaxed;
+  }
+  
+  .category-chip {
+    @apply inline-block bg-primary-100 text-primary-800 text-xs font-medium px-3 py-1 rounded-full uppercase tracking-wide;
+  }
+  
+  .premium-badge {
+    @apply inline-flex items-center bg-gradient-to-r from-gold-400 to-gold-600 text-white text-xs font-bold px-2 py-1 rounded-full;
+  }
+  
+  .hero-title {
+    @apply font-serif text-5xl lg:text-7xl font-black text-primary-900 leading-none;
+  }
+  
+  .hero-subtitle {
+    @apply text-lg lg:text-xl text-gray-600 leading-relaxed max-w-3xl;
+  }
+  
+  .section-title {
+    @apply font-serif text-3xl lg:text-4xl font-bold text-primary-900 mb-8;
+  }
+  
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #bfa094;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a18072;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Loading animation */
+@keyframes shimmer {
+  0% {
+    background-position: -468px 0;
+  }
+  100% {
+    background-position: 468px 0;
+  }
+}
+
+.skeleton {
+  animation: shimmer 1.2s ease-in-out infinite;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 468px 104px;
+}
+
+/* Premium content blur effect */
+.premium-blur {
+  filter: blur(3px);
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Responsive text sizes */
+@media (max-width: 640px) {
+  .hero-title {
+    @apply text-3xl lg:text-5xl;
+  }
+  
+  .hero-subtitle {
+    @apply text-base lg:text-lg;
+  }
+  
+  .section-title {
+    @apply text-2xl lg:text-3xl;
+  }
+}
