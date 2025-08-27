@@ -42,60 +42,62 @@ const PricingPage = () => {
   };
   const plans = [
     {
-      id: 'free',
-      name: 'Free',
-      price: '₹0',
-      period: 'Forever',
-      description: 'Basic access to our content',
-      features: [
-        '3 premium articles per month',
-        'Basic newsletter',
-        'Limited magazine access',
-        'Standard support'
-      ],
-      buttonText: 'Get Started',
-      buttonVariant: 'secondary',
-      popular: false,
-      packageId: null
-    },
-    {
-      id: 'premium_monthly',
-      name: 'Premium',
-      price: packages?.premium_monthly ? formatINR(packages.premium_monthly.amount) : '₹499',
-      period: 'per month',
-      description: 'Full access to premium lifestyle content',
-      features: packages?.premium_monthly?.features || [
-        'Unlimited premium articles',
-        'Weekly premium newsletter',
-        'Full magazine archive',
-        'Priority support',
-        'Exclusive events access',
-        'No advertisements'
-      ],
-      buttonText: 'Start Premium',
-      buttonVariant: 'primary',
-      popular: true,
-      packageId: 'premium_monthly'
-    },
-    {
-      id: 'premium_annual',
-      name: 'Annual',
-      price: packages?.premium_annual ? formatINR(packages.premium_annual.amount) : '₹4,999',
+      id: 'digital',
+      name: 'Digital Subscription',
+      price: '₹499',
       period: 'per year',
-      description: 'Best value for committed readers',
-      features: packages?.premium_annual?.features || [
-        'Everything in Premium',
-        '2 months free',
-        'Print magazine delivery',
-        'Exclusive member gifts',
-        'VIP customer support',
+      description: 'Complete digital access to premium content',
+      features: [
+        'Unlimited premium articles',
+        'Ad-free reading experience',
+        'Weekly premium newsletter',
+        'Mobile app access',
+        'Exclusive digital content',
         'Early access to new features'
       ],
-      buttonText: 'Save 17%',
+      buttonText: 'Get Digital Access',
       buttonVariant: 'primary',
       popular: false,
-      savings: 'Save ₹988',
-      packageId: 'premium_annual'
+      packageId: 'digital_annual'
+    },
+    {
+      id: 'print',
+      name: 'Print Subscription',
+      price: '₹499',
+      period: 'per year',
+      description: 'Physical magazine delivered to your door',
+      features: [
+        'Monthly print magazine delivery',
+        'Premium paper quality',
+        'Collector\'s edition covers',
+        'Exclusive print content',
+        'Free shipping across India',
+        'Gift subscription options'
+      ],
+      buttonText: 'Get Print Edition',
+      buttonVariant: 'secondary',
+      popular: false,
+      packageId: 'print_annual'
+    },
+    {
+      id: 'combined',
+      name: 'Print + Digital',
+      price: '₹999',
+      period: 'per year',
+      description: 'Complete premium experience with best value',
+      features: [
+        'Everything in Digital',
+        'Everything in Print',
+        'Exclusive subscriber events',
+        'Priority customer support',
+        'Behind-the-scenes content',
+        'Special edition magazines'
+      ],
+      buttonText: 'Best Value',
+      buttonVariant: 'premium',
+      popular: true,
+      packageId: 'combined_annual',
+      savings: 'Save ₹499'
     }
   ];
 
