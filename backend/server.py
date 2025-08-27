@@ -46,21 +46,28 @@ ACCESS_TOKEN_EXPIRE_MINUTES = 30
 # Stripe Configuration
 STRIPE_API_KEY = os.getenv("STRIPE_API_KEY")
 
-# Subscription packages - FIXED PRICING TO PREVENT MANIPULATION
+# Subscription packages - UPDATED AS PER PDF REQUIREMENTS
 SUBSCRIPTION_PACKAGES = {
-    "premium_monthly": {
-        "name": "Premium Monthly",
-        "amount": 499.0,  # ₹499 as float
-        "currency": "inr",
-        "period": "month",
-        "features": ["Unlimited premium articles", "Ad-free experience", "Weekly newsletter", "Priority support"]
-    },
-    "premium_annual": {
-        "name": "Premium Annual", 
-        "amount": 4999.0,  # ₹4999 as float
+    "digital_annual": {
+        "name": "Digital Subscription",
+        "amount": 499.0,  # ₹499 as per PDF
         "currency": "inr",
         "period": "year",
-        "features": ["Everything in Premium", "2 months free", "Print magazine", "Exclusive gifts", "VIP support"]
+        "features": ["Unlimited premium articles", "Ad-free experience", "Weekly newsletter", "Mobile app access", "Exclusive digital content", "Early access to features"]
+    },
+    "print_annual": {
+        "name": "Print Subscription", 
+        "amount": 499.0,  # ₹499 as per PDF
+        "currency": "inr",
+        "period": "year",
+        "features": ["Monthly print magazine", "Premium paper quality", "Collector's edition", "Exclusive print content", "Free shipping", "Gift options"]
+    },
+    "combined_annual": {
+        "name": "Print + Digital Subscription",
+        "amount": 999.0,  # ₹999 as per PDF
+        "currency": "inr", 
+        "period": "year",
+        "features": ["Everything Digital + Print", "Exclusive subscriber events", "Priority support", "Behind-the-scenes content", "Special editions", "Best value"]
     }
 }
 
