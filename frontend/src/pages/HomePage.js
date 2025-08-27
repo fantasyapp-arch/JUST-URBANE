@@ -16,11 +16,11 @@ const HomePage = () => {
   const { data: featuredArticles = [], isLoading: loadingFeatured } = useFeaturedArticles();
   const { data: trendingArticles = [], isLoading: loadingTrending } = useTrendingArticles();
   
-  // Load articles from different categories
+  // Load articles from categories as per PDF requirements
   const { data: fashionArticles = [] } = useCategoryArticles('fashion', { limit: 6 });
-  const { data: businessArticles = [] } = useCategoryArticles('business', { limit: 4 });
   const { data: techArticles = [] } = useCategoryArticles('technology', { limit: 4 });
-  const { data: entertainmentArticles = [] } = useCategoryArticles('entertainment', { limit: 4 });
+  const { data: autoArticles = [] } = useCategoryArticles('auto', { limit: 4 });
+  const { data: travelArticles = [] } = useCategoryArticles('travel', { limit: 4 });
 
   // Premium article card component with perfect alignment
   const PremiumArticleCard = ({ article, layout = 'standard', index = 0 }) => {
@@ -28,12 +28,12 @@ const HomePage = () => {
       hero: {
         container: 'relative group cursor-pointer overflow-hidden rounded-2xl bg-white shadow-2xl hover:shadow-3xl transition-all duration-500',
         image: 'w-full h-96 lg:h-[600px] object-cover group-hover:scale-105 transition-transform duration-700',
-        overlay: 'absolute inset-0 hero-overlay',
-        content: 'hero-content',
-        category: 'inline-block bg-white/20 backdrop-blur-sm text-white px-4 py-2 rounded-full text-sm font-bold mb-6 uppercase tracking-wide',
-        title: 'text-3xl lg:text-5xl font-bold leading-tight mb-6 font-serif max-w-4xl',
+        overlay: 'absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent',
+        content: 'absolute bottom-0 left-0 right-0 p-6 lg:p-8 z-10',
+        category: 'inline-block bg-primary-600 text-white px-4 py-2 rounded-full text-sm font-bold mb-6 uppercase tracking-wide',
+        title: 'text-3xl lg:text-5xl font-bold leading-tight mb-6 font-serif text-white max-w-full',
         dek: 'text-lg lg:text-xl text-white/90 mb-8 leading-relaxed max-w-3xl',
-        meta: 'flex items-center space-x-6 text-white/80 text-sm'
+        meta: 'flex flex-wrap items-center space-x-6 text-white/80 text-sm lg:text-base'
       },
       large: {
         container: 'group cursor-pointer bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2',
@@ -80,26 +80,28 @@ const HomePage = () => {
               <>
                 <div className={styles.overlay}></div>
                 <div className={styles.content}>
-                  <div className={styles.category}>
-                    {article.category}
-                  </div>
-                  
-                  <h3 className={styles.title}>
-                    {article.title}
-                  </h3>
-                  
-                  {article.dek && (
-                    <p className={styles.dek}>
-                      {article.dek}
-                    </p>
-                  )}
-                  
-                  <div className={styles.meta}>
-                    <div className="flex items-center space-x-4">
+                  <div className="max-w-4xl">
+                    {/* Category */}
+                    <span className={styles.category}>
+                      {article.category}
+                    </span>
+                    
+                    {/* Title - FIXED TO STAY IN BOUNDS */}
+                    <h1 className={styles.title}>
+                      {article.title}
+                    </h1>
+                    
+                    {/* Description */}
+                    {article.dek && (
+                      <p className={styles.dek}>
+                        {article.dek}
+                      </p>
+                    )}
+                    
+                    {/* Meta info */}
+                    <div className={styles.meta}>
                       <span className="font-semibold">By {article.author_name}</span>
                       <span>{formatDateShort(article.published_at)}</span>
-                    </div>
-                    <div className="flex items-center space-x-3">
                       <span className="flex items-center">
                         <Clock className="h-4 w-4 mr-1" />
                         {formatReadingTime(article.reading_time)}
@@ -166,98 +168,24 @@ const HomePage = () => {
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Premium Subscription Banner - FIXED STYLING */}
-      <div className="bg-primary-900 text-white py-3 border-b border-primary-800">
-        <div className="container mx-auto px-4">
-          <div className="flex items-center justify-center gap-4 text-sm">
-            <div className="flex items-center gap-3">
-              <div className="w-8 h-8 bg-primary-600 rounded flex items-center justify-center text-white text-xs font-bold">
-                U
-              </div>
-              <span className="font-medium">Limited Time Offer! Flat 55% OFF on Premium Subscription. Save ₹3000</span>
-            </div>
-            <Link 
-              to="/pricing" 
-              className="bg-accent-600 hover:bg-accent-700 px-6 py-2 rounded-lg font-bold text-white transition-colors transform hover:scale-105 shadow-lg"
-            >
-              Subscribe Now!
-            </Link>
-          </div>
-        </div>
-      </div>
-
-      {/* Main Content Container */}
-      <div className="container mx-auto px-4 py-12">
+      {/* MAIN CONTENT CONTAINER - NO BLUE STRIP */}
+      <div className="container mx-auto px-4 py-8">
         
-        {/* Hero Section - FIXED PERFECT ALIGNMENT */}
+        {/* HERO SECTION - PERFECT ALIGNMENT */}
         <section className="mb-20">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-            {/* Main Hero Article - FIXED TEXT POSITIONING */}
+            {/* Main Hero Article */}
             {featuredArticles[0] && (
               <div className="lg:col-span-8">
-                <div className="relative group cursor-pointer overflow-hidden rounded-2xl bg-white shadow-2xl hover:shadow-3xl transition-all duration-500">
-                  <img
-                    src={featuredArticles[0].hero_image}
-                    alt={featuredArticles[0].title}
-                    className="w-full h-96 lg:h-[600px] object-cover group-hover:scale-105 transition-transform duration-700"
-                    onError={(e) => {
-                      e.target.src = '/placeholder-image.jpg';
-                    }}
-                  />
-                  
-                  {/* Perfect gradient overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent"></div>
-                  
-                  {/* Premium badge - fixed positioning */}
-                  {featuredArticles[0].is_premium && (
-                    <div className="absolute top-6 right-6 z-20">
-                      <span className="bg-gold-500 text-black px-4 py-2 rounded-full text-sm font-bold flex items-center shadow-lg">
-                        <Crown className="h-4 w-4 mr-2" />
-                        Premium
-                      </span>
-                    </div>
-                  )}
-                  
-                  {/* PERFECTLY POSITIONED TEXT CONTENT */}
-                  <div className="absolute bottom-0 left-0 right-0 p-6 lg:p-8 z-10">
-                    <div className="max-w-4xl">
-                      {/* Category */}
-                      <span className="inline-block bg-primary-600 text-white px-4 py-2 rounded-full text-sm font-bold mb-6 uppercase tracking-wide">
-                        {featuredArticles[0].category}
-                      </span>
-                      
-                      {/* Title - FIXED TO STAY IN BOUNDS */}
-                      <h1 className="text-3xl lg:text-5xl font-bold leading-tight mb-6 font-serif text-white max-w-full">
-                        {featuredArticles[0].title}
-                      </h1>
-                      
-                      {/* Description */}
-                      {featuredArticles[0].dek && (
-                        <p className="text-lg lg:text-xl text-white/90 mb-8 leading-relaxed max-w-3xl">
-                          {featuredArticles[0].dek}
-                        </p>
-                      )}
-                      
-                      {/* Meta info */}
-                      <div className="flex flex-wrap items-center space-x-6 text-white/80 text-sm lg:text-base">
-                        <span className="font-semibold">By {featuredArticles[0].author_name}</span>
-                        <span>{formatDateShort(featuredArticles[0].published_at)}</span>
-                        <span className="flex items-center">
-                          <Clock className="h-4 w-4 mr-1" />
-                          {formatReadingTime(featuredArticles[0].reading_time)}
-                        </span>
-                        <span className="flex items-center">
-                          <Eye className="h-4 w-4 mr-1" />
-                          {featuredArticles[0].view_count?.toLocaleString()}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                <PremiumArticleCard 
+                  article={featuredArticles[0]} 
+                  layout="hero"
+                  index={0}
+                />
               </div>
             )}
 
-            {/* Side Articles - IMPROVED LAYOUT */}
+            {/* Side Articles */}
             <div className="lg:col-span-4 space-y-6">
               {featuredArticles.slice(1, 4).map((article, index) => (
                 <PremiumArticleCard 
@@ -271,15 +199,15 @@ const HomePage = () => {
           </div>
         </section>
 
-        {/* Fashion Section */}
+        {/* FASHION SECTION */}
         {fashionArticles.length > 0 && (
           <motion.section 
-            className="mb-16"
+            className="mb-20"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
           >
-            <div className="flex items-center justify-between mb-10">
+            <div className="flex items-center justify-between mb-12">
               <div>
                 <h2 className="text-4xl lg:text-5xl font-serif font-bold text-gray-900 mb-3">
                   Fashion
@@ -290,14 +218,14 @@ const HomePage = () => {
               </div>
               <Link
                 to="/category/fashion"
-                className="flex items-center bg-primary-600 hover:bg-primary-700 text-white px-6 py-3 rounded-lg font-semibold group transition-all duration-200 transform hover:scale-105"
+                className="flex items-center bg-primary-600 hover:bg-primary-700 text-white px-8 py-4 rounded-xl font-semibold group transition-all duration-200 transform hover:scale-105 shadow-lg"
               >
-                View All
-                <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                Explore Fashion
+                <ArrowRight className="ml-3 h-5 w-5 group-hover:translate-x-1 transition-transform" />
               </Link>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
               {/* Featured Fashion Article */}
               {fashionArticles[0] && (
                 <div className="md:col-span-8">
@@ -310,7 +238,7 @@ const HomePage = () => {
               )}
               
               {/* Side Fashion Articles */}
-              <div className="md:col-span-4 space-y-4">
+              <div className="md:col-span-4 space-y-6">
                 {fashionArticles.slice(1, 4).map((article, index) => (
                   <PremiumArticleCard 
                     key={article.id}
@@ -324,72 +252,33 @@ const HomePage = () => {
           </motion.section>
         )}
 
-        {/* Business Section */}
-        {businessArticles.length > 0 && (
+        {/* TECH SECTION */}
+        {techArticles.length > 0 && (
           <motion.section 
-            className="mb-16"
+            className="mb-20"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.5 }}
           >
-            <div className="flex items-center justify-between mb-10">
-              <div>
-                <h2 className="text-4xl lg:text-5xl font-serif font-bold text-gray-900 mb-3">
-                  Business
-                </h2>
-                <p className="text-gray-600 text-lg lg:text-xl">
-                  Leadership, strategy and success stories
-                </p>
-              </div>
-              <Link
-                to="/category/business"
-                className="flex items-center bg-primary-600 hover:bg-primary-700 text-white px-6 py-3 rounded-lg font-semibold group transition-all duration-200 transform hover:scale-105"
-              >
-                View All
-                <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-              </Link>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-              {businessArticles.slice(0, 4).map((article, index) => (
-                <PremiumArticleCard 
-                  key={article.id}
-                  article={article} 
-                  layout="standard"
-                  index={index}
-                />
-              ))}
-            </div>
-          </motion.section>
-        )}
-
-        {/* Technology Section */}
-        {techArticles.length > 0 && (
-          <motion.section 
-            className="mb-16"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.7 }}
-          >
-            <div className="flex items-center justify-between mb-10">
+            <div className="flex items-center justify-between mb-12">
               <div>
                 <h2 className="text-4xl lg:text-5xl font-serif font-bold text-gray-900 mb-3">
                   Technology
                 </h2>
                 <p className="text-gray-600 text-lg lg:text-xl">
-                  Latest gadgets and innovation
+                  Latest gadgets, smart tech and innovation
                 </p>
               </div>
               <Link
-                to="/category/technology"
-                className="flex items-center bg-primary-600 hover:bg-primary-700 text-white px-6 py-3 rounded-lg font-semibold group transition-all duration-200 transform hover:scale-105"
+                to="/category/tech"
+                className="flex items-center bg-primary-600 hover:bg-primary-700 text-white px-8 py-4 rounded-xl font-semibold group transition-all duration-200 transform hover:scale-105 shadow-lg"
               >
-                View All
-                <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                Explore Tech
+                <ArrowRight className="ml-3 h-5 w-5 group-hover:translate-x-1 transition-transform" />
               </Link>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
               {techArticles.slice(0, 4).map((article, index) => (
                 <PremiumArticleCard 
                   key={article.id}
@@ -402,48 +291,81 @@ const HomePage = () => {
           </motion.section>
         )}
 
-        {/* People of the Year - Premium Section */}
+        {/* TRENDING SECTION */}
+        {trendingArticles.length > 0 && (
+          <motion.section 
+            className="mb-20"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.7 }}
+          >
+            <div className="flex items-center mb-12">
+              <TrendingUp className="h-12 w-12 text-accent-500 mr-4" />
+              <div>
+                <h2 className="text-4xl lg:text-5xl font-serif font-bold text-gray-900 mb-3">
+                  Trending Now
+                </h2>
+                <p className="text-gray-600 text-lg lg:text-xl">
+                  Most popular stories this week
+                </p>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+              {trendingArticles.slice(0, 4).map((article, index) => (
+                <PremiumArticleCard 
+                  key={article.id}
+                  article={article} 
+                  layout="standard"
+                  index={index}
+                />
+              ))}
+            </div>
+          </motion.section>
+        )}
+
+        {/* PEOPLE OF THE YEAR - PREMIUM SECTION */}
         <motion.section 
-          className="mb-16"
+          className="mb-20"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.9 }}
         >
-          <div className="bg-gradient-to-br from-gray-900 via-gray-800 to-black text-white rounded-2xl p-12">
-            <div className="text-center mb-12">
-              <div className="flex items-center justify-center mb-6">
-                <Award className="h-12 w-12 text-yellow-500 mr-4" />
-                <h2 className="text-4xl font-serif font-bold">
+          <div className="bg-gradient-to-br from-gray-900 via-gray-800 to-black text-white rounded-3xl p-12">
+            <div className="text-center mb-16">
+              <div className="flex items-center justify-center mb-8">
+                <Award className="h-16 w-16 text-gold-500 mr-4" />
+                <h2 className="text-4xl lg:text-6xl font-serif font-bold">
                   People of the Year 2025
                 </h2>
               </div>
-              <p className="text-xl text-gray-300 max-w-2xl mx-auto">
+              <p className="text-xl lg:text-2xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
                 Celebrating exceptional individuals who are shaping luxury, business, and culture
               </p>
             </div>
 
-            <div className="grid md:grid-cols-3 gap-8">
+            <div className="grid md:grid-cols-3 gap-10">
               {[
                 {
                   name: 'Ratan Tata',
                   title: 'Business Visionary & Philanthropist',
-                  image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop',
+                  image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=500&fit=crop',
                   category: 'Business Leader',
-                  achievement: 'Transforming Indian business landscape with ethical leadership'
+                  achievement: 'Transforming Indian business with ethical leadership'
                 },
                 {
                   name: 'Priyanka Chopra',
                   title: 'Global Entertainment Icon',
-                  image: 'https://images.unsplash.com/photo-1494790108755-2616b612b1bb?w=400&h=400&fit=crop',
+                  image: 'https://images.unsplash.com/photo-1494790108755-2616b612b1bb?w=400&h=500&fit=crop',
                   category: 'Entertainment',
-                  achievement: 'Breaking barriers in Hollywood while championing Indian culture globally'
+                  achievement: 'Breaking barriers globally while championing Indian culture'
                 },
                 {
                   name: 'Byju Raveendran',
                   title: 'EdTech Revolutionary',
-                  image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop',
+                  image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=500&fit=crop',
                   category: 'Technology',
-                  achievement: 'Revolutionizing education through technology and innovation'
+                  achievement: 'Revolutionizing education through innovation'
                 }
               ].map((person, index) => (
                 <motion.div 
@@ -453,51 +375,51 @@ const HomePage = () => {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.9 + index * 0.1 }}
                 >
-                  <div className="relative mb-6 overflow-hidden rounded-2xl">
+                  <div className="relative mb-8 overflow-hidden rounded-3xl">
                     <img
                       src={person.image}
                       alt={person.name}
                       className="w-full h-80 object-cover group-hover:scale-105 transition-transform duration-500"
                     />
-                    <div className="absolute top-4 left-4">
-                      <span className="bg-yellow-500 text-black px-4 py-2 rounded-full text-sm font-bold">
+                    <div className="absolute top-6 left-6">
+                      <span className="bg-gold-500 text-black px-4 py-2 rounded-full text-sm font-bold">
                         {person.category}
                       </span>
                     </div>
                   </div>
-                  <h3 className="text-2xl font-serif font-bold text-white mb-2 group-hover:text-yellow-400 transition-colors">
+                  <h3 className="text-2xl lg:text-3xl font-serif font-bold text-white mb-3 group-hover:text-gold-400 transition-colors">
                     {person.name}
                   </h3>
-                  <p className="text-yellow-400 font-semibold mb-3">
+                  <p className="text-gold-400 font-semibold mb-4 text-lg">
                     {person.title}
                   </p>
-                  <p className="text-gray-300 text-sm leading-relaxed">
+                  <p className="text-gray-300 leading-relaxed">
                     {person.achievement}
                   </p>
                 </motion.div>
               ))}
             </div>
 
-            <div className="text-center mt-12">
+            <div className="text-center mt-16">
               <Link 
                 to="/people-of-the-year" 
-                className="inline-flex items-center bg-primary-600 hover:bg-primary-700 text-white font-bold px-10 py-4 rounded-xl transition-all duration-200 transform hover:scale-105 shadow-xl"
+                className="inline-flex items-center bg-primary-600 hover:bg-primary-700 text-white font-bold px-12 py-5 rounded-2xl transition-all duration-200 transform hover:scale-105 shadow-2xl text-lg"
               >
                 View All Winners
-                <ArrowRight className="ml-3 h-6 w-6" />
+                <ArrowRight className="ml-4 h-6 w-6" />
               </Link>
             </div>
           </div>
         </motion.section>
 
-        {/* Videos Section */}
+        {/* VIDEOS SECTION */}
         <motion.section 
-          className="mb-16"
+          className="mb-20"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 1.1 }}
         >
-          <div className="flex items-center justify-between mb-10">
+          <div className="flex items-center justify-between mb-12">
             <div>
               <h2 className="text-4xl lg:text-5xl font-serif font-bold text-gray-900 mb-3">
                 Videos
@@ -508,14 +430,14 @@ const HomePage = () => {
             </div>
             <Link
               to="/videos"
-              className="flex items-center bg-primary-600 hover:bg-primary-700 text-white px-6 py-3 rounded-lg font-semibold group transition-all duration-200 transform hover:scale-105"
+              className="flex items-center bg-primary-600 hover:bg-primary-700 text-white px-8 py-4 rounded-xl font-semibold group transition-all duration-200 transform hover:scale-105 shadow-lg"
             >
               Watch All
-              <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+              <ArrowRight className="ml-3 h-5 w-5 group-hover:translate-x-1 transition-transform" />
             </Link>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-3 gap-8">
             {[
               {
                 title: 'Inside India\'s Most Exclusive Business Club',
@@ -543,29 +465,29 @@ const HomePage = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 1.1 + index * 0.1 }}
               >
-                <div className="relative overflow-hidden rounded-xl mb-4">
+                <div className="relative overflow-hidden rounded-2xl mb-6 shadow-lg">
                   <img
                     src={video.thumbnail}
                     alt={video.title}
-                    className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500"
+                    className="w-full h-56 object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                   <div className="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition-colors flex items-center justify-center">
-                    <div className="w-16 h-16 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
-                      <Play className="h-6 w-6 text-gray-900 ml-1" />
+                    <div className="w-20 h-20 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center group-hover:scale-110 transition-transform shadow-xl">
+                      <Play className="h-8 w-8 text-primary-600 ml-1" />
                     </div>
                   </div>
                   <div className="absolute bottom-4 right-4">
-                    <span className="bg-black/70 text-white px-3 py-1 rounded-lg text-sm font-medium">
+                    <span className="bg-black/70 text-white px-4 py-2 rounded-lg text-sm font-medium">
                       {video.duration}
                     </span>
                   </div>
                   <div className="absolute top-4 left-4">
-                    <span className="bg-red-600 text-white px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide">
+                    <span className="bg-accent-600 text-white px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wide">
                       {video.category}
                     </span>
                   </div>
                 </div>
-                <h4 className="text-xl font-serif font-semibold text-gray-900 group-hover:text-blue-600 transition-colors leading-tight">
+                <h4 className="text-xl lg:text-2xl font-serif font-semibold text-gray-900 group-hover:text-primary-600 transition-colors leading-tight">
                   {video.title}
                 </h4>
               </motion.div>
@@ -573,53 +495,42 @@ const HomePage = () => {
           </div>
         </motion.section>
 
-        {/* Trending Stories */}
-        {trendingArticles.length > 0 && (
-          <motion.section 
-            className="mb-16"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 1.3 }}
-          >
-            <div className="flex items-center mb-10">
-              <TrendingUp className="h-10 w-10 text-accent-500 mr-4" />
-              <div>
-                <h2 className="text-4xl lg:text-5xl font-serif font-bold text-gray-900 mb-3">
-                  Trending Now
-                </h2>
-                <p className="text-gray-600 text-lg lg:text-xl">
-                  Most popular stories this week
-                </p>
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {trendingArticles.slice(0, 4).map((article, index) => (
-                <PremiumArticleCard 
-                  key={article.id}
-                  article={article} 
-                  layout="standard"
-                  index={index}
-                />
-              ))}
-            </div>
-          </motion.section>
-        )}
-
-        {/* Newsletter Signup */}
+        {/* NEWSLETTER SECTION - INLINE */}
         <motion.section 
-          className="mb-16"
+          className="mb-20"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 1.5 }}
+          transition={{ duration: 0.6, delay: 1.3 }}
         >
-          <NewsletterSignup variant="inline" />
+          <div className="bg-gradient-to-r from-primary-50 to-primary-100 rounded-3xl p-12">
+            <div className="text-center max-w-3xl mx-auto">
+              <h3 className="text-3xl lg:text-4xl font-serif font-bold text-gray-900 mb-6">
+                Stay Updated with Just Urbane
+              </h3>
+              <p className="text-lg text-gray-600 mb-8 leading-relaxed">
+                Get the latest in luxury lifestyle, fashion trends, and exclusive content delivered to your inbox weekly.
+              </p>
+              <form className="flex flex-col sm:flex-row gap-4 max-w-lg mx-auto">
+                <input
+                  type="email"
+                  placeholder="Enter your email address"
+                  className="flex-1 px-6 py-4 rounded-xl text-gray-900 border-2 border-primary-200 focus:ring-4 focus:ring-primary-200 focus:border-primary-500 outline-none text-lg"
+                />
+                <button
+                  type="submit"
+                  className="bg-primary-600 hover:bg-primary-700 text-white px-8 py-4 rounded-xl font-bold transition-all duration-200 transform hover:scale-105 shadow-lg text-lg"
+                >
+                  Subscribe Free
+                </button>
+              </form>
+              <p className="text-sm text-gray-500 mt-4">
+                No spam, unsubscribe anytime. Join 50,000+ premium readers.
+              </p>
+            </div>
+          </div>
         </motion.section>
 
       </div>
-
-      {/* Bottom Newsletter */}
-      <NewsletterSignup />
     </div>
   );
 };
