@@ -258,7 +258,7 @@ const ArticlePage = () => {
           )}
 
           {/* Related Articles */}
-          {canReadPremium && (
+          {!isLocked && (
             <motion.div 
               className="mt-16"
               initial={{ opacity: 0 }}
