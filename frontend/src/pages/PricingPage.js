@@ -82,10 +82,10 @@ const PricingPage = () => {
       <div className="container mx-auto px-4">
         {/* Header */}
         <div className="text-center mb-16">
-          <h1 className="hero-title mb-6">
+          <h1 className="text-5xl lg:text-6xl font-serif font-bold text-gray-900 mb-6">
             Choose Your Plan
           </h1>
-          <p className="hero-subtitle">
+          <p className="text-xl lg:text-2xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
             Access premium lifestyle content, exclusive articles, and luxury insights
           </p>
         </div>
