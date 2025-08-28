@@ -8,16 +8,11 @@ import SubscriptionModal from '../components/SubscriptionModal';
 import toast from 'react-hot-toast';
 
 const PricingPage = () => {
-  const { isAuthenticated } = useAuth();
   const [selectedPlan, setSelectedPlan] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handlePlanSelect = (plan) => {
-    if (!isAuthenticated) {
-      toast.error('Please sign in to subscribe');
-      return;
-    }
-    
+    // SMART SYSTEM - NO LOGIN REQUIRED, DIRECT SUBSCRIPTION
     setSelectedPlan(plan);
     setIsModalOpen(true);
   };
