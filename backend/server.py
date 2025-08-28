@@ -885,6 +885,11 @@ async def create_smart_subscription(
         print(f"Smart subscription error: {str(e)}")
         raise HTTPException(status_code=500, detail="Failed to create smart subscription")
 
+@app.get("/api/payments/packages")
+async def get_subscription_packages():
+    """Get available subscription packages"""
+    return SUBSCRIPTION_PACKAGES
+
 # Update existing user dependency to be optional for free content
 async def get_current_user_optional_session(request: Request):
     """Optional user authentication - allows free content access"""
