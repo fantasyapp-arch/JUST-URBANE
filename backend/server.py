@@ -783,7 +783,143 @@ async def get_subscription_packages():
     """Get available subscription packages"""
     return SUBSCRIPTION_PACKAGES
 
-# Article Routes
+# Update existing user dependency to be optional for free content
+async def get_current_user_optional_session(request: Request):
+    """Optional user authentication - allows free content access"""
+    return await get_current_user_from_session(request)
+
+# Articles Routes - Updated for GQ India Model
+@app.get("/api/articles", response_model=List[Article])
+async def get_articles(
+    category: Optional[str] = None,
+    featured: Optional[bool] = None,
+    trending: Optional[bool] = None,
+    content_type: Optional[str] = None,  # free, premium, all
+    limit: int = Query(default=20, le=50),
+    skip: int = 0,
+    current_user = Depends(get_current_user_optional_session)
+):
+    filter_dict = {}
+    if category:
+        filter_dict["category"] = category
+    if featured is not None:
+        filter_dict["is_featured"] = featured
+    if trending is not None:
+        filter_dict["is_trending"] = trending
+    
+    # Content type filtering
+    if content_type == "free":
+        filter_dict["is_premium"] = False
+    elif content_type == "premium":
+        filter_dict["is_premium"] = True
+    
+    articles = list(db.articles.find(filter_dict).sort("published_at", -1).skip(skip).limit(limit))
+    
+    # For premium articles, check if user has access
+    for article in articles:
+        article["id"] = str(article["_id"])
+        del article["_id"]
+        
+        # If article is premium and user doesn't have access, limit content
+        if article.get("is_premium", False):
+            user_has_access = (
+                current_user and 
+                current_user.get("is_premium", False) and 
+                current_user.get("subscription_status") == "active"
+            )
+            
+            if not user_has_access:
+                # Provide teaser content only
+                article["body"] = article["body"][:300] + "..." if len(article["body"]) > 300 else article["body"]
+                article["is_locked"] = True
+            else:
+                article["is_locked"] = False
+        else:
+            article["is_locked"] = False
+    
+    return articles
+
+@app.get("/api/articles/{article_id}", response_model=Article)
+async def get_article(
+    article_id: str, 
+    current_user = Depends(get_current_user_optional_session)
+):
+    article = db.articles.find_one({"_id": article_id})
+    if not article:
+        raise HTTPException(status_code=404, detail="Article not found")
+    
+    # Check premium access
+    if article.get("is_premium", False):
+        user_has_access = (
+            current_user and 
+            current_user.get("is_premium", False) and 
+            current_user.get("subscription_status") == "active"
+        )
+        
+        if not user_has_access:
+            # Return limited content for premium articles
+            article["body"] = article["body"][:500] + "\n\n[Premium content continues...]"
+            article["is_locked"] = True
+        else:
+            article["is_locked"] = False
+            # Increment view count only for full access
+            db.articles.update_one({"_id": article_id}, {"$inc": {"view_count": 1}})
+    else:
+        # Free article - always increment view count
+        article["is_locked"] = False
+        db.articles.update_one({"_id": article_id}, {"$inc": {"view_count": 1}})
+    
+    article["id"] = str(article["_id"])
+    del article["_id"]
+    return article
+
+# Free content endpoints (no authentication required)
+@app.get("/api/free-articles", response_model=List[Article])
+async def get_free_articles(
+    category: Optional[str] = None,
+    limit: int = Query(default=10, le=20),
+    skip: int = 0
+):
+    """Get free articles that don't require subscription"""
+    filter_dict = {"is_premium": False}
+    if category:
+        filter_dict["category"] = category
+    
+    articles = list(db.articles.find(filter_dict).sort("published_at", -1).skip(skip).limit(limit))
+    
+    for article in articles:
+        article["id"] = str(article["_id"])
+        del article["_id"]
+        article["is_locked"] = False
+    
+    return articles
+
+@app.get("/api/premium-articles", response_model=List[Article])
+async def get_premium_articles(
+    category: Optional[str] = None,
+    limit: int = Query(default=10, le=20),
+    skip: int = 0,
+    current_user = Depends(get_current_user_from_session)
+):
+    """Get premium articles (requires subscription)"""
+    if not current_user:
+        raise HTTPException(status_code=401, detail="Authentication required")
+    
+    if not current_user.get("is_premium", False):
+        raise HTTPException(status_code=403, detail="Premium subscription required")
+    
+    filter_dict = {"is_premium": True}
+    if category:
+        filter_dict["category"] = category
+    
+    articles = list(db.articles.find(filter_dict).sort("published_at", -1).skip(skip).limit(limit))
+    
+    for article in articles:
+        article["id"] = str(article["_id"])
+        del article["_id"]
+        article["is_locked"] = False
+    
+    return articles
 @app.get("/api/articles", response_model=List[Article])
 async def get_articles(
     category: Optional[str] = None,
