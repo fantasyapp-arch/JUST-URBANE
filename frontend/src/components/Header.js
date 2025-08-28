@@ -67,7 +67,7 @@ const Header = () => {
     <header className="bg-white shadow-lg sticky top-0 z-50">
       {/* CLEAN MAIN HEADER - NO BLUE STRIP */}
       <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-24 lg:h-32">
+        <div className="flex items-center justify-between h-16 lg:h-18">{/* SMALLER NAVBAR HEIGHT */}
           
           {/* HERO LOGO - MUCH BIGGER */}
           <Link to="/" className="flex items-center">
