@@ -27,6 +27,7 @@ import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import PaymentSuccessPage from './pages/PaymentSuccessPage';
 import ProfilePage from './pages/ProfilePage';
+import SubcategoryPage from './pages/SubcategoryPage';
 
 // Create a client
 const queryClient = new QueryClient({
