@@ -44,6 +44,7 @@ export const articlesApi = {
   getFeatured: () => api.get('/articles?featured=true&limit=6'),
   getTrending: () => api.get('/articles?trending=true&limit=8'),
   getByCategory: (category, params = {}) => api.get('/articles', { params: { category, ...params } }),
+  getBySubcategory: (category, subcategory, params = {}) => api.get('/articles', { params: { category, subcategory, ...params } }),
   getFree: (params = {}) => api.get('/free-articles', { params }),
   getPremium: (params = {}) => api.get('/premium-articles', { params })
 };
