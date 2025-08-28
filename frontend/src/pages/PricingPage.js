@@ -9,37 +9,17 @@ import toast from 'react-hot-toast';
 
 const PricingPage = () => {
   const { isAuthenticated } = useAuth();
-  const [loadingPackage, setLoadingPackage] = useState(null);
-  const [packages, setPackages] = useState(null);
+  const [selectedPlan, setSelectedPlan] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  useEffect(() => {
-    // Load subscription packages from API
-    const loadPackages = async () => {
-      try {
-        const packagesData = await paymentApi.getSubscriptionPackages();
-        setPackages(packagesData);
-      } catch (error) {
-        console.error('Error loading packages:', error);
-      }
-    };
-    
-    loadPackages();
-  }, []);
-
-  const handleSubscribe = async (packageId) => {
+  const handlePlanSelect = (plan) => {
     if (!isAuthenticated) {
       toast.error('Please sign in to subscribe');
       return;
     }
-
-    setLoadingPackage(packageId);
     
-    try {
-      await initiatePayment(packageId);
-    } catch (error) {
-      toast.error(error.message || 'Failed to initiate payment');
-      setLoadingPackage(null);
-    }
+    setSelectedPlan(plan);
+    setIsModalOpen(true);
   };
   const plans = [
     {
