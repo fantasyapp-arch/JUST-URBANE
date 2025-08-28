@@ -232,7 +232,7 @@ const ArticlePage = () => {
           </motion.div>
 
           {/* Article Tags */}
-          {article.tags && article.tags.length > 0 && canReadPremium && (
+          {article.tags && article.tags.length > 0 && !isLocked && (
             <motion.div 
               className="mt-12 pt-8 border-t border-gray-200"
               initial={{ opacity: 0 }}
