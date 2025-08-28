@@ -277,44 +277,31 @@ const HomePage = () => {
         </section>
       )}
 
-      {/* NEWSLETTER SECTION - SINGLE PREMIUM INSTANCE */}
-      <section className="py-20 bg-gradient-to-br from-primary-600 via-blue-700 to-indigo-800 text-white">
+      {/* SINGLE NEWSLETTER SECTION - NO DUPLICATE */}
+      <section className="py-16 bg-gradient-to-br from-primary-600 via-blue-700 to-indigo-800 text-white">
         <div className="container mx-auto px-4">
-          <motion.div 
-            className="text-center max-w-4xl mx-auto"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 1.2 }}
-          >
-            <div className="inline-flex items-center bg-white/20 backdrop-blur-sm text-white px-8 py-4 rounded-full font-bold text-lg mb-8 shadow-xl">
-              <Sparkles className="h-6 w-6 mr-3" />
-              EXCLUSIVE ACCESS
-            </div>
-            
-            <h2 className="text-5xl lg:text-6xl font-serif font-black mb-8 leading-tight">
-              Join the Elite Circle
+          <div className="text-center max-w-3xl mx-auto">
+            <h2 className="text-4xl font-serif font-black mb-6 leading-tight">
+              Stay Updated with Just Urbane
             </h2>
-            <p className="text-2xl text-white/90 mb-12 leading-relaxed">
-              Get exclusive insights, luxury lifestyle trends, and premium content delivered weekly
+            <p className="text-xl text-white/90 mb-8 leading-relaxed">
+              Get exclusive insights and premium content delivered weekly
             </p>
 
-            <div className="max-w-2xl mx-auto">
-              <form className="flex flex-col lg:flex-row gap-6">
-                <input
-                  type="email"
-                  placeholder="Enter your email address"
-                  className="flex-1 px-8 py-5 rounded-2xl text-gray-900 border-0 focus:ring-4 focus:ring-white/30 outline-none text-xl font-medium placeholder-gray-500"
-                />
-                <button
-                  type="submit"
-                  className="bg-gradient-to-r from-gold-400 to-yellow-500 hover:from-gold-500 hover:to-yellow-600 text-black px-12 py-5 rounded-2xl font-black text-xl transition-all duration-300 transform hover:scale-105 shadow-2xl flex items-center justify-center"
-                >
-                  <Crown className="h-6 w-6 mr-3" />
-                  Join Elite
-                </button>
-              </form>
-            </div>
-          </motion.div>
+            <form className="flex flex-col lg:flex-row gap-4 max-w-lg mx-auto">
+              <input
+                type="email"
+                placeholder="Enter your email address"
+                className="flex-1 px-6 py-4 rounded-xl text-gray-900 focus:ring-4 focus:ring-white/30 outline-none text-lg"
+              />
+              <button
+                type="submit"
+                className="bg-accent-500 hover:bg-accent-600 text-white px-8 py-4 rounded-xl font-bold transition-all duration-200 transform hover:scale-105 shadow-lg"
+              >
+                Subscribe Free
+              </button>
+            </form>
+          </div>
         </div>
       </section>
     </div>
