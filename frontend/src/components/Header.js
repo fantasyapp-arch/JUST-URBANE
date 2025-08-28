@@ -146,23 +146,23 @@ const Header = () => {
               <Search className="h-4 w-4 text-gray-600" />
             </button>
 
-            {/* User Menu */}
+            {/* Compact User Menu */}
             {isAuthenticated ? (
               <div className="relative group">
-                <button className="p-2.5 hover:bg-gray-100 rounded-lg transition-colors">
-                  <User className="h-5 w-5 text-gray-600" />
+                <button className="p-2 hover:bg-gray-100 rounded-lg transition-colors">
+                  <User className="h-4 w-4 text-gray-600" />
                 </button>
-                <div className="absolute right-0 top-full mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                <div className="absolute right-0 top-full mt-2 w-40 bg-white border border-gray-200 rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
                   <Link
                     to="/account"
-                    className="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 flex items-center"
+                    className="block px-3 py-2 text-sm text-gray-700 hover:bg-gray-50 flex items-center"
                   >
-                    <Crown className="h-4 w-4 mr-2 text-gold-500" />
-                    My Account
+                    <Crown className="h-3 w-3 mr-2 text-gold-500" />
+                    Account
                   </Link>
                   <button
                     onClick={logout}
-                    className="block w-full text-left px-4 py-3 text-sm text-gray-700 hover:bg-gray-50"
+                    className="block w-full text-left px-3 py-2 text-sm text-gray-700 hover:bg-gray-50"
                   >
                     Sign Out
                   </button>
@@ -171,21 +171,21 @@ const Header = () => {
             ) : (
               <Link
                 to="/login"
-                className="text-sm font-medium text-gray-700 hover:text-primary-600 transition-colors px-4 py-2"
+                className="text-sm font-medium text-gray-700 hover:text-primary-600 transition-colors px-3 py-1"
               >
                 Sign In
               </Link>
             )}
 
-            {/* SIDEBAR MENU TOGGLE */}
+            {/* COMPACT SIDEBAR MENU TOGGLE */}
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="p-2.5 hover:bg-gray-100 rounded-lg transition-colors"
+              className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
             >
               {isMenuOpen ? (
-                <X className="h-6 w-6 text-gray-600" />
+                <X className="h-5 w-5 text-gray-600" />
               ) : (
-                <Menu className="h-6 w-6 text-gray-600" />
+                <Menu className="h-5 w-5 text-gray-600" />
               )}
             </button>
           </div>
