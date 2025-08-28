@@ -51,6 +51,7 @@ function App() {
               <Routes>
                 <Route path="/" element={<HomePage />} />
                 <Route path="/category/:slug" element={<CategoryPage />} />
+                <Route path="/category/:category/:subcategory" element={<SubcategoryPage />} />
                 <Route path="/article/:slug" element={<ArticlePage />} />
                 <Route path="/author/:slug" element={<AuthorPage />} />
                 <Route path="/issues" element={<IssuesPage />} />
