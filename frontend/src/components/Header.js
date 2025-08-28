@@ -128,22 +128,22 @@ const Header = () => {
             })}
           </nav>
 
-          {/* RIGHT SIDE ACTIONS */}
-          <div className="flex items-center space-x-4">
-            {/* SMART SUBSCRIBE BUTTON */}
+          {/* COMPACT RIGHT SIDE ACTIONS */}
+          <div className="flex items-center space-x-3">
+            {/* COMPACT SUBSCRIBE BUTTON */}
             <Link
               to="/pricing"
-              className="hidden md:inline-flex bg-accent-500 hover:bg-accent-600 text-white px-6 py-2.5 rounded-lg font-bold text-sm uppercase tracking-wide transition-all duration-200 transform hover:scale-105 shadow-lg"
+              className="hidden md:inline-flex bg-accent-500 hover:bg-accent-600 text-white px-4 py-2 rounded-lg font-bold text-sm uppercase tracking-wide transition-all duration-200 transform hover:scale-105 shadow-md"
             >
               Subscribe
             </Link>
 
-            {/* Search */}
+            {/* Compact Search */}
             <button
               onClick={() => setIsSearchOpen(true)}
-              className="p-2.5 hover:bg-gray-100 rounded-lg transition-colors"
+              className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
             >
-              <Search className="h-5 w-5 text-gray-600" />
+              <Search className="h-4 w-4 text-gray-600" />
             </button>
 
             {/* User Menu */}
