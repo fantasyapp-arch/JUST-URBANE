@@ -203,49 +203,30 @@ const ArticlePage = () => {
         )}
 
         <div className="max-w-4xl mx-auto">
-          {/* Premium Content Gate */}
-          {!canReadPremium && (
-            <motion.div 
-              className="bg-gradient-to-r from-gold-50 to-gold-100 border border-gold-200 rounded-2xl p-8 mb-12 text-center"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-            >
-              <Crown className="h-12 w-12 text-gold-500 mx-auto mb-4" />
-              <h3 className="text-2xl font-serif font-bold text-primary-900 mb-4">
-                Premium Content
-              </h3>
-              <p className="text-gray-700 mb-6 max-w-md mx-auto">
-                This article is available to premium subscribers. Join thousands of readers who enjoy unlimited access to our luxury lifestyle content.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Link to="/pricing" className="btn-primary">
-                  View Plans
-                </Link>
-                <Link to="/login" className="btn-secondary">
-                  Sign In
-                </Link>
-              </div>
-            </motion.div>
-          )}
-
-          {/* Article Content */}
+          {/* Article Content - GQ India Hybrid Model */}
           <motion.div 
-            className={`prose prose-lg lg:prose-xl max-w-none ${shouldBlur ? 'premium-blur' : ''}`}
+            className="prose prose-lg lg:prose-xl max-w-none"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.6 }}
           >
-            {article.body.split('\n\n').map((paragraph, index) => (
-              <p key={index} className="mb-6 text-gray-700 leading-relaxed text-lg">
-                {paragraph}
-              </p>
-            ))}
+            {/* Show content based on access */}
+            {article.is_premium && isLocked ? (
+              // Premium content gate for locked articles
+              <PremiumContentGate article={article} showPreview={true} />
+            ) : (
+              // Full content for free articles or subscribed users
+              <div>
+                {article.body.split('\n\n').map((paragraph, index) => (
+                  <p key={index} className="mb-6 text-gray-700 leading-relaxed text-lg">
+                    {paragraph}
+                  </p>
+                ))}
 
-            {/* Newsletter Signup - Inline */}
-            {canReadPremium && (
-              <div className="my-12">
-                <NewsletterSignup variant="inline" />
+                {/* Newsletter Signup - Inline for full access */}
+                <div className="my-12">
+                  <NewsletterSignup variant="inline" />
+                </div>
               </div>
             )}
           </motion.div>
