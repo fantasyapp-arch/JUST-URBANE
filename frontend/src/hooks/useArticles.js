@@ -56,6 +56,28 @@ export const useCategoryArticles = (category, params = {}) => {
   );
 };
 
+export const useFreeArticles = (params = {}) => {
+  return useQuery(
+    ['articles', 'free', params],
+    () => articlesApi.getFree(params),
+    {
+      select: (data) => data.data,
+      staleTime: 5 * 60 * 1000, // 5 minutes
+    }
+  );
+};
+
+export const usePremiumArticles = (params = {}) => {
+  return useQuery(
+    ['articles', 'premium', params],
+    () => articlesApi.getPremium(params),
+    {
+      select: (data) => data.data,
+      staleTime: 5 * 60 * 1000, // 5 minutes
+    }
+  );
+};
+
 export const useCreateArticle = () => {
   const queryClient = useQueryClient();
 
