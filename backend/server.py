@@ -91,8 +91,22 @@ class UserLogin(BaseModel):
     password: str
 
 class PaymentRequest(BaseModel):
-    package_id: str  # premium_monthly or premium_annual
+    package_id: str  # digital_annual, print_annual, combined_annual
     origin_url: str
+
+class SubscriptionRequest(BaseModel):
+    package_id: str
+    user_details: Optional[Dict[str, Any]] = None  # For print subscriptions
+    
+class UserAddress(BaseModel):
+    full_name: str
+    address_line_1: str
+    address_line_2: Optional[str] = None
+    city: str
+    state: str
+    postal_code: str
+    country: str = "India"
+    phone_number: str
 
 class PaymentTransaction(BaseModel):
     id: str
