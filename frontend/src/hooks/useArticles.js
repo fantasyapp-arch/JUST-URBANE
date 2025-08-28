@@ -56,6 +56,17 @@ export const useCategoryArticles = (category, params = {}) => {
   );
 };
 
+export const useSubcategoryArticles = (category, subcategory, params = {}) => {
+  return useQuery(
+    ['articles', 'subcategory', category, subcategory, params],
+    () => articlesApi.getBySubcategory(category, subcategory, params),
+    {
+      select: (data) => data.data,
+      enabled: !!(category && subcategory),
+    }
+  );
+};
+
 export const useFreeArticles = (params = {}) => {
   return useQuery(
     ['articles', 'free', params],
