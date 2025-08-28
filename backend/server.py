@@ -900,10 +900,11 @@ async def get_current_user_optional_session(request: Request):
     """Optional user authentication - allows free content access"""
     return await get_current_user_from_session(request)
 
-# Articles Routes - Updated for GQ India Model
+# Articles Routes - Updated with subcategory support
 @app.get("/api/articles", response_model=List[Article])
 async def get_articles(
     category: Optional[str] = None,
+    subcategory: Optional[str] = None,  # NEW: subcategory filter
     featured: Optional[bool] = None,
     trending: Optional[bool] = None,
     content_type: Optional[str] = None,  # free, premium, all
@@ -914,6 +915,8 @@ async def get_articles(
     filter_dict = {}
     if category:
         filter_dict["category"] = category
+    if subcategory:
+        filter_dict["subcategory"] = subcategory  # NEW: subcategory filtering
     if featured is not None:
         filter_dict["is_featured"] = featured
     if trending is not None:
@@ -924,6 +927,13 @@ async def get_articles(
         filter_dict["is_premium"] = False
     elif content_type == "premium":
         filter_dict["is_premium"] = True
+    
+    # Also search in tags for subcategory
+    if subcategory and not filter_dict.get("subcategory"):
+        filter_dict["$or"] = [
+            {"subcategory": subcategory},
+            {"tags": {"$in": [subcategory]}}
+        ]
     
     articles = list(db.articles.find(filter_dict).sort("published_at", -1).skip(skip).limit(limit))
     
