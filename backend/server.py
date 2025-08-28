@@ -453,7 +453,155 @@ async def login(user: UserLogin):
     )
     return {"access_token": access_token, "token_type": "bearer"}
 
-# Payment Routes
+# Enhanced Payment Routes with Address Collection
+@app.post("/api/payments/create-subscription")
+async def create_subscription_checkout(
+    subscription_request: SubscriptionRequest,
+    request: Request,
+    current_user = Depends(get_current_user_from_session)
+):
+    """Create subscription with address collection for print editions"""
+    
+    # Validate package
+    if subscription_request.package_id not in SUBSCRIPTION_PACKAGES:
+        raise HTTPException(status_code=400, detail="Invalid subscription package")
+    
+    package = SUBSCRIPTION_PACKAGES[subscription_request.package_id]
+    
+    # Check if print delivery address is required
+    requires_address = subscription_request.package_id in ["print_annual", "combined_annual"]
+    
+    if requires_address and not subscription_request.user_details:
+        raise HTTPException(status_code=400, detail="Address details required for print subscription")
+    
+    try:
+        # Initialize Stripe
+        host_url = str(request.base_url)
+        webhook_url = f"{host_url}api/webhook/stripe"
+        stripe_checkout = StripeCheckout(api_key=STRIPE_API_KEY, webhook_url=webhook_url)
+        
+        # Build success and cancel URLs
+        origin_url = request.headers.get("origin", str(request.base_url))
+        success_url = f"{origin_url}/subscription-success?session_id={{CHECKOUT_SESSION_ID}}"
+        cancel_url = f"{origin_url}/pricing"
+        
+        # Prepare metadata
+        metadata = {
+            "package_id": subscription_request.package_id,
+            "package_name": package["name"],
+            "user_email": current_user["email"] if current_user else "guest",
+            "user_id": current_user["id"] if current_user else "guest",
+            "requires_delivery": str(requires_address).lower()
+        }
+        
+        # Add address to metadata if provided
+        if subscription_request.user_details:
+            for key, value in subscription_request.user_details.items():
+                metadata[f"address_{key}"] = str(value)
+        
+        # Create checkout session
+        checkout_request = CheckoutSessionRequest(
+            amount=package["amount"],
+            currency=package["currency"],
+            success_url=success_url,
+            cancel_url=cancel_url,
+            metadata=metadata
+        )
+        
+        session: CheckoutSessionResponse = await stripe_checkout.create_checkout_session(checkout_request)
+        
+        # Create subscription transaction record
+        transaction_dict = {
+            "_id": str(uuid.uuid4()),
+            "session_id": session.session_id,
+            "user_id": current_user["id"] if current_user else None,
+            "user_email": current_user["email"] if current_user else None,
+            "package_id": subscription_request.package_id,
+            "amount": package["amount"],
+            "currency": package["currency"],
+            "payment_status": "initiated",
+            "status": "open",
+            "requires_delivery": requires_address,
+            "delivery_address": subscription_request.user_details if requires_address else None,
+            "metadata": metadata,
+            "created_at": datetime.utcnow(),
+            "updated_at": datetime.utcnow()
+        }
+        
+        db.subscription_transactions.insert_one(transaction_dict)
+        
+        return {"checkout_url": session.url, "session_id": session.session_id}
+        
+    except Exception as e:
+        print(f"Subscription payment error: {str(e)}")
+        raise HTTPException(status_code=500, detail="Failed to create subscription session")
+
+@app.get("/api/payments/subscription-status/{session_id}")
+async def get_subscription_status(session_id: str):
+    """Get subscription payment status and update user subscription"""
+    
+    try:
+        # Get transaction from database
+        transaction = db.subscription_transactions.find_one({"session_id": session_id})
+        if not transaction:
+            raise HTTPException(status_code=404, detail="Subscription session not found")
+        
+        # Check if already processed
+        if transaction["payment_status"] == "paid":
+            return {
+                "status": "complete",
+                "payment_status": "paid",
+                "message": "Subscription already processed"
+            }
+        
+        # Initialize Stripe and check status
+        stripe_checkout = StripeCheckout(api_key=STRIPE_API_KEY, webhook_url="")
+        checkout_status: CheckoutStatusResponse = await stripe_checkout.get_checkout_status(session_id)
+        
+        # Update transaction
+        update_data = {
+            "status": checkout_status.status,
+            "payment_status": checkout_status.payment_status,
+            "updated_at": datetime.utcnow()
+        }
+        
+        db.subscription_transactions.update_one(
+            {"session_id": session_id},
+            {"$set": update_data}
+        )
+        
+        # If payment successful, update user subscription
+        if checkout_status.payment_status == "paid" and transaction["payment_status"] != "paid":
+            if transaction["user_email"]:
+                subscription_end_date = datetime.utcnow() + timedelta(days=365)  # All are annual
+                
+                subscription_update = {
+                    "is_premium": True,
+                    "subscription_status": "active",
+                    "subscription_package": transaction["package_id"],
+                    "subscription_end_date": subscription_end_date,
+                    "updated_at": datetime.utcnow()
+                }
+                
+                # Add delivery info for print subscriptions
+                if transaction.get("requires_delivery") and transaction.get("delivery_address"):
+                    subscription_update["delivery_address"] = transaction["delivery_address"]
+                
+                db.users.update_one(
+                    {"email": transaction["user_email"]},
+                    {"$set": subscription_update}
+                )
+        
+        return {
+            "status": checkout_status.status,
+            "payment_status": checkout_status.payment_status,
+            "package": transaction["package_id"],
+            "requires_delivery": transaction.get("requires_delivery", False)
+        }
+        
+    except Exception as e:
+        print(f"Subscription status error: {str(e)}")
+        raise HTTPException(status_code=500, detail="Failed to check subscription status")
 @app.post("/api/payments/create-checkout")
 async def create_payment_checkout(
     payment_request: PaymentRequest,
