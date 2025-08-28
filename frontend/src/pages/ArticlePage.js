@@ -4,6 +4,7 @@ import { Calendar, Clock, Eye, User, Tag, Crown, Share2, Heart, BookOpen, ArrowL
 import { motion } from 'framer-motion';
 import LoadingSpinner, { SkeletonArticle } from '../components/LoadingSpinner';
 import NewsletterSignup from '../components/NewsletterSignup';
+import PremiumContentGate from '../components/PremiumContentGate';
 import { useAuth } from '../context/AuthContext';
 import { useArticle } from '../hooks/useArticles';
 import { formatDate, formatReadingTime } from '../utils/formatters';
