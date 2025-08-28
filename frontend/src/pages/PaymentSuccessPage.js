@@ -215,16 +215,16 @@ const PaymentSuccessPage = () => {
           {/* Error Details */}
           {error && paymentStatus !== 'success' && (
             <motion.div
-              className="bg-red-50 border border-red-200 rounded-xl p-6 mb-8"
+              className="bg-gradient-to-r from-red-50 to-rose-50 border-2 border-red-300 rounded-2xl p-8 mb-8"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5 }}
             >
-              <p className="text-red-700 font-medium">
+              <p className="text-red-800 font-bold text-lg text-center">
                 {error}
               </p>
               {sessionId && (
-                <p className="text-red-600 text-sm mt-2">
+                <p className="text-red-700 text-sm mt-4 text-center">
                   Session ID: {sessionId}
                 </p>
               )}
