@@ -51,8 +51,8 @@ const ArticlePage = () => {
     );
   }
 
-  const canReadPremium = isAuthenticated || !article.is_premium;
-  const shouldBlur = article.is_premium && !isAuthenticated;
+  const canReadPremium = isAuthenticated && user?.is_premium && user?.subscription_status === 'active';
+  const isLocked = article?.is_locked || (article?.is_premium && !canReadPremium);
 
   const shareArticle = () => {
     if (navigator.share) {
