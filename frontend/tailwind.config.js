@@ -11,7 +11,7 @@ module.exports = {
         'sans': ['Inter', 'system-ui', 'sans-serif'],
       },
       colors: {
-        // Updated colors based on URBANE logo blue theme
+        // Updated colors for maximum text visibility
         primary: {
           50: '#eff6ff',
           100: '#dbeafe', 
@@ -22,7 +22,7 @@ module.exports = {
           600: '#2563eb',  // Darker blue from logo
           700: '#1d4ed8',
           800: '#1e40af',
-          900: '#1e3a8a',  // Dark navy from logo
+          900: '#1e3a8a',  // Dark navy from logo - VERY DARK for text
         },
         // Accent colors for buttons and highlights
         accent: {
