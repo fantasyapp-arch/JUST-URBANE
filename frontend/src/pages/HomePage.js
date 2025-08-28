@@ -657,7 +657,6 @@ const HomePage = () => {
             ))}
           </div>
         </section>
-      )}
 
       {/* PREMIUM NEWSLETTER - SINGLE INSTANCE */}
       <section className="py-20 bg-gradient-to-br from-primary-600 via-blue-700 to-indigo-800 text-white relative overflow-hidden">
