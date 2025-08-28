@@ -295,7 +295,125 @@ async def get_current_user_optional(credentials: HTTPAuthorizationCredentials = 
 async def health_check():
     return {"status": "healthy", "message": "Just Urbane API is running"}
 
-# Authentication Routes
+# Google Authentication Routes
+@app.get("/api/auth/google-login-url")
+async def get_google_login_url(request: Request):
+    """Get Google authentication URL"""
+    try:
+        # Get the base URL from the request
+        base_url = str(request.base_url).rstrip('/')
+        redirect_url = f"{base_url}/profile"
+        
+        # Create Google auth URL
+        auth_url = f"https://auth.emergentagent.com/?redirect={redirect_url}"
+        
+        return {"auth_url": auth_url}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail="Failed to generate auth URL")
+
+@app.post("/api/auth/google-callback")
+async def google_auth_callback(session_id: str, response: Response):
+    """Handle Google authentication callback"""
+    try:
+        # Call Emergent auth API to get user data
+        async with aiohttp.ClientSession() as session:
+            async with session.get(
+                "https://demobackend.emergentagent.com/auth/v1/env/oauth/session-data",
+                headers={"X-Session-ID": session_id}
+            ) as resp:
+                if resp.status != 200:
+                    raise HTTPException(status_code=400, detail="Invalid session ID")
+                
+                user_data = await resp.json()
+        
+        # Check if user already exists
+        existing_user = db.users.find_one({"email": user_data["email"]})
+        
+        if not existing_user:
+            # Create new user
+            user_dict = {
+                "_id": str(uuid.uuid4()),
+                "name": user_data["name"],
+                "email": user_data["email"],
+                "picture": user_data.get("picture"),
+                "google_id": user_data["id"],
+                "created_at": datetime.utcnow(),
+                "is_premium": False,
+                "subscription_status": "inactive",
+                "auth_provider": "google"
+            }
+            db.users.insert_one(user_dict)
+        else:
+            user_dict = existing_user
+            user_dict["id"] = str(user_dict["_id"])
+        
+        # Save session token in sessions table
+        session_dict = {
+            "_id": str(uuid.uuid4()),
+            "session_token": user_data["session_token"],
+            "user_id": user_dict["_id"] if "_id" in user_dict else user_dict["id"],
+            "user_email": user_data["email"],
+            "expires_at": datetime.utcnow() + timedelta(days=7),
+            "created_at": datetime.utcnow()
+        }
+        db.sessions.insert_one(session_dict)
+        
+        # Set session cookie
+        response.set_cookie(
+            key="session_token",
+            value=user_data["session_token"],
+            max_age=7 * 24 * 60 * 60,  # 7 days
+            httponly=True,
+            secure=True,
+            samesite="none",
+            path="/"
+        )
+        
+        return {
+            "success": True,
+            "user": {
+                "id": user_dict["_id"] if "_id" in user_dict else user_dict["id"],
+                "name": user_data["name"],
+                "email": user_data["email"],
+                "picture": user_data.get("picture")
+            }
+        }
+        
+    except Exception as e:
+        print(f"Google auth error: {str(e)}")
+        raise HTTPException(status_code=500, detail="Authentication failed")
+
+async def get_current_user_from_session(request: Request):
+    """Get current user from session cookie or bearer token"""
+    # Try session cookie first
+    session_token = request.cookies.get("session_token")
+    
+    # Try bearer token as fallback
+    if not session_token:
+        auth_header = request.headers.get("Authorization")
+        if auth_header and auth_header.startswith("Bearer "):
+            session_token = auth_header.split(" ")[1]
+    
+    if not session_token:
+        return None
+    
+    # Find session in database
+    session = db.sessions.find_one({
+        "session_token": session_token,
+        "expires_at": {"$gt": datetime.utcnow()}
+    })
+    
+    if not session:
+        return None
+    
+    # Get user data
+    user = db.users.find_one({"_id": session["user_id"]})
+    if user:
+        user["id"] = str(user["_id"])
+        del user["_id"]
+        return user
+    
+    return None
 @app.post("/api/auth/register", response_model=User)
 async def register(user: UserCreate):
     # Check if user already exists
