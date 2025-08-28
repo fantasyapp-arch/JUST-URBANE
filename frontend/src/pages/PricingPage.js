@@ -223,6 +223,13 @@ const PricingPage = () => {
           </p>
         </div>
       </div>
+
+      {/* Subscription Modal */}
+      <SubscriptionModal 
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        selectedPlan={selectedPlan}
+      />
     </div>
   );
 };
