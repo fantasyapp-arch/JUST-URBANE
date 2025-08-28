@@ -1,10 +1,4 @@
 import React, { useState } from 'react';
-import { X, CreditCard, MapPin, Phone, Mail, Loader } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
-import toast from 'react-hot-toast';
-import { api } from '../utils/api';
-
-import React, { useState } from 'react';
 import { X, CreditCard, MapPin, Phone, Mail, Loader, User, Crown, CheckCircle } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import toast from 'react-hot-toast';
