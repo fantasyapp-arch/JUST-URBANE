@@ -148,24 +148,16 @@ const PricingPage = () => {
                 </ul>
 
                 <button
-                  onClick={() => plan.packageId ? handleSubscribe(plan.packageId) : null}
-                  disabled={loadingPackage === plan.packageId}
+                  onClick={() => handlePlanSelect(plan)}
                   className={`w-full block text-center py-4 px-8 rounded-xl font-bold text-lg transition-all duration-200 transform hover:scale-105 shadow-lg ${
                     plan.buttonVariant === 'premium'
                       ? 'bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 text-white'
                       : plan.buttonVariant === 'primary'
                       ? 'bg-primary-600 hover:bg-primary-700 text-white'
                       : 'bg-gray-100 hover:bg-gray-200 text-gray-900'
-                  } ${loadingPackage === plan.packageId ? 'cursor-not-allowed opacity-70' : ''}`}
+                  }`}
                 >
-                  {loadingPackage === plan.packageId ? (
-                    <div className="flex items-center justify-center">
-                      <Loader className="h-5 w-5 animate-spin mr-2" />
-                      Processing...
-                    </div>
-                  ) : (
-                    plan.buttonText
-                  )}
+                  {plan.buttonText}
                 </button>
               </div>
             </div>
