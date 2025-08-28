@@ -88,8 +88,8 @@ const Header = () => {
             </div>
           </Link>
 
-          {/* CLEAN DESKTOP NAVIGATION - MAIN CATEGORIES ONLY */}
-          <nav className="hidden lg:flex items-center space-x-8">
+          {/* COMPACT DESKTOP NAVIGATION */}
+          <nav className="hidden lg:flex items-center space-x-6">
             {mainHeaderCategories.map((categoryName) => {
               const category = categories.find(cat => cat.name === categoryName);
               return (
@@ -101,10 +101,10 @@ const Header = () => {
                 >
                   <Link
                     to={`/category/${category.slug}`}
-                    className="flex items-center text-gray-700 hover:text-primary-600 font-medium transition-colors duration-200 text-sm uppercase tracking-wide py-2"
+                    className="flex items-center text-gray-700 hover:text-primary-600 font-medium transition-colors duration-200 text-sm uppercase tracking-wide py-1"
                   >
                     {categoryName}
-                    <ChevronDown className="h-4 w-4 ml-1 transform group-hover:rotate-180 transition-transform duration-200" />
+                    <ChevronDown className="h-3 w-3 ml-1 transform group-hover:rotate-180 transition-transform duration-200" />
                   </Link>
 
                   {/* DROPDOWN SUBMENU */}
