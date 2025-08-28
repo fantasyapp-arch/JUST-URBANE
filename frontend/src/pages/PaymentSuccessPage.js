@@ -168,38 +168,47 @@ const PaymentSuccessPage = () => {
           {/* Payment Details */}
           {paymentData && paymentStatus === 'success' && (
             <motion.div
-              className="bg-green-50 border border-green-200 rounded-xl p-6 mb-8"
+              className="bg-gradient-to-r from-green-50 to-emerald-50 border-2 border-green-300 rounded-2xl p-8 mb-8"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5 }}
             >
-              <div className="flex items-center justify-center mb-4">
-                <Crown className="h-6 w-6 text-green-600 mr-2" />
-                <span className="text-lg font-semibold text-green-800">
-                  Premium Subscription Activated
+              <div className="flex items-center justify-center mb-6">
+                <Crown className="h-8 w-8 text-green-600 mr-3" />
+                <span className="text-2xl font-bold text-green-800">
+                  Subscription Activated!
                 </span>
               </div>
               
-              <div className="grid md:grid-cols-2 gap-4 text-sm">
+              <div className="grid md:grid-cols-2 gap-6 text-base">
                 <div className="text-left">
-                  <p className="text-green-700">
+                  <p className="text-green-800 font-semibold mb-2">
                     <strong>Package:</strong> {paymentData.metadata?.package_name || 'Premium'}
                   </p>
                   {paymentData.amount && (
-                    <p className="text-green-700">
+                    <p className="text-green-800 font-semibold mb-2">
                       <strong>Amount:</strong> {formatAmount(paymentData.amount, paymentData.currency)}
                     </p>
                   )}
                 </div>
                 <div className="text-left">
-                  <p className="text-green-700">
-                    <strong>Session ID:</strong> {sessionId.substring(0, 20)}...
+                  <p className="text-green-800 font-semibold mb-2">
+                    <strong>Duration:</strong> 1 Year
                   </p>
-                  <p className="text-green-700">
-                    <strong>Status:</strong> {paymentData.payment_status}
+                  <p className="text-green-800 font-semibold mb-2">
+                    <strong>Status:</strong> ✅ {paymentData.payment_status}
                   </p>
                 </div>
               </div>
+
+              {/* Print delivery notice */}
+              {paymentData.requires_delivery && (
+                <div className="mt-6 p-4 bg-blue-100 border border-blue-300 rounded-xl">
+                  <p className="text-blue-800 font-semibold text-center">
+                    📦 Your print magazine will be delivered to the address provided within 7-10 business days
+                  </p>
+                </div>
+              )}
             </motion.div>
           )}
 
