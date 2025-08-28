@@ -1,9 +1,8 @@
 import React, { useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
-import { Calendar, Clock, Eye, User, Tag, Crown, Share2, Heart, BookOpen, ArrowLeft } from 'lucide-react';
+import { Calendar, Clock, Eye, User, Tag, Crown, Share2, Heart, ArrowLeft } from 'lucide-react';
 import { motion } from 'framer-motion';
 import LoadingSpinner, { SkeletonArticle } from '../components/LoadingSpinner';
-import NewsletterSignup from '../components/NewsletterSignup';
 import PremiumContentGate from '../components/PremiumContentGate';
 import { useAuth } from '../context/AuthContext';
 import { useArticle } from '../hooks/useArticles';
@@ -16,7 +15,6 @@ const ArticlePage = () => {
   const { data: article, isLoading, error } = useArticle(slug);
 
   useEffect(() => {
-    // Scroll to top on article load
     window.scrollTo(0, 0);
   }, [slug]);
 
@@ -34,11 +32,11 @@ const ArticlePage = () => {
     return (
       <div className="min-h-screen bg-white flex items-center justify-center">
         <div className="text-center">
-          <h1 className="text-4xl font-serif font-bold text-primary-900 mb-4">
+          <h1 className="text-4xl font-bold text-gray-900 mb-4">
             Article Not Found
           </h1>
           <p className="text-gray-600 mb-8">
-            The article you're looking for doesn't exist or has been moved.
+            The article you're looking for doesn't exist.
           </p>
           <button
             onClick={() => navigate('/')}
@@ -63,63 +61,65 @@ const ArticlePage = () => {
       });
     } else {
       navigator.clipboard.writeText(window.location.href);
-      // You could add a toast notification here
     }
   };
 
+  // Category Labels like GQ India
+  const categoryLabels = {
+    fashion: "Look Good",
+    technology: "Get Smart", 
+    tech: "Get Smart",
+    business: "Get Smart",
+    finance: "Get Smart",
+    travel: "Live Well",
+    health: "Live Well",
+    culture: "Entertainment",
+    art: "Entertainment",
+    entertainment: "Entertainment",
+    auto: "Live Well",
+    grooming: "Look Good",
+    food: "Live Well",
+    aviation: "Live Well", 
+    people: "Entertainment",
+    luxury: "Live Well"
+  };
+
+  const categoryLabel = categoryLabels[article.category] || "Category";
+
   return (
     <div className="min-h-screen bg-white">
-      {/* Navigation Breadcrumb */}
-      <div className="bg-gray-50 py-4">
+      {/* Breadcrumb - GQ Style */}
+      <div className="bg-white py-4 border-b border-gray-100">
         <div className="container mx-auto px-4">
-          <nav className="flex items-center space-x-2 text-sm text-gray-600">
-            <Link to="/" className="hover:text-gold-600">Home</Link>
+          <nav className="flex items-center space-x-2 text-sm text-gray-500">
+            <Link to="/" className="hover:text-gray-900 font-medium">Home</Link>
             <span>/</span>
-            <Link to={`/category/${article.category}`} className="hover:text-gold-600 capitalize">
+            <Link to={`/category/${article.category}`} className="hover:text-gray-900 font-medium capitalize">
               {article.category}
             </Link>
             <span>/</span>
-            <span className="text-gray-900">{article.title}</span>
+            <span className="text-gray-900 font-bold">{article.title}</span>
           </nav>
         </div>
       </div>
 
-      <article className="container mx-auto px-4 py-12">
-        {/* Article Header */}
+      <article className="container mx-auto px-4 py-16">
+        {/* Article Header - Professional GQ Style */}
         <motion.div 
-          className="max-w-4xl mx-auto"
+          className="max-w-4xl mx-auto mb-12"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          {/* Category and Premium Badge */}
-          <div className="flex items-center gap-3 mb-6">
-            <Link
-              to={`/category/${article.category}`}
-              className="category-chip hover:bg-primary-200 transition-colors"
-            >
-              {article.category}
-            </Link>
-            {article.is_premium && (
-              <span className="premium-badge">
-                <Crown className="h-3 w-3 mr-1" />
-                Premium
-              </span>
-            )}
-            {article.is_trending && (
-              <span className="bg-red-500 text-white text-xs font-bold px-3 py-1 rounded-full">
-                Trending
-              </span>
-            )}
-            {article.is_sponsored && (
-              <span className="bg-gray-900 text-white text-xs font-medium px-3 py-1 rounded-full">
-                Sponsored
-              </span>
-            )}
+          {/* Category Label */}
+          <div className="mb-6">
+            <span className="text-sm font-bold text-gray-600 uppercase tracking-widest">
+              {categoryLabel}
+            </span>
           </div>
 
           {/* Title */}
-          <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl font-black text-primary-900 leading-tight mb-6">
+          <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 leading-tight mb-6">
             {article.title}
           </h1>
 
@@ -130,60 +130,49 @@ const ArticlePage = () => {
             </p>
           )}
 
-          {/* Article Meta */}
-          <div className="flex flex-wrap items-center justify-between py-6 border-t border-b border-gray-200 mb-12">
-            <div className="flex flex-wrap items-center gap-6">
-              {/* Author */}
-              <Link
-                to={`/author/${article.author_name?.toLowerCase().replace(' ', '-')}`}
-                className="flex items-center hover:text-gold-600 transition-colors"
-              >
-                <User className="h-5 w-5 mr-2" />
-                <span className="font-medium">{article.author_name}</span>
-              </Link>
-
-              {/* Date */}
-              <div className="flex items-center text-gray-600">
-                <Calendar className="h-5 w-5 mr-2" />
-                <time>{formatDate(article.published_at)}</time>
-              </div>
-
-              {/* Reading Time */}
-              <div className="flex items-center text-gray-600">
-                <Clock className="h-5 w-5 mr-2" />
-                <span>{formatReadingTime(article.reading_time)}</span>
-              </div>
-
-              {/* Views */}
-              {article.view_count > 0 && (
-                <div className="flex items-center text-gray-600">
-                  <Eye className="h-5 w-5 mr-2" />
-                  <span>{article.view_count.toLocaleString()} views</span>
-                </div>
-              )}
+          {/* Article Meta - Clean Style */}
+          <div className="flex flex-wrap items-center gap-6 py-6 border-t border-b border-gray-200 text-sm text-gray-500">
+            {/* Author */}
+            <div className="flex items-center">
+              <User className="h-4 w-4 mr-2" />
+              <span className="font-medium">By {article.author_name}</span>
             </div>
 
-            {/* Share Buttons */}
-            <div className="flex items-center gap-3 mt-4 sm:mt-0">
-              <button
-                onClick={shareArticle}
-                className="flex items-center px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg text-gray-700 transition-colors"
-              >
-                <Share2 className="h-4 w-4 mr-2" />
-                Share
-              </button>
-              <button className="flex items-center px-4 py-2 bg-gold-100 hover:bg-gold-200 text-gold-700 rounded-lg transition-colors">
-                <Heart className="h-4 w-4 mr-2" />
-                Save
-              </button>
+            {/* Date */}
+            <div className="flex items-center">
+              <Calendar className="h-4 w-4 mr-2" />
+              <time>{formatDate(article.published_at)}</time>
             </div>
+
+            {/* Reading Time */}
+            <div className="flex items-center">
+              <Clock className="h-4 w-4 mr-2" />
+              <span>{formatReadingTime(article.reading_time)}</span>
+            </div>
+
+            {/* Views */}
+            {article.view_count > 0 && (
+              <div className="flex items-center">
+                <Eye className="h-4 w-4 mr-2" />
+                <span>{article.view_count.toLocaleString()} views</span>
+              </div>
+            )}
+
+            {/* Share */}
+            <button
+              onClick={shareArticle}
+              className="flex items-center hover:text-gray-700 transition-colors ml-auto"
+            >
+              <Share2 className="h-4 w-4 mr-2" />
+              Share
+            </button>
           </div>
         </motion.div>
 
         {/* Hero Image */}
         {article.hero_image && (
           <motion.div 
-            className="mb-12"
+            className="mb-12 max-w-6xl mx-auto"
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6, delay: 0.2 }}
@@ -197,7 +186,7 @@ const ArticlePage = () => {
                   e.target.src = '/placeholder-article.jpg';
                 }}
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent"></div>
             </div>
           </motion.div>
         )}
@@ -208,7 +197,7 @@ const ArticlePage = () => {
             className="prose prose-lg lg:prose-xl max-w-none"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.6 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
           >
             {/* Show content based on access */}
             {article.is_premium && isLocked ? (
@@ -222,11 +211,6 @@ const ArticlePage = () => {
                     {paragraph}
                   </p>
                 ))}
-
-                {/* Newsletter Signup - Inline for full access */}
-                <div className="my-12">
-                  <NewsletterSignup variant="inline" />
-                </div>
               </div>
             )}
           </motion.div>
@@ -237,7 +221,7 @@ const ArticlePage = () => {
               className="mt-12 pt-8 border-t border-gray-200"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: 0.6, delay: 0.8 }}
+              transition={{ duration: 0.6, delay: 0.6 }}
             >
               <div className="flex items-center mb-4">
                 <Tag className="h-5 w-5 text-gray-600 mr-2" />
@@ -248,7 +232,7 @@ const ArticlePage = () => {
                   <Link
                     key={tag}
                     to={`/search?q=${encodeURIComponent(tag)}`}
-                    className="bg-gray-100 hover:bg-gold-100 text-gray-700 hover:text-gold-700 px-3 py-1 rounded-full text-sm transition-colors"
+                    className="bg-gray-100 hover:bg-primary-100 text-gray-700 hover:text-primary-700 px-3 py-1 rounded-full text-sm transition-colors"
                   >
                     #{tag}
                   </Link>
@@ -257,45 +241,16 @@ const ArticlePage = () => {
             </motion.div>
           )}
 
-          {/* Related Articles */}
-          {!isLocked && (
-            <motion.div 
-              className="mt-16"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.6, delay: 1 }}
-            >
-              <div className="text-center mb-8">
-                <h3 className="text-3xl font-serif font-bold text-primary-900 mb-4">
-                  Continue Reading
-                </h3>
-                <p className="text-gray-600">
-                  Discover more stories from our {article.category} collection
-                </p>
-              </div>
-              
-              <div className="text-center">
-                <Link
-                  to={`/category/${article.category}`}
-                  className="inline-flex items-center btn-primary"
-                >
-                  <BookOpen className="h-5 w-5 mr-2" />
-                  Explore {article.category} Articles
-                </Link>
-              </div>
-            </motion.div>
-          )}
-
           {/* Back to Category */}
           <motion.div 
-            className="mt-12 pt-8 border-t border-gray-200"
+            className="mt-16 pt-8 border-t border-gray-200"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 1.2 }}
+            transition={{ duration: 0.6, delay: 0.8 }}
           >
             <Link
               to={`/category/${article.category}`}
-              className="inline-flex items-center text-gold-600 hover:text-gold-700 font-medium transition-colors"
+              className="inline-flex items-center text-gray-600 hover:text-gray-900 font-medium transition-colors"
             >
               <ArrowLeft className="h-4 w-4 mr-2" />
               Back to {article.category} Articles

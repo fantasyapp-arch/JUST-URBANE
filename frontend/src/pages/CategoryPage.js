@@ -1,26 +1,19 @@
 import React, { useState, useMemo } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { Filter, SortAsc, SortDesc, Calendar, Eye, Search } from 'lucide-react';
+import { Search, ArrowLeft, Clock, Eye } from 'lucide-react';
 import { motion } from 'framer-motion';
-import ArticleCard from '../components/ArticleCard';
 import LoadingSpinner, { SkeletonCard } from '../components/LoadingSpinner';
-import NewsletterSignup from '../components/NewsletterSignup';
 import { useCategoryArticles } from '../hooks/useArticles';
-import { useCategories } from '../hooks/useCategories';
+import { formatDateShort, formatReadingTime } from '../utils/formatters';
 
 const CategoryPage = () => {
   const { slug } = useParams();
-  const [sortBy, setSortBy] = useState('newest'); // newest, oldest, popular, trending
-  const [filterBy, setFilterBy] = useState('all'); // all, premium, free, trending
   const [searchQuery, setSearchQuery] = useState('');
 
   const { data: articles = [], isLoading, error } = useCategoryArticles(slug, { limit: 50 });
-  const { data: categories = [] } = useCategories();
 
-  const currentCategory = categories.find(cat => cat.slug === slug);
-
-  // Filter and sort articles
-  const filteredAndSortedArticles = useMemo(() => {
+  // Filter articles
+  const filteredArticles = useMemo(() => {
     if (!articles.length) return [];
 
     let filtered = articles;
@@ -35,230 +28,242 @@ const CategoryPage = () => {
       );
     }
 
-    // Apply content filters
-    switch (filterBy) {
-      case 'premium':
-        filtered = filtered.filter(article => article.is_premium);
-        break;
-      case 'free':
-        filtered = filtered.filter(article => !article.is_premium);
-        break;
-      case 'trending':
-        filtered = filtered.filter(article => article.is_trending);
-        break;
-      default:
-        // 'all' - no filter
-        break;
-    }
-
-    // Apply sorting
-    switch (sortBy) {
-      case 'oldest':
-        filtered.sort((a, b) => new Date(a.published_at) - new Date(b.published_at));
-        break;
-      case 'popular':
-        filtered.sort((a, b) => b.view_count - a.view_count);
-        break;
-      case 'trending':
-        filtered.sort((a, b) => {
-          if (a.is_trending && !b.is_trending) return -1;
-          if (!a.is_trending && b.is_trending) return 1;
-          return b.view_count - a.view_count;
-        });
-        break;
-      default: // 'newest'
-        filtered.sort((a, b) => new Date(b.published_at) - new Date(a.published_at));
-        break;
-    }
+    // Sort by newest first
+    filtered.sort((a, b) => new Date(b.published_at) - new Date(a.published_at));
 
     return filtered;
-  }, [articles, searchQuery, filterBy, sortBy]);
+  }, [articles, searchQuery]);
 
-  const categoryInfo = {
-    style: {
-      title: 'Style',
-      description: 'Timeless fashion, designer insights, and luxury style advice',
-      icon: '👔',
-      gradient: 'from-purple-600 to-pink-600'
-    },
-    grooming: {
-      title: 'Grooming',
-      description: 'Personal care, skincare, and grooming essentials',
-      icon: '💅',
-      gradient: 'from-blue-600 to-cyan-600'
-    },
-    culture: {
-      title: 'Culture',
-      description: 'Arts, music, literature, and cultural movements',
-      icon: '🎭',
-      gradient: 'from-green-600 to-emerald-600'
-    },
-    watches: {
-      title: 'Watches',
-      description: 'Horological excellence and luxury timepieces',
-      icon: '⌚',
-      gradient: 'from-amber-600 to-orange-600'
-    },
-    tech: {
-      title: 'Tech',
-      description: 'Latest gadgets and luxury technology',
-      icon: '📱',
-      gradient: 'from-indigo-600 to-purple-600'
-    },
-    fitness: {
-      title: 'Fitness',
-      description: 'Health, wellness, and peak performance',
-      icon: '💪',
-      gradient: 'from-red-600 to-rose-600'
-    },
-    travel: {
-      title: 'Travel',
-      description: 'Luxury destinations and exclusive experiences',
-      icon: '✈️',
-      gradient: 'from-teal-600 to-cyan-600'
-    },
-    entertainment: {
-      title: 'Entertainment',
-      description: 'Movies, shows, and celebrity culture',
-      icon: '🎬',
-      gradient: 'from-violet-600 to-fuchsia-600'
-    }
+  const categoryTitles = {
+    fashion: "FASHION",
+    technology: "TECHNOLOGY",
+    tech: "TECH",
+    business: "BUSINESS", 
+    finance: "FINANCE",
+    travel: "TRAVEL",
+    health: "HEALTH",
+    culture: "CULTURE",
+    art: "ART",
+    entertainment: "ENTERTAINMENT",
+    auto: "AUTO",
+    grooming: "GROOMING",
+    food: "FOOD",
+    aviation: "AVIATION",
+    people: "PEOPLE",
+    luxury: "LUXURY"
   };
 
-  const info = categoryInfo[slug] || { title: slug, description: `Articles about ${slug}`, icon: '📰', gradient: 'from-gray-600 to-gray-700' };
+  const categoryLabels = {
+    fashion: "Look Good",
+    technology: "Get Smart",
+    tech: "Get Smart",
+    business: "Get Smart",
+    finance: "Get Smart",
+    travel: "Live Well",
+    health: "Live Well",
+    culture: "Entertainment",
+    art: "Entertainment",
+    entertainment: "Entertainment",
+    auto: "Live Well",
+    grooming: "Look Good",
+    food: "Live Well",
+    aviation: "Live Well",
+    people: "Entertainment",
+    luxury: "Live Well"
+  };
+
+  const pageTitle = categoryTitles[slug] || slug.toUpperCase();
+  const categoryLabel = categoryLabels[slug] || "Category";
+
+  // Subcategories for each main category
+  const subcategories = {
+    fashion: [
+      { name: 'Men', slug: 'men', description: "Men's style & grooming" },
+      { name: 'Women', slug: 'women', description: "Women's fashion & beauty" },
+      { name: 'Luxury', slug: 'luxury', description: 'Designer collections' },
+      { name: 'Accessories', slug: 'accessories', description: 'Watches & jewelry' },
+      { name: 'Trends', slug: 'trends', description: 'Latest fashion trends' }
+    ],
+    tech: [
+      { name: 'Gadgets', slug: 'gadgets', description: 'Latest devices' },
+      { name: 'Mobile', slug: 'mobile', description: 'Smartphones & apps' },
+      { name: 'Smart', slug: 'smart', description: 'Smart home tech' },
+      { name: 'Future', slug: 'future', description: 'Emerging technology' },
+      { name: 'Reviews', slug: 'reviews', description: 'Product reviews' }
+    ],
+    auto: [
+      { name: 'Cars', slug: 'cars', description: 'Luxury automobiles' },
+      { name: 'Bikes', slug: 'bikes', description: 'Premium motorcycles' },
+      { name: 'EVs', slug: 'evs', description: 'Electric vehicles' },
+      { name: 'Concept', slug: 'concept', description: 'Future concepts' },
+      { name: 'Classics', slug: 'classics', description: 'Vintage classics' }
+    ],
+    travel: [
+      { name: 'Luxury', slug: 'luxury', description: 'Premium destinations' },
+      { name: 'Destinations', slug: 'destinations', description: 'Travel guides' },
+      { name: 'Guides', slug: 'guides', description: 'Travel tips' },
+      { name: 'Resorts', slug: 'resorts', description: 'Luxury hotels' },
+      { name: 'Adventure', slug: 'adventure', description: 'Adventure travel' }
+    ],
+    people: [
+      { name: 'Celebrities', slug: 'celebrities', description: 'Celebrity news' },
+      { name: 'Entrepreneurs', slug: 'entrepreneurs', description: 'Business leaders' },
+      { name: 'Icons', slug: 'icons', description: 'Cultural icons' },
+      { name: 'Leaders', slug: 'leaders', description: 'Industry leaders' },
+      { name: 'Culture', slug: 'culture', description: 'Cultural figures' }
+    ]
+  };
+
+  const currentSubcategories = subcategories[slug] || [];
+
+  // Clean GQ India style Article Card
+  const GQStyleCard = ({ article, index }) => (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay: index * 0.1 }}
+    >
+      <Link
+        to={`/article/${article.slug || article.id}`}
+        className="group block bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300"
+      >
+        {/* Image */}
+        <div className="relative overflow-hidden">
+          <img
+            src={article.hero_image}
+            alt={article.title}
+            className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500"
+            onError={(e) => {
+              e.target.src = '/placeholder-image.jpg';
+            }}
+          />
+        </div>
+
+        {/* Content */}
+        <div className="p-6">
+          {/* Category Tag - GQ Style */}
+          <div className="mb-4">
+            <span className="text-xs font-bold text-gray-600 uppercase tracking-widest">
+              {categoryLabel}
+            </span>
+          </div>
+          
+          {/* Title */}
+          <h3 className="text-xl font-bold text-gray-900 mb-3 leading-tight group-hover:text-primary-600 transition-colors">
+            {article.title}
+          </h3>
+          
+          {/* Meta */}
+          <div className="text-sm text-gray-500">
+            <span className="font-medium">By {article.author_name}</span>
+            <br />
+            <span>{formatDateShort(article.published_at)}</span>
+          </div>
+        </div>
+      </Link>
+    </motion.div>
+  );
 
   if (error) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="min-h-screen bg-white flex items-center justify-center">
         <div className="text-center">
-          <h1 className="text-4xl font-serif font-bold text-primary-900 mb-4">
-            Category Not Found
-          </h1>
-          <p className="text-gray-600 mb-8">
-            The category you're looking for doesn't exist.
-          </p>
-          <Link to="/" className="btn-primary">
-            Return Home
-          </Link>
+          <h1 className="text-4xl font-bold text-gray-900 mb-4">Category Not Found</h1>
+          <Link to="/" className="btn-primary">Back to Home</Link>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Category Hero */}
-      <div className={`bg-gradient-to-br ${info.gradient} text-white py-20`}>
+    <div className="min-h-screen bg-white">
+      {/* Breadcrumb - GQ Style */}
+      <div className="bg-white py-4 border-b border-gray-100">
         <div className="container mx-auto px-4">
-          <motion.div 
-            className="max-w-4xl mx-auto text-center"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <div className="text-6xl mb-6">{info.icon}</div>
-            <h1 className="font-serif text-5xl md:text-6xl font-black mb-6">
-              {info.title}
-            </h1>
-            <p className="text-xl md:text-2xl opacity-90 mb-8 max-w-2xl mx-auto">
-              {info.description}
-            </p>
-            <div className="flex items-center justify-center text-sm opacity-80">
-              <span>{filteredAndSortedArticles.length} articles</span>
-            </div>
-          </motion.div>
+          <nav className="flex items-center space-x-2 text-sm text-gray-500">
+            <Link to="/" className="hover:text-gray-900 font-medium">Home</Link>
+            <span>/</span>
+            <span className="text-gray-900 font-bold capitalize">{slug}</span>
+          </nav>
         </div>
       </div>
 
-      {/* Filters and Search */}
-      <div className="bg-white border-b border-gray-200 sticky top-20 z-40">
-        <div className="container mx-auto px-4 py-6">
+      {/* Main Content */}
+      <div className="container mx-auto px-4 py-16">
+        
+        {/* Page Title - Exactly like GQ India */}
+        <motion.div 
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
+          <h1 className="text-6xl font-black text-gray-900 mb-8 tracking-wider">
+            {pageTitle}
+          </h1>
+        </motion.div>
+
+        {/* Subcategories Navigation - If Available */}
+        {currentSubcategories.length > 0 && (
           <motion.div 
-            className="flex flex-col lg:flex-row gap-4 items-center justify-between"
-            initial={{ opacity: 0, y: -20 }}
+            className="mb-16"
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            {/* Search */}
-            <div className="relative flex-1 max-w-md">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
-              <input
-                type="text"
-                placeholder={`Search ${info.title.toLowerCase()} articles...`}
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gold-500 focus:border-transparent outline-none"
-              />
-            </div>
-
-            {/* Filters */}
-            <div className="flex items-center gap-4">
-              {/* Content Filter */}
-              <div className="flex items-center gap-2">
-                <Filter className="h-4 w-4 text-gray-600" />
-                <select
-                  value={filterBy}
-                  onChange={(e) => setFilterBy(e.target.value)}
-                  className="border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-gold-500 focus:border-transparent outline-none"
+            <div className="flex flex-wrap justify-center gap-4">
+              {currentSubcategories.map((sub) => (
+                <Link
+                  key={sub.slug}
+                  to={`/category/${slug}/${sub.slug}`}
+                  className="group bg-gray-100 hover:bg-primary-600 text-gray-700 hover:text-white px-6 py-3 rounded-full text-sm font-bold uppercase tracking-wide transition-all duration-300 transform hover:scale-105"
                 >
-                  <option value="all">All Articles</option>
-                  <option value="premium">Premium Only</option>
-                  <option value="free">Free Articles</option>
-                  <option value="trending">Trending</option>
-                </select>
-              </div>
-
-              {/* Sort */}
-              <div className="flex items-center gap-2">
-                {sortBy === 'newest' ? (
-                  <SortDesc className="h-4 w-4 text-gray-600" />
-                ) : (
-                  <SortAsc className="h-4 w-4 text-gray-600" />
-                )}
-                <select
-                  value={sortBy}
-                  onChange={(e) => setSortBy(e.target.value)}
-                  className="border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-gold-500 focus:border-transparent outline-none"
-                >
-                  <option value="newest">Newest First</option>
-                  <option value="oldest">Oldest First</option>
-                  <option value="popular">Most Popular</option>
-                  <option value="trending">Trending</option>
-                </select>
-              </div>
+                  {sub.name}
+                </Link>
+              ))}
             </div>
           </motion.div>
-        </div>
-      </div>
+        )}
 
-      {/* Articles Grid */}
-      <div className="container mx-auto px-4 py-12">
+        {/* Search Bar - Clean and Simple */}
+        <motion.div 
+          className="max-w-lg mx-auto mb-16"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+        >
+          <div className="relative">
+            <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
+            <input
+              type="text"
+              placeholder={`Search ${pageTitle.toLowerCase()} articles...`}
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full pl-12 pr-4 py-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-gray-200 focus:border-gray-300 outline-none text-lg"
+            />
+          </div>
+        </motion.div>
+
+        {/* Articles Grid - Clean GQ India Style */}
         {isLoading ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[...Array(9)].map((_, i) => (
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[...Array(6)].map((_, i) => (
               <SkeletonCard key={i} />
             ))}
           </div>
-        ) : filteredAndSortedArticles.length > 0 ? (
+        ) : filteredArticles.length > 0 ? (
           <motion.div 
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+            className="grid grid-cols-1 md:grid-cols-3 gap-8"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
+            transition={{ duration: 0.6, delay: 0.6 }}
           >
-            {filteredAndSortedArticles.map((article, index) => (
-              <motion.div
-                key={article.id}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-              >
-                <ArticleCard 
-                  article={article} 
-                  size={index === 0 ? 'large' : 'medium'}
-                  showCategory={false}
-                />
-              </motion.div>
+            {filteredArticles.map((article, index) => (
+              <GQStyleCard 
+                key={article.id} 
+                article={article} 
+                index={index}
+              />
             ))}
           </motion.div>
         ) : (
@@ -266,95 +271,48 @@ const CategoryPage = () => {
             className="text-center py-20"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
+            transition={{ duration: 0.6, delay: 0.6 }}
           >
-            <div className="text-6xl mb-6">🔍</div>
-            <h3 className="text-2xl font-serif font-bold text-primary-900 mb-4">
-              No Articles Found
+            <h3 className="text-2xl font-bold text-gray-900 mb-4">
+              {searchQuery ? 'No Articles Found' : 'Coming Soon'}
             </h3>
             <p className="text-gray-600 mb-8 max-w-md mx-auto">
               {searchQuery 
-                ? `No articles match your search "${searchQuery}" in ${info.title}.`
-                : `No articles match your current filters in ${info.title}.`
+                ? `No articles match "${searchQuery}"`
+                : `We're working on amazing ${pageTitle.toLowerCase()} content.`
               }
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            {searchQuery && (
               <button
-                onClick={() => {
-                  setSearchQuery('');
-                  setFilterBy('all');
-                  setSortBy('newest');
-                }}
-                className="btn-secondary"
+                onClick={() => setSearchQuery('')}
+                className="btn-secondary mr-4"
               >
-                Clear Filters
+                Clear Search
               </button>
-              <Link to="/" className="btn-primary">
-                Browse All Articles
-              </Link>
-            </div>
+            )}
+            <Link to="/" className="btn-primary">
+              Back to Home
+            </Link>
           </motion.div>
         )}
 
-        {/* Load More - if needed for pagination */}
-        {filteredAndSortedArticles.length >= 20 && (
+        {/* Back Navigation */}
+        {filteredArticles.length > 0 && (
           <motion.div 
-            className="text-center mt-12"
+            className="text-center mt-16 pt-8 border-t border-gray-100"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.6 }}
-          >
-            <button className="btn-secondary">
-              Load More Articles
-            </button>
-          </motion.div>
-        )}
-      </div>
-
-      {/* Newsletter Signup */}
-      <NewsletterSignup />
-
-      {/* Related Categories */}
-      <div className="bg-white py-16">
-        <div className="container mx-auto px-4">
-          <motion.div 
-            className="text-center mb-12"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.8 }}
           >
-            <h3 className="section-title">Explore More Categories</h3>
-            <p className="text-gray-600">
-              Discover other areas of luxury lifestyle
-            </p>
+            <Link
+              to="/"
+              className="inline-flex items-center text-gray-600 hover:text-gray-900 font-medium"
+            >
+              <ArrowLeft className="h-4 w-4 mr-2" />
+              Back to Home
+            </Link>
           </motion.div>
-
-          <motion.div 
-            className="grid grid-cols-2 md:grid-cols-4 gap-6"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 1 }}
-          >
-            {Object.entries(categoryInfo)
-              .filter(([key]) => key !== slug)
-              .slice(0, 4)
-              .map(([key, cat]) => (
-                <Link
-                  key={key}
-                  to={`/category/${key}`}
-                  className="group bg-gradient-to-br from-gray-50 to-gray-100 hover:from-gold-50 hover:to-gold-100 rounded-2xl p-6 text-center transition-all duration-300 transform hover:-translate-y-2"
-                >
-                  <div className="text-3xl mb-3">{cat.icon}</div>
-                  <h4 className="font-serif text-lg font-semibold text-primary-900 mb-2 group-hover:text-gold-600">
-                    {cat.title}
-                  </h4>
-                  <p className="text-sm text-gray-600">
-                    {cat.description}
-                  </p>
-                </Link>
-              ))}
-          </motion.div>
-        </div>
+        )}
       </div>
     </div>
   );
