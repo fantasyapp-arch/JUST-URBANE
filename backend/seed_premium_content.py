@@ -58,46 +58,50 @@ def seed_premium_articles():
         ]
     }
     
-    # Premium articles with great content
-    articles_data = [
+    # Premium articles with great content (SUBSCRIPTION REQUIRED)
+    premium_articles = [
         {
             "title": "The Future of Luxury: How Tech Billionaires Are Reshaping Premium Experiences",
             "dek": "AI-powered assistants to blockchain authenticity—technology is revolutionizing luxury living",
-            "body": "Technology and luxury intersect in unprecedented ways as tech entrepreneurs redefine premium experiences. From AI concierges managing wine collections to blockchain-verified authenticity certificates, the luxury landscape is transforming. The ultimate status symbol has become 'time luxury'—investing in longevity research and life extension technologies.",
+            "body": "Technology and luxury intersect in unprecedented ways as tech entrepreneurs redefine premium experiences. From AI concierges managing wine collections to blockchain-verified authenticity certificates, the luxury landscape is transforming. The ultimate status symbol has become 'time luxury'—investing in longevity research and life extension technologies. Silicon Valley elite now employ personalized AI systems that anticipate needs and orchestrate experiences money alone cannot buy. This comprehensive analysis explores how technology titans are reshaping what luxury means in the 21st century.",
             "category": "technology",
             "tags": ["AI", "luxury", "innovation", "billionaires"],
-            "is_premium": True,
+            "is_premium": True,  # PREMIUM CONTENT
             "is_featured": True,
             "hero_image": premium_images["business"][0]
         },
         {
             "title": "Inside the Wardrobes of India's Most Stylish Business Leaders",
             "dek": "How CEOs use fashion as strategic influence in boardrooms and beyond",
-            "body": "India's business leaders understand that style is strategy. From Mukesh Ambani's understated elegance to Falguni Nayar's designer choices, successful executives leverage fashion for influence. The modern CEO wardrobe balances traditional craftsmanship with contemporary design, using clothes to communicate competence and cultural values.",
+            "body": "India's business leaders understand that style is strategy. From Mukesh Ambani's understated elegance to Falguni Nayar's designer choices, successful executives leverage fashion for influence. The modern CEO wardrobe balances traditional craftsmanship with contemporary design, using clothes to communicate competence and cultural values. This exclusive investigation reveals the styling secrets, preferred designers, and strategic fashion choices of India's most powerful business personalities.",
             "category": "fashion",
             "tags": ["business", "style", "CEO", "india"],
-            "is_premium": True,
+            "is_premium": True,  # PREMIUM CONTENT
             "is_featured": True,
             "hero_image": premium_images["fashion"][3]
         },
         {
             "title": "Impact Investing: Where Profits Meet Purpose in 2025",
             "dek": "How wealthy investors generate returns while solving global challenges",
-            "body": "Impact investing has evolved to dominate global finance with $1.5 trillion in assets. Indian impact investors tackle financial inclusion and renewable energy with 15-20% returns, proving profit and purpose are synergistic. ESG criteria are becoming mandatory, positioning impact investing as the ultimate wealth creation strategy.",
+            "body": "Impact investing has evolved to dominate global finance with $1.5 trillion in assets. Indian impact investors tackle financial inclusion and renewable energy with 15-20% returns, proving profit and purpose are synergistic. ESG criteria are becoming mandatory, positioning impact investing as the ultimate wealth creation strategy. Our exclusive analysis reveals the top-performing impact funds and investment opportunities for 2025.",
             "category": "finance",
             "tags": ["investing", "ESG", "impact", "returns"],
-            "is_premium": True,
+            "is_premium": True,  # PREMIUM CONTENT
             "is_featured": True,
             "hero_image": premium_images["business"][1]
-        },
+        }
+    ]
+    
+    # FREE articles (accessible without subscription)
+    free_articles = [
         {
             "title": "Electric Hypercars: The New Status Symbol",
             "dek": "Why tech entrepreneurs are choosing electric over traditional supercars",
             "body": "Electric hypercars are becoming the ultimate status symbol among tech billionaires. Performance, sustainability, and cutting-edge technology combine in vehicles that represent the future of luxury automotive. From Tesla's Roadster to Rimac's innovations, electric is now synonymous with premium performance.",
-            "category": "technology",
+            "category": "auto",
             "tags": ["electric", "cars", "luxury", "performance"],
+            "is_premium": False,  # FREE CONTENT
             "is_trending": True,
-            "is_premium": False,
             "hero_image": premium_images["luxury"][1]
         },
         {
@@ -106,11 +110,34 @@ def seed_premium_articles():
             "body": "Indian contemporary artists like Bharti Kher and Subodh Gupta are commanding seven-figure auction prices and museum acquisitions worldwide. The international art world recognizes Indian artists creating universal themes from subcontinental experiences. Digital platforms and blockchain are democratizing access to Indian art globally.",
             "category": "culture",
             "tags": ["art", "contemporary", "india", "investment"],
+            "is_premium": False,  # FREE CONTENT
             "is_featured": True,
-            "is_premium": False,
             "hero_image": premium_images["fashion"][0]
+        },
+        {
+            "title": "Top 5 Smartphones Under ₹50,000 in 2025",
+            "dek": "Best flagship phones offering premium features at accessible prices",
+            "body": "The smartphone market in 2025 offers incredible flagship features at mid-range prices. From camera innovations to AI-powered performance, these devices deliver premium experiences without the flagship price tag. Our comprehensive review covers the top 5 smartphones that offer the best value for money.",
+            "category": "technology",
+            "tags": ["smartphones", "reviews", "budget", "flagship"],
+            "is_premium": False,  # FREE CONTENT
+            "is_trending": True,
+            "hero_image": premium_images["tech"][0]
+        },
+        {
+            "title": "Mumbai's Best Restaurants for Business Lunches",
+            "dek": "Where India's business elite prefer to close deals over fine dining",
+            "body": "Mumbai's restaurant scene offers perfect venues for business discussions and deal-making. From the elegant ambiance of Trishna to the private dining rooms at The Table, these establishments understand the art of business hospitality. Our guide covers the top restaurants where India's business leaders prefer to conduct their most important meetings.",
+            "category": "food",
+            "tags": ["restaurants", "business", "mumbai", "dining"],
+            "is_premium": False,  # FREE CONTENT
+            "is_featured": False,
+            "hero_image": premium_images["luxury"][2]
         }
     ]
+    
+    # Combine premium and free articles for processing
+    articles_data = premium_articles + free_articles
     
     # Create articles
     articles = []
