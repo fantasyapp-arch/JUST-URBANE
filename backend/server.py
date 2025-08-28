@@ -778,10 +778,112 @@ async def stripe_webhook(request: Request):
         print(f"Webhook error: {str(e)}")
         raise HTTPException(status_code=400, detail="Webhook processing failed")
 
-@app.get("/api/payments/packages")
-async def get_subscription_packages():
-    """Get available subscription packages"""
-    return SUBSCRIPTION_PACKAGES
+@app.post("/api/payments/create-smart-subscription")
+async def create_smart_subscription(
+    subscription_data: dict,
+    request: Request
+):
+    """Create subscription with automatic account creation"""
+    
+    package_id = subscription_data.get("package_id")
+    user_details = subscription_data.get("user_details", {})
+    
+    # Validate package
+    if package_id not in SUBSCRIPTION_PACKAGES:
+        raise HTTPException(status_code=400, detail="Invalid subscription package")
+    
+    package = SUBSCRIPTION_PACKAGES[package_id]
+    
+    try:
+        # Check if user exists, create if not
+        existing_user = db.users.find_one({"email": user_details.get("email")})
+        
+        if existing_user:
+            user_id = str(existing_user["_id"])
+            user_email = existing_user["email"]
+        else:
+            # Create new user automatically
+            new_user = {
+                "_id": str(uuid.uuid4()),
+                "name": user_details.get("full_name", ""),
+                "email": user_details.get("email", ""),
+                "phone": user_details.get("phone_number", ""),
+                "created_at": datetime.utcnow(),
+                "is_premium": False,
+                "subscription_status": "pending",
+                "auth_provider": "email_subscription"
+            }
+            
+            # Add address for print subscriptions
+            if package_id in ["print_annual", "combined_annual"]:
+                new_user["delivery_address"] = {
+                    "address_line_1": user_details.get("address_line_1", ""),
+                    "address_line_2": user_details.get("address_line_2", ""),
+                    "city": user_details.get("city", ""),
+                    "state": user_details.get("state", ""),
+                    "postal_code": user_details.get("postal_code", ""),
+                    "country": user_details.get("country", "India")
+                }
+            
+            db.users.insert_one(new_user)
+            user_id = new_user["_id"]
+            user_email = new_user["email"]
+        
+        # Initialize Stripe
+        host_url = str(request.base_url)
+        webhook_url = f"{host_url}api/webhook/stripe"
+        stripe_checkout = StripeCheckout(api_key=STRIPE_API_KEY, webhook_url=webhook_url)
+        
+        # Build URLs
+        origin_url = request.headers.get("origin", str(request.base_url))
+        success_url = f"{origin_url}/subscription-success?session_id={{CHECKOUT_SESSION_ID}}"
+        cancel_url = f"{origin_url}/pricing"
+        
+        # Prepare metadata
+        metadata = {
+            "package_id": package_id,
+            "package_name": package["name"],
+            "user_email": user_email,
+            "user_id": user_id,
+            "auto_created": "true" if not existing_user else "false"
+        }
+        
+        # Create checkout session
+        checkout_request = CheckoutSessionRequest(
+            amount=package["amount"],
+            currency=package["currency"],
+            success_url=success_url,
+            cancel_url=cancel_url,
+            metadata=metadata
+        )
+        
+        session: CheckoutSessionResponse = await stripe_checkout.create_checkout_session(checkout_request)
+        
+        # Create subscription transaction
+        transaction_dict = {
+            "_id": str(uuid.uuid4()),
+            "session_id": session.session_id,
+            "user_id": user_id,
+            "user_email": user_email,
+            "package_id": package_id,
+            "amount": package["amount"],
+            "currency": package["currency"],
+            "payment_status": "initiated",
+            "status": "open",
+            "user_details": user_details,
+            "auto_account_created": not existing_user,
+            "metadata": metadata,
+            "created_at": datetime.utcnow(),
+            "updated_at": datetime.utcnow()
+        }
+        
+        db.subscription_transactions.insert_one(transaction_dict)
+        
+        return {"checkout_url": session.url, "session_id": session.session_id}
+        
+    except Exception as e:
+        print(f"Smart subscription error: {str(e)}")
+        raise HTTPException(status_code=500, detail="Failed to create smart subscription")
 
 # Update existing user dependency to be optional for free content
 async def get_current_user_optional_session(request: Request):
