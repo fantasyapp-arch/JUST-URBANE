@@ -1,4 +1,4 @@
-from fastapi import FastAPI, HTTPException, Depends, status, File, UploadFile, Query, Request
+from fastapi import FastAPI, HTTPException, Depends, status, File, UploadFile, Query, Request, Response
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from pymongo import MongoClient
@@ -14,6 +14,7 @@ import uuid
 import json
 from pathlib import Path
 import shutil
+import aiohttp
 
 # Stripe Integration
 from emergentintegrations.payments.stripe.checkout import StripeCheckout, CheckoutSessionResponse, CheckoutStatusResponse, CheckoutSessionRequest
