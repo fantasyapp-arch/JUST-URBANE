@@ -895,11 +895,6 @@ async def get_current_user_optional_session(request: Request):
     """Optional user authentication - allows free content access"""
     return await get_current_user_from_session(request)
 
-# Update existing user dependency to be optional for free content
-async def get_current_user_optional_session(request: Request):
-    """Optional user authentication - allows free content access"""
-    return await get_current_user_from_session(request)
-
 # Articles Routes - Updated with subcategory support
 @app.get("/api/articles", response_model=List[Article])
 async def get_articles(
