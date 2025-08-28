@@ -38,6 +38,17 @@ const LoginPage = () => {
     setIsLoading(false);
   };
 
+  const handleGoogleLogin = async () => {
+    try {
+      const response = await api.get('/auth/google-login-url');
+      if (response.data.auth_url) {
+        window.location.href = response.data.auth_url;
+      }
+    } catch (error) {
+      toast.error('Google authentication failed');
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
