@@ -185,8 +185,8 @@ const ArticlePage = () => {
             </button>
           </div>
 
-          {/* Magazine Reader Button */}
-          {canReadPremium && allArticles && allArticles.length > 0 && (
+          {/* Magazine Reader Button - Show for all users */}
+          {allArticles && allArticles.length > 0 && (
             <div className="mt-6 pt-6 border-t border-gray-100">
               <button
                 onClick={openMagazineReader}
@@ -198,6 +198,9 @@ const ArticlePage = () => {
               </button>
               <p className="text-xs text-gray-500 mt-2">
                 Experience this article in our interactive flip-book magazine
+                {!canReadPremium && (
+                  <span className="text-amber-600 font-medium"> • Free preview available</span>
+                )}
               </p>
             </div>
           )}
