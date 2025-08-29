@@ -82,14 +82,14 @@ const RegisterPage = () => {
             <img 
               src="https://customer-assets.emergentagent.com/job_urbane-nexus/artifacts/w4pbaa92_Untitled%20design-10.png" 
               alt="JUST URBANE" 
-              className="h-16 w-auto max-w-[300px] object-contain mx-auto"
+              className="h-20 lg:h-24 w-auto max-w-[400px] object-contain mx-auto"
               onError={(e) => {
                 e.target.style.display = 'none';
                 e.target.nextSibling.style.display = 'block';
               }}
             />
             <div 
-              className="font-serif text-4xl font-black text-primary-700 tracking-tight" 
+              className="font-serif text-5xl font-black text-primary-700 tracking-tight" 
               style={{ display: 'none' }}
             >
               JUST URBANE
