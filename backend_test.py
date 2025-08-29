@@ -635,9 +635,9 @@ class JustUrbaneAPITester:
             return False
     
     def run_comprehensive_tests(self):
-        """Run all tests in sequence - Updated for GQ-style testing"""
-        print("🚀 Starting Just Urbane GQ-Style API Comprehensive Testing")
-        print("=" * 60)
+        """Run all tests in sequence - Updated for Article API Focus"""
+        print("🚀 Starting Just Urbane Article API Testing - PDF Content Fix Verification")
+        print("=" * 70)
         
         # 1. Health Check
         if not self.test_health_check():
@@ -649,33 +649,51 @@ class JustUrbaneAPITester:
         if user_credentials:
             self.test_user_login(user_credentials)
         
-        # 3. NEW: Payment System Tests (Critical Priority)
-        print("\n💳 Testing Stripe Payment Integration...")
-        self.test_payment_packages()
-        self.test_payment_checkout_creation()
-        
-        # 4. NEW: Updated Category System Tests (Critical Priority)
-        print("\n📂 Testing Updated Category System...")
-        categories = self.test_categories_endpoint()
-        
-        # 5. Content API Tests with New Categories
-        print("\n📰 Testing Articles with New Categories...")
+        # 3. PRIORITY: Article API Endpoint Tests (KEY REQUIREMENTS)
+        print("\n📰 Testing Article API Endpoints - PRIORITY TESTS...")
         articles = self.test_articles_endpoint()
         if articles:
             self.test_single_article(articles)
         
-        # Test articles with new category filters
+        # 4. KEY REQUIREMENT: Article Retrieval by UUID and Slug
+        print("\n🔍 Testing Article Retrieval by UUID and Slug...")
+        self.test_article_retrieval_by_uuid_and_slug()
+        
+        # 5. KEY REQUIREMENT: Category and Subcategory Filtering
+        print("\n📂 Testing Category and Subcategory Filtering...")
+        self.test_category_subcategory_filtering()
+        
+        # 6. KEY REQUIREMENT: View Count Increment
+        print("\n👁️ Testing View Count Increment...")
+        self.test_view_count_increment()
+        
+        # 7. KEY REQUIREMENT: PDF Content Accessibility
+        print("\n📄 Testing PDF Content Accessibility...")
+        self.test_pdf_content_accessibility()
+        
+        # 8. Test articles with new category filters
+        print("\n🏷️ Testing Articles with New Categories...")
         self.test_articles_with_new_categories()
         
-        # 6. Other Content APIs
+        # 9. Updated Category System Tests
+        print("\n📂 Testing Updated Category System...")
+        categories = self.test_categories_endpoint()
+        
+        # 10. Other Content APIs (Secondary Priority)
+        print("\n📚 Testing Other Content APIs...")
         reviews = self.test_reviews_endpoint()
         issues = self.test_magazine_issues_endpoint()
         destinations = self.test_destinations_endpoint()
         
-        # 7. Protected Endpoint Test
+        # 11. Payment System Tests (Secondary for this test)
+        print("\n💳 Testing Stripe Payment Integration...")
+        self.test_payment_packages()
+        self.test_payment_checkout_creation()
+        
+        # 12. Protected Endpoint Test
         self.test_protected_endpoint()
         
-        # 8. CORS Configuration Test
+        # 13. CORS Configuration Test
         self.test_cors_configuration()
         
         return self.generate_report()
