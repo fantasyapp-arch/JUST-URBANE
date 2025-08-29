@@ -14,10 +14,29 @@ const ArticlePage = () => {
   const navigate = useNavigate();
   const { user, isAuthenticated } = useAuth();
   const { data: article, isLoading, error } = useArticle(slug);
+  const { data: allArticles } = useArticles();
+  const [isReaderOpen, setIsReaderOpen] = useState(false);
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [slug]);
+
+  const canReadPremium = isAuthenticated && user?.is_premium && user?.subscription_status === 'active';
+
+  const openMagazineReader = () => {
+    if (allArticles && allArticles.length > 0) {
+      // Find current article's index and create a magazine starting from that article
+      const currentIndex = allArticles.findIndex(a => a.slug === article.slug || a.id === article.id);
+      const magazineArticles = currentIndex >= 0 ? 
+        [...allArticles.slice(currentIndex), ...allArticles.slice(0, currentIndex)] : 
+        allArticles;
+      setIsReaderOpen(true);
+    }
+  };
+
+  const closeMagazineReader = () => {
+    setIsReaderOpen(false);
+  };
 
   if (isLoading) {
     return (
