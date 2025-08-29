@@ -90,15 +90,57 @@ const PricingPage = () => {
   return (
     <div className="min-h-screen bg-gray-50 py-12">
       <div className="container mx-auto px-4">
-        {/* Header */}
-        <div className="text-center mb-16">
-          <h1 className="text-5xl lg:text-6xl font-serif font-bold text-gray-900 mb-6">
+        {/* Premium Header with Motion */}
+        <motion.div 
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: -50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+        >
+          <motion.h1 
+            className="text-5xl lg:text-6xl font-serif font-bold text-gray-900 mb-6"
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
             Choose Your Plan
-          </h1>
-          <p className="text-xl lg:text-2xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
+          </motion.h1>
+          
+          <motion.p 
+            className="text-xl lg:text-2xl text-gray-700 max-w-3xl mx-auto leading-relaxed"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+          >
             Access premium lifestyle content, exclusive articles, and luxury insights
-          </p>
-        </div>
+          </motion.p>
+          
+          {/* Decorative Elements */}
+          <motion.div
+            className="flex justify-center mt-8"
+            initial={{ opacity: 0, scale: 0 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6, delay: 0.6 }}
+          >
+            <div className="flex space-x-2">
+              {[0, 1, 2].map((i) => (
+                <motion.div
+                  key={i}
+                  className="w-2 h-2 bg-primary-500 rounded-full"
+                  animate={{ 
+                    scale: [1, 1.5, 1],
+                    opacity: [0.5, 1, 0.5]
+                  }}
+                  transition={{ 
+                    duration: 2,
+                    delay: i * 0.2,
+                    repeat: Infinity
+                  }}
+                />
+              ))}
+            </div>
+          </motion.div>
+        </motion.div>
 
         {/* Premium Pricing Cards with GQ-Style Motion Effects */}
         <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
