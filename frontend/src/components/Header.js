@@ -113,26 +113,33 @@ const Header = () => {
                 <div
                   key={categoryName}
                   className="relative group"
-                  onMouseEnter={() => setActiveDropdown(categoryName)}
-                  onMouseLeave={() => setActiveDropdown(null)}
+                  onMouseEnter={() => handleDropdownEnter(categoryName)}
+                  onMouseLeave={handleDropdownLeave}
                 >
                   <Link
                     to={`/category/${category.slug}`}
-                    className="flex items-center text-gray-700 hover:text-primary-600 font-medium transition-colors duration-200 text-sm uppercase tracking-wide py-1"
+                    className="flex items-center text-gray-700 hover:text-primary-600 font-medium transition-colors duration-200 text-sm uppercase tracking-wide py-3 px-2"
                   >
                     {categoryName}
                     <ChevronDown className="h-3 w-3 ml-1 transform group-hover:rotate-180 transition-transform duration-200" />
                   </Link>
 
-                  {/* DROPDOWN SUBMENU */}
+                  {/* IMPROVED DROPDOWN SUBMENU WITH BETTER HOVER ZONE */}
                   {activeDropdown === categoryName && (
-                    <div className="absolute top-full left-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-xl z-50">
-                      <div className="py-2">
+                    <div 
+                      className="absolute top-full left-0 w-52 bg-white border border-gray-200 rounded-xl shadow-2xl z-50 overflow-hidden"
+                      onMouseEnter={() => handleDropdownEnter(categoryName)}
+                      onMouseLeave={handleDropdownLeave}
+                    >
+                      {/* Invisible bridge to prevent gap issues */}
+                      <div className="absolute -top-2 left-0 right-0 h-2 bg-transparent"></div>
+                      
+                      <div className="py-3">
                         {category.subcategories.map((sub) => (
                           <Link
                             key={sub}
                             to={`/category/${category.slug}/${sub.toLowerCase()}`}
-                            className="block px-4 py-2 text-sm text-gray-700 hover:bg-primary-50 hover:text-primary-600 transition-colors"
+                            className="block px-5 py-3 text-sm text-gray-700 hover:bg-gradient-to-r hover:from-primary-50 hover:to-primary-100 hover:text-primary-700 transition-all duration-200 font-medium"
                           >
                             {sub}
                           </Link>
