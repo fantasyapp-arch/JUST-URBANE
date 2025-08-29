@@ -304,10 +304,14 @@ const MagazineReader = ({ articles, isOpen, onClose, initialPageIndex = 0 }) => 
         </AnimatePresence>
 
         {/* Premium Subscription Modal */}
-        <PremiumSubscriptionModal
-          isOpen={showSubscriptionModal}
-          onClose={() => setShowSubscriptionModal(false)}
-        />
+        <AnimatePresence>
+          {showSubscriptionModal && (
+            <PremiumSubscriptionModal
+              isOpen={showSubscriptionModal}
+              onClose={() => setShowSubscriptionModal(false)}
+            />
+          )}
+        </AnimatePresence>
 
         {/* Table of Contents Modal */}
         <TableOfContentsModal
