@@ -294,11 +294,11 @@ const IssuesPage = () => {
         )}
       </div>
 
-      {/* Magazine Reader */}
-      <MagazineReader
-        articles={selectedIssue}
+      {/* Full Screen 3D Magazine Reader */}
+      <FullScreenMagazineReader
         isOpen={isReaderOpen}
         onClose={closeMagazineReader}
+        magazineContent={selectedIssue}
       />
     </div>
   );
