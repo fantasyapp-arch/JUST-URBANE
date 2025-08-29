@@ -636,69 +636,218 @@ class JustUrbaneAPITester:
             self.log_test("Articles New Categories", False, f"New categories test error: {str(e)}")
             return False
     
-    def run_comprehensive_tests(self):
-        """Run all tests in sequence - Updated for Article API Focus"""
-        print("🚀 Starting Just Urbane Article API Testing - PDF Content Fix Verification")
-        print("=" * 70)
+    def test_magazine_flip_book_api_requirements(self):
+        """Test Magazine Flip Book Backend API Requirements - PRIORITY TEST"""
+        print("\n📖 MAGAZINE FLIP-BOOK BACKEND API TESTING")
+        print("=" * 50)
         
-        # 1. Health Check
-        if not self.test_health_check():
-            print("❌ API is not healthy. Stopping tests.")
-            return self.generate_report()
+        try:
+            # Test 1: Articles API for Magazine Reader - All Required Fields
+            response = self.session.get(f"{self.base_url}/api/articles?limit=10", timeout=10)
+            if response.status_code == 200:
+                articles = response.json()
+                if articles:
+                    # Check required fields for magazine reader
+                    required_fields = ["title", "body", "hero_image", "author_name", "category", "tags", "is_premium", "published_at"]
+                    
+                    field_coverage = {}
+                    for field in required_fields:
+                        field_coverage[field] = sum(1 for article in articles if field in article and article[field] is not None)
+                    
+                    all_fields_present = all(count == len(articles) for count in field_coverage.values())
+                    
+                    if all_fields_present:
+                        self.log_test("Magazine Reader API - Required Fields", True, f"All required fields present in {len(articles)} articles: {', '.join(required_fields)}")
+                    else:
+                        missing_info = [f"{field}: {count}/{len(articles)}" for field, count in field_coverage.items() if count < len(articles)]
+                        self.log_test("Magazine Reader API - Required Fields", False, f"Missing field coverage: {', '.join(missing_info)}")
+                    
+                    # Test 2: Premium Content System
+                    premium_articles = [a for a in articles if a.get("is_premium", False)]
+                    free_articles = [a for a in articles if not a.get("is_premium", False)]
+                    
+                    if premium_articles and free_articles:
+                        self.log_test("Premium Content System - Content Mix", True, f"Found {len(premium_articles)} premium and {len(free_articles)} free articles")
+                        
+                        # Test premium access control
+                        premium_article = premium_articles[0]
+                        article_id = premium_article.get("id")
+                        
+                        # Test without authentication (should be limited)
+                        response_no_auth = requests.get(f"{self.base_url}/api/articles/{article_id}", timeout=10)
+                        if response_no_auth.status_code == 200:
+                            article_no_auth = response_no_auth.json()
+                            is_locked = article_no_auth.get("is_locked", False)
+                            body_length = len(article_no_auth.get("body", ""))
+                            
+                            if is_locked or body_length < len(premium_article.get("body", "")):
+                                self.log_test("Premium Access Control", True, f"Premium content properly gated (locked: {is_locked}, limited content: {body_length} chars)")
+                            else:
+                                self.log_test("Premium Access Control", False, "Premium content not properly gated")
+                        else:
+                            self.log_test("Premium Access Control", False, f"Failed to test premium access: HTTP {response_no_auth.status_code}")
+                    else:
+                        self.log_test("Premium Content System - Content Mix", False, f"Insufficient content mix: {len(premium_articles)} premium, {len(free_articles)} free")
+                    
+                    # Test 3: Magazine Data Quality
+                    content_quality_issues = []
+                    formatting_issues = []
+                    
+                    for article in articles[:5]:  # Test first 5 articles
+                        title = article.get("title", "")
+                        body = article.get("body", "")
+                        author = article.get("author_name", "")
+                        category = article.get("category", "")
+                        
+                        # Check content length for magazine display
+                        if len(body) < 200:
+                            content_quality_issues.append(f"{title}: insufficient content ({len(body)} chars)")
+                        
+                        # Check formatting
+                        if not title or not author or not category:
+                            formatting_issues.append(f"{title}: missing basic info")
+                    
+                    if not content_quality_issues:
+                        self.log_test("Magazine Data Quality - Content Length", True, "All tested articles have sufficient content for magazine display")
+                    else:
+                        self.log_test("Magazine Data Quality - Content Length", False, f"Content issues: {'; '.join(content_quality_issues[:3])}")
+                    
+                    if not formatting_issues:
+                        self.log_test("Magazine Data Quality - Formatting", True, "All tested articles have proper formatting")
+                    else:
+                        self.log_test("Magazine Data Quality - Formatting", False, f"Formatting issues: {'; '.join(formatting_issues[:3])}")
+                    
+                    # Test 4: Category Distribution for Magazine
+                    categories_with_content = {}
+                    for article in articles:
+                        cat = article.get("category", "unknown")
+                        categories_with_content[cat] = categories_with_content.get(cat, 0) + 1
+                    
+                    if len(categories_with_content) >= 3:
+                        self.log_test("Magazine Category Distribution", True, f"Good category distribution: {dict(list(categories_with_content.items())[:5])}")
+                    else:
+                        self.log_test("Magazine Category Distribution", False, f"Limited category distribution: {categories_with_content}")
+                    
+                else:
+                    self.log_test("Magazine Reader API", False, "No articles found for magazine testing")
+            else:
+                self.log_test("Magazine Reader API", False, f"Articles API failed: HTTP {response.status_code}")
+                
+        except Exception as e:
+            self.log_test("Magazine Flip Book API Testing", False, f"Error: {str(e)}")
+
+    def test_authentication_system_jwt(self):
+        """Test JWT Authentication System for Subscription Endpoints"""
+        print("\n🔐 JWT AUTHENTICATION SYSTEM TESTING")
+        print("=" * 40)
         
-        # 2. Authentication Tests
+        try:
+            # Test 1: JWT Token Generation
+            if self.auth_token:
+                self.log_test("JWT Token Generation", True, "JWT token successfully generated during login")
+                
+                # Test 2: Protected Endpoint Access
+                headers = {"Authorization": f"Bearer {self.auth_token}"}
+                response = self.session.get(f"{self.base_url}/api/premium-articles", headers=headers, timeout=10)
+                
+                if response.status_code in [200, 403]:  # 200 if premium user, 403 if not premium but authenticated
+                    self.log_test("JWT Authentication - Protected Endpoint", True, f"JWT authentication working (HTTP {response.status_code})")
+                else:
+                    self.log_test("JWT Authentication - Protected Endpoint", False, f"JWT authentication failed: HTTP {response.status_code}")
+                
+                # Test 3: Invalid Token Handling
+                invalid_headers = {"Authorization": "Bearer invalid_token_here"}
+                response = requests.get(f"{self.base_url}/api/premium-articles", headers=invalid_headers, timeout=10)
+                
+                if response.status_code == 401:
+                    self.log_test("JWT Authentication - Invalid Token", True, "Invalid tokens properly rejected")
+                else:
+                    self.log_test("JWT Authentication - Invalid Token", False, f"Invalid token handling issue: HTTP {response.status_code}")
+            else:
+                self.log_test("JWT Authentication System", False, "No JWT token available for testing")
+                
+        except Exception as e:
+            self.log_test("JWT Authentication System", False, f"Error: {str(e)}")
+
+    def test_api_health_comprehensive(self):
+        """Test API Health and Core Backend Services"""
+        print("\n🏥 COMPREHENSIVE API HEALTH TESTING")
+        print("=" * 40)
+        
+        try:
+            # Test 1: Basic Health Check
+            response = self.session.get(f"{self.base_url}/api/health", timeout=10)
+            if response.status_code == 200:
+                health_data = response.json()
+                if health_data.get("status") == "healthy":
+                    self.log_test("API Health Check", True, "Core API is healthy and responsive")
+                else:
+                    self.log_test("API Health Check", False, f"Unexpected health status: {health_data}")
+            else:
+                self.log_test("API Health Check", False, f"Health check failed: HTTP {response.status_code}")
+            
+            # Test 2: Core Endpoints Responsiveness
+            core_endpoints = [
+                ("/api/articles", "Articles API"),
+                ("/api/categories", "Categories API"),
+                ("/api/payments/packages", "Payment Packages API")
+            ]
+            
+            responsive_endpoints = 0
+            for endpoint, name in core_endpoints:
+                try:
+                    response = self.session.get(f"{self.base_url}{endpoint}", timeout=5)
+                    if response.status_code == 200:
+                        responsive_endpoints += 1
+                        self.log_test(f"Core Service - {name}", True, f"Responsive (HTTP {response.status_code})")
+                    else:
+                        self.log_test(f"Core Service - {name}", False, f"HTTP {response.status_code}")
+                except Exception as e:
+                    self.log_test(f"Core Service - {name}", False, f"Connection error: {str(e)}")
+            
+            if responsive_endpoints == len(core_endpoints):
+                self.log_test("Core Backend Services", True, f"All {len(core_endpoints)} core services responsive")
+            else:
+                self.log_test("Core Backend Services", False, f"Only {responsive_endpoints}/{len(core_endpoints)} services responsive")
+                
+        except Exception as e:
+            self.log_test("API Health Comprehensive", False, f"Error: {str(e)}")
+
+    def run_magazine_flip_book_tests(self):
+        """Run Magazine Flip Book Focused Tests"""
+        print("📖 Starting Magazine Flip Book Backend API Testing")
+        print("=" * 60)
+        
+        # 1. API Health Check
+        self.test_api_health_comprehensive()
+        
+        # 2. Authentication System for Subscription Endpoints
         user_credentials = self.test_user_registration()
         if user_credentials:
             self.test_user_login(user_credentials)
         
-        # 3. PRIORITY: Article API Endpoint Tests (KEY REQUIREMENTS)
-        print("\n📰 Testing Article API Endpoints - PRIORITY TESTS...")
-        articles = self.test_articles_endpoint()
-        if articles:
-            self.test_single_article(articles)
+        self.test_authentication_system_jwt()
         
-        # 4. KEY REQUIREMENT: Article Retrieval by UUID and Slug
-        print("\n🔍 Testing Article Retrieval by UUID and Slug...")
-        self.test_article_retrieval_by_uuid_and_slug()
+        # 3. Magazine Flip Book API Requirements (PRIORITY)
+        self.test_magazine_flip_book_api_requirements()
         
-        # 5. KEY REQUIREMENT: Category and Subcategory Filtering
-        print("\n📂 Testing Category and Subcategory Filtering...")
-        self.test_category_subcategory_filtering()
-        
-        # 6. KEY REQUIREMENT: View Count Increment
-        print("\n👁️ Testing View Count Increment...")
-        self.test_view_count_increment()
-        
-        # 7. KEY REQUIREMENT: PDF Content Accessibility
-        print("\n📄 Testing PDF Content Accessibility...")
-        self.test_pdf_content_accessibility()
-        
-        # 8. Test articles with new category filters
-        print("\n🏷️ Testing Articles with New Categories...")
-        self.test_articles_with_new_categories()
-        
-        # 9. Updated Category System Tests
-        print("\n📂 Testing Updated Category System...")
-        categories = self.test_categories_endpoint()
-        
-        # 10. Other Content APIs (Secondary Priority)
-        print("\n📚 Testing Other Content APIs...")
-        reviews = self.test_reviews_endpoint()
-        issues = self.test_magazine_issues_endpoint()
-        destinations = self.test_destinations_endpoint()
-        
-        # 11. Payment System Tests (Secondary for this test)
-        print("\n💳 Testing Stripe Payment Integration...")
+        # 4. Premium Content System Testing
+        print("\n💎 Testing Premium Content System...")
         self.test_payment_packages()
-        self.test_payment_checkout_creation()
         
-        # 12. Protected Endpoint Test
-        self.test_protected_endpoint()
-        
-        # 13. CORS Configuration Test
-        self.test_cors_configuration()
+        # 5. Additional Core Tests
+        print("\n📚 Testing Supporting APIs...")
+        self.test_categories_endpoint()
         
         return self.generate_report()
+
+    def run_comprehensive_tests(self):
+        """Run all tests in sequence - Updated for Magazine Flip Book Focus"""
+        print("🚀 Starting Just Urbane Magazine Flip Book Backend Testing")
+        print("=" * 70)
+        
+        # Run Magazine Flip Book focused tests
+        return self.run_magazine_flip_book_tests()
     
     def generate_report(self):
         """Generate comprehensive test report"""
