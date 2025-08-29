@@ -13,6 +13,7 @@ import MagazineCoverCard from '../components/MagazineCoverCard';
 import { formatDate } from '../utils/formatters';
 import { Link } from 'react-router-dom';
 import LoadingSpinner from '../components/LoadingSpinner';
+import { parseMagazineContent } from '../components/MagazineContentParser';
 
 const IssuesPage = () => {
   const [selectedIssue, setSelectedIssue] = useState(null);
