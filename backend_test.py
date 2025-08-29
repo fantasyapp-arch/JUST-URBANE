@@ -746,18 +746,37 @@ class JustUrbaneAPITester:
             if self.auth_token:
                 self.log_test("JWT Token Generation", True, "JWT token successfully generated during login")
                 
-                # Test 2: Protected Endpoint Access
-                headers = {"Authorization": f"Bearer {self.auth_token}"}
-                response = self.session.get(f"{self.base_url}/api/premium-articles", headers=headers, timeout=10)
+                # Test 2: Protected Endpoint Access - Use article creation instead
+                test_article = {
+                    "title": "JWT Test Article",
+                    "dek": "Testing JWT authentication",
+                    "body": "This is a test article for JWT authentication testing.",
+                    "category": "tech",
+                    "tags": ["test", "jwt"],
+                    "is_premium": False
+                }
                 
-                if response.status_code in [200, 403]:  # 200 if premium user, 403 if not premium but authenticated
-                    self.log_test("JWT Authentication - Protected Endpoint", True, f"JWT authentication working (HTTP {response.status_code})")
+                response = self.session.post(
+                    f"{self.base_url}/api/articles",
+                    json=test_article,
+                    headers={"Content-Type": "application/json"},
+                    timeout=10
+                )
+                
+                if response.status_code == 200:
+                    self.log_test("JWT Authentication - Protected Endpoint", True, f"JWT authentication working for protected endpoints (HTTP {response.status_code})")
                 else:
-                    self.log_test("JWT Authentication - Protected Endpoint", False, f"JWT authentication failed: HTTP {response.status_code}")
+                    self.log_test("JWT Authentication - Protected Endpoint", False, f"JWT authentication failed: HTTP {response.status_code}: {response.text}")
                 
                 # Test 3: Invalid Token Handling
-                invalid_headers = {"Authorization": "Bearer invalid_token_here"}
-                response = requests.get(f"{self.base_url}/api/premium-articles", headers=invalid_headers, timeout=10)
+                invalid_session = requests.Session()
+                invalid_session.headers.update({"Authorization": "Bearer invalid_token_here"})
+                response = invalid_session.post(
+                    f"{self.base_url}/api/articles",
+                    json=test_article,
+                    headers={"Content-Type": "application/json"},
+                    timeout=10
+                )
                 
                 if response.status_code == 401:
                     self.log_test("JWT Authentication - Invalid Token", True, "Invalid tokens properly rejected")
