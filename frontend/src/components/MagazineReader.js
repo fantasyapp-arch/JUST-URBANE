@@ -8,6 +8,13 @@ import {
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { Link } from 'react-router-dom';
+import { 
+  ArticlePageLeft, 
+  ArticlePageRight, 
+  LockedArticlePage, 
+  SubscriptionPromotionPage, 
+  TableOfContentsModal 
+} from './MagazinePages';
 
 const MagazineReader = ({ articles, isOpen, onClose, initialPageIndex = 0 }) => {
   const flipBookRef = useRef();
