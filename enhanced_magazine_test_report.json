@@ -1,0 +1,176 @@
+{
+  "total": 24,
+  "passed": 22,
+  "failed": 2,
+  "success_rate": 91.66666666666666,
+  "results": [
+    {
+      "test": "Authentication Setup",
+      "success": true,
+      "message": "User registered and authenticated successfully",
+      "timestamp": "2025-08-29T17:17:24.762297",
+      "response_data": null
+    },
+    {
+      "test": "Magazine Issues API - Basic",
+      "success": true,
+      "message": "Retrieved 2 magazine issues",
+      "timestamp": "2025-08-29T17:17:24.782976",
+      "response_data": null
+    },
+    {
+      "test": "Magazine Issues API - Structure",
+      "success": true,
+      "message": "Magazine issues have proper structure for grouping",
+      "timestamp": "2025-08-29T17:17:24.783043",
+      "response_data": null
+    },
+    {
+      "test": "Magazine Content Grouping",
+      "success": true,
+      "message": "20/20 articles have publication dates for month/year grouping",
+      "timestamp": "2025-08-29T17:17:24.796412",
+      "response_data": null
+    },
+    {
+      "test": "Magazine Monthly Grouping",
+      "success": true,
+      "message": "Articles can be grouped by month: {'2025-08': ['JWT Test Article', 'JWT Test Article', 'JWT Test Article', 'Test Article for API Testing', 'Test Article for API Testing', 'Test Article for API Testing', 'Test Article for API Testing', 'Test Article for API Testing', 'Mobile Technology Mastery: Smartphones for Every Lifestyle', \"Timeless Elegance: Women's Fashion Fundamentals\"]}",
+      "timestamp": "2025-08-29T17:17:24.796488",
+      "response_data": null
+    },
+    {
+      "test": "Premium Content Mix",
+      "success": true,
+      "message": "Found 2 premium and 18 free articles",
+      "timestamp": "2025-08-29T17:17:24.809445",
+      "response_data": null
+    },
+    {
+      "test": "Premium Content Gating",
+      "success": true,
+      "message": "Premium content properly gated (locked: False, marker: True, truncated: True)",
+      "timestamp": "2025-08-29T17:17:24.863495",
+      "response_data": null
+    },
+    {
+      "test": "Free Preview Limit",
+      "success": true,
+      "message": "Free preview appears limited (~1.0 pages, 502 chars)",
+      "timestamp": "2025-08-29T17:17:24.863558",
+      "response_data": null
+    },
+    {
+      "test": "Premium Content with Auth",
+      "success": true,
+      "message": "Premium content accessible with authentication (locked: False, length: 532)",
+      "timestamp": "2025-08-29T17:17:24.875828",
+      "response_data": null
+    },
+    {
+      "test": "Payment Packages - Structure",
+      "success": true,
+      "message": "All expected packages present: ['digital_annual', 'print_annual', 'combined_annual']",
+      "timestamp": "2025-08-29T17:17:24.983432",
+      "response_data": null
+    },
+    {
+      "test": "Payment Packages - Pricing",
+      "success": true,
+      "message": "Correct pricing: Digital \u20b9499.0, Print \u20b9499.0, Combined \u20b9999.0",
+      "timestamp": "2025-08-29T17:17:24.983478",
+      "response_data": null
+    },
+    {
+      "test": "Payment Packages - Currency",
+      "success": true,
+      "message": "All packages use INR currency",
+      "timestamp": "2025-08-29T17:17:24.983488",
+      "response_data": null
+    },
+    {
+      "test": "Package Features - digital_annual",
+      "success": true,
+      "message": "6 features defined",
+      "timestamp": "2025-08-29T17:17:24.983506",
+      "response_data": null
+    },
+    {
+      "test": "Package Features - print_annual",
+      "success": true,
+      "message": "6 features defined",
+      "timestamp": "2025-08-29T17:17:24.983513",
+      "response_data": null
+    },
+    {
+      "test": "Package Features - combined_annual",
+      "success": true,
+      "message": "6 features defined",
+      "timestamp": "2025-08-29T17:17:24.983517",
+      "response_data": null
+    },
+    {
+      "test": "Articles - Required Fields",
+      "success": true,
+      "message": "All 10 articles have required fields",
+      "timestamp": "2025-08-29T17:17:25.003597",
+      "response_data": null
+    },
+    {
+      "test": "Articles - Hero Images",
+      "success": true,
+      "message": "10/10 articles (100.0%) have hero images",
+      "timestamp": "2025-08-29T17:17:25.003645",
+      "response_data": null
+    },
+    {
+      "test": "Articles - Content Quality",
+      "success": false,
+      "message": "Only 7/10 articles have sufficient content",
+      "timestamp": "2025-08-29T17:17:25.003652",
+      "response_data": null
+    },
+    {
+      "test": "Articles - Category Distribution",
+      "success": true,
+      "message": "Good category variety: {'tech': 10, 'fashion': 4, 'auto': 2, 'travel': 2, 'people': 1, 'grooming': 1}",
+      "timestamp": "2025-08-29T17:17:25.003673",
+      "response_data": null
+    },
+    {
+      "test": "JWT Token Generation",
+      "success": true,
+      "message": "JWT token successfully generated",
+      "timestamp": "2025-08-29T17:17:25.003714",
+      "response_data": null
+    },
+    {
+      "test": "JWT - Protected Endpoint Access",
+      "success": true,
+      "message": "JWT authentication working for protected endpoints",
+      "timestamp": "2025-08-29T17:17:25.056484",
+      "response_data": null
+    },
+    {
+      "test": "JWT - Invalid Token Rejection",
+      "success": true,
+      "message": "Invalid JWT tokens properly rejected",
+      "timestamp": "2025-08-29T17:17:25.108594",
+      "response_data": null
+    },
+    {
+      "test": "JWT - Premium Content Access",
+      "success": true,
+      "message": "JWT allows access to premium content filtering (5 articles)",
+      "timestamp": "2025-08-29T17:17:25.121186",
+      "response_data": null
+    },
+    {
+      "test": "Stripe Checkout Creation",
+      "success": false,
+      "message": "Checkout creation failed: HTTP 500: {\"detail\":\"Failed to create payment session\"}",
+      "timestamp": "2025-08-29T17:17:25.175748",
+      "response_data": null
+    }
+  ]
+}
