@@ -208,7 +208,7 @@ const PricingPage = () => {
                       initial={{ opacity: 0, y: -20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.5 }}
-                      className="absolute -top-6 left-1/2 transform -translate-x-1/2 z-20"
+                      className="absolute -top-4 left-1/2 transform -translate-x-1/2 z-20"
                     >
                       <div className="bg-gradient-to-r from-primary-500 to-primary-600 text-white px-4 py-1.5 rounded-full text-xs font-bold flex items-center shadow-lg whitespace-nowrap">
                         <motion.div
