@@ -8,19 +8,19 @@
       "test": "Health Check",
       "success": true,
       "message": "API is healthy and responding",
-      "timestamp": "2025-08-29T12:24:57.730038",
+      "timestamp": "2025-08-29T12:35:33.617636",
       "response_data": null
     },
     {
       "test": "User Registration",
       "success": true,
       "message": "User registered successfully",
-      "timestamp": "2025-08-29T12:24:58.061913",
+      "timestamp": "2025-08-29T12:35:33.935015",
       "response_data": {
-        "email": "testuser_1756470297@justurbane.com",
+        "email": "testuser_1756470933@justurbane.com",
         "name": "Premium Test User",
-        "id": "c26a91aa-5397-449b-80c4-76b6f50011a5",
-        "created_at": "2025-08-29T12:24:58.053741",
+        "id": "dc33f6e3-877b-4531-858f-b88ffb67b7fb",
+        "created_at": "2025-08-29T12:35:33.930428",
         "is_premium": false,
         "subscription_status": "inactive"
       }
@@ -29,287 +29,287 @@
       "test": "User Login",
       "success": true,
       "message": "Login successful, JWT token received",
-      "timestamp": "2025-08-29T12:24:58.307878",
+      "timestamp": "2025-08-29T12:35:34.174652",
       "response_data": null
     },
     {
       "test": "Articles Listing",
       "success": true,
       "message": "Retrieved 20 articles",
-      "timestamp": "2025-08-29T12:24:58.324494",
+      "timestamp": "2025-08-29T12:35:34.187554",
       "response_data": null
     },
     {
       "test": "Articles Category Filter",
       "success": true,
       "message": "Retrieved 0 style articles",
-      "timestamp": "2025-08-29T12:24:58.393195",
+      "timestamp": "2025-08-29T12:35:34.226207",
       "response_data": null
     },
     {
       "test": "Featured Articles",
       "success": true,
       "message": "Retrieved 19 featured articles",
-      "timestamp": "2025-08-29T12:24:58.409035",
+      "timestamp": "2025-08-29T12:35:34.399956",
       "response_data": null
     },
     {
       "test": "Trending Articles",
       "success": true,
       "message": "Retrieved 9 trending articles",
-      "timestamp": "2025-08-29T12:24:58.420973",
+      "timestamp": "2025-08-29T12:35:34.411415",
       "response_data": null
     },
     {
       "test": "Single Article",
       "success": true,
       "message": "Retrieved article: Test Article for API Testing",
-      "timestamp": "2025-08-29T12:24:58.436051",
+      "timestamp": "2025-08-29T12:35:34.425446",
       "response_data": null
     },
     {
       "test": "Article Retrieval by UUID",
       "success": true,
-      "message": "Successfully retrieved article by UUID: 3ccdf6d0-abf5-41ff-a95b-7a1329ce18d1",
-      "timestamp": "2025-08-29T12:24:58.454842",
+      "message": "Successfully retrieved article by UUID: b11e7eb0-6538-4b0b-97d5-eeb5c9b42302",
+      "timestamp": "2025-08-29T12:35:34.485383",
       "response_data": null
     },
     {
       "test": "Free Article Content Visibility",
       "success": true,
       "message": "Full content returned for free article (length: 105)",
-      "timestamp": "2025-08-29T12:24:58.454877",
+      "timestamp": "2025-08-29T12:35:34.485430",
       "response_data": null
     },
     {
       "test": "Data Consistency (ID Field)",
       "success": true,
       "message": "Article has 'id' field and no '_id' field",
-      "timestamp": "2025-08-29T12:24:58.454883",
+      "timestamp": "2025-08-29T12:35:34.485437",
       "response_data": null
     },
     {
       "test": "Article Retrieval by Slug",
       "success": true,
       "message": "Successfully retrieved article by slug: test-article-for-api-testing",
-      "timestamp": "2025-08-29T12:24:58.508443",
+      "timestamp": "2025-08-29T12:35:34.504536",
       "response_data": null
     },
     {
       "test": "UUID/Slug Consistency",
       "success": false,
       "message": "UUID and slug return different articles",
-      "timestamp": "2025-08-29T12:24:58.508476",
+      "timestamp": "2025-08-29T12:35:34.504580",
       "response_data": null
     },
     {
       "test": "Category Filter - Fashion",
       "success": true,
       "message": "Retrieved 6 fashion articles",
-      "timestamp": "2025-08-29T12:24:58.518637",
+      "timestamp": "2025-08-29T12:35:34.519402",
       "response_data": null
     },
     {
       "test": "Category Filter - Technology",
       "success": true,
       "message": "Retrieved 0 technology articles",
-      "timestamp": "2025-08-29T12:24:58.568393",
+      "timestamp": "2025-08-29T12:35:34.528150",
       "response_data": null
     },
     {
       "test": "Category Filter - Business",
       "success": true,
       "message": "Retrieved 0 business articles",
-      "timestamp": "2025-08-29T12:24:58.577184",
+      "timestamp": "2025-08-29T12:35:34.543235",
       "response_data": null
     },
     {
       "test": "Category Filter - Travel",
       "success": true,
       "message": "Retrieved 4 travel articles",
-      "timestamp": "2025-08-29T12:24:58.585747",
+      "timestamp": "2025-08-29T12:35:34.558009",
       "response_data": null
     },
     {
       "test": "Subcategory Filter - fashion/men",
       "success": true,
       "message": "Retrieved 2 fashion/men articles",
-      "timestamp": "2025-08-29T12:24:58.594356",
+      "timestamp": "2025-08-29T12:35:34.567716",
       "response_data": null
     },
     {
       "test": "Subcategory Filter - fashion/women",
       "success": true,
       "message": "Retrieved 1 fashion/women articles",
-      "timestamp": "2025-08-29T12:24:58.643380",
+      "timestamp": "2025-08-29T12:35:34.576123",
       "response_data": null
     },
     {
       "test": "Subcategory Filter - fashion/smartphones",
       "success": true,
       "message": "Retrieved 0 fashion/smartphones articles",
-      "timestamp": "2025-08-29T12:24:58.653395",
+      "timestamp": "2025-08-29T12:35:34.586185",
       "response_data": null
     },
     {
       "test": "Subcategory Filter - fashion/luxury",
       "success": true,
       "message": "Retrieved 1 fashion/luxury articles",
-      "timestamp": "2025-08-29T12:24:58.662455",
+      "timestamp": "2025-08-29T12:35:34.635496",
       "response_data": null
     },
     {
       "test": "View Count Increment",
       "success": true,
       "message": "View count incremented from 2 to 3",
-      "timestamp": "2025-08-29T12:24:58.770477",
+      "timestamp": "2025-08-29T12:35:34.748625",
       "response_data": null
     },
     {
       "test": "PDF Content Accessibility",
       "success": true,
-      "message": "8/10 articles have accessible content",
-      "timestamp": "2025-08-29T12:24:58.779996",
+      "message": "9/10 articles have accessible content",
+      "timestamp": "2025-08-29T12:35:34.761038",
       "response_data": null
     },
     {
       "test": "Articles - Fashion Category",
       "success": true,
       "message": "Retrieved 5 fashion articles",
-      "timestamp": "2025-08-29T12:24:58.788075",
+      "timestamp": "2025-08-29T12:35:34.769754",
       "response_data": null
     },
     {
       "test": "Articles - Business Category",
       "success": true,
       "message": "Retrieved 0 business articles",
-      "timestamp": "2025-08-29T12:24:58.836212",
+      "timestamp": "2025-08-29T12:35:34.778379",
       "response_data": null
     },
     {
       "test": "Articles - Technology Category",
       "success": true,
       "message": "Retrieved 0 technology articles",
-      "timestamp": "2025-08-29T12:24:58.844681",
+      "timestamp": "2025-08-29T12:35:34.787523",
       "response_data": null
     },
     {
       "test": "Articles - Finance Category",
       "success": true,
       "message": "Retrieved 0 finance articles",
-      "timestamp": "2025-08-29T12:24:58.893461",
+      "timestamp": "2025-08-29T12:35:34.796210",
       "response_data": null
     },
     {
       "test": "Articles - Travel Category",
       "success": true,
       "message": "Retrieved 4 travel articles",
-      "timestamp": "2025-08-29T12:24:58.903733",
+      "timestamp": "2025-08-29T12:35:34.804686",
       "response_data": null
     },
     {
       "test": "Articles - Health Category",
       "success": true,
       "message": "Retrieved 0 health articles",
-      "timestamp": "2025-08-29T12:24:58.912158",
+      "timestamp": "2025-08-29T12:35:34.815864",
       "response_data": null
     },
     {
       "test": "Articles - Culture Category",
       "success": true,
       "message": "Retrieved 0 culture articles",
-      "timestamp": "2025-08-29T12:24:58.961433",
+      "timestamp": "2025-08-29T12:35:34.824388",
       "response_data": null
     },
     {
       "test": "Articles - Art Category",
       "success": true,
       "message": "Retrieved 0 art articles",
-      "timestamp": "2025-08-29T12:24:59.012898",
+      "timestamp": "2025-08-29T12:35:34.833270",
       "response_data": null
     },
     {
       "test": "Articles - Entertainment Category",
       "success": true,
       "message": "Retrieved 0 entertainment articles",
-      "timestamp": "2025-08-29T12:24:59.021669",
+      "timestamp": "2025-08-29T12:35:34.882269",
       "response_data": null
     },
     {
       "test": "Categories Count",
       "success": true,
       "message": "Retrieved expected 9 categories",
-      "timestamp": "2025-08-29T12:24:59.032289",
+      "timestamp": "2025-08-29T12:35:34.890123",
       "response_data": null
     },
     {
       "test": "GQ Categories Structure",
       "success": true,
       "message": "All 9 GQ-style categories present: Fashion, Business, Technology, Finance, Travel, Health, Culture, Art, Entertainment",
-      "timestamp": "2025-08-29T12:24:59.032325",
+      "timestamp": "2025-08-29T12:35:34.890156",
       "response_data": null
     },
     {
       "test": "Categories Listing",
       "success": true,
       "message": "Retrieved 9 categories",
-      "timestamp": "2025-08-29T12:24:59.032334",
+      "timestamp": "2025-08-29T12:35:34.890165",
       "response_data": null
     },
     {
       "test": "Reviews Listing",
       "success": true,
       "message": "Retrieved 1 reviews",
-      "timestamp": "2025-08-29T12:24:59.044756",
+      "timestamp": "2025-08-29T12:35:34.939333",
       "response_data": null
     },
     {
       "test": "Magazine Issues",
       "success": true,
       "message": "Retrieved 2 magazine issues",
-      "timestamp": "2025-08-29T12:24:59.096633",
+      "timestamp": "2025-08-29T12:35:34.947095",
       "response_data": null
     },
     {
       "test": "Travel Destinations",
       "success": true,
       "message": "Retrieved 2 destinations",
-      "timestamp": "2025-08-29T12:24:59.117328",
+      "timestamp": "2025-08-29T12:35:34.995809",
       "response_data": null
     },
     {
       "test": "Payment Packages",
       "success": true,
       "message": "Correct INR pricing: Digital \u20b9499.0, Print \u20b9499.0, Combined \u20b9999.0",
-      "timestamp": "2025-08-29T12:24:59.165751",
+      "timestamp": "2025-08-29T12:35:35.044381",
       "response_data": null
     },
     {
       "test": "Payment Currency",
       "success": true,
       "message": "Currency set to INR for all packages",
-      "timestamp": "2025-08-29T12:24:59.165788",
+      "timestamp": "2025-08-29T12:35:35.044419",
       "response_data": null
     },
     {
       "test": "Payment Checkout Creation",
       "success": false,
       "message": "HTTP 500: {\"detail\":\"Failed to create payment session\"}",
-      "timestamp": "2025-08-29T12:24:59.174166",
+      "timestamp": "2025-08-29T12:35:35.055905",
       "response_data": null
     },
     {
       "test": "Protected Endpoint",
       "success": true,
       "message": "Article created successfully with authentication",
-      "timestamp": "2025-08-29T12:24:59.224404",
+      "timestamp": "2025-08-29T12:35:35.065463",
       "response_data": null
     },
     {
       "test": "CORS Configuration",
       "success": true,
       "message": "CORS headers present and configured",
-      "timestamp": "2025-08-29T12:24:59.231209",
+      "timestamp": "2025-08-29T12:35:35.112701",
       "response_data": null
     }
   ]
