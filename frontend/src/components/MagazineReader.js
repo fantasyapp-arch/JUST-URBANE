@@ -24,9 +24,11 @@ const MagazineReader = ({ articles, isOpen, onClose, initialPageIndex = 0 }) => 
   const [zoom, setZoom] = useState(1);
   const [showControls, setShowControls] = useState(true);
   const [showTableOfContents, setShowTableOfContents] = useState(false);
+  const [showSubscriptionModal, setShowSubscriptionModal] = useState(false);
   const { user, isAuthenticated } = useAuth();
 
   const canReadPremium = isAuthenticated && user?.is_premium && user?.subscription_status === 'active';
+  const FREE_PREVIEW_PAGES = 3; // Number of pages to show as free preview (including cover)
 
   useEffect(() => {
     if (articles && articles.length > 0) {
