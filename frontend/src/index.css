@@ -109,20 +109,98 @@
 
 /* Custom scrollbar */
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: #f1f5f9;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #3b82f6;
-  border-radius: 3px;
+  background: #cbd5e1;
+  border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #2563eb;
+  background: #94a3b8;
+}
+
+/* Magazine Reader Styles */
+.magazine-flipbook {
+  outline: none;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.magazine-page {
+  background: white;
+  color: black;
+  border: 1px solid #e5e7eb;
+  overflow: hidden;
+  position: relative;
+  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.05);
+}
+
+.magazine-page::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(0, 0, 0, 0.02) 100%
+  );
+  pointer-events: none;
+}
+
+/* Page flip animation enhancements */
+.magazine-flipbook .page-wrap {
+  transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.magazine-flipbook .page-wrap.flipping {
+  z-index: 100;
+}
+
+/* Magazine typography */
+.magazine-page h1,
+.magazine-page h2,
+.magazine-page h3 {
+  font-family: 'Playfair Display', serif;
+  line-height: 1.2;
+}
+
+.magazine-page p {
+  font-family: 'Inter', sans-serif;
+  line-height: 1.6;
+  text-align: justify;
+  hyphens: auto;
+}
+
+/* Responsive magazine */
+@media (max-width: 768px) {
+  .magazine-flipbook {
+    width: 100% !important;
+    height: auto !important;
+  }
+}
+
+/* Line clamp utility */
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 /* Smooth scrolling */
