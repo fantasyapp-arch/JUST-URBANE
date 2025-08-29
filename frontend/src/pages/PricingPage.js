@@ -256,7 +256,7 @@ const PricingPage = () => {
                       </motion.div>
                     </div>
 
-                    <div className="relative z-10 p-8">
+                    <div className="relative z-10 p-8 flex-1 flex flex-col">
                       {/* Plan Header */}
                       <div className="text-center mb-8">
                         <motion.div
@@ -300,7 +300,7 @@ const PricingPage = () => {
                       </div>
 
                       {/* Features List */}
-                      <div className="mb-8">
+                      <div className="mb-8 flex-1">
                         <h4 className="font-semibold text-gray-900 mb-4 flex items-center">
                           <Star className={`h-4 w-4 mr-2 ${plan.textColor}`} />
                           What's Included:
@@ -327,36 +327,38 @@ const PricingPage = () => {
                         </ul>
                       </div>
 
-                      {/* CTA Button */}
-                      <motion.button
-                        onClick={() => handlePlanSelect(plan)}
-                        className={`relative w-full py-4 px-6 rounded-2xl font-bold text-lg transition-all duration-300 overflow-hidden group/btn ${
-                          plan.buttonVariant === 'premium'
-                            ? 'bg-gradient-to-r from-primary-600 via-primary-700 to-purple-600 text-white shadow-lg hover:shadow-2xl'
-                            : plan.buttonVariant === 'primary'
-                            ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-lg hover:shadow-xl'
-                            : 'bg-gradient-to-r from-gray-800 to-gray-900 text-white shadow-lg hover:shadow-xl'
-                        }`}
-                        whileHover={{ 
-                          scale: 1.02,
-                          y: -2
-                        }}
-                        whileTap={{ scale: 0.98 }}
-                      >
-                        {/* Button Shimmer Effect */}
-                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover/btn:translate-x-full transition-transform duration-1000 ease-in-out"></div>
-                        
-                        <span className="relative flex items-center justify-center">
-                          {plan.buttonText}
-                          <ChevronRight className="h-5 w-5 ml-2 group-hover/btn:translate-x-1 transition-transform" />
-                        </span>
-                      </motion.button>
+                      {/* CTA Button - Now at bottom with margin-top auto */}
+                      <div className="mt-auto">
+                        <motion.button
+                          onClick={() => handlePlanSelect(plan)}
+                          className={`relative w-full py-4 px-6 rounded-2xl font-bold text-lg transition-all duration-300 overflow-hidden group/btn ${
+                            plan.buttonVariant === 'premium'
+                              ? 'bg-gradient-to-r from-primary-600 via-primary-700 to-purple-600 text-white shadow-lg hover:shadow-2xl'
+                              : plan.buttonVariant === 'primary'
+                              ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-lg hover:shadow-xl'
+                              : 'bg-gradient-to-r from-gray-800 to-gray-900 text-white shadow-lg hover:shadow-xl'
+                          }`}
+                          whileHover={{ 
+                            scale: 1.02,
+                            y: -2
+                          }}
+                          whileTap={{ scale: 0.98 }}
+                        >
+                          {/* Button Shimmer Effect */}
+                          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover/btn:translate-x-full transition-transform duration-1000 ease-in-out"></div>
+                          
+                          <span className="relative flex items-center justify-center">
+                            {plan.buttonText}
+                            <ChevronRight className="h-5 w-5 ml-2 group-hover/btn:translate-x-1 transition-transform" />
+                          </span>
+                        </motion.button>
 
-                      {/* Trust Elements */}
-                      <div className="mt-4 text-center">
-                        <p className="text-xs text-gray-500">
-                          ✓ Secure Payment • ✓ Instant Access • ✓ Cancel Anytime
-                        </p>
+                        {/* Trust Elements */}
+                        <div className="mt-4 text-center">
+                          <p className="text-xs text-gray-500">
+                            ✓ Secure Payment • ✓ Instant Access • ✓ Cancel Anytime
+                          </p>
+                        </div>
                       </div>
                     </div>
                   </motion.div>
