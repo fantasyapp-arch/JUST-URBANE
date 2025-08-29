@@ -154,6 +154,23 @@ const ArticlePage = () => {
               Share
             </button>
           </div>
+
+          {/* Magazine Reader Button */}
+          {canReadPremium && allArticles && allArticles.length > 0 && (
+            <div className="mt-6 pt-6 border-t border-gray-100">
+              <button
+                onClick={openMagazineReader}
+                className="inline-flex items-center bg-gradient-to-r from-amber-600 to-amber-700 hover:from-amber-700 hover:to-amber-800 text-white font-semibold px-6 py-3 rounded-xl transition-all duration-200 transform hover:scale-105 shadow-lg"
+              >
+                <BookOpen className="h-5 w-5 mr-2" />
+                Read in Magazine Mode
+                <Crown className="h-4 w-4 ml-2" />
+              </button>
+              <p className="text-xs text-gray-500 mt-2">
+                Experience this article in our interactive flip-book magazine
+              </p>
+            </div>
+          )}
         </motion.div>
 
         {/* Hero Image */}
