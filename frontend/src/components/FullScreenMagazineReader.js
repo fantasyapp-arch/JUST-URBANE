@@ -115,7 +115,7 @@ const FullScreenMagazineReader = ({ isOpen, onClose, magazineContent = [] }) => 
     }
   ];
 
-  const pages = magazineContent.length > 0 ? magazineContent : defaultMagazinePages;
+  const pages = (magazineContent && magazineContent.length > 0) ? magazineContent : defaultMagazinePages;
 
   useEffect(() => {
     setTotalPages(pages.length);
