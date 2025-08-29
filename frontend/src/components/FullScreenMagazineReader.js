@@ -257,11 +257,11 @@ const FullScreenMagazineReader = ({ isOpen, onClose, magazineContent = [] }) => 
             autoSize={true}
             clickEventForward={true}
           >
-            {pages.map((page, index) => {
+            {(pages && Array.isArray(pages)) && pages.map((page, index) => {
               const isPageLocked = !canReadPremium && index >= FREE_PREVIEW_PAGES;
               
               return (
-                <div key={page.id} className="magazine-page bg-white relative overflow-hidden">
+                <div key={page?.id || `page-${index}`} className="magazine-page bg-white relative overflow-hidden">
                   {isPageLocked ? (
                     <LockedPageComponent 
                       onSubscribe={() => setShowSubscriptionModal(true)}
