@@ -1041,43 +1041,6 @@ async def get_premium_articles(
         article["is_locked"] = False
     
     return articles
-@app.get("/api/articles", response_model=List[Article])
-async def get_articles(
-    category: Optional[str] = None,
-    featured: Optional[bool] = None,
-    trending: Optional[bool] = None,
-    limit: int = Query(default=20, le=50),
-    skip: int = 0
-):
-    filter_dict = {}
-    if category:
-        filter_dict["category"] = category
-    if featured is not None:
-        filter_dict["is_featured"] = featured
-    if trending is not None:
-        filter_dict["is_trending"] = trending
-    
-    articles = list(db.articles.find(filter_dict).sort("published_at", -1).skip(skip).limit(limit))
-    
-    # Convert ObjectId to string
-    for article in articles:
-        article["id"] = str(article["_id"])
-        del article["_id"]
-    
-    return articles
-
-@app.get("/api/articles/{article_id}", response_model=Article)
-async def get_article(article_id: str):
-    article = db.articles.find_one({"_id": article_id})
-    if not article:
-        raise HTTPException(status_code=404, detail="Article not found")
-    
-    # Increment view count
-    db.articles.update_one({"_id": article_id}, {"$inc": {"view_count": 1}})
-    
-    article["id"] = str(article["_id"])
-    del article["_id"]
-    return article
 
 @app.post("/api/articles", response_model=Article)
 async def create_article(article: ArticleCreate, current_user = Depends(get_current_user)):
