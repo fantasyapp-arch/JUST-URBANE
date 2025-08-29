@@ -160,6 +160,18 @@ const FullScreenMagazineReader = ({ isOpen, onClose, magazineContent = [] }) => 
     return null;
   }
 
+  // Loading state
+  if (!pages || !Array.isArray(pages) || pages.length === 0) {
+    return (
+      <div className="fixed inset-0 bg-black z-50 flex items-center justify-center">
+        <div className="text-white text-center">
+          <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-amber-400 mx-auto mb-4"></div>
+          <p className="text-xl">Loading Magazine...</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <AnimatePresence>
       <motion.div
