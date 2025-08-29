@@ -2,11 +2,13 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { 
   Calendar, BookOpen, Crown, Lock, Play, Users, 
-  TrendingUp, Award, ArrowRight, Eye, Clock, Download
+  TrendingUp, Award, ArrowRight, Eye, Clock, Download, MoreHorizontal, Grid3X3
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { useArticles } from '../hooks/useArticles';
 import MagazineReader from '../components/MagazineReader';
+import FeaturedMagazineCover from '../components/FeaturedMagazineCover';
+import MagazineCoverCard from '../components/MagazineCoverCard';
 import { formatDate } from '../utils/formatters';
 import { Link } from 'react-router-dom';
 import LoadingSpinner from '../components/LoadingSpinner';
