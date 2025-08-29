@@ -802,8 +802,8 @@ frontend:
 
 metadata:
   created_by: "testing_agent"
-  version: "2.3"
-  test_sequence: 5
+  version: "2.4"
+  test_sequence: 6
   run_ui: true
   frontend_tested: true
   backend_tested: true
@@ -812,8 +812,10 @@ metadata:
   subscription_modal_enhancement_tested: true
   magazine_flipbook_backend_tested: true
   magazine_flipbook_backend_success: true
-  last_test_date: "2025-01-27T15:45:00"
-  last_test_success_rate: "95.2%"
+  enhanced_gq_magazine_backend_tested: true
+  enhanced_gq_magazine_backend_success: true
+  last_test_date: "2025-01-27T16:30:00"
+  last_test_success_rate: "91.7%"
 
 test_plan:
   current_focus:
