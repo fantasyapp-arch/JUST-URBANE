@@ -474,9 +474,7 @@ const SubscriptionGatePage = ({ onSubscribe, pageNumber }) => {
 };
 
 // Premium Subscription Modal Component (Better than GQ)
-const PremiumSubscriptionModal = ({ isOpen, onClose }) => {
-  if (!isOpen) return null;
-
+const PremiumSubscriptionModal = ({ onClose }) => {
   return (
     <motion.div
       initial={{ opacity: 0 }}
