@@ -356,7 +356,8 @@ const PricingPage = () => {
                 </motion.div>
               </motion.div>
             );
-          })}
+            })}
+          </div>
         </div>
 
         {/* Premium Features Section with Motion */}
