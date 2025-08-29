@@ -152,9 +152,9 @@ const Header = () => {
             })}
           </nav>
 
-          {/* COMPACT RIGHT SIDE ACTIONS */}
+          {/* RIGHT SIDE ACTIONS */}
           <div className="flex items-center space-x-3">
-            {/* PREMIUM SUBSCRIBE BUTTON - LOGO COLOR THEME */}
+            {/* PREMIUM SUBSCRIBE BUTTON - DESKTOP */}
             <Link
               to="/pricing"
               className="hidden md:inline-flex relative bg-gradient-to-r from-primary-500 via-primary-600 to-primary-700 hover:from-primary-600 hover:via-primary-700 hover:to-primary-800 text-white px-6 py-3 rounded-full font-bold text-sm uppercase tracking-wider transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl group overflow-hidden"
@@ -171,17 +171,27 @@ const Header = () => {
               <div className="absolute inset-0 bg-gradient-to-r from-primary-400/50 to-primary-600/50 blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10"></div>
             </Link>
 
-            {/* Compact Search */}
+            {/* PREMIUM SUBSCRIBE BUTTON - MOBILE (FOCUS) */}
+            <Link
+              to="/pricing"
+              className="md:hidden inline-flex relative bg-gradient-to-r from-primary-500 via-primary-600 to-primary-700 hover:from-primary-600 hover:via-primary-700 hover:to-primary-800 text-white px-4 py-2.5 rounded-full font-bold text-sm transition-all duration-300 transform hover:scale-105 shadow-lg group overflow-hidden"
+            >
+              {/* Crown icon */}
+              <Crown className="h-4 w-4 mr-1.5" />
+              <span className="relative z-10">Subscribe</span>
+            </Link>
+
+            {/* Search - Desktop */}
             <button
               onClick={() => setIsSearchOpen(true)}
-              className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+              className="hidden md:block p-2 hover:bg-gray-100 rounded-lg transition-colors"
             >
               <Search className="h-4 w-4 text-gray-600" />
             </button>
 
-            {/* Compact User Menu */}
+            {/* User Menu - Desktop Only */}
             {isAuthenticated ? (
-              <div className="relative group">
+              <div className="hidden md:block relative group">
                 <button className="p-2 hover:bg-gray-100 rounded-lg transition-colors">
                   <User className="h-4 w-4 text-gray-600" />
                 </button>
@@ -204,13 +214,13 @@ const Header = () => {
             ) : (
               <Link
                 to="/login"
-                className="text-sm font-medium text-gray-700 hover:text-primary-600 transition-colors px-3 py-1"
+                className="hidden md:block text-sm font-medium text-gray-700 hover:text-primary-600 transition-colors px-3 py-1"
               >
                 Sign In
               </Link>
             )}
 
-            {/* COMPACT SIDEBAR MENU TOGGLE */}
+            {/* MOBILE MENU TOGGLE */}
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
