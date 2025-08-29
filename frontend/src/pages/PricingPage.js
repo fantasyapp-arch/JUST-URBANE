@@ -8,7 +8,6 @@ const PricingPage = () => {
   const [selectedPlan, setSelectedPlan] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [hoveredPlan, setHoveredPlan] = useState(null);
-  const [billingPeriod, setBillingPeriod] = useState('yearly');
 
   const handlePlanSelect = (plan) => {
     setSelectedPlan(plan);
