@@ -87,28 +87,6 @@ const ArticlePage = () => {
     }
   };
 
-  // Category Labels like GQ India
-  const categoryLabels = {
-    fashion: "Look Good",
-    technology: "Get Smart", 
-    tech: "Get Smart",
-    business: "Get Smart",
-    finance: "Get Smart",
-    travel: "Live Well",
-    health: "Live Well",
-    culture: "Entertainment",
-    art: "Entertainment",
-    entertainment: "Entertainment",
-    auto: "Live Well",
-    grooming: "Look Good",
-    food: "Live Well",
-    aviation: "Live Well", 
-    people: "Entertainment",
-    luxury: "Live Well"
-  };
-
-  const categoryLabel = categoryLabels[article.category] || "Category";
-
   return (
     <div className="min-h-screen bg-white">
       {/* Breadcrumb - GQ Style */}
