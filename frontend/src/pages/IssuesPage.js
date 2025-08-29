@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { 
   Calendar, BookOpen, Crown, Lock, Play, Users, 
-  TrendingUp, Award, ArrowRight, Eye, Clock 
+  TrendingUp, Award, ArrowRight, Eye, Clock, Download
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { useArticles } from '../hooks/useArticles';
@@ -66,158 +66,93 @@ const IssuesPage = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-amber-50/20">
-      {/* Hero Section */}
-      <div className="bg-gradient-to-br from-slate-900 via-slate-800 to-black text-white py-20">
+    <div className="min-h-screen bg-white">
+      {/* Header Section - GQ Style */}
+      <div className="border-b border-gray-200 py-8">
         <div className="container mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-center max-w-4xl mx-auto"
-          >
-            <div className="flex items-center justify-center space-x-3 mb-6">
-              <Crown className="h-12 w-12 text-amber-400" />
-              <h1 className="text-5xl md:text-6xl font-bold tracking-tight">
-                Digital Magazine
-              </h1>
-            </div>
-            <p className="text-xl md:text-2xl text-gray-300 mb-8 leading-relaxed">
-              Immerse yourself in premium content with our interactive flip-book magazine experience
+          <div className="text-center">
+            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+              Magazine
+            </h1>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              Read your favourite magazines anywhere, anytime | Enjoy unlimited access to our archives | 
+              Download the latest issues on the Just Urbane App
             </p>
-            <div className="flex items-center justify-center space-x-6 text-sm text-amber-300">
-              <div className="flex items-center">
-                <BookOpen className="h-5 w-5 mr-2" />
-                Interactive Reading
-              </div>
-              <div className="flex items-center">
-                <Crown className="h-5 w-5 mr-2" />
-                Premium Content
-              </div>
-              <div className="flex items-center">
-                <Users className="h-5 w-5 mr-2" />
-                Exclusive Access
-              </div>
-            </div>
-          </motion.div>
+          </div>
         </div>
       </div>
 
-      <div className="container mx-auto px-4 py-16">
-        {/* Subscription Status */}
-        {!canReadPremium && (
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="bg-gradient-to-r from-amber-100 to-orange-100 border-2 border-amber-200 rounded-2xl p-8 mb-12 text-center"
-          >
-            <Crown className="h-12 w-12 text-amber-600 mx-auto mb-4" />
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">
-              Premium Subscription Required
-            </h2>
-            <p className="text-gray-700 mb-6 max-w-2xl mx-auto">
-              Access our premium magazine experience with unlimited articles, exclusive content, 
-              and ad-free reading for just ₹499/year.
-            </p>
-            <Link
-              to="/pricing"
-              className="inline-flex items-center bg-gradient-to-r from-amber-600 to-amber-700 hover:from-amber-700 hover:to-amber-800 text-white font-bold px-8 py-4 rounded-xl transition-all duration-200 transform hover:scale-105 shadow-lg"
-            >
-              <Crown className="h-5 w-5 mr-2" />
-              Subscribe Now
-              <ArrowRight className="h-5 w-5 ml-2" />
-            </Link>
-          </motion.div>
-        )}
-
-        {/* Featured Current Issue */}
+      <div className="container mx-auto px-4 py-12">
+        {/* Current Issue Section */}
         {sortedIssues.length > 0 && (
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="mb-16"
-          >
-            <div className="text-center mb-8">
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Current Issue</h2>
-              <p className="text-gray-600 max-w-2xl mx-auto">
-                Experience our latest magazine issue with interactive flip-book technology
-              </p>
+          <div className="mb-16">
+            <div className="flex items-center justify-between mb-8">
+              <h2 className="text-2xl font-bold text-gray-900">
+                {sortedIssues[0][1].displayDate} issue
+              </h2>
+              <Link
+                to="#"
+                className="text-sm text-gray-600 hover:text-gray-900 transition-colors"
+              >
+                Archive →
+              </Link>
             </div>
 
-            <FeaturedIssueCard
+            {/* Featured Magazine Cover Layout */}
+            <FeaturedMagazineCover
               issue={sortedIssues[0][1]}
-              monthKey={sortedIssues[0][0]}
               onReadClick={openMagazineReader}
               canRead={canReadPremium}
-              isCurrent={true}
             />
-          </motion.div>
+          </div>
         )}
 
-        {/* All Issues Grid */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-        >
-          <div className="flex items-center justify-between mb-8">
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-900">All Issues</h2>
-            <div className="flex items-center text-sm text-gray-600">
-              <Calendar className="h-4 w-4 mr-2" />
-              {sortedIssues.length} Issues Available
-            </div>
-          </div>
-
-          <div className="grid lg:grid-cols-2 gap-8">
-            {sortedIssues.map(([monthKey, issue], index) => (
-              <IssueCard
+        {/* Additional Issues Grid - GQ Style */}
+        {sortedIssues.length > 1 && (
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {sortedIssues.slice(1).map(([monthKey, issue], index) => (
+              <MagazineCoverCard
                 key={monthKey}
                 issue={issue}
-                monthKey={monthKey}
                 onReadClick={openMagazineReader}
                 canRead={canReadPremium}
                 index={index}
               />
             ))}
           </div>
-        </motion.div>
+        )}
 
-        {/* Statistics */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.6 }}
-          className="mt-16 bg-gradient-to-r from-gray-900 to-slate-800 rounded-2xl p-8 text-white"
-        >
-          <div className="grid md:grid-cols-4 gap-6 text-center">
-            <div>
-              <div className="text-3xl font-bold text-amber-400 mb-2">
-                {sortedIssues.length}
+        {/* Subscription Prompt - GQ Style */}
+        {!canReadPremium && (
+          <div className="mt-16 bg-gray-50 rounded-2xl p-8 text-center">
+            <h3 className="text-xl font-bold text-gray-900 mb-4">
+              Did you know our monthly issues can now be read online? Subscribe to read our {sortedIssues[0]?.[1]?.displayDate} issue now.
+            </h3>
+            
+            <div className="flex items-center justify-center space-x-4 mb-6">
+              <div className="bg-gradient-to-r from-yellow-400 to-yellow-500 text-black px-4 py-2 rounded font-bold">
+                GO DIGITAL 1 YEAR
               </div>
-              <div className="text-gray-300">Digital Issues</div>
+              <div className="text-right">
+                <div className="text-gray-500 line-through text-sm">₹1500</div>
+                <div className="text-2xl font-bold">₹900</div>
+              </div>
             </div>
-            <div>
-              <div className="text-3xl font-bold text-amber-400 mb-2">
-                {articles?.length || 0}
+
+            <div className="text-center mb-6">
+              <div className="text-gray-600 mb-4">OR</div>
+              <div className="bg-gradient-to-r from-yellow-400 to-yellow-500 text-black px-6 py-3 rounded font-bold inline-block">
+                FREE PREVIEW
               </div>
-              <div className="text-gray-300">Premium Articles</div>
             </div>
-            <div>
-              <div className="text-3xl font-bold text-amber-400 mb-2">
-                {articles?.filter(a => a.is_premium).length || 0}
-              </div>
-              <div className="text-gray-300">Exclusive Content</div>
-            </div>
-            <div>
-              <div className="text-3xl font-bold text-amber-400 mb-2">
-                {canReadPremium ? 'Unlimited' : 'Limited'}
-              </div>
-              <div className="text-gray-300">Access Level</div>
+
+            <div className="text-sm text-gray-600">
+              Already purchased? <Link to="/login" className="text-blue-600 hover:underline">Login</Link>
+              <span className="mx-4">|</span>
+              <Link to="/pricing" className="text-blue-600 hover:underline">More plans →</Link>
             </div>
           </div>
-        </motion.div>
+        )}
       </div>
 
       {/* Magazine Reader */}
