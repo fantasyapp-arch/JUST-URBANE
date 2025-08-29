@@ -29,6 +29,15 @@ import PaymentSuccessPage from './pages/PaymentSuccessPage';
 import ProfilePage from './pages/ProfilePage';
 import SubcategoryPage from './pages/SubcategoryPage';
 
+// Suppress React Router v7 future flag warnings
+const originalWarn = console.warn;
+console.warn = (...args) => {
+  if (typeof args[0] === 'string' && args[0].includes('React Router Future Flag Warning')) {
+    return;
+  }
+  originalWarn.apply(console, args);
+};
+
 // Create a client
 const queryClient = new QueryClient({
   defaultOptions: {
