@@ -33,30 +33,13 @@ const MagazineIssuesPage = () => {
         grouped[monthYear] = {
           displayDate,
           articles: [],
-          date: date,
-          coverImage: generateMagazineCover(displayDate, articles.filter(a => {
-            const aDate = new Date(a.published_at);
-            const aMonthYear = `${aDate.getFullYear()}-${String(aDate.getMonth() + 1).padStart(2, '0')}`;
-            return aMonthYear === monthYear;
-          }))
+          date: date
         };
       }
       grouped[monthYear].articles.push(article);
     });
     
     return grouped;
-  };
-
-  // Generate magazine cover design
-  const generateMagazineCover = (displayDate, issueArticles) => {
-    const heroArticle = issueArticles.find(a => a.hero_image) || issueArticles[0];
-    return {
-      bgImage: heroArticle?.hero_image || '/placeholder-magazine.jpg',
-      title: displayDate.split(' ')[0].toUpperCase(),
-      year: displayDate.split(' ')[1],
-      headline: heroArticle?.title || 'Premium Content',
-      category: heroArticle?.category || 'lifestyle'
-    };
   };
 
   const monthlyIssues = groupArticlesByMonth(articles);
