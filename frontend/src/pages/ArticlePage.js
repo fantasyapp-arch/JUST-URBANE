@@ -37,39 +37,6 @@ const ArticlePage = () => {
   const closeMagazineReader = () => {
     setIsReaderOpen(false);
   };
-
-  if (isLoading) {
-    return (
-      <div className="min-h-screen bg-white">
-        <div className="container mx-auto px-4 py-12">
-          <SkeletonArticle />
-        </div>
-      </div>
-    );
-  }
-
-  if (error || !article) {
-    return (
-      <div className="min-h-screen bg-white flex items-center justify-center">
-        <div className="text-center">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">
-            Article Not Found
-          </h1>
-          <p className="text-gray-600 mb-8">
-            The article you're looking for doesn't exist.
-          </p>
-          <button
-            onClick={() => navigate('/')}
-            className="btn-primary"
-          >
-            Return Home
-          </button>
-        </div>
-      </div>
-    );
-  }
-
-  const canReadPremium = isAuthenticated && user?.is_premium && user?.subscription_status === 'active';
   const isLocked = article?.is_locked || (article?.is_premium && !canReadPremium);
 
   const shareArticle = () => {
