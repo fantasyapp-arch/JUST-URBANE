@@ -481,40 +481,7 @@ const HomePage = () => {
           </div>
         </motion.section>
 
-        {/* SINGLE NEWSLETTER SECTION - PROFESSIONAL DESIGN */}
-        <motion.section 
-          className="mb-20"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 1.3 }}
-        >
-          <div className="bg-gradient-to-br from-primary-50 to-primary-100 rounded-3xl p-12">
-            <div className="text-center max-w-3xl mx-auto">
-              <h3 className="text-3xl lg:text-4xl font-serif font-bold text-gray-900 mb-6">
-                Stay Updated with Just Urbane
-              </h3>
-              <p className="text-lg text-gray-700 mb-8 leading-relaxed">
-                Get the latest in luxury lifestyle, fashion trends, and exclusive content delivered to your inbox weekly.
-              </p>
-              <form className="flex flex-col sm:flex-row gap-4 max-w-lg mx-auto">
-                <input
-                  type="email"
-                  placeholder="Enter your email address"
-                  className="flex-1 px-6 py-4 rounded-xl text-gray-900 border-2 border-primary-200 focus:ring-4 focus:ring-primary-200 focus:border-primary-500 outline-none text-lg"
-                />
-                <button
-                  type="submit"
-                  className="bg-primary-600 hover:bg-primary-700 text-white px-8 py-4 rounded-xl font-bold transition-all duration-200 transform hover:scale-105 shadow-lg text-lg"
-                >
-                  Subscribe Free
-                </button>
-              </form>
-              <p className="text-sm text-gray-500 mt-4">
-                No spam, unsubscribe anytime. Join 50,000+ premium readers.
-              </p>
-            </div>
-          </div>
-        </motion.section>
+
 
       </div>
     </div>
