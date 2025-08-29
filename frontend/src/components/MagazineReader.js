@@ -60,6 +60,11 @@ const MagazineReader = ({ articles, isOpen, onClose, initialPageIndex = 0 }) => 
 
   const nextPage = () => {
     if (flipBookRef.current) {
+      // Prevent going beyond free preview for non-premium users
+      if (!canReadPremium && currentPage >= FREE_PREVIEW_PAGES - 1) {
+        setShowSubscriptionModal(true);
+        return;
+      }
       flipBookRef.current.pageFlip().flipNext();
     }
   };
