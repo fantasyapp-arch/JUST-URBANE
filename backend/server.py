@@ -956,12 +956,15 @@ async def get_articles(
     
     return articles
 
-@app.get("/api/articles/{article_id}", response_model=Article)
+@app.get("/api/articles/{article_identifier}", response_model=Article)
 async def get_article(
-    article_id: str, 
+    article_identifier: str, 
     current_user = Depends(get_current_user_optional_session)
 ):
-    article = db.articles.find_one({"_id": article_id})
+    # Try to find by id first, then by slug
+    article = db.articles.find_one({"id": article_identifier})
+    if not article:
+        article = db.articles.find_one({"slug": article_identifier})
     if not article:
         raise HTTPException(status_code=404, detail="Article not found")
     
