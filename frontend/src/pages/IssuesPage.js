@@ -188,7 +188,7 @@ const IssuesPage = () => {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={ duration: 0.6, delay: 0.6 }}
+          transition={{ duration: 0.6, delay: 0.6 }}
           className="mt-16 bg-gradient-to-r from-gray-900 to-slate-800 rounded-2xl p-8 text-white"
         >
           <div className="grid md:grid-cols-4 gap-6 text-center">
