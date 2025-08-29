@@ -552,22 +552,24 @@ class JustUrbaneAPITester:
                     
                     if not missing_packages:
                         # Check pricing
-                        monthly = packages.get("premium_monthly", {})
-                        annual = packages.get("premium_annual", {})
+                        digital = packages.get("digital_annual", {})
+                        print_pkg = packages.get("print_annual", {})
+                        combined = packages.get("combined_annual", {})
                         
-                        monthly_price = monthly.get("amount")
-                        annual_price = annual.get("amount")
+                        digital_price = digital.get("amount")
+                        print_price = print_pkg.get("amount")
+                        combined_price = combined.get("amount")
                         
-                        if monthly_price == 499.0 and annual_price == 4999.0:
-                            self.log_test("Payment Packages", True, f"Correct INR pricing: Monthly ₹{monthly_price}, Annual ₹{annual_price}")
+                        if digital_price == 499.0 and print_price == 499.0 and combined_price == 999.0:
+                            self.log_test("Payment Packages", True, f"Correct INR pricing: Digital ₹{digital_price}, Print ₹{print_price}, Combined ₹{combined_price}")
                         else:
-                            self.log_test("Payment Packages", False, f"Incorrect pricing: Monthly ₹{monthly_price}, Annual ₹{annual_price}")
+                            self.log_test("Payment Packages", False, f"Incorrect pricing: Digital ₹{digital_price}, Print ₹{print_price}, Combined ₹{combined_price}")
                         
                         # Check currency
-                        if monthly.get("currency") == "inr" and annual.get("currency") == "inr":
-                            self.log_test("Payment Currency", True, "Currency set to INR for both packages")
+                        if digital.get("currency") == "inr" and print_pkg.get("currency") == "inr" and combined.get("currency") == "inr":
+                            self.log_test("Payment Currency", True, "Currency set to INR for all packages")
                         else:
-                            self.log_test("Payment Currency", False, f"Currency issue: Monthly {monthly.get('currency')}, Annual {annual.get('currency')}")
+                            self.log_test("Payment Currency", False, f"Currency issue: Digital {digital.get('currency')}, Print {print_pkg.get('currency')}, Combined {combined.get('currency')}")
                     else:
                         self.log_test("Payment Packages", False, f"Missing packages: {missing_packages}")
                     
