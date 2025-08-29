@@ -234,9 +234,9 @@ const PricingPage = () => {
                       initial={{ opacity: 0, x: 20 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: 0.6 }}
-                      className="absolute -top-4 right-4"
+                      className="absolute -top-3 right-4 z-20"
                     >
-                      <span className="bg-gradient-to-r from-green-500 to-green-600 text-white px-3 py-1 rounded-full text-xs font-bold shadow-md">
+                      <span className="bg-gradient-to-r from-green-500 to-green-600 text-white px-3 py-1 rounded-full text-xs font-bold shadow-md whitespace-nowrap">
                         {plan.savings}
                       </span>
                     </motion.div>
