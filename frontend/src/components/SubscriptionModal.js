@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { X, CreditCard, MapPin, Phone, Mail, Loader, User, Crown, CheckCircle } from 'lucide-react';
+import { X, CreditCard, MapPin, Phone, Mail, Loader, User, Crown, CheckCircle, Sparkles } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import toast from 'react-hot-toast';
 import { api } from '../utils/api';
@@ -97,7 +97,7 @@ const SubscriptionModal = ({ isOpen, onClose, selectedPlan }) => {
         onClick={onClose}
       >
         <motion.div
-          className="bg-white rounded-3xl shadow-2xl w-full max-w-5xl max-h-[95vh] overflow-hidden"
+          className="bg-white rounded-3xl shadow-2xl w-full max-w-5xl max-h-[95vh] overflow-y-auto"
           initial={{ opacity: 0, scale: 0.8, y: 100 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.8, y: 100 }}
@@ -139,6 +139,33 @@ const SubscriptionModal = ({ isOpen, onClose, selectedPlan }) => {
                 }}
                 transition={{ duration: 3, repeat: Infinity }}
               />
+            </div>
+
+            {/* Floating Sparkles */}
+            <div className="absolute inset-0 pointer-events-none">
+              {[...Array(6)].map((_, i) => (
+                <motion.div
+                  key={i}
+                  className="absolute"
+                  initial={{ 
+                    x: Math.random() * 400,
+                    y: Math.random() * 200,
+                    opacity: 0
+                  }}
+                  animate={{ 
+                    y: [0, -20, 0],
+                    opacity: [0, 1, 0],
+                    scale: [0.5, 1, 0.5]
+                  }}
+                  transition={{ 
+                    duration: 2 + Math.random() * 2,
+                    repeat: Infinity,
+                    delay: Math.random() * 2
+                  }}
+                >
+                  <Sparkles className="h-4 w-4 text-yellow-300" />
+                </motion.div>
+              ))}
             </div>
 
             <div className="relative z-10 flex items-center justify-between">
@@ -195,71 +222,171 @@ const SubscriptionModal = ({ isOpen, onClose, selectedPlan }) => {
             </div>
           </motion.div>
 
-          {/* Content */}
-          <div className="p-8">
+          {/* Content with Smooth Scroll */}
+          <div className="p-8 overflow-y-auto max-h-[calc(95vh-200px)]">
             <div className="grid lg:grid-cols-2 gap-10">
               
               {/* Left Side - Plan Details */}
-              <div>
+              <motion.div
+                initial={{ opacity: 0, x: -50 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6, delay: 0.3 }}
+              >
                 {/* Plan Summary */}
-                <div className="bg-gradient-to-br from-primary-500 to-blue-600 text-white rounded-2xl p-8 mb-8">
-                  <div className="flex items-center justify-between mb-6">
-                    <div>
-                      <h3 className="text-2xl font-serif font-bold">{selectedPlan.name}</h3>
-                      <p className="text-primary-100 mt-2">{selectedPlan.description}</p>
-                    </div>
-                    <div className="text-right">
-                      <div className="text-4xl font-black">{selectedPlan.price}</div>
-                      <div className="text-primary-200">{selectedPlan.period}</div>
-                    </div>
+                <motion.div 
+                  className="bg-gradient-to-br from-primary-500 via-primary-600 to-blue-600 text-white rounded-2xl p-8 mb-8 relative overflow-hidden"
+                  whileHover={{ scale: 1.02 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  {/* Background Animation */}
+                  <div className="absolute inset-0 opacity-20">
+                    <motion.div
+                      className="absolute top-0 right-0 w-32 h-32 bg-white rounded-full blur-2xl"
+                      animate={{
+                        scale: [1, 1.5, 1],
+                        x: [0, 20, 0],
+                        y: [0, 10, 0]
+                      }}
+                      transition={{ duration: 4, repeat: Infinity }}
+                    />
                   </div>
-                  
-                  {selectedPlan.savings && (
-                    <div className="bg-green-500 bg-opacity-20 border border-green-300 rounded-lg p-3 mb-6">
-                      <p className="text-green-100 font-bold text-center">{selectedPlan.savings}</p>
-                    </div>
-                  )}
 
-                  {/* Features */}
-                  <div>
-                    <h4 className="font-bold text-lg mb-4 text-primary-100">What's included:</h4>
-                    <ul className="space-y-3">
-                      {selectedPlan.features.map((feature, index) => (
-                        <li key={index} className="flex items-center">
-                          <CheckCircle className="h-5 w-5 text-green-300 mr-3 flex-shrink-0" />
-                          <span className="text-primary-50">{feature}</span>
-                        </li>
-                      ))}
-                    </ul>
+                  <div className="relative z-10">
+                    <div className="flex items-center justify-between mb-6">
+                      <div>
+                        <motion.h3 
+                          className="text-2xl font-serif font-bold mb-2"
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          transition={{ delay: 0.5 }}
+                        >
+                          {selectedPlan.name}
+                        </motion.h3>
+                        <motion.p 
+                          className="text-primary-100"
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          transition={{ delay: 0.6 }}
+                        >
+                          {selectedPlan.description}
+                        </motion.p>
+                      </div>
+                      <motion.div 
+                        className="text-right"
+                        initial={{ opacity: 0, scale: 0.5 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ delay: 0.7, type: "spring" }}
+                      >
+                        <div className="text-4xl font-black">{selectedPlan.price}</div>
+                        <div className="text-primary-200">{selectedPlan.period}</div>
+                      </motion.div>
+                    </div>
+                    
+                    {selectedPlan.savings && (
+                      <motion.div 
+                        className="bg-green-500 bg-opacity-30 border border-green-300 rounded-lg p-3 mb-6"
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.8 }}
+                        whileHover={{ scale: 1.02 }}
+                      >
+                        <p className="text-green-100 font-bold text-center flex items-center justify-center">
+                          <Sparkles className="h-4 w-4 mr-2" />
+                          {selectedPlan.savings}
+                        </p>
+                      </motion.div>
+                    )}
+
+                    {/* Features */}
+                    <div>
+                      <motion.h4 
+                        className="font-bold text-lg mb-4 text-primary-100"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ delay: 0.9 }}
+                      >
+                        What's included:
+                      </motion.h4>
+                      <motion.ul className="space-y-3">
+                        {selectedPlan.features.map((feature, index) => (
+                          <motion.li 
+                            key={index} 
+                            className="flex items-center"
+                            initial={{ opacity: 0, x: -20 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ delay: 1 + index * 0.1 }}
+                            whileHover={{ x: 5 }}
+                          >
+                            <motion.div
+                              whileHover={{ scale: 1.2, rotate: 360 }}
+                              transition={{ duration: 0.3 }}
+                            >
+                              <CheckCircle className="h-5 w-5 text-green-300 mr-3 flex-shrink-0" />
+                            </motion.div>
+                            <span className="text-primary-50">{feature}</span>
+                          </motion.li>
+                        ))}
+                      </motion.ul>
+                    </div>
                   </div>
-                </div>
+                </motion.div>
 
                 {/* Delivery Notice */}
                 {requiresAddress && (
-                  <div className="bg-blue-50 border border-blue-200 rounded-xl p-6">
+                  <motion.div 
+                    className="bg-blue-50 border border-blue-200 rounded-xl p-6"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.4 }}
+                    whileHover={{ scale: 1.02 }}
+                  >
                     <div className="flex items-center">
-                      <MapPin className="h-6 w-6 text-blue-600 mr-3" />
+                      <motion.div
+                        animate={{ 
+                          rotate: [0, 10, -10, 0]
+                        }}
+                        transition={{ duration: 2, repeat: Infinity, repeatDelay: 3 }}
+                      >
+                        <MapPin className="h-6 w-6 text-blue-600 mr-3" />
+                      </motion.div>
                       <div>
                         <p className="font-bold text-blue-900 text-lg">Print Magazine Delivery</p>
                         <p className="text-blue-700">We'll deliver your magazine to the address provided below.</p>
                       </div>
                     </div>
-                  </div>
+                  </motion.div>
                 )}
-              </div>
+              </motion.div>
 
               {/* Right Side - User Details Form */}
-              <div>
-                <h3 className="text-2xl font-serif font-bold text-gray-900 mb-8 flex items-center">
+              <motion.div
+                initial={{ opacity: 0, x: 50 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6, delay: 0.5 }}
+              >
+                <motion.h3 
+                  className="text-2xl font-serif font-bold text-gray-900 mb-8 flex items-center"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.6 }}
+                >
                   <User className="h-6 w-6 mr-3 text-primary-600" />
                   Your Details
-                </h3>
+                </motion.h3>
 
                 {/* Account Information */}
-                <div className="space-y-6 mb-8">
-                  <div>
+                <motion.div 
+                  className="space-y-6 mb-8"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.7 }}
+                >
+                  <motion.div
+                    whileHover={{ scale: 1.02 }}
+                    transition={{ duration: 0.2 }}
+                  >
                     <label className="block text-sm font-bold text-gray-700 mb-3">
-                      <Mail className="h-4 w-4 inline mr-2" />
+                      <Mail className="h-4 w-4 inline mr-2 text-primary-600" />
                       Email Address *
                     </label>
                     <input
@@ -267,15 +394,18 @@ const SubscriptionModal = ({ isOpen, onClose, selectedPlan }) => {
                       name="email"
                       value={userDetails.email}
                       onChange={handleInputChange}
-                      className="w-full px-6 py-4 text-lg border-2 border-gray-200 rounded-xl focus:ring-4 focus:ring-primary-200 focus:border-primary-500 outline-none transition-all"
+                      className="w-full px-6 py-4 text-lg border-2 border-gray-200 rounded-xl focus:ring-4 focus:ring-primary-200 focus:border-primary-500 outline-none transition-all duration-300 hover:border-gray-300"
                       placeholder="your@email.com"
                       required
                     />
-                  </div>
+                  </motion.div>
 
-                  <div>
+                  <motion.div
+                    whileHover={{ scale: 1.02 }}
+                    transition={{ duration: 0.2 }}
+                  >
                     <label className="block text-sm font-bold text-gray-700 mb-3">
-                      <User className="h-4 w-4 inline mr-2" />
+                      <User className="h-4 w-4 inline mr-2 text-primary-600" />
                       Full Name *
                     </label>
                     <input
@@ -283,15 +413,18 @@ const SubscriptionModal = ({ isOpen, onClose, selectedPlan }) => {
                       name="full_name"
                       value={userDetails.full_name}
                       onChange={handleInputChange}
-                      className="w-full px-6 py-4 text-lg border-2 border-gray-200 rounded-xl focus:ring-4 focus:ring-primary-200 focus:border-primary-500 outline-none transition-all"
+                      className="w-full px-6 py-4 text-lg border-2 border-gray-200 rounded-xl focus:ring-4 focus:ring-primary-200 focus:border-primary-500 outline-none transition-all duration-300 hover:border-gray-300"
                       placeholder="Enter your full name"
                       required
                     />
-                  </div>
+                  </motion.div>
 
-                  <div>
+                  <motion.div
+                    whileHover={{ scale: 1.02 }}
+                    transition={{ duration: 0.2 }}
+                  >
                     <label className="block text-sm font-bold text-gray-700 mb-3">
-                      <Phone className="h-4 w-4 inline mr-2" />
+                      <Phone className="h-4 w-4 inline mr-2 text-primary-600" />
                       Phone Number *
                     </label>
                     <input
@@ -299,17 +432,23 @@ const SubscriptionModal = ({ isOpen, onClose, selectedPlan }) => {
                       name="phone_number"
                       value={userDetails.phone_number}
                       onChange={handleInputChange}
-                      className="w-full px-6 py-4 text-lg border-2 border-gray-200 rounded-xl focus:ring-4 focus:ring-primary-200 focus:border-primary-500 outline-none transition-all"
+                      className="w-full px-6 py-4 text-lg border-2 border-gray-200 rounded-xl focus:ring-4 focus:ring-primary-200 focus:border-primary-500 outline-none transition-all duration-300 hover:border-gray-300"
                       placeholder="+91 XXXXX XXXXX"
                       required
                     />
-                  </div>
-                </div>
+                  </motion.div>
+                </motion.div>
 
                 {/* Address Information (for print subscriptions) */}
                 {requiresAddress && (
-                  <div className="space-y-6 mb-8 p-6 bg-gray-50 rounded-2xl">
-                    <h4 className="text-xl font-bold text-gray-900 flex items-center">
+                  <motion.div 
+                    className="space-y-6 mb-8 p-6 bg-gradient-to-br from-gray-50 to-gray-100 rounded-2xl border border-gray-200"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.8 }}
+                    whileHover={{ scale: 1.01 }}
+                  >
+                    <h4 className="text-xl font-bold text-gray-900 flex items-center mb-4">
                       <MapPin className="h-5 w-5 mr-2 text-primary-600" />
                       Delivery Address
                     </h4>
@@ -322,7 +461,7 @@ const SubscriptionModal = ({ isOpen, onClose, selectedPlan }) => {
                           name="address_line_1"
                           value={userDetails.address_line_1}
                           onChange={handleInputChange}
-                          className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none"
+                          className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition-all duration-300 hover:border-gray-300"
                           placeholder="House/Flat number, Street name"
                           required
                         />
@@ -335,7 +474,7 @@ const SubscriptionModal = ({ isOpen, onClose, selectedPlan }) => {
                           name="address_line_2"
                           value={userDetails.address_line_2}
                           onChange={handleInputChange}
-                          className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none"
+                          className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition-all duration-300 hover:border-gray-300"
                           placeholder="Apartment, suite, etc. (optional)"
                         />
                       </div>
@@ -347,7 +486,7 @@ const SubscriptionModal = ({ isOpen, onClose, selectedPlan }) => {
                           name="city"
                           value={userDetails.city}
                           onChange={handleInputChange}
-                          className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none"
+                          className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition-all duration-300 hover:border-gray-300"
                           placeholder="Enter city"
                           required
                         />
@@ -360,7 +499,7 @@ const SubscriptionModal = ({ isOpen, onClose, selectedPlan }) => {
                           name="state"
                           value={userDetails.state}
                           onChange={handleInputChange}
-                          className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none"
+                          className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition-all duration-300 hover:border-gray-300"
                           placeholder="Enter state"
                           required
                         />
@@ -373,53 +512,90 @@ const SubscriptionModal = ({ isOpen, onClose, selectedPlan }) => {
                           name="postal_code"
                           value={userDetails.postal_code}
                           onChange={handleInputChange}
-                          className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none"
+                          className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition-all duration-300 hover:border-gray-300"
                           placeholder="Enter postal code"
                           required
                         />
                       </div>
                     </div>
-                  </div>
+                  </motion.div>
                 )}
 
                 {/* Subscribe Button */}
-                <button
+                <motion.button
                   onClick={handleSubscribe}
                   disabled={isLoading}
-                  className="w-full bg-gradient-to-r from-primary-600 to-blue-600 hover:from-primary-700 hover:to-blue-700 disabled:from-gray-400 disabled:to-gray-500 text-white py-5 px-8 rounded-2xl font-bold text-xl transition-all duration-200 transform hover:scale-105 shadow-xl flex items-center justify-center"
+                  className="w-full bg-gradient-to-r from-primary-600 via-primary-700 to-blue-600 hover:from-primary-700 hover:via-primary-800 hover:to-blue-700 disabled:from-gray-400 disabled:to-gray-500 text-white py-5 px-8 rounded-2xl font-bold text-xl transition-all duration-300 transform shadow-xl relative overflow-hidden group"
+                  whileHover={{ 
+                    scale: 1.02, 
+                    boxShadow: '0 20px 40px -10px rgba(59, 130, 246, 0.4)' 
+                  }}
+                  whileTap={{ scale: 0.98 }}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.9 }}
                 >
-                  {isLoading ? (
-                    <>
-                      <Loader className="h-6 w-6 animate-spin mr-3" />
-                      Processing Subscription...
-                    </>
-                  ) : (
-                    <>
-                      <CreditCard className="h-6 w-6 mr-3" />
-                      Subscribe & Pay {selectedPlan.price}
-                    </>
-                  )}
-                </button>
+                  {/* Button Shimmer Effect */}
+                  <motion.div
+                    className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full"
+                    transition={{ duration: 1, ease: "easeInOut" }}
+                  />
+                  
+                  <div className="flex items-center justify-center relative z-10">
+                    {isLoading ? (
+                      <>
+                        <motion.div
+                          animate={{ rotate: 360 }}
+                          transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                        >
+                          <Loader className="h-6 w-6 mr-3" />
+                        </motion.div>
+                        Processing Subscription...
+                      </>
+                    ) : (
+                      <>
+                        <CreditCard className="h-6 w-6 mr-3" />
+                        Subscribe & Pay {selectedPlan.price}
+                      </>
+                    )}
+                  </div>
+                </motion.button>
 
                 {/* Auto Account Notice */}
-                <div className="mt-6 p-4 bg-green-50 border border-green-200 rounded-xl">
+                <motion.div 
+                  className="mt-6 p-4 bg-green-50 border border-green-200 rounded-xl"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 1 }}
+                  whileHover={{ scale: 1.02 }}
+                >
                   <div className="flex items-center">
-                    <CheckCircle className="h-5 w-5 text-green-600 mr-2" />
+                    <motion.div
+                      animate={{ scale: [1, 1.2, 1] }}
+                      transition={{ duration: 2, repeat: Infinity }}
+                    >
+                      <CheckCircle className="h-5 w-5 text-green-600 mr-2" />
+                    </motion.div>
                     <p className="text-green-800 font-medium">
                       Your account will be automatically created with these details
                     </p>
                   </div>
-                </div>
+                </motion.div>
 
                 {/* Security Notice */}
-                <p className="text-center text-sm text-gray-500 mt-4">
-                  Secure payment powered by Stripe. Your data is encrypted and protected.
-                </p>
-              </div>
+                <motion.p 
+                  className="text-center text-sm text-gray-500 mt-4"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 1.1 }}
+                >
+                  🔒 Secure payment powered by Stripe. Your data is encrypted and protected.
+                </motion.p>
+              </motion.div>
             </div>
           </div>
         </motion.div>
-      </div>
+      </motion.div>
     </AnimatePresence>
   );
 };
