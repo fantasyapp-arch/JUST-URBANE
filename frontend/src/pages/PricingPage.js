@@ -299,46 +299,91 @@ const PricingPage = () => {
           })}
         </div>
 
-        {/* Features Section */}
-        <div className="mt-20 bg-white rounded-2xl p-12">
-          <div className="text-center mb-12">
+        {/* Premium Features Section with Motion */}
+        <motion.div 
+          className="mt-20 bg-white rounded-3xl p-12 shadow-xl"
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.5 }}
+        >
+          <motion.div 
+            className="text-center mb-12"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.7 }}
+          >
             <h2 className="section-title">
               Why Choose Just Urbane Premium?
             </h2>
-          </div>
+          </motion.div>
 
           <div className="grid md:grid-cols-3 gap-8">
-            <div className="text-center">
-              <div className="bg-gold-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Star className="h-8 w-8 text-gold-600" />
-              </div>
-              <h3 className="font-serif text-xl font-semibold mb-2">Premium Content</h3>
-              <p className="text-gray-600">
-                Access to exclusive articles, in-depth reviews, and luxury lifestyle insights from industry experts.
-              </p>
-            </div>
-
-            <div className="text-center">
-              <div className="bg-primary-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Crown className="h-8 w-8 text-primary-600" />
-              </div>
-              <h3 className="font-serif text-xl font-semibold mb-2">Ad-Free Experience</h3>
-              <p className="text-gray-600">
-                Enjoy uninterrupted reading with zero advertisements and faster page loading times.
-              </p>
-            </div>
-
-            <div className="text-center">
-              <div className="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Check className="h-8 w-8 text-green-600" />
-              </div>
-              <h3 className="font-serif text-xl font-semibold mb-2">Magazine Access</h3>
-              <p className="text-gray-600">
-                Complete access to our digital magazine archive and exclusive subscriber-only issues.
-              </p>
-            </div>
+            {[
+              {
+                icon: Star,
+                title: "Premium Content",
+                description: "Access to exclusive articles, in-depth reviews, and luxury lifestyle insights from industry experts.",
+                gradient: "from-primary-500 to-primary-600",
+                bgColor: "bg-primary-100"
+              },
+              {
+                icon: Crown,
+                title: "Ad-Free Experience", 
+                description: "Enjoy uninterrupted reading with zero advertisements and faster page loading times.",
+                gradient: "from-primary-500 to-primary-600",
+                bgColor: "bg-primary-100"
+              },
+              {
+                icon: Check,
+                title: "Magazine Access",
+                description: "Complete access to our digital magazine archive and exclusive subscriber-only issues.",
+                gradient: "from-green-500 to-green-600",
+                bgColor: "bg-green-100"
+              }
+            ].map((feature, index) => {
+              const FeatureIcon = feature.icon;
+              return (
+                <motion.div
+                  key={feature.title}
+                  className="text-center group cursor-pointer"
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.8 + index * 0.2 }}
+                  whileHover={{ y: -10 }}
+                >
+                  <motion.div
+                    className={`${feature.bgColor} w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:shadow-lg transition-all duration-300`}
+                    whileHover={{ 
+                      scale: 1.1,
+                      boxShadow: '0 10px 25px -5px rgba(59, 130, 246, 0.3)'
+                    }}
+                  >
+                    <motion.div
+                      whileHover={{ rotate: 360 }}
+                      transition={{ duration: 0.6 }}
+                    >
+                      <FeatureIcon className={`h-8 w-8 ${feature.icon === Check ? 'text-green-600' : 'text-primary-600'}`} />
+                    </motion.div>
+                  </motion.div>
+                  
+                  <motion.h3 
+                    className="font-serif text-xl font-semibold mb-2 group-hover:text-primary-600 transition-colors duration-300"
+                    whileHover={{ scale: 1.05 }}
+                  >
+                    {feature.title}
+                  </motion.h3>
+                  
+                  <motion.p 
+                    className="text-gray-600 group-hover:text-gray-800 transition-colors duration-300"
+                    whileHover={{ scale: 1.02 }}
+                  >
+                    {feature.description}
+                  </motion.p>
+                </motion.div>
+              );
+            })}
           </div>
-        </div>
+        </motion.div>
 
         {/* FAQ */}
         <div className="mt-16 text-center">
