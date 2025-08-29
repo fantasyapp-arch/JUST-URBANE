@@ -307,18 +307,30 @@ const Header = () => {
                   </div>
                 </div>
 
-                {/* SUBSCRIBE CTA IN SIDEBAR */}
+                {/* PREMIUM SUBSCRIBE CTA IN SIDEBAR */}
                 <div className="border-t border-gray-200 pt-6 mt-6">
-                  <div className="bg-gradient-to-r from-primary-600 to-primary-700 p-4 rounded-xl text-white">
-                    <h3 className="font-bold mb-2">Get Premium Access</h3>
-                    <p className="text-sm text-primary-100 mb-4">Unlimited articles, exclusive content, and more</p>
-                    <Link
-                      to="/pricing"
-                      className="block bg-white text-primary-600 font-bold py-2 px-4 rounded-lg text-center hover:bg-gray-100 transition-colors"
-                      onClick={() => setIsMenuOpen(false)}
-                    >
-                      Subscribe Now
-                    </Link>
+                  <div className="bg-gradient-to-br from-gray-900 via-gray-800 to-black p-6 rounded-2xl text-white relative overflow-hidden">
+                    {/* Premium background pattern */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-gold-500/10 to-gold-600/10"></div>
+                    <div className="absolute top-0 right-0 w-20 h-20 bg-gold-500/20 rounded-full blur-xl"></div>
+                    
+                    <div className="relative z-10">
+                      <div className="flex items-center mb-3">
+                        <Crown className="h-5 w-5 text-gold-400 mr-2" />
+                        <h3 className="font-bold text-lg">Premium Access</h3>
+                      </div>
+                      <p className="text-sm text-gray-300 mb-5 leading-relaxed">Unlock exclusive content, expert insights, and luxury experiences</p>
+                      <Link
+                        to="/pricing"
+                        className="block bg-gradient-to-r from-gold-500 to-gold-600 hover:from-gold-600 hover:to-gold-700 text-white font-bold py-3 px-4 rounded-xl text-center transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
+                        onClick={() => setIsMenuOpen(false)}
+                      >
+                        <span className="flex items-center justify-center">
+                          <Crown className="h-4 w-4 mr-2" />
+                          Subscribe Now
+                        </span>
+                      </Link>
+                    </div>
                   </div>
                 </div>
               </nav>
