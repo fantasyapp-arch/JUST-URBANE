@@ -398,6 +398,66 @@ backend:
         agent: "testing"
         comment: "Single article retrieval working with view count increment functionality"
 
+  - task: "Article Retrieval by UUID and Slug"
+    implemented: true
+    working: true
+    file: "backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "✅ CRITICAL FIX VERIFIED: Article retrieval by both UUID (b97cf14c-609f-4755-9cd1-b96d28ad420d) and slug (mobile-technology-mastery-smartphones-for-every-li) working perfectly. Both methods return the same article with consistent data structure."
+
+  - task: "Article Content Visibility (PDF Content Fix)"
+    implemented: true
+    working: true
+    file: "backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "✅ PDF CONTENT FIX VERIFIED: Article body field properly returned and not truncated for free articles. Tested 5/5 articles with full content accessibility. Content lengths ranging from 105-518 characters, no truncation detected."
+
+  - task: "Category and Subcategory Filtering"
+    implemented: true
+    working: true
+    file: "backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "✅ FILTERING SYSTEM WORKING: Category filtering (/api/articles?category=fashion) returns proper results. Subcategory filtering (/api/articles?category=fashion&subcategory=men) returns 2 articles. All category filters (fashion, technology, business, travel) functional."
+
+  - task: "Data Consistency (ID Field Conversion)"
+    implemented: true
+    working: true
+    file: "backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "✅ DATA CONSISTENCY VERIFIED: All articles have proper 'id' field (not '_id') in responses. Tested 5/5 articles with correct data structure. MongoDB ObjectId properly converted to string ID for JSON serialization."
+
+  - task: "View Count Increment System"
+    implemented: true
+    working: true
+    file: "backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "✅ VIEW COUNT WORKING: View counts properly incremented when articles are accessed. Tested increment from 1 to 2 views. System tracks article engagement correctly for analytics."
+
   - task: "Categories API"
     implemented: true
     working: true
