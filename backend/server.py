@@ -983,14 +983,15 @@ async def get_article(
         else:
             article["is_locked"] = False
             # Increment view count only for full access
-            db.articles.update_one({"_id": article_id}, {"$inc": {"view_count": 1}})
+            db.articles.update_one({"id": article["id"]}, {"$inc": {"view_count": 1}})
     else:
         # Free article - always increment view count
         article["is_locked"] = False
-        db.articles.update_one({"_id": article_id}, {"$inc": {"view_count": 1}})
+        db.articles.update_one({"id": article["id"]}, {"$inc": {"view_count": 1}})
     
-    article["id"] = str(article["_id"])
-    del article["_id"]
+    # Remove MongoDB's _id if present
+    if "_id" in article:
+        del article["_id"]
     return article
 
 # Free content endpoints (no authentication required)
