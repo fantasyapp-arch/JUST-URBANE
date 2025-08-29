@@ -8,6 +8,7 @@ const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState(null);
+  const [dropdownTimer, setDropdownTimer] = useState(null);
   const { user, logout, isAuthenticated } = useAuth();
   const navigate = useNavigate();
 
