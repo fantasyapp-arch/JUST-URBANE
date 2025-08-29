@@ -63,42 +63,33 @@ function Layout() {
   );
 }
 
-// Create router with future flags to eliminate warnings
+// Create router with minimal configuration to avoid warnings
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Layout />,
     children: [
-      { path: "/", element: <HomePage /> },
-      { path: "/category/:slug", element: <CategoryPage /> },
-      { path: "/category/:category/:subcategory", element: <SubcategoryPage /> },
-      { path: "/article/:slug", element: <ArticlePage /> },
-      { path: "/author/:slug", element: <AuthorPage /> },
-      { path: "/issues", element: <IssuesPage /> },
-      { path: "/reviews", element: <ReviewsPage /> },
-      { path: "/travel", element: <TravelPage /> },
-      { path: "/pricing", element: <PricingPage /> },
-      { path: "/account", element: <AccountPage /> },
-      { path: "/search", element: <SearchPage /> },
-      { path: "/about", element: <AboutPage /> },
-      { path: "/contact", element: <ContactPage /> },
-      { path: "/login", element: <LoginPage /> },
-      { path: "/register", element: <RegisterPage /> },
-      { path: "/payment-success", element: <PaymentSuccessPage /> },
-      { path: "/subscription-success", element: <PaymentSuccessPage /> },
-      { path: "/profile", element: <ProfilePage /> },
+      { index: true, element: <HomePage /> },
+      { path: "category/:slug", element: <CategoryPage /> },
+      { path: "category/:category/:subcategory", element: <SubcategoryPage /> },
+      { path: "article/:slug", element: <ArticlePage /> },
+      { path: "author/:slug", element: <AuthorPage /> },
+      { path: "issues", element: <IssuesPage /> },
+      { path: "reviews", element: <ReviewsPage /> },
+      { path: "travel", element: <TravelPage /> },
+      { path: "pricing", element: <PricingPage /> },
+      { path: "account", element: <AccountPage /> },
+      { path: "search", element: <SearchPage /> },
+      { path: "about", element: <AboutPage /> },
+      { path: "contact", element: <ContactPage /> },
+      { path: "login", element: <LoginPage /> },
+      { path: "register", element: <RegisterPage /> },
+      { path: "payment-success", element: <PaymentSuccessPage /> },
+      { path: "subscription-success", element: <PaymentSuccessPage /> },
+      { path: "profile", element: <ProfilePage /> },
     ]
   }
-], {
-  future: {
-    v7_startTransition: true,
-    v7_relativeSplatPath: true,
-    v7_fetcherPersist: true,
-    v7_normalizeFormMethod: true,
-    v7_partialHydration: true,
-    v7_skipActionErrorRevalidation: true,
-  }
-});
+]);
 
 function App() {
   return (
