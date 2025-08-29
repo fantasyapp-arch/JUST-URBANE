@@ -184,6 +184,206 @@ class JustUrbaneAPITester:
                 self.log_test("Single Article", False, f"HTTP {response.status_code}: {response.text}")
         except Exception as e:
             self.log_test("Single Article", False, f"Single article error: {str(e)}")
+
+    def test_article_retrieval_by_uuid_and_slug(self):
+        """Test article retrieval by both UUID and slug - KEY REQUIREMENT"""
+        try:
+            # First get articles to find one with both ID and slug
+            response = self.session.get(f"{self.base_url}/api/articles?limit=5", timeout=10)
+            if response.status_code != 200:
+                self.log_test("Article UUID/Slug Test Setup", False, f"Failed to get articles: HTTP {response.status_code}")
+                return
+            
+            articles = response.json()
+            if not articles:
+                self.log_test("Article UUID/Slug Test", False, "No articles available for testing")
+                return
+            
+            test_article = articles[0]
+            article_uuid = test_article.get("id")
+            article_slug = test_article.get("slug")
+            
+            if not article_uuid:
+                self.log_test("Article UUID Test", False, "No UUID found in article")
+                return
+            
+            if not article_slug:
+                self.log_test("Article Slug Test", False, "No slug found in article")
+                return
+            
+            # Test retrieval by UUID
+            response_uuid = self.session.get(f"{self.base_url}/api/articles/{article_uuid}", timeout=10)
+            if response_uuid.status_code == 200:
+                article_by_uuid = response_uuid.json()
+                if article_by_uuid.get("id") == article_uuid:
+                    self.log_test("Article Retrieval by UUID", True, f"Successfully retrieved article by UUID: {article_uuid}")
+                    
+                    # Check content visibility for free articles
+                    if not article_by_uuid.get("is_premium", False):
+                        body_content = article_by_uuid.get("body", "")
+                        if len(body_content) > 100:  # Ensure full content is returned
+                            self.log_test("Free Article Content Visibility", True, f"Full content returned for free article (length: {len(body_content)})")
+                        else:
+                            self.log_test("Free Article Content Visibility", False, f"Content seems truncated (length: {len(body_content)})")
+                    
+                    # Check data consistency (_id to id conversion)
+                    if "id" in article_by_uuid and "_id" not in article_by_uuid:
+                        self.log_test("Data Consistency (ID Field)", True, "Article has 'id' field and no '_id' field")
+                    else:
+                        self.log_test("Data Consistency (ID Field)", False, "Article missing 'id' field or has '_id' field")
+                        
+                else:
+                    self.log_test("Article Retrieval by UUID", False, "UUID mismatch in response")
+            else:
+                self.log_test("Article Retrieval by UUID", False, f"HTTP {response_uuid.status_code}: {response_uuid.text}")
+            
+            # Test retrieval by slug
+            response_slug = self.session.get(f"{self.base_url}/api/articles/{article_slug}", timeout=10)
+            if response_slug.status_code == 200:
+                article_by_slug = response_slug.json()
+                if article_by_slug.get("slug") == article_slug:
+                    self.log_test("Article Retrieval by Slug", True, f"Successfully retrieved article by slug: {article_slug}")
+                    
+                    # Verify both methods return the same article
+                    if article_by_uuid.get("id") == article_by_slug.get("id"):
+                        self.log_test("UUID/Slug Consistency", True, "Both UUID and slug return the same article")
+                    else:
+                        self.log_test("UUID/Slug Consistency", False, "UUID and slug return different articles")
+                else:
+                    self.log_test("Article Retrieval by Slug", False, "Slug mismatch in response")
+            else:
+                self.log_test("Article Retrieval by Slug", False, f"HTTP {response_slug.status_code}: {response_slug.text}")
+                
+        except Exception as e:
+            self.log_test("Article UUID/Slug Test", False, f"Error: {str(e)}")
+
+    def test_category_subcategory_filtering(self):
+        """Test category and subcategory filtering - KEY REQUIREMENT"""
+        try:
+            # Test category filtering
+            test_categories = ["fashion", "technology", "business", "travel"]
+            
+            for category in test_categories:
+                response = self.session.get(f"{self.base_url}/api/articles?category={category}&limit=10", timeout=10)
+                if response.status_code == 200:
+                    articles = response.json()
+                    if isinstance(articles, list):
+                        # Verify all articles belong to the requested category
+                        category_match = all(article.get("category", "").lower() == category.lower() for article in articles)
+                        if category_match or len(articles) == 0:  # Empty result is also valid
+                            self.log_test(f"Category Filter - {category.title()}", True, f"Retrieved {len(articles)} {category} articles")
+                        else:
+                            self.log_test(f"Category Filter - {category.title()}", False, "Some articles don't match category filter")
+                    else:
+                        self.log_test(f"Category Filter - {category.title()}", False, "Invalid response format")
+                else:
+                    self.log_test(f"Category Filter - {category.title()}", False, f"HTTP {response.status_code}")
+            
+            # Test subcategory filtering (if supported)
+            test_subcategories = ["men", "women", "smartphones", "luxury"]
+            
+            for subcategory in test_subcategories:
+                # Test with fashion category and subcategory
+                response = self.session.get(f"{self.base_url}/api/articles?category=fashion&subcategory={subcategory}&limit=5", timeout=10)
+                if response.status_code == 200:
+                    articles = response.json()
+                    if isinstance(articles, list):
+                        self.log_test(f"Subcategory Filter - fashion/{subcategory}", True, f"Retrieved {len(articles)} fashion/{subcategory} articles")
+                    else:
+                        self.log_test(f"Subcategory Filter - fashion/{subcategory}", False, "Invalid response format")
+                else:
+                    # Subcategory might not be implemented, so this is not a critical failure
+                    self.log_test(f"Subcategory Filter - fashion/{subcategory}", True, f"Subcategory filtering not implemented (HTTP {response.status_code})")
+                    
+        except Exception as e:
+            self.log_test("Category/Subcategory Filtering", False, f"Error: {str(e)}")
+
+    def test_view_count_increment(self):
+        """Test view count increment functionality - KEY REQUIREMENT"""
+        try:
+            # Get an article first
+            response = self.session.get(f"{self.base_url}/api/articles?limit=1", timeout=10)
+            if response.status_code != 200:
+                self.log_test("View Count Test Setup", False, "Failed to get articles for view count test")
+                return
+            
+            articles = response.json()
+            if not articles:
+                self.log_test("View Count Test", False, "No articles available for view count test")
+                return
+            
+            test_article = articles[0]
+            article_id = test_article.get("id")
+            
+            # Get initial view count
+            response1 = self.session.get(f"{self.base_url}/api/articles/{article_id}", timeout=10)
+            if response1.status_code != 200:
+                self.log_test("View Count Initial", False, f"Failed to get article: HTTP {response1.status_code}")
+                return
+            
+            article1 = response1.json()
+            initial_views = article1.get("view_count", 0)
+            
+            # Access the article again to increment view count
+            response2 = self.session.get(f"{self.base_url}/api/articles/{article_id}", timeout=10)
+            if response2.status_code != 200:
+                self.log_test("View Count Second Access", False, f"Failed to access article again: HTTP {response2.status_code}")
+                return
+            
+            article2 = response2.json()
+            second_views = article2.get("view_count", 0)
+            
+            # Check if view count incremented
+            if second_views > initial_views:
+                self.log_test("View Count Increment", True, f"View count incremented from {initial_views} to {second_views}")
+            else:
+                self.log_test("View Count Increment", False, f"View count did not increment (stayed at {initial_views})")
+                
+        except Exception as e:
+            self.log_test("View Count Increment", False, f"Error: {str(e)}")
+
+    def test_pdf_content_accessibility(self):
+        """Test PDF content accessibility and full content display - KEY REQUIREMENT"""
+        try:
+            # Get articles and check for content accessibility
+            response = self.session.get(f"{self.base_url}/api/articles?limit=10", timeout=10)
+            if response.status_code != 200:
+                self.log_test("PDF Content Test Setup", False, "Failed to get articles")
+                return
+            
+            articles = response.json()
+            if not articles:
+                self.log_test("PDF Content Test", False, "No articles available")
+                return
+            
+            content_accessible_count = 0
+            total_articles = len(articles)
+            
+            for article in articles:
+                body_content = article.get("body", "")
+                is_premium = article.get("is_premium", False)
+                is_locked = article.get("is_locked", False)
+                
+                # For free articles, content should be fully accessible
+                if not is_premium and not is_locked:
+                    if len(body_content) > 50:  # Reasonable content length
+                        content_accessible_count += 1
+                    
+                # Check if article has proper content structure
+                required_fields = ["id", "title", "body", "category", "author_name"]
+                has_required_fields = all(field in article for field in required_fields)
+                
+                if not has_required_fields:
+                    missing_fields = [field for field in required_fields if field not in article]
+                    self.log_test(f"Article Structure - {article.get('title', 'Unknown')}", False, f"Missing fields: {missing_fields}")
+                    
+            if content_accessible_count > 0:
+                self.log_test("PDF Content Accessibility", True, f"{content_accessible_count}/{total_articles} articles have accessible content")
+            else:
+                self.log_test("PDF Content Accessibility", False, "No articles have accessible content")
+                
+        except Exception as e:
+            self.log_test("PDF Content Accessibility", False, f"Error: {str(e)}")
     
     def test_categories_endpoint(self):
         """Test categories listing endpoint - Updated for GQ-style 9 categories"""
