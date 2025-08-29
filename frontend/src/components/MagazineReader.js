@@ -28,7 +28,7 @@ const MagazineReader = ({ articles, isOpen, onClose, initialPageIndex = 0 }) => 
   const { user, isAuthenticated } = useAuth();
 
   const canReadPremium = isAuthenticated && user?.is_premium && user?.subscription_status === 'active';
-  const FREE_PREVIEW_PAGES = 5; // Number of pages to show as free preview (cover + 2 article pages)
+  const FREE_PREVIEW_PAGES = 3; // Number of pages to show as free preview (cover + 1 article page)
 
   useEffect(() => {
     if (articles && articles.length > 0) {
