@@ -61,7 +61,7 @@ export const useSubcategoryArticles = (category, subcategory, params = {}) => {
     ['articles', 'subcategory', category, subcategory, params],
     () => articlesApi.getBySubcategory(category, subcategory, params),
     {
-      select: (data) => data.data,
+      select: (response) => response.data || response, // FIX: Handle both response structures
       enabled: !!(category && subcategory),
     }
   );
