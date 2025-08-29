@@ -167,8 +167,9 @@ const MagazineIssuesPage = () => {
 
 // Featured Magazine Cover Component - GQ Style
 const FeaturedMagazineCover = ({ issue, onReadClick, canRead }) => {
-  const cover = issue.coverImage;
   const heroArticle = issue.articles.find(a => a.hero_image) || issue.articles[0];
+  const monthName = issue.displayDate.split(' ')[0].toUpperCase();
+  const year = issue.displayDate.split(' ')[1];
 
   return (
     <div className="grid lg:grid-cols-2 gap-8 items-center">
@@ -185,14 +186,14 @@ const FeaturedMagazineCover = ({ issue, onReadClick, canRead }) => {
           <div className="absolute top-6 left-6 right-6">
             <div className="flex items-center justify-between text-white">
               <div className="text-xs font-bold tracking-widest">JUST URBANE</div>
-              <div className="text-xs">{cover.year}</div>
+              <div className="text-xs">{year}</div>
             </div>
           </div>
 
           {/* Magazine Title */}
           <div className="absolute top-16 left-6">
             <h1 className="text-6xl font-bold text-white tracking-tight leading-none">
-              {cover.title}
+              {monthName}
             </h1>
           </div>
 
@@ -200,10 +201,10 @@ const FeaturedMagazineCover = ({ issue, onReadClick, canRead }) => {
           <div className="absolute bottom-20 left-6 right-6">
             <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4">
               <h2 className="text-white font-bold text-lg mb-2 line-clamp-2">
-                {cover.headline}
+                {heroArticle?.title || 'Premium Content'}
               </h2>
               <div className="text-white/80 text-sm uppercase tracking-wide">
-                {cover.category}
+                {heroArticle?.category || 'lifestyle'}
               </div>
             </div>
           </div>
