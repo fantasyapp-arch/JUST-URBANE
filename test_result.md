@@ -803,11 +803,12 @@ metadata:
 
 test_plan:
   current_focus:
-    - "Pricing page badge positioning & subscription modal backend testing completed - 95.3% SUCCESS RATE"
-    - "All 4 priority areas from review request verified working correctly"
+    - "Magazine Flip-Book Backend API Testing - CRITICAL BUG FOUND"
+    - "Duplicate API endpoints breaking premium access control"
   stuck_tasks:
     - "Stripe Payment Checkout Integration"
     - "Search functionality needs implementation"
+    - "Magazine Flip-Book Backend API Testing"
   test_all: true
   test_priority: "high_first"
   article_api_testing_completed: true
@@ -816,6 +817,7 @@ test_plan:
   tick_mark_animation_removal_verified: true
   pricing_page_badge_positioning_backend_verified: true
   subscription_modal_enhancement_backend_verified: true
+  magazine_flipbook_backend_tested: true
 
 agent_communication:
   - agent: "testing"
