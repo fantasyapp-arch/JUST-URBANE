@@ -59,10 +59,13 @@ export const useCategoryArticles = (category, params = {}) => {
 export const useSubcategoryArticles = (category, subcategory, params = {}) => {
   return useQuery(
     ['articles', 'subcategory', category, subcategory, params],
-    () => articlesApi.getBySubcategory(category, subcategory, params),
+    async () => {
+      const response = await articlesApi.getBySubcategory(category, subcategory, params);
+      return response.data || response; // Handle both response structures
+    },
     {
-      select: (response) => response.data || response, // FIX: Handle both response structures
       enabled: !!(category && subcategory),
+      staleTime: 5 * 60 * 1000, // 5 minutes
     }
   );
 };
