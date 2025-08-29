@@ -290,6 +290,56 @@ const Header = () => {
                   </div>
                 ))}
 
+                {/* ACCOUNT & AUTH SECTION */}
+                <div className="border-t border-gray-200 pt-6 mt-6">
+                  <div className="space-y-3">
+                    {/* Authentication */}
+                    {isAuthenticated ? (
+                      <>
+                        <Link
+                          to="/account" 
+                          className="flex items-center p-3 text-gray-700 hover:bg-gray-50 rounded-lg font-medium transition-colors"
+                          onClick={() => setIsMenuOpen(false)}
+                        >
+                          <User className="h-5 w-5 mr-3 text-primary-500" />
+                          My Account
+                        </Link>
+                        <button
+                          onClick={() => {
+                            logout();
+                            setIsMenuOpen(false);
+                          }}
+                          className="flex items-center w-full p-3 text-gray-700 hover:bg-gray-50 rounded-lg font-medium transition-colors"
+                        >
+                          <X className="h-5 w-5 mr-3 text-gray-500" />
+                          Sign Out
+                        </button>
+                      </>
+                    ) : (
+                      <Link
+                        to="/login"
+                        className="flex items-center p-3 text-gray-700 hover:bg-gray-50 rounded-lg font-medium transition-colors"
+                        onClick={() => setIsMenuOpen(false)}
+                      >
+                        <User className="h-5 w-5 mr-3 text-primary-500" />
+                        Sign In
+                      </Link>
+                    )}
+                    
+                    {/* Search for Mobile */}
+                    <button
+                      onClick={() => {
+                        setIsSearchOpen(true);
+                        setIsMenuOpen(false);
+                      }}
+                      className="flex items-center w-full p-3 text-gray-700 hover:bg-gray-50 rounded-lg font-medium transition-colors"
+                    >
+                      <Search className="h-5 w-5 mr-3 text-gray-500" />
+                      Search
+                    </button>
+                  </div>
+                </div>
+
                 {/* SPECIAL SECTIONS */}
                 <div className="border-t border-gray-200 pt-4 mt-6">
                   <div className="space-y-2">
