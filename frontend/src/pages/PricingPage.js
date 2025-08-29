@@ -207,10 +207,22 @@ const PricingPage = () => {
                       initial={{ opacity: 0, y: -20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.5 }}
-                      className="absolute -top-4 left-1/2 transform -translate-x-1/2 z-10"
+                      className="absolute -top-3 left-1/2 transform -translate-x-1/2 z-20"
                     >
-                      <div className="bg-gradient-to-r from-primary-500 to-primary-600 text-white px-6 py-2 rounded-full text-sm font-bold flex items-center shadow-lg">
-                        <Crown className="h-4 w-4 mr-1 animate-pulse" />
+                      <div className="bg-gradient-to-r from-primary-500 to-primary-600 text-white px-6 py-2 rounded-full text-sm font-bold flex items-center shadow-lg whitespace-nowrap">
+                        <motion.div
+                          animate={{ 
+                            rotate: isHovered ? [0, -10, 10, -10, 0] : 0,
+                            scale: isHovered ? [1, 1.1, 1] : 1 
+                          }}
+                          transition={{ 
+                            duration: 0.6,
+                            repeat: isHovered ? Infinity : 0,
+                            repeatDelay: 1
+                          }}
+                        >
+                          <Crown className="h-4 w-4 mr-1" />
+                        </motion.div>
                         Most Popular
                       </div>
                     </motion.div>
