@@ -588,7 +588,7 @@ class JustUrbaneAPITester:
         """Test Stripe checkout session creation"""
         try:
             checkout_data = {
-                "package_id": "premium_monthly",
+                "package_id": "digital_annual",
                 "origin_url": "https://premium-magazine.preview.emergentagent.com"
             }
             
