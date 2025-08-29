@@ -669,21 +669,28 @@ class JustUrbaneAPITester:
                     if premium_articles and free_articles:
                         self.log_test("Premium Content System - Content Mix", True, f"Found {len(premium_articles)} premium and {len(free_articles)} free articles")
                         
-                        # Test premium access control
+                        # Test premium access control with unauthenticated request
                         premium_article = premium_articles[0]
                         article_id = premium_article.get("id")
                         
-                        # Test without authentication (should be limited)
-                        response_no_auth = requests.get(f"{self.base_url}/api/articles/{article_id}", timeout=10)
+                        # Create a new session without authentication
+                        unauth_session = requests.Session()
+                        response_no_auth = unauth_session.get(f"{self.base_url}/api/articles/{article_id}", timeout=10)
+                        
                         if response_no_auth.status_code == 200:
                             article_no_auth = response_no_auth.json()
                             is_locked = article_no_auth.get("is_locked", False)
-                            body_length = len(article_no_auth.get("body", ""))
+                            body_no_auth = article_no_auth.get("body", "")
+                            original_body = premium_article.get("body", "")
                             
-                            if is_locked or body_length < len(premium_article.get("body", "")):
-                                self.log_test("Premium Access Control", True, f"Premium content properly gated (locked: {is_locked}, limited content: {body_length} chars)")
+                            # Check if content is truncated or locked
+                            content_truncated = len(body_no_auth) < len(original_body)
+                            has_premium_marker = "[Premium content continues...]" in body_no_auth
+                            
+                            if is_locked or content_truncated or has_premium_marker:
+                                self.log_test("Premium Access Control", True, f"Premium content properly gated (locked: {is_locked}, truncated: {content_truncated}, marker: {has_premium_marker})")
                             else:
-                                self.log_test("Premium Access Control", False, "Premium content not properly gated")
+                                self.log_test("Premium Access Control", False, f"Premium content not properly gated - full access without subscription (locked: {is_locked}, lengths: {len(body_no_auth)} vs {len(original_body)})")
                         else:
                             self.log_test("Premium Access Control", False, f"Failed to test premium access: HTTP {response_no_auth.status_code}")
                     else:
