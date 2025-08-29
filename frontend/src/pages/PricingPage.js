@@ -285,7 +285,9 @@ const PricingPage = () => {
                             className="text-5xl font-black text-gray-900"
                             animate={{ 
                               scale: isHovered ? 1.1 : 1,
-                              color: isHovered ? plan.textColor.replace('text-', '#') : '#111827'
+                              color: isHovered ? 
+                                (plan.id === 'digital' ? '#2563eb' : 
+                                 plan.id === 'combined' ? '#3b82f6' : '#4b5563') : '#111827'
                             }}
                           >
                             {plan.price}
