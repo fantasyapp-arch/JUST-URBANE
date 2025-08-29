@@ -547,7 +547,7 @@ class JustUrbaneAPITester:
                 packages = response.json()
                 if isinstance(packages, dict):
                     # Check for expected packages
-                    expected_packages = ["premium_monthly", "premium_annual"]
+                    expected_packages = ["digital_annual", "print_annual", "combined_annual"]
                     missing_packages = [pkg for pkg in expected_packages if pkg not in packages]
                     
                     if not missing_packages:
