@@ -69,12 +69,12 @@ const Header = () => {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-20 lg:h-24">{/* BIGGER NAVBAR FOR BIG LOGO */}
           
-          {/* BIG HERO LOGO - MUCH MORE VISIBLE */}
+          {/* BIGGER HERO LOGO - MUCH MORE VISIBLE */}
           <Link to="/" className="flex items-center">
             <img 
               src="https://customer-assets.emergentagent.com/job_urbane-nexus/artifacts/w4pbaa92_Untitled%20design-10.png" 
               alt="JUST URBANE" 
-              className="h-16 lg:h-20 w-auto max-w-[350px] object-contain"
+              className="h-20 lg:h-28 w-auto max-w-[400px] object-contain"
               onError={(e) => {
                 e.target.style.display = 'none';
                 e.target.nextSibling.style.display = 'block';
