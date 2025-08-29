@@ -368,6 +368,14 @@ const FullScreenMagazineReader = ({ isOpen, onClose, magazineContent = [] }) => 
 
 // Magazine Page Content Component
 const MagazinePageContent = ({ page, pageNumber }) => {
+  if (!page) {
+    return (
+      <div className="h-full flex items-center justify-center bg-gray-100">
+        <p className="text-gray-500">Page content loading...</p>
+      </div>
+    );
+  }
+
   if (page.type === 'cover') {
     return (
       <div 
