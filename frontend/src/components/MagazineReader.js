@@ -303,6 +303,12 @@ const MagazineReader = ({ articles, isOpen, onClose, initialPageIndex = 0 }) => 
           )}
         </AnimatePresence>
 
+        {/* Premium Subscription Modal */}
+        <PremiumSubscriptionModal
+          isOpen={showSubscriptionModal}
+          onClose={() => setShowSubscriptionModal(false)}
+        />
+
         {/* Table of Contents Modal */}
         <TableOfContentsModal
           isOpen={showTableOfContents}
