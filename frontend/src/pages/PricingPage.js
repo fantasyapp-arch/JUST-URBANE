@@ -287,86 +287,20 @@ const PricingPage = () => {
                       </span>
                     </motion.div>
 
-                    {/* Features with Enhanced Tick Mark Animations */}
-                    <motion.ul className="space-y-4 mb-8">
+                    {/* Features List */}
+                    <ul className="space-y-4 mb-8">
                       {plan.features.map((feature, featureIndex) => (
-                        <motion.li 
+                        <li 
                           key={featureIndex} 
-                          className="flex items-center group/feature"
-                          initial={{ opacity: 0, x: -20 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          transition={{ 
-                            delay: index * 0.2 + featureIndex * 0.1,
-                            duration: 0.4
-                          }}
-                          whileHover={{ x: 5, transition: { duration: 0.2 } }}
+                          className="flex items-center"
                         >
-                          <motion.div
-                            className="relative"
-                            animate={{ 
-                              scale: isHovered ? 1.3 : 1,
-                              rotate: isHovered ? [0, 360] : 0
-                            }}
-                            transition={{ 
-                              duration: isHovered ? 0.8 : 0.3,
-                              delay: isHovered ? featureIndex * 0.1 : 0,
-                              repeat: isHovered ? Infinity : 0,
-                              repeatDelay: 2
-                            }}
-                          >
-                            {/* Animated Background Circle for Tick */}
-                            <motion.div
-                              className="absolute inset-0 rounded-full"
-                              animate={{
-                                backgroundColor: isHovered ? '#10b98150' : '#10b98100',
-                                scale: isHovered ? 1.5 : 1
-                              }}
-                              transition={{ duration: 0.3 }}
-                            />
-                            
-                            {/* Tick Mark with Enhanced Animation */}
-                            <motion.div
-                              animate={{
-                                color: isHovered ? '#059669' : '#16a34a',
-                                filter: isHovered ? 'drop-shadow(0 0 8px #10b981)' : 'none'
-                              }}
-                              transition={{ duration: 0.3 }}
-                            >
-                              <Check className="h-5 w-5 mr-3 flex-shrink-0 relative z-10" />
-                            </motion.div>
-                            
-                            {/* Pulse Effect on Hover */}
-                            <AnimatePresence>
-                              {isHovered && (
-                                <motion.div
-                                  initial={{ scale: 0, opacity: 1 }}
-                                  animate={{ scale: 2, opacity: 0 }}
-                                  exit={{ scale: 0, opacity: 0 }}
-                                  transition={{ 
-                                    duration: 1.5,
-                                    delay: featureIndex * 0.15,
-                                    repeat: Infinity,
-                                    repeatDelay: 1
-                                  }}
-                                  className="absolute inset-0 rounded-full border-2 border-green-400 -m-2"
-                                />
-                              )}
-                            </AnimatePresence>
-                          </motion.div>
-                          
-                          <motion.span 
-                            className="text-gray-800 font-medium"
-                            animate={{
-                              color: isHovered ? '#1f2937' : '#374151',
-                              fontWeight: isHovered ? 600 : 500
-                            }}
-                            transition={{ duration: 0.3 }}
-                          >
+                          <Check className="h-5 w-5 mr-3 text-green-500 flex-shrink-0" />
+                          <span className="text-gray-800 font-medium">
                             {feature}
-                          </motion.span>
-                        </motion.li>
+                          </span>
+                        </li>
                       ))}
-                    </motion.ul>
+                    </ul>
 
                     {/* Premium CTA Button */}
                     <motion.button
