@@ -47,7 +47,15 @@ const MagazineReader = ({ articles, isOpen, onClose, initialPageIndex = 0 }) => 
   }, [initialPageIndex]);
 
   const handlePageFlip = (e) => {
-    setCurrentPage(e.data);
+    const newPage = e.data;
+    setCurrentPage(newPage);
+    
+    // Show subscription modal when user tries to go beyond free preview
+    if (!canReadPremium && newPage >= FREE_PREVIEW_PAGES) {
+      setTimeout(() => {
+        setShowSubscriptionModal(true);
+      }, 500);
+    }
   };
 
   const nextPage = () => {
