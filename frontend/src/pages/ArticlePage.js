@@ -73,6 +73,7 @@ const ArticlePage = () => {
   };
 
   const categoryLabel = categoryLabels[article.category] || "Category";
+  const canReadPremium = isAuthenticated && user?.is_premium && user?.subscription_status === 'active';
   const isLocked = article?.is_locked || (article?.is_premium && !canReadPremium);
 
   const shareArticle = () => {
