@@ -227,7 +227,7 @@ const PricingPage = () => {
 
                   {/* Card Container */}
                   <motion.div
-                    className={`relative bg-white rounded-3xl transition-all duration-500 overflow-hidden ${
+                    className={`relative bg-white rounded-3xl transition-all duration-500 overflow-hidden h-full flex flex-col ${
                       isPopular ? 'shadow-2xl border-2 border-primary-200' : 'shadow-lg border border-gray-200'
                     }`}
                     animate={{
