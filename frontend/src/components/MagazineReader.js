@@ -307,7 +307,6 @@ const MagazineReader = ({ articles, isOpen, onClose, initialPageIndex = 0 }) => 
         <AnimatePresence>
           {showSubscriptionModal && (
             <PremiumSubscriptionModal
-              isOpen={showSubscriptionModal}
               onClose={() => setShowSubscriptionModal(false)}
             />
           )}
