@@ -10,6 +10,7 @@ import toast from 'react-hot-toast';
 const PricingPage = () => {
   const [selectedPlan, setSelectedPlan] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [hoveredPlan, setHoveredPlan] = useState(null);
 
   const handlePlanSelect = (plan) => {
     // SMART SYSTEM - NO LOGIN REQUIRED, DIRECT SUBSCRIPTION
