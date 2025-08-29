@@ -35,7 +35,10 @@ const PricingPage = () => {
       buttonText: 'Get Digital Access',
       buttonVariant: 'primary',
       popular: false,
-      packageId: 'digital_annual'
+      packageId: 'digital_annual',
+      icon: Zap,
+      gradient: 'from-blue-500 to-primary-600',
+      accentColor: 'blue'
     },
     {
       id: 'print',
@@ -54,7 +57,10 @@ const PricingPage = () => {
       buttonText: 'Get Print Edition',
       buttonVariant: 'secondary',
       popular: false,
-      packageId: 'print_annual'
+      packageId: 'print_annual',
+      icon: Shield,
+      gradient: 'from-gray-600 to-gray-800',
+      accentColor: 'gray'
     },
     {
       id: 'combined',
@@ -74,7 +80,10 @@ const PricingPage = () => {
       buttonVariant: 'premium',
       popular: true,
       packageId: 'combined_annual',
-      savings: 'Save ₹499'
+      savings: 'Save ₹499',
+      icon: Crown,
+      gradient: 'from-primary-500 to-primary-700',
+      accentColor: 'primary'
     }
   ];
 
