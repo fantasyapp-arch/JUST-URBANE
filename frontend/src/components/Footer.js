@@ -72,7 +72,7 @@ const Footer = () => {
                 <img 
                   src="https://customer-assets.emergentagent.com/job_urbane-nexus/artifacts/w4pbaa92_Untitled%20design-10.png" 
                   alt="JUST URBANE" 
-                  className="h-12 w-auto max-w-[250px] object-contain"
+                  className="h-16 w-auto max-w-[300px] object-contain"
                   onError={(e) => {
                     e.target.style.display = 'none';
                     e.target.nextSibling.style.display = 'block';
