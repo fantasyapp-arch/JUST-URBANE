@@ -162,7 +162,7 @@ const PricingPage = () => {
                 transition={{ duration: 0.6, delay: index * 0.2 }}
                 onMouseEnter={() => setHoveredPlan(plan.id)}
                 onMouseLeave={() => setHoveredPlan(null)}
-                className={`relative group cursor-pointer ${plan.popular ? 'md:scale-105 pt-6' : 'pt-2'}`}
+                className={`relative group cursor-pointer ${plan.popular ? 'md:scale-105 pt-12' : 'pt-6'}`}
               >
                 {/* Premium Glow Background Effect */}
                 <div className={`absolute inset-0 bg-gradient-to-r ${plan.gradient} opacity-0 group-hover:opacity-10 rounded-3xl transition-opacity duration-500 blur-xl`}></div>
