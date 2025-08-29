@@ -112,75 +112,184 @@ const IssuesPage = () => {
       </div>
 
       <div className="container mx-auto px-4 py-12">
-        {/* Current Issue Section */}
-        {sortedIssues.length > 0 && (
-          <div className="mb-16">
-            <div className="flex items-center justify-between mb-8">
-              <h2 className="text-2xl font-bold text-gray-900">
-                {sortedIssues[0][1].displayDate} issue
-              </h2>
-              <Link
-                to="#"
-                className="text-sm text-gray-600 hover:text-gray-900 transition-colors"
-              >
-                Archive →
-              </Link>
-            </div>
+        {/* Preview Tab Content */}
+        {activeTab === 'preview' && sortedIssues.length > 0 && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+          >
+            {/* Current Issue Featured Section */}
+            <div className="mb-16">
+              <div className="flex items-center justify-between mb-12">
+                <h2 className="text-3xl font-bold text-gray-900">
+                  {sortedIssues[0][1].displayDate} issue
+                </h2>
+                <button
+                  onClick={() => setActiveTab('archive')}
+                  className="text-sm text-gray-600 hover:text-gray-900 transition-colors font-medium"
+                >
+                  View Archive →
+                </button>
+              </div>
 
-            {/* Featured Magazine Cover Layout */}
-            <FeaturedMagazineCover
-              issue={sortedIssues[0][1]}
-              onReadClick={openMagazineReader}
-              canRead={canReadPremium}
-            />
-          </div>
-        )}
-
-        {/* Additional Issues Grid - GQ Style */}
-        {sortedIssues.length > 1 && (
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {sortedIssues.slice(1).map(([monthKey, issue], index) => (
-              <MagazineCoverCard
-                key={monthKey}
-                issue={issue}
+              {/* Featured Magazine Cover Layout */}
+              <FeaturedMagazineCover
+                issue={sortedIssues[0][1]}
                 onReadClick={openMagazineReader}
                 canRead={canReadPremium}
-                index={index}
               />
-            ))}
-          </div>
+            </div>
+
+            {/* Magazine Page Preview Thumbnails - GQ Style */}
+            <div className="mb-16">
+              <h3 className="text-2xl font-bold text-gray-900 mb-8">Page Preview</h3>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                {/* Sample magazine page thumbnails */}
+                {[1, 2, 3, 4].map((pageNum) => (
+                  <motion.div
+                    key={pageNum}
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.4, delay: pageNum * 0.1 }}
+                    className="group cursor-pointer"
+                    onClick={() => openMagazineReader(sortedIssues[0][1].articles)}
+                  >
+                    <div className="aspect-[3/4] bg-gradient-to-br from-gray-100 to-gray-200 rounded-lg overflow-hidden shadow-md group-hover:shadow-xl transition-all duration-300 relative">
+                      {/* Simulated page content */}
+                      <div className="absolute inset-0 p-3">
+                        <div className="text-xs text-gray-600 mb-2">Page {pageNum}</div>
+                        <div className="space-y-2">
+                          <div className="h-2 bg-gray-300 rounded w-3/4"></div>
+                          <div className="h-2 bg-gray-300 rounded w-1/2"></div>
+                          <div className="h-16 bg-gray-300 rounded mt-3"></div>
+                          <div className="space-y-1">
+                            <div className="h-1.5 bg-gray-300 rounded"></div>
+                            <div className="h-1.5 bg-gray-300 rounded w-4/5"></div>
+                            <div className="h-1.5 bg-gray-300 rounded w-3/5"></div>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      {/* Lock overlay for pages beyond preview */}
+                      {pageNum > 3 && !canReadPremium && (
+                        <div className="absolute inset-0 bg-black/20 flex items-center justify-center">
+                          <div className="bg-white/90 backdrop-blur-sm rounded-full p-2">
+                            <Lock className="h-4 w-4 text-gray-700" />
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Play overlay on hover */}
+                      <div className="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <div className="bg-white/20 backdrop-blur-sm rounded-full p-2">
+                          <Play className="h-4 w-4 text-gray-800 fill-current" />
+                        </div>
+                      </div>
+                    </div>
+                    <p className="text-sm text-gray-600 mt-2 text-center">
+                      {pageNum <= 3 || canReadPremium ? 'Preview Available' : 'Premium Only'}
+                    </p>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+
+            {/* App Promotion Section - GQ Style */}
+            <div className="bg-gradient-to-br from-slate-900 to-slate-800 rounded-3xl p-8 text-white text-center mb-16">
+              <h3 className="text-2xl font-bold mb-4">UPGRADE YOUR READING EXPERIENCE</h3>
+              <p className="text-slate-300 mb-6">Subscribe to get access to our exclusive GQ reader app</p>
+              <Link
+                to="/pricing"
+                className="inline-flex items-center bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white font-bold px-8 py-4 rounded-xl transition-all duration-300 transform hover:scale-105"
+              >
+                <Download className="h-5 w-5 mr-2" />
+                SUBSCRIBE
+              </Link>
+            </div>
+          </motion.div>
         )}
 
-        {/* Subscription Prompt - GQ Style */}
+        {/* Archive Tab Content */}
+        {activeTab === 'archive' && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+          >
+            <div className="mb-12">
+              <h2 className="text-3xl font-bold text-gray-900 mb-4">Magazine Archive</h2>
+              <p className="text-gray-600 text-lg">Explore our collection of premium digital magazines</p>
+            </div>
+
+            {/* Archive Grid - GQ Style */}
+            {sortedIssues.length > 0 && (
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                {sortedIssues.map(([monthKey, issue], index) => (
+                  <MagazineCoverCard
+                    key={monthKey}
+                    issue={issue}
+                    onReadClick={openMagazineReader}
+                    canRead={canReadPremium}
+                    index={index}
+                  />
+                ))}
+              </div>
+            )}
+          </motion.div>
+        )}
+
+        {/* Global Subscription Prompt - GQ Style */}
         {!canReadPremium && (
-          <div className="mt-16 bg-gray-50 rounded-2xl p-8 text-center">
-            <h3 className="text-xl font-bold text-gray-900 mb-4">
-              Did you know our monthly issues can now be read online? Subscribe to read our {sortedIssues[0]?.[1]?.displayDate} issue now.
-            </h3>
-            
-            <div className="flex items-center justify-center space-x-4 mb-6">
-              <div className="bg-gradient-to-r from-yellow-400 to-yellow-500 text-black px-4 py-2 rounded font-bold">
-                GO DIGITAL 1 YEAR
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="mt-16 bg-gradient-to-br from-amber-50 to-orange-50 rounded-3xl p-12 text-center border border-amber-200"
+          >
+            <div className="max-w-4xl mx-auto">
+              <h3 className="text-3xl font-bold text-gray-900 mb-6">
+                Did you know our monthly issues can now be read online?
+              </h3>
+              <p className="text-xl text-gray-600 mb-8">
+                Subscribe to read our {sortedIssues[0]?.[1]?.displayDate} issue now.
+              </p>
+              
+              <div className="flex items-center justify-center space-x-8 mb-8">
+                <div className="bg-gradient-to-r from-amber-500 to-amber-600 text-white px-8 py-4 rounded-2xl text-center shadow-lg">
+                  <div className="font-bold text-xl mb-1">GO DIGITAL 1 YEAR</div>
+                  <div className="text-amber-100 text-sm">Best Value</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-gray-500 line-through text-lg mb-1">₹1500</div>
+                  <div className="text-4xl font-bold text-gray-900">₹900</div>
+                  <div className="text-sm text-gray-600">Save 40%</div>
+                </div>
               </div>
-              <div className="text-right">
-                <div className="text-gray-500 line-through text-sm">₹1500</div>
-                <div className="text-2xl font-bold">₹900</div>
-              </div>
-            </div>
 
-            <div className="text-center mb-6">
-              <div className="text-gray-600 mb-4">OR</div>
-              <div className="bg-gradient-to-r from-yellow-400 to-yellow-500 text-black px-6 py-3 rounded font-bold inline-block">
-                FREE PREVIEW
+              <div className="flex items-center justify-center space-x-6 mb-8">
+                <Link
+                  to="/pricing"
+                  className="bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white font-bold px-8 py-4 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg"
+                >
+                  SUBSCRIBE NOW
+                </Link>
+                <div className="text-gray-400 text-lg">OR</div>
+                <button
+                  onClick={() => sortedIssues.length > 0 && openMagazineReader(sortedIssues[0][1].articles)}
+                  className="border-2 border-amber-500 text-amber-700 font-bold px-8 py-4 rounded-xl hover:bg-amber-50 transition-all duration-300"
+                >
+                  FREE PREVIEW
+                </button>
+              </div>
+
+              <div className="text-sm text-gray-600">
+                Already purchased? <Link to="/login" className="text-amber-600 hover:text-amber-700 font-semibold underline">Login</Link>
+                <span className="mx-4">|</span>
+                <Link to="/pricing" className="text-amber-600 hover:text-amber-700 font-semibold underline">More plans →</Link>
               </div>
             </div>
-
-            <div className="text-sm text-gray-600">
-              Already purchased? <Link to="/login" className="text-blue-600 hover:underline">Login</Link>
-              <span className="mx-4">|</span>
-              <Link to="/pricing" className="text-blue-600 hover:underline">More plans →</Link>
-            </div>
-          </div>
+          </motion.div>
         )}
       </div>
 
