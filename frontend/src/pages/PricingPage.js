@@ -210,7 +210,7 @@ const PricingPage = () => {
                       transition={{ delay: 0.5 }}
                       className="absolute -top-3 left-1/2 transform -translate-x-1/2 z-20"
                     >
-                      <div className="bg-gradient-to-r from-primary-500 to-primary-600 text-white px-6 py-2 rounded-full text-sm font-bold flex items-center shadow-lg whitespace-nowrap">
+                      <div className="bg-gradient-to-r from-primary-500 to-primary-600 text-white px-4 py-1.5 rounded-full text-xs font-bold flex items-center shadow-lg whitespace-nowrap">
                         <motion.div
                           animate={{ 
                             rotate: isHovered ? [0, -10, 10, -10, 0] : 0,
@@ -222,7 +222,7 @@ const PricingPage = () => {
                             repeatDelay: 1
                           }}
                         >
-                          <Crown className="h-4 w-4 mr-1" />
+                          <Crown className="h-3 w-3 mr-1" />
                         </motion.div>
                         Most Popular
                       </div>
@@ -235,9 +235,9 @@ const PricingPage = () => {
                       initial={{ opacity: 0, x: 20 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: 0.6 }}
-                      className="absolute -top-3 right-4 z-20"
+                      className="absolute -top-3 right-2 z-20"
                     >
-                      <span className="bg-gradient-to-r from-green-500 to-green-600 text-white px-3 py-1 rounded-full text-xs font-bold shadow-md whitespace-nowrap">
+                      <span className="bg-gradient-to-r from-green-500 to-green-600 text-white px-2 py-1 rounded-full text-xs font-bold shadow-md whitespace-nowrap">
                         {plan.savings}
                       </span>
                     </motion.div>
