@@ -300,8 +300,9 @@ const FeaturedMagazineCover = ({ issue, onReadClick, canRead }) => {
 
 // Magazine Cover Card Component - Grid Item
 const MagazineCoverCard = ({ issue, onReadClick, canRead, index }) => {
-  const cover = issue.coverImage;
   const heroArticle = issue.articles.find(a => a.hero_image) || issue.articles[0];
+  const monthName = issue.displayDate.split(' ')[0].toUpperCase();
+  const year = issue.displayDate.split(' ')[1];
 
   return (
     <motion.div
@@ -322,14 +323,14 @@ const MagazineCoverCard = ({ issue, onReadClick, canRead, index }) => {
         <div className="absolute top-4 left-4 right-4">
           <div className="flex items-center justify-between text-white text-xs">
             <div className="font-bold tracking-widest">JUST URBANE</div>
-            <div>{cover.year}</div>
+            <div>{year}</div>
           </div>
         </div>
 
         {/* Magazine Title */}
         <div className="absolute top-8 left-4">
           <h3 className="text-3xl font-bold text-white tracking-tight">
-            {cover.title}
+            {monthName}
           </h3>
         </div>
 
@@ -337,7 +338,7 @@ const MagazineCoverCard = ({ issue, onReadClick, canRead, index }) => {
         <div className="absolute bottom-4 left-4 right-4">
           <div className="bg-white/10 backdrop-blur-sm rounded p-2">
             <div className="text-white font-semibold text-sm line-clamp-1">
-              {cover.headline}
+              {heroArticle?.title || 'Premium Content'}
             </div>
           </div>
         </div>
