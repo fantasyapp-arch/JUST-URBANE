@@ -262,6 +262,14 @@ const ArticlePage = () => {
           </motion.div>
         </div>
       </article>
+
+      {/* Magazine Reader */}
+      <MagazineReader
+        articles={allArticles}
+        isOpen={isReaderOpen}
+        onClose={closeMagazineReader}
+        initialPageIndex={allArticles ? allArticles.findIndex(a => a.slug === article.slug || a.id === article.id) * 2 + 1 : 0}
+      />
     </div>
   );
 };
