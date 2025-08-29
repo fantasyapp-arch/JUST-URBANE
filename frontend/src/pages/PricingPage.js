@@ -17,6 +17,7 @@ const PricingPage = () => {
     setSelectedPlan(plan);
     setIsModalOpen(true);
   };
+
   const plans = [
     {
       id: 'digital',
@@ -94,6 +95,7 @@ const PricingPage = () => {
         <div className="absolute top-0 left-0 w-96 h-96 bg-gradient-to-br from-primary-500 to-primary-600 rounded-full blur-3xl"></div>
         <div className="absolute bottom-0 right-0 w-96 h-96 bg-gradient-to-tl from-primary-400 to-primary-500 rounded-full blur-3xl"></div>
       </div>
+      
       <div className="container mx-auto px-4 relative z-10">
         {/* Premium Header with Motion */}
         <motion.div 
@@ -147,202 +149,177 @@ const PricingPage = () => {
           </motion.div>
         </motion.div>
 
-        {/* Premium Pricing Cards with GQ-Style Motion Effects */}
+        {/* REDESIGNED Premium Pricing Cards */}
         <div className="mt-8 mb-16">
           <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto px-4">
             {plans.map((plan, index) => {
-            const IconComponent = plan.icon;
-            const isHovered = hoveredPlan === plan.id;
-            
-            return (
-              <motion.div
-                key={plan.name}
-                initial={{ opacity: 0, y: 50 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.2 }}
-                onMouseEnter={() => setHoveredPlan(plan.id)}
-                onMouseLeave={() => setHoveredPlan(null)}
-                className={`relative group cursor-pointer ${plan.popular ? 'md:scale-105 pt-8' : 'pt-4'}`}
-              >
-                {/* Premium Glow Background Effect */}
-                <div className={`absolute inset-0 bg-gradient-to-r ${plan.gradient} opacity-0 group-hover:opacity-10 rounded-3xl transition-opacity duration-500 blur-xl`}></div>
-                
-                {/* Main Card */}
+              const IconComponent = plan.icon;
+              const isHovered = hoveredPlan === plan.id;
+              
+              return (
                 <motion.div
-                  className={`relative bg-white rounded-3xl shadow-lg transition-all duration-500 overflow-hidden ${
-                    plan.popular ? 'ring-2 ring-primary-500/30' : ''
-                  }`}
-                  animate={{
-                    y: isHovered ? -10 : 0,
-                    scale: isHovered ? 1.02 : 1,
-                    boxShadow: isHovered 
-                      ? '0 25px 50px -12px rgba(0, 0, 0, 0.25)' 
-                      : '0 10px 25px -5px rgba(0, 0, 0, 0.1)'
-                  }}
-                  transition={{ duration: 0.4, ease: "easeInOut" }}
+                  key={plan.name}
+                  initial={{ opacity: 0, y: 50 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: index * 0.2 }}
+                  onMouseEnter={() => setHoveredPlan(plan.id)}
+                  onMouseLeave={() => setHoveredPlan(null)}
+                  className="relative group cursor-pointer"
                 >
-                  {/* Animated Background Gradient */}
+                  {/* REDESIGNED Card Container with Better Badge Positioning */}
                   <motion.div
-                    className={`absolute inset-0 bg-gradient-to-br ${plan.gradient} opacity-0 transition-opacity duration-500`}
-                    animate={{ opacity: isHovered ? 0.05 : 0 }}
-                  />
-                  
-                  {/* Sparkle Effect */}
-                  <AnimatePresence>
-                    {isHovered && (
-                      <motion.div
-                        initial={{ opacity: 0, scale: 0 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        exit={{ opacity: 0, scale: 0 }}
-                        transition={{ duration: 0.3 }}
-                        className="absolute top-4 right-4"
-                      >
-                        <Sparkles className="h-6 w-6 text-primary-500 animate-pulse" />
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-
-                  {/* Popular Badge */}
-                  {plan.popular && (
-                    <motion.div
-                      initial={{ opacity: 0, y: -20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.5 }}
-                      className="absolute -top-4 left-1/2 transform -translate-x-1/2 z-20"
-                    >
-                      <div className="bg-gradient-to-r from-primary-500 to-primary-600 text-white px-4 py-1.5 rounded-full text-xs font-bold flex items-center shadow-lg whitespace-nowrap">
+                    className={`relative bg-white rounded-3xl shadow-lg transition-all duration-500 overflow-visible ${
+                      plan.popular ? 'ring-2 ring-primary-500/30 transform scale-105' : ''
+                    }`}
+                    animate={{
+                      y: isHovered ? -10 : 0,
+                      scale: isHovered ? (plan.popular ? 1.08 : 1.02) : (plan.popular ? 1.05 : 1),
+                      boxShadow: isHovered 
+                        ? '0 25px 50px -12px rgba(0, 0, 0, 0.25)' 
+                        : '0 10px 25px -5px rgba(0, 0, 0, 0.1)'
+                    }}
+                    transition={{ duration: 0.4, ease: "easeInOut" }}
+                    style={{ marginTop: plan.popular ? '40px' : '20px', marginBottom: '20px' }}
+                  >
+                    {/* Premium Glow Background Effect */}
+                    <div className={`absolute inset-0 bg-gradient-to-r ${plan.gradient} opacity-0 group-hover:opacity-10 rounded-3xl transition-opacity duration-500 blur-xl`}></div>
+                    
+                    {/* REDESIGNED Badge System - Better Positioning */}
+                    {plan.popular && (
+                      <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 z-30">
                         <motion.div
-                          animate={{ 
-                            rotate: isHovered ? [0, -10, 10, -10, 0] : 0,
-                            scale: isHovered ? [1, 1.1, 1] : 1 
+                          initial={{ opacity: 0, y: -20, scale: 0.8 }}
+                          animate={{ opacity: 1, y: 0, scale: 1 }}
+                          transition={{ delay: 0.5, type: "spring", stiffness: 400 }}
+                          className="bg-gradient-to-r from-primary-500 via-primary-600 to-blue-600 text-white px-6 py-2 rounded-full text-sm font-bold flex items-center shadow-xl whitespace-nowrap border-2 border-white"
+                        >
+                          <motion.div
+                            animate={{ 
+                              rotate: isHovered ? [0, -15, 15, -15, 0] : 0,
+                              scale: isHovered ? [1, 1.2, 1] : 1 
+                            }}
+                            transition={{ 
+                              duration: 0.8,
+                              repeat: isHovered ? Infinity : 0,
+                              repeatDelay: 1.5
+                            }}
+                          >
+                            <Crown className="h-4 w-4 mr-2 text-yellow-300" />
+                          </motion.div>
+                          Most Popular
+                        </motion.div>
+                      </div>
+                    )}
+                    
+                    {/* REDESIGNED Savings Badge - Better Positioning */}
+                    {plan.savings && (
+                      <div className="absolute -top-6 right-4 z-30">
+                        <motion.div
+                          initial={{ opacity: 0, x: 20, scale: 0.8 }}
+                          animate={{ opacity: 1, x: 0, scale: 1 }}
+                          transition={{ delay: 0.7, type: "spring", stiffness: 400 }}
+                          className="bg-gradient-to-r from-green-500 to-emerald-600 text-white px-4 py-2 rounded-full text-sm font-bold shadow-lg whitespace-nowrap border-2 border-white flex items-center"
+                        >
+                          <Sparkles className="h-3 w-3 mr-1" />
+                          {plan.savings}
+                        </motion.div>
+                      </div>
+                    )}
+
+                    <div className="p-8 relative z-10">
+                      {/* Plan Header with Icon */}
+                      <motion.div
+                        className="flex items-center mb-6"
+                        animate={{ 
+                          scale: isHovered ? 1.05 : 1,
+                          x: isHovered ? 5 : 0
+                        }}
+                        transition={{ duration: 0.3 }}
+                      >
+                        <div className={`p-4 rounded-full bg-gradient-to-r ${plan.gradient} mr-4 shadow-lg`}>
+                          <IconComponent className="h-8 w-8 text-white" />
+                        </div>
+                        <div>
+                          <h3 className="font-serif text-2xl font-bold text-gray-900">
+                            {plan.name}
+                          </h3>
+                          <p className="text-gray-600 text-sm mt-1">{plan.description}</p>
+                        </div>
+                      </motion.div>
+
+                      {/* Pricing with Motion */}
+                      <motion.div 
+                        className="mb-8 text-center"
+                        animate={{ 
+                          scale: isHovered ? 1.1 : 1,
+                          color: isHovered ? '#3b82f6' : '#111827'
+                        }}
+                        transition={{ duration: 0.3 }}
+                      >
+                        <span className="text-5xl font-black">
+                          {plan.price}
+                        </span>
+                        <span className="text-gray-600 ml-2 text-lg">
+                          {plan.period}
+                        </span>
+                      </motion.div>
+
+                      {/* Features List */}
+                      <ul className="space-y-4 mb-8">
+                        {plan.features.map((feature, featureIndex) => (
+                          <li 
+                            key={featureIndex} 
+                            className="flex items-center"
+                          >
+                            <Check className="h-5 w-5 mr-3 text-green-500 flex-shrink-0" />
+                            <span className="text-gray-800 font-medium">
+                              {feature}
+                            </span>
+                          </li>
+                        ))}
+                      </ul>
+
+                      {/* Premium CTA Button */}
+                      <motion.button
+                        onClick={() => handlePlanSelect(plan)}
+                        className={`relative w-full py-4 px-8 rounded-xl font-bold text-lg transition-all duration-300 overflow-hidden ${
+                          plan.buttonVariant === 'premium'
+                            ? 'bg-gradient-to-r from-primary-600 to-primary-700 text-white'
+                            : plan.buttonVariant === 'primary'
+                            ? 'bg-primary-600 text-white'
+                            : 'bg-gray-100 text-gray-900'
+                        }`}
+                        whileHover={{ 
+                          scale: 1.05,
+                          boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.25)'
+                        }}
+                        whileTap={{ scale: 0.95 }}
+                        animate={{
+                          background: isHovered && plan.buttonVariant === 'premium'
+                            ? 'linear-gradient(135deg, #3b82f6, #1d4ed8)'
+                            : undefined
+                        }}
+                      >
+                        {/* Shimmer Effect on Button */}
+                        <motion.div
+                          className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
+                          animate={{
+                            x: isHovered ? ['-100%', '100%'] : '-100%'
                           }}
-                          transition={{ 
-                            duration: 0.6,
+                          transition={{
+                            duration: 0.8,
+                            ease: "easeInOut",
                             repeat: isHovered ? Infinity : 0,
                             repeatDelay: 1
                           }}
-                        >
-                          <Crown className="h-3 w-3 mr-1" />
-                        </motion.div>
-                        Most Popular
-                      </div>
-                    </motion.div>
-                  )}
-                  
-                  {/* Savings Badge */}
-                  {plan.savings && (
-                    <motion.div
-                      initial={{ opacity: 0, x: 20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0.6 }}
-                      className="absolute -top-4 right-2 z-20"
-                    >
-                      <span className="bg-gradient-to-r from-green-500 to-green-600 text-white px-2 py-1 rounded-full text-xs font-bold shadow-md whitespace-nowrap">
-                        {plan.savings}
-                      </span>
-                    </motion.div>
-                  )}
-
-                  <div className="p-8 relative z-10">
-                    {/* Plan Header with Icon */}
-                    <motion.div
-                      className="flex items-center mb-4"
-                      animate={{ 
-                        scale: isHovered ? 1.05 : 1,
-                        x: isHovered ? 5 : 0
-                      }}
-                      transition={{ duration: 0.3 }}
-                    >
-                      <div className={`p-3 rounded-full bg-gradient-to-r ${plan.gradient} mr-4`}>
-                        <IconComponent className="h-6 w-6 text-white" />
-                      </div>
-                      <div>
-                        <h3 className="font-serif text-2xl font-bold text-gray-900">
-                          {plan.name}
-                        </h3>
-                      </div>
-                    </motion.div>
-
-                    <motion.p 
-                      className="text-gray-700 mb-6 text-lg"
-                      animate={{ opacity: isHovered ? 1 : 0.8 }}
-                    >
-                      {plan.description}
-                    </motion.p>
-
-                    {/* Pricing with Motion */}
-                    <motion.div 
-                      className="mb-8"
-                      animate={{ 
-                        scale: isHovered ? 1.1 : 1,
-                        color: isHovered ? '#3b82f6' : '#111827'
-                      }}
-                      transition={{ duration: 0.3 }}
-                    >
-                      <span className="text-4xl font-bold">
-                        {plan.price}
-                      </span>
-                      <span className="text-gray-600 ml-2 text-lg">
-                        {plan.period}
-                      </span>
-                    </motion.div>
-
-                    {/* Features List */}
-                    <ul className="space-y-4 mb-8">
-                      {plan.features.map((feature, featureIndex) => (
-                        <li 
-                          key={featureIndex} 
-                          className="flex items-center"
-                        >
-                          <Check className="h-5 w-5 mr-3 text-green-500 flex-shrink-0" />
-                          <span className="text-gray-800 font-medium">
-                            {feature}
-                          </span>
-                        </li>
-                      ))}
-                    </ul>
-
-                    {/* Premium CTA Button */}
-                    <motion.button
-                      onClick={() => handlePlanSelect(plan)}
-                      className={`relative w-full py-4 px-8 rounded-xl font-bold text-lg transition-all duration-300 overflow-hidden ${
-                        plan.buttonVariant === 'premium'
-                          ? 'bg-gradient-to-r from-primary-600 to-primary-700 text-white'
-                          : plan.buttonVariant === 'primary'
-                          ? 'bg-primary-600 text-white'
-                          : 'bg-gray-100 text-gray-900'
-                      }`}
-                      whileHover={{ 
-                        scale: 1.05,
-                        boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.25)'
-                      }}
-                      whileTap={{ scale: 0.95 }}
-                      animate={{
-                        background: isHovered && plan.buttonVariant === 'premium'
-                          ? 'linear-gradient(135deg, #3b82f6, #1d4ed8)'
-                          : undefined
-                      }}
-                    >
-                      {/* Shimmer Effect on Button */}
-                      <motion.div
-                        className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
-                        animate={{
-                          x: isHovered ? ['-100%', '100%'] : '-100%'
-                        }}
-                        transition={{
-                          duration: 0.8,
-                          ease: "easeInOut",
-                          repeat: isHovered ? Infinity : 0,
-                          repeatDelay: 1
-                        }}
-                      />
-                      
-                      <span className="relative z-10">{plan.buttonText}</span>
-                    </motion.button>
-                  </div>
+                        />
+                        
+                        <span className="relative z-10">{plan.buttonText}</span>
+                      </motion.button>
+                    </div>
+                  </motion.div>
                 </motion.div>
-              </motion.div>
-            );
+              );
             })}
           </div>
         </div>
