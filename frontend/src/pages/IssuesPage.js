@@ -7,6 +7,7 @@ import {
 import { useAuth } from '../context/AuthContext';
 import { useArticles } from '../hooks/useArticles';
 import MagazineReader from '../components/MagazineReader';
+import FullScreenMagazineReader from '../components/FullScreenMagazineReader';
 import FeaturedMagazineCover from '../components/FeaturedMagazineCover';
 import MagazineCoverCard from '../components/MagazineCoverCard';
 import { formatDate } from '../utils/formatters';
