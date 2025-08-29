@@ -21,22 +21,58 @@ const ArticlePage = () => {
     window.scrollTo(0, 0);
   }, [slug]);
 
-  const canReadPremium = isAuthenticated && user?.is_premium && user?.subscription_status === 'active';
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-white">
+        <div className="container mx-auto px-4 py-12">
+          <SkeletonArticle />
+        </div>
+      </div>
+    );
+  }
 
-  const openMagazineReader = () => {
-    if (allArticles && allArticles.length > 0) {
-      // Find current article's index and create a magazine starting from that article
-      const currentIndex = allArticles.findIndex(a => a.slug === article.slug || a.id === article.id);
-      const magazineArticles = currentIndex >= 0 ? 
-        [...allArticles.slice(currentIndex), ...allArticles.slice(0, currentIndex)] : 
-        allArticles;
-      setIsReaderOpen(true);
-    }
+  if (error || !article) {
+    return (
+      <div className="min-h-screen bg-white flex items-center justify-center">
+        <div className="text-center">
+          <h1 className="text-4xl font-bold text-gray-900 mb-4">
+            Article Not Found
+          </h1>
+          <p className="text-gray-600 mb-8">
+            The article you're looking for doesn't exist.
+          </p>
+          <button
+            onClick={() => navigate('/')}
+            className="btn-primary"
+          >
+            Return Home
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  // Category Labels like GQ India - moved here after loading check
+  const categoryLabels = {
+    fashion: "Look Good",
+    technology: "Get Smart", 
+    tech: "Get Smart",
+    business: "Get Smart",
+    finance: "Get Smart",
+    travel: "Live Well",
+    health: "Live Well",
+    culture: "Entertainment",
+    art: "Entertainment",
+    entertainment: "Entertainment",
+    auto: "Live Well",
+    grooming: "Look Good",
+    food: "Live Well",
+    aviation: "Live Well", 
+    people: "Entertainment",
+    luxury: "Live Well"
   };
 
-  const closeMagazineReader = () => {
-    setIsReaderOpen(false);
-  };
+  const categoryLabel = categoryLabels[article.category] || "Category";
   const isLocked = article?.is_locked || (article?.is_premium && !canReadPremium);
 
   const shareArticle = () => {
