@@ -207,25 +207,29 @@ const MagazineReader = ({ articles, isOpen, onClose, initialPageIndex = 0 }) => 
 
             {/* Article Pages */}
             {articles.map((article, index) => {
-              const isLocked = article?.is_premium && !canReadPremium;
+              const pageIndex = index * 2 + 1; // Starting from page 1 (after cover)
+              const isPageLocked = !canReadPremium && pageIndex >= FREE_PREVIEW_PAGES;
               
               return (
                 <React.Fragment key={article.id}>
                   {/* Left Page - Article Content */}
                   <div className="magazine-page bg-white">
-                    {isLocked ? (
-                      <LockedArticlePage article={article} />
+                    {isPageLocked ? (
+                      <SubscriptionGatePage 
+                        onSubscribe={() => setShowSubscriptionModal(true)}
+                        pageNumber={pageIndex + 1}
+                      />
                     ) : (
-                      <ArticlePageLeft article={article} pageNumber={index * 2 + 2} />
+                      <ArticlePageLeft article={article} pageNumber={pageIndex + 1} />
                     )}
                   </div>
                   
                   {/* Right Page - Article Continued or Images */}
                   <div className="magazine-page bg-white">
-                    {isLocked ? (
+                    {isPageLocked ? (
                       <SubscriptionPromotionPage />
                     ) : (
-                      <ArticlePageRight article={article} pageNumber={index * 2 + 3} />
+                      <ArticlePageRight article={article} pageNumber={pageIndex + 2} />
                     )}
                   </div>
                 </React.Fragment>
