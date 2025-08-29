@@ -1,0 +1,127 @@
+{
+  "total": 17,
+  "passed": 13,
+  "failed": 4,
+  "success_rate": 76.47058823529412,
+  "results": [
+    {
+      "test": "Articles API Required Fields",
+      "success": true,
+      "message": "10/10 articles have all required fields (100.0%)",
+      "timestamp": "2025-08-29T14:22:36.086607",
+      "response_data": null
+    },
+    {
+      "test": "Article Titles Quality",
+      "success": true,
+      "message": "10/10 articles have quality titles (100.0%)",
+      "timestamp": "2025-08-29T14:22:36.086655",
+      "response_data": null
+    },
+    {
+      "test": "Article Authors Quality",
+      "success": true,
+      "message": "10/10 articles have proper author names (100.0%)",
+      "timestamp": "2025-08-29T14:22:36.086666",
+      "response_data": null
+    },
+    {
+      "test": "Article Categories Quality",
+      "success": true,
+      "message": "10/10 articles have proper categories (100.0%)",
+      "timestamp": "2025-08-29T14:22:36.086675",
+      "response_data": null
+    },
+    {
+      "test": "Magazine Content Length",
+      "success": false,
+      "message": "Only 10/15 articles have sufficient content (66.7%)",
+      "timestamp": "2025-08-29T14:22:36.099048",
+      "response_data": null
+    },
+    {
+      "test": "Magazine Content Formatting",
+      "success": false,
+      "message": "Only 7/15 articles have proper formatting (46.7%)",
+      "timestamp": "2025-08-29T14:22:36.099086",
+      "response_data": null
+    },
+    {
+      "test": "Premium Flag Presence",
+      "success": true,
+      "message": "All 20 articles have is_premium field",
+      "timestamp": "2025-08-29T14:22:36.108703",
+      "response_data": null
+    },
+    {
+      "test": "Premium Content Access Control",
+      "success": false,
+      "message": "Premium articles are not properly locked",
+      "timestamp": "2025-08-29T14:22:36.120760",
+      "response_data": null
+    },
+    {
+      "test": "Premium Content Distribution",
+      "success": true,
+      "message": "Found 4 premium and 16 free articles",
+      "timestamp": "2025-08-29T14:22:36.120795",
+      "response_data": null
+    },
+    {
+      "test": "Category-based Grouping",
+      "success": false,
+      "message": "Only 2/5 categories have articles",
+      "timestamp": "2025-08-29T14:22:36.207270",
+      "response_data": null
+    },
+    {
+      "test": "Date-based Sorting Support",
+      "success": true,
+      "message": "10/10 articles have publication dates (100.0%)",
+      "timestamp": "2025-08-29T14:22:36.215596",
+      "response_data": null
+    },
+    {
+      "test": "Date Sorting Order",
+      "success": true,
+      "message": "Articles are properly sorted by publication date (newest first)",
+      "timestamp": "2025-08-29T14:22:36.215637",
+      "response_data": null
+    },
+    {
+      "test": "Article Pagination",
+      "success": true,
+      "message": "Pagination working correctly. Page 1: 5 articles, Page 2: 5 articles",
+      "timestamp": "2025-08-29T14:22:36.232606",
+      "response_data": null
+    },
+    {
+      "test": "Featured Articles Sorting",
+      "success": true,
+      "message": "Featured articles filter working correctly (10 articles)",
+      "timestamp": "2025-08-29T14:22:36.241371",
+      "response_data": null
+    },
+    {
+      "test": "Trending Articles Sorting",
+      "success": true,
+      "message": "Trending articles filter working correctly (9 articles)",
+      "timestamp": "2025-08-29T14:22:36.249127",
+      "response_data": null
+    },
+    {
+      "test": "Magazine Reader Data Completeness",
+      "success": true,
+      "message": "Article has all required fields for magazine reader",
+      "timestamp": "2025-08-29T14:22:36.308736",
+      "response_data": null
+    },
+    {
+      "test": "Magazine Reader Analytics",
+      "success": true,
+      "message": "View count tracking working (0 \u2192 1)",
+      "timestamp": "2025-08-29T14:22:36.359006",
+      "response_data": null
+    }
+  ]
+}
