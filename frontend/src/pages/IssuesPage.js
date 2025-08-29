@@ -71,16 +71,42 @@ const IssuesPage = () => {
   return (
     <div className="min-h-screen bg-white">
       {/* Header Section - GQ Style */}
-      <div className="border-b border-gray-200 py-8">
+      <div className="border-b border-gray-200 py-12">
         <div className="container mx-auto px-4">
-          <div className="text-center">
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+          <div className="text-center mb-8">
+            <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6">
               Magazine
             </h1>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
               Read your favourite magazines anywhere, anytime | Enjoy unlimited access to our archives | 
               Download the latest issues on the Just Urbane App
             </p>
+          </div>
+
+          {/* GQ-Style Tab Navigation */}
+          <div className="flex items-center justify-center space-x-1 bg-gray-100 rounded-xl p-1 max-w-md mx-auto">
+            <button
+              onClick={() => setActiveTab('preview')}
+              className={`flex items-center space-x-2 px-6 py-3 rounded-lg font-semibold text-sm transition-all duration-300 ${
+                activeTab === 'preview'
+                  ? 'bg-white text-gray-900 shadow-md'
+                  : 'text-gray-600 hover:text-gray-900'
+              }`}
+            >
+              <MoreHorizontal className="h-4 w-4" />
+              <span>Preview</span>
+            </button>
+            <button
+              onClick={() => setActiveTab('archive')}
+              className={`flex items-center space-x-2 px-6 py-3 rounded-lg font-semibold text-sm transition-all duration-300 ${
+                activeTab === 'archive'
+                  ? 'bg-white text-gray-900 shadow-md'
+                  : 'text-gray-600 hover:text-gray-900'
+              }`}
+            >
+              <Grid3X3 className="h-4 w-4" />
+              <span>Archive</span>
+            </button>
           </div>
         </div>
       </div>
