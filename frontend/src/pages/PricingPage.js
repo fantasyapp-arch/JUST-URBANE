@@ -205,7 +205,7 @@ const PricingPage = () => {
                 >
                   {/* Popular Badge - Redesigned */}
                   {isPopular && (
-                    <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 z-30">
+                    <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 z-30">
                       <motion.div
                         initial={{ opacity: 0, y: -20, scale: 0.8 }}
                         animate={{ opacity: 1, y: 0, scale: 1 }}
