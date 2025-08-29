@@ -154,10 +154,10 @@ const Header = () => {
 
           {/* COMPACT RIGHT SIDE ACTIONS */}
           <div className="flex items-center space-x-3">
-            {/* PREMIUM SUBSCRIBE BUTTON */}
+            {/* PREMIUM SUBSCRIBE BUTTON - LOGO COLOR THEME */}
             <Link
               to="/pricing"
-              className="hidden md:inline-flex relative bg-gradient-to-r from-gold-500 via-gold-600 to-gold-700 hover:from-gold-600 hover:via-gold-700 hover:to-gold-800 text-white px-6 py-3 rounded-full font-bold text-sm uppercase tracking-wider transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl group overflow-hidden"
+              className="hidden md:inline-flex relative bg-gradient-to-r from-primary-500 via-primary-600 to-primary-700 hover:from-primary-600 hover:via-primary-700 hover:to-primary-800 text-white px-6 py-3 rounded-full font-bold text-sm uppercase tracking-wider transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl group overflow-hidden"
             >
               {/* Shimmer effect */}
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
@@ -168,7 +168,7 @@ const Header = () => {
               <span className="relative z-10">Subscribe</span>
               
               {/* Premium glow effect */}
-              <div className="absolute inset-0 bg-gradient-to-r from-gold-400/50 to-gold-600/50 blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10"></div>
+              <div className="absolute inset-0 bg-gradient-to-r from-primary-400/50 to-primary-600/50 blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10"></div>
             </Link>
 
             {/* Compact Search */}
