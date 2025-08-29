@@ -118,7 +118,9 @@ const FullScreenMagazineReader = ({ isOpen, onClose, magazineContent = [] }) => 
   const pages = (magazineContent && magazineContent.length > 0) ? magazineContent : defaultMagazinePages;
 
   useEffect(() => {
-    setTotalPages(pages.length);
+    if (pages && Array.isArray(pages)) {
+      setTotalPages(pages.length);
+    }
   }, [pages]);
 
   const handlePageFlip = (e) => {
