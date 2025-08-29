@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { Toaster } from 'react-hot-toast';
 
@@ -40,48 +40,71 @@ const queryClient = new QueryClient({
   },
 });
 
+// Layout component
+function Layout() {
+  return (
+    <div className="App min-h-screen bg-gray-50">
+      <Header />
+      <main className="flex-1">
+        <Outlet />
+      </main>
+      <Footer />
+      <Toaster 
+        position="top-right"
+        toastOptions={{
+          duration: 4000,
+          style: {
+            background: '#363636',
+            color: '#fff',
+          },
+        }}
+      />
+    </div>
+  );
+}
+
+// Create router with future flags to eliminate warnings
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Layout />,
+    children: [
+      { path: "/", element: <HomePage /> },
+      { path: "/category/:slug", element: <CategoryPage /> },
+      { path: "/category/:category/:subcategory", element: <SubcategoryPage /> },
+      { path: "/article/:slug", element: <ArticlePage /> },
+      { path: "/author/:slug", element: <AuthorPage /> },
+      { path: "/issues", element: <IssuesPage /> },
+      { path: "/reviews", element: <ReviewsPage /> },
+      { path: "/travel", element: <TravelPage /> },
+      { path: "/pricing", element: <PricingPage /> },
+      { path: "/account", element: <AccountPage /> },
+      { path: "/search", element: <SearchPage /> },
+      { path: "/about", element: <AboutPage /> },
+      { path: "/contact", element: <ContactPage /> },
+      { path: "/login", element: <LoginPage /> },
+      { path: "/register", element: <RegisterPage /> },
+      { path: "/payment-success", element: <PaymentSuccessPage /> },
+      { path: "/subscription-success", element: <PaymentSuccessPage /> },
+      { path: "/profile", element: <ProfilePage /> },
+    ]
+  }
+], {
+  future: {
+    v7_startTransition: true,
+    v7_relativeSplatPath: true,
+    v7_fetcherPersist: true,
+    v7_normalizeFormMethod: true,
+    v7_partialHydration: true,
+    v7_skipActionErrorRevalidation: true,
+  }
+});
+
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
-        <Router>
-          <div className="App min-h-screen bg-gray-50">
-            <Header />
-            <main className="flex-1">
-              <Routes>
-                <Route path="/" element={<HomePage />} />
-                <Route path="/category/:slug" element={<CategoryPage />} />
-                <Route path="/category/:category/:subcategory" element={<SubcategoryPage />} />
-                <Route path="/article/:slug" element={<ArticlePage />} />
-                <Route path="/author/:slug" element={<AuthorPage />} />
-                <Route path="/issues" element={<IssuesPage />} />
-                <Route path="/reviews" element={<ReviewsPage />} />
-                <Route path="/travel" element={<TravelPage />} />
-                <Route path="/pricing" element={<PricingPage />} />
-                <Route path="/account" element={<AccountPage />} />
-                <Route path="/search" element={<SearchPage />} />
-                <Route path="/about" element={<AboutPage />} />
-                <Route path="/contact" element={<ContactPage />} />
-                <Route path="/login" element={<LoginPage />} />
-                <Route path="/register" element={<RegisterPage />} />
-                <Route path="/payment-success" element={<PaymentSuccessPage />} />
-                <Route path="/subscription-success" element={<PaymentSuccessPage />} />
-                <Route path="/profile" element={<ProfilePage />} />
-              </Routes>
-            </main>
-            <Footer />
-            <Toaster 
-              position="top-right"
-              toastOptions={{
-                duration: 4000,
-                style: {
-                  background: '#363636',
-                  color: '#fff',
-                },
-              }}
-            />
-          </div>
-        </Router>
+        <RouterProvider router={router} />
       </AuthProvider>
     </QueryClientProvider>
   );
