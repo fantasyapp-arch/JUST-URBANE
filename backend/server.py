@@ -961,8 +961,8 @@ async def get_article(
     article_identifier: str, 
     current_user = Depends(get_current_user_optional_session)
 ):
-    # Try to find by id first, then by slug
-    article = db.articles.find_one({"id": article_identifier})
+    # Try to find by _id first (UUID), then by slug
+    article = db.articles.find_one({"_id": article_identifier})
     if not article:
         article = db.articles.find_one({"slug": article_identifier})
     if not article:
