@@ -190,7 +190,7 @@ const Header = () => {
                     to="/account"
                     className="block px-3 py-2 text-sm text-gray-700 hover:bg-gray-50 flex items-center"
                   >
-                    <Crown className="h-3 w-3 mr-2 text-gold-500" />
+                    <Crown className="h-3 w-3 mr-2 text-primary-500" />
                     Account
                   </Link>
                   <button
