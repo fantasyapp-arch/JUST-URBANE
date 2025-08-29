@@ -2,8 +2,9 @@ import React, { useState, useMemo } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Search, ArrowLeft, Clock, Eye } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { useQuery } from 'react-query';
 import LoadingSpinner, { SkeletonCard } from '../components/LoadingSpinner';
-import { useSubcategoryArticles } from '../hooks/useArticles';
+import { api } from '../utils/api';
 import { formatDateShort, formatReadingTime } from '../utils/formatters';
 
 const SubcategoryPage = () => {
