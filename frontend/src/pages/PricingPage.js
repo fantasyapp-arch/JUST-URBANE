@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Check, Crown, Star, Loader, Zap, Shield, Sparkles } from 'lucide-react';
+import { Check, Crown, Star, Loader, Zap, Shield, Sparkles, ChevronRight, Award, Users, TrendingUp } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useAuth } from '../context/AuthContext';
@@ -11,9 +11,9 @@ const PricingPage = () => {
   const [selectedPlan, setSelectedPlan] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [hoveredPlan, setHoveredPlan] = useState(null);
+  const [billingPeriod, setBillingPeriod] = useState('yearly');
 
   const handlePlanSelect = (plan) => {
-    // SMART SYSTEM - NO LOGIN REQUIRED, DIRECT SUBSCRIPTION
     setSelectedPlan(plan);
     setIsModalOpen(true);
   };
@@ -21,301 +21,343 @@ const PricingPage = () => {
   const plans = [
     {
       id: 'digital',
-      name: 'Digital Subscription',
+      name: 'Digital Elite',
+      shortName: 'Digital',
       price: '₹499',
+      originalPrice: '₹999',
       period: 'per year',
-      description: 'Complete digital access to premium content',
+      monthlyPrice: '₹42',
+      description: 'Perfect for digital natives who love premium content',
+      tagline: 'Most Flexible',
       features: [
-        'Unlimited premium articles',
+        'Unlimited premium articles & insights',
         'Ad-free reading experience',
-        'Weekly premium newsletter',
-        'Mobile app access',
-        'Exclusive digital content',
-        'Early access to new features'
+        'Weekly exclusive newsletter',
+        'Mobile app with offline reading',
+        'Exclusive digital content library',
+        'Early access to new features',
+        'Premium podcast episodes',
+        'Digital magazine archive'
       ],
-      buttonText: 'Get Digital Access',
+      buttonText: 'Start Digital Journey',
       buttonVariant: 'primary',
       popular: false,
       packageId: 'digital_annual',
       icon: Zap,
-      gradient: 'from-blue-500 to-primary-600',
-      accentColor: 'blue'
-    },
-    {
-      id: 'print',
-      name: 'Print Subscription',
-      price: '₹499',
-      period: 'per year',
-      description: 'Physical magazine delivered to your door',
-      features: [
-        'Monthly print magazine delivery',
-        'Premium paper quality',
-        'Collector\'s edition covers',
-        'Exclusive print content',
-        'Free shipping across India',
-        'Gift subscription options'
-      ],
-      buttonText: 'Get Print Edition',
-      buttonVariant: 'secondary',
-      popular: false,
-      packageId: 'print_annual',
-      icon: Shield,
-      gradient: 'from-gray-600 to-gray-800',
-      accentColor: 'gray'
+      gradient: 'from-blue-500 via-blue-600 to-indigo-700',
+      bgGradient: 'from-blue-50 to-indigo-50',
+      textColor: 'text-blue-600',
+      borderColor: 'border-blue-200',
+      savings: '50% OFF'
     },
     {
       id: 'combined',
-      name: 'Print + Digital',
+      name: 'Premium Complete',
+      shortName: 'Complete',
       price: '₹999',
+      originalPrice: '₹1999',
       period: 'per year',
-      description: 'Complete premium experience with best value',
+      monthlyPrice: '₹83',
+      description: 'The ultimate luxury magazine experience',
+      tagline: 'Best Value',
       features: [
-        'Everything in Digital',
-        'Everything in Print',
-        'Exclusive subscriber events',
+        'Everything in Digital Elite',
+        'Monthly premium print magazine',
+        'Collector\'s edition covers',
+        'Exclusive subscriber events access',
         'Priority customer support',
         'Behind-the-scenes content',
-        'Special edition magazines'
+        'Special edition magazines',
+        'Complimentary gift subscriptions',
+        'VIP community access',
+        'Annual luxury gift box'
       ],
-      buttonText: 'Best Value',
+      buttonText: 'Get Complete Access',
       buttonVariant: 'premium',
       popular: true,
       packageId: 'combined_annual',
-      savings: 'Save ₹499',
       icon: Crown,
-      gradient: 'from-primary-500 to-primary-700',
-      accentColor: 'primary'
+      gradient: 'from-primary-500 via-primary-600 to-purple-700',
+      bgGradient: 'from-primary-50 to-purple-50',
+      textColor: 'text-primary-600',
+      borderColor: 'border-primary-200',
+      savings: 'Save ₹1000'
+    },
+    {
+      id: 'print',
+      name: 'Print Luxury',
+      shortName: 'Print',
+      price: '₹699',
+      originalPrice: '₹1299',
+      period: 'per year',
+      monthlyPrice: '₹58',
+      description: 'Classic elegance for print enthusiasts',
+      tagline: 'Classic Choice',
+      features: [
+        'Monthly premium print delivery',
+        'Museum-quality paper printing',
+        'Collector\'s edition covers',
+        'Exclusive print-only content',
+        'Free shipping across India',
+        'Gift subscription options',
+        'Archive access privileges',
+        'Vintage cover reprints'
+      ],
+      buttonText: 'Order Print Edition',
+      buttonVariant: 'secondary',
+      popular: false,
+      packageId: 'print_annual',
+      icon: Award,
+      gradient: 'from-gray-600 via-gray-700 to-slate-800',
+      bgGradient: 'from-gray-50 to-slate-50',
+      textColor: 'text-gray-600',
+      borderColor: 'border-gray-200',
+      savings: '46% OFF'
     }
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100 py-12 relative overflow-hidden">
-      {/* Premium Background Pattern */}
-      <div className="absolute inset-0 opacity-5">
-        <div className="absolute top-0 left-0 w-96 h-96 bg-gradient-to-br from-primary-500 to-primary-600 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-0 right-0 w-96 h-96 bg-gradient-to-tl from-primary-400 to-primary-500 rounded-full blur-3xl"></div>
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-gray-50 relative overflow-hidden">
+      {/* Premium Background Effects */}
+      <div className="absolute inset-0">
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-gradient-to-br from-primary-400/20 to-blue-500/20 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-gradient-to-tl from-purple-400/20 to-primary-500/20 rounded-full blur-3xl animate-pulse" style={{animationDelay: '1s'}}></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-gradient-to-r from-indigo-400/10 to-purple-500/10 rounded-full blur-2xl"></div>
       </div>
       
-      <div className="container mx-auto px-4 relative z-10">
-        {/* Premium Header with Motion */}
+      <div className="container mx-auto px-4 py-16 relative z-10">
+        {/* Luxury Header Section */}
         <motion.div 
-          className="text-center mb-16"
-          initial={{ opacity: 0, y: -50 }}
+          className="text-center mb-20"
+          initial={{ opacity: 0, y: -30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
         >
-          <motion.h1 
-            className="text-5xl lg:text-6xl font-serif font-bold text-gray-900 mb-6"
-            initial={{ opacity: 0, scale: 0.5 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
+          {/* Trust Indicators */}
+          <motion.div 
+            className="flex justify-center items-center space-x-8 mb-8"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
           >
-            Choose Your Plan
+            <div className="flex items-center text-gray-600">
+              <Users className="h-5 w-5 mr-2 text-primary-500" />
+              <span className="text-sm font-medium">50,000+ Happy Readers</span>
+            </div>
+            <div className="flex items-center text-gray-600">
+              <TrendingUp className="h-5 w-5 mr-2 text-green-500" />
+              <span className="text-sm font-medium">98% Satisfaction Rate</span>
+            </div>
+            <div className="flex items-center text-gray-600">
+              <Award className="h-5 w-5 mr-2 text-yellow-500" />
+              <span className="text-sm font-medium">Award Winning Content</span>
+            </div>
+          </motion.div>
+
+          <motion.h1 
+            className="text-6xl lg:text-7xl font-serif font-bold bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 bg-clip-text text-transparent mb-6"
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+          >
+            Choose Your Experience
           </motion.h1>
           
           <motion.p 
-            className="text-xl lg:text-2xl text-gray-700 max-w-3xl mx-auto leading-relaxed"
+            className="text-2xl text-gray-700 max-w-4xl mx-auto leading-relaxed font-light"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
+            transition={{ duration: 0.6, delay: 0.5 }}
           >
-            Access premium lifestyle content, exclusive articles, and luxury insights
+            Join India's most exclusive lifestyle community. Premium content, luxury insights, and unparalleled access to the world of sophistication.
           </motion.p>
-          
-          {/* Decorative Elements */}
+
+          {/* Premium Guarantee Badge */}
           <motion.div
-            className="flex justify-center mt-8"
-            initial={{ opacity: 0, scale: 0 }}
+            className="inline-flex items-center mt-8 px-6 py-3 bg-gradient-to-r from-green-50 to-emerald-50 border border-green-200 rounded-full"
+            initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, delay: 0.6 }}
+            transition={{ duration: 0.6, delay: 0.7 }}
           >
-            <div className="flex space-x-2">
-              {[0, 1, 2].map((i) => (
-                <motion.div
-                  key={i}
-                  className="w-2 h-2 bg-primary-500 rounded-full"
-                  animate={{ 
-                    scale: [1, 1.5, 1],
-                    opacity: [0.5, 1, 0.5]
-                  }}
-                  transition={{ 
-                    duration: 2,
-                    delay: i * 0.2,
-                    repeat: Infinity
-                  }}
-                />
-              ))}
-            </div>
+            <div className="w-2 h-2 bg-green-500 rounded-full mr-3 animate-pulse"></div>
+            <span className="text-green-700 font-semibold text-sm">7-Day Money Back Guarantee • Cancel Anytime</span>
           </motion.div>
         </motion.div>
 
-        {/* REDESIGNED Premium Pricing Cards */}
-        <div className="mt-8 mb-16">
-          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto px-4">
+        {/* PREMIUM Pricing Cards Grid */}
+        <div className="max-w-7xl mx-auto mb-20">
+          <div className="grid lg:grid-cols-3 gap-8 lg:gap-6">
             {plans.map((plan, index) => {
               const IconComponent = plan.icon;
               const isHovered = hoveredPlan === plan.id;
+              const isPopular = plan.popular;
               
               return (
                 <motion.div
                   key={plan.name}
-                  initial={{ opacity: 0, y: 50 }}
+                  initial={{ opacity: 0, y: 40 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.2 }}
+                  transition={{ duration: 0.6, delay: index * 0.15 }}
                   onMouseEnter={() => setHoveredPlan(plan.id)}
                   onMouseLeave={() => setHoveredPlan(null)}
-                  className="relative group cursor-pointer"
+                  className={`relative group ${isPopular ? 'lg:scale-110 lg:-mt-8' : ''}`}
+                  style={{ zIndex: isPopular ? 20 : 10 }}
                 >
-                  {/* REDESIGNED Card Container with Better Badge Positioning */}
+                  {/* Popular Badge - Redesigned */}
+                  {isPopular && (
+                    <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 z-30">
+                      <motion.div
+                        initial={{ opacity: 0, y: -20, scale: 0.8 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        transition={{ delay: 0.8, type: "spring", stiffness: 400 }}
+                        className="relative"
+                      >
+                        <div className="bg-gradient-to-r from-primary-500 via-primary-600 to-purple-600 text-white px-8 py-3 rounded-full text-sm font-bold shadow-2xl border-4 border-white">
+                          <div className="flex items-center">
+                            <Crown className="h-4 w-4 mr-2 text-yellow-300" />
+                            <span>MOST POPULAR</span>
+                            <Sparkles className="h-4 w-4 ml-2 text-yellow-300" />
+                          </div>
+                        </div>
+                        {/* Glow effect */}
+                        <div className="absolute inset-0 bg-gradient-to-r from-primary-500 to-purple-600 rounded-full blur-xl opacity-30 -z-10"></div>
+                      </motion.div>
+                    </div>
+                  )}
+
+                  {/* Card Container */}
                   <motion.div
-                    className={`relative bg-white rounded-3xl shadow-lg transition-all duration-500 overflow-visible ${
-                      plan.popular ? 'ring-2 ring-primary-500/30 transform scale-105' : ''
+                    className={`relative bg-white rounded-3xl transition-all duration-500 overflow-hidden ${
+                      isPopular ? 'shadow-2xl border-2 border-primary-200' : 'shadow-lg border border-gray-200'
                     }`}
                     animate={{
-                      y: isHovered ? -10 : 0,
-                      scale: isHovered ? (plan.popular ? 1.08 : 1.02) : (plan.popular ? 1.05 : 1),
+                      y: isHovered ? -12 : 0,
+                      scale: isHovered ? 1.03 : 1,
                       boxShadow: isHovered 
-                        ? '0 25px 50px -12px rgba(0, 0, 0, 0.25)' 
-                        : '0 10px 25px -5px rgba(0, 0, 0, 0.1)'
+                        ? '0 32px 64px -12px rgba(0, 0, 0, 0.15)' 
+                        : isPopular 
+                        ? '0 25px 50px -12px rgba(0, 0, 0, 0.12)'
+                        : '0 10px 25px -5px rgba(0, 0, 0, 0.08)'
                     }}
-                    transition={{ duration: 0.4, ease: "easeInOut" }}
-                    style={{ marginTop: plan.popular ? '40px' : '20px', marginBottom: '20px' }}
+                    transition={{ duration: 0.4, ease: "easeOut" }}
                   >
-                    {/* Premium Glow Background Effect */}
-                    <div className={`absolute inset-0 bg-gradient-to-r ${plan.gradient} opacity-0 group-hover:opacity-10 rounded-3xl transition-opacity duration-500 blur-xl`}></div>
+                    {/* Premium Background Gradient */}
+                    <div className={`absolute inset-0 bg-gradient-to-br ${plan.bgGradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500`}></div>
                     
-                    {/* REDESIGNED Badge System - Better Positioning */}
-                    {plan.popular && (
-                      <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 z-30">
+                    {/* Savings Badge */}
+                    <div className="absolute top-6 right-6 z-20">
+                      <motion.div
+                        initial={{ opacity: 0, scale: 0.8, x: 20 }}
+                        animate={{ opacity: 1, scale: 1, x: 0 }}
+                        transition={{ delay: 0.6 + index * 0.1, type: "spring" }}
+                        className="bg-gradient-to-r from-green-500 to-emerald-600 text-white px-4 py-2 rounded-full text-xs font-bold shadow-lg"
+                      >
+                        {plan.savings}
+                      </motion.div>
+                    </div>
+
+                    <div className="relative z-10 p-8">
+                      {/* Plan Header */}
+                      <div className="text-center mb-8">
                         <motion.div
-                          initial={{ opacity: 0, y: -20, scale: 0.8 }}
-                          animate={{ opacity: 1, y: 0, scale: 1 }}
-                          transition={{ delay: 0.5, type: "spring", stiffness: 400 }}
-                          className="bg-gradient-to-r from-primary-500 via-primary-600 to-blue-600 text-white px-6 py-2 rounded-full text-sm font-bold flex items-center shadow-xl whitespace-nowrap border-2 border-white"
+                          className={`w-20 h-20 mx-auto mb-6 rounded-2xl bg-gradient-to-br ${plan.gradient} flex items-center justify-center shadow-lg`}
+                          animate={{ 
+                            rotate: isHovered ? [0, 5, -5, 0] : 0,
+                            scale: isHovered ? 1.1 : 1
+                          }}
+                          transition={{ duration: 0.6 }}
                         >
-                          <motion.div
+                          <IconComponent className="h-10 w-10 text-white" />
+                        </motion.div>
+                        
+                        <h3 className="text-2xl font-serif font-bold text-gray-900 mb-2">
+                          {plan.name}
+                        </h3>
+                        <p className="text-gray-600 font-medium mb-1">
+                          {plan.description}
+                        </p>
+                        <span className={`inline-block px-3 py-1 rounded-full text-xs font-semibold ${plan.textColor} bg-gradient-to-r ${plan.bgGradient}`}>
+                          {plan.tagline}
+                        </span>
+                      </div>
+
+                      {/* Pricing Section */}
+                      <div className="text-center mb-8">
+                        <div className="flex items-center justify-center mb-2">
+                          <span className="text-lg text-gray-500 line-through mr-3">{plan.originalPrice}</span>
+                          <motion.span 
+                            className="text-5xl font-black text-gray-900"
                             animate={{ 
-                              rotate: isHovered ? [0, -15, 15, -15, 0] : 0,
-                              scale: isHovered ? [1, 1.2, 1] : 1 
-                            }}
-                            transition={{ 
-                              duration: 0.8,
-                              repeat: isHovered ? Infinity : 0,
-                              repeatDelay: 1.5
+                              scale: isHovered ? 1.1 : 1,
+                              color: isHovered ? plan.textColor.replace('text-', '#') : '#111827'
                             }}
                           >
-                            <Crown className="h-4 w-4 mr-2 text-yellow-300" />
-                          </motion.div>
-                          Most Popular
-                        </motion.div>
-                      </div>
-                    )}
-                    
-                    {/* REDESIGNED Savings Badge - Better Positioning */}
-                    {plan.savings && (
-                      <div className="absolute -top-6 right-4 z-30">
-                        <motion.div
-                          initial={{ opacity: 0, x: 20, scale: 0.8 }}
-                          animate={{ opacity: 1, x: 0, scale: 1 }}
-                          transition={{ delay: 0.7, type: "spring", stiffness: 400 }}
-                          className="bg-gradient-to-r from-green-500 to-emerald-600 text-white px-4 py-2 rounded-full text-sm font-bold shadow-lg whitespace-nowrap border-2 border-white flex items-center"
-                        >
-                          <Sparkles className="h-3 w-3 mr-1" />
-                          {plan.savings}
-                        </motion.div>
-                      </div>
-                    )}
-
-                    <div className="p-8 relative z-10">
-                      {/* Plan Header with Icon */}
-                      <motion.div
-                        className="flex items-center mb-6"
-                        animate={{ 
-                          scale: isHovered ? 1.05 : 1,
-                          x: isHovered ? 5 : 0
-                        }}
-                        transition={{ duration: 0.3 }}
-                      >
-                        <div className={`p-4 rounded-full bg-gradient-to-r ${plan.gradient} mr-4 shadow-lg`}>
-                          <IconComponent className="h-8 w-8 text-white" />
+                            {plan.price}
+                          </motion.span>
                         </div>
-                        <div>
-                          <h3 className="font-serif text-2xl font-bold text-gray-900">
-                            {plan.name}
-                          </h3>
-                          <p className="text-gray-600 text-sm mt-1">{plan.description}</p>
-                        </div>
-                      </motion.div>
-
-                      {/* Pricing with Motion */}
-                      <motion.div 
-                        className="mb-8 text-center"
-                        animate={{ 
-                          scale: isHovered ? 1.1 : 1,
-                          color: isHovered ? '#3b82f6' : '#111827'
-                        }}
-                        transition={{ duration: 0.3 }}
-                      >
-                        <span className="text-5xl font-black">
-                          {plan.price}
-                        </span>
-                        <span className="text-gray-600 ml-2 text-lg">
-                          {plan.period}
-                        </span>
-                      </motion.div>
+                        <p className="text-gray-600 text-lg">{plan.period}</p>
+                        <p className="text-sm text-gray-500 mt-1">Just {plan.monthlyPrice}/month</p>
+                      </div>
 
                       {/* Features List */}
-                      <ul className="space-y-4 mb-8">
-                        {plan.features.map((feature, featureIndex) => (
-                          <li 
-                            key={featureIndex} 
-                            className="flex items-center"
-                          >
-                            <Check className="h-5 w-5 mr-3 text-green-500 flex-shrink-0" />
-                            <span className="text-gray-800 font-medium">
-                              {feature}
-                            </span>
-                          </li>
-                        ))}
-                      </ul>
+                      <div className="mb-8">
+                        <h4 className="font-semibold text-gray-900 mb-4 flex items-center">
+                          <Star className={`h-4 w-4 mr-2 ${plan.textColor}`} />
+                          What's Included:
+                        </h4>
+                        <ul className="space-y-3">
+                          {plan.features.map((feature, featureIndex) => (
+                            <motion.li 
+                              key={featureIndex} 
+                              className="flex items-start group/item"
+                              initial={{ opacity: 0, x: -10 }}
+                              animate={{ opacity: 1, x: 0 }}
+                              transition={{ delay: 0.8 + index * 0.1 + featureIndex * 0.05 }}
+                            >
+                              <div className="flex-shrink-0 mt-0.5">
+                                <div className="w-5 h-5 rounded-full bg-gradient-to-r from-green-400 to-emerald-500 flex items-center justify-center">
+                                  <Check className="h-3 w-3 text-white" />
+                                </div>
+                              </div>
+                              <span className="ml-3 text-gray-700 text-sm leading-relaxed group-hover/item:text-gray-900 transition-colors">
+                                {feature}
+                              </span>
+                            </motion.li>
+                          ))}
+                        </ul>
+                      </div>
 
-                      {/* Premium CTA Button */}
+                      {/* CTA Button */}
                       <motion.button
                         onClick={() => handlePlanSelect(plan)}
-                        className={`relative w-full py-4 px-8 rounded-xl font-bold text-lg transition-all duration-300 overflow-hidden ${
+                        className={`relative w-full py-4 px-6 rounded-2xl font-bold text-lg transition-all duration-300 overflow-hidden group/btn ${
                           plan.buttonVariant === 'premium'
-                            ? 'bg-gradient-to-r from-primary-600 to-primary-700 text-white'
+                            ? 'bg-gradient-to-r from-primary-600 via-primary-700 to-purple-600 text-white shadow-lg hover:shadow-2xl'
                             : plan.buttonVariant === 'primary'
-                            ? 'bg-primary-600 text-white'
-                            : 'bg-gray-100 text-gray-900'
+                            ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-lg hover:shadow-xl'
+                            : 'bg-gradient-to-r from-gray-800 to-gray-900 text-white shadow-lg hover:shadow-xl'
                         }`}
                         whileHover={{ 
-                          scale: 1.05,
-                          boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.25)'
+                          scale: 1.02,
+                          y: -2
                         }}
-                        whileTap={{ scale: 0.95 }}
-                        animate={{
-                          background: isHovered && plan.buttonVariant === 'premium'
-                            ? 'linear-gradient(135deg, #3b82f6, #1d4ed8)'
-                            : undefined
-                        }}
+                        whileTap={{ scale: 0.98 }}
                       >
-                        {/* Shimmer Effect on Button */}
-                        <motion.div
-                          className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
-                          animate={{
-                            x: isHovered ? ['-100%', '100%'] : '-100%'
-                          }}
-                          transition={{
-                            duration: 0.8,
-                            ease: "easeInOut",
-                            repeat: isHovered ? Infinity : 0,
-                            repeatDelay: 1
-                          }}
-                        />
+                        {/* Button Shimmer Effect */}
+                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover/btn:translate-x-full transition-transform duration-1000 ease-in-out"></div>
                         
-                        <span className="relative z-10">{plan.buttonText}</span>
+                        <span className="relative flex items-center justify-center">
+                          {plan.buttonText}
+                          <ChevronRight className="h-5 w-5 ml-2 group-hover/btn:translate-x-1 transition-transform" />
+                        </span>
                       </motion.button>
+
+                      {/* Trust Elements */}
+                      <div className="mt-4 text-center">
+                        <p className="text-xs text-gray-500">
+                          ✓ Secure Payment • ✓ Instant Access • ✓ Cancel Anytime
+                        </p>
+                      </div>
                     </div>
                   </motion.div>
                 </motion.div>
@@ -324,127 +366,114 @@ const PricingPage = () => {
           </div>
         </div>
 
-        {/* Premium Features Section with Motion */}
+        {/* Premium Trust Section */}
         <motion.div 
-          className="mt-20 bg-white rounded-3xl p-12 shadow-xl"
-          initial={{ opacity: 0, y: 50 }}
+          className="bg-white rounded-3xl p-12 shadow-xl max-w-6xl mx-auto mb-20"
+          initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.5 }}
+          transition={{ duration: 0.8, delay: 1 }}
         >
-          <motion.div 
-            className="text-center mb-12"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.7 }}
-          >
-            <h2 className="section-title">
-              Why Choose Just Urbane Premium?
+          <div className="text-center mb-12">
+            <h2 className="text-4xl font-serif font-bold text-gray-900 mb-4">
+              Why 50,000+ Readers Trust Just Urbane
             </h2>
-          </motion.div>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Join India's most discerning community of lifestyle enthusiasts and industry leaders.
+            </p>
+          </div>
 
           <div className="grid md:grid-cols-3 gap-8">
             {[
               {
                 icon: Star,
                 title: "Premium Content",
-                description: "Access to exclusive articles, in-depth reviews, and luxury lifestyle insights from industry experts.",
-                gradient: "from-primary-500 to-primary-600",
-                bgColor: "bg-primary-100"
+                description: "Curated by industry experts, our content sets the gold standard for luxury lifestyle journalism.",
+                stats: "500+ Premium Articles"
               },
               {
-                icon: Crown,
-                title: "Ad-Free Experience", 
-                description: "Enjoy uninterrupted reading with zero advertisements and faster page loading times.",
-                gradient: "from-primary-500 to-primary-600",
-                bgColor: "bg-primary-100"
+                icon: Users,
+                title: "Exclusive Community", 
+                description: "Connect with like-minded individuals who appreciate the finer things in life.",
+                stats: "50,000+ Members"
               },
               {
-                icon: Check,
-                title: "Magazine Access",
-                description: "Complete access to our digital magazine archive and exclusive subscriber-only issues.",
-                gradient: "from-green-500 to-green-600",
-                bgColor: "bg-green-100"
+                icon: Award,
+                title: "Award Winning",
+                description: "Recognized globally for excellence in digital publishing and content curation.",
+                stats: "15+ Industry Awards"
               }
             ].map((feature, index) => {
               const FeatureIcon = feature.icon;
               return (
                 <motion.div
                   key={feature.title}
-                  className="text-center group cursor-pointer"
+                  className="text-center group"
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.8 + index * 0.2 }}
-                  whileHover={{ y: -10 }}
+                  transition={{ duration: 0.6, delay: 1.2 + index * 0.2 }}
+                  whileHover={{ y: -8 }}
                 >
-                  <motion.div
-                    className={`${feature.bgColor} w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:shadow-lg transition-all duration-300`}
-                    whileHover={{ 
-                      scale: 1.1,
-                      boxShadow: '0 10px 25px -5px rgba(59, 130, 246, 0.3)'
-                    }}
-                  >
-                    <motion.div
-                      whileHover={{ rotate: 360 }}
-                      transition={{ duration: 0.6 }}
-                    >
-                      <FeatureIcon className={`h-8 w-8 ${feature.icon === Check ? 'text-green-600' : 'text-primary-600'}`} />
-                    </motion.div>
-                  </motion.div>
+                  <div className="w-16 h-16 mx-auto mb-6 bg-gradient-to-br from-primary-100 to-primary-200 rounded-2xl flex items-center justify-center group-hover:shadow-lg transition-all duration-300">
+                    <FeatureIcon className="h-8 w-8 text-primary-600" />
+                  </div>
                   
-                  <motion.h3 
-                    className="font-serif text-xl font-semibold mb-2 group-hover:text-primary-600 transition-colors duration-300"
-                    whileHover={{ scale: 1.05 }}
-                  >
+                  <h3 className="text-xl font-serif font-semibold mb-3 text-gray-900">
                     {feature.title}
-                  </motion.h3>
+                  </h3>
                   
-                  <motion.p 
-                    className="text-gray-600 group-hover:text-gray-800 transition-colors duration-300"
-                    whileHover={{ scale: 1.02 }}
-                  >
+                  <p className="text-gray-600 mb-3 leading-relaxed">
                     {feature.description}
-                  </motion.p>
+                  </p>
+
+                  <div className="inline-block px-4 py-2 bg-gradient-to-r from-primary-50 to-primary-100 rounded-full">
+                    <span className="text-primary-700 font-semibold text-sm">{feature.stats}</span>
+                  </div>
                 </motion.div>
               );
             })}
           </div>
         </motion.div>
 
-        {/* Premium FAQ Section */}
+        {/* FAQ Section */}
         <motion.div 
-          className="mt-16 text-center"
+          className="text-center max-w-4xl mx-auto"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 1 }}
+          transition={{ duration: 0.6, delay: 1.4 }}
         >
-          <motion.p 
-            className="text-gray-600 mb-4"
-            whileHover={{ scale: 1.02 }}
-            transition={{ duration: 0.2 }}
-          >
-            Have questions? Check out our{' '}
-            <Link to="/faq" className="text-primary-600 hover:text-primary-700 font-medium transition-colors duration-200 hover:underline">
-              FAQ
-            </Link>{' '}
-            or{' '}
-            <Link to="/contact" className="text-primary-600 hover:text-primary-700 font-medium transition-colors duration-200 hover:underline">
-              contact us
-            </Link>
-            .
-          </motion.p>
+          <h3 className="text-2xl font-serif font-semibold text-gray-900 mb-6">
+            Questions? We're Here to Help
+          </h3>
           
-          <motion.p 
-            className="text-sm text-gray-500"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 1.2 }}
-          >
-            All plans include a 7-day free trial. Cancel anytime.
-          </motion.p>
+          <div className="flex flex-wrap justify-center gap-4 mb-8">
+            <Link to="/faq" className="inline-flex items-center px-6 py-3 bg-gray-100 hover:bg-gray-200 rounded-full text-gray-700 font-medium transition-colors">
+              View FAQ
+              <ChevronRight className="h-4 w-4 ml-2" />
+            </Link>
+            <Link to="/contact" className="inline-flex items-center px-6 py-3 bg-primary-100 hover:bg-primary-200 rounded-full text-primary-700 font-medium transition-colors">
+              Contact Support
+              <ChevronRight className="h-4 w-4 ml-2" />
+            </Link>
+          </div>
+          
+          <div className="flex justify-center items-center space-x-8 text-sm text-gray-500">
+            <div className="flex items-center">
+              <div className="w-2 h-2 bg-green-500 rounded-full mr-2"></div>
+              <span>SSL Secured</span>
+            </div>
+            <div className="flex items-center">
+              <div className="w-2 h-2 bg-blue-500 rounded-full mr-2"></div>
+              <span>24/7 Support</span>
+            </div>
+            <div className="flex items-center">
+              <div className="w-2 h-2 bg-purple-500 rounded-full mr-2"></div>
+              <span>Money Back Guarantee</span>
+            </div>
+          </div>
         </motion.div>
       </div>
 
-      {/* Subscription Modal */}
+      {/* Premium Subscription Modal */}
       <SubscriptionModal 
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
