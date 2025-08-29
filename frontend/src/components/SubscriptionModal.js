@@ -88,32 +88,112 @@ const SubscriptionModal = ({ isOpen, onClose, selectedPlan }) => {
 
   return (
     <AnimatePresence>
-      <div className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4">
+      <motion.div 
+        className="fixed inset-0 bg-black/70 z-50 flex items-center justify-center p-4"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.3 }}
+        onClick={onClose}
+      >
         <motion.div
-          className="bg-white rounded-3xl shadow-2xl w-full max-w-4xl max-h-[95vh] overflow-y-auto"
-          initial={{ opacity: 0, scale: 0.9, y: 50 }}
+          className="bg-white rounded-3xl shadow-2xl w-full max-w-5xl max-h-[95vh] overflow-hidden"
+          initial={{ opacity: 0, scale: 0.8, y: 100 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
-          exit={{ opacity: 0, scale: 0.9, y: 50 }}
-          transition={{ duration: 0.4, type: "spring", stiffness: 300 }}
+          exit={{ opacity: 0, scale: 0.8, y: 100 }}
+          transition={{ 
+            duration: 0.5, 
+            type: "spring", 
+            stiffness: 300,
+            damping: 25
+          }}
+          onClick={(e) => e.stopPropagation()}
         >
-          {/* Header */}
-          <div className="flex items-center justify-between p-8 border-b border-gray-200 bg-gradient-to-r from-primary-50 to-blue-50">
-            <div className="flex items-center">
-              <Crown className="h-8 w-8 text-primary-600 mr-3" />
-              <div>
-                <h2 className="text-3xl font-serif font-bold text-gray-900">
-                  Subscribe to {selectedPlan.name}
-                </h2>
-                <p className="text-gray-600 mt-1 text-lg">{selectedPlan.description}</p>
-              </div>
+          {/* Premium Header with Gradient and Animation */}
+          <motion.div 
+            className="relative bg-gradient-to-r from-primary-600 via-primary-700 to-blue-600 text-white p-8 overflow-hidden"
+            initial={{ backgroundPosition: "0% 50%" }}
+            animate={{ backgroundPosition: "100% 50%" }}
+            transition={{ duration: 3, repeat: Infinity, repeatType: "reverse" }}
+            style={{
+              backgroundSize: "200% 200%"
+            }}
+          >
+            {/* Animated Background Pattern */}
+            <div className="absolute inset-0 opacity-10">
+              <motion.div
+                className="absolute top-0 left-0 w-96 h-96 bg-white rounded-full blur-3xl"
+                animate={{
+                  x: [0, 100, 0],
+                  y: [0, 50, 0],
+                  scale: [1, 1.2, 1]
+                }}
+                transition={{ duration: 4, repeat: Infinity }}
+              />
+              <motion.div
+                className="absolute bottom-0 right-0 w-64 h-64 bg-white rounded-full blur-3xl"
+                animate={{
+                  x: [0, -50, 0],
+                  y: [0, -30, 0],
+                  scale: [1, 0.8, 1]
+                }}
+                transition={{ duration: 3, repeat: Infinity }}
+              />
             </div>
-            <button
-              onClick={onClose}
-              className="p-3 hover:bg-white rounded-full transition-colors"
-            >
-              <X className="h-6 w-6 text-gray-600" />
-            </button>
-          </div>
+
+            <div className="relative z-10 flex items-center justify-between">
+              <motion.div 
+                className="flex items-center"
+                initial={{ opacity: 0, x: -50 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+              >
+                <motion.div
+                  animate={{ 
+                    rotate: [0, 10, -10, 0],
+                    scale: [1, 1.1, 1]
+                  }}
+                  transition={{ 
+                    duration: 2,
+                    repeat: Infinity,
+                    repeatDelay: 3
+                  }}
+                >
+                  <Crown className="h-10 w-10 text-yellow-300 mr-4 drop-shadow-lg" />
+                </motion.div>
+                <div>
+                  <motion.h2 
+                    className="text-4xl font-serif font-bold mb-2"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: 0.3 }}
+                  >
+                    Subscribe to {selectedPlan.name}
+                  </motion.h2>
+                  <motion.p 
+                    className="text-primary-100 text-lg"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: 0.4 }}
+                  >
+                    {selectedPlan.description}
+                  </motion.p>
+                </div>
+              </motion.div>
+              
+              <motion.button
+                onClick={onClose}
+                className="p-3 hover:bg-white/20 rounded-full transition-all duration-300 group"
+                whileHover={{ scale: 1.1, rotate: 90 }}
+                whileTap={{ scale: 0.9 }}
+                initial={{ opacity: 0, rotate: -90 }}
+                animate={{ opacity: 1, rotate: 0 }}
+                transition={{ duration: 0.5, delay: 0.5 }}
+              >
+                <X className="h-6 w-6 text-white group-hover:text-gray-200" />
+              </motion.button>
+            </div>
+          </motion.div>
 
           {/* Content */}
           <div className="p-8">
