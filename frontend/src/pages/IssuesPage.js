@@ -16,6 +16,7 @@ import LoadingSpinner from '../components/LoadingSpinner';
 const IssuesPage = () => {
   const [selectedIssue, setSelectedIssue] = useState(null);
   const [isReaderOpen, setIsReaderOpen] = useState(false);
+  const [activeTab, setActiveTab] = useState('preview'); // 'preview' or 'archive'
   const { user, isAuthenticated } = useAuth();
   const { data: articles, isLoading } = useArticles();
 
