@@ -1,11 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { Check, Crown, Star, Loader, Zap, Shield, Sparkles, ChevronRight, Award, Users, TrendingUp } from 'lucide-react';
+import React, { useState } from 'react';
+import { Check, Crown, Star, Zap, Sparkles, ChevronRight, Award, Users, TrendingUp } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
-import { useAuth } from '../context/AuthContext';
-import { api } from '../utils/api';
+import { motion } from 'framer-motion';
 import SubscriptionModal from '../components/SubscriptionModal';
-import toast from 'react-hot-toast';
 
 const PricingPage = () => {
   const [selectedPlan, setSelectedPlan] = useState(null);
