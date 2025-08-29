@@ -311,8 +311,8 @@ const Header = () => {
                 <div className="border-t border-gray-200 pt-6 mt-6">
                   <div className="bg-gradient-to-br from-gray-900 via-gray-800 to-black p-6 rounded-2xl text-white relative overflow-hidden">
                     {/* Premium background pattern */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-gold-500/10 to-gold-600/10"></div>
-                    <div className="absolute top-0 right-0 w-20 h-20 bg-gold-500/20 rounded-full blur-xl"></div>
+                    <div className="absolute inset-0 bg-gradient-to-r from-primary-500/10 to-primary-600/10"></div>
+                    <div className="absolute top-0 right-0 w-20 h-20 bg-primary-500/20 rounded-full blur-xl"></div>
                     
                     <div className="relative z-10">
                       <div className="flex items-center mb-3">
