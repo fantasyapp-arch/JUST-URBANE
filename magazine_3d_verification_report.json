@@ -1,0 +1,78 @@
+{
+  "total": 10,
+  "passed": 8,
+  "failed": 2,
+  "success_rate": 80.0,
+  "results": [
+    {
+      "test": "Magazine Reader API Support",
+      "success": true,
+      "message": "APIs support 3D flip book reader - 20 articles with required fields (response time: 0.13s)",
+      "timestamp": "2025-08-29T17:42:09.270886",
+      "response_data": null
+    },
+    {
+      "test": "Content Delivery Structure",
+      "success": false,
+      "message": "Only 6/10 articles properly structured (60.0%)",
+      "timestamp": "2025-08-29T17:42:09.270967",
+      "response_data": null
+    },
+    {
+      "test": "3-Page Free Preview Limit",
+      "success": true,
+      "message": "Premium gating enforced - preview limited to ~1.1 pages (532 chars, locked: False)",
+      "timestamp": "2025-08-29T17:42:09.360736",
+      "response_data": null
+    },
+    {
+      "test": "JWT Authentication System",
+      "success": true,
+      "message": "JWT system working for subscription access - token generated successfully",
+      "timestamp": "2025-08-29T17:42:09.884745",
+      "response_data": null
+    },
+    {
+      "test": "JWT Protected Endpoints",
+      "success": false,
+      "message": "JWT authentication issue: HTTP 401",
+      "timestamp": "2025-08-29T17:42:09.942262",
+      "response_data": null
+    },
+    {
+      "test": "Performance - Articles Loading",
+      "success": true,
+      "message": "Fast response time: 0.01s",
+      "timestamp": "2025-08-29T17:42:09.957092",
+      "response_data": null
+    },
+    {
+      "test": "Performance - Categories Loading",
+      "success": true,
+      "message": "Fast response time: 0.01s",
+      "timestamp": "2025-08-29T17:42:09.968301",
+      "response_data": null
+    },
+    {
+      "test": "Performance - Magazine Issues Loading",
+      "success": true,
+      "message": "Fast response time: 0.05s",
+      "timestamp": "2025-08-29T17:42:10.020708",
+      "response_data": null
+    },
+    {
+      "test": "Performance - Payment Packages Loading",
+      "success": true,
+      "message": "Fast response time: 0.05s",
+      "timestamp": "2025-08-29T17:42:10.071692",
+      "response_data": null
+    },
+    {
+      "test": "Overall API Performance",
+      "success": true,
+      "message": "Excellent performance - average response time: 0.03s",
+      "timestamp": "2025-08-29T17:42:10.071739",
+      "response_data": null
+    }
+  ]
+}
