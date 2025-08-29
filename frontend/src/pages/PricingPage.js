@@ -427,23 +427,38 @@ const PricingPage = () => {
           </div>
         </motion.div>
 
-        {/* FAQ */}
-        <div className="mt-16 text-center">
-          <p className="text-gray-600 mb-4">
+        {/* Premium FAQ Section */}
+        <motion.div 
+          className="mt-16 text-center"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 1 }}
+        >
+          <motion.p 
+            className="text-gray-600 mb-4"
+            whileHover={{ scale: 1.02 }}
+            transition={{ duration: 0.2 }}
+          >
             Have questions? Check out our{' '}
-            <Link to="/faq" className="text-gold-600 hover:text-gold-700 font-medium">
+            <Link to="/faq" className="text-primary-600 hover:text-primary-700 font-medium transition-colors duration-200 hover:underline">
               FAQ
             </Link>{' '}
             or{' '}
-            <Link to="/contact" className="text-gold-600 hover:text-gold-700 font-medium">
+            <Link to="/contact" className="text-primary-600 hover:text-primary-700 font-medium transition-colors duration-200 hover:underline">
               contact us
             </Link>
             .
-          </p>
-          <p className="text-sm text-gray-500">
+          </motion.p>
+          
+          <motion.p 
+            className="text-sm text-gray-500"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6, delay: 1.2 }}
+          >
             All plans include a 7-day free trial. Cancel anytime.
-          </p>
-        </div>
+          </motion.p>
+        </motion.div>
       </div>
 
       {/* Subscription Modal */}
