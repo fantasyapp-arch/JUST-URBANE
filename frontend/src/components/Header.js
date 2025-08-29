@@ -322,7 +322,7 @@ const Header = () => {
                       <p className="text-sm text-gray-300 mb-5 leading-relaxed">Unlock exclusive content, expert insights, and luxury experiences</p>
                       <Link
                         to="/pricing"
-                        className="block bg-gradient-to-r from-gold-500 to-gold-600 hover:from-gold-600 hover:to-gold-700 text-white font-bold py-3 px-4 rounded-xl text-center transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
+                        className="block bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-600 hover:to-primary-700 text-white font-bold py-3 px-4 rounded-xl text-center transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
                         onClick={() => setIsMenuOpen(false)}
                       >
                         <span className="flex items-center justify-center">
