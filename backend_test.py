@@ -387,7 +387,7 @@ class JustUrbaneAPITester:
         try:
             checkout_data = {
                 "package_id": "premium_monthly",
-                "origin_url": "https://urbane-nexus.preview.emergentagent.com"
+                "origin_url": "https://premium-magazine.preview.emergentagent.com"
             }
             
             response = self.session.post(
@@ -513,7 +513,7 @@ class JustUrbaneAPITester:
 def main():
     """Main testing function"""
     # Use the backend URL from frontend environment (production URL)
-    backend_url = "https://urbane-nexus.preview.emergentagent.com"
+    backend_url = "https://premium-magazine.preview.emergentagent.com"
     tester = JustUrbaneAPITester(backend_url)
     report = tester.run_comprehensive_tests()
     
