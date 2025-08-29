@@ -67,7 +67,7 @@ const Header = () => {
     <header className="bg-white shadow-lg sticky top-0 z-50">
       {/* CLEAN MAIN HEADER - NO BLUE STRIP */}
       <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-20 lg:h-24">{/* BIGGER NAVBAR FOR BIG LOGO */}
+        <div className="flex items-center justify-between h-24 lg:h-32">{/* BIGGER NAVBAR FOR BIGGER LOGO */}
           
           {/* BIGGER HERO LOGO - MUCH MORE VISIBLE */}
           <Link to="/" className="flex items-center">
