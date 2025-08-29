@@ -344,6 +344,17 @@ const Header = () => {
                 <div className="border-t border-gray-200 pt-4 mt-6">
                   <div className="space-y-2">
                     <Link
+                      to="/issues"
+                      className="flex items-center p-3 bg-gradient-to-r from-amber-50 to-amber-100 text-amber-800 border border-amber-200 hover:from-amber-100 hover:to-amber-200 rounded-lg font-semibold transition-all duration-200 group"
+                      onClick={() => setIsMenuOpen(false)}
+                    >
+                      <Crown className="h-5 w-5 mr-3 text-amber-600 group-hover:rotate-12 transition-transform" />
+                      <span>Digital Magazine</span>
+                      <span className="ml-auto text-xs bg-amber-200 text-amber-900 px-2 py-1 rounded-full font-medium">
+                        New
+                      </span>
+                    </Link>
+                    <Link
                       to="/subscription"
                       className="block p-3 text-primary-600 hover:bg-primary-50 rounded-lg font-semibold transition-colors"
                       onClick={() => setIsMenuOpen(false)}
