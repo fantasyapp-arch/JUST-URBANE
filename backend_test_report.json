@@ -1,26 +1,26 @@
 {
-  "total": 28,
-  "passed": 27,
-  "failed": 1,
-  "success_rate": 96.42857142857143,
+  "total": 42,
+  "passed": 40,
+  "failed": 2,
+  "success_rate": 95.23809523809523,
   "results": [
     {
       "test": "Health Check",
       "success": true,
       "message": "API is healthy and responding",
-      "timestamp": "2025-08-26T13:53:08.178959",
+      "timestamp": "2025-08-29T08:09:11.895782",
       "response_data": null
     },
     {
       "test": "User Registration",
       "success": true,
       "message": "User registered successfully",
-      "timestamp": "2025-08-26T13:53:08.452329",
+      "timestamp": "2025-08-29T08:09:12.186434",
       "response_data": {
-        "email": "testuser_1756216388@justurbane.com",
+        "email": "testuser_1756454951@justurbane.com",
         "name": "Premium Test User",
-        "id": "5d8fc13b-44ff-46e2-b3a8-376e4df27f4c",
-        "created_at": "2025-08-26T13:53:08.445620",
+        "id": "f2eab368-7033-4a26-81f5-f5495487e7c7",
+        "created_at": "2025-08-29T08:09:12.178032",
         "is_premium": false,
         "subscription_status": "inactive"
       }
@@ -29,182 +29,280 @@
       "test": "User Login",
       "success": true,
       "message": "Login successful, JWT token received",
-      "timestamp": "2025-08-26T13:53:08.718722",
-      "response_data": null
-    },
-    {
-      "test": "Payment Packages",
-      "success": true,
-      "message": "Correct INR pricing: Monthly \u20b9499.0, Annual \u20b94999.0",
-      "timestamp": "2025-08-26T13:53:08.734331",
-      "response_data": null
-    },
-    {
-      "test": "Payment Currency",
-      "success": true,
-      "message": "Currency set to INR for both packages",
-      "timestamp": "2025-08-26T13:53:08.734372",
-      "response_data": null
-    },
-    {
-      "test": "Payment Checkout Creation",
-      "success": false,
-      "message": "HTTP 500: {\"detail\":\"Failed to create payment session\"}",
-      "timestamp": "2025-08-26T13:53:08.747312",
-      "response_data": null
-    },
-    {
-      "test": "Categories Count",
-      "success": true,
-      "message": "Retrieved expected 9 categories",
-      "timestamp": "2025-08-26T13:53:08.756003",
-      "response_data": null
-    },
-    {
-      "test": "GQ Categories Structure",
-      "success": true,
-      "message": "All 9 GQ-style categories present: Fashion, Business, Technology, Finance, Travel, Health, Culture, Art, Entertainment",
-      "timestamp": "2025-08-26T13:53:08.756042",
-      "response_data": null
-    },
-    {
-      "test": "Categories Listing",
-      "success": true,
-      "message": "Retrieved 9 categories",
-      "timestamp": "2025-08-26T13:53:08.756050",
+      "timestamp": "2025-08-29T08:09:12.439705",
       "response_data": null
     },
     {
       "test": "Articles Listing",
       "success": true,
-      "message": "Retrieved 14 articles",
-      "timestamp": "2025-08-26T13:53:08.765820",
+      "message": "Retrieved 20 articles",
+      "timestamp": "2025-08-29T08:09:12.460694",
       "response_data": null
     },
     {
       "test": "Articles Category Filter",
       "success": true,
-      "message": "Retrieved 1 style articles",
-      "timestamp": "2025-08-26T13:53:08.774637",
+      "message": "Retrieved 0 style articles",
+      "timestamp": "2025-08-29T08:09:12.470676",
       "response_data": null
     },
     {
       "test": "Featured Articles",
       "success": true,
-      "message": "Retrieved 5 featured articles",
-      "timestamp": "2025-08-26T13:53:08.783566",
+      "message": "Retrieved 19 featured articles",
+      "timestamp": "2025-08-29T08:09:12.480708",
       "response_data": null
     },
     {
       "test": "Trending Articles",
       "success": true,
-      "message": "Retrieved 4 trending articles",
-      "timestamp": "2025-08-26T13:53:08.793934",
+      "message": "Retrieved 9 trending articles",
+      "timestamp": "2025-08-29T08:09:12.490408",
       "response_data": null
     },
     {
       "test": "Single Article",
       "success": true,
-      "message": "Retrieved article: The Future of Luxury Tech: AI Meets Artisanal Craftsmanship",
-      "timestamp": "2025-08-26T13:53:08.807321",
+      "message": "Retrieved article: Mobile Technology Mastery: Smartphones for Every Lifestyle",
+      "timestamp": "2025-08-29T08:09:12.504731",
+      "response_data": null
+    },
+    {
+      "test": "Article Retrieval by UUID",
+      "success": true,
+      "message": "Successfully retrieved article by UUID: b97cf14c-609f-4755-9cd1-b96d28ad420d",
+      "timestamp": "2025-08-29T08:09:12.568872",
+      "response_data": null
+    },
+    {
+      "test": "Free Article Content Visibility",
+      "success": true,
+      "message": "Full content returned for free article (length: 293)",
+      "timestamp": "2025-08-29T08:09:12.568908",
+      "response_data": null
+    },
+    {
+      "test": "Data Consistency (ID Field)",
+      "success": true,
+      "message": "Article has 'id' field and no '_id' field",
+      "timestamp": "2025-08-29T08:09:12.568914",
+      "response_data": null
+    },
+    {
+      "test": "Article Retrieval by Slug",
+      "success": true,
+      "message": "Successfully retrieved article by slug: mobile-technology-mastery-smartphones-for-every-li",
+      "timestamp": "2025-08-29T08:09:12.623183",
+      "response_data": null
+    },
+    {
+      "test": "UUID/Slug Consistency",
+      "success": true,
+      "message": "Both UUID and slug return the same article",
+      "timestamp": "2025-08-29T08:09:12.623227",
+      "response_data": null
+    },
+    {
+      "test": "Category Filter - Fashion",
+      "success": true,
+      "message": "Retrieved 6 fashion articles",
+      "timestamp": "2025-08-29T08:09:12.633657",
+      "response_data": null
+    },
+    {
+      "test": "Category Filter - Technology",
+      "success": true,
+      "message": "Retrieved 0 technology articles",
+      "timestamp": "2025-08-29T08:09:12.643779",
+      "response_data": null
+    },
+    {
+      "test": "Category Filter - Business",
+      "success": true,
+      "message": "Retrieved 0 business articles",
+      "timestamp": "2025-08-29T08:09:12.653102",
+      "response_data": null
+    },
+    {
+      "test": "Category Filter - Travel",
+      "success": true,
+      "message": "Retrieved 4 travel articles",
+      "timestamp": "2025-08-29T08:09:12.662287",
+      "response_data": null
+    },
+    {
+      "test": "Subcategory Filter - fashion/men",
+      "success": true,
+      "message": "Retrieved 2 fashion/men articles",
+      "timestamp": "2025-08-29T08:09:12.671946",
+      "response_data": null
+    },
+    {
+      "test": "Subcategory Filter - fashion/women",
+      "success": true,
+      "message": "Retrieved 1 fashion/women articles",
+      "timestamp": "2025-08-29T08:09:12.682164",
+      "response_data": null
+    },
+    {
+      "test": "Subcategory Filter - fashion/smartphones",
+      "success": true,
+      "message": "Retrieved 0 fashion/smartphones articles",
+      "timestamp": "2025-08-29T08:09:12.732246",
+      "response_data": null
+    },
+    {
+      "test": "Subcategory Filter - fashion/luxury",
+      "success": true,
+      "message": "Retrieved 1 fashion/luxury articles",
+      "timestamp": "2025-08-29T08:09:12.741999",
+      "response_data": null
+    },
+    {
+      "test": "View Count Increment",
+      "success": true,
+      "message": "View count incremented from 1544 to 1545",
+      "timestamp": "2025-08-29T08:09:12.813282",
+      "response_data": null
+    },
+    {
+      "test": "PDF Content Accessibility",
+      "success": true,
+      "message": "8/10 articles have accessible content",
+      "timestamp": "2025-08-29T08:09:12.822754",
       "response_data": null
     },
     {
       "test": "Articles - Fashion Category",
       "success": true,
-      "message": "Retrieved 1 fashion articles",
-      "timestamp": "2025-08-26T13:53:08.816287",
+      "message": "Retrieved 5 fashion articles",
+      "timestamp": "2025-08-29T08:09:12.832322",
       "response_data": null
     },
     {
       "test": "Articles - Business Category",
       "success": true,
-      "message": "Retrieved 1 business articles",
-      "timestamp": "2025-08-26T13:53:08.865902",
+      "message": "Retrieved 0 business articles",
+      "timestamp": "2025-08-29T08:09:12.884400",
       "response_data": null
     },
     {
       "test": "Articles - Technology Category",
       "success": true,
-      "message": "Retrieved 2 technology articles",
-      "timestamp": "2025-08-26T13:53:08.877328",
+      "message": "Retrieved 0 technology articles",
+      "timestamp": "2025-08-29T08:09:12.894105",
       "response_data": null
     },
     {
       "test": "Articles - Finance Category",
       "success": true,
       "message": "Retrieved 0 finance articles",
-      "timestamp": "2025-08-26T13:53:08.886394",
+      "timestamp": "2025-08-29T08:09:12.902725",
       "response_data": null
     },
     {
       "test": "Articles - Travel Category",
       "success": true,
-      "message": "Retrieved 2 travel articles",
-      "timestamp": "2025-08-26T13:53:08.894818",
+      "message": "Retrieved 4 travel articles",
+      "timestamp": "2025-08-29T08:09:12.915389",
       "response_data": null
     },
     {
       "test": "Articles - Health Category",
       "success": true,
-      "message": "Retrieved 1 health articles",
-      "timestamp": "2025-08-26T13:53:08.910286",
+      "message": "Retrieved 0 health articles",
+      "timestamp": "2025-08-29T08:09:12.966635",
       "response_data": null
     },
     {
       "test": "Articles - Culture Category",
       "success": true,
-      "message": "Retrieved 2 culture articles",
-      "timestamp": "2025-08-26T13:53:08.918460",
+      "message": "Retrieved 0 culture articles",
+      "timestamp": "2025-08-29T08:09:12.977058",
       "response_data": null
     },
     {
       "test": "Articles - Art Category",
       "success": true,
-      "message": "Retrieved 1 art articles",
-      "timestamp": "2025-08-26T13:53:08.926727",
+      "message": "Retrieved 0 art articles",
+      "timestamp": "2025-08-29T08:09:12.986196",
       "response_data": null
     },
     {
       "test": "Articles - Entertainment Category",
       "success": true,
       "message": "Retrieved 0 entertainment articles",
-      "timestamp": "2025-08-26T13:53:08.975984",
+      "timestamp": "2025-08-29T08:09:13.036008",
+      "response_data": null
+    },
+    {
+      "test": "Categories Count",
+      "success": true,
+      "message": "Retrieved expected 9 categories",
+      "timestamp": "2025-08-29T08:09:13.049676",
+      "response_data": null
+    },
+    {
+      "test": "GQ Categories Structure",
+      "success": true,
+      "message": "All 9 GQ-style categories present: Fashion, Business, Technology, Finance, Travel, Health, Culture, Art, Entertainment",
+      "timestamp": "2025-08-29T08:09:13.049717",
+      "response_data": null
+    },
+    {
+      "test": "Categories Listing",
+      "success": true,
+      "message": "Retrieved 9 categories",
+      "timestamp": "2025-08-29T08:09:13.049726",
       "response_data": null
     },
     {
       "test": "Reviews Listing",
       "success": true,
       "message": "Retrieved 1 reviews",
-      "timestamp": "2025-08-26T13:53:08.985859",
+      "timestamp": "2025-08-29T08:09:13.102513",
       "response_data": null
     },
     {
       "test": "Magazine Issues",
       "success": true,
       "message": "Retrieved 2 magazine issues",
-      "timestamp": "2025-08-26T13:53:09.034260",
+      "timestamp": "2025-08-29T08:09:13.122918",
       "response_data": null
     },
     {
       "test": "Travel Destinations",
       "success": true,
       "message": "Retrieved 2 destinations",
-      "timestamp": "2025-08-26T13:53:09.083589",
+      "timestamp": "2025-08-29T08:09:13.139163",
+      "response_data": null
+    },
+    {
+      "test": "Payment Packages",
+      "success": false,
+      "message": "Missing packages: ['premium_monthly', 'premium_annual']",
+      "timestamp": "2025-08-29T08:09:13.205738",
+      "response_data": null
+    },
+    {
+      "test": "Payment Checkout Creation",
+      "success": false,
+      "message": "HTTP 400: {\"detail\":\"Invalid subscription package\"}",
+      "timestamp": "2025-08-29T08:09:13.215494",
       "response_data": null
     },
     {
       "test": "Protected Endpoint",
       "success": true,
       "message": "Article created successfully with authentication",
-      "timestamp": "2025-08-26T13:53:09.099191",
+      "timestamp": "2025-08-29T08:09:13.267030",
       "response_data": null
     },
     {
       "test": "CORS Configuration",
       "success": true,
       "message": "CORS headers present and configured",
-      "timestamp": "2025-08-26T13:53:09.106318",
+      "timestamp": "2025-08-29T08:09:13.275380",
       "response_data": null
     }
   ]
