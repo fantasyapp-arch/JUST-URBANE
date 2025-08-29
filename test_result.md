@@ -577,6 +577,9 @@ backend:
       - working: true
         agent: "testing"
         comment: "✅ Payment packages endpoint working correctly. Returns premium_monthly (₹499) and premium_annual (₹4999) with correct INR currency and feature descriptions."
+      - working: true
+        agent: "testing"
+        comment: "✅ PREMIUM PRICING PAGE TESTING COMPLETED: Payment packages API working perfectly. All 3 subscription plans (Digital ₹499, Print ₹499, Print+Digital ₹999) returned with correct INR pricing, proper currency settings, and complete feature descriptions. Data structure fully compatible with frontend requirements."
 
   - task: "Stripe Payment Checkout Integration"
     implemented: true
@@ -589,6 +592,9 @@ backend:
       - working: false
         agent: "testing"
         comment: "❌ Stripe checkout creation failing with 'NoneType' object has no attribute 'Session' error. Issue with emergentintegrations.payments.stripe.checkout library. Environment variables fixed but third-party library integration needs research."
+      - working: false
+        agent: "testing"
+        comment: "❌ PREMIUM PRICING CHECKOUT TESTING: Stripe checkout creation still failing for all 3 packages (digital_annual, print_annual, combined_annual) with HTTP 500 error. Root cause: emergentintegrations library issue with STRIPE_API_KEY='sk_test_emergent' placeholder. All other premium pricing functionality working correctly (83.3% success rate)."
 
 frontend:
   - task: "Homepage Excellence"
