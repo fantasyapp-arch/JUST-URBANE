@@ -1,0 +1,134 @@
+{
+  "total": 18,
+  "passed": 15,
+  "failed": 3,
+  "success_rate": 83.33333333333334,
+  "results": [
+    {
+      "test": "Payment Packages Structure",
+      "success": true,
+      "message": "All 3 subscription plans present: ['digital_annual', 'print_annual', 'combined_annual']",
+      "timestamp": "2025-08-29T09:00:38.091453",
+      "response_data": null
+    },
+    {
+      "test": "INR Pricing Verification",
+      "success": true,
+      "message": "Correct pricing: Digital \u20b9499, Print \u20b9499, Print+Digital \u20b9999",
+      "timestamp": "2025-08-29T09:00:38.091490",
+      "response_data": null
+    },
+    {
+      "test": "Currency Verification",
+      "success": true,
+      "message": "All packages use INR currency",
+      "timestamp": "2025-08-29T09:00:38.091500",
+      "response_data": null
+    },
+    {
+      "test": "Package Features",
+      "success": true,
+      "message": "All packages have feature descriptions",
+      "timestamp": "2025-08-29T09:00:38.091507",
+      "response_data": null
+    },
+    {
+      "test": "Premium User Registration",
+      "success": true,
+      "message": "Premium test user registered successfully",
+      "timestamp": "2025-08-29T09:00:38.334375",
+      "response_data": null
+    },
+    {
+      "test": "Premium User Authentication",
+      "success": true,
+      "message": "JWT authentication successful for premium features",
+      "timestamp": "2025-08-29T09:00:38.574994",
+      "response_data": null
+    },
+    {
+      "test": "Checkout Creation - digital_annual",
+      "success": false,
+      "message": "HTTP 500: {\"detail\":\"Failed to create payment session\"} (Known Stripe integration issue)",
+      "timestamp": "2025-08-29T09:00:38.590580",
+      "response_data": null
+    },
+    {
+      "test": "Checkout Creation - print_annual",
+      "success": false,
+      "message": "HTTP 500: {\"detail\":\"Failed to create payment session\"} (Known Stripe integration issue)",
+      "timestamp": "2025-08-29T09:00:38.641298",
+      "response_data": null
+    },
+    {
+      "test": "Checkout Creation - combined_annual",
+      "success": false,
+      "message": "HTTP 500: {\"detail\":\"Failed to create payment session\"} (Known Stripe integration issue)",
+      "timestamp": "2025-08-29T09:00:38.650934",
+      "response_data": null
+    },
+    {
+      "test": "API Responsiveness - Health Check",
+      "success": true,
+      "message": "Endpoint responsive (HTTP 200)",
+      "timestamp": "2025-08-29T09:00:38.659053",
+      "response_data": null
+    },
+    {
+      "test": "API Responsiveness - Payment Packages",
+      "success": true,
+      "message": "Endpoint responsive (HTTP 200)",
+      "timestamp": "2025-08-29T09:00:38.708084",
+      "response_data": null
+    },
+    {
+      "test": "API Responsiveness - Categories",
+      "success": true,
+      "message": "Endpoint responsive (HTTP 200)",
+      "timestamp": "2025-08-29T09:00:38.717345",
+      "response_data": null
+    },
+    {
+      "test": "API Responsiveness - Articles",
+      "success": true,
+      "message": "Endpoint responsive (HTTP 200)",
+      "timestamp": "2025-08-29T09:00:38.727315",
+      "response_data": null
+    },
+    {
+      "test": "Data Structure - digital_annual",
+      "success": true,
+      "message": "Valid structure with 6 features",
+      "timestamp": "2025-08-29T09:00:38.776386",
+      "response_data": null
+    },
+    {
+      "test": "Data Structure - print_annual",
+      "success": true,
+      "message": "Valid structure with 6 features",
+      "timestamp": "2025-08-29T09:00:38.776423",
+      "response_data": null
+    },
+    {
+      "test": "Data Structure - combined_annual",
+      "success": true,
+      "message": "Valid structure with 6 features",
+      "timestamp": "2025-08-29T09:00:38.776431",
+      "response_data": null
+    },
+    {
+      "test": "Frontend Data Consistency",
+      "success": true,
+      "message": "All packages have consistent data structure for frontend",
+      "timestamp": "2025-08-29T09:00:38.776436",
+      "response_data": null
+    },
+    {
+      "test": "Premium Content Access",
+      "success": true,
+      "message": "Retrieved 5 articles, 5 premium",
+      "timestamp": "2025-08-29T09:00:38.786777",
+      "response_data": null
+    }
+  ]
+}
