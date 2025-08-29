@@ -100,73 +100,203 @@ const PricingPage = () => {
           </p>
         </div>
 
-        {/* Pricing Cards */}
+        {/* Premium Pricing Cards with GQ-Style Motion Effects */}
         <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-          {plans.map((plan) => (
-            <div
-              key={plan.name}
-              className={`relative bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 ${
-                plan.popular ? 'ring-2 ring-gold-500 transform scale-105' : ''
-              }`}
-            >
-              {plan.popular && (
-                <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                  <span className="bg-gold-500 text-white px-6 py-2 rounded-full text-sm font-bold flex items-center">
-                    <Crown className="h-4 w-4 mr-1" />
-                    Most Popular
-                  </span>
-                </div>
-              )}
-              
-              {plan.savings && (
-                <div className="absolute -top-4 right-4">
-                  <span className="bg-green-500 text-white px-3 py-1 rounded-full text-xs font-bold">
-                    {plan.savings}
-                  </span>
-                </div>
-              )}
-
-              <div className="p-8">
-                <h3 className="font-serif text-2xl font-bold text-gray-900 mb-2">
-                  {plan.name}
-                </h3>
-                <p className="text-gray-700 mb-6 text-lg">
-                  {plan.description}
-                </p>
-
-                <div className="mb-8">
-                  <span className="text-4xl font-bold text-gray-900">
-                    {plan.price}
-                  </span>
-                  <span className="text-gray-600 ml-2 text-lg">
-                    {plan.period}
-                  </span>
-                </div>
-
-                <ul className="space-y-4 mb-8">
-                  {plan.features.map((feature, index) => (
-                    <li key={index} className="flex items-center">
-                      <Check className="h-5 w-5 text-green-600 mr-3 flex-shrink-0" />
-                      <span className="text-gray-800 font-medium">{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-
-                <button
-                  onClick={() => handlePlanSelect(plan)}
-                  className={`w-full block text-center py-4 px-8 rounded-xl font-bold text-lg transition-all duration-200 transform hover:scale-105 shadow-lg ${
-                    plan.buttonVariant === 'premium'
-                      ? 'bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 text-white'
-                      : plan.buttonVariant === 'primary'
-                      ? 'bg-primary-600 hover:bg-primary-700 text-white'
-                      : 'bg-gray-100 hover:bg-gray-200 text-gray-900'
+          {plans.map((plan, index) => {
+            const IconComponent = plan.icon;
+            const isHovered = hoveredPlan === plan.id;
+            
+            return (
+              <motion.div
+                key={plan.name}
+                initial={{ opacity: 0, y: 50 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.2 }}
+                onMouseEnter={() => setHoveredPlan(plan.id)}
+                onMouseLeave={() => setHoveredPlan(null)}
+                className={`relative group cursor-pointer ${plan.popular ? 'md:scale-105' : ''}`}
+              >
+                {/* Premium Glow Background Effect */}
+                <div className={`absolute inset-0 bg-gradient-to-r ${plan.gradient} opacity-0 group-hover:opacity-10 rounded-3xl transition-opacity duration-500 blur-xl`}></div>
+                
+                {/* Main Card */}
+                <motion.div
+                  className={`relative bg-white rounded-3xl shadow-lg transition-all duration-500 overflow-hidden ${
+                    plan.popular ? 'ring-2 ring-primary-500/30' : ''
                   }`}
+                  animate={{
+                    y: isHovered ? -10 : 0,
+                    scale: isHovered ? 1.02 : 1,
+                    boxShadow: isHovered 
+                      ? '0 25px 50px -12px rgba(0, 0, 0, 0.25)' 
+                      : '0 10px 25px -5px rgba(0, 0, 0, 0.1)'
+                  }}
+                  transition={{ duration: 0.4, ease: "easeInOut" }}
                 >
-                  {plan.buttonText}
-                </button>
-              </div>
-            </div>
-          ))}
+                  {/* Animated Background Gradient */}
+                  <motion.div
+                    className={`absolute inset-0 bg-gradient-to-br ${plan.gradient} opacity-0 transition-opacity duration-500`}
+                    animate={{ opacity: isHovered ? 0.05 : 0 }}
+                  />
+                  
+                  {/* Sparkle Effect */}
+                  <AnimatePresence>
+                    {isHovered && (
+                      <motion.div
+                        initial={{ opacity: 0, scale: 0 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0, scale: 0 }}
+                        transition={{ duration: 0.3 }}
+                        className="absolute top-4 right-4"
+                      >
+                        <Sparkles className="h-6 w-6 text-primary-500 animate-pulse" />
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+
+                  {/* Popular Badge */}
+                  {plan.popular && (
+                    <motion.div
+                      initial={{ opacity: 0, y: -20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.5 }}
+                      className="absolute -top-4 left-1/2 transform -translate-x-1/2 z-10"
+                    >
+                      <div className="bg-gradient-to-r from-primary-500 to-primary-600 text-white px-6 py-2 rounded-full text-sm font-bold flex items-center shadow-lg">
+                        <Crown className="h-4 w-4 mr-1 animate-pulse" />
+                        Most Popular
+                      </div>
+                    </motion.div>
+                  )}
+                  
+                  {/* Savings Badge */}
+                  {plan.savings && (
+                    <motion.div
+                      initial={{ opacity: 0, x: 20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.6 }}
+                      className="absolute -top-4 right-4"
+                    >
+                      <span className="bg-gradient-to-r from-green-500 to-green-600 text-white px-3 py-1 rounded-full text-xs font-bold shadow-md">
+                        {plan.savings}
+                      </span>
+                    </motion.div>
+                  )}
+
+                  <div className="p-8 relative z-10">
+                    {/* Plan Header with Icon */}
+                    <motion.div
+                      className="flex items-center mb-4"
+                      animate={{ 
+                        scale: isHovered ? 1.05 : 1,
+                        x: isHovered ? 5 : 0
+                      }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <div className={`p-3 rounded-full bg-gradient-to-r ${plan.gradient} mr-4`}>
+                        <IconComponent className="h-6 w-6 text-white" />
+                      </div>
+                      <div>
+                        <h3 className="font-serif text-2xl font-bold text-gray-900">
+                          {plan.name}
+                        </h3>
+                      </div>
+                    </motion.div>
+
+                    <motion.p 
+                      className="text-gray-700 mb-6 text-lg"
+                      animate={{ opacity: isHovered ? 1 : 0.8 }}
+                    >
+                      {plan.description}
+                    </motion.p>
+
+                    {/* Pricing with Motion */}
+                    <motion.div 
+                      className="mb-8"
+                      animate={{ 
+                        scale: isHovered ? 1.1 : 1,
+                        color: isHovered ? '#3b82f6' : '#111827'
+                      }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <span className="text-4xl font-bold">
+                        {plan.price}
+                      </span>
+                      <span className="text-gray-600 ml-2 text-lg">
+                        {plan.period}
+                      </span>
+                    </motion.div>
+
+                    {/* Features with Staggered Animation */}
+                    <motion.ul className="space-y-4 mb-8">
+                      {plan.features.map((feature, featureIndex) => (
+                        <motion.li 
+                          key={featureIndex} 
+                          className="flex items-center"
+                          initial={{ opacity: 0, x: -20 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ 
+                            delay: index * 0.2 + featureIndex * 0.1,
+                            duration: 0.4
+                          }}
+                          whileHover={{ x: 5, transition: { duration: 0.2 } }}
+                        >
+                          <motion.div
+                            animate={{ 
+                              scale: isHovered ? 1.2 : 1,
+                              rotate: isHovered ? 360 : 0
+                            }}
+                            transition={{ duration: 0.5 }}
+                          >
+                            <Check className="h-5 w-5 text-green-600 mr-3 flex-shrink-0" />
+                          </motion.div>
+                          <span className="text-gray-800 font-medium">{feature}</span>
+                        </motion.li>
+                      ))}
+                    </motion.ul>
+
+                    {/* Premium CTA Button */}
+                    <motion.button
+                      onClick={() => handlePlanSelect(plan)}
+                      className={`relative w-full py-4 px-8 rounded-xl font-bold text-lg transition-all duration-300 overflow-hidden ${
+                        plan.buttonVariant === 'premium'
+                          ? 'bg-gradient-to-r from-primary-600 to-primary-700 text-white'
+                          : plan.buttonVariant === 'primary'
+                          ? 'bg-primary-600 text-white'
+                          : 'bg-gray-100 text-gray-900'
+                      }`}
+                      whileHover={{ 
+                        scale: 1.05,
+                        boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.25)'
+                      }}
+                      whileTap={{ scale: 0.95 }}
+                      animate={{
+                        background: isHovered && plan.buttonVariant === 'premium'
+                          ? 'linear-gradient(135deg, #3b82f6, #1d4ed8)'
+                          : undefined
+                      }}
+                    >
+                      {/* Shimmer Effect on Button */}
+                      <motion.div
+                        className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
+                        animate={{
+                          x: isHovered ? ['-100%', '100%'] : '-100%'
+                        }}
+                        transition={{
+                          duration: 0.8,
+                          ease: "easeInOut",
+                          repeat: isHovered ? Infinity : 0,
+                          repeatDelay: 1
+                        }}
+                      />
+                      
+                      <span className="relative z-10">{plan.buttonText}</span>
+                    </motion.button>
+                  </div>
+                </motion.div>
+              </motion.div>
+            );
+          })}
         </div>
 
         {/* Features Section */}
