@@ -51,7 +51,9 @@ const IssuesPage = () => {
   const sortedIssues = Object.entries(monthlyIssues).sort(([a], [b]) => b.localeCompare(a));
 
   const openMagazineReader = (issueArticles) => {
-    setSelectedIssue(issueArticles);
+    // Use your uploaded magazine content instead of articles
+    const magazineContent = parseMagazineContent();
+    setSelectedIssue(magazineContent);
     setIsReaderOpen(true);
   };
 
