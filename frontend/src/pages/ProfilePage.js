@@ -74,7 +74,7 @@ const ProfilePage = () => {
           <img 
             src="https://customer-assets.emergentagent.com/job_urbane-nexus/artifacts/w4pbaa92_Untitled%20design-10.png" 
             alt="JUST URBANE" 
-            className="h-16 w-auto object-contain mx-auto"
+            className="h-20 w-auto object-contain mx-auto"
           />
         </div>
 
