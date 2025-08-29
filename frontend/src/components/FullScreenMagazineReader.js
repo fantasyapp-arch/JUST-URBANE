@@ -459,7 +459,7 @@ const MagazinePageContent = ({ page, pageNumber }) => {
         {/* Article Body */}
         <div className="flex-1 prose prose-lg max-w-none">
           <div className="text-gray-700 leading-relaxed text-base">
-            {page.content.split('\n\n').map((paragraph, index) => (
+            {(page.content || '').split('\n\n').map((paragraph, index) => (
               <p key={index} className="mb-6 text-justify">
                 {index === 0 && (
                   <span className="float-left text-7xl font-serif leading-none mr-3 mt-2 text-gray-800">
