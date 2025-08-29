@@ -10,7 +10,19 @@ const SubcategoryPage = () => {
   const { category, subcategory } = useParams();
   const [searchQuery, setSearchQuery] = useState('');
 
-  const { data: articles = [], isLoading, error } = useSubcategoryArticles(category, subcategory, { limit: 50 });
+  const { data: articles = [], isLoading, error } = useQuery(
+    ['subcategory-articles', category, subcategory],
+    async () => {
+      const response = await api.get('/articles', { 
+        params: { category, subcategory } 
+      });
+      return response.data;
+    },
+    {
+      enabled: !!(category && subcategory),
+      staleTime: 5 * 60 * 1000,
+    }
+  );
 
   // Filter articles
   const filteredArticles = useMemo(() => {
