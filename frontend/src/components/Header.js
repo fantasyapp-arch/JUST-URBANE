@@ -316,7 +316,7 @@ const Header = () => {
                     
                     <div className="relative z-10">
                       <div className="flex items-center mb-3">
-                        <Crown className="h-5 w-5 text-gold-400 mr-2" />
+                        <Crown className="h-5 w-5 text-primary-400 mr-2" />
                         <h3 className="font-bold text-lg">Premium Access</h3>
                       </div>
                       <p className="text-sm text-gray-300 mb-5 leading-relaxed">Unlock exclusive content, expert insights, and luxury experiences</p>
