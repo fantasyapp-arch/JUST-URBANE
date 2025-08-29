@@ -427,8 +427,10 @@ const SubscriptionGatePage = ({ onSubscribe, pageNumber }) => {
         </div>
 
         {/* Main Heading */}
-        <h1 className="text-3xl font-bold mb-4 bg-gradient-to-r from-amber-200 to-amber-400 bg-clip-text text-transparent">
-          This magazine access is exclusive to our subscribers.
+        <h1 className="text-3xl font-bold text-gray-900 mb-4">
+          <span className="bg-gradient-to-r from-amber-300 to-amber-500 bg-clip-text text-transparent">
+            This magazine access is exclusive to our subscribers.
+          </span>
         </h1>
 
         <p className="text-xl text-gray-300 mb-8 max-w-sm leading-relaxed">
