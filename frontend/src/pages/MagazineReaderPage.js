@@ -189,19 +189,79 @@ const MagazineReaderPage = () => {
           height: 100vh;
         }
         
-        /* Enhanced page turn effect with visible shadow and curl */
-        .page-turn-effect {
-          box-shadow: 
-            0 0 30px rgba(0, 0, 0, 0.3),
-            inset -15px 0 30px rgba(0, 0, 0, 0.2),
-            inset 15px 0 30px rgba(0, 0, 0, 0.1);
+        /* Realistic page curl effect */
+        .page-curl-container {
+          position: relative;
+          width: 100%;
+          height: 100%;
+          perspective: 1000px;
         }
         
-        .page-turning {
-          transform-origin: center center;
-          box-shadow: 
-            0 10px 40px rgba(0, 0, 0, 0.4),
-            inset -20px 0 40px rgba(0, 0, 0, 0.3);
+        .page-curling {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          transform-origin: left center;
+          background: linear-gradient(135deg, transparent 0%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.2) 100%);
+          z-index: 10;
+        }
+        
+        .page-underneath {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          z-index: 5;
+        }
+        
+        /* Page curl animation keyframes */
+        @keyframes pageCurlNext {
+          0% {
+            transform: rotateY(0deg) rotateX(0deg);
+            clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+          }
+          25% {
+            transform: rotateY(-15deg) rotateX(2deg);
+            clip-path: polygon(0% 0%, 95% 5%, 95% 95%, 0% 100%);
+          }
+          50% {
+            transform: rotateY(-45deg) rotateX(5deg);
+            clip-path: polygon(0% 0%, 80% 20%, 80% 80%, 0% 100%);
+          }
+          75% {
+            transform: rotateY(-75deg) rotateX(8deg);
+            clip-path: polygon(0% 0%, 40% 40%, 40% 60%, 0% 100%);
+          }
+          100% {
+            transform: rotateY(-180deg) rotateX(10deg);
+            clip-path: polygon(0% 0%, 0% 50%, 0% 50%, 0% 100%);
+          }
+        }
+        
+        @keyframes pageCurlPrev {
+          0% {
+            transform: rotateY(0deg) rotateX(0deg);
+            clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+          }
+          25% {
+            transform: rotateY(15deg) rotateX(2deg);
+            clip-path: polygon(5% 5%, 100% 0%, 100% 100%, 5% 95%);
+          }
+          50% {
+            transform: rotateY(45deg) rotateX(5deg);
+            clip-path: polygon(20% 20%, 100% 0%, 100% 100%, 20% 80%);
+          }
+          75% {
+            transform: rotateY(75deg) rotateX(8deg);
+            clip-path: polygon(60% 40%, 100% 0%, 100% 100%, 60% 60%);
+          }
+          100% {
+            transform: rotateY(180deg) rotateX(10deg);
+            clip-path: polygon(100% 50%, 100% 0%, 100% 100%, 100% 50%);
+          }
         }
       `}</style>
       
