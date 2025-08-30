@@ -255,7 +255,7 @@ const HomePage = () => {
               </Link>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-6">
               {/* Featured Fashion Article */}
               {fashionArticles[0] && (
                 <div className="md:col-span-8">
