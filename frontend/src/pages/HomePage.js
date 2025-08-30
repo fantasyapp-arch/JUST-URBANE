@@ -388,7 +388,7 @@ const HomePage = () => {
           <div className="w-full px-2">
             <div className="max-w-7xl mx-auto">
             <div className="border-t-2 border-gray-900 pt-2 mb-3">
-              <div className="flex items-center justify-between mb-6">
+              <div className="flex items-center justify-between mb-3">
                 <h2 className="text-3xl lg:text-4xl font-serif font-bold text-gray-900">
                   Trending
                 </h2>
