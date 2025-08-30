@@ -161,7 +161,7 @@ const MagazineReaderPage = () => {
         overflow: 'hidden',
         zIndex: 999999
       }}>
-      {/* Hidden Close Button - Appears on hover */}
+        {/* Hidden Close Button - Appears on hover */}
       <button
         onClick={closeReader}
         style={{
