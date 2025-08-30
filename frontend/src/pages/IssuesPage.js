@@ -44,10 +44,17 @@ const IssuesPage = () => {
   ];
 
   const openMagazineReader = () => {
-    // Use your uploaded magazine content
-    const magazineContent = parseMagazineContent();
-    setSelectedIssue(magazineContent);
-    setIsReaderOpen(true);
+    console.log('🔥 Opening magazine reader...');
+    try {
+      // Use your uploaded magazine content
+      const magazineContent = parseMagazineContent();
+      console.log('📖 Magazine content parsed:', magazineContent);
+      setSelectedIssue(magazineContent);
+      setIsReaderOpen(true);
+      console.log('✅ Magazine reader state updated');
+    } catch (error) {
+      console.error('❌ Error opening magazine reader:', error);
+    }
   };
 
   const closeMagazineReader = () => {
