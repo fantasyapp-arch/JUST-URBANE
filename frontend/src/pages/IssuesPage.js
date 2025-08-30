@@ -112,8 +112,14 @@ const IssuesPage = () => {
                   <div className="text-center">
                     {magazine.current ? (
                       <button
-                        onClick={openMagazineReader}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          e.stopPropagation();
+                          console.log('🎯 Button clicked!');
+                          openMagazineReader();
+                        }}
                         className="bg-white/20 backdrop-blur-sm text-white px-6 py-3 rounded-full font-semibold hover:bg-white/30 transition-all duration-300 flex items-center justify-center space-x-2 mx-auto"
+                        type="button"
                       >
                         <PlayCircle className="h-5 w-5" />
                         <span>Free Preview</span>
