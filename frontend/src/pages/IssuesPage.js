@@ -46,8 +46,16 @@ const IssuesPage = () => {
 
   const openMagazineReader = () => {
     console.log('🔥 Opening magazine reader...');
-    // Navigate to dedicated magazine reader page
-    navigate('/magazine-reader');
+    console.log('Navigate function:', navigate);
+    try {
+      // Navigate to dedicated magazine reader page
+      navigate('/magazine-reader');
+      console.log('✅ Navigation called successfully');
+    } catch (error) {
+      console.error('❌ Navigation error:', error);
+      // Fallback to window.location
+      window.location.href = '/magazine-reader';
+    }
   };
 
   const closeMagazineReader = () => {
