@@ -425,82 +425,273 @@ const HomePage = () => {
           </div>
         </motion.section>
 
-        {/* PREMIUM CONTENT SECTIONS */}
+        {/* TRENDING ARTICLES - GQ STYLE */}
         <motion.section 
-          className="mb-20"
+          className="mb-16"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.9 }}
         >
-          <div className="text-center mb-16">
-            <h2 className="text-4xl lg:text-5xl font-serif font-bold text-gray-900 mb-6">
-              Premium Categories
+          <div className="border-t-2 border-gray-900 pt-12 mb-12">
+            <div className="flex items-center justify-between mb-8">
+              <h2 className="text-3xl lg:text-4xl font-serif font-bold text-gray-900">
+                Trending
+              </h2>
+              <Link
+                to="/trending"
+                className="text-primary-600 hover:text-primary-700 font-semibold text-lg"
+              >
+                View All
+              </Link>
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-8">
+              {/* Use trending articles or fallback content */}
+              {(trendingArticles.length > 0 ? trendingArticles.slice(0, 3) : [
+                {
+                  id: 1,
+                  title: 'The Future of Luxury: How Technology is Reshaping Premium Experiences',
+                  hero_image: 'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=600&h=400&fit=crop',
+                  category: 'Technology',
+                  author_name: 'Arjun Menon',
+                  published_at: '2025-08-29',
+                  reading_time: 6,
+                  view_count: 2847,
+                  slug: 'future-luxury-technology'
+                },
+                {
+                  id: 2,
+                  title: 'Sustainable Fashion: The New Status Symbol Among Elite Circles',
+                  hero_image: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=600&h=400&fit=crop',
+                  category: 'Fashion',
+                  author_name: 'Priya Sharma',
+                  published_at: '2025-08-28',
+                  reading_time: 8,
+                  view_count: 1923,
+                  slug: 'sustainable-fashion-status'
+                },
+                {
+                  id: 3,
+                  title: 'India\'s Most Exclusive Private Members Clubs: An Inside Look',
+                  hero_image: 'https://images.unsplash.com/photo-1574180566232-aaad1b5b8450?w=600&h=400&fit=crop',
+                  category: 'Culture',
+                  author_name: 'Vikram Singh',
+                  published_at: '2025-08-27',
+                  reading_time: 12,
+                  view_count: 3156,
+                  slug: 'exclusive-private-clubs'
+                }
+              ]).map((article, index) => (
+                <ProfessionalArticleCard 
+                  key={article.id}
+                  article={article} 
+                  layout="standard"
+                  index={index}
+                />
+              ))}
+            </div>
+          </div>
+        </motion.section>
+
+        {/* LIFESTYLE SECTION - MIXED LAYOUT */}
+        <motion.section 
+          className="mb-16"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 1.0 }}
+        >
+          <div className="flex items-center justify-between mb-8">
+            <h2 className="text-3xl lg:text-4xl font-serif font-bold text-gray-900">
+              Lifestyle
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Explore curated content across luxury lifestyle, technology, fashion, and entertainment
-            </p>
+            <Link
+              to="/category/lifestyle"
+              className="text-primary-600 hover:text-primary-700 font-semibold text-lg"
+            >
+              View All
+            </Link>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {[
-              {
-                title: 'Fashion & Style',
-                description: 'Latest trends, designer collections, and style guides',
-                icon: '👔',
-                color: 'from-pink-500 to-rose-600',
-                link: '/category/fashion'
-              },
-              {
-                title: 'Technology',
-                description: 'Cutting-edge gadgets, AI innovations, and tech reviews',
-                icon: '💻',
-                color: 'from-blue-500 to-cyan-600',
-                link: '/category/tech'
-              },
-              {
-                title: 'Travel & Luxury',
-                description: 'Premium destinations, luxury hotels, and travel guides',
-                icon: '✈️',
-                color: 'from-green-500 to-emerald-600',
-                link: '/category/travel'
-              },
-              {
-                title: 'Entertainment',
-                description: 'Celebrity interviews, movies, music, and culture',
-                icon: '🎬',
-                color: 'from-purple-500 to-violet-600',
-                link: '/category/entertainment'
-              }
-            ].map((category, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.9 + index * 0.1 }}
-              >
-                <Link 
-                  to={category.link}
-                  className="group block bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100"
+          <div className="grid lg:grid-cols-2 gap-8">
+            {/* Featured Lifestyle Article */}
+            <motion.div 
+              className="group cursor-pointer"
+              initial={{ opacity: 0, x: -30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 1.1 }}
+            >
+              <Link to="/article/luxury-watch-investment">
+                <div className="relative overflow-hidden rounded-lg shadow-xl">
+                  <img
+                    src="https://images.unsplash.com/photo-1603189343302-e603f7add05a?w=800&h=500&fit=crop"
+                    alt="Luxury Watch Investment"
+                    className="w-full h-80 object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
+                  <div className="absolute bottom-0 left-0 right-0 p-8">
+                    <span className="bg-primary-600 text-white px-3 py-1 rounded text-sm font-bold mb-4 inline-block">
+                      WATCHES
+                    </span>
+                    <h3 className="text-2xl lg:text-3xl font-serif font-bold text-white group-hover:text-gold-300 transition-colors leading-tight mb-4">
+                      The Art of Watch Investment: Building a Premium Collection
+                    </h3>
+                    <div className="flex items-center text-white/80 text-sm space-x-4">
+                      <span>By Rohit Khanna</span>
+                      <span>•</span>
+                      <span>Aug 28, 2025</span>
+                      <span>•</span>
+                      <span>10 min read</span>
+                    </div>
+                  </div>
+                </div>
+              </Link>
+            </motion.div>
+
+            {/* Lifestyle Article List */}
+            <div className="space-y-6">
+              {[
+                {
+                  title: 'Mumbai\'s Hidden Speakeasies: Where the Elite Unwind',
+                  image: 'https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=400&h=250&fit=crop',
+                  category: 'Culture',
+                  author: 'Ananya Desai',
+                  date: '25 Aug 2025',
+                  readTime: '7 min'
+                },
+                {
+                  title: 'Luxury Car Trends: The Rise of Electric Supercars',
+                  image: 'https://images.unsplash.com/photo-1549399810-ec2d17c20e7c?w=400&h=250&fit=crop',
+                  category: 'Automotive',
+                  author: 'Karan Malhotra',
+                  date: '23 Aug 2025',
+                  readTime: '5 min'
+                },
+                {
+                  title: 'Fine Dining Revolution: India\'s Michelin Star Pursuit',
+                  image: 'https://images.unsplash.com/photo-1559339352-11d035aa65de?w=400&h=250&fit=crop',
+                  category: 'Food & Drink',
+                  author: 'Chef Raghav Iyer',
+                  date: '20 Aug 2025',
+                  readTime: '9 min'
+                }
+              ].map((article, index) => (
+                <motion.div 
+                  key={index}
+                  className="group cursor-pointer flex gap-4 bg-white hover:bg-gray-50 transition-colors duration-300 p-4 rounded-lg"
+                  initial={{ opacity: 0, x: 30 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.6, delay: 1.2 + index * 0.1 }}
                 >
-                  <div className={`w-16 h-16 bg-gradient-to-br ${category.color} rounded-2xl flex items-center justify-center text-2xl mb-6 group-hover:scale-110 transition-transform`}>
-                    {category.icon}
+                  <div className="relative overflow-hidden rounded-lg flex-shrink-0">
+                    <img
+                      src={article.image}
+                      alt={article.title}
+                      className="w-32 h-20 object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
                   </div>
                   
-                  <h3 className="text-xl font-serif font-bold text-gray-900 mb-4 group-hover:text-primary-600 transition-colors">
-                    {category.title}
-                  </h3>
-                  
-                  <p className="text-gray-600 leading-relaxed mb-6">
-                    {category.description}
-                  </p>
-                  
-                  <div className="flex items-center text-primary-600 group-hover:text-primary-700 font-semibold">
-                    <span>Explore</span>
-                    <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                  <div className="flex-1">
+                    <div className="mb-2">
+                      <span className="bg-gray-900 text-white px-2 py-1 rounded text-xs font-bold uppercase tracking-wide">
+                        {article.category}
+                      </span>
+                    </div>
+                    <h4 className="font-serif font-semibold text-gray-900 group-hover:text-primary-600 transition-colors leading-tight mb-2">
+                      {article.title}
+                    </h4>
+                    <div className="text-xs text-gray-500 flex items-center space-x-2">
+                      <span>{article.author}</span>
+                      <span>•</span>
+                      <span>{article.date}</span>
+                      <span>•</span>
+                      <span>{article.readTime}</span>
+                    </div>
                   </div>
-                </Link>
-              </motion.div>
-            ))}
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </motion.section>
+
+        {/* BUSINESS & FINANCE SECTION */}
+        <motion.section 
+          className="mb-16"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 1.3 }}
+        >
+          <div className="border-t border-gray-200 pt-12">
+            <div className="flex items-center justify-between mb-8">
+              <h2 className="text-3xl lg:text-4xl font-serif font-bold text-gray-900">
+                Business & Finance
+              </h2>
+              <Link
+                to="/category/business"
+                className="text-primary-600 hover:text-primary-700 font-semibold text-lg"
+              >
+                View All
+              </Link>
+            </div>
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {[
+                {
+                  title: 'Startup Unicorns: The New Billionaire Playbook',
+                  image: 'https://images.unsplash.com/photo-1551434678-e076c223a692?w=400&h=300&fit=crop',
+                  category: 'Business',
+                  readTime: '6 min'
+                },
+                {
+                  title: 'Crypto Investment Strategies for High Net Worth Individuals',
+                  image: 'https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=400&h=300&fit=crop',
+                  category: 'Finance',
+                  readTime: '8 min'
+                },
+                {
+                  title: 'Real Estate Empire: Mumbai\'s Premium Property Market',
+                  image: 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=400&h=300&fit=crop',
+                  category: 'Real Estate',
+                  readTime: '10 min'
+                },
+                {
+                  title: 'Angel Investing: How India\'s Elite Build Wealth',
+                  image: 'https://images.unsplash.com/photo-1559526324-4b87b5e36e44?w=400&h=300&fit=crop',
+                  category: 'Investment',
+                  readTime: '7 min'
+                }
+              ].map((article, index) => (
+                <motion.div
+                  key={index}
+                  className="group cursor-pointer bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 1.4 + index * 0.1 }}
+                >
+                  <div className="relative overflow-hidden rounded-t-lg">
+                    <img
+                      src={article.image}
+                      alt={article.title}
+                      className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                    <div className="absolute top-4 left-4">
+                      <span className="bg-black/80 text-white px-3 py-1 rounded text-xs font-bold">
+                        {article.category}
+                      </span>
+                    </div>
+                    <div className="absolute bottom-4 right-4">
+                      <span className="bg-white/90 text-gray-900 px-2 py-1 rounded text-xs font-medium">
+                        {article.readTime}
+                      </span>
+                    </div>
+                  </div>
+                  <div className="p-6">
+                    <h3 className="font-serif font-semibold text-gray-900 group-hover:text-primary-600 transition-colors leading-tight">
+                      {article.title}
+                    </h3>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
           </div>
         </motion.section>
 
