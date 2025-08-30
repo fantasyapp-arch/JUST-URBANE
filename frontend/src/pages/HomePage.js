@@ -199,7 +199,7 @@ const HomePage = () => {
       </motion.div>
 
       {/* MAIN CONTENT CONTAINER */}
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-4 py-4">
         
         {/* HERO SECTION - PROFESSIONAL MAGAZINE STYLE */}
         <section className="mb-20">
