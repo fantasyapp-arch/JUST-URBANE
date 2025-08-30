@@ -577,7 +577,7 @@ const HomePage = () => {
             </motion.div>
 
             {/* Lifestyle Article List */}
-            <div className="space-y-3">
+            <div className="space-y-6">
               {[
                 {
                   title: 'Mumbai\'s Hidden Speakeasies: Where the Elite Unwind',
