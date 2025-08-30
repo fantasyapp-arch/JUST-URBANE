@@ -225,9 +225,9 @@ const MagazineReaderPage = () => {
             initial={{ 
               opacity: 0,
               rotateY: flipDirection === 'next' ? -180 : 180,
-              scale: 0.6,
-              z: -300,
-              rotateX: flipDirection === 'next' ? -15 : 15
+              scale: 0.8,
+              z: -200,
+              rotateX: flipDirection === 'next' ? -8 : 8
             }}
             animate={{ 
               opacity: 1,
@@ -239,17 +239,17 @@ const MagazineReaderPage = () => {
             exit={{ 
               opacity: 0,
               rotateY: flipDirection === 'next' ? 180 : -180,
-              scale: 0.6,
-              z: -300,
-              rotateX: flipDirection === 'next' ? 15 : -15
+              scale: 0.8,
+              z: -200,
+              rotateX: flipDirection === 'next' ? 8 : -8
             }}
             transition={{ 
-              duration: 1.2,
+              duration: 1.0,
               ease: [0.25, 0.46, 0.45, 0.94],
-              opacity: { duration: 0.6 },
-              scale: { duration: 1.0 },
-              rotateY: { duration: 1.2 },
-              rotateX: { duration: 1.0 }
+              opacity: { duration: 0.4, delay: flipDirection === 'next' ? 0.3 : 0 },
+              scale: { duration: 0.8, ease: [0.34, 1.56, 0.64, 1] },
+              rotateY: { duration: 1.0, ease: [0.25, 0.46, 0.45, 0.94] },
+              rotateX: { duration: 0.8 }
             }}
             style={{
               position: 'relative',
