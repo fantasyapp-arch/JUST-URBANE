@@ -195,7 +195,8 @@ const FullScreenMagazineReader = ({ isOpen, onClose, magazineContent = [] }) => 
         <button
           onClick={nextPage}
           disabled={(!canReadPremium && currentPage >= FREE_PREVIEW_PAGES - 1) || currentPage >= totalPages - 1}
-          className="absolute right-6 top-1/2 transform -translate-y-1/2 z-30 p-4 text-white/80 hover:text-white hover:scale-110 transition-all duration-200 disabled:opacity-30 disabled:cursor-not-allowed"
+          className="absolute right-6 top-1/2 transform -translate-y-1/2 p-4 text-white/80 hover:text-white hover:scale-110 transition-all duration-200 disabled:opacity-30 disabled:cursor-not-allowed"
+          style={{ zIndex: 10000 }}
         >
           <ChevronRight className="h-16 w-16 drop-shadow-lg" />
         </button>
