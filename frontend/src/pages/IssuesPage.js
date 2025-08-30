@@ -194,6 +194,7 @@ const IssuesPage = () => {
       </div>
 
       {/* Full Screen 3D Magazine Reader */}
+      {console.log('🎯 Rendering FullScreenMagazineReader - isOpen:', isReaderOpen, 'selectedIssue:', selectedIssue)}
       <FullScreenMagazineReader
         isOpen={isReaderOpen}
         onClose={closeMagazineReader}
