@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, ChevronLeft, ChevronRight, Crown } from 'lucide-react';
@@ -12,6 +12,7 @@ const MagazineReaderPage = () => {
   const [totalPages, setTotalPages] = useState(0);
   const [showSubscriptionModal, setShowSubscriptionModal] = useState(false);
   const [isFlipping, setIsFlipping] = useState(false);
+  const [flipDirection, setFlipDirection] = useState('next');
   const { user, isAuthenticated } = useAuth();
 
   const canReadPremium = isAuthenticated && user?.is_premium && user?.subscription_status === 'active';
@@ -26,13 +27,16 @@ const MagazineReaderPage = () => {
   }, [pages]);
 
   useEffect(() => {
-    // Lock body scroll completely
+    // COMPLETE full-screen experience - lock body scroll and remove all browser elements
     document.body.style.overflow = 'hidden';
     document.body.style.position = 'fixed';
     document.body.style.width = '100%';
     document.body.style.height = '100%';
     document.body.style.top = '0';
     document.body.style.left = '0';
+    document.body.style.margin = '0';
+    document.body.style.padding = '0';
+    document.documentElement.style.overflow = 'hidden';
     
     return () => {
       // Restore when leaving page
@@ -42,6 +46,9 @@ const MagazineReaderPage = () => {
       document.body.style.height = '';
       document.body.style.top = '';
       document.body.style.left = '';
+      document.body.style.margin = '';
+      document.body.style.padding = '';
+      document.documentElement.style.overflow = '';
     };
   }, []);
 
@@ -55,10 +62,11 @@ const MagazineReaderPage = () => {
     
     if (currentPage < totalPages - 1) {
       setIsFlipping(true);
+      setFlipDirection('next');
       setTimeout(() => {
         setCurrentPage(currentPage + 1);
         setIsFlipping(false);
-      }, 400);
+      }, 600);
     }
   };
 
@@ -67,10 +75,11 @@ const MagazineReaderPage = () => {
     
     if (currentPage > 0) {
       setIsFlipping(true);
+      setFlipDirection('prev');
       setTimeout(() => {
         setCurrentPage(currentPage - 1);
         setIsFlipping(false);
-      }, 400);
+      }, 600);
     }
   };
 
@@ -81,13 +90,17 @@ const MagazineReaderPage = () => {
   if (!pages.length) {
     return (
       <div style={{
+        position: 'fixed',
+        top: 0,
+        left: 0,
         width: '100vw',
         height: '100vh',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#1a1a1a',
-        color: 'white'
+        backgroundColor: '#000',
+        color: 'white',
+        fontSize: '18px'
       }}>
         Loading magazine...
       </div>
@@ -99,47 +112,55 @@ const MagazineReaderPage = () => {
 
   return (
     <div style={{
-      width: '100vw',
-      height: '100vh',
-      backgroundColor: '#1a1a1a',
       position: 'fixed',
       top: 0,
       left: 0,
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
+      width: '100vw',
+      height: '100vh',
+      backgroundColor: '#000',
       margin: 0,
       padding: 0,
-      overflow: 'hidden'
+      overflow: 'hidden',
+      zIndex: 999999
     }}>
-      {/* Top Navigation Bar */}
+      {/* Top Navigation Bar - Minimalist */}
       <div style={{
         position: 'absolute',
         top: 0,
         left: 0,
         right: 0,
-        height: '50px',
-        backgroundColor: 'rgba(0,0,0,0.9)',
+        height: '60px',
+        background: 'linear-gradient(to bottom, rgba(0,0,0,0.8), transparent)',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
-        padding: '0 20px',
-        zIndex: 100000
+        padding: '0 30px',
+        zIndex: 1000000
       }}>
         <div style={{ 
           color: 'white', 
-          fontSize: '14px',
+          fontSize: '16px',
+          fontWeight: '500',
           display: 'flex',
           alignItems: 'center',
-          gap: '10px'
+          gap: '15px'
         }}>
           <span>Just Urbane - August 2025</span>
-          <span style={{ color: '#666' }}>|</span>
-          <span>{currentPage + 1} of {totalPages}</span>
+          <span style={{ color: '#666' }}>•</span>
+          <span>Page {currentPage + 1} of {totalPages}</span>
           {!canReadPremium && currentPage < FREE_PREVIEW_PAGES && (
             <>
-              <span style={{ color: '#666' }}>|</span>
-              <span style={{ color: '#10b981', fontSize: '12px' }}>FREE PREVIEW</span>
+              <span style={{ color: '#666' }}>•</span>
+              <span style={{ 
+                color: '#10b981', 
+                fontSize: '14px',
+                background: 'rgba(16, 185, 129, 0.2)',
+                padding: '4px 12px',
+                borderRadius: '20px',
+                border: '1px solid #10b981'
+              }}>
+                FREE PREVIEW
+              </span>
             </>
           )}
         </div>
@@ -147,158 +168,190 @@ const MagazineReaderPage = () => {
         <button
           onClick={closeReader}
           style={{
-            padding: '8px',
-            backgroundColor: 'transparent',
+            padding: '10px',
+            backgroundColor: 'rgba(255,255,255,0.1)',
             color: 'white',
             border: 'none',
-            borderRadius: '4px',
+            borderRadius: '50%',
             cursor: 'pointer',
             display: 'flex',
             alignItems: 'center',
-            justifyContent: 'center'
+            justifyContent: 'center',
+            width: '40px',
+            height: '40px',
+            transition: 'all 0.2s ease'
           }}
+          onMouseEnter={(e) => e.target.style.backgroundColor = 'rgba(255,255,255,0.2)'}
+          onMouseLeave={(e) => e.target.style.backgroundColor = 'rgba(255,255,255,0.1)'}
         >
           <X size={20} />
         </button>
       </div>
 
-      {/* Magazine Display Area */}
+      {/* Magazine Display Area - Full Screen with 3D Flip */}
       <div style={{
-        position: 'relative',
+        position: 'absolute',
+        top: 0,
+        left: 0,
         width: '100%',
         height: '100%',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        paddingTop: '50px'
+        perspective: '1500px'
       }}>
         <AnimatePresence mode="wait">
           <motion.div
             key={currentPage}
             initial={{ 
-              x: isFlipping ? (currentPage > 0 ? -30 : 30) : 0, 
               opacity: 0,
-              scale: 0.98
+              rotateY: flipDirection === 'next' ? -90 : 90,
+              scale: 0.8,
+              z: -200
             }}
             animate={{ 
-              x: 0, 
               opacity: 1,
-              scale: 1
+              rotateY: 0,
+              scale: 1,
+              z: 0
             }}
             exit={{ 
-              x: isFlipping ? (currentPage > 0 ? 30 : -30) : 0, 
               opacity: 0,
-              scale: 0.98
+              rotateY: flipDirection === 'next' ? 90 : -90,
+              scale: 0.8,
+              z: -200
             }}
             transition={{ 
-              duration: 0.6, 
-              ease: [0.4, 0, 0.2, 1]
+              duration: 0.8,
+              ease: [0.25, 0.46, 0.45, 0.94],
+              opacity: { duration: 0.4 }
             }}
             style={{
               position: 'relative',
-              width: '100%',
-              height: '100%',
+              width: '90vmin',
+              height: '90vmin',
+              maxWidth: '800px',
+              maxHeight: '1000px',
               display: 'flex',
               alignItems: 'center',
-              justifyContent: 'center'
+              justifyContent: 'center',
+              transformStyle: 'preserve-3d'
             }}
           >
-            {/* Display Actual Magazine Page */}
+            {/* Magazine Page Container */}
             <div style={{
               position: 'relative',
-              maxWidth: '95%',
-              maxHeight: '90%',
-              width: 'auto',
-              height: 'auto',
-              backgroundColor: 'white',
-              boxShadow: '0 15px 35px rgba(0,0,0,0.4)',
-              borderRadius: '6px',
-              overflow: 'hidden'
+              width: '100%',
+              height: '100%',
+              backgroundColor: '#fff',
+              borderRadius: '8px',
+              boxShadow: '0 25px 60px rgba(0,0,0,0.6), 0 10px 20px rgba(0,0,0,0.3)',
+              overflow: 'hidden',
+              transformStyle: 'preserve-3d'
             }}>
               <img
                 src={currentPageData.pageImage}
-                alt={`Page ${currentPage + 1} - ${currentPageData.title}`}
+                alt={`${currentPageData.title} - Page ${currentPage + 1}`}
                 style={{
-                  width: 'auto',
-                  height: 'auto',
-                  maxWidth: '90vw',
-                  maxHeight: '85vh',
+                  width: '100%',
+                  height: '100%',
                   objectFit: 'contain',
                   objectPosition: 'center',
                   display: 'block',
-                  filter: isPageLocked ? 'blur(8px)' : 'none'
+                  filter: isPageLocked ? 'blur(12px)' : 'none',
+                  transition: 'filter 0.3s ease'
                 }}
                 onError={(e) => {
                   e.target.style.display = 'none';
                   e.target.parentNode.innerHTML = `
                     <div style="
-                      width: 600px; 
-                      height: 800px; 
-                      background: #f5f5f5; 
+                      width: 100%; 
+                      height: 100%; 
+                      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); 
                       display: flex; 
+                      flex-direction: column;
                       align-items: center; 
                       justify-content: center;
                       color: #666;
-                      font-size: 18px;
+                      font-size: 24px;
+                      font-weight: 500;
                       text-align: center;
-                      padding: 20px;
+                      padding: 40px;
                     ">
-                      <div>
-                        <h3>Page ${currentPage + 1}</h3>
-                        <p>${currentPageData.title}</p>
-                        <p style="font-size: 14px; color: #999; margin-top: 10px;">
-                          Image loading error - Just Urbane Magazine
-                        </p>
+                      <div style="font-size: 48px; margin-bottom: 20px;">📖</div>
+                      <div>Page ${currentPage + 1}</div>
+                      <div style="font-size: 18px; color: #999; margin-top: 10px;">
+                        ${currentPageData.title}
+                      </div>
+                      <div style="font-size: 14px; color: #bbb; margin-top: 20px;">
+                        Just Urbane Magazine - August 2025
                       </div>
                     </div>
                   `;
                 }}
               />
               
-              {/* Premium Lock Overlay */}
+              {/* Premium Lock Overlay with Crown */}
               {isPageLocked && (
-                <div style={{
-                  position: 'absolute',
-                  top: 0,
-                  left: 0,
-                  right: 0,
-                  bottom: 0,
-                  backgroundColor: 'rgba(0,0,0,0.3)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center'
-                }}>
-                  <div style={{
-                    backgroundColor: 'rgba(255,255,255,0.95)',
-                    borderRadius: '50%',
-                    padding: '25px',
-                    boxShadow: '0 10px 25px rgba(0,0,0,0.3)'
-                  }}>
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  style={{
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    bottom: 0,
+                    backgroundColor: 'rgba(0,0,0,0.4)',
+                    backdropFilter: 'blur(8px)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    zIndex: 10
+                  }}
+                >
+                  <motion.div
+                    animate={{
+                      scale: [1, 1.1, 1],
+                      rotate: [0, 5, -5, 0]
+                    }}
+                    transition={{
+                      duration: 3,
+                      repeat: Infinity,
+                      ease: "easeInOut"
+                    }}
+                    style={{
+                      background: 'linear-gradient(135deg, #ffd700 0%, #ffed4e  100%)',
+                      borderRadius: '50%',
+                      padding: '30px',
+                      boxShadow: '0 15px 35px rgba(255, 215, 0, 0.4)'
+                    }}
+                  >
                     <Crown style={{ 
-                      width: '50px', 
-                      height: '50px', 
-                      color: '#f59e0b' 
+                      width: '60px', 
+                      height: '60px', 
+                      color: '#b8860b' 
                     }} />
-                  </div>
-                </div>
+                  </motion.div>
+                </motion.div>
               )}
             </div>
           </motion.div>
         </AnimatePresence>
       </div>
 
-      {/* Navigation Arrows */}
+      {/* Navigation Controls */}
       <button
         onClick={prevPage}
         disabled={currentPage === 0 || isFlipping}
         style={{
           position: 'absolute',
-          left: '20px',
+          left: '30px',
           top: '50%',
           transform: 'translateY(-50%)',
-          width: '60px',
-          height: '60px',
-          backgroundColor: 'rgba(0,0,0,0.8)',
+          width: '70px',
+          height: '70px',
+          backgroundColor: currentPage === 0 || isFlipping ? 'rgba(0,0,0,0.3)' : 'rgba(0,0,0,0.7)',
           color: currentPage === 0 || isFlipping ? 'rgba(255,255,255,0.3)' : 'white',
           border: 'none',
           borderRadius: '50%',
@@ -306,11 +359,24 @@ const MagazineReaderPage = () => {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          zIndex: 100000,
-          transition: 'all 0.2s ease'
+          zIndex: 1000000,
+          transition: 'all 0.3s ease',
+          fontSize: '18px'
+        }}
+        onMouseEnter={(e) => {
+          if (!(currentPage === 0 || isFlipping)) {
+            e.target.style.backgroundColor = 'rgba(0,0,0,0.8)';
+            e.target.style.transform = 'translateY(-50%) scale(1.1)';
+          }
+        }}
+        onMouseLeave={(e) => {
+          if (!(currentPage === 0 || isFlipping)) {
+            e.target.style.backgroundColor = 'rgba(0,0,0,0.7)';
+            e.target.style.transform = 'translateY(-50%) scale(1)';
+          }
         }}
       >
-        <ChevronLeft size={28} />
+        <ChevronLeft size={32} />
       </button>
 
       <button
@@ -318,12 +384,12 @@ const MagazineReaderPage = () => {
         disabled={currentPage >= totalPages - 1 || isFlipping}
         style={{
           position: 'absolute',
-          right: '20px',
+          right: '30px',
           top: '50%',
           transform: 'translateY(-50%)',
-          width: '60px',
-          height: '60px',
-          backgroundColor: 'rgba(0,0,0,0.8)',
+          width: '70px',
+          height: '70px',
+          backgroundColor: currentPage >= totalPages - 1 || isFlipping ? 'rgba(0,0,0,0.3)' : 'rgba(0,0,0,0.7)',
           color: currentPage >= totalPages - 1 || isFlipping ? 'rgba(255,255,255,0.3)' : 'white',
           border: 'none',
           borderRadius: '50%',
@@ -331,116 +397,142 @@ const MagazineReaderPage = () => {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          zIndex: 100000,
-          transition: 'all 0.2s ease'
+          zIndex: 1000000,
+          transition: 'all 0.3s ease',
+          fontSize: '18px'
+        }}
+        onMouseEnter={(e) => {
+          if (!(currentPage >= totalPages - 1 || isFlipping)) {
+            e.target.style.backgroundColor = 'rgba(0,0,0,0.8)';
+            e.target.style.transform = 'translateY(-50%) scale(1.1)';
+          }
+        }}
+        onMouseLeave={(e) => {
+          if (!(currentPage >= totalPages - 1 || isFlipping)) {
+            e.target.style.backgroundColor = 'rgba(0,0,0,0.7)';
+            e.target.style.transform = 'translateY(-50%) scale(1)';
+          }
         }}
       >
-        <ChevronRight size={28} />
+        <ChevronRight size={32} />
       </button>
 
       {/* Premium Subscription Modal */}
       {showSubscriptionModal && (
         <div style={{
-          position: 'absolute',
+          position: 'fixed',
           top: 0,
           left: 0,
           right: 0,
           bottom: 0,
           backgroundColor: 'rgba(0,0,0,0.95)',
+          backdropFilter: 'blur(10px)',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          zIndex: 200000
+          zIndex: 2000000
         }} onClick={() => setShowSubscriptionModal(false)}>
           <motion.div
-            initial={{ opacity: 0, scale: 0.9, y: 20 }}
+            initial={{ opacity: 0, scale: 0.8, y: 50 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.9, y: 20 }}
+            exit={{ opacity: 0, scale: 0.8, y: 50 }}
             style={{
               backgroundColor: 'white',
-              borderRadius: '20px',
-              padding: '50px',
-              maxWidth: '500px',
+              borderRadius: '24px',
+              padding: '60px',
+              maxWidth: '550px',
               margin: '20px',
               textAlign: 'center',
-              boxShadow: '0 25px 50px rgba(0,0,0,0.5)'
+              boxShadow: '0 40px 100px rgba(0,0,0,0.6)'
             }}
             onClick={(e) => e.stopPropagation()}
           >
-            <div style={{
-              width: '80px',
-              height: '80px',
-              background: 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)',
-              borderRadius: '50%',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              margin: '0 auto 30px'
-            }}>
-              <Crown style={{ width: '40px', height: '40px', color: 'white' }} />
-            </div>
+            <motion.div
+              animate={{
+                rotate: [0, 10, -10, 0],
+                scale: [1, 1.1, 1]
+              }}
+              transition={{
+                duration: 2,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+              style={{
+                width: '100px',
+                height: '100px',
+                background: 'linear-gradient(135deg, #ffd700 0%, #ffed4e 100%)',
+                borderRadius: '50%',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                margin: '0 auto 40px',
+                boxShadow: '0 15px 30px rgba(255, 215, 0, 0.3)'
+              }}
+            >
+              <Crown style={{ width: '50px', height: '50px', color: '#b8860b' }} />
+            </motion.div>
             
             <h2 style={{ 
-              fontSize: '28px', 
+              fontSize: '32px', 
               fontWeight: 'bold', 
-              marginBottom: '15px',
+              marginBottom: '20px',
               color: '#111'
             }}>
-              Continue Your Journey
+              Unlock Your Journey
             </h2>
             <p style={{ 
-              fontSize: '16px', 
+              fontSize: '18px', 
               color: '#666', 
-              marginBottom: '30px',
+              marginBottom: '40px',
               lineHeight: '1.6'
             }}>
-              Unlock unlimited access to the complete Just Urbane magazine experience with premium content and exclusive insights
+              Continue reading the complete Just Urbane magazine with unlimited access to premium content, exclusive insights, and luxury lifestyle stories.
             </p>
             
             <div style={{
-              backgroundColor: '#f8f9fa',
-              borderRadius: '15px',
-              padding: '25px',
-              marginBottom: '30px'
+              background: 'linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%)',
+              borderRadius: '20px',
+              padding: '35px',
+              marginBottom: '40px'
             }}>
               <div style={{ 
-                fontSize: '36px', 
+                fontSize: '42px', 
                 fontWeight: 'bold',
                 color: '#111',
-                marginBottom: '8px'
+                marginBottom: '10px'
               }}>
                 ₹499
               </div>
               <div style={{ 
-                fontSize: '16px', 
+                fontSize: '18px', 
                 color: '#666',
-                marginBottom: '5px'
+                marginBottom: '8px'
               }}>
                 Annual Digital Subscription
               </div>
               <div style={{ 
-                fontSize: '14px', 
+                fontSize: '16px', 
                 color: '#10b981',
-                fontWeight: '600'
+                fontWeight: '700'
               }}>
                 Save 67% • Best Value
               </div>
             </div>
             
-            <div style={{ display: 'flex', gap: '15px' }}>
+            <div style={{ display: 'flex', gap: '20px' }}>
               <Link
                 to="/pricing?plan=digital"
                 style={{
                   flex: 1,
                   display: 'inline-block',
-                  backgroundColor: '#000',
+                  background: 'linear-gradient(135deg, #000 0%, #333 100%)',
                   color: 'white',
-                  padding: '15px 25px',
-                  borderRadius: '10px',
+                  padding: '18px 30px',
+                  borderRadius: '15px',
                   textDecoration: 'none',
-                  fontSize: '16px',
+                  fontSize: '18px',
                   fontWeight: '600',
-                  transition: 'all 0.2s ease'
+                  transition: 'all 0.3s ease'
                 }}
               >
                 Subscribe Now
@@ -450,14 +542,17 @@ const MagazineReaderPage = () => {
                 onClick={() => setShowSubscriptionModal(false)}
                 style={{
                   flex: 1,
-                  padding: '15px 25px',
+                  padding: '18px 30px',
                   backgroundColor: '#f5f5f5',
                   color: '#666',
                   border: 'none',
-                  borderRadius: '10px',
-                  fontSize: '16px',
-                  cursor: 'pointer'
+                  borderRadius: '15px',
+                  fontSize: '18px',
+                  cursor: 'pointer',
+                  transition: 'all 0.3s ease'
                 }}
+                onMouseEnter={(e) => e.target.style.backgroundColor = '#e5e5e5'}
+                onMouseLeave={(e) => e.target.style.backgroundColor = '#f5f5f5'}
               >
                 Maybe Later
               </button>
