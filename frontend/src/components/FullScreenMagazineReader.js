@@ -80,15 +80,16 @@ const FullScreenMagazineReader = ({ isOpen, onClose, magazineContent = [] }) => 
 
   // Loading state
   if (!pages || !Array.isArray(pages) || pages.length === 0) {
-    return (
-      <div className="fixed inset-0 bg-black z-50 flex items-center justify-center" 
-           style={{ width: '100vw', height: '100vh' }}>
+    const loadingComponent = (
+      <div className="fixed inset-0 bg-black flex items-center justify-center" 
+           style={{ width: '100vw', height: '100vh', zIndex: 9999 }}>
         <div className="text-white text-center">
           <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-amber-400 mx-auto mb-4"></div>
           <p className="text-xl">Loading Magazine...</p>
         </div>
       </div>
     );
+    return createPortal(loadingComponent, document.body);
   }
 
   // Calculate optimal size for truly full-screen experience
@@ -97,7 +98,7 @@ const FullScreenMagazineReader = ({ isOpen, onClose, magazineContent = [] }) => 
   const pageWidth = Math.min(screenWidth * 0.45, 500); // 45% of screen width, max 500px
   const pageHeight = Math.min(screenHeight * 0.9, 700); // 90% of screen height, max 700px
 
-  return (
+  const magazineReaderComponent = (
     <AnimatePresence>
       <motion.div
         initial={{ opacity: 0 }}
