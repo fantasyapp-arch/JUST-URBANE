@@ -11,9 +11,6 @@ const FullScreenMagazineReader = ({ isOpen, onClose, magazineContent = [] }) => 
   const flipBookRef = useRef();
   const [currentPage, setCurrentPage] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
-  const [isFullscreen, setIsFullscreen] = useState(true);
-  const [zoom, setZoom] = useState(1);
-  const [showControls, setShowControls] = useState(true);
   const [showSubscriptionModal, setShowSubscriptionModal] = useState(false);
   const { user, isAuthenticated } = useAuth();
 
