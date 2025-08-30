@@ -809,10 +809,10 @@ const HomePage = () => {
           <div className="border-t-2 border-gray-900 pt-2">
             <div className="flex items-center justify-between mb-3">
               <div>
-                <h2 className="text-4xl lg:text-5xl font-serif font-bold text-gray-900 mb-3">
+                <h2 className="text-3xl lg:text-4xl font-serif font-bold text-gray-900 mb-1">
                   Videos
                 </h2>
-                <p className="text-gray-600 text-lg lg:text-xl">
+                <p className="text-gray-600 text-base lg:text-lg">
                   Exclusive interviews and premium video content
                 </p>
               </div>
