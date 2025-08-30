@@ -1,57 +1,52 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { 
-  Calendar, BookOpen, Crown, Lock, Play, Users, 
-  TrendingUp, Award, ArrowRight, Eye, Clock, Download, MoreHorizontal, Grid3X3
-} from 'lucide-react';
+import { PlayCircle } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
-import { useArticles } from '../hooks/useArticles';
-import MagazineReader from '../components/MagazineReader';
 import FullScreenMagazineReader from '../components/FullScreenMagazineReader';
-import FeaturedMagazineCover from '../components/FeaturedMagazineCover';
-import MagazineCoverCard from '../components/MagazineCoverCard';
-import { formatDate } from '../utils/formatters';
 import { Link } from 'react-router-dom';
-import LoadingSpinner from '../components/LoadingSpinner';
 import { parseMagazineContent } from '../components/MagazineContentParser';
 
 const IssuesPage = () => {
   const [selectedIssue, setSelectedIssue] = useState(null);
   const [isReaderOpen, setIsReaderOpen] = useState(false);
-  const [activeTab, setActiveTab] = useState('preview'); // 'preview' or 'archive'
   const { user, isAuthenticated } = useAuth();
-  const { data: articles, isLoading } = useArticles();
 
   const canReadPremium = isAuthenticated && user?.is_premium && user?.subscription_status === 'active';
 
-  // Group articles by month for magazine issues
-  const groupArticlesByMonth = (articles) => {
-    if (!articles) return {};
-    
-    const grouped = {};
-    articles.forEach(article => {
-      const date = new Date(article.published_at);
-      const monthYear = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`;
-      const displayDate = date.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
-      
-      if (!grouped[monthYear]) {
-        grouped[monthYear] = {
-          displayDate,
-          articles: [],
-          date: date
-        };
-      }
-      grouped[monthYear].articles.push(article);
-    });
-    
-    return grouped;
-  };
+  // Sample magazine covers - GQ style
+  const magazineCovers = [
+    {
+      id: 1,
+      title: 'JUST URBANE',
+      subtitle: 'AUGUST 2025',
+      image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=800&fit=crop&crop=face',
+      current: true
+    },
+    {
+      id: 2,
+      title: 'JUST URBANE',
+      subtitle: 'JULY 2025',
+      image: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=600&h=800&fit=crop',
+      current: false
+    },
+    {
+      id: 3,
+      title: 'JUST URBANE', 
+      subtitle: 'JUNE 2025',
+      image: 'https://images.unsplash.com/photo-1582719508461-905c673771fd?w=600&h=800&fit=crop',
+      current: false
+    },
+    {
+      id: 4,
+      title: 'JUST URBANE',
+      subtitle: 'MAY 2025',
+      image: 'https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=600&h=800&fit=crop',
+      current: false
+    }
+  ];
 
-  const monthlyIssues = groupArticlesByMonth(articles);
-  const sortedIssues = Object.entries(monthlyIssues).sort(([a], [b]) => b.localeCompare(a));
-
-  const openMagazineReader = (issueArticles) => {
-    // Use your uploaded magazine content instead of articles
+  const openMagazineReader = () => {
+    // Use your uploaded magazine content
     const magazineContent = parseMagazineContent();
     setSelectedIssue(magazineContent);
     setIsReaderOpen(true);
@@ -61,16 +56,6 @@ const IssuesPage = () => {
     setIsReaderOpen(false);
     setSelectedIssue(null);
   };
-
-  if (isLoading) {
-    return (
-      <div className="min-h-screen bg-white">
-        <div className="container mx-auto px-4 py-12">
-          <LoadingSpinner />
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className="min-h-screen bg-white">
