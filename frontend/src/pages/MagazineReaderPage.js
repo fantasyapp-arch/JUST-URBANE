@@ -431,6 +431,52 @@ const MagazineReaderPage = () => {
                   `;
                 }}
               />
+              
+              {/* Premium Lock Overlay with Enhanced Crown */}
+              {isPageLocked && (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  style={{
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    bottom: 0,
+                    backgroundColor: 'rgba(0,0,0,0.5)',
+                    backdropFilter: 'blur(15px)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    zIndex: 10
+                  }}
+                >
+                  <motion.div
+                    animate={{
+                      scale: [1, 1.2, 1],
+                      rotate: [0, 10, -10, 0],
+                      y: [0, -10, 0]
+                    }}
+                    transition={{
+                      duration: 4,
+                      repeat: Infinity,
+                      ease: "easeInOut"
+                    }}
+                    style={{
+                      background: 'linear-gradient(135deg, #ffd700 0%, #ffed4e 100%)',
+                      borderRadius: '50%',
+                      padding: '50px',
+                      boxShadow: '0 25px 50px rgba(255, 215, 0, 0.4), 0 0 100px rgba(255, 215, 0, 0.2)'
+                    }}
+                  >
+                    <Crown style={{ 
+                      width: '80px', 
+                      height: '80px', 
+                      color: '#b8860b' 
+                    }} />
+                  </motion.div>
+                </motion.div>
+              )}
             </div>
           </div>
         </div>
