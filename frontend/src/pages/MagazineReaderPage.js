@@ -325,7 +325,7 @@ const MagazineReaderPage = () => {
         <X size={24} />
       </button>
 
-      {/* Magazine Display Area - Complete Full Screen with Realistic Page Turn */}
+      {/* Magazine Display Area - Realistic Page Curl Effect */}
       <div style={{
         position: 'absolute',
         top: 0,
@@ -335,68 +335,71 @@ const MagazineReaderPage = () => {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        perspective: '2000px',
-        perspectiveOrigin: 'center center'
+        perspective: '1500px'
       }}>
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={currentPage}
-            initial={{ 
-              opacity: 0,
-              x: flipDirection === 'next' ? 400 : -400,
-              scale: 0.8,
-              rotateY: flipDirection === 'next' ? 30 : -30,
-              rotateX: 5
-            }}
-            animate={{ 
-              opacity: 1,
-              x: 0,
-              scale: 1,
-              rotateY: 0,
-              rotateX: 0
-            }}
-            exit={{ 
-              opacity: 0,
-              x: flipDirection === 'next' ? -400 : 400,
-              scale: 0.8,
-              rotateY: flipDirection === 'next' ? -30 : 30,
-              rotateX: -5
-            }}
-            transition={{ 
-              duration: 0.4, // Slower to see the turn effect
-              ease: [0.25, 0.46, 0.45, 0.94] // Smooth cubic bezier
-            }}
+        <div className="page-curl-container" style={{
+          width: '90vw',
+          height: '90vh',
+          position: 'relative'
+        }}>
+          {/* Next page underneath (when curling) */}
+          {showPageCurl && (currentPage + 1 < totalPages) && (
+            <div className="page-underneath">
+              <div style={{
+                position: 'relative',
+                width: '100%',
+                height: '100%',
+                backgroundColor: '#fff',
+                borderRadius: '8px',
+                boxShadow: '0 10px 30px rgba(0, 0, 0, 0.2)'
+              }}>
+                <img
+                  src={pages[currentPage + 1]?.pageImage}
+                  alt={`Next page - ${currentPage + 2}`}
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'contain',
+                    objectPosition: 'center',
+                    borderRadius: '8px'
+                  }}
+                />
+              </div>
+            </div>
+          )}
+          
+          {/* Current page with curl effect */}
+          <div 
+            className={showPageCurl ? 'page-curling' : ''}
             style={{
-              position: 'relative',
-              width: '100vw',
-              height: '100vh',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              transformStyle: 'preserve-3d',
-              perspective: '1500px'
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              width: '100%',
+              height: '100%',
+              zIndex: 20,
+              animation: showPageCurl ? 
+                (flipDirection === 'next' ? 'pageCurlNext 0.8s ease-in-out forwards' : 'pageCurlPrev 0.8s ease-in-out forwards') : 
+                'none'
             }}
-            className="page-turn-effect"
           >
-            {/* Magazine Page Container - Full Screen */}
             <div style={{
               position: 'relative',
               width: '100%',
               height: '100%',
               backgroundColor: '#fff',
-              overflow: 'hidden',
-              boxShadow: '0 20px 60px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(0, 0, 0, 0.1)',
-              borderRadius: '8px'
+              borderRadius: '8px',
+              boxShadow: showPageCurl ? '0 20px 50px rgba(0, 0, 0, 0.4)' : '0 10px 30px rgba(0, 0, 0, 0.2)',
+              overflow: 'hidden'
             }}>
               <img
-                src={currentPageData.pageImage}
-                alt={`${currentPageData.title} - Page ${currentPage + 1}`}
+                src={pages[currentPage]?.pageImage}
+                alt={`${pages[currentPage]?.title} - Page ${currentPage + 1}`}
                 style={{
                   width: '100%',
                   height: '100%',
                   objectFit: 'contain',
                   objectPosition: 'center',
-                  display: 'block',
                   filter: isPageLocked ? 'blur(15px)' : 'none'
                 }}
                 onError={(e) => {
@@ -419,7 +422,7 @@ const MagazineReaderPage = () => {
                       <div style="font-size: 80px; margin-bottom: 30px;">📖</div>
                       <div>Page ${currentPage + 1}</div>
                       <div style="font-size: 24px; color: #999; margin-top: 20px; font-weight: 400;">
-                        ${currentPageData.title}
+                        ${pages[currentPage]?.title}
                       </div>
                       <div style="font-size: 18px; color: #bbb; margin-top: 30px; font-weight: 300;">
                         Just Urbane Magazine - August 2025
@@ -428,56 +431,9 @@ const MagazineReaderPage = () => {
                   `;
                 }}
               />
-              
-              {/* Premium Lock Overlay with Enhanced Crown */}
-              {isPageLocked && (
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  style={{
-                    position: 'absolute',
-                    top: 0,
-                    left: 0,
-                    right: 0,
-                    bottom: 0,
-                    backgroundColor: 'rgba(0,0,0,0.5)',
-                    backdropFilter: 'blur(15px)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    zIndex: 10
-                  }}
-                >
-                  <motion.div
-                    animate={{
-                      scale: [1, 1.2, 1],
-                      rotate: [0, 10, -10, 0],
-                      y: [0, -10, 0]
-                    }}
-                    transition={{
-                      duration: 4,
-                      repeat: Infinity,
-                      ease: "easeInOut"
-                    }}
-                    style={{
-                      background: 'linear-gradient(135deg, #ffd700 0%, #ffed4e 100%)',
-                      borderRadius: '50%',
-                      padding: '50px',
-                      boxShadow: '0 25px 50px rgba(255, 215, 0, 0.4), 0 0 100px rgba(255, 215, 0, 0.2)'
-                    }}
-                  >
-                    <Crown style={{ 
-                      width: '80px', 
-                      height: '80px', 
-                      color: '#b8860b' 
-                    }} />
-                  </motion.div>
-                </motion.div>
-              )}
-
             </div>
-          </motion.div>
-        </AnimatePresence>
+          </div>
+        </div>
       </div>
 
       {/* Enhanced Navigation Controls - Large Click Areas */}
