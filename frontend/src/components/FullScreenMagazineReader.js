@@ -7,15 +7,6 @@ import {
 import { useAuth } from '../context/AuthContext';
 import { Link } from 'react-router-dom';
 
-import React, { useRef, useEffect, useState } from 'react';
-import HTMLFlipBook from 'react-pageflip';
-import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  X, ChevronLeft, ChevronRight, Crown, Lock, Play
-} from 'lucide-react';
-import { useAuth } from '../context/AuthContext';
-import { Link } from 'react-router-dom';
-
 const FullScreenMagazineReader = ({ isOpen, onClose, magazineContent = [] }) => {
   const flipBookRef = useRef();
   const [currentPage, setCurrentPage] = useState(0);
