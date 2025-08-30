@@ -536,13 +536,13 @@ const LockedPageComponent = ({ onSubscribe, pageNumber }) => {
         </div>
       </div>
 
-      {/* Action Button */}
-      <button
-        onClick={onSubscribe}
-        className="bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-black font-bold px-12 py-5 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-xl text-lg mb-6"
+      {/* Action Button - Direct Buy Digital Plan */}
+      <Link
+        to="/pricing?plan=digital"
+        className="bg-black hover:bg-gray-800 text-white font-bold px-12 py-5 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-xl text-lg mb-6 inline-block"
       >
-        Subscribe Now
-      </button>
+        Buy Digital Plan - ₹499
+      </Link>
 
       {/* Login Link */}
       <p className="text-gray-400 text-sm">
