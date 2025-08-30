@@ -538,9 +538,75 @@ const HomePage = () => {
           </div>
         </motion.section>
 
+        {/* AUTOMOTIVE SECTION - COMPACT */}
+        <motion.section 
+          className="mb-6"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.95 }}
+        >
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-2xl lg:text-3xl font-serif font-bold text-gray-900">
+              Automotive
+            </h2>
+            <Link
+              to="/category/automotive"
+              className="text-primary-600 hover:text-primary-700 font-semibold"
+            >
+              View All
+            </Link>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-4">
+            {[
+              {
+                title: 'Lamborghini Revuelto: The New Hybrid Beast',
+                image: 'https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=400&h=250&fit=crop',
+                category: 'Supercars'
+              },
+              {
+                title: 'Mercedes EQS: Redefining Electric Luxury',
+                image: 'https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?w=400&h=250&fit=crop',
+                category: 'Electric'
+              },
+              {
+                title: 'Porsche 911 GT3 RS: Track-Focused Excellence',
+                image: 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=400&h=250&fit=crop',
+                category: 'Sports Cars'
+              }
+            ].map((article, index) => (
+              <motion.div
+                key={index}
+                className="group cursor-pointer bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-300"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.96 + index * 0.05 }}
+              >
+                <div className="relative overflow-hidden rounded-t-lg">
+                  <img
+                    src={article.image}
+                    alt={article.title}
+                    className="w-full h-32 object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <div className="absolute top-2 left-2">
+                    <span className="bg-red-600 text-white px-2 py-1 rounded text-xs font-bold">
+                      {article.category}
+                    </span>
+                  </div>
+                </div>
+                <div className="p-4">
+                  <h3 className="font-serif font-semibold text-gray-900 group-hover:text-primary-600 transition-colors leading-tight text-sm">
+                    {article.title}
+                  </h3>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </motion.section>
+
         {/* LIFESTYLE SECTION - MIXED LAYOUT */}
         <motion.section 
-          className="mb-16"
+          className="mb-6"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 1.0 }}
