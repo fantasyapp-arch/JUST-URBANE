@@ -234,14 +234,14 @@ const HomePage = () => {
         {/* FASHION SECTION - PROFESSIONAL */}
         {fashionArticles.length > 0 && (
           <motion.section 
-            className="bg-gray-50 w-full py-6"
+            className="bg-gray-50 w-full py-1"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
           >
-            <div className="w-full px-4">
+            <div className="w-full px-2">
               <div className="max-w-7xl mx-auto">
-                <div className="flex items-center justify-between mb-6">
+                <div className="flex items-center justify-between mb-3">
                 <div>
                   <h2 className="text-4xl lg:text-5xl font-serif font-bold text-gray-900 mb-3">
                     Fashion
