@@ -158,7 +158,7 @@ const MagazineReaderPage = () => {
         <X size={24} />
       </button>
 
-      {/* Magazine Display Area - Full Screen with 3D Flip */}
+      {/* Magazine Display Area - Complete Full Screen with Realistic Page Turn */}
       <div style={{
         position: 'absolute',
         top: 0,
@@ -168,56 +168,60 @@ const MagazineReaderPage = () => {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        perspective: '1500px'
+        perspective: '2000px',
+        perspectiveOrigin: 'center center'
       }}>
         <AnimatePresence mode="wait">
           <motion.div
             key={currentPage}
             initial={{ 
               opacity: 0,
-              rotateY: flipDirection === 'next' ? -90 : 90,
-              scale: 0.8,
-              z: -200
+              rotateY: flipDirection === 'next' ? -180 : 180,
+              scale: 0.6,
+              z: -300,
+              rotateX: flipDirection === 'next' ? -15 : 15
             }}
             animate={{ 
               opacity: 1,
               rotateY: 0,
               scale: 1,
-              z: 0
+              z: 0,
+              rotateX: 0
             }}
             exit={{ 
               opacity: 0,
-              rotateY: flipDirection === 'next' ? 90 : -90,
-              scale: 0.8,
-              z: -200
+              rotateY: flipDirection === 'next' ? 180 : -180,
+              scale: 0.6,
+              z: -300,
+              rotateX: flipDirection === 'next' ? 15 : -15
             }}
             transition={{ 
-              duration: 0.8,
+              duration: 1.2,
               ease: [0.25, 0.46, 0.45, 0.94],
-              opacity: { duration: 0.4 }
+              opacity: { duration: 0.6 },
+              scale: { duration: 1.0 },
+              rotateY: { duration: 1.2 },
+              rotateX: { duration: 1.0 }
             }}
             style={{
               position: 'relative',
-              width: '90vmin',
-              height: '90vmin',
-              maxWidth: '800px',
-              maxHeight: '1000px',
+              width: '100vw',
+              height: '100vh',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               transformStyle: 'preserve-3d'
             }}
           >
-            {/* Magazine Page Container */}
+            {/* Magazine Page Container - Full Screen */}
             <div style={{
               position: 'relative',
               width: '100%',
               height: '100%',
               backgroundColor: '#fff',
-              borderRadius: '8px',
-              boxShadow: '0 25px 60px rgba(0,0,0,0.6), 0 10px 20px rgba(0,0,0,0.3)',
               overflow: 'hidden',
-              transformStyle: 'preserve-3d'
+              transformStyle: 'preserve-3d',
+              boxShadow: '0 0 100px rgba(255,255,255,0.1), 0 0 50px rgba(255,255,255,0.05)'
             }}>
               <img
                 src={currentPageData.pageImage}
@@ -228,8 +232,8 @@ const MagazineReaderPage = () => {
                   objectFit: 'contain',
                   objectPosition: 'center',
                   display: 'block',
-                  filter: isPageLocked ? 'blur(12px)' : 'none',
-                  transition: 'filter 0.3s ease'
+                  filter: isPageLocked ? 'blur(15px)' : 'none',
+                  transition: 'filter 0.5s ease'
                 }}
                 onError={(e) => {
                   e.target.style.display = 'none';
@@ -237,23 +241,23 @@ const MagazineReaderPage = () => {
                     <div style="
                       width: 100%; 
                       height: 100%; 
-                      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); 
+                      background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); 
                       display: flex; 
                       flex-direction: column;
                       align-items: center; 
                       justify-content: center;
                       color: #666;
-                      font-size: 24px;
-                      font-weight: 500;
+                      font-size: 32px;
+                      font-weight: 600;
                       text-align: center;
-                      padding: 40px;
+                      padding: 60px;
                     ">
-                      <div style="font-size: 48px; margin-bottom: 20px;">📖</div>
+                      <div style="font-size: 80px; margin-bottom: 30px;">📖</div>
                       <div>Page ${currentPage + 1}</div>
-                      <div style="font-size: 18px; color: #999; margin-top: 10px;">
+                      <div style="font-size: 24px; color: #999; margin-top: 20px; font-weight: 400;">
                         ${currentPageData.title}
                       </div>
-                      <div style="font-size: 14px; color: #bbb; margin-top: 20px;">
+                      <div style="font-size: 18px; color: #bbb; margin-top: 30px; font-weight: 300;">
                         Just Urbane Magazine - August 2025
                       </div>
                     </div>
@@ -261,7 +265,7 @@ const MagazineReaderPage = () => {
                 }}
               />
               
-              {/* Premium Lock Overlay with Crown */}
+              {/* Premium Lock Overlay with Enhanced Crown */}
               {isPageLocked && (
                 <motion.div
                   initial={{ opacity: 0 }}
@@ -272,8 +276,8 @@ const MagazineReaderPage = () => {
                     left: 0,
                     right: 0,
                     bottom: 0,
-                    backgroundColor: 'rgba(0,0,0,0.4)',
-                    backdropFilter: 'blur(8px)',
+                    backgroundColor: 'rgba(0,0,0,0.5)',
+                    backdropFilter: 'blur(15px)',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
@@ -282,29 +286,57 @@ const MagazineReaderPage = () => {
                 >
                   <motion.div
                     animate={{
-                      scale: [1, 1.1, 1],
-                      rotate: [0, 5, -5, 0]
+                      scale: [1, 1.2, 1],
+                      rotate: [0, 10, -10, 0],
+                      y: [0, -10, 0]
                     }}
                     transition={{
-                      duration: 3,
+                      duration: 4,
                       repeat: Infinity,
                       ease: "easeInOut"
                     }}
                     style={{
-                      background: 'linear-gradient(135deg, #ffd700 0%, #ffed4e  100%)',
+                      background: 'linear-gradient(135deg, #ffd700 0%, #ffed4e 100%)',
                       borderRadius: '50%',
-                      padding: '30px',
-                      boxShadow: '0 15px 35px rgba(255, 215, 0, 0.4)'
+                      padding: '50px',
+                      boxShadow: '0 25px 50px rgba(255, 215, 0, 0.4), 0 0 100px rgba(255, 215, 0, 0.2)'
                     }}
                   >
                     <Crown style={{ 
-                      width: '60px', 
-                      height: '60px', 
+                      width: '80px', 
+                      height: '80px', 
                       color: '#b8860b' 
                     }} />
                   </motion.div>
                 </motion.div>
               )}
+
+              {/* Page Number Indicator - Bottom Center */}
+              <div style={{
+                position: 'absolute',
+                bottom: '30px',
+                left: '50%',
+                transform: 'translateX(-50%)',
+                background: 'rgba(0,0,0,0.7)',
+                color: 'white',
+                padding: '8px 20px',
+                borderRadius: '20px',
+                fontSize: '14px',
+                fontWeight: '500',
+                opacity: 0.8,
+                zIndex: 100
+              }}>
+                {currentPage + 1} / {totalPages}
+                {!canReadPremium && currentPage < FREE_PREVIEW_PAGES && (
+                  <span style={{ 
+                    color: '#10b981', 
+                    marginLeft: '10px',
+                    fontSize: '12px'
+                  }}>
+                    • FREE PREVIEW
+                  </span>
+                )}
+              </div>
             </div>
           </motion.div>
         </AnimatePresence>
