@@ -289,23 +289,23 @@ const MagazinePageContent = ({ page, pageNumber, isBlurred = false }) => {
           backgroundImage: page.image ? `linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.4)), url(${page.image})` : 'linear-gradient(135deg, #1e3c72 0%, #2a5298 100%)'
         }}
       >
-        <div className="absolute inset-0 flex flex-col justify-between p-12 md:p-16 text-white">
+        <div className="absolute inset-0 flex flex-col justify-between p-16 md:p-24 lg:p-32 text-white">
           {/* Magazine Header */}
           <div className="text-center">
-            <h1 className="text-6xl md:text-8xl lg:text-9xl font-bold tracking-widest mb-6 drop-shadow-2xl">{page.title}</h1>
-            <div className="text-amber-300 text-2xl md:text-3xl lg:text-4xl tracking-widest uppercase font-light">{page.content}</div>
+            <h1 className="text-8xl md:text-9xl lg:text-[12rem] font-bold tracking-widest mb-8 drop-shadow-2xl">{page.title}</h1>
+            <div className="text-amber-300 text-3xl md:text-4xl lg:text-5xl tracking-widest uppercase font-light">{page.content}</div>
           </div>
 
           {/* Issue Info */}
           <div className="text-center">
-            <div className="text-5xl md:text-7xl lg:text-8xl font-light mb-8 drop-shadow-lg">{page.subtitle}</div>
-            <div className="text-2xl md:text-3xl lg:text-4xl text-amber-200 tracking-wider">Premium Digital Edition</div>
+            <div className="text-6xl md:text-8xl lg:text-9xl font-light mb-12 drop-shadow-lg">{page.subtitle}</div>
+            <div className="text-3xl md:text-4xl lg:text-5xl text-amber-200 tracking-wider">Premium Digital Edition</div>
           </div>
 
           {/* Cover Features */}
-          <div className="text-center space-y-6">
-            <div className="text-3xl md:text-4xl lg:text-5xl font-semibold">INSIDE THIS ISSUE</div>
-            <div className="text-lg md:text-xl lg:text-2xl space-y-3 text-gray-200 leading-relaxed max-w-4xl mx-auto">
+          <div className="text-center space-y-8">
+            <div className="text-4xl md:text-5xl lg:text-6xl font-semibold">INSIDE THIS ISSUE</div>
+            <div className="text-xl md:text-2xl lg:text-3xl space-y-4 text-gray-200 leading-relaxed max-w-6xl mx-auto">
               {page.coverFeatures?.map((feature, index) => (
                 <div key={index}>• {feature}</div>
               )) || [
