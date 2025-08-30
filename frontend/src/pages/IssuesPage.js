@@ -49,11 +49,18 @@ const IssuesPage = () => {
       // Use your uploaded magazine content
       const magazineContent = parseMagazineContent();
       console.log('📖 Magazine content parsed:', magazineContent);
-      setSelectedIssue(magazineContent);
-      setIsReaderOpen(true);
-      console.log('✅ Magazine reader state updated');
+      
+      if (magazineContent && magazineContent.length > 0) {
+        setSelectedIssue(magazineContent);
+        setIsReaderOpen(true);
+        console.log('✅ Magazine reader state updated - Reader should open');
+      } else {
+        console.error('❌ No magazine content available');
+      }
     } catch (error) {
       console.error('❌ Error opening magazine reader:', error);
+      // Fallback - still try to open with empty content
+      setIsReaderOpen(true);
     }
   };
 
