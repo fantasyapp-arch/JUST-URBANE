@@ -537,86 +537,162 @@ const HomePage = () => {
           </div>
         </motion.section>
 
-        {/* VIDEOS SECTION - PROFESSIONAL */}
+        {/* VIDEOS SECTION - GQ STYLE */}
         <motion.section 
           className="mb-20"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 1.1 }}
         >
-          <div className="flex items-center justify-between mb-12">
-            <div>
-              <h2 className="text-4xl lg:text-5xl font-serif font-bold text-gray-900 mb-3">
-                Videos
-              </h2>
-              <p className="text-gray-600 text-lg lg:text-xl">
-                Exclusive interviews and premium video content
-              </p>
+          <div className="border-t-2 border-gray-900 pt-12">
+            <div className="flex items-center justify-between mb-12">
+              <div>
+                <h2 className="text-4xl lg:text-5xl font-serif font-bold text-gray-900 mb-3">
+                  Videos
+                </h2>
+                <p className="text-gray-600 text-lg lg:text-xl">
+                  Exclusive interviews and premium video content
+                </p>
+              </div>
             </div>
-            <Link
-              to="/videos"
-              className="flex items-center bg-primary-600 hover:bg-primary-700 text-white px-8 py-4 rounded-xl font-semibold group transition-all duration-200 transform hover:scale-105 shadow-lg"
-            >
-              Watch All
-              <ArrowRight className="ml-3 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-            </Link>
-          </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
-            {[
-              {
-                title: 'Inside India\'s Most Exclusive Business Club',
-                thumbnail: 'https://images.unsplash.com/photo-1573164713988-8665fc963095?w=800',
-                duration: '12:45',
-                category: 'Business Exclusive'
-              },
-              {
-                title: 'Luxury Watch Collection Worth ₹50 Crores',
-                thumbnail: 'https://images.unsplash.com/photo-1603189343302-e603f7add05a?w=800',
-                duration: '8:30',
-                category: 'Fashion & Style'
-              },
-              {
-                title: 'AI Billionaire\'s Daily Routine Revealed',
-                thumbnail: 'https://images.unsplash.com/photo-1557426272-fc759fdf7a8d?w=800',
-                duration: '15:20',
-                category: 'Technology'
-              }
-            ].map((video, index) => (
+            <div className="grid lg:grid-cols-2 gap-8">
+              {/* Featured Video */}
               <motion.div 
-                key={index}
                 className="group cursor-pointer"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 1.1 + index * 0.1 }}
+                initial={{ opacity: 0, x: -30 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6, delay: 1.2 }}
               >
-                <div className="relative overflow-hidden rounded-2xl mb-6 shadow-lg">
+                <div className="relative overflow-hidden rounded-lg shadow-xl">
                   <img
-                    src={video.thumbnail}
-                    alt={video.title}
-                    className="w-full h-56 object-cover group-hover:scale-105 transition-transform duration-500"
+                    src="https://images.unsplash.com/photo-1573164713988-8665fc963095?w=800&h=500&fit=crop"
+                    alt="Featured Video"
+                    className="w-full h-80 object-cover group-hover:scale-105 transition-transform duration-500"
                   />
-                  <div className="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition-colors flex items-center justify-center">
+                  <div className="absolute inset-0 bg-black/40 group-hover:bg-black/50 transition-colors flex items-center justify-center">
                     <div className="w-20 h-20 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center group-hover:scale-110 transition-transform shadow-xl">
-                      <Play className="h-8 w-8 text-primary-600 ml-1" />
+                      <Play className="h-8 w-8 text-red-600 ml-1" />
                     </div>
                   </div>
-                  <div className="absolute bottom-4 right-4">
-                    <span className="bg-black/70 text-white px-4 py-2 rounded-lg text-sm font-medium">
-                      {video.duration}
+                  <div className="absolute bottom-4 left-4">
+                    <span className="bg-red-600 text-white px-3 py-1 rounded text-sm font-bold">
+                      Video
                     </span>
                   </div>
-                  <div className="absolute top-4 left-4">
-                    <span className="bg-primary-600 text-white px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wide">
-                      {video.category}
+                  <div className="absolute bottom-4 right-4">
+                    <span className="bg-black/70 text-white px-3 py-1 rounded text-sm font-medium">
+                      12:45
                     </span>
                   </div>
                 </div>
-                <h4 className="text-xl lg:text-2xl font-serif font-semibold text-gray-900 group-hover:text-primary-600 transition-colors leading-tight">
-                  {video.title}
-                </h4>
+                <div className="mt-6">
+                  <h3 className="text-2xl lg:text-3xl font-serif font-bold text-gray-900 group-hover:text-primary-600 transition-colors leading-tight mb-3">
+                    Inside India's Most Exclusive Business Club
+                  </h3>
+                  <p className="text-gray-600 text-lg leading-relaxed">
+                    A rare glimpse into the private chambers of India's business elite and their networking secrets.
+                  </p>
+                  <div className="mt-4 text-sm text-gray-500">
+                    <span>6 May 2025</span>
+                  </div>
+                </div>
               </motion.div>
-            ))}
+
+              {/* Video List */}
+              <div className="space-y-6">
+                {[
+                  {
+                    title: 'Luxury Watch Collection Worth ₹50 Crores',
+                    thumbnail: 'https://images.unsplash.com/photo-1603189343302-e603f7add05a?w=400&h=250&fit=crop',
+                    duration: '8:30',
+                    category: 'No Filter',
+                    date: '17 April 2025'
+                  },
+                  {
+                    title: 'AI Billionaire\'s Daily Routine Revealed',
+                    thumbnail: 'https://images.unsplash.com/photo-1557426272-fc759fdf7a8d?w=400&h=250&fit=crop',
+                    duration: '15:20',
+                    category: 'My Essentials',
+                    date: '7 February 2025'
+                  }
+                ].map((video, index) => (
+                  <motion.div 
+                    key={index}
+                    className="group cursor-pointer flex gap-4"
+                    initial={{ opacity: 0, x: 30 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.6, delay: 1.3 + index * 0.1 }}
+                  >
+                    <div className="relative overflow-hidden rounded-lg flex-shrink-0">
+                      <img
+                        src={video.thumbnail}
+                        alt={video.title}
+                        className="w-32 h-20 object-cover group-hover:scale-105 transition-transform duration-500"
+                      />
+                      <div className="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition-colors flex items-center justify-center">
+                        <div className="w-8 h-8 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center">
+                          <Play className="h-3 w-3 text-red-600 ml-0.5" />
+                        </div>
+                      </div>
+                      <div className="absolute bottom-1 right-1">
+                        <span className="bg-black/70 text-white px-2 py-0.5 rounded text-xs">
+                          {video.duration}
+                        </span>
+                      </div>
+                    </div>
+                    
+                    <div className="flex-1">
+                      <div className="mb-2">
+                        <span className="bg-red-600 text-white px-2 py-1 rounded text-xs font-bold">
+                          {video.category}
+                        </span>
+                      </div>
+                      <h4 className="font-serif font-semibold text-gray-900 group-hover:text-primary-600 transition-colors leading-tight mb-2">
+                        {video.title}
+                      </h4>
+                      <div className="text-xs text-gray-500">
+                        {video.date}
+                      </div>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </motion.section>
+
+        {/* NEWSLETTER SUBSCRIPTION - PREMIUM */}
+        <motion.section 
+          className="mb-20"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 1.4 }}
+        >
+          <div className="bg-gradient-to-br from-gray-100 via-white to-gray-100 rounded-3xl p-12 text-center">
+            <div className="max-w-2xl mx-auto">
+              <h3 className="text-3xl lg:text-4xl font-serif font-bold text-gray-900 mb-6">
+                Stay Updated with Just Urbane
+              </h3>
+              <p className="text-xl text-gray-600 mb-8 leading-relaxed">
+                Get exclusive content, premium insights, and early access to our digital magazine delivered to your inbox.
+              </p>
+              
+              <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+                <input
+                  type="email"
+                  placeholder="Enter your email"
+                  className="flex-1 px-6 py-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent text-lg"
+                />
+                <button className="bg-primary-600 hover:bg-primary-700 text-white font-semibold px-8 py-4 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg">
+                  Subscribe
+                </button>
+              </div>
+              
+              <p className="text-sm text-gray-500 mt-4">
+                No spam, unsubscribe anytime. Premium content awaits.
+              </p>
+            </div>
           </div>
         </motion.section>
 
