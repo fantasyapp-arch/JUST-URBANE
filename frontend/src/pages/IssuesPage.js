@@ -190,8 +190,13 @@ const IssuesPage = () => {
             </Link>
             <div className="text-gray-400">OR</div>
             <button
-              onClick={openMagazineReader}
+              onClick={(e) => {
+                e.preventDefault();
+                console.log('🎯 Bottom Free Preview button clicked!');
+                openMagazineReader();
+              }}
               className="border-2 border-black text-black font-semibold px-8 py-4 rounded-xl hover:bg-black hover:text-white transition-all duration-300"
+              type="button"
             >
               Free Preview
             </button>
