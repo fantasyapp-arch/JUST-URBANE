@@ -279,19 +279,53 @@ const MagazineReaderPage = () => {
               transformStyle: 'preserve-3d',
               boxShadow: '0 0 100px rgba(255,255,255,0.1), 0 0 50px rgba(255,255,255,0.05)'
             }}>
-              <img
+              {/* Smooth Loading Skeleton */}
+              {(!imageLoaded || pageLoading) && (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  style={{
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    bottom: 0,
+                    background: 'linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%)',
+                    backgroundSize: '200% 100%',
+                    animation: 'shimmer 1.5s ease-in-out infinite',
+                    zIndex: 5
+                  }}
+                />
+              )}
+
+              <motion.img
                 src={currentPageData.pageImage}
                 alt={`${currentPageData.title} - Page ${currentPage + 1}`}
+                initial={{ opacity: 0, scale: 1.1 }}
+                animate={{ 
+                  opacity: imageLoaded ? 1 : 0, 
+                  scale: imageLoaded ? 1 : 1.1,
+                  filter: isPageLocked ? 'blur(15px)' : 'none'
+                }}
+                transition={{ 
+                  duration: 0.6, 
+                  ease: [0.25, 0.46, 0.45, 0.94]
+                }}
                 style={{
                   width: '100%',
                   height: '100%',
                   objectFit: 'contain',
                   objectPosition: 'center',
-                  display: 'block',
-                  filter: isPageLocked ? 'blur(15px)' : 'none',
-                  transition: 'filter 0.5s ease'
+                  display: 'block'
+                }}
+                onLoad={() => {
+                  setImageLoaded(true);
+                  setTimeout(() => setPageLoading(false), 200);
                 }}
                 onError={(e) => {
+                  setImageLoaded(true);
+                  setPageLoading(false);
                   e.target.style.display = 'none';
                   e.target.parentNode.innerHTML = `
                     <div style="
