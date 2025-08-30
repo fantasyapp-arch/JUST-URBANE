@@ -188,6 +188,13 @@ const MagazineReaderPage = () => {
           width: 100vw;
           height: 100vh;
         }
+        
+        /* Page turn effect - simple slide with shadow */
+        .page-turn-effect {
+          box-shadow: 
+            inset -10px 0 20px rgba(0, 0, 0, 0.1),
+            inset 10px 0 20px rgba(0, 0, 0, 0.1);
+        }
       `}</style>
       
       <div className="magazine-container" style={{
