@@ -123,70 +123,40 @@ const MagazineReaderPage = () => {
       overflow: 'hidden',
       zIndex: 999999
     }}>
-      {/* Top Navigation Bar - Minimalist */}
-      <div style={{
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        right: 0,
-        height: '60px',
-        background: 'linear-gradient(to bottom, rgba(0,0,0,0.8), transparent)',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        padding: '0 30px',
-        zIndex: 1000000
-      }}>
-        <div style={{ 
-          color: 'white', 
-          fontSize: '16px',
-          fontWeight: '500',
+      {/* Hidden Close Button - Appears on hover */}
+      <button
+        onClick={closeReader}
+        style={{
+          position: 'absolute',
+          top: '20px',
+          right: '20px',
+          padding: '12px',
+          backgroundColor: 'rgba(0,0,0,0.7)',
+          color: 'white',
+          border: 'none',
+          borderRadius: '50%',
+          cursor: 'pointer',
           display: 'flex',
           alignItems: 'center',
-          gap: '15px'
-        }}>
-          <span>Just Urbane - August 2025</span>
-          <span style={{ color: '#666' }}>•</span>
-          <span>Page {currentPage + 1} of {totalPages}</span>
-          {!canReadPremium && currentPage < FREE_PREVIEW_PAGES && (
-            <>
-              <span style={{ color: '#666' }}>•</span>
-              <span style={{ 
-                color: '#10b981', 
-                fontSize: '14px',
-                background: 'rgba(16, 185, 129, 0.2)',
-                padding: '4px 12px',
-                borderRadius: '20px',
-                border: '1px solid #10b981'
-              }}>
-                FREE PREVIEW
-              </span>
-            </>
-          )}
-        </div>
-        
-        <button
-          onClick={closeReader}
-          style={{
-            padding: '10px',
-            backgroundColor: 'rgba(255,255,255,0.1)',
-            color: 'white',
-            border: 'none',
-            borderRadius: '50%',
-            cursor: 'pointer',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            width: '40px',
-            height: '40px',
-            transition: 'all 0.2s ease'
-          }}
-          onMouseEnter={(e) => e.target.style.backgroundColor = 'rgba(255,255,255,0.2)'}
-          onMouseLeave={(e) => e.target.style.backgroundColor = 'rgba(255,255,255,0.1)'}
-        >
-          <X size={20} />
-        </button>
-      </div>
+          justifyContent: 'center',
+          width: '50px',
+          height: '50px',
+          opacity: 0,
+          transition: 'all 0.3s ease',
+          zIndex: 1000000
+        }}
+        onMouseEnter={(e) => {
+          e.target.style.backgroundColor = 'rgba(0,0,0,0.9)';
+          e.target.style.transform = 'scale(1.1)';
+        }}
+        onMouseLeave={(e) => {
+          e.target.style.backgroundColor = 'rgba(0,0,0,0.7)';
+          e.target.style.transform = 'scale(1)';
+        }}
+        className="hover-visible"
+      >
+        <X size={24} />
+      </button>
 
       {/* Magazine Display Area - Full Screen with 3D Flip */}
       <div style={{
