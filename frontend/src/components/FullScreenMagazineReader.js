@@ -92,32 +92,15 @@ const FullScreenMagazineReader = ({ isOpen, onClose, magazineContent = [] }) => 
         position: 'fixed',
         top: 0,
         left: 0,
-        right: 0,
-        bottom: 0,
         width: '100vw',
         height: '100vh',
-        zIndex: 9999999,  // Increased z-index
-        backgroundColor: '#000000',
-        display: 'block'  // Changed from flex to ensure full coverage
+        zIndex: 999999999,
+        backgroundColor: '#ffffff',
+        margin: 0,
+        padding: 0,
+        overflow: 'hidden'
       }}
     >
-      {/* DEBUG: Show that component is rendering */}
-      <div style={{
-        position: 'absolute',
-        top: '10px',
-        left: '50%',
-        transform: 'translateX(-50%)',
-        color: 'yellow',
-        backgroundColor: 'red',
-        padding: '10px 20px',
-        zIndex: 10000000,
-        fontSize: '18px',
-        fontWeight: 'bold',
-        borderRadius: '5px'
-      }}>
-        FULL-SCREEN MAGAZINE READER ACTIVE - Page {currentPage + 1}/{totalPages}
-      </div>
-
       {/* Close Button */}
       <button
         onClick={closeReader}
@@ -125,7 +108,7 @@ const FullScreenMagazineReader = ({ isOpen, onClose, magazineContent = [] }) => 
           position: 'absolute',
           top: '20px',
           right: '20px',
-          zIndex: 10000000,
+          zIndex: 1000000000,
           padding: '15px',
           backgroundColor: 'rgba(0, 0, 0, 0.9)',
           color: 'white',
@@ -144,7 +127,7 @@ const FullScreenMagazineReader = ({ isOpen, onClose, magazineContent = [] }) => 
           position: 'absolute',
           top: '20px',
           left: '20px',
-          zIndex: 10000000,
+          zIndex: 1000000000,
           backgroundColor: 'rgba(0, 0, 0, 0.9)',
           color: 'white',
           padding: '10px 20px',
@@ -158,19 +141,18 @@ const FullScreenMagazineReader = ({ isOpen, onClose, magazineContent = [] }) => 
         )}
       </div>
 
-      {/* Magazine Page - TRULY FULL SCREEN (no margins, no padding) */}
+      {/* Magazine Page - FULL SCREEN */}
       <div
         style={{
           position: 'absolute',
           top: 0,
           left: 0,
           width: '100vw',
-          height: '100vh', 
+          height: '100vh',
           backgroundColor: 'white',
-          overflow: 'hidden',
+          overflow: 'auto',
           margin: 0,
-          padding: 0,
-          zIndex: 1000000
+          padding: 0
         }}
       >
         <MagazinePageContent 
@@ -180,7 +162,7 @@ const FullScreenMagazineReader = ({ isOpen, onClose, magazineContent = [] }) => 
         />
       </div>
 
-      {/* Navigation Arrows - Positioned for full screen */}
+      {/* Navigation Arrows */}
       <button
         onClick={prevPage}
         disabled={currentPage === 0}
@@ -189,7 +171,7 @@ const FullScreenMagazineReader = ({ isOpen, onClose, magazineContent = [] }) => 
           left: '20px',
           top: '50%',
           transform: 'translateY(-50%)',
-          zIndex: 10000000,
+          zIndex: 1000000000,
           padding: '20px',
           backgroundColor: 'rgba(0, 0, 0, 0.8)',
           color: currentPage === 0 ? 'rgba(255, 255, 255, 0.3)' : 'white',
@@ -210,7 +192,7 @@ const FullScreenMagazineReader = ({ isOpen, onClose, magazineContent = [] }) => 
           right: '20px',
           top: '50%',
           transform: 'translateY(-50%)',
-          zIndex: 10000000,
+          zIndex: 1000000000,
           padding: '20px',
           backgroundColor: 'rgba(0, 0, 0, 0.8)',
           color: currentPage >= totalPages - 1 ? 'rgba(255, 255, 255, 0.3)' : 'white',
