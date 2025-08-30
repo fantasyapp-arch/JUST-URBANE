@@ -165,34 +165,34 @@ const HomePage = () => {
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.8 }}
-        className="bg-gradient-to-r from-red-600 via-red-700 to-red-800 text-white relative overflow-hidden"
+        className="bg-gradient-to-r from-gray-900 via-black to-gray-900 text-white relative overflow-hidden"
       >
-        <div className="absolute inset-0 bg-gradient-to-r from-red-500/20 to-red-900/20"></div>
-        <div className="relative z-10 container mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-4">
+        <div className="absolute inset-0 bg-gradient-to-r from-primary-600/10 to-gold-500/10"></div>
+        <div className="relative z-10 container mx-auto px-4 py-3">
+          <div className="flex items-center justify-center md:justify-between">
+            <div className="flex items-center justify-center space-x-3 md:space-x-6">
               <div className="flex items-center space-x-2">
-                <Sparkles className="h-5 w-5 text-yellow-300 animate-pulse" />
-                <span className="font-bold text-lg">LIMITED TIME OFFER!</span>
+                <Sparkles className="h-4 w-4 md:h-5 md:w-5 text-gold-400 animate-pulse" />
+                <span className="font-bold text-sm md:text-lg tracking-wide">LIMITED TIME OFFER!</span>
               </div>
               <div className="hidden md:block">
-                <span className="text-lg">
-                  Flat <span className="font-bold text-xl text-yellow-300">67% OFF</span> on Just Urbane Digital + Print Magazine. 
-                  Save <span className="font-bold text-yellow-300">₹2,401</span>
+                <span className="text-base md:text-lg">
+                  Flat <span className="font-bold text-lg md:text-xl text-gold-400">67% OFF</span> on Just Urbane Digital + Print Magazine. 
+                  Save <span className="font-bold text-gold-400">₹2,401</span>
                 </span>
               </div>
               <div className="md:hidden">
-                <span className="text-sm">
-                  <span className="font-bold text-yellow-300">67% OFF</span> Just Urbane Magazine!
+                <span className="text-xs">
+                  <span className="font-bold text-gold-400">67% OFF</span> Just Urbane Magazine!
                 </span>
               </div>
             </div>
             <Link 
               to="/pricing" 
-              className="bg-yellow-400 hover:bg-yellow-300 text-black font-bold px-6 py-2 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center space-x-2"
+              className="bg-gradient-to-r from-gold-500 to-amber-600 hover:from-gold-600 hover:to-amber-700 text-black font-bold px-4 py-2 md:px-6 md:py-2 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center space-x-2 ml-4 md:ml-0"
             >
-              <span>BUY NOW</span>
-              <ArrowRight className="h-4 w-4" />
+              <span className="text-sm md:text-base">BUY NOW</span>
+              <ArrowRight className="h-3 w-3 md:h-4 md:w-4" />
             </Link>
           </div>
         </div>
