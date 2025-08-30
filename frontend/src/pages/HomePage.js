@@ -217,7 +217,7 @@ const HomePage = () => {
             )}
 
             {/* Side Articles */}
-            <div className="lg:col-span-4 space-y-3 md:space-y-4">
+            <div className="lg:col-span-4 space-y-4">
               {featuredArticles.slice(1, 4).map((article, index) => (
                 <ProfessionalArticleCard 
                   key={article.id}
