@@ -308,8 +308,53 @@ const HomePage = () => {
               </Link>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-              {techArticles.slice(0, 4).map((article, index) => (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {(techArticles.length > 0 ? techArticles.slice(0, 4) : [
+                {
+                  id: 1,
+                  title: 'Apple Vision Pro: The Future of Computing is Here',
+                  hero_image: 'https://images.unsplash.com/photo-1593508512255-86ab42a8e620?w=400&h=300&fit=crop',
+                  category: 'Technology',
+                  author_name: 'Tech Editor',
+                  published_at: '2025-08-30',
+                  reading_time: 5,
+                  view_count: 1234,
+                  slug: 'apple-vision-pro-future'
+                },
+                {
+                  id: 2,
+                  title: 'Electric Supercars: Performance Meets Sustainability',
+                  hero_image: 'https://images.unsplash.com/photo-1542362567-b07e54358753?w=400&h=300&fit=crop',
+                  category: 'Automotive',
+                  author_name: 'Auto Expert',
+                  published_at: '2025-08-29',
+                  reading_time: 7,
+                  view_count: 987,
+                  slug: 'electric-supercars'
+                },
+                {
+                  id: 3,
+                  title: 'AI in Business: Transforming Corporate Strategy',
+                  hero_image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=400&h=300&fit=crop',
+                  category: 'Business Tech',
+                  author_name: 'Business Analyst',
+                  published_at: '2025-08-28',
+                  reading_time: 6,
+                  view_count: 1456,
+                  slug: 'ai-business-strategy'
+                },
+                {
+                  id: 4,
+                  title: 'Luxury Smart Homes: Technology Meets Comfort',
+                  hero_image: 'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=400&h=300&fit=crop',
+                  category: 'Smart Home',
+                  author_name: 'Home Tech',
+                  published_at: '2025-08-27',
+                  reading_time: 8,
+                  view_count: 876,
+                  slug: 'luxury-smart-homes'
+                }
+              ]).map((article, index) => (
                 <ProfessionalArticleCard 
                   key={article.id}
                   article={article} 
