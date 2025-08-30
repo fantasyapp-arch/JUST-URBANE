@@ -1,93 +1,63 @@
 // Magazine Content Parser - Using ACTUAL magazine pages from uploaded PDF
-// Just Urbane August 2025 - Actual PDF pages as they are
+// Just Urbane August 2025 - Extracted PDF pages
 export const parseMagazineContent = () => {
-  // ACTUAL magazine pages from your uploaded PDF - using working image URLs
+  // ACTUAL magazine pages from the uploaded PDF - converted to PNG images
   const magazinePages = [
     {
-      id: 'cover',
+      id: 'page-1',
       type: 'actual-page',
       pageNumber: 1,
       title: 'JUST URBANE - August 2025 Cover',
-      // Using working Unsplash image as placeholder for magazine cover
-      pageImage: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&h=1200&fit=crop',
+      pageImage: '/magazine-pages/page-1.png', // Local extracted image
       isFromUpload: true
     },
     {
-      id: 'contents',
+      id: 'page-2',
       type: 'actual-page', 
       pageNumber: 2,
       title: 'Contents Page',
-      // Using working Unsplash image as placeholder for contents
-      pageImage: 'https://images.unsplash.com/photo-1554415707-6e8cfc93fe23?w=800&h=1200&fit=crop',
+      pageImage: '/magazine-pages/page-2.png', // Local extracted image
       isFromUpload: true
     },
     {
-      id: 'publisher-desk',
+      id: 'page-3',
       type: 'actual-page',
       pageNumber: 3, 
       title: 'From the Publisher\'s Desk',
-      // Using working Unsplash image as placeholder for publisher page
-      pageImage: 'https://images.unsplash.com/photo-1586953983027-d7508a64f4bb?w=800&h=1200&fit=crop',
+      pageImage: '/magazine-pages/page-3.png', // Local extracted image
       isFromUpload: true
     },
     // Premium pages (after 3 free pages)
     {
-      id: 'tech-news',
+      id: 'page-4',
       type: 'actual-page-premium',
       pageNumber: 4,
       title: 'Tech News - Premium Content',
-      pageImage: 'https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=800&h=1200&fit=crop',
+      pageImage: '/magazine-pages/page-4.png', // Local extracted image
       isPremium: true,
       isFromUpload: true
     },
     {
-      id: 'dell-xps',
+      id: 'page-5',
       type: 'actual-page-premium',
       pageNumber: 5,
       title: 'Dell XPS 14 Review - Premium',
-      pageImage: 'https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=800&h=1200&fit=crop',
+      pageImage: '/magazine-pages/page-5.png', // Local extracted image
       isPremium: true,
       isFromUpload: true
     },
     {
-      id: 'tapan-singhel',
+      id: 'page-6',
       type: 'actual-page-premium',
       pageNumber: 6,
       title: 'Cover Story - Tapan Singhel - Premium',
-      pageImage: 'https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=800&h=1200&fit=crop',
-      isPremium: true,
-      isFromUpload: true
-    },
-    {
-      id: 'bentley',
-      type: 'actual-page-premium',
-      pageNumber: 7,
-      title: 'Bentley Bentayga Speed - Premium',
-      pageImage: 'https://images.unsplash.com/photo-1544829099-b9a0c5303bea?w=800&h=1200&fit=crop',
-      isPremium: true,
-      isFromUpload: true
-    },
-    {
-      id: 'fashion',
-      type: 'actual-page-premium',
-      pageNumber: 8,
-      title: 'Fashion - Timeless Tailoring - Premium',
-      pageImage: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800&h=1200&fit=crop',
-      isPremium: true,
-      isFromUpload: true
-    },
-    {
-      id: 'travel',
-      type: 'actual-page-premium',
-      pageNumber: 9,
-      title: 'Travel & Luxury - Premium',
-      pageImage: 'https://images.unsplash.com/photo-1582719508461-905c673771fd?w=800&h=1200&fit=crop',
+      pageImage: '/magazine-pages/page-6.png', // Local extracted image
       isPremium: true,
       isFromUpload: true
     }
   ];
 
-  console.log('📖 ACTUAL magazine pages loaded:', magazinePages.length, 'pages from Just Urbane PDF');
+  console.log('📖 ACTUAL magazine pages loaded from uploaded PDF:', magazinePages.length, 'pages from Just Urbane August 2025');
   return magazinePages;
 };
 
