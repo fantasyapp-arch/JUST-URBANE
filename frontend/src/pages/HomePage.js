@@ -296,22 +296,22 @@ const HomePage = () => {
           >
             <div className="max-w-7xl mx-auto">
               <div className="flex items-center justify-between mb-6">
-              <div>
-                <h2 className="text-4xl lg:text-5xl font-serif font-bold text-gray-900 mb-3">
-                  Technology
-                </h2>
-                <p className="text-gray-600 text-lg lg:text-xl">
-                  Latest gadgets, innovation and digital trends
-                </p>
+                <div>
+                  <h2 className="text-4xl lg:text-5xl font-serif font-bold text-gray-900 mb-3">
+                    Technology
+                  </h2>
+                  <p className="text-gray-600 text-lg lg:text-xl">
+                    Latest gadgets, innovation and digital trends
+                  </p>
+                </div>
+                <Link
+                  to="/category/tech"
+                  className="flex items-center bg-primary-600 hover:bg-primary-700 text-white px-8 py-4 rounded-xl font-semibold group transition-all duration-200 transform hover:scale-105 shadow-lg"
+                >
+                  Explore Tech
+                  <ArrowRight className="ml-3 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                </Link>
               </div>
-              <Link
-                to="/category/tech"
-                className="flex items-center bg-primary-600 hover:bg-primary-700 text-white px-8 py-4 rounded-xl font-semibold group transition-all duration-200 transform hover:scale-105 shadow-lg"
-              >
-                Explore Tech
-                <ArrowRight className="ml-3 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-              </Link>
-            </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {(techArticles.length > 0 ? techArticles.slice(0, 4) : [
