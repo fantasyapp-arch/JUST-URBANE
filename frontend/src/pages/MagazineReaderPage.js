@@ -66,7 +66,7 @@ const MagazineReaderPage = () => {
       setTimeout(() => {
         setCurrentPage(currentPage + 1);
         setIsFlipping(false);
-      }, 600);
+      }, 800);
     }
   };
 
@@ -79,7 +79,7 @@ const MagazineReaderPage = () => {
       setTimeout(() => {
         setCurrentPage(currentPage - 1);
         setIsFlipping(false);
-      }, 600);
+      }, 800);
     }
   };
 
