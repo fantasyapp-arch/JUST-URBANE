@@ -268,7 +268,7 @@ const HomePage = () => {
               )}
               
               {/* Side Fashion Articles */}
-              <div className="md:col-span-4 space-y-6">
+              <div className="md:col-span-4 space-y-3">
                 {fashionArticles.slice(1, 4).map((article, index) => (
                   <ProfessionalArticleCard 
                     key={article.id}
