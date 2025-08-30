@@ -168,7 +168,7 @@ const HomePage = () => {
         className="bg-gradient-to-r from-gray-900 via-black to-gray-900 text-white relative overflow-hidden"
       >
         <div className="absolute inset-0 bg-gradient-to-r from-primary-600/10 to-gold-500/10"></div>
-        <div className="relative z-10 container mx-auto px-4 py-3">
+        <div className="relative z-10 container mx-auto px-2 py-1">
           <div className="flex items-center justify-center md:justify-between">
             <div className="flex items-center justify-center space-x-3 md:space-x-6">
               <div className="flex items-center space-x-2">
