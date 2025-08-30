@@ -280,6 +280,7 @@ const HomePage = () => {
                     index={index + 1}
                   />
                 ))}
+                </div>
               </div>
             </div>
           </motion.section>
