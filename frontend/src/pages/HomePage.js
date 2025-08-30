@@ -202,9 +202,9 @@ const HomePage = () => {
       <div className="w-full">
         
         {/* HERO SECTION - PROFESSIONAL MAGAZINE STYLE */}
-        <section className="bg-white px-4 py-4 mb-0">
-          <div className="max-w-7xl mx-auto">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        <section className="bg-white w-full py-6">
+          <div className="w-full px-4">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 max-w-7xl mx-auto">
             {/* Main Hero Article */}
             {featuredArticles[0] && (
               <div className="lg:col-span-8">
