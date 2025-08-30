@@ -127,7 +127,7 @@ const MagazineReaderPage = () => {
       // Quick reset for next interaction
       setTimeout(() => {
         setIsFlipping(false);
-      }, 300);
+      }, 250);
     }
   };
 
