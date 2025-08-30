@@ -926,13 +926,13 @@ const HomePage = () => {
 
         {/* GROOMING & WELLNESS SECTION */}
         <motion.section 
-          className="mb-6"
+          className="mb-2"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 1.5 }}
         >
-          <div className="border-t border-gray-200 pt-8">
-            <div className="flex items-center justify-between mb-8">
+          <div className="border-t border-gray-200 pt-2">
+            <div className="flex items-center justify-between mb-3">
               <h2 className="text-3xl lg:text-4xl font-serif font-bold text-gray-900">
                 Grooming & Wellness
               </h2>
