@@ -376,7 +376,7 @@ const HomePage = () => {
           transition={{ duration: 0.6, delay: 0.9 }}
         >
           <div className="border-t-2 border-gray-900 pt-4 mb-3">
-            <div className="flex items-center justify-between mb-8">
+            <div className="flex items-center justify-between mb-3">
               <h2 className="text-3xl lg:text-4xl font-serif font-bold text-gray-900">
                 Trending
               </h2>
