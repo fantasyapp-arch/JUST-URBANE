@@ -147,18 +147,18 @@ const FullScreenMagazineReader = ({ isOpen, onClose, magazineContent = [] }) => 
         />
       </div>
 
-      {/* Navigation Arrows - Large and Visible */}
+      {/* Navigation Arrows - Positioned for full screen */}
       <button
         onClick={prevPage}
         disabled={currentPage === 0}
         style={{
           position: 'fixed',
-          left: '30px',
+          left: '20px',
           top: '50%',
           transform: 'translateY(-50%)',
           zIndex: 1000000,
           padding: '20px',
-          backgroundColor: 'rgba(0, 0, 0, 0.6)',
+          backgroundColor: 'rgba(0, 0, 0, 0.7)',
           color: currentPage === 0 ? 'rgba(255, 255, 255, 0.3)' : 'white',
           border: 'none',
           borderRadius: '50%',
@@ -166,7 +166,7 @@ const FullScreenMagazineReader = ({ isOpen, onClose, magazineContent = [] }) => 
           boxShadow: '0 4px 20px rgba(0, 0, 0, 0.3)'
         }}
       >
-        <ChevronLeft style={{ width: '40px', height: '40px' }} />
+        <ChevronLeft style={{ width: '50px', height: '50px' }} />
       </button>
 
       <button
@@ -174,12 +174,12 @@ const FullScreenMagazineReader = ({ isOpen, onClose, magazineContent = [] }) => 
         disabled={currentPage >= totalPages - 1}
         style={{
           position: 'fixed',
-          right: '30px',
+          right: '20px',
           top: '50%',
           transform: 'translateY(-50%)',
           zIndex: 1000000,
           padding: '20px',
-          backgroundColor: 'rgba(0, 0, 0, 0.6)',
+          backgroundColor: 'rgba(0, 0, 0, 0.7)',
           color: currentPage >= totalPages - 1 ? 'rgba(255, 255, 255, 0.3)' : 'white',
           border: 'none',
           borderRadius: '50%',
@@ -187,7 +187,7 @@ const FullScreenMagazineReader = ({ isOpen, onClose, magazineContent = [] }) => 
           boxShadow: '0 4px 20px rgba(0, 0, 0, 0.3)'
         }}
       >
-        <ChevronRight style={{ width: '40px', height: '40px' }} />
+        <ChevronRight style={{ width: '50px', height: '50px' }} />
       </button>
 
       {/* Premium Modal */}
