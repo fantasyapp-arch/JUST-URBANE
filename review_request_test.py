@@ -1,5 +1,374 @@
 #!/usr/bin/env python3
 """
+Review Request Backend Testing - Digital Magazine Support
+Testing the 6 priority areas from the review request
+"""
+
+import requests
+import json
+import time
+from datetime import datetime
+
+class ReviewRequestTester:
+    def __init__(self, base_url: str = "https://urbane-reader.preview.emergentagent.com"):
+        self.base_url = base_url
+        self.session = requests.Session()
+        self.test_results = []
+        
+    def log_test(self, test_name: str, success: bool, message: str):
+        """Log test results"""
+        result = {
+            "test": test_name,
+            "success": success,
+            "message": message,
+            "timestamp": datetime.now().isoformat()
+        }
+        self.test_results.append(result)
+        status = "✅ PASS" if success else "❌ FAIL"
+        print(f"{status} {test_name}: {message}")
+        
+    def test_api_health_check(self):
+        """1. API Health Check - Verify /api/health endpoint is responding"""
+        try:
+            response = self.session.get(f"{self.base_url}/api/health", timeout=10)
+            if response.status_code == 200:
+                data = response.json()
+                if data.get("status") == "healthy":
+                    self.log_test("API Health Check", True, f"API responding correctly with status '{data.get('status')}' and message '{data.get('message', '')}'")
+                    return True
+                else:
+                    self.log_test("API Health Check", False, f"Unexpected health status: {data}")
+                    return False
+            else:
+                self.log_test("API Health Check", False, f"HTTP {response.status_code}: {response.text}")
+                return False
+        except Exception as e:
+            self.log_test("API Health Check", False, f"Connection error: {str(e)}")
+            return False
+    
+    def test_magazine_issues_api(self):
+        """2. Magazine Issues API - Test /api/issues for magazine content"""
+        try:
+            response = self.session.get(f"{self.base_url}/api/issues", timeout=10)
+            if response.status_code == 200:
+                issues = response.json()
+                if isinstance(issues, list):
+                    if len(issues) > 0:
+                        # Check structure of magazine issues
+                        sample_issue = issues[0]
+                        required_fields = ["id", "title", "cover_image", "release_date", "is_digital_available"]
+                        missing_fields = [field for field in required_fields if field not in sample_issue]
+                        
+                        if not missing_fields:
+                            self.log_test("Magazine Issues API", True, f"Retrieved {len(issues)} magazine issues with proper structure (id, title, cover_image, release_date, is_digital_available)")
+                            return True
+                        else:
+                            self.log_test("Magazine Issues API", False, f"Magazine issues missing required fields: {missing_fields}")
+                            return False
+                    else:
+                        self.log_test("Magazine Issues API", True, "Magazine issues endpoint working (empty result is acceptable)")
+                        return True
+                else:
+                    self.log_test("Magazine Issues API", False, f"Expected list, got: {type(issues)}")
+                    return False
+            else:
+                self.log_test("Magazine Issues API", False, f"HTTP {response.status_code}: {response.text}")
+                return False
+        except Exception as e:
+            self.log_test("Magazine Issues API", False, f"Error: {str(e)}")
+            return False
+    
+    def test_articles_api(self):
+        """3. Articles API - Test /api/articles for magazine content with proper structure"""
+        try:
+            response = self.session.get(f"{self.base_url}/api/articles", timeout=10)
+            if response.status_code == 200:
+                articles = response.json()
+                if isinstance(articles, list):
+                    if len(articles) > 0:
+                        # Check structure for magazine content
+                        sample_article = articles[0]
+                        required_fields = ["id", "title", "body", "category", "author_name", "published_at", "is_premium"]
+                        missing_fields = [field for field in required_fields if field not in sample_article]
+                        
+                        if not missing_fields:
+                            # Test category filtering
+                            response_filtered = self.session.get(f"{self.base_url}/api/articles?category=fashion&limit=10", timeout=10)
+                            if response_filtered.status_code == 200:
+                                filtered_articles = response_filtered.json()
+                                self.log_test("Articles API", True, f"Retrieved {len(articles)} articles with proper magazine content structure, category filtering working ({len(filtered_articles)} fashion articles)")
+                                return True
+                            else:
+                                self.log_test("Articles API", False, f"Category filtering failed: HTTP {response_filtered.status_code}")
+                                return False
+                        else:
+                            self.log_test("Articles API", False, f"Articles missing required fields: {missing_fields}")
+                            return False
+                    else:
+                        self.log_test("Articles API", False, "No articles found")
+                        return False
+                else:
+                    self.log_test("Articles API", False, f"Expected list, got: {type(articles)}")
+                    return False
+            else:
+                self.log_test("Articles API", False, f"HTTP {response.status_code}: {response.text}")
+                return False
+        except Exception as e:
+            self.log_test("Articles API", False, f"Error: {str(e)}")
+            return False
+    
+    def test_authentication_system(self):
+        """4. Authentication System - Test user login/registration for premium access"""
+        try:
+            # Test user registration
+            test_user = {
+                "name": "Review Test User",
+                "email": f"reviewtest_{int(time.time())}@justurbane.com",
+                "password": "reviewtest123"
+            }
+            
+            response = self.session.post(
+                f"{self.base_url}/api/auth/register",
+                json=test_user,
+                headers={"Content-Type": "application/json"},
+                timeout=10
+            )
+            
+            if response.status_code == 200:
+                # Test user login
+                login_data = {
+                    "email": test_user["email"],
+                    "password": test_user["password"]
+                }
+                
+                response = self.session.post(
+                    f"{self.base_url}/api/auth/login",
+                    json=login_data,
+                    headers={"Content-Type": "application/json"},
+                    timeout=10
+                )
+                
+                if response.status_code == 200:
+                    data = response.json()
+                    if data.get("access_token") and data.get("token_type") == "bearer":
+                        self.log_test("Authentication System", True, "User registration and login working correctly for premium access (JWT token generated)")
+                        return True
+                    else:
+                        self.log_test("Authentication System", False, f"Invalid login response: {data}")
+                        return False
+                else:
+                    self.log_test("Authentication System", False, f"Login failed: HTTP {response.status_code}: {response.text}")
+                    return False
+            else:
+                self.log_test("Authentication System", False, f"Registration failed: HTTP {response.status_code}: {response.text}")
+                return False
+        except Exception as e:
+            self.log_test("Authentication System", False, f"Error: {str(e)}")
+            return False
+    
+    def test_payment_packages_api(self):
+        """5. Payment Packages API - Test /api/payments/packages for subscription plans"""
+        try:
+            response = self.session.get(f"{self.base_url}/api/payments/packages", timeout=10)
+            if response.status_code == 200:
+                packages = response.json()
+                if isinstance(packages, dict):
+                    # Check for expected subscription packages
+                    expected_packages = ["digital_annual", "print_annual", "combined_annual"]
+                    missing_packages = [pkg for pkg in expected_packages if pkg not in packages]
+                    
+                    if not missing_packages:
+                        # Verify pricing and currency
+                        digital = packages.get("digital_annual", {})
+                        print_pkg = packages.get("print_annual", {})
+                        combined = packages.get("combined_annual", {})
+                        
+                        pricing_correct = (
+                            digital.get("amount") == 499.0 and
+                            print_pkg.get("amount") == 499.0 and
+                            combined.get("amount") == 999.0 and
+                            digital.get("currency") == "inr" and
+                            print_pkg.get("currency") == "inr" and
+                            combined.get("currency") == "inr"
+                        )
+                        
+                        if pricing_correct:
+                            self.log_test("Payment Packages API", True, f"All 3 subscription packages available with correct INR pricing (Digital ₹{digital.get('amount')}, Print ₹{print_pkg.get('amount')}, Combined ₹{combined.get('amount')})")
+                            return True
+                        else:
+                            self.log_test("Payment Packages API", False, f"Incorrect pricing or currency settings")
+                            return False
+                    else:
+                        self.log_test("Payment Packages API", False, f"Missing subscription packages: {missing_packages}")
+                        return False
+                else:
+                    self.log_test("Payment Packages API", False, f"Expected dict, got: {type(packages)}")
+                    return False
+            else:
+                self.log_test("Payment Packages API", False, f"HTTP {response.status_code}: {response.text}")
+                return False
+        except Exception as e:
+            self.log_test("Payment Packages API", False, f"Error: {str(e)}")
+            return False
+    
+    def test_database_connection(self):
+        """6. Database Connection - Verify MongoDB connectivity and data availability"""
+        try:
+            # Test multiple endpoints to verify database connectivity
+            endpoints_to_test = [
+                ("/api/articles", "Articles"),
+                ("/api/categories", "Categories"),
+                ("/api/issues", "Magazine Issues"),
+                ("/api/payments/packages", "Payment Packages")
+            ]
+            
+            successful_connections = 0
+            total_data_count = 0
+            
+            for endpoint, name in endpoints_to_test:
+                try:
+                    response = self.session.get(f"{self.base_url}{endpoint}", timeout=10)
+                    if response.status_code == 200:
+                        data = response.json()
+                        if isinstance(data, list):
+                            data_count = len(data)
+                            total_data_count += data_count
+                        elif isinstance(data, dict):
+                            data_count = len(data.keys())
+                            total_data_count += data_count
+                        else:
+                            data_count = 1 if data else 0
+                            
+                        successful_connections += 1
+                        print(f"  ✅ {name}: {data_count} records")
+                    else:
+                        print(f"  ❌ {name}: HTTP {response.status_code}")
+                except Exception as e:
+                    print(f"  ❌ {name}: {str(e)}")
+            
+            if successful_connections == len(endpoints_to_test) and total_data_count > 0:
+                self.log_test("Database Connection", True, f"MongoDB connectivity verified - all {len(endpoints_to_test)} endpoints responsive with {total_data_count} total data records")
+                return True
+            elif successful_connections == len(endpoints_to_test):
+                self.log_test("Database Connection", True, f"MongoDB connectivity verified - all endpoints responsive (some may have empty data)")
+                return True
+            else:
+                self.log_test("Database Connection", False, f"Database connectivity issues - only {successful_connections}/{len(endpoints_to_test)} endpoints responsive")
+                return False
+        except Exception as e:
+            self.log_test("Database Connection", False, f"Error: {str(e)}")
+            return False
+    
+    def test_cors_configuration(self):
+        """Bonus: Test CORS configuration for frontend communication"""
+        try:
+            response = self.session.options(
+                f"{self.base_url}/api/health",
+                headers={
+                    "Origin": "https://urbane-reader.preview.emergentagent.com",
+                    "Access-Control-Request-Method": "GET",
+                    "Access-Control-Request-Headers": "Content-Type"
+                },
+                timeout=10
+            )
+            
+            if response.status_code in [200, 204]:
+                cors_headers = response.headers
+                if "Access-Control-Allow-Origin" in cors_headers:
+                    self.log_test("CORS Configuration", True, "CORS properly configured for frontend communication")
+                    return True
+                else:
+                    self.log_test("CORS Configuration", False, "CORS headers missing")
+                    return False
+            else:
+                self.log_test("CORS Configuration", False, f"CORS preflight failed: HTTP {response.status_code}")
+                return False
+        except Exception as e:
+            self.log_test("CORS Configuration", False, f"Error: {str(e)}")
+            return False
+    
+    def run_review_request_tests(self):
+        """Run all review request tests"""
+        print("🎯 REVIEW REQUEST BACKEND TESTING - DIGITAL MAGAZINE SUPPORT")
+        print("=" * 70)
+        print("Testing 6 priority areas before investigating frontend issues with FullScreenMagazineReader")
+        print()
+        
+        # Run all 6 priority tests
+        test_results = []
+        
+        print("1. API Health Check...")
+        test_results.append(self.test_api_health_check())
+        
+        print("\n2. Magazine Issues API...")
+        test_results.append(self.test_magazine_issues_api())
+        
+        print("\n3. Articles API...")
+        test_results.append(self.test_articles_api())
+        
+        print("\n4. Authentication System...")
+        test_results.append(self.test_authentication_system())
+        
+        print("\n5. Payment Packages API...")
+        test_results.append(self.test_payment_packages_api())
+        
+        print("\n6. Database Connection...")
+        test_results.append(self.test_database_connection())
+        
+        print("\nBonus: CORS Configuration...")
+        test_results.append(self.test_cors_configuration())
+        
+        return self.generate_report()
+    
+    def generate_report(self):
+        """Generate test report"""
+        print("\n" + "=" * 70)
+        print("📊 REVIEW REQUEST TEST RESULTS")
+        print("=" * 70)
+        
+        total_tests = len(self.test_results)
+        passed_tests = sum(1 for result in self.test_results if result["success"])
+        failed_tests = total_tests - passed_tests
+        
+        print(f"Total Tests: {total_tests}")
+        print(f"Passed: {passed_tests} ✅")
+        print(f"Failed: {failed_tests} ❌")
+        print(f"Success Rate: {(passed_tests/total_tests)*100:.1f}%")
+        
+        if failed_tests > 0:
+            print("\n❌ FAILED TESTS:")
+            for result in self.test_results:
+                if not result["success"]:
+                    print(f"  - {result['test']}: {result['message']}")
+        else:
+            print("\n🎉 ALL TESTS PASSED! Backend is ready for FullScreenMagazineReader functionality.")
+        
+        print("\n" + "=" * 70)
+        return {
+            "total": total_tests,
+            "passed": passed_tests,
+            "failed": failed_tests,
+            "success_rate": (passed_tests/total_tests)*100,
+            "results": self.test_results
+        }
+
+def main():
+    """Main testing function"""
+    tester = ReviewRequestTester()
+    report = tester.run_review_request_tests()
+    
+    # Save report
+    with open("/app/review_request_test_report.json", "w") as f:
+        json.dump(report, f, indent=2, default=str)
+    
+    print(f"\n📄 Detailed report saved to: /app/review_request_test_report.json")
+    
+    return report["failed"] == 0
+
+if __name__ == "__main__":
+    success = main()
+    exit(0 if success else 1)
+"""
 Review Request Focused Testing
 Testing the specific priorities mentioned in the review request
 """
