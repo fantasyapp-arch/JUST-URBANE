@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Play, TrendingUp, Award, Clock, Eye, Crown } from 'lucide-react';
+import { ArrowRight, Play, TrendingUp, Award, Clock, Eye, Crown, X, Sparkles, Star, Zap } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 // Components
