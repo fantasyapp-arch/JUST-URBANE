@@ -2,9 +2,7 @@ import React, { useRef, useEffect, useState } from 'react';
 import HTMLFlipBook from 'react-pageflip';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
-  X, ChevronLeft, ChevronRight, ZoomIn, ZoomOut, 
-  Home, Bookmark, Share2, Settings, Maximize, 
-  Minimize, RotateCw, Menu, Crown, Lock, Play
+  X, ChevronLeft, ChevronRight, Crown, Lock
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { Link } from 'react-router-dom';
