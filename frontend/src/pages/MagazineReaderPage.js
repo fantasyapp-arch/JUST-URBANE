@@ -125,15 +125,11 @@ const MagazineReaderPage = () => {
     if (currentPage < totalPages - 1) {
       setIsFlipping(true);
       setFlipDirection('next');
-      setPageLoading(true);
-      setImageLoaded(false);
-      
-      // Simple page turn timing like GQ India
+      // Instant page change - no loading delay
+      setCurrentPage(currentPage + 1);
       setTimeout(() => {
-        setCurrentPage(currentPage + 1);
         setIsFlipping(false);
-        setPageLoading(false);
-      }, 300); // Quick and simple transition
+      }, 150); // Super fast transition
     }
   };
 
@@ -143,15 +139,11 @@ const MagazineReaderPage = () => {
     if (currentPage > 0) {
       setIsFlipping(true);
       setFlipDirection('prev');
-      setPageLoading(true);
-      setImageLoaded(false);
-      
-      // Simple page turn timing like GQ India
+      // Instant page change - no loading delay
+      setCurrentPage(currentPage - 1);
       setTimeout(() => {
-        setCurrentPage(currentPage - 1);
         setIsFlipping(false);
-        setPageLoading(false);
-      }, 300); // Quick and simple transition
+      }, 150); // Super fast transition
     }
   };
 
