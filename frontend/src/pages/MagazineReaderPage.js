@@ -124,11 +124,17 @@ const MagazineReaderPage = () => {
     if (currentPage < totalPages - 1) {
       setIsFlipping(true);
       setFlipDirection('next');
-      // Instant page change - no loading delay
-      setCurrentPage(currentPage + 1);
+      setShowPageCurl(true);
+      
+      // Start page curl animation
       setTimeout(() => {
+        setCurrentPage(currentPage + 1);
+      }, 400); // Change page mid-curl
+      
+      setTimeout(() => {
+        setShowPageCurl(false);
         setIsFlipping(false);
-      }, 150); // Super fast transition
+      }, 800); // Complete curl animation
     }
   };
 
@@ -138,11 +144,17 @@ const MagazineReaderPage = () => {
     if (currentPage > 0) {
       setIsFlipping(true);
       setFlipDirection('prev');
-      // Instant page change - no loading delay
-      setCurrentPage(currentPage - 1);
+      setShowPageCurl(true);
+      
+      // Start page curl animation
       setTimeout(() => {
+        setCurrentPage(currentPage - 1);
+      }, 400); // Change page mid-curl
+      
+      setTimeout(() => {
+        setShowPageCurl(false);
         setIsFlipping(false);
-      }, 150); // Super fast transition
+      }, 800); // Complete curl animation
     }
   };
 
