@@ -1088,13 +1088,13 @@ const HomePage = () => {
 
         {/* FOOD & DRINK SECTION - COMPACT */}
         <motion.section 
-          className="mb-2"
+          className="mb-6"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 1.8 }}
         >
-          <div className="bg-gradient-to-r from-amber-50 to-orange-50 rounded-lg p-3">
-            <div className="flex items-center justify-between mb-2">
+          <div className="bg-gradient-to-r from-amber-50 to-orange-50 rounded-lg p-6">
+            <div className="flex items-center justify-between mb-4">
               <h2 className="text-2xl lg:text-3xl font-serif font-bold text-gray-900">
                 Food & Drink
               </h2>
