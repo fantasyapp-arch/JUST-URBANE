@@ -944,7 +944,7 @@ const HomePage = () => {
               </Link>
             </div>
 
-            <div className="grid lg:grid-cols-3 gap-8">
+            <div className="grid lg:grid-cols-3 gap-4">
               {[
                 {
                   title: 'The Complete Guide to Premium Men\'s Skincare Routines',
