@@ -127,26 +127,55 @@ const FullScreenMagazineReader = ({ isOpen, onClose, magazineContent = [] }) => 
       {/* Close Button */}
       <button
         onClick={closeReader}
-        className="absolute top-4 right-4 p-3 bg-black/90 hover:bg-black text-white rounded-full transition-all duration-200 shadow-xl border border-white/20"
-        style={{ zIndex: 100000 }}
+        style={{
+          position: 'absolute',
+          top: '16px',
+          right: '16px',
+          zIndex: 1000000,
+          padding: '12px',
+          backgroundColor: 'rgba(0, 0, 0, 0.9)',
+          color: 'white',
+          border: 'none',
+          borderRadius: '50%',
+          cursor: 'pointer',
+          boxShadow: '0 4px 20px rgba(0, 0, 0, 0.5)',
+          border: '1px solid rgba(255, 255, 255, 0.2)'
+        }}
         aria-label="Close Magazine"
       >
-        <X className="h-6 w-6" />
+        <X style={{ width: '24px', height: '24px' }} />
       </button>
 
       {/* Page Counter */}
       <div 
-        className="absolute top-4 left-4 bg-black/90 text-white px-4 py-2 rounded-full text-sm border border-white/20"
-        style={{ zIndex: 100000 }}
+        style={{
+          position: 'absolute',
+          top: '16px',
+          left: '16px',
+          zIndex: 1000000,
+          backgroundColor: 'rgba(0, 0, 0, 0.9)',
+          color: 'white',
+          padding: '8px 16px',
+          borderRadius: '20px',
+          fontSize: '14px',
+          border: '1px solid rgba(255, 255, 255, 0.2)'
+        }}
       >
         {currentPage + 1} / {totalPages}
         {!canReadPremium && currentPage < FREE_PREVIEW_PAGES && (
-          <span className="ml-2 text-green-400">(Free Preview)</span>
+          <span style={{ marginLeft: '8px', color: '#10b981' }}>(Free Preview)</span>
         )}
       </div>
 
       {/* Magazine Container */}
-      <div className="w-full h-full flex items-center justify-center relative">
+      <div style={{
+        width: '100%',
+        height: '100%',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        position: 'relative'
+      }}>
         {!isLoading && pages && pages.length > 0 ? (
           <HTMLFlipBook
             ref={flipBookRef}
