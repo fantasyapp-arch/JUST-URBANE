@@ -23,16 +23,22 @@ const FullScreenMagazineReader = ({ isOpen, onClose, magazineContent = [] }) => 
   }, [pages]);
 
   useEffect(() => {
+    console.log('🔥 FullScreenMagazineReader render - isOpen:', isOpen, 'pages:', pages.length);
+  }, [isOpen, pages]);
+
+  useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
       document.body.style.position = 'fixed';
       document.body.style.width = '100%';
       document.body.style.height = '100%';
+      console.log('🔒 Body scroll locked for full-screen magazine');
     } else {
       document.body.style.overflow = '';
       document.body.style.position = '';
       document.body.style.width = '';
       document.body.style.height = '';
+      console.log('🔓 Body scroll unlocked');
     }
 
     return () => {
@@ -64,9 +70,18 @@ const FullScreenMagazineReader = ({ isOpen, onClose, magazineContent = [] }) => 
     onClose();
   };
 
-  if (!isOpen || !pages.length) {
+  // Early return with debug log
+  if (!isOpen) {
+    console.log('🚫 FullScreenMagazineReader not rendering - isOpen is false');
     return null;
   }
+
+  if (!pages.length) {
+    console.log('🚫 FullScreenMagazineReader not rendering - no pages');
+    return null;
+  }
+
+  console.log('✅ FullScreenMagazineReader RENDERING - pages:', pages.length, 'currentPage:', currentPage);
 
   const currentPageData = pages[currentPage];
   const isPageLocked = !canReadPremium && currentPage >= FREE_PREVIEW_PAGES;
@@ -88,6 +103,22 @@ const FullScreenMagazineReader = ({ isOpen, onClose, magazineContent = [] }) => 
         justifyContent: 'center'
       }}
     >
+      {/* DEBUG: Show that component is rendering */}
+      <div style={{
+        position: 'fixed',
+        top: '10px',
+        left: '50%',
+        transform: 'translateX(-50%)',
+        color: 'yellow',
+        backgroundColor: 'red',
+        padding: '10px',
+        zIndex: 1000001,
+        fontSize: '16px',
+        fontWeight: 'bold'
+      }}>
+        FULL-SCREEN MAGAZINE READER ACTIVE - Page {currentPage + 1}/{totalPages}
+      </div>
+
       {/* Close Button */}
       <button
         onClick={closeReader}
