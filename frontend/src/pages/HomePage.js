@@ -641,6 +641,7 @@ const HomePage = () => {
               </div>
             </div>
           </div>
+        </div>
         </motion.section>
 
         {/* WATCHES & LUXURY SECTION - COMPACT */}
