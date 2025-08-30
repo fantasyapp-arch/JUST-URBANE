@@ -1,26 +1,16 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate, Link } from 'react-router-dom';
 import { PlayCircle, Calendar, User, Clock, ArrowRight } from 'lucide-react';
-import FullScreenMagazineReader from '../components/FullScreenMagazineReader';
-import parseMagazineContent from '../components/MagazineContentParser';
 
 const IssuesPage = () => {
   const navigate = useNavigate();
   
   const openMagazineReader = () => {
     console.log('🔥 Opening magazine reader...');
-    // Use React Router navigation (not window.location)
+    // Navigate to dedicated magazine reader page
     navigate('/magazine-reader');
   };
-
-  const closeMagazineReader = () => {
-    setIsReaderOpen(false);
-    setSelectedIssue(null);
-  };
-
-  const [isReaderOpen, setIsReaderOpen] = useState(false);
-  const [selectedIssue, setSelectedIssue] = useState(null);
 
   // Sample magazine issues data
   const magazineIssues = [
