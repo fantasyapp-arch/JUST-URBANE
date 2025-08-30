@@ -16,6 +16,7 @@ import CategoryPage from './pages/CategoryPage';
 import ArticlePage from './pages/ArticlePage';
 import AuthorPage from './pages/AuthorPage';
 import IssuesPage from './pages/IssuesPage';
+import MagazineReaderPage from './pages/MagazineReaderPage';
 import ReviewsPage from './pages/ReviewsPage';
 import TravelPage from './pages/TravelPage';
 import PricingPage from './pages/PricingPage';
