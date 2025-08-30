@@ -260,11 +260,11 @@ const FullScreenMagazineReader = ({ isOpen, onClose, magazineContent = [] }) => 
 };
 
 // Magazine Page Content Component
-const MagazinePageContent = ({ page, pageNumber }) => {
+const MagazinePageContent = ({ page, pageNumber, isBlurred = false }) => {
   if (!page) {
     return (
       <div className="h-full flex items-center justify-center bg-gray-100">
-        <p className="text-gray-500">Page content loading...</p>
+        <p className="text-gray-500">Loading...</p>
       </div>
     );
   }
@@ -272,94 +272,87 @@ const MagazinePageContent = ({ page, pageNumber }) => {
   if (page.type === 'cover') {
     return (
       <div 
-        className="h-full flex flex-col justify-between p-12 text-white relative overflow-hidden bg-cover bg-center"
+        className={`h-full relative overflow-hidden bg-cover bg-center ${isBlurred ? 'blur-sm' : ''}`}
         style={{
-          backgroundImage: `linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.6)), url(${page.image})`
+          backgroundImage: `linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.5)), url(${page.image})`
         }}
       >
-        {/* Cover Header */}
-        <div className="text-center mb-8">
-          <div className="flex items-center justify-center space-x-3 mb-4">
-            <Crown className="h-10 w-10 text-amber-400" />
-            <h1 className="text-6xl font-bold tracking-wider">{page.title}</h1>
-          </div>
-          <p className="text-amber-200 text-xl tracking-widest uppercase">{page.content}</p>
-        </div>
-
-        {/* Issue Info */}
-        <div className="text-center mb-16">
-          <p className="text-4xl font-light mb-4">{page.subtitle}</p>
-          <p className="text-amber-300 text-lg">The Modern Gentleman's Guide</p>
-        </div>
-
-        {/* Cover Features */}
-        <div className="space-y-3 mb-8">
+        {/* Magazine Cover Design */}
+        <div className="absolute inset-0 flex flex-col justify-between p-8 text-white">
+          {/* Top - Magazine Logo */}
           <div className="text-center">
-            <h2 className="text-2xl font-semibold mb-4">Inside This Issue</h2>
-            <div className="space-y-2 text-lg text-gray-300">
-              <p>• Style Essentials for the Modern Man</p>
-              <p>• Luxury Travel Destinations 2025</p>
-              <p>• Investment Strategies & Tech Innovations</p>
-              <p>• Exclusive Interviews & Premium Content</p>
+            <h1 className="text-6xl font-bold tracking-widest mb-2">{page.title}</h1>
+            <div className="text-amber-300 text-lg tracking-widest uppercase">{page.content}</div>
+          </div>
+
+          {/* Center - Issue Info */}
+          <div className="text-center">
+            <div className="text-5xl font-light mb-4">{page.subtitle}</div>
+            <div className="text-xl text-amber-200 tracking-wider">Premium Digital Edition</div>
+          </div>
+
+          {/* Bottom - Cover Features */}
+          <div className="text-center space-y-2">
+            <div className="text-lg font-semibold">INSIDE THIS ISSUE</div>
+            <div className="text-sm space-y-1 text-gray-200">
+              <div>• Modern Gentleman's Style Guide</div>
+              <div>• Luxury Travel Destinations 2025</div>
+              <div>• Tech Innovations & Investment</div>
+              <div>• Exclusive Premium Content</div>
             </div>
           </div>
         </div>
-
-        {/* Cover Footer */}
-        <div className="text-center text-sm text-gray-400">
-          <p>Premium Digital Magazine Experience</p>
-        </div>
+        
+        {isBlurred && <PurchaseOverlay />}
       </div>
     );
   }
 
+  // Article Page Design
   return (
-    <div className="h-full p-12 flex flex-col relative overflow-hidden bg-white">
-      {/* Page Number */}
-      <div className="absolute top-6 right-6 text-sm text-gray-400 font-medium">
-        {pageNumber}
-      </div>
-
-      {/* Magazine Header */}
-      <div className="flex items-center justify-between mb-8 pb-4 border-b border-gray-200">
-        <div className="flex items-center space-x-3">
-          <Crown className="h-5 w-5 text-amber-600" />
-          <span className="text-sm font-bold tracking-wider text-gray-800">JUST URBANE</span>
+    <div className={`h-full bg-white relative overflow-hidden ${isBlurred ? 'blur-sm' : ''}`}>
+      {/* Magazine Page Layout */}
+      <div className="h-full p-8 flex flex-col">
+        {/* Header */}
+        <div className="flex items-center justify-between mb-6 pb-3 border-b-2 border-gray-200">
+          <div className="flex items-center space-x-2">
+            <Crown className="h-4 w-4 text-amber-600" />
+            <span className="text-sm font-bold tracking-wider text-gray-800">JUST URBANE</span>
+          </div>
+          <div className="text-sm text-gray-500 uppercase tracking-wider">{page.category}</div>
         </div>
-        <div className="text-sm text-gray-500 uppercase tracking-widest">
-          {page.category}
-        </div>
-      </div>
 
-      {/* Article Content */}
-      <div className="flex-1 flex flex-col">
-        {/* Title */}
-        <h1 className="text-4xl font-serif font-bold text-gray-900 leading-tight mb-6">
+        {/* Article Title */}
+        <h1 className="text-3xl font-serif font-bold text-gray-900 leading-tight mb-6">
           {page.title}
         </h1>
 
         {/* Hero Image */}
         {page.image && (
-          <div className="mb-8 rounded-xl overflow-hidden shadow-lg">
+          <div className="mb-6 rounded-lg overflow-hidden shadow-md">
             <img
               src={page.image}
               alt={page.title}
-              className="w-full h-64 object-cover"
+              className="w-full h-48 object-cover"
             />
           </div>
         )}
 
-        {/* Article Body */}
-        <div className="flex-1 prose prose-lg max-w-none">
-          <div className="text-gray-700 leading-relaxed text-base">
-            {(page.content || '').split('\n\n').map((paragraph, index) => (
-              <p key={index} className="mb-6 text-justify">
-                {index === 0 && (
-                  <span className="float-left text-7xl font-serif leading-none mr-3 mt-2 text-gray-800">
-                    {paragraph.charAt(0)}
-                  </span>
-                )}
-                {index === 0 ? paragraph.slice(1) : paragraph}
+        {/* Article Content */}
+        <div className="flex-1">
+          <div className="prose prose-sm max-w-none text-gray-700 leading-relaxed">
+            {/* Drop Cap */}
+            <p className="text-justify mb-4">
+              <span className="float-left text-6xl font-serif leading-none mr-2 mt-1 text-gray-800">
+                {(page.content || '').charAt(0)}
+              </span>
+              {(page.content || '').split('\n\n')[0]?.slice(1)}
+            </p>
+            
+            {/* Rest of content */}
+            {(page.content || '').split('\n\n').slice(1).map((paragraph, index) => (
+              <p key={index} className="mb-4 text-justify text-sm">
+                {paragraph}
               </p>
             ))}
           </div>
@@ -367,14 +360,21 @@ const MagazinePageContent = ({ page, pageNumber }) => {
 
         {/* Premium Badge */}
         {page.type === 'premium' && (
-          <div className="flex justify-center mt-8">
-            <div className="flex items-center bg-gradient-to-r from-amber-500 to-amber-600 text-white text-sm px-4 py-2 rounded-full">
-              <Crown className="h-4 w-4 mr-2" />
-              Premium Exclusive
+          <div className="flex justify-end mt-4">
+            <div className="flex items-center bg-gradient-to-r from-amber-500 to-amber-600 text-white text-xs px-3 py-1 rounded-full">
+              <Crown className="h-3 w-3 mr-1" />
+              Premium
             </div>
           </div>
         )}
+
+        {/* Page Number */}
+        <div className="text-center mt-4">
+          <span className="text-xs text-gray-400">{pageNumber}</span>
+        </div>
       </div>
+      
+      {isBlurred && <PurchaseOverlay />}
     </div>
   );
 };
