@@ -159,7 +159,7 @@ const HomePage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 w-full">
+    <div className="min-h-screen bg-white w-full">
       {/* PREMIUM PROMOTIONAL BANNER */}
       <motion.div 
         initial={{ y: -100, opacity: 0 }}
