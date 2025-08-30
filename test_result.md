@@ -962,7 +962,12 @@ metadata:
   last_test_success_rate: "100.0%"
   review_request_final_verification_completed: true
   review_request_final_verification_success: true
-  magazine_reader_simplified_transitions_verified: true
+  magazine_reader_page_turn_effect_verified: true
+  magazine_reader_page_turn_effect_success: true
+  last_test_date: "2025-08-30T17:05:00"
+  last_test_success_rate: "100.0%"
+  review_request_page_turn_verification_completed: true
+  review_request_page_turn_verification_success: true
 
 test_plan:
   current_focus:
