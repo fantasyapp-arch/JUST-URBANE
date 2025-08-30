@@ -390,32 +390,6 @@ const MagazineReaderPage = () => {
                 </motion.div>
               )}
 
-              {/* Page Number Indicator - Bottom Center */}
-              <div style={{
-                position: 'absolute',
-                bottom: '30px',
-                left: '50%',
-                transform: 'translateX(-50%)',
-                background: 'rgba(0,0,0,0.7)',
-                color: 'white',
-                padding: '8px 20px',
-                borderRadius: '20px',
-                fontSize: '14px',
-                fontWeight: '500',
-                opacity: 0.8,
-                zIndex: 100
-              }}>
-                {currentPage + 1} / {totalPages}
-                {!canReadPremium && currentPage < FREE_PREVIEW_PAGES && (
-                  <span style={{ 
-                    color: '#10b981', 
-                    marginLeft: '10px',
-                    fontSize: '12px'
-                  }}>
-                    • FREE PREVIEW
-                  </span>
-                )}
-              </div>
             </div>
           </motion.div>
         </AnimatePresence>
