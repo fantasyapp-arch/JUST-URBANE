@@ -1,7 +1,6 @@
-import React, { useRef, useEffect, useState } from 'react';
-import { 
-  X, ChevronLeft, ChevronRight, Crown, Lock
-} from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { X, ChevronLeft, ChevronRight, Crown } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { Link } from 'react-router-dom';
 
@@ -9,6 +8,7 @@ const FullScreenMagazineReader = ({ isOpen, onClose, magazineContent = [] }) => 
   const [currentPage, setCurrentPage] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
   const [showSubscriptionModal, setShowSubscriptionModal] = useState(false);
+  const [isFlipping, setIsFlipping] = useState(false);
   const { user, isAuthenticated } = useAuth();
 
   const canReadPremium = isAuthenticated && user?.is_premium && user?.subscription_status === 'active';
@@ -23,22 +23,16 @@ const FullScreenMagazineReader = ({ isOpen, onClose, magazineContent = [] }) => 
   }, [pages]);
 
   useEffect(() => {
-    console.log('🔥 FullScreenMagazineReader render - isOpen:', isOpen, 'pages:', pages.length);
-  }, [isOpen, pages]);
-
-  useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
       document.body.style.position = 'fixed';
       document.body.style.width = '100%';
       document.body.style.height = '100%';
-      console.log('🔒 Body scroll locked for full-screen magazine');
     } else {
       document.body.style.overflow = '';
       document.body.style.position = '';
       document.body.style.width = '';
       document.body.style.height = '';
-      console.log('🔓 Body scroll unlocked');
     }
 
     return () => {
@@ -50,18 +44,31 @@ const FullScreenMagazineReader = ({ isOpen, onClose, magazineContent = [] }) => 
   }, [isOpen]);
 
   const nextPage = () => {
+    if (isFlipping) return;
+    
     if (!canReadPremium && currentPage >= FREE_PREVIEW_PAGES - 1) {
       setShowSubscriptionModal(true);
       return;
     }
+    
     if (currentPage < totalPages - 1) {
-      setCurrentPage(currentPage + 1);
+      setIsFlipping(true);
+      setTimeout(() => {
+        setCurrentPage(currentPage + 1);
+        setIsFlipping(false);
+      }, 300);
     }
   };
 
   const prevPage = () => {
+    if (isFlipping) return;
+    
     if (currentPage > 0) {
-      setCurrentPage(currentPage - 1);
+      setIsFlipping(true);
+      setTimeout(() => {
+        setCurrentPage(currentPage - 1);
+        setIsFlipping(false);
+      }, 300);
     }
   };
 
@@ -70,18 +77,9 @@ const FullScreenMagazineReader = ({ isOpen, onClose, magazineContent = [] }) => 
     onClose();
   };
 
-  // Early return with debug log
-  if (!isOpen) {
-    console.log('🚫 FullScreenMagazineReader not rendering - isOpen is false');
+  if (!isOpen || !pages.length) {
     return null;
   }
-
-  if (!pages.length) {
-    console.log('🚫 FullScreenMagazineReader not rendering - no pages');
-    return null;
-  }
-
-  console.log('✅ FullScreenMagazineReader RENDERING - pages:', pages.length, 'currentPage:', currentPage);
 
   const currentPageData = pages[currentPage];
   const isPageLocked = !canReadPremium && currentPage >= FREE_PREVIEW_PAGES;
@@ -94,115 +92,133 @@ const FullScreenMagazineReader = ({ isOpen, onClose, magazineContent = [] }) => 
         left: 0,
         width: '100vw',
         height: '100vh',
-        zIndex: 999999999,
-        backgroundColor: '#ffffff',
-        margin: 0,
-        padding: 0,
-        overflow: 'hidden'
+        zIndex: 999999,
+        backgroundColor: '#f5f5f5',
+        fontFamily: 'Georgia, serif'
       }}
     >
-      {/* Close Button */}
-      <button
-        onClick={closeReader}
-        style={{
-          position: 'absolute',
-          top: '20px',
-          right: '20px',
-          zIndex: 1000000000,
-          padding: '15px',
-          backgroundColor: 'rgba(0, 0, 0, 0.9)',
-          color: 'white',
-          border: 'none',
-          borderRadius: '50%',
-          cursor: 'pointer',
-          boxShadow: '0 4px 20px rgba(0, 0, 0, 0.5)'
-        }}
-      >
-        <X style={{ width: '24px', height: '24px' }} />
-      </button>
-
-      {/* Page Counter */}
-      <div
-        style={{
-          position: 'absolute',
-          top: '20px',
-          left: '20px',
-          zIndex: 1000000000,
-          backgroundColor: 'rgba(0, 0, 0, 0.9)',
-          color: 'white',
-          padding: '10px 20px',
-          borderRadius: '25px',
-          fontSize: '16px'
-        }}
-      >
-        {currentPage + 1} / {totalPages}
-        {!canReadPremium && currentPage < FREE_PREVIEW_PAGES && (
-          <span style={{ marginLeft: '10px', color: '#10b981' }}>(Free Preview)</span>
-        )}
+      {/* Top Bar */}
+      <div style={{
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+        height: '60px',
+        backgroundColor: 'rgba(0,0,0,0.9)',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        padding: '0 20px',
+        zIndex: 1000000
+      }}>
+        <div style={{ color: 'white', fontSize: '16px' }}>
+          {currentPage + 1} / {totalPages}
+          {!canReadPremium && currentPage < FREE_PREVIEW_PAGES && (
+            <span style={{ marginLeft: '10px', color: '#10b981' }}>(Free Preview)</span>
+          )}
+        </div>
+        <button
+          onClick={closeReader}
+          style={{
+            padding: '10px',
+            backgroundColor: 'transparent',
+            color: 'white',
+            border: 'none',
+            borderRadius: '50%',
+            cursor: 'pointer'
+          }}
+        >
+          <X style={{ width: '24px', height: '24px' }} />
+        </button>
       </div>
 
-      {/* Magazine Page - FULL SCREEN */}
-      <div
-        style={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          width: '100vw',
-          height: '100vh',
-          backgroundColor: 'white',
-          overflow: 'auto',
-          margin: 0,
-          padding: 0
-        }}
-      >
-        <MagazinePageContent 
-          page={currentPageData} 
-          pageNumber={currentPage + 1} 
-          isBlurred={isPageLocked} 
-        />
+      {/* Magazine Page Container */}
+      <div style={{
+        position: 'absolute',
+        top: '60px',
+        left: 0,
+        right: 0,
+        bottom: 0,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        overflow: 'hidden'
+      }}>
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={currentPage}
+            initial={{ x: isFlipping ? (currentPage > 0 ? -100 : 100) : 0, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            exit={{ x: isFlipping ? (currentPage > 0 ? 100 : -100) : 0, opacity: 0 }}
+            transition={{ duration: 0.5, ease: "easeInOut" }}
+            style={{
+              width: '90vw',
+              height: '90vh',
+              maxWidth: '1200px',
+              maxHeight: '800px',
+              backgroundColor: 'white',
+              boxShadow: '0 20px 40px rgba(0,0,0,0.3)',
+              borderRadius: '8px',
+              overflow: 'hidden',
+              position: 'relative'
+            }}
+          >
+            <PremiumMagazinePage 
+              page={currentPageData} 
+              pageNumber={currentPage + 1} 
+              isBlurred={isPageLocked}
+            />
+          </motion.div>
+        </AnimatePresence>
       </div>
 
       {/* Navigation Arrows */}
       <button
         onClick={prevPage}
-        disabled={currentPage === 0}
+        disabled={currentPage === 0 || isFlipping}
         style={{
           position: 'absolute',
           left: '20px',
           top: '50%',
           transform: 'translateY(-50%)',
-          zIndex: 1000000000,
-          padding: '20px',
-          backgroundColor: 'rgba(0, 0, 0, 0.8)',
-          color: currentPage === 0 ? 'rgba(255, 255, 255, 0.3)' : 'white',
+          width: '60px',
+          height: '60px',
+          backgroundColor: 'rgba(0,0,0,0.8)',
+          color: currentPage === 0 ? 'rgba(255,255,255,0.3)' : 'white',
           border: 'none',
           borderRadius: '50%',
-          cursor: currentPage === 0 ? 'not-allowed' : 'pointer',
-          boxShadow: '0 4px 20px rgba(0, 0, 0, 0.3)'
+          cursor: currentPage === 0 || isFlipping ? 'not-allowed' : 'pointer',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          zIndex: 1000000
         }}
       >
-        <ChevronLeft style={{ width: '50px', height: '50px' }} />
+        <ChevronLeft size={24} />
       </button>
 
       <button
         onClick={nextPage}
-        disabled={currentPage >= totalPages - 1}
+        disabled={currentPage >= totalPages - 1 || isFlipping}
         style={{
           position: 'absolute',
           right: '20px',
           top: '50%',
           transform: 'translateY(-50%)',
-          zIndex: 1000000000,
-          padding: '20px',
-          backgroundColor: 'rgba(0, 0, 0, 0.8)',
-          color: currentPage >= totalPages - 1 ? 'rgba(255, 255, 255, 0.3)' : 'white',
+          width: '60px',
+          height: '60px',
+          backgroundColor: 'rgba(0,0,0,0.8)',
+          color: currentPage >= totalPages - 1 || isFlipping ? 'rgba(255,255,255,0.3)' : 'white',
           border: 'none',
           borderRadius: '50%',
-          cursor: currentPage >= totalPages - 1 ? 'not-allowed' : 'pointer',
-          boxShadow: '0 4px 20px rgba(0, 0, 0, 0.3)'
+          cursor: currentPage >= totalPages - 1 || isFlipping ? 'not-allowed' : 'pointer',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          zIndex: 1000000
         }}
       >
-        <ChevronRight style={{ width: '50px', height: '50px' }} />
+        <ChevronRight size={24} />
       </button>
 
       {/* Premium Modal */}
@@ -214,11 +230,11 @@ const FullScreenMagazineReader = ({ isOpen, onClose, magazineContent = [] }) => 
             left: 0,
             right: 0,
             bottom: 0,
-            backgroundColor: 'rgba(0, 0, 0, 0.9)',
+            backgroundColor: 'rgba(0,0,0,0.9)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            zIndex: 1000001
+            zIndex: 10000000
           }}
           onClick={() => setShowSubscriptionModal(false)}
         >
@@ -229,7 +245,6 @@ const FullScreenMagazineReader = ({ isOpen, onClose, magazineContent = [] }) => 
               padding: '40px',
               maxWidth: '500px',
               margin: '20px',
-              boxShadow: '0 25px 50px rgba(0, 0, 0, 0.5)',
               textAlign: 'center'
             }}
             onClick={(e) => e.stopPropagation()}
@@ -247,7 +262,7 @@ const FullScreenMagazineReader = ({ isOpen, onClose, magazineContent = [] }) => 
               <Crown style={{ width: '40px', height: '40px', color: 'white' }} />
             </div>
             
-            <h2 style={{ fontSize: '28px', fontWeight: 'bold', marginBottom: '15px', color: '#111' }}>
+            <h2 style={{ fontSize: '28px', fontWeight: 'bold', marginBottom: '15px' }}>
               Continue Reading
             </h2>
             <p style={{ fontSize: '16px', color: '#666', marginBottom: '30px' }}>
@@ -260,7 +275,7 @@ const FullScreenMagazineReader = ({ isOpen, onClose, magazineContent = [] }) => 
               padding: '25px',
               marginBottom: '30px'
             }}>
-              <div style={{ fontSize: '36px', fontWeight: 'bold', color: '#111' }}>₹499</div>
+              <div style={{ fontSize: '36px', fontWeight: 'bold' }}>₹499</div>
               <div style={{ fontSize: '16px', color: '#666' }}>Annual Digital Subscription</div>
             </div>
             
@@ -286,236 +301,430 @@ const FullScreenMagazineReader = ({ isOpen, onClose, magazineContent = [] }) => 
   );
 };
 
-// Magazine Page Content Component - Premium, large-scale design
-const MagazinePageContent = ({ page, pageNumber, isBlurred = false }) => {
+// Premium Magazine Page Layout - Like real magazines
+const PremiumMagazinePage = ({ page, pageNumber, isBlurred = false }) => {
   if (!page) {
     return (
-      <div className="h-full flex items-center justify-center bg-gray-100">
-        <p className="text-gray-500 text-xl">Loading page...</p>
+      <div style={{ 
+        height: '100%', 
+        display: 'flex', 
+        alignItems: 'center', 
+        justifyContent: 'center',
+        fontSize: '18px',
+        color: '#666'
+      }}>
+        Loading...
       </div>
     );
   }
 
+  // Magazine Cover Layout
   if (page.type === 'cover') {
     return (
-      <div 
-        className={`h-full relative overflow-hidden bg-cover bg-center ${isBlurred ? 'blur-sm' : ''}`}
-        style={{
-          backgroundImage: page.image ? `linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.4)), url(${page.image})` : 'linear-gradient(135deg, #1e3c72 0%, #2a5298 100%)'
-        }}
-      >
-        <div className="absolute inset-0 flex flex-col justify-between p-16 md:p-24 lg:p-32 text-white">
-          {/* Magazine Header */}
-          <div className="text-center">
-            <h1 className="text-8xl md:text-9xl lg:text-[12rem] font-bold tracking-widest mb-8 drop-shadow-2xl">{page.title}</h1>
-            <div className="text-amber-300 text-3xl md:text-4xl lg:text-5xl tracking-widest uppercase font-light">{page.content}</div>
-          </div>
-
-          {/* Issue Info */}
-          <div className="text-center">
-            <div className="text-6xl md:text-8xl lg:text-9xl font-light mb-12 drop-shadow-lg">{page.subtitle}</div>
-            <div className="text-3xl md:text-4xl lg:text-5xl text-amber-200 tracking-wider">Premium Digital Edition</div>
-          </div>
-
-          {/* Cover Features */}
-          <div className="text-center space-y-8">
-            <div className="text-4xl md:text-5xl lg:text-6xl font-semibold">INSIDE THIS ISSUE</div>
-            <div className="text-xl md:text-2xl lg:text-3xl space-y-4 text-gray-200 leading-relaxed max-w-6xl mx-auto">
-              {page.coverFeatures?.map((feature, index) => (
-                <div key={index}>• {feature}</div>
-              )) || [
-                '• Premium Technology Reviews & Latest Innovations',
-                '• Luxury Lifestyle Features & Exclusive Interviews', 
-                '• High-End Fashion & Designer Collections',
-                '• Elite Automotive & Travel Experiences'
-              ].map((feature, index) => (
-                <div key={index}>{feature}</div>
-              ))}
-            </div>
-          </div>
-        </div>
-        
-        {isBlurred && <PurchaseOverlay />}
-      </div>
-    );
-  }
-
-  // Contents Page - Enhanced for large display
-  if (page.type === 'contents') {
-    return (
-      <div className={`h-full bg-white relative overflow-hidden ${isBlurred ? 'blur-sm' : ''}`}>
-        <div className="h-full p-16 md:p-24 lg:p-32">
-          {/* Header */}
-          <div className="flex items-center justify-between mb-16 pb-8 border-b-4 border-gray-200">
-            <div className="flex items-center space-x-6">
-              <Crown className="h-10 w-10 md:h-12 w-12 text-amber-600" />
-              <span className="text-3xl md:text-4xl font-bold tracking-wider text-gray-800">JUST URBANE</span>
-            </div>
-            <div className="text-2xl md:text-3xl text-gray-500 uppercase tracking-wider">August 2025</div>
-          </div>
-
-          {/* Contents Title */}
-          <h1 className="text-8xl md:text-9xl lg:text-[12rem] font-serif font-bold text-gray-900 text-center mb-24">
+      <div style={{
+        height: '100%',
+        background: `linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.5)), url(${page.image})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+        padding: '60px 40px',
+        color: 'white',
+        textAlign: 'center',
+        filter: isBlurred ? 'blur(3px)' : 'none'
+      }}>
+        <div>
+          <h1 style={{
+            fontSize: '4rem',
+            fontWeight: 'bold',
+            letterSpacing: '8px',
+            marginBottom: '20px',
+            textShadow: '2px 2px 4px rgba(0,0,0,0.8)'
+          }}>
             {page.title}
           </h1>
-
-          {/* Contents List - Improved layout for full-screen */}
-          <div className="space-y-12 text-2xl md:text-3xl">
-            {page.content.split('\n\n').map((section, index) => (
-              <div key={index} className="mb-16">
-                {section.split('\n').map((line, lineIndex) => {
-                  if (line.match(/^[A-Z\s&]+$/)) {
-                    // Section headers
-                    return (
-                      <h3 key={lineIndex} className="text-3xl md:text-4xl lg:text-5xl font-bold text-amber-600 mb-8 tracking-wider">
-                        {line}
-                      </h3>
-                    );
-                  } else if (line.includes(' - ')) {
-                    // Content items
-                    const [number, content] = line.split(' - ');
-                    return (
-                      <div key={lineIndex} className="flex justify-between items-start py-4 border-b border-gray-200">
-                        <span className="font-bold text-amber-600 mr-8 text-2xl md:text-3xl">{number}</span>
-                        <span className="flex-1 text-gray-700 text-xl md:text-2xl leading-relaxed">{content}</span>
-                      </div>
-                    );
-                  } else if (line.trim()) {
-                    return (
-                      <p key={lineIndex} className="text-gray-600 leading-relaxed text-xl md:text-2xl">
-                        {line}
-                      </p>
-                    );
-                  }
-                  return null;
-                })}
-              </div>
-            ))}
-          </div>
-
-          {/* Page Number */}
-          <div className="absolute bottom-12 right-12">
-            <span className="text-2xl text-gray-400 font-medium">{pageNumber}</span>
+          <div style={{
+            fontSize: '1.2rem',
+            color: '#fbbf24',
+            letterSpacing: '4px',
+            textTransform: 'uppercase'
+          }}>
+            {page.content}
           </div>
         </div>
-        
-        {isBlurred && <PurchaseOverlay />}
+
+        <div>
+          <h2 style={{
+            fontSize: '2.5rem',
+            fontWeight: '300',
+            marginBottom: '30px'
+          }}>
+            {page.subtitle}
+          </h2>
+          <div style={{
+            fontSize: '1.1rem',
+            color: '#e5e7eb'
+          }}>
+            Premium Digital Edition
+          </div>
+        </div>
+
+        <div>
+          <h3 style={{
+            fontSize: '1.5rem',
+            marginBottom: '20px',
+            fontWeight: 'bold'
+          }}>
+            INSIDE THIS ISSUE
+          </h3>
+          <div style={{
+            fontSize: '1rem',
+            lineHeight: '1.8',
+            maxWidth: '600px',
+            margin: '0 auto'
+          }}>
+            {page.coverFeatures?.map((feature, index) => (
+              <div key={index} style={{ marginBottom: '8px' }}>• {feature}</div>
+            )) || [
+              '• Premium Technology Reviews & Latest Innovations',
+              '• Luxury Lifestyle Features & Exclusive Interviews',
+              '• High-End Fashion & Designer Collections',
+              '• Elite Automotive & Travel Experiences'
+            ].map((feature, index) => (
+              <div key={index} style={{ marginBottom: '8px' }}>{feature}</div>
+            ))}
+          </div>
+        </div>
       </div>
     );
   }
 
-  // Regular Article Pages - Enhanced for premium large display
-  return (
-    <div className={`h-full bg-white relative overflow-hidden ${isBlurred ? 'blur-sm' : ''}`}>
-      <div className="h-full p-16 md:p-24 lg:p-32 flex flex-col">
+  // Contents Page Layout
+  if (page.type === 'contents') {
+    return (
+      <div style={{
+        height: '100%',
+        padding: '40px 60px',
+        backgroundColor: 'white',
+        filter: isBlurred ? 'blur(3px)' : 'none'
+      }}>
         {/* Header */}
-        <div className="flex items-center justify-between mb-16 pb-8 border-b-4 border-gray-200">
-          <div className="flex items-center space-x-6">
-            <Crown className="h-8 w-8 md:h-10 w-10 text-amber-600" />
-            <span className="text-2xl md:text-3xl lg:text-4xl font-bold tracking-wider text-gray-800">JUST URBANE</span>
+        <div style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          borderBottom: '2px solid #e5e7eb',
+          paddingBottom: '20px',
+          marginBottom: '40px'
+        }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+            <Crown size={24} style={{ color: '#f59e0b' }} />
+            <span style={{ fontSize: '1.2rem', fontWeight: 'bold', letterSpacing: '2px' }}>
+              JUST URBANE
+            </span>
           </div>
-          <div className="text-xl md:text-2xl lg:text-3xl text-gray-500 uppercase tracking-wider">{page.category}</div>
+          <div style={{ fontSize: '1rem', color: '#6b7280', letterSpacing: '1px' }}>
+            AUGUST 2025
+          </div>
         </div>
 
-        {/* Article Title */}
-        <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif font-bold text-gray-900 leading-tight mb-12 md:mb-16">
-          {page.title}
+        <h1 style={{
+          fontSize: '4rem',
+          fontWeight: 'bold',
+          textAlign: 'center',
+          marginBottom: '50px',
+          color: '#111827'
+        }}>
+          CONTENTS
         </h1>
 
-        {/* Subtitle if exists */}
-        {page.subtitle && (
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-light text-gray-600 mb-12 md:mb-16 italic">
-            {page.subtitle}
-          </h2>
-        )}
+        {/* Two Column Layout */}
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: '1fr 1fr',
+          gap: '60px',
+          height: 'calc(100% - 200px)'
+        }}>
+          <div>
+            <h3 style={{
+              fontSize: '1.3rem',
+              fontWeight: 'bold',
+              color: '#f59e0b',
+              marginBottom: '25px',
+              letterSpacing: '2px'
+            }}>
+              TECH LIFE
+            </h3>
+            <div style={{ lineHeight: '2', fontSize: '1rem' }}>
+              <div style={{ marginBottom: '15px' }}>
+                <strong>12</strong> TECH NEWS - Foldables, gaming beasts, audio gear
+              </div>
+              <div style={{ marginBottom: '15px' }}>
+                <strong>18</strong> LENOVO TECH WORLD - AI innovation, transparent displays
+              </div>
+              <div style={{ marginBottom: '15px' }}>
+                <strong>22</strong> APPLE EVERYWHERE - iOS 19, macOS Sequoia, CarPlay Ultra
+              </div>
+              <div style={{ marginBottom: '15px' }}>
+                <strong>24</strong> DELL XPS 14 REVIEW - AI-ready performance meets design
+              </div>
+              <div style={{ marginBottom: '15px' }}>
+                <strong>26</strong> LEGION TAB 2 REVIEW - 8.8-inch portable gaming display
+              </div>
+            </div>
 
-        {/* Hero Image */}
-        {page.image && (
-          <div className="mb-12 md:mb-16 rounded-2xl overflow-hidden shadow-2xl">
+            <h3 style={{
+              fontSize: '1.3rem',
+              fontWeight: 'bold',
+              color: '#f59e0b',
+              marginBottom: '25px',
+              marginTop: '40px',
+              letterSpacing: '2px'
+            }}>
+              COVER STORY
+            </h3>
+            <div style={{ lineHeight: '2', fontSize: '1rem' }}>
+              <div style={{ marginBottom: '15px' }}>
+                <strong>41</strong> TAPAN SINGHEL - The Insurance Man of India
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <h3 style={{
+              fontSize: '1.3rem',
+              fontWeight: 'bold',
+              color: '#f59e0b',
+              marginBottom: '25px',
+              letterSpacing: '2px'
+            }}>
+              FASHION & LIFESTYLE
+            </h3>
+            <div style={{ lineHeight: '2', fontSize: '1rem' }}>
+              <div style={{ marginBottom: '15px' }}>
+                <strong>58</strong> TIMELESS TAILORING - Dior blends elegance
+              </div>
+              <div style={{ marginBottom: '15px' }}>
+                <strong>63</strong> FEMININE FUTURE - Modern femininity with bold elegance
+              </div>
+              <div style={{ marginBottom: '15px' }}>
+                <strong>67</strong> SPEED STYLE - Dua Lipa celebrates racing legacy
+              </div>
+            </div>
+
+            <h3 style={{
+              fontSize: '1.3rem',
+              fontWeight: 'bold',
+              color: '#f59e0b',
+              marginBottom: '25px',
+              marginTop: '40px',
+              letterSpacing: '2px'
+            }}>
+              AUTOMOTIVE
+            </h3>
+            <div style={{ lineHeight: '2', fontSize: '1rem' }}>
+              <div style={{ marginBottom: '15px' }}>
+                <strong>70</strong> BENTLEY BENTAYGA - Luxury and performance redefined
+              </div>
+              <div style={{ marginBottom: '15px' }}>
+                <strong>76</strong> BMW X7 - Bold luxury drives forward
+              </div>
+              <div style={{ marginBottom: '15px' }}>
+                <strong>84</strong> ROYAL ENFIELD - Rugged royalty reimagined
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style={{
+          position: 'absolute',
+          bottom: '30px',
+          right: '60px',
+          fontSize: '1rem',
+          color: '#9ca3af'
+        }}>
+          {pageNumber}
+        </div>
+      </div>
+    );
+  }
+
+  // Article Page Layout - Two Column Magazine Style
+  return (
+    <div style={{
+      height: '100%',
+      padding: '40px 60px',
+      backgroundColor: 'white',
+      filter: isBlurred ? 'blur(3px)' : 'none'
+    }}>
+      {/* Header */}
+      <div style={{
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        borderBottom: '2px solid #e5e7eb',
+        paddingBottom: '20px',
+        marginBottom: '30px'
+      }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+          <Crown size={20} style={{ color: '#f59e0b' }} />
+          <span style={{ fontSize: '1rem', fontWeight: 'bold', letterSpacing: '2px' }}>
+            JUST URBANE
+          </span>
+        </div>
+        <div style={{ fontSize: '0.9rem', color: '#6b7280', letterSpacing: '1px' }}>
+          {page.category?.toUpperCase() || 'FEATURE'}
+        </div>
+      </div>
+
+      {/* Article Title */}
+      <h1 style={{
+        fontSize: '2.5rem',
+        fontWeight: 'bold',
+        lineHeight: '1.2',
+        marginBottom: '20px',
+        color: '#111827'
+      }}>
+        {page.title}
+      </h1>
+
+      {page.subtitle && (
+        <h2 style={{
+          fontSize: '1.3rem',
+          fontWeight: '300',
+          color: '#6b7280',
+          marginBottom: '30px',
+          fontStyle: 'italic'
+        }}>
+          {page.subtitle}
+        </h2>
+      )}
+
+      {/* Two Column Layout */}
+      <div style={{
+        display: 'grid',
+        gridTemplateColumns: '1fr 1fr',
+        gap: '40px',
+        height: 'calc(100% - 200px)'
+      }}>
+        {/* Left Column */}
+        <div>
+          {page.image && (
             <img
               src={page.image}
               alt={page.title}
-              className="w-full h-64 md:h-80 lg:h-96 object-cover"
-              onError={(e) => {
-                e.target.style.display = 'none';
+              style={{
+                width: '100%',
+                height: '200px',
+                objectFit: 'cover',
+                borderRadius: '8px',
+                marginBottom: '25px'
               }}
+              onError={(e) => { e.target.style.display = 'none'; }}
             />
-          </div>
-        )}
+          )}
 
-        {/* Article Content */}
-        <div className="flex-1 overflow-hidden">
-          <div className="prose prose-xl md:prose-2xl max-w-none text-gray-700 leading-relaxed">
-            {(page.content || '').split('\n\n').map((paragraph, index) => {
-              if (paragraph.trim().match(/^[A-Z\s:]+$/)) {
-                // All caps sections (headers)
-                return (
-                  <h3 key={index} className="text-2xl md:text-3xl lg:text-4xl font-bold text-amber-600 mt-12 mb-6 tracking-wider">
-                    {paragraph.trim()}
-                  </h3>
-                );
-              } else if (paragraph.startsWith('•')) {
-                // Bullet points
-                return (
-                  <ul key={index} className="list-none space-y-4 mb-12 ml-8">
-                    {paragraph.split('\n').filter(line => line.trim()).map((item, itemIndex) => (
-                      <li key={itemIndex} className="text-xl md:text-2xl flex items-start">
-                        <span className="text-amber-600 mr-6 text-2xl">•</span>
-                        <span>{item.replace(/^•\s*/, '')}</span>
-                      </li>
-                    ))}
-                  </ul>
-                );
-              } else if (index === 0) {
-                // First paragraph with large drop cap
-                return (
-                  <p key={index} className="text-justify mb-8 md:mb-12">
-                    <span className="float-left text-8xl md:text-9xl lg:text-[10rem] font-serif leading-none mr-6 mt-4 text-gray-800">
-                      {paragraph.charAt(0)}
-                    </span>
-                    <span className="text-xl md:text-2xl lg:text-3xl leading-relaxed">{paragraph.slice(1)}</span>
-                  </p>
-                );
-              } else {
-                // Regular paragraphs
-                return (
-                  <p key={index} className="mb-8 md:mb-12 text-justify text-xl md:text-2xl lg:text-3xl leading-relaxed">
-                    {paragraph}
-                  </p>
-                );
-              }
-            })}
+          <div style={{
+            fontSize: '1rem',
+            lineHeight: '1.7',
+            color: '#374151'
+          }}>
+            {/* Drop Cap */}
+            <p style={{ marginBottom: '20px' }}>
+              <span style={{
+                float: 'left',
+                fontSize: '4rem',
+                lineHeight: '3rem',
+                marginRight: '8px',
+                marginTop: '8px',
+                fontWeight: 'bold',
+                color: '#111827'
+              }}>
+                {(page.content || '').charAt(0)}
+              </span>
+              {(page.content || '').split('\n\n')[0]?.slice(1) || ''}
+            </p>
+
+            {/* Additional paragraphs */}
+            {(page.content || '').split('\n\n').slice(1, 3).map((paragraph, index) => (
+              <p key={index} style={{ marginBottom: '20px', textAlign: 'justify' }}>
+                {paragraph}
+              </p>
+            ))}
           </div>
         </div>
 
-        {/* Premium Badge */}
-        {page.type === 'premium' && (
-          <div className="flex justify-end mt-12">
-            <div className="flex items-center bg-gradient-to-r from-amber-500 to-amber-600 text-white text-lg md:text-xl px-8 py-4 rounded-full shadow-lg">
-              <Crown className="h-6 w-6 mr-3" />
-              Premium Content
-            </div>
-          </div>
-        )}
+        {/* Right Column */}
+        <div style={{
+          fontSize: '1rem',
+          lineHeight: '1.7',
+          color: '#374151'
+        }}>
+          {(page.content || '').split('\n\n').slice(3).map((paragraph, index) => {
+            if (paragraph.startsWith('•')) {
+              return (
+                <ul key={index} style={{ 
+                  listStyle: 'none', 
+                  padding: 0, 
+                  marginBottom: '25px' 
+                }}>
+                  {paragraph.split('\n').filter(line => line.trim()).map((item, itemIndex) => (
+                    <li key={itemIndex} style={{
+                      marginBottom: '8px',
+                      paddingLeft: '20px',
+                      position: 'relative'
+                    }}>
+                      <span style={{
+                        position: 'absolute',
+                        left: 0,
+                        color: '#f59e0b'
+                      }}>•</span>
+                      {item.replace(/^•\s*/, '')}
+                    </li>
+                  ))}
+                </ul>
+              );
+            }
+            
+            return (
+              <p key={index} style={{ marginBottom: '20px', textAlign: 'justify' }}>
+                {paragraph}
+              </p>
+            );
+          })}
 
-        {/* Page Number */}
-        <div className="text-center mt-12">
-          <span className="text-xl md:text-2xl text-gray-400 font-medium">{pageNumber}</span>
+          {page.type === 'premium' && (
+            <div style={{
+              backgroundColor: '#fbbf24',
+              color: 'white',
+              padding: '10px 20px',
+              borderRadius: '25px',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '8px',
+              fontSize: '0.9rem',
+              fontWeight: 'bold',
+              marginTop: '30px'
+            }}>
+              <Crown size={16} />
+              PREMIUM CONTENT
+            </div>
+          )}
         </div>
       </div>
-      
-      {isBlurred && <PurchaseOverlay />}
+
+      <div style={{
+        position: 'absolute',
+        bottom: '30px',
+        right: '60px',
+        fontSize: '1rem',
+        color: '#9ca3af'
+      }}>
+        {pageNumber}
+      </div>
     </div>
   );
 };
-
-// Purchase Overlay for premium content - Enhanced for large display
-const PurchaseOverlay = () => (
-  <div className="absolute inset-0 bg-black/50 flex items-center justify-center backdrop-blur-sm">
-    <div className="bg-white/40 backdrop-blur-md rounded-full p-12 md:p-16 shadow-2xl border-4 border-white/60">
-      <Lock className="h-20 w-20 md:h-28 md:w-28 text-white drop-shadow-2xl" />
-    </div>
-  </div>
-);
 
 export default FullScreenMagazineReader;
