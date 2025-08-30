@@ -1168,12 +1168,12 @@ const HomePage = () => {
 
         {/* NEWSLETTER SUBSCRIPTION - CLEAN GQ STYLE */}
         <motion.section 
-          className="mb-8"
+          className="mb-4"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 1.9 }}
         >
-          <div className="border-t border-gray-200 pt-12 pb-8">
+          <div className="border-t border-gray-200 pt-8 pb-4">
             <div className="max-w-2xl mx-auto text-center">
               <h3 className="text-2xl lg:text-3xl font-serif font-bold text-gray-900 mb-4">
                 Newsletter
