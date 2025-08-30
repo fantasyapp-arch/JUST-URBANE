@@ -211,17 +211,65 @@ html {
 /* Loading animation */
 @keyframes shimmer {
   0% {
-    background-position: -468px 0;
+    background-position: -200% 0;
   }
   100% {
-    background-position: 468px 0;
+    background-position: 200% 0;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(1.05);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
   }
 }
 
 .skeleton {
-  animation: shimmer 1.2s ease-in-out infinite;
+  animation: shimmer 1.5s ease-in-out infinite;
   background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
-  background-size: 468px 104px;
+  background-size: 200% 100%;
+}
+
+.page-fade-in {
+  animation: fadeIn 0.6s ease-out;
+}
+
+/* Enhanced page turning physics */
+@keyframes pageFlipRealistic {
+  0% { 
+    transform: perspective(1200px) rotateY(0deg) rotateX(0deg);
+    box-shadow: 0 0 20px rgba(0,0,0,0.2);
+  }
+  25% { 
+    transform: perspective(1200px) rotateY(-45deg) rotateX(-5deg);
+    box-shadow: -10px 10px 30px rgba(0,0,0,0.3);
+  }
+  50% { 
+    transform: perspective(1200px) rotateY(-90deg) rotateX(-10deg);
+    box-shadow: -20px 20px 40px rgba(0,0,0,0.4);
+  }
+  75% { 
+    transform: perspective(1200px) rotateY(-135deg) rotateX(-5deg);
+    box-shadow: -10px 10px 30px rgba(0,0,0,0.3);
+  }
+  100% { 
+    transform: perspective(1200px) rotateY(-180deg) rotateX(0deg);
+    box-shadow: 0 0 20px rgba(0,0,0,0.2);
+  }
+}
+
+/* Natural cursor styles for magazine reading */
+.magazine-cursor-prev {
+  cursor: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>') 16 16, w-resize;
+}
+
+.magazine-cursor-next {
+  cursor: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>') 16 16, e-resize;
 }
 
 /* Premium content blur effect */
