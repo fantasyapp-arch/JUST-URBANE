@@ -617,6 +617,7 @@ const MagazineReaderPage = () => {
         </div>
       )}
     </div>
+    </>
   );
 };
 
