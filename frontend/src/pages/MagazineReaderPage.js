@@ -128,15 +128,12 @@ const MagazineReaderPage = () => {
       setPageLoading(true);
       setImageLoaded(false);
       
-      // More natural page turning timing
+      // Simple page turn timing like GQ India
       setTimeout(() => {
         setCurrentPage(currentPage + 1);
-      }, 400); // Change page content mid-animation
-      
-      setTimeout(() => {
         setIsFlipping(false);
         setPageLoading(false);
-      }, 1000); // Complete animation timing
+      }, 300); // Quick and simple transition
     }
   };
 
@@ -149,15 +146,12 @@ const MagazineReaderPage = () => {
       setPageLoading(true);
       setImageLoaded(false);
       
-      // More natural page turning timing
+      // Simple page turn timing like GQ India
       setTimeout(() => {
         setCurrentPage(currentPage - 1);
-      }, 400); // Change page content mid-animation
-      
-      setTimeout(() => {
         setIsFlipping(false);
         setPageLoading(false);
-      }, 1000); // Complete animation timing
+      }, 300); // Quick and simple transition
     }
   };
 
