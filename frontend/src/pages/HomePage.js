@@ -321,39 +321,6 @@ const HomePage = () => {
           </motion.section>
         )}
 
-        {/* TRENDING SECTION - PROFESSIONAL */}
-        {trendingArticles.length > 0 && (
-          <motion.section 
-            className="mb-20"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.7 }}
-          >
-            <div className="flex items-center mb-12">
-              <TrendingUp className="h-10 w-10 text-accent-500 mr-4" />
-              <div>
-                <h2 className="text-4xl lg:text-5xl font-serif font-bold text-gray-900 mb-3">
-                  Trending Now
-                </h2>
-                <p className="text-gray-600 text-lg lg:text-xl">
-                  Most popular stories this week
-                </p>
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-              {trendingArticles.slice(0, 4).map((article, index) => (
-                <ProfessionalArticleCard 
-                  key={article.id}
-                  article={article} 
-                  layout="standard"
-                  index={index}
-                />
-              ))}
-            </div>
-          </motion.section>
-        )}
-
         {/* DIGITAL MAGAZINE PREMIUM SECTION */}
         <motion.section 
           className="mb-20"
