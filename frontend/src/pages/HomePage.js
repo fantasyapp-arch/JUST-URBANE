@@ -820,36 +820,194 @@ const HomePage = () => {
           </div>
         </motion.section>
 
-        {/* NEWSLETTER SUBSCRIPTION - PREMIUM */}
+        {/* GROOMING & WELLNESS SECTION */}
         <motion.section 
-          className="mb-20"
+          className="mb-16"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 1.4 }}
+          transition={{ duration: 0.6, delay: 1.5 }}
         >
-          <div className="bg-gradient-to-br from-gray-100 via-white to-gray-100 rounded-3xl p-12 text-center">
-            <div className="max-w-2xl mx-auto">
-              <h3 className="text-3xl lg:text-4xl font-serif font-bold text-gray-900 mb-6">
-                Stay Updated with Just Urbane
+          <div className="border-t border-gray-200 pt-12">
+            <div className="flex items-center justify-between mb-8">
+              <h2 className="text-3xl lg:text-4xl font-serif font-bold text-gray-900">
+                Grooming & Wellness
+              </h2>
+              <Link
+                to="/category/grooming"
+                className="text-primary-600 hover:text-primary-700 font-semibold text-lg"
+              >
+                View All
+              </Link>
+            </div>
+
+            <div className="grid lg:grid-cols-3 gap-8">
+              {[
+                {
+                  title: 'The Complete Guide to Premium Men\'s Skincare Routines',
+                  image: 'https://images.unsplash.com/photo-1506629905877-d4461ba3c9c8?w=600&h=400&fit=crop',
+                  category: 'Skincare',
+                  author: 'Dr. Sameer Khurana',
+                  date: '22 Aug 2025',
+                  layout: 'large'
+                },
+                {
+                  title: 'Mental Health: Executive Stress Management Techniques',
+                  image: 'https://images.unsplash.com/photo-1591019479261-1a103efda8e6?w=400&h=300&fit=crop',
+                  category: 'Wellness',
+                  author: 'Dr. Neha Gupta',
+                  date: '20 Aug 2025',
+                  layout: 'standard'
+                },
+                {
+                  title: 'Luxury Fitness: Private Gyms for the Elite',
+                  image: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop',
+                  category: 'Fitness',
+                  author: 'Fitness Expert Rajesh',
+                  date: '18 Aug 2025',
+                  layout: 'standard'
+                }
+              ].map((article, index) => (
+                <motion.div
+                  key={index}
+                  className={`group cursor-pointer ${index === 0 ? 'lg:row-span-2' : ''}`}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 1.6 + index * 0.1 }}
+                >
+                  <div className="bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 overflow-hidden">
+                    <div className="relative">
+                      <img
+                        src={article.image}
+                        alt={article.title}
+                        className={`w-full object-cover group-hover:scale-105 transition-transform duration-500 ${
+                          index === 0 ? 'h-64 lg:h-80' : 'h-48'
+                        }`}
+                      />
+                      <div className="absolute top-4 left-4">
+                        <span className="bg-primary-600 text-white px-3 py-1 rounded text-xs font-bold uppercase tracking-wide">
+                          {article.category}
+                        </span>
+                      </div>
+                    </div>
+                    <div className="p-6">
+                      <h3 className={`font-serif font-bold text-gray-900 group-hover:text-primary-600 transition-colors leading-tight mb-4 ${
+                        index === 0 ? 'text-xl lg:text-2xl' : 'text-lg'
+                      }`}>
+                        {article.title}
+                      </h3>
+                      <div className="text-sm text-gray-500 flex items-center space-x-2">
+                        <span>{article.author}</span>
+                        <span>•</span>
+                        <span>{article.date}</span>
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </motion.section>
+
+        {/* CULTURE & ENTERTAINMENT FINAL SECTION */}
+        <motion.section 
+          className="mb-16"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 1.7 }}
+        >
+          <div className="border-t-2 border-gray-900 pt-12">
+            <div className="flex items-center justify-between mb-8">
+              <h2 className="text-3xl lg:text-4xl font-serif font-bold text-gray-900">
+                Culture & Entertainment
+              </h2>
+            </div>
+
+            <div className="grid md:grid-cols-5 gap-6">
+              {[
+                {
+                  title: 'Bollywood\'s Power Players: The New Generation of Producers',
+                  image: 'https://images.unsplash.com/photo-1489599126737-8fdbab4da1d1?w=300&h=200&fit=crop',
+                  category: 'Entertainment'
+                },
+                {
+                  title: 'Art Market Boom: Contemporary Indian Artists to Watch',
+                  image: 'https://images.unsplash.com/photo-1544967919-6f7de8aa5e35?w=300&h=200&fit=crop',
+                  category: 'Art'
+                },
+                {
+                  title: 'Music Festivals: The Elite Social Calendar',
+                  image: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=300&h=200&fit=crop',
+                  category: 'Music'
+                },
+                {
+                  title: 'Fashion Week Highlights: Designer Spotlight',
+                  image: 'https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=300&h=200&fit=crop',
+                  category: 'Fashion'
+                },
+                {
+                  title: 'Literature Scene: India\'s Rising Authors',
+                  image: 'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=300&h=200&fit=crop',
+                  category: 'Books'
+                }
+              ].map((article, index) => (
+                <motion.div
+                  key={index}
+                  className="group cursor-pointer"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 1.8 + index * 0.1 }}
+                >
+                  <div className="bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 overflow-hidden">
+                    <div className="relative">
+                      <img
+                        src={article.image}
+                        alt={article.title}
+                        className="w-full h-32 object-cover group-hover:scale-105 transition-transform duration-500"
+                      />
+                      <div className="absolute top-2 left-2">
+                        <span className="bg-black/80 text-white px-2 py-1 rounded text-xs font-bold">
+                          {article.category}
+                        </span>
+                      </div>
+                    </div>
+                    <div className="p-4">
+                      <h4 className="font-serif font-semibold text-gray-900 group-hover:text-primary-600 transition-colors leading-tight text-sm">
+                        {article.title}
+                      </h4>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </motion.section>
+
+        {/* NEWSLETTER SUBSCRIPTION - CLEAN GQ STYLE */}
+        <motion.section 
+          className="mb-8"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 1.9 }}
+        >
+          <div className="border-t border-gray-200 pt-12 pb-8">
+            <div className="max-w-2xl mx-auto text-center">
+              <h3 className="text-2xl lg:text-3xl font-serif font-bold text-gray-900 mb-4">
+                Newsletter
               </h3>
-              <p className="text-xl text-gray-600 mb-8 leading-relaxed">
-                Get exclusive content, premium insights, and early access to our digital magazine delivered to your inbox.
+              <p className="text-gray-600 mb-6">
+                Get the best of Just Urbane delivered to your inbox weekly
               </p>
               
-              <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+              <div className="flex max-w-md mx-auto">
                 <input
                   type="email"
-                  placeholder="Enter your email"
-                  className="flex-1 px-6 py-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent text-lg"
+                  placeholder="Your email address"
+                  className="flex-1 px-4 py-3 border border-gray-300 border-r-0 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                 />
-                <button className="bg-primary-600 hover:bg-primary-700 text-white font-semibold px-8 py-4 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg">
+                <button className="bg-gray-900 hover:bg-black text-white font-semibold px-6 py-3 border border-gray-900 transition-colors duration-300">
                   Subscribe
                 </button>
               </div>
-              
-              <p className="text-sm text-gray-500 mt-4">
-                No spam, unsubscribe anytime. Premium content awaits.
-              </p>
             </div>
           </div>
         </motion.section>
