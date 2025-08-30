@@ -262,21 +262,24 @@ const MagazineReaderPage = () => {
             key={currentPage}
             initial={{ 
               opacity: 0,
-              x: flipDirection === 'next' ? 100 : -100,
-              scale: 0.95
+              x: flipDirection === 'next' ? 200 : -200,
+              scale: 0.9,
+              rotateY: flipDirection === 'next' ? 15 : -15
             }}
             animate={{ 
               opacity: 1,
               x: 0,
-              scale: 1
+              scale: 1,
+              rotateY: 0
             }}
             exit={{ 
               opacity: 0,
-              x: flipDirection === 'next' ? -100 : 100,
-              scale: 0.95
+              x: flipDirection === 'next' ? -200 : 200,
+              scale: 0.9,
+              rotateY: flipDirection === 'next' ? -15 : 15
             }}
             transition={{ 
-              duration: 0.15, // Super fast transition
+              duration: 0.2, // Super fast but with page turn feel
               ease: [0.4, 0, 0.2, 1] // Sharp easing for snappy page turns
             }}
             style={{
@@ -285,8 +288,11 @@ const MagazineReaderPage = () => {
               height: '100vh',
               display: 'flex',
               alignItems: 'center',
-              justifyContent: 'center'
+              justifyContent: 'center',
+              transformStyle: 'preserve-3d',
+              perspective: '1000px'
             }}
+            className="page-turn-effect"
           >
             {/* Magazine Page Container - Full Screen */}
             <div style={{
