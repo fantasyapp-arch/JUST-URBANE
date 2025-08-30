@@ -400,7 +400,7 @@ const HomePage = () => {
                 </Link>
               </div>
 
-              <div className="grid md:grid-cols-3 gap-4">
+              <div className="grid md:grid-cols-3 gap-6">
               {/* Use trending articles or fallback content */}
               {(trendingArticles.length > 0 ? trendingArticles.slice(0, 3) : [
                 {
