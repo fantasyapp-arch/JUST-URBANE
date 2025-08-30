@@ -102,15 +102,16 @@ const FullScreenMagazineReader = ({ isOpen, onClose, magazineContent = [] }) => 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        className="fixed inset-0 bg-black z-50 overflow-hidden"
+        className="fixed inset-0 bg-black overflow-hidden"
         style={{ 
           width: '100vw', 
           height: '100vh',
-          position: 'fixed',
+          position: 'fixed !important',
           top: 0,
           left: 0,
           right: 0,
-          bottom: 0
+          bottom: 0,
+          zIndex: 9999
         }}
       >
         {/* Close Button - Top Right */}
