@@ -438,12 +438,12 @@ const HomePage = () => {
 
         {/* AUTOMOTIVE SECTION - COMPACT */}
         <motion.section 
-          className="mb-6"
+          className="mb-3"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.95 }}
         >
-          <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center justify-between mb-2">
             <h2 className="text-2xl lg:text-3xl font-serif font-bold text-gray-900">
               Automotive
             </h2>
