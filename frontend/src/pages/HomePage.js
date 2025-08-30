@@ -368,12 +368,12 @@ const HomePage = () => {
 
         {/* DIGITAL MAGAZINE PREMIUM SECTION */}
         <motion.section 
-          className="mb-20"
+          className="mb-8"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.8 }}
         >
-          <div className="bg-gradient-to-br from-black via-gray-900 to-black text-white rounded-3xl p-8 md:p-16 relative overflow-hidden">
+          <div className="bg-gradient-to-br from-black via-gray-900 to-black text-white rounded-2xl p-6 md:p-12 relative overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-r from-amber-500/10 via-gold-500/10 to-amber-500/10"></div>
             <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-gold-400/20 to-transparent rounded-full blur-3xl"></div>
             
