@@ -561,7 +561,7 @@ const LockedPageComponent = ({ onSubscribe, pageNumber }) => {
   );
 };
 
-// Premium Subscription Modal
+// Premium Subscription Modal - Digital Plan Only
 const PremiumSubscriptionModal = ({ onClose }) => {
   return (
     <motion.div
@@ -596,20 +596,20 @@ const PremiumSubscriptionModal = ({ onClose }) => {
           </div>
           
           <h2 className="text-3xl font-bold text-gray-900 mb-3">
-            Unlock Premium Experience
+            Unlock Full Magazine Access
           </h2>
           <p className="text-gray-600 text-lg">
-            Continue reading with unlimited access to exclusive content.
+            Continue reading with unlimited digital magazine access.
           </p>
         </div>
 
-        {/* Features */}
+        {/* Digital Plan Features */}
         <div className="space-y-4 mb-10">
           {[
-            'Unlimited premium magazine access',
+            'Unlimited digital magazine access',
             '3D flip-book reading experience',
-            'Exclusive luxury content & insights',
-            'Ad-free premium reading',
+            'Exclusive premium content & insights',
+            'Ad-free reading experience',
             'Download for offline reading'
           ].map((feature, index) => (
             <div key={index} className="flex items-center space-x-4">
@@ -621,27 +621,27 @@ const PremiumSubscriptionModal = ({ onClose }) => {
           ))}
         </div>
 
-        {/* Pricing */}
-        <div className="bg-gradient-to-br from-amber-50 to-orange-50 rounded-2xl p-8 mb-8 border border-amber-200">
+        {/* Digital Plan Pricing */}
+        <div className="bg-gradient-to-br from-gray-50 to-gray-100 rounded-2xl p-8 mb-8 border border-gray-200">
           <div className="text-center">
-            <div className="bg-gradient-to-r from-amber-500 to-amber-600 text-white text-sm font-bold px-4 py-2 rounded-full inline-block mb-4">
-              BEST VALUE - SAVE 40%
+            <div className="bg-black text-white text-sm font-bold px-4 py-2 rounded-full inline-block mb-4">
+              DIGITAL PLAN ONLY
             </div>
             <div className="flex items-center justify-center space-x-4 mb-3">
               <span className="text-gray-500 line-through text-xl">₹1500</span>
-              <span className="text-4xl font-bold text-gray-900">₹900</span>
+              <span className="text-4xl font-bold text-gray-900">₹499</span>
             </div>
-            <p className="text-gray-600">Annual subscription</p>
+            <p className="text-gray-600">Annual Digital Subscription</p>
           </div>
         </div>
 
-        {/* Action Buttons */}
+        {/* Action Buttons - Direct Buy */}
         <div className="space-y-4">
           <Link
-            to="/pricing"
-            className="block w-full bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white font-bold text-center py-5 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-xl text-lg"
+            to="/pricing?plan=digital"
+            className="block w-full bg-black hover:bg-gray-800 text-white font-bold text-center py-5 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-xl text-lg"
           >
-            Subscribe Now
+            Buy Digital Plan - ₹499
           </Link>
           <Link
             to="/login"
