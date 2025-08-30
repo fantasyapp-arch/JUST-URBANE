@@ -257,8 +257,8 @@ const MagazineReaderPage = () => {
             key={currentPage}
             initial={{ 
               opacity: 0,
-              x: flipDirection === 'next' ? 50 : -50,
-              scale: 0.98
+              x: flipDirection === 'next' ? 100 : -100,
+              scale: 0.95
             }}
             animate={{ 
               opacity: 1,
@@ -267,12 +267,12 @@ const MagazineReaderPage = () => {
             }}
             exit={{ 
               opacity: 0,
-              x: flipDirection === 'next' ? -50 : 50,
-              scale: 0.98
+              x: flipDirection === 'next' ? -100 : 100,
+              scale: 0.95
             }}
             transition={{ 
-              duration: 0.3,
-              ease: [0.25, 0.46, 0.45, 0.94]
+              duration: 0.15, // Super fast transition
+              ease: [0.4, 0, 0.2, 1] // Sharp easing for snappy page turns
             }}
             style={{
               position: 'relative',
