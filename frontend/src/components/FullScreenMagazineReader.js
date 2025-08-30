@@ -392,35 +392,35 @@ const MagazinePageContent = ({ page, pageNumber, isBlurred = false }) => {
   // Regular Article Pages - Enhanced for premium large display
   return (
     <div className={`h-full bg-white relative overflow-hidden ${isBlurred ? 'blur-sm' : ''}`}>
-      <div className="h-full p-10 md:p-16 flex flex-col">
+      <div className="h-full p-16 md:p-24 lg:p-32 flex flex-col">
         {/* Header */}
-        <div className="flex items-center justify-between mb-12 pb-6 border-b-4 border-gray-200">
-          <div className="flex items-center space-x-4">
-            <Crown className="h-6 w-6 md:h-8 w-8 text-amber-600" />
-            <span className="text-xl md:text-2xl font-bold tracking-wider text-gray-800">JUST URBANE</span>
+        <div className="flex items-center justify-between mb-16 pb-8 border-b-4 border-gray-200">
+          <div className="flex items-center space-x-6">
+            <Crown className="h-8 w-8 md:h-10 w-10 text-amber-600" />
+            <span className="text-2xl md:text-3xl lg:text-4xl font-bold tracking-wider text-gray-800">JUST URBANE</span>
           </div>
-          <div className="text-lg md:text-xl text-gray-500 uppercase tracking-wider">{page.category}</div>
+          <div className="text-xl md:text-2xl lg:text-3xl text-gray-500 uppercase tracking-wider">{page.category}</div>
         </div>
 
         {/* Article Title */}
-        <h1 className="text-4xl md:text-6xl lg:text-7xl font-serif font-bold text-gray-900 leading-tight mb-8 md:mb-12">
+        <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif font-bold text-gray-900 leading-tight mb-12 md:mb-16">
           {page.title}
         </h1>
 
         {/* Subtitle if exists */}
         {page.subtitle && (
-          <h2 className="text-2xl md:text-3xl lg:text-4xl font-light text-gray-600 mb-8 md:mb-12 italic">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-light text-gray-600 mb-12 md:mb-16 italic">
             {page.subtitle}
           </h2>
         )}
 
         {/* Hero Image */}
         {page.image && (
-          <div className="mb-8 md:mb-12 rounded-2xl overflow-hidden shadow-2xl">
+          <div className="mb-12 md:mb-16 rounded-2xl overflow-hidden shadow-2xl">
             <img
               src={page.image}
               alt={page.title}
-              className="w-full h-48 md:h-72 lg:h-96 object-cover"
+              className="w-full h-64 md:h-80 lg:h-96 object-cover"
               onError={(e) => {
                 e.target.style.display = 'none';
               }}
@@ -430,22 +430,22 @@ const MagazinePageContent = ({ page, pageNumber, isBlurred = false }) => {
 
         {/* Article Content */}
         <div className="flex-1 overflow-hidden">
-          <div className="prose prose-lg md:prose-xl max-w-none text-gray-700 leading-relaxed">
+          <div className="prose prose-xl md:prose-2xl max-w-none text-gray-700 leading-relaxed">
             {(page.content || '').split('\n\n').map((paragraph, index) => {
               if (paragraph.trim().match(/^[A-Z\s:]+$/)) {
                 // All caps sections (headers)
                 return (
-                  <h3 key={index} className="text-xl md:text-2xl lg:text-3xl font-bold text-amber-600 mt-8 mb-4 tracking-wider">
+                  <h3 key={index} className="text-2xl md:text-3xl lg:text-4xl font-bold text-amber-600 mt-12 mb-6 tracking-wider">
                     {paragraph.trim()}
                   </h3>
                 );
               } else if (paragraph.startsWith('•')) {
                 // Bullet points
                 return (
-                  <ul key={index} className="list-none space-y-3 mb-8 ml-6">
+                  <ul key={index} className="list-none space-y-4 mb-12 ml-8">
                     {paragraph.split('\n').filter(line => line.trim()).map((item, itemIndex) => (
-                      <li key={itemIndex} className="text-lg md:text-xl flex items-start">
-                        <span className="text-amber-600 mr-4 text-xl">•</span>
+                      <li key={itemIndex} className="text-xl md:text-2xl flex items-start">
+                        <span className="text-amber-600 mr-6 text-2xl">•</span>
                         <span>{item.replace(/^•\s*/, '')}</span>
                       </li>
                     ))}
@@ -454,17 +454,17 @@ const MagazinePageContent = ({ page, pageNumber, isBlurred = false }) => {
               } else if (index === 0) {
                 // First paragraph with large drop cap
                 return (
-                  <p key={index} className="text-justify mb-6 md:mb-8">
-                    <span className="float-left text-6xl md:text-8xl lg:text-9xl font-serif leading-none mr-4 mt-2 text-gray-800">
+                  <p key={index} className="text-justify mb-8 md:mb-12">
+                    <span className="float-left text-8xl md:text-9xl lg:text-[10rem] font-serif leading-none mr-6 mt-4 text-gray-800">
                       {paragraph.charAt(0)}
                     </span>
-                    <span className="text-lg md:text-xl leading-relaxed">{paragraph.slice(1)}</span>
+                    <span className="text-xl md:text-2xl lg:text-3xl leading-relaxed">{paragraph.slice(1)}</span>
                   </p>
                 );
               } else {
                 // Regular paragraphs
                 return (
-                  <p key={index} className="mb-6 md:mb-8 text-justify text-lg md:text-xl leading-relaxed">
+                  <p key={index} className="mb-8 md:mb-12 text-justify text-xl md:text-2xl lg:text-3xl leading-relaxed">
                     {paragraph}
                   </p>
                 );
@@ -475,17 +475,17 @@ const MagazinePageContent = ({ page, pageNumber, isBlurred = false }) => {
 
         {/* Premium Badge */}
         {page.type === 'premium' && (
-          <div className="flex justify-end mt-8">
-            <div className="flex items-center bg-gradient-to-r from-amber-500 to-amber-600 text-white text-sm md:text-base px-6 py-3 rounded-full shadow-lg">
-              <Crown className="h-5 w-5 mr-2" />
+          <div className="flex justify-end mt-12">
+            <div className="flex items-center bg-gradient-to-r from-amber-500 to-amber-600 text-white text-lg md:text-xl px-8 py-4 rounded-full shadow-lg">
+              <Crown className="h-6 w-6 mr-3" />
               Premium Content
             </div>
           </div>
         )}
 
         {/* Page Number */}
-        <div className="text-center mt-8">
-          <span className="text-lg text-gray-400 font-medium">{pageNumber}</span>
+        <div className="text-center mt-12">
+          <span className="text-xl md:text-2xl text-gray-400 font-medium">{pageNumber}</span>
         </div>
       </div>
       
