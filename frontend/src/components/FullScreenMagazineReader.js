@@ -524,15 +524,15 @@ const LockedPageComponent = ({ onSubscribe, pageNumber }) => {
         Unlock exclusive content, luxury insights, and premium experiences with your subscription.
       </p>
 
-      {/* Pricing Display */}
-      <div className="bg-gradient-to-br from-amber-500 to-amber-600 rounded-2xl p-8 mb-8 transform hover:scale-105 transition-transform duration-300 shadow-2xl">
-        <div className="text-center text-black">
-          <p className="text-lg font-bold mb-2">JUST URBANE PREMIUM</p>
+      {/* Pricing Display - Digital Plan Only */}
+      <div className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl p-8 mb-8 transform hover:scale-105 transition-transform duration-300 shadow-2xl">
+        <div className="text-center text-white">
+          <p className="text-lg font-bold mb-2">DIGITAL PLAN</p>
           <div className="flex items-center justify-center space-x-3">
-            <span className="text-gray-700 line-through text-lg">₹1500</span>
-            <span className="text-black font-bold text-3xl">₹900</span>
+            <span className="text-gray-400 line-through text-lg">₹1500</span>
+            <span className="text-white font-bold text-3xl">₹499</span>
           </div>
-          <p className="text-sm text-gray-800 mt-1">Annual Subscription</p>
+          <p className="text-sm text-gray-300 mt-1">Annual Digital Subscription</p>
         </div>
       </div>
 
