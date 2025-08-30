@@ -8,47 +8,47 @@
       "test": "API Health Check",
       "success": true,
       "message": "Core API is healthy and responsive",
-      "timestamp": "2025-08-30T10:09:30.876996",
+      "timestamp": "2025-08-30T11:00:51.808243",
       "response_data": null
     },
     {
       "test": "Core Service - Articles API",
       "success": true,
       "message": "Responsive (HTTP 200)",
-      "timestamp": "2025-08-30T10:09:30.898734",
+      "timestamp": "2025-08-30T11:00:51.819420",
       "response_data": null
     },
     {
       "test": "Core Service - Categories API",
       "success": true,
       "message": "Responsive (HTTP 200)",
-      "timestamp": "2025-08-30T10:09:30.910532",
+      "timestamp": "2025-08-30T11:00:51.830935",
       "response_data": null
     },
     {
       "test": "Core Service - Payment Packages API",
       "success": true,
       "message": "Responsive (HTTP 200)",
-      "timestamp": "2025-08-30T10:09:30.920328",
+      "timestamp": "2025-08-30T11:00:51.877002",
       "response_data": null
     },
     {
       "test": "Core Backend Services",
       "success": true,
       "message": "All 3 core services responsive",
-      "timestamp": "2025-08-30T10:09:30.920375",
+      "timestamp": "2025-08-30T11:00:51.877039",
       "response_data": null
     },
     {
       "test": "User Registration",
       "success": true,
       "message": "User registered successfully",
-      "timestamp": "2025-08-30T10:09:31.238249",
+      "timestamp": "2025-08-30T11:00:52.198454",
       "response_data": {
-        "email": "testuser_1756548570@justurbane.com",
+        "email": "testuser_1756551651@justurbane.com",
         "name": "Premium Test User",
-        "id": "0affa79d-0456-4887-8e2c-1f0f6f14d568",
-        "created_at": "2025-08-30T10:09:31.232521",
+        "id": "bb2c34d3-2568-4755-a0a4-905357150eb4",
+        "created_at": "2025-08-30T11:00:52.192977",
         "is_premium": false,
         "subscription_status": "inactive"
       }
@@ -57,105 +57,105 @@
       "test": "User Login",
       "success": true,
       "message": "Login successful, JWT token received",
-      "timestamp": "2025-08-30T10:09:31.479230",
+      "timestamp": "2025-08-30T11:00:52.438476",
       "response_data": null
     },
     {
       "test": "JWT Token Generation",
       "success": true,
       "message": "JWT token successfully generated during login",
-      "timestamp": "2025-08-30T10:09:31.479283",
+      "timestamp": "2025-08-30T11:00:52.438550",
       "response_data": null
     },
     {
       "test": "JWT Authentication - Protected Endpoint",
       "success": true,
       "message": "JWT authentication working for protected endpoints (HTTP 200)",
-      "timestamp": "2025-08-30T10:09:31.490518",
+      "timestamp": "2025-08-30T11:00:52.449814",
       "response_data": null
     },
     {
       "test": "JWT Authentication - Invalid Token",
       "success": true,
       "message": "Invalid tokens properly rejected",
-      "timestamp": "2025-08-30T10:09:31.542509",
+      "timestamp": "2025-08-30T11:00:52.502743",
       "response_data": null
     },
     {
       "test": "Magazine Reader API - Required Fields",
       "success": false,
       "message": "Missing field coverage: hero_image: 0/10",
-      "timestamp": "2025-08-30T10:09:31.554880",
+      "timestamp": "2025-08-30T11:00:52.514690",
       "response_data": null
     },
     {
       "test": "Premium Content System - Content Mix",
       "success": true,
-      "message": "Found 2 premium and 18 free articles",
-      "timestamp": "2025-08-30T10:09:31.554913",
+      "message": "Found 1 premium and 19 free articles",
+      "timestamp": "2025-08-30T11:00:52.514731",
       "response_data": null
     },
     {
       "test": "Premium Access Control",
       "success": true,
       "message": "Premium content properly gated (locked: False, truncated: False, marker: True)",
-      "timestamp": "2025-08-30T10:09:31.608009",
+      "timestamp": "2025-08-30T11:00:52.569432",
       "response_data": null
     },
     {
       "test": "Magazine Data Quality - Content Length",
       "success": false,
-      "message": "Content issues in 1/5 articles: JWT Authentication Test Article: insufficient content (101 chars)",
-      "timestamp": "2025-08-30T10:09:31.608052",
+      "message": "Content issues in 2/5 articles: Review Test Article: insufficient content (50 chars); JWT Authentication Test Article: insufficient content (101 chars)",
+      "timestamp": "2025-08-30T11:00:52.569484",
       "response_data": null
     },
     {
       "test": "Magazine Data Quality - Formatting",
       "success": true,
       "message": "All tested articles have proper formatting",
-      "timestamp": "2025-08-30T10:09:31.608059",
+      "timestamp": "2025-08-30T11:00:52.569491",
       "response_data": null
     },
     {
       "test": "Magazine Category Distribution",
       "success": true,
-      "message": "Good category distribution: {'tech': 11, 'technology': 1, 'fashion': 4, 'auto': 2, 'travel': 1, 'people': 1}",
-      "timestamp": "2025-08-30T10:09:31.608085",
+      "message": "Good category distribution: {'tech': 13, 'technology': 1, 'fashion': 3, 'auto': 2, 'travel': 1}",
+      "timestamp": "2025-08-30T11:00:52.569516",
       "response_data": null
     },
     {
       "test": "Payment Packages",
       "success": true,
       "message": "Correct INR pricing: Digital \u20b9499.0, Print \u20b9499.0, Combined \u20b9999.0",
-      "timestamp": "2025-08-30T10:09:31.656510",
+      "timestamp": "2025-08-30T11:00:52.576692",
       "response_data": null
     },
     {
       "test": "Payment Currency",
       "success": true,
       "message": "Currency set to INR for all packages",
-      "timestamp": "2025-08-30T10:09:31.656552",
+      "timestamp": "2025-08-30T11:00:52.576725",
       "response_data": null
     },
     {
       "test": "Categories Count",
       "success": true,
       "message": "Retrieved expected 9 categories",
-      "timestamp": "2025-08-30T10:09:31.664041",
+      "timestamp": "2025-08-30T11:00:52.582990",
       "response_data": null
     },
     {
       "test": "GQ Categories Structure",
       "success": true,
       "message": "All 9 GQ-style categories present: Fashion, Business, Technology, Finance, Travel, Health, Culture, Art, Entertainment",
-      "timestamp": "2025-08-30T10:09:31.664076",
+      "timestamp": "2025-08-30T11:00:52.583030",
       "response_data": null
     },
     {
       "test": "Categories Listing",
       "success": true,
       "message": "Retrieved 9 categories",
-      "timestamp": "2025-08-30T10:09:31.664084",
+      "timestamp": "2025-08-30T11:00:52.583038",
       "response_data": null
     }
   ]
