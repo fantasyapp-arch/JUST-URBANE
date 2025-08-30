@@ -189,11 +189,19 @@ const MagazineReaderPage = () => {
           height: 100vh;
         }
         
-        /* Page turn effect - simple slide with shadow */
+        /* Enhanced page turn effect with visible shadow and curl */
         .page-turn-effect {
           box-shadow: 
-            inset -10px 0 20px rgba(0, 0, 0, 0.1),
-            inset 10px 0 20px rgba(0, 0, 0, 0.1);
+            0 0 30px rgba(0, 0, 0, 0.3),
+            inset -15px 0 30px rgba(0, 0, 0, 0.2),
+            inset 15px 0 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .page-turning {
+          transform-origin: center center;
+          box-shadow: 
+            0 10px 40px rgba(0, 0, 0, 0.4),
+            inset -20px 0 40px rgba(0, 0, 0, 0.3);
         }
       `}</style>
       
