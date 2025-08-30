@@ -197,8 +197,5 @@ const IssuesPage = () => {
     </div>
   );
 };
-};
-
-
 
 export default IssuesPage;
