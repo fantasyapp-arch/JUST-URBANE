@@ -342,82 +342,98 @@ const MagazineReaderPage = () => {
         </AnimatePresence>
       </div>
 
-      {/* Navigation Controls */}
-      <button
-        onClick={prevPage}
-        disabled={currentPage === 0 || isFlipping}
-        style={{
-          position: 'absolute',
-          left: '30px',
-          top: '50%',
-          transform: 'translateY(-50%)',
-          width: '70px',
-          height: '70px',
-          backgroundColor: currentPage === 0 || isFlipping ? 'rgba(0,0,0,0.3)' : 'rgba(0,0,0,0.7)',
-          color: currentPage === 0 || isFlipping ? 'rgba(255,255,255,0.3)' : 'white',
-          border: 'none',
-          borderRadius: '50%',
-          cursor: currentPage === 0 || isFlipping ? 'not-allowed' : 'pointer',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          zIndex: 1000000,
-          transition: 'all 0.3s ease',
-          fontSize: '18px'
-        }}
-        onMouseEnter={(e) => {
-          if (!(currentPage === 0 || isFlipping)) {
-            e.target.style.backgroundColor = 'rgba(0,0,0,0.8)';
-            e.target.style.transform = 'translateY(-50%) scale(1.1)';
-          }
-        }}
-        onMouseLeave={(e) => {
-          if (!(currentPage === 0 || isFlipping)) {
-            e.target.style.backgroundColor = 'rgba(0,0,0,0.7)';
-            e.target.style.transform = 'translateY(-50%) scale(1)';
-          }
-        }}
-      >
-        <ChevronLeft size={32} />
-      </button>
+      {/* Navigation Controls - Invisible Until Hover */}
+      <div style={{
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        width: '100%',
+        height: '100%',
+        pointerEvents: 'none',
+        zIndex: 999999
+      }}>
+        <button
+          onClick={prevPage}
+          disabled={currentPage === 0 || isFlipping}
+          style={{
+            position: 'absolute',
+            left: '20px',
+            top: '50%',
+            transform: 'translateY(-50%)',
+            width: '80px',
+            height: '80px',
+            backgroundColor: currentPage === 0 || isFlipping ? 'transparent' : 'rgba(0,0,0,0.6)',
+            color: currentPage === 0 || isFlipping ? 'transparent' : 'white',
+            border: 'none',
+            borderRadius: '50%',
+            cursor: currentPage === 0 || isFlipping ? 'not-allowed' : 'pointer',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            fontSize: '20px',
+            transition: 'all 0.3s ease',
+            opacity: currentPage === 0 || isFlipping ? 0 : 0.7,
+            pointerEvents: 'auto'
+          }}
+          onMouseEnter={(e) => {
+            if (!(currentPage === 0 || isFlipping)) {
+              e.target.style.backgroundColor = 'rgba(0,0,0,0.8)';
+              e.target.style.opacity = '1';
+              e.target.style.transform = 'translateY(-50%) scale(1.1)';
+            }
+          }}
+          onMouseLeave={(e) => {
+            if (!(currentPage === 0 || isFlipping)) {
+              e.target.style.backgroundColor = 'rgba(0,0,0,0.6)';
+              e.target.style.opacity = '0.7';
+              e.target.style.transform = 'translateY(-50%) scale(1)';
+            }
+          }}
+        >
+          <ChevronLeft size={36} />
+        </button>
 
-      <button
-        onClick={nextPage}
-        disabled={currentPage >= totalPages - 1 || isFlipping}
-        style={{
-          position: 'absolute',
-          right: '30px',
-          top: '50%',
-          transform: 'translateY(-50%)',
-          width: '70px',
-          height: '70px',
-          backgroundColor: currentPage >= totalPages - 1 || isFlipping ? 'rgba(0,0,0,0.3)' : 'rgba(0,0,0,0.7)',
-          color: currentPage >= totalPages - 1 || isFlipping ? 'rgba(255,255,255,0.3)' : 'white',
-          border: 'none',
-          borderRadius: '50%',
-          cursor: currentPage >= totalPages - 1 || isFlipping ? 'not-allowed' : 'pointer',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          zIndex: 1000000,
-          transition: 'all 0.3s ease',
-          fontSize: '18px'
-        }}
-        onMouseEnter={(e) => {
-          if (!(currentPage >= totalPages - 1 || isFlipping)) {
-            e.target.style.backgroundColor = 'rgba(0,0,0,0.8)';
-            e.target.style.transform = 'translateY(-50%) scale(1.1)';
-          }
-        }}
-        onMouseLeave={(e) => {
-          if (!(currentPage >= totalPages - 1 || isFlipping)) {
-            e.target.style.backgroundColor = 'rgba(0,0,0,0.7)';
-            e.target.style.transform = 'translateY(-50%) scale(1)';
-          }
-        }}
-      >
-        <ChevronRight size={32} />
-      </button>
+        <button
+          onClick={nextPage}
+          disabled={currentPage >= totalPages - 1 || isFlipping}
+          style={{
+            position: 'absolute',
+            right: '20px',
+            top: '50%',
+            transform: 'translateY(-50%)',
+            width: '80px',
+            height: '80px',
+            backgroundColor: currentPage >= totalPages - 1 || isFlipping ? 'transparent' : 'rgba(0,0,0,0.6)',
+            color: currentPage >= totalPages - 1 || isFlipping ? 'transparent' : 'white',
+            border: 'none',
+            borderRadius: '50%',
+            cursor: currentPage >= totalPages - 1 || isFlipping ? 'not-allowed' : 'pointer',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            fontSize: '20px',
+            transition: 'all 0.3s ease',
+            opacity: currentPage >= totalPages - 1 || isFlipping ? 0 : 0.7,
+            pointerEvents: 'auto'
+          }}
+          onMouseEnter={(e) => {
+            if (!(currentPage >= totalPages - 1 || isFlipping)) {
+              e.target.style.backgroundColor = 'rgba(0,0,0,0.8)';
+              e.target.style.opacity = '1';
+              e.target.style.transform = 'translateY(-50%) scale(1.1)';
+            }
+          }}
+          onMouseLeave={(e) => {
+            if (!(currentPage >= totalPages - 1 || isFlipping)) {
+              e.target.style.backgroundColor = 'rgba(0,0,0,0.6)';
+              e.target.style.opacity = '0.7';
+              e.target.style.transform = 'translateY(-50%) scale(1)';
+            }
+          }}
+        >
+          <ChevronRight size={36} />
+        </button>
+      </div>
 
       {/* Premium Subscription Modal */}
       {showSubscriptionModal && (
