@@ -329,30 +329,30 @@ const MagazinePageContent = ({ page, pageNumber, isBlurred = false }) => {
   if (page.type === 'contents') {
     return (
       <div className={`h-full bg-white relative overflow-hidden ${isBlurred ? 'blur-sm' : ''}`}>
-        <div className="h-full p-10 md:p-16">
+        <div className="h-full p-16 md:p-24 lg:p-32">
           {/* Header */}
-          <div className="flex items-center justify-between mb-12 pb-6 border-b-4 border-gray-200">
-            <div className="flex items-center space-x-4">
-              <Crown className="h-8 w-8 text-amber-600" />
-              <span className="text-2xl md:text-3xl font-bold tracking-wider text-gray-800">JUST URBANE</span>
+          <div className="flex items-center justify-between mb-16 pb-8 border-b-4 border-gray-200">
+            <div className="flex items-center space-x-6">
+              <Crown className="h-10 w-10 md:h-12 w-12 text-amber-600" />
+              <span className="text-3xl md:text-4xl font-bold tracking-wider text-gray-800">JUST URBANE</span>
             </div>
-            <div className="text-lg md:text-xl text-gray-500 uppercase tracking-wider">August 2025</div>
+            <div className="text-2xl md:text-3xl text-gray-500 uppercase tracking-wider">August 2025</div>
           </div>
 
           {/* Contents Title */}
-          <h1 className="text-6xl md:text-8xl lg:text-9xl font-serif font-bold text-gray-900 text-center mb-16">
+          <h1 className="text-8xl md:text-9xl lg:text-[12rem] font-serif font-bold text-gray-900 text-center mb-24">
             {page.title}
           </h1>
 
-          {/* Contents List - Improved layout for large pages */}
-          <div className="space-y-8 text-lg md:text-xl">
+          {/* Contents List - Improved layout for full-screen */}
+          <div className="space-y-12 text-2xl md:text-3xl">
             {page.content.split('\n\n').map((section, index) => (
-              <div key={index} className="mb-10">
+              <div key={index} className="mb-16">
                 {section.split('\n').map((line, lineIndex) => {
                   if (line.match(/^[A-Z\s&]+$/)) {
                     // Section headers
                     return (
-                      <h3 key={lineIndex} className="text-2xl md:text-3xl font-bold text-amber-600 mb-6 tracking-wider">
+                      <h3 key={lineIndex} className="text-3xl md:text-4xl lg:text-5xl font-bold text-amber-600 mb-8 tracking-wider">
                         {line}
                       </h3>
                     );
@@ -360,14 +360,14 @@ const MagazinePageContent = ({ page, pageNumber, isBlurred = false }) => {
                     // Content items
                     const [number, content] = line.split(' - ');
                     return (
-                      <div key={lineIndex} className="flex justify-between items-start py-3 border-b border-gray-200">
-                        <span className="font-bold text-amber-600 mr-6 text-xl">{number}</span>
-                        <span className="flex-1 text-gray-700 text-lg leading-relaxed">{content}</span>
+                      <div key={lineIndex} className="flex justify-between items-start py-4 border-b border-gray-200">
+                        <span className="font-bold text-amber-600 mr-8 text-2xl md:text-3xl">{number}</span>
+                        <span className="flex-1 text-gray-700 text-xl md:text-2xl leading-relaxed">{content}</span>
                       </div>
                     );
                   } else if (line.trim()) {
                     return (
-                      <p key={lineIndex} className="text-gray-600 leading-relaxed text-lg">
+                      <p key={lineIndex} className="text-gray-600 leading-relaxed text-xl md:text-2xl">
                         {line}
                       </p>
                     );
@@ -379,8 +379,8 @@ const MagazinePageContent = ({ page, pageNumber, isBlurred = false }) => {
           </div>
 
           {/* Page Number */}
-          <div className="absolute bottom-8 right-8">
-            <span className="text-lg text-gray-400 font-medium">{pageNumber}</span>
+          <div className="absolute bottom-12 right-12">
+            <span className="text-2xl text-gray-400 font-medium">{pageNumber}</span>
           </div>
         </div>
         
