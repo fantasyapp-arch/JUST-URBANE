@@ -517,6 +517,7 @@ const HomePage = () => {
             ))}
             </div>
           </div>
+        </div>
         </motion.section>
 
         {/* LIFESTYLE SECTION - MIXED LAYOUT */}
