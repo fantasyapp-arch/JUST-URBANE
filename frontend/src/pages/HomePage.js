@@ -354,85 +354,186 @@ const HomePage = () => {
           </motion.section>
         )}
 
-        {/* PEOPLE OF THE YEAR - PROFESSIONAL MAGAZINE STYLE */}
+        {/* DIGITAL MAGAZINE PREMIUM SECTION */}
+        <motion.section 
+          className="mb-20"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.8 }}
+        >
+          <div className="bg-gradient-to-br from-black via-gray-900 to-black text-white rounded-3xl p-8 md:p-16 relative overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-r from-amber-500/10 via-gold-500/10 to-amber-500/10"></div>
+            <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-gold-400/20 to-transparent rounded-full blur-3xl"></div>
+            
+            <div className="relative z-10 grid lg:grid-cols-2 gap-12 items-center">
+              <div>
+                <div className="flex items-center space-x-3 mb-6">
+                  <Star className="h-8 w-8 text-gold-400" />
+                  <span className="text-gold-400 font-bold text-xl uppercase tracking-wide">Digital Magazine</span>
+                </div>
+                
+                <h2 className="text-4xl lg:text-6xl font-serif font-bold mb-6 leading-tight">
+                  Experience Premium <span className="text-transparent bg-clip-text bg-gradient-to-r from-gold-300 to-amber-400">Digital Reading</span>
+                </h2>
+                
+                <p className="text-xl text-gray-300 mb-8 leading-relaxed">
+                  Immerse yourself in luxury lifestyle content with our interactive digital magazine. 
+                  Full-screen reading, smooth page turns, and premium content at your fingertips.
+                </p>
+                
+                <div className="space-y-4 mb-10">
+                  {[
+                    'Full-screen immersive reading experience',
+                    '6 premium pages with exclusive content',
+                    'Smooth page transitions and natural feel',
+                    '3 pages free preview available'
+                  ].map((feature, index) => (
+                    <div key={index} className="flex items-center space-x-3">
+                      <div className="w-2 h-2 bg-gradient-to-r from-gold-400 to-amber-500 rounded-full"></div>
+                      <span className="text-gray-300 text-lg">{feature}</span>
+                    </div>
+                  ))}
+                </div>
+                
+                <div className="flex flex-col sm:flex-row gap-4">
+                  <Link
+                    to="/issues"
+                    className="bg-gradient-to-r from-gold-500 to-amber-600 hover:from-gold-600 hover:to-amber-700 text-black font-bold px-8 py-4 rounded-2xl transition-all duration-300 transform hover:scale-105 shadow-xl flex items-center justify-center space-x-3"
+                  >
+                    <Play className="h-6 w-6" />
+                    <span>Read Digital Magazine</span>
+                  </Link>
+                  
+                  <Link
+                    to="/pricing"
+                    className="border-2 border-gold-400 text-gold-400 hover:bg-gold-400 hover:text-black font-semibold px-8 py-4 rounded-2xl transition-all duration-300 flex items-center justify-center space-x-3"
+                  >
+                    <Crown className="h-6 w-6" />
+                    <span>Get Premium Access</span>
+                  </Link>
+                </div>
+              </div>
+              
+              <div className="relative">
+                <div className="relative transform rotate-3 hover:rotate-0 transition-transform duration-500">
+                  <img
+                    src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=800&fit=crop"
+                    alt="Just Urbane Magazine Cover"
+                    className="w-full max-w-md mx-auto rounded-2xl shadow-2xl"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent rounded-2xl"></div>
+                  
+                  {/* Magazine Badge */}
+                  <div className="absolute top-6 left-6">
+                    <div className="bg-gold-500 text-black px-4 py-2 rounded-full text-sm font-bold flex items-center space-x-2">
+                      <Zap className="h-4 w-4" />
+                      <span>AUGUST 2025</span>
+                    </div>
+                  </div>
+                  
+                  {/* Free Preview Badge */}
+                  <div className="absolute bottom-6 right-6">
+                    <div className="bg-green-500 text-white px-4 py-2 rounded-full text-sm font-bold">
+                      3 Pages Free
+                    </div>
+                  </div>
+                </div>
+                
+                {/* Floating Stats */}
+                <div className="absolute -top-4 -right-4 bg-white/10 backdrop-blur-sm rounded-2xl p-4 border border-white/20">
+                  <div className="text-center">
+                    <div className="text-2xl font-bold text-gold-400">6</div>
+                    <div className="text-xs text-gray-300">Pages</div>
+                  </div>
+                </div>
+                
+                <div className="absolute -bottom-4 -left-4 bg-white/10 backdrop-blur-sm rounded-2xl p-4 border border-white/20">
+                  <div className="text-center">
+                    <div className="text-2xl font-bold text-gold-400">4K+</div>
+                    <div className="text-xs text-gray-300">Readers</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </motion.section>
+
+        {/* PREMIUM CONTENT SECTIONS */}
         <motion.section 
           className="mb-20"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.9 }}
         >
-          <div className="bg-gradient-to-br from-gray-900 via-gray-800 to-black text-white rounded-3xl p-12">
-            <div className="text-center mb-16">
-              <div className="flex items-center justify-center mb-8">
-                <Award className="h-12 w-12 text-gold-500 mr-4" />
-                <h2 className="text-4xl lg:text-5xl font-serif font-bold">
-                  People of the Year 2025
-                </h2>
-              </div>
-              <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-                Celebrating exceptional individuals shaping luxury, business, and culture
-              </p>
-            </div>
+          <div className="text-center mb-16">
+            <h2 className="text-4xl lg:text-5xl font-serif font-bold text-gray-900 mb-6">
+              Premium Categories
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Explore curated content across luxury lifestyle, technology, fashion, and entertainment
+            </p>
+          </div>
 
-            <div className="grid md:grid-cols-3 gap-10">
-              {[
-                {
-                  name: 'Ratan Tata',
-                  title: 'Business Visionary & Philanthropist',
-                  image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=500&fit=crop',
-                  category: 'Business Leader'
-                },
-                {
-                  name: 'Priyanka Chopra',
-                  title: 'Global Entertainment Icon',
-                  image: 'https://images.unsplash.com/photo-1494790108755-2616b612b1bb?w=400&h=500&fit=crop',
-                  category: 'Entertainment'
-                },
-                {
-                  name: 'Byju Raveendran',
-                  title: 'EdTech Revolutionary',
-                  image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=500&fit=crop',
-                  category: 'Technology'
-                }
-              ].map((person, index) => (
-                <motion.div 
-                  key={index}
-                  className="group text-center"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.9 + index * 0.1 }}
-                >
-                  <div className="relative mb-8 overflow-hidden rounded-2xl">
-                    <img
-                      src={person.image}
-                      alt={person.name}
-                      className="w-full h-80 object-cover group-hover:scale-105 transition-transform duration-500"
-                    />
-                    <div className="absolute top-6 left-6">
-                      <span className="bg-gold-500 text-black px-4 py-2 rounded-full text-sm font-bold">
-                        {person.category}
-                      </span>
-                    </div>
-                  </div>
-                  <h3 className="text-2xl font-serif font-bold text-white mb-3 group-hover:text-gold-400 transition-colors">
-                    {person.name}
-                  </h3>
-                  <p className="text-gold-400 font-semibold text-lg">
-                    {person.title}
-                  </p>
-                </motion.div>
-              ))}
-            </div>
-
-            <div className="text-center mt-16">
-              <Link 
-                to="/people-of-the-year" 
-                className="inline-flex items-center bg-primary-600 hover:bg-primary-700 text-white font-bold px-12 py-5 rounded-2xl transition-all duration-200 transform hover:scale-105 shadow-2xl text-lg"
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {[
+              {
+                title: 'Fashion & Style',
+                description: 'Latest trends, designer collections, and style guides',
+                icon: '👔',
+                color: 'from-pink-500 to-rose-600',
+                link: '/category/fashion'
+              },
+              {
+                title: 'Technology',
+                description: 'Cutting-edge gadgets, AI innovations, and tech reviews',
+                icon: '💻',
+                color: 'from-blue-500 to-cyan-600',
+                link: '/category/tech'
+              },
+              {
+                title: 'Travel & Luxury',
+                description: 'Premium destinations, luxury hotels, and travel guides',
+                icon: '✈️',
+                color: 'from-green-500 to-emerald-600',
+                link: '/category/travel'
+              },
+              {
+                title: 'Entertainment',
+                description: 'Celebrity interviews, movies, music, and culture',
+                icon: '🎬',
+                color: 'from-purple-500 to-violet-600',
+                link: '/category/entertainment'
+              }
+            ].map((category, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.9 + index * 0.1 }}
               >
-                View All Winners
-                <ArrowRight className="ml-4 h-6 w-6" />
-              </Link>
-            </div>
+                <Link 
+                  to={category.link}
+                  className="group block bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100"
+                >
+                  <div className={`w-16 h-16 bg-gradient-to-br ${category.color} rounded-2xl flex items-center justify-center text-2xl mb-6 group-hover:scale-110 transition-transform`}>
+                    {category.icon}
+                  </div>
+                  
+                  <h3 className="text-xl font-serif font-bold text-gray-900 mb-4 group-hover:text-primary-600 transition-colors">
+                    {category.title}
+                  </h3>
+                  
+                  <p className="text-gray-600 leading-relaxed mb-6">
+                    {category.description}
+                  </p>
+                  
+                  <div className="flex items-center text-primary-600 group-hover:text-primary-700 font-semibold">
+                    <span>Explore</span>
+                    <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                  </div>
+                </Link>
+              </motion.div>
+            ))}
           </div>
         </motion.section>
 
