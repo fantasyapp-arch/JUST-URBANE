@@ -147,10 +147,6 @@ const FullScreenMagazineReader = ({ isOpen, onClose, magazineContent = [] }) => 
     }
   };
 
-  const toggleControls = () => {
-    setShowControls(!showControls);
-  };
-
   if (!isOpen) {
     return null;
   }
