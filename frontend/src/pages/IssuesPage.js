@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { parseMagazineContent } from '../components/MagazineContentParser';
 
 const IssuesPage = () => {
+  const navigate = useNavigate();
   const [selectedIssue, setSelectedIssue] = useState(null);
   const [isReaderOpen, setIsReaderOpen] = useState(false);
   const { user, isAuthenticated } = useAuth();
@@ -46,7 +47,7 @@ const IssuesPage = () => {
   const openMagazineReader = () => {
     console.log('🔥 Opening magazine reader...');
     // Navigate to dedicated magazine reader page
-    window.location.href = '/magazine-reader';
+    navigate('/magazine-reader');
   };
 
   const closeMagazineReader = () => {
