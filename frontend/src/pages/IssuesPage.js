@@ -206,13 +206,6 @@ const IssuesPage = () => {
           </div>
         </motion.div>
       </div>
-
-      {/* Full Screen 3D Magazine Reader */}
-      <FullScreenMagazineReader
-        isOpen={isReaderOpen}
-        onClose={closeMagazineReader}
-        magazineContent={selectedIssue}
-      />
     </div>
   );
 };
