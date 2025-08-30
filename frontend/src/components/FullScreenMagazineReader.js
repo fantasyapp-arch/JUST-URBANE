@@ -1,6 +1,4 @@
 import React, { useRef, useEffect, useState } from 'react';
-import { createPortal } from 'react-dom';
-import HTMLFlipBook from 'react-pageflip';
 import { 
   X, ChevronLeft, ChevronRight, Crown, Lock
 } from 'lucide-react';
@@ -8,64 +6,56 @@ import { useAuth } from '../context/AuthContext';
 import { Link } from 'react-router-dom';
 
 const FullScreenMagazineReader = ({ isOpen, onClose, magazineContent = [] }) => {
-  const flipBookRef = useRef();
   const [currentPage, setCurrentPage] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
   const [showSubscriptionModal, setShowSubscriptionModal] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
   const { user, isAuthenticated } = useAuth();
 
   const canReadPremium = isAuthenticated && user?.is_premium && user?.subscription_status === 'active';
-  const FREE_PREVIEW_PAGES = 3; // First 3 pages are free
+  const FREE_PREVIEW_PAGES = 3;
 
   const pages = magazineContent && magazineContent.length > 0 ? magazineContent : [];
 
   useEffect(() => {
     if (pages && Array.isArray(pages)) {
       setTotalPages(pages.length);
-      setIsLoading(false);
     }
   }, [pages]);
 
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
-      document.documentElement.style.overflow = 'hidden';
+      document.body.style.position = 'fixed';
+      document.body.style.width = '100%';
+      document.body.style.height = '100%';
     } else {
-      document.body.style.overflow = 'unset';
-      document.documentElement.style.overflow = 'unset';
+      document.body.style.overflow = '';
+      document.body.style.position = '';
+      document.body.style.width = '';
+      document.body.style.height = '';
     }
 
     return () => {
-      document.body.style.overflow = 'unset';
-      document.documentElement.style.overflow = 'unset';
+      document.body.style.overflow = '';
+      document.body.style.position = '';
+      document.body.style.width = '';
+      document.body.style.height = '';
     };
   }, [isOpen]);
 
-  const handlePageFlip = (e) => {
-    const newPage = e.data;
-    setCurrentPage(newPage);
-    
-    if (!canReadPremium && newPage >= FREE_PREVIEW_PAGES) {
-      setTimeout(() => {
-        setShowSubscriptionModal(true);
-      }, 500);
-    }
-  };
-
   const nextPage = () => {
-    if (flipBookRef.current) {
-      if (!canReadPremium && currentPage >= FREE_PREVIEW_PAGES - 1) {
-        setShowSubscriptionModal(true);
-        return;
-      }
-      flipBookRef.current.pageFlip().flipNext();
+    if (!canReadPremium && currentPage >= FREE_PREVIEW_PAGES - 1) {
+      setShowSubscriptionModal(true);
+      return;
+    }
+    if (currentPage < totalPages - 1) {
+      setCurrentPage(currentPage + 1);
     }
   };
 
   const prevPage = () => {
-    if (flipBookRef.current) {
-      flipBookRef.current.pageFlip().flipPrev();
+    if (currentPage > 0) {
+      setCurrentPage(currentPage - 1);
     }
   };
 
@@ -74,33 +64,14 @@ const FullScreenMagazineReader = ({ isOpen, onClose, magazineContent = [] }) => 
     onClose();
   };
 
-  if (!isOpen) {
+  if (!isOpen || !pages.length) {
     return null;
   }
 
-  // Calculate LARGE magazine size for truly immersive full-screen experience
-  const screenWidth = window.innerWidth;
-  const screenHeight = window.innerHeight;
-  
-  // Make magazine pages MUCH larger to fill most of the screen
-  let pageWidth, pageHeight;
-  
-  if (screenWidth <= 768) {
-    // Mobile: Fill most of the screen
-    pageWidth = screenWidth * 0.95;
-    pageHeight = screenHeight * 0.9;
-  } else if (screenWidth <= 1024) {
-    // Tablet: Large, immersive size
-    pageWidth = screenWidth * 0.7;
-    pageHeight = screenHeight * 0.95;
-  } else {
-    // Desktop: Truly immersive, large magazine experience
-    pageWidth = Math.min(screenWidth * 0.6, 800);  // Much larger max width
-    pageHeight = Math.min(screenHeight * 0.95, 1000); // Much larger max height
-  }
+  const currentPageData = pages[currentPage];
+  const isPageLocked = !canReadPremium && currentPage >= FREE_PREVIEW_PAGES;
 
-  // Full-screen magazine reader component
-  const magazineReader = (
+  return (
     <div
       style={{
         position: 'fixed',
@@ -112,187 +83,125 @@ const FullScreenMagazineReader = ({ isOpen, onClose, magazineContent = [] }) => 
         height: '100vh',
         zIndex: 999999,
         backgroundColor: '#000000',
-        margin: 0,
-        padding: 0,
-        overflow: 'hidden'
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center'
       }}
     >
       {/* Close Button */}
       <button
         onClick={closeReader}
         style={{
-          position: 'absolute',
-          top: '16px',
-          right: '16px',
+          position: 'fixed',
+          top: '20px',
+          right: '20px',
           zIndex: 1000000,
-          padding: '12px',
-          backgroundColor: 'rgba(0, 0, 0, 0.9)',
+          padding: '15px',
+          backgroundColor: 'rgba(0, 0, 0, 0.8)',
           color: 'white',
           border: 'none',
           borderRadius: '50%',
           cursor: 'pointer',
-          boxShadow: '0 4px 20px rgba(0, 0, 0, 0.5)',
-          border: '1px solid rgba(255, 255, 255, 0.2)'
+          boxShadow: '0 4px 20px rgba(0, 0, 0, 0.5)'
         }}
-        aria-label="Close Magazine"
       >
         <X style={{ width: '24px', height: '24px' }} />
       </button>
 
       {/* Page Counter */}
-      <div 
+      <div
         style={{
-          position: 'absolute',
-          top: '16px',
-          left: '16px',
+          position: 'fixed',
+          top: '20px',
+          left: '20px',
           zIndex: 1000000,
-          backgroundColor: 'rgba(0, 0, 0, 0.9)',
+          backgroundColor: 'rgba(0, 0, 0, 0.8)',
           color: 'white',
-          padding: '8px 16px',
-          borderRadius: '20px',
-          fontSize: '14px',
-          border: '1px solid rgba(255, 255, 255, 0.2)'
+          padding: '10px 20px',
+          borderRadius: '25px',
+          fontSize: '16px'
         }}
       >
         {currentPage + 1} / {totalPages}
         {!canReadPremium && currentPage < FREE_PREVIEW_PAGES && (
-          <span style={{ marginLeft: '8px', color: '#10b981' }}>(Free Preview)</span>
+          <span style={{ marginLeft: '10px', color: '#10b981' }}>(Free Preview)</span>
         )}
       </div>
 
-      {/* Magazine Container */}
-      <div style={{
-        width: '100%',
-        height: '100%',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        position: 'relative'
-      }}>
-        {!isLoading && pages && pages.length > 0 ? (
-          <HTMLFlipBook
-            ref={flipBookRef}
-            width={pageWidth}
-            height={pageHeight}
-            size="stretch"
-            minWidth={400}          // Increased minimum size
-            maxWidth={900}          // Increased maximum size  
-            minHeight={500}         // Increased minimum size
-            maxHeight={1200}        // Increased maximum size
-            maxShadowOpacity={1.0}
-            showCover={true}
-            mobileScrollSupport={false}
-            onFlip={handlePageFlip}
-            style={{
-              boxShadow: '0 60px 120px -25px rgba(0, 0, 0, 0.9), 0 35px 75px -35px rgba(0, 0, 0, 0.7)',
-              borderRadius: '16px',
-              overflow: 'hidden',
-              border: '3px solid rgba(255, 255, 255, 0.15)'
-            }}
-            flippingTime={600}
-            usePortrait={true}
-            startZIndex={1000}
-            autoSize={false}
-            clickEventForward={true}
-          >
-            {pages.map((page, index) => {
-              const isPageLocked = !canReadPremium && index >= FREE_PREVIEW_PAGES;
-              
-              return (
-                <div 
-                  key={page?.id || `page-${index}`} 
-                  style={{ 
-                    width: '100%', 
-                    height: '100%',
-                    borderRadius: '12px',
-                    backgroundColor: 'white',
-                    position: 'relative',
-                    overflow: 'hidden'
-                  }}
-                >
-                  {isPageLocked ? (
-                    <MagazinePageContent page={page} pageNumber={index + 1} isBlurred={true} />
-                  ) : (
-                    <MagazinePageContent page={page} pageNumber={index + 1} />
-                  )}
-                </div>
-              );
-            })}
-          </HTMLFlipBook>
-        ) : (
-          <div style={{
-            color: 'white',
-            textAlign: 'center',
-            fontSize: '18px'
-          }}>
-            <div style={{
-              width: '80px',
-              height: '80px',
-              border: '4px solid transparent',
-              borderTop: '4px solid #f59e0b',
-              borderRadius: '50%',
-              margin: '0 auto 24px',
-              animation: 'spin 1s linear infinite'
-            }}></div>
-            <p style={{ fontSize: '24px', fontWeight: '300', marginBottom: '8px' }}>Loading Your Magazine...</p>
-            <p style={{ fontSize: '18px', color: '#d1d5db' }}>Just Urbane August 2025</p>
-          </div>
-        )}
+      {/* Magazine Page - LARGE and IMMERSIVE */}
+      <div
+        style={{
+          width: '90vw',
+          height: '95vh',
+          maxWidth: '900px',
+          backgroundColor: 'white',
+          borderRadius: '15px',
+          boxShadow: '0 25px 50px rgba(0, 0, 0, 0.5)',
+          overflow: 'hidden',
+          position: 'relative',
+          border: '3px solid rgba(255, 255, 255, 0.1)'
+        }}
+      >
+        <MagazinePageContent 
+          page={currentPageData} 
+          pageNumber={currentPage + 1} 
+          isBlurred={isPageLocked} 
+        />
       </div>
 
-      {/* Navigation Arrows */}
+      {/* Navigation Arrows - Large and Visible */}
       <button
         onClick={prevPage}
         disabled={currentPage === 0}
         style={{
-          position: 'absolute',
-          left: '16px',
+          position: 'fixed',
+          left: '30px',
           top: '50%',
           transform: 'translateY(-50%)',
           zIndex: 1000000,
-          padding: '16px',
-          backgroundColor: 'transparent',
-          color: currentPage === 0 ? 'rgba(255, 255, 255, 0.3)' : 'rgba(255, 255, 255, 0.9)',
+          padding: '20px',
+          backgroundColor: 'rgba(0, 0, 0, 0.6)',
+          color: currentPage === 0 ? 'rgba(255, 255, 255, 0.3)' : 'white',
           border: 'none',
+          borderRadius: '50%',
           cursor: currentPage === 0 ? 'not-allowed' : 'pointer',
-          transition: 'all 0.2s'
+          boxShadow: '0 4px 20px rgba(0, 0, 0, 0.3)'
         }}
-        aria-label="Previous Page"
       >
-        <ChevronLeft style={{ width: '80px', height: '80px', filter: 'drop-shadow(0 4px 8px rgba(0,0,0,0.5))' }} />
+        <ChevronLeft style={{ width: '40px', height: '40px' }} />
       </button>
 
       <button
         onClick={nextPage}
-        disabled={(!canReadPremium && currentPage >= FREE_PREVIEW_PAGES - 1) || currentPage >= totalPages - 1}
+        disabled={currentPage >= totalPages - 1}
         style={{
-          position: 'absolute',
-          right: '16px',
+          position: 'fixed',
+          right: '30px',
           top: '50%',
           transform: 'translateY(-50%)',
           zIndex: 1000000,
-          padding: '16px',
-          backgroundColor: 'transparent',
-          color: ((!canReadPremium && currentPage >= FREE_PREVIEW_PAGES - 1) || currentPage >= totalPages - 1) ? 'rgba(255, 255, 255, 0.3)' : 'rgba(255, 255, 255, 0.9)',
+          padding: '20px',
+          backgroundColor: 'rgba(0, 0, 0, 0.6)',
+          color: currentPage >= totalPages - 1 ? 'rgba(255, 255, 255, 0.3)' : 'white',
           border: 'none',
-          cursor: ((!canReadPremium && currentPage >= FREE_PREVIEW_PAGES - 1) || currentPage >= totalPages - 1) ? 'not-allowed' : 'pointer',
-          transition: 'all 0.2s'
+          borderRadius: '50%',
+          cursor: currentPage >= totalPages - 1 ? 'not-allowed' : 'pointer',
+          boxShadow: '0 4px 20px rgba(0, 0, 0, 0.3)'
         }}
-        aria-label="Next Page"
       >
-        <ChevronRight style={{ width: '80px', height: '80px', filter: 'drop-shadow(0 4px 8px rgba(0,0,0,0.5))' }} />
+        <ChevronRight style={{ width: '40px', height: '40px' }} />
       </button>
 
-      {/* Premium Subscription Modal */}
+      {/* Premium Modal */}
       {showSubscriptionModal && (
         <div
           style={{
-            position: 'absolute',
+            position: 'fixed',
             top: 0,
             left: 0,
             right: 0,
             bottom: 0,
-            backgroundColor: 'rgba(0, 0, 0, 0.95)',
+            backgroundColor: 'rgba(0, 0, 0, 0.9)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
@@ -303,110 +212,66 @@ const FullScreenMagazineReader = ({ isOpen, onClose, magazineContent = [] }) => 
           <div
             style={{
               backgroundColor: 'white',
-              borderRadius: '24px',
+              borderRadius: '20px',
               padding: '40px',
               maxWidth: '500px',
-              margin: '0 24px',
-              boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5)',
-              position: 'relative',
-              border: '2px solid #fbbf24'
+              margin: '20px',
+              boxShadow: '0 25px 50px rgba(0, 0, 0, 0.5)',
+              textAlign: 'center'
             }}
             onClick={(e) => e.stopPropagation()}
           >
-            <button
-              onClick={() => setShowSubscriptionModal(false)}
-              style={{
-                position: 'absolute',
-                top: '24px',
-                right: '24px',
-                padding: '8px',
-                backgroundColor: 'transparent',
-                border: 'none',
-                cursor: 'pointer',
-                borderRadius: '50%'
-              }}
-            >
-              <X style={{ width: '24px', height: '24px', color: '#6b7280' }} />
-            </button>
-
-            <div style={{ textAlign: 'center', marginBottom: '32px' }}>
-              <div style={{
-                width: '80px',
-                height: '80px',
-                background: 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)',
-                borderRadius: '50%',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                margin: '0 auto 24px',
-                boxShadow: '0 10px 25px rgba(245, 158, 11, 0.3)'
-              }}>
-                <Crown style={{ width: '40px', height: '40px', color: 'white' }} />
-              </div>
-              <h2 style={{ fontSize: '32px', fontWeight: 'bold', color: '#111827', marginBottom: '16px' }}>
-                Continue Your Journey
-              </h2>
-              <p style={{ fontSize: '18px', color: '#6b7280', lineHeight: '1.6' }}>
-                Unlock unlimited access to premium content, exclusive insights, and the complete magazine experience
-              </p>
-            </div>
-
             <div style={{
-              background: 'linear-gradient(135deg, #f9fafb 0%, #f3f4f6 100%)',
-              borderRadius: '16px',
-              padding: '32px',
-              marginBottom: '32px',
-              border: '1px solid #e5e7eb'
+              width: '80px',
+              height: '80px',
+              background: 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)',
+              borderRadius: '50%',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              margin: '0 auto 30px'
             }}>
-              <div style={{ textAlign: 'center' }}>
-                <div style={{
-                  backgroundColor: '#000000',
-                  color: 'white',
-                  fontSize: '18px',
-                  fontWeight: 'bold',
-                  padding: '12px 24px',
-                  borderRadius: '20px',
-                  display: 'inline-block',
-                  marginBottom: '24px'
-                }}>
-                  DIGITAL PREMIUM ACCESS
-                </div>
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '16px' }}>
-                  <span style={{ fontSize: '24px', color: '#6b7280', textDecoration: 'line-through', marginRight: '16px' }}>₹1500</span>
-                  <span style={{ fontSize: '48px', fontWeight: 'bold', color: '#111827' }}>₹499</span>
-                </div>
-                <p style={{ fontSize: '18px', color: '#6b7280', marginBottom: '8px' }}>Annual Digital Subscription</p>
-                <p style={{ fontSize: '18px', color: '#059669', fontWeight: '600' }}>Save 67% • Best Value</p>
-              </div>
+              <Crown style={{ width: '40px', height: '40px', color: 'white' }} />
             </div>
-
+            
+            <h2 style={{ fontSize: '28px', fontWeight: 'bold', marginBottom: '15px', color: '#111' }}>
+              Continue Reading
+            </h2>
+            <p style={{ fontSize: '16px', color: '#666', marginBottom: '30px' }}>
+              Unlock unlimited access to premium magazine content
+            </p>
+            
+            <div style={{
+              backgroundColor: '#f8f9fa',
+              borderRadius: '15px',
+              padding: '25px',
+              marginBottom: '30px'
+            }}>
+              <div style={{ fontSize: '36px', fontWeight: 'bold', color: '#111' }}>₹499</div>
+              <div style={{ fontSize: '16px', color: '#666' }}>Annual Digital Subscription</div>
+            </div>
+            
             <Link
               to="/pricing?plan=digital"
               style={{
-                display: 'block',
-                width: '100%',
-                backgroundColor: '#000000',
+                display: 'inline-block',
+                backgroundColor: '#000',
                 color: 'white',
-                fontWeight: 'bold',
-                textAlign: 'center',
-                padding: '20px',
-                borderRadius: '16px',
-                fontSize: '20px',
+                padding: '15px 40px',
+                borderRadius: '10px',
                 textDecoration: 'none',
-                boxShadow: '0 10px 25px rgba(0, 0, 0, 0.2)',
-                transition: 'all 0.2s'
+                fontSize: '18px',
+                fontWeight: 'bold'
               }}
             >
-              Subscribe Now - ₹499
+              Subscribe Now
             </Link>
           </div>
         </div>
       )}
     </div>
   );
-
-  // Use React Portal to render outside parent container
-  return createPortal(magazineReader, document.body);
+};
 };
 
 // Magazine Page Content Component - Premium, large-scale design
