@@ -270,8 +270,8 @@ const HomePage = () => {
                 </div>
               )}
               
-              {/* Side Fashion Articles */}
-              <div className="md:col-span-4 space-y-3">
+                {/* Side Fashion Articles */}
+                <div className="md:col-span-4 space-y-4">
                 {fashionArticles.slice(1, 4).map((article, index) => (
                   <ProfessionalArticleCard 
                     key={article.id}
