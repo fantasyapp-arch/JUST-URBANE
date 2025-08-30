@@ -170,56 +170,6 @@ const IssuesPage = () => {
           </div>
         </motion.div>
 
-        {/* Full Screen Zoom Overlay */}
-        <AnimatePresence>
-          {isZooming && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.3 }}
-              style={{
-                position: 'fixed',
-                top: 0,
-                left: 0,
-                right: 0,
-                bottom: 0,
-                backgroundColor: '#000',
-                zIndex: 99999,
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center'
-              }}
-            >
-              <motion.div
-                initial={{ scale: 0.5, opacity: 0 }}
-                animate={{ scale: 1.2, opacity: 1 }}
-                transition={{ 
-                  duration: 0.8, 
-                  ease: [0.25, 0.46, 0.45, 0.94] 
-                }}
-                style={{
-                  width: '400px',
-                  height: '600px',
-                  borderRadius: '16px',
-                  overflow: 'hidden',
-                  boxShadow: '0 0 100px rgba(255,255,255,0.3)'
-                }}
-              >
-                <img
-                  src={magazineIssues[0].coverImage}
-                  alt="Magazine transitioning..."
-                  style={{
-                    width: '100%',
-                    height: '100%',
-                    objectFit: 'cover'
-                  }}
-                />
-              </motion.div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-
         {/* Bottom CTA Section */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
