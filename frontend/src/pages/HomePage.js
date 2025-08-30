@@ -199,7 +199,7 @@ const HomePage = () => {
       </motion.div>
 
       {/* MAIN CONTENT CONTAINER */}
-      <div className="w-full px-0 py-0">
+      <div className="w-full">
         
         {/* HERO SECTION - PROFESSIONAL MAGAZINE STYLE */}
         <section className="bg-white px-4 py-4 mb-0">
