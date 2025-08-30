@@ -128,18 +128,16 @@ const FullScreenMagazineReader = ({ isOpen, onClose, magazineContent = [] }) => 
         )}
       </div>
 
-      {/* Magazine Page - LARGE and IMMERSIVE */}
+      {/* Magazine Page - TRULY FULL SCREEN (no margins, no padding) */}
       <div
         style={{
-          width: '90vw',
-          height: '95vh',
-          maxWidth: '900px',
+          width: '100vw',
+          height: '100vh', 
           backgroundColor: 'white',
-          borderRadius: '15px',
-          boxShadow: '0 25px 50px rgba(0, 0, 0, 0.5)',
           overflow: 'hidden',
           position: 'relative',
-          border: '3px solid rgba(255, 255, 255, 0.1)'
+          margin: 0,
+          padding: 0
         }}
       >
         <MagazinePageContent 
