@@ -384,16 +384,16 @@ const HomePage = () => {
           <div className="max-w-7xl mx-auto">
             <div className="border-t-2 border-gray-900 pt-6 mb-6">
               <div className="flex items-center justify-between mb-6">
-              <h2 className="text-3xl lg:text-4xl font-serif font-bold text-gray-900">
-                Trending
-              </h2>
-              <Link
-                to="/trending"
-                className="text-primary-600 hover:text-primary-700 font-semibold text-lg"
-              >
-                View All
-              </Link>
-            </div>
+                <h2 className="text-3xl lg:text-4xl font-serif font-bold text-gray-900">
+                  Trending
+                </h2>
+                <Link
+                  to="/trending"
+                  className="text-primary-600 hover:text-primary-700 font-semibold text-lg"
+                >
+                  View All
+                </Link>
+              </div>
 
               <div className="grid md:grid-cols-3 gap-6">
               {/* Use trending articles or fallback content */}
