@@ -85,6 +85,7 @@ const router = createBrowserRouter([
       { path: "article/:slug", element: <ArticlePage /> },
       { path: "author/:slug", element: <AuthorPage /> },
       { path: "issues", element: <IssuesPage /> },
+      { path: "magazine-reader", element: <MagazineReaderPage /> },
       { path: "reviews", element: <ReviewsPage /> },
       { path: "travel", element: <TravelPage /> },
       { path: "pricing", element: <PricingPage /> },
