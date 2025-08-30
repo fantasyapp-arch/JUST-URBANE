@@ -78,32 +78,25 @@ const FullScreenMagazineReader = ({ isOpen, onClose, magazineContent = [] }) => 
     return null;
   }
 
-  // Calculate optimal magazine size based on device
+  // Calculate LARGE magazine size for truly immersive full-screen experience
   const screenWidth = window.innerWidth;
   const screenHeight = window.innerHeight;
   
-  // Magazine aspect ratio: 3:4 (typical magazine proportions)
-  const aspectRatio = 3 / 4;
+  // Make magazine pages MUCH larger to fill most of the screen
   let pageWidth, pageHeight;
   
-  // Device-specific calculations for truly full-screen experience
   if (screenWidth <= 768) {
-    // Mobile: Use full width, calculate height
-    pageWidth = Math.min(screenWidth * 0.9, 350);
-    pageHeight = pageWidth / aspectRatio;
-    // Adjust if height exceeds screen
-    if (pageHeight > screenHeight * 0.85) {
-      pageHeight = screenHeight * 0.85;
-      pageWidth = pageHeight * aspectRatio;
-    }
+    // Mobile: Fill most of the screen
+    pageWidth = screenWidth * 0.95;
+    pageHeight = screenHeight * 0.9;
   } else if (screenWidth <= 1024) {
-    // Tablet: Balanced approach
-    pageWidth = Math.min(screenWidth * 0.4, 400);
-    pageHeight = Math.min(screenHeight * 0.85, pageWidth / aspectRatio);
+    // Tablet: Large, immersive size
+    pageWidth = screenWidth * 0.7;
+    pageHeight = screenHeight * 0.95;
   } else {
-    // Desktop: Larger, more immersive
-    pageWidth = Math.min(screenWidth * 0.35, 500);
-    pageHeight = Math.min(screenHeight * 0.9, 700);
+    // Desktop: Truly immersive, large magazine experience
+    pageWidth = Math.min(screenWidth * 0.6, 800);  // Much larger max width
+    pageHeight = Math.min(screenHeight * 0.95, 1000); // Much larger max height
   }
 
   // Full-screen magazine reader component
