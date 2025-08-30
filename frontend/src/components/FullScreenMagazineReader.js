@@ -178,107 +178,50 @@ const FullScreenMagazineReader = ({ isOpen, onClose, magazineContent = [] }) => 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        className="fixed inset-0 bg-black z-50 overflow-hidden"
+        className="fixed inset-0 bg-black z-50"
+        style={{ width: '100vw', height: '100vh' }}
       >
-        {/* Elegant Background Pattern */}
-        <div className="absolute inset-0 opacity-5">
-          <div 
-            className="w-full h-full"
-            style={{
-              backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.02'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-            }}
-          />
-        </div>
-
-        {/* Top Controls Bar */}
-        <AnimatePresence>
-          {showControls && (
-            <motion.div
-              initial={{ opacity: 0, y: -50 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -50 }}
-              className="absolute top-0 left-0 right-0 z-20 bg-gradient-to-b from-black/90 via-black/60 to-transparent p-6"
-            >
-              <div className="flex items-center justify-between text-white">
-                <div className="flex items-center space-x-6">
-                  <button
-                    onClick={onClose}
-                    className="p-3 hover:bg-white/10 rounded-full transition-all duration-200 group"
-                  >
-                    <X className="h-6 w-6 group-hover:scale-110" />
-                  </button>
-                  <div className="flex items-center space-x-3">
-                    <Crown className="h-6 w-6 text-amber-400" />
-                    <h1 className="text-2xl font-bold tracking-wide">JUST URBANE</h1>
-                    <span className="text-amber-300 text-sm">Premium Edition</span>
-                  </div>
-                </div>
-
-                <div className="flex items-center space-x-3">
-                  <button
-                    onClick={() => setZoom(Math.max(zoom - 0.1, 0.7))}
-                    className="p-3 hover:bg-white/10 rounded-full transition-all duration-200"
-                  >
-                    <ZoomOut className="h-5 w-5" />
-                  </button>
-                  <button
-                    onClick={() => setZoom(Math.min(zoom + 0.1, 1.5))}
-                    className="p-3 hover:bg-white/10 rounded-full transition-all duration-200"
-                  >
-                    <ZoomIn className="h-5 w-5" />
-                  </button>
-                  <button
-                    onClick={toggleControls}
-                    className="p-3 hover:bg-white/10 rounded-full transition-all duration-200"
-                  >
-                    <Settings className="h-5 w-5" />
-                  </button>
-                </div>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-
-        {/* Magazine Container - Full Screen 3D Experience */}
-        <div 
-          className="flex items-center justify-center h-full p-4 pt-24 pb-24"
-          onClick={toggleControls}
-          style={{ transform: `scale(${zoom})` }}
+        {/* Close Button - Top Right */}
+        <button
+          onClick={onClose}
+          className="absolute top-6 right-6 z-30 p-3 bg-black/50 hover:bg-black/70 text-white rounded-full transition-all duration-200 backdrop-blur-sm"
         >
+          <X className="h-6 w-6" />
+        </button>
+
+        {/* Magazine Container - True Full Screen */}
+        <div className="w-full h-full flex items-center justify-center">
           <HTMLFlipBook
             ref={flipBookRef}
-            width={500}
-            height={700}
-            size="fixed"
+            width={Math.min(window.innerWidth * 0.4, 600)}
+            height={Math.min(window.innerHeight * 0.85, 800)}
+            size="stretch"
             minWidth={400}
-            maxWidth={800}
+            maxWidth={700}
             minHeight={600}
-            maxHeight={1000}
+            maxHeight={900}
             maxShadowOpacity={0.8}
             showCover={true}
             mobileScrollSupport={false}
             onFlip={handlePageFlip}
-            className="magazine-flipbook shadow-2xl"
+            className="magazine-flipbook"
             style={{
-              boxShadow: '0 40px 80px -12px rgba(0, 0, 0, 0.9)',
+              boxShadow: '0 50px 100px -20px rgba(0, 0, 0, 0.8)',
             }}
-            // 3D flip settings for realistic page turning
-            flippingTime={1000}
+            flippingTime={800}
             usePortrait={true}
             startZIndex={0}
-            autoSize={true}
+            autoSize={false}
             clickEventForward={true}
           >
             {(pages && Array.isArray(pages)) && pages.map((page, index) => {
               const isPageLocked = !canReadPremium && index >= FREE_PREVIEW_PAGES;
               
               return (
-                <div key={page?.id || `page-${index}`} className="magazine-page bg-white relative overflow-hidden">
+                <div key={page?.id || `page-${index}`} className="magazine-page bg-white relative overflow-hidden" 
+                     style={{ width: '100%', height: '100%' }}>
                   {isPageLocked ? (
-                    <LockedPageComponent 
-                      onSubscribe={() => setShowSubscriptionModal(true)}
-                      pageNumber={index + 1}
-                    />
+                    <MagazinePageContent page={page} pageNumber={index + 1} isBlurred={true} />
                   ) : (
                     <MagazinePageContent page={page} pageNumber={index + 1} />
                   )}
@@ -288,77 +231,27 @@ const FullScreenMagazineReader = ({ isOpen, onClose, magazineContent = [] }) => 
           </HTMLFlipBook>
         </div>
 
-        {/* Navigation Controls - Floating */}
-        <AnimatePresence>
-          {showControls && (
-            <>
-              {/* Left Navigation */}
-              <motion.button
-                initial={{ opacity: 0, x: -50 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -50 }}
-                onClick={prevPage}
-                className="absolute left-8 top-1/2 transform -translate-y-1/2 z-20 p-6 bg-black/60 hover:bg-black/80 text-white rounded-full transition-all duration-300 backdrop-blur-sm group"
-                disabled={currentPage === 0}
-              >
-                <ChevronLeft className="h-8 w-8 group-hover:scale-110" />
-              </motion.button>
+        {/* Navigation Arrows - Minimal */}
+        <button
+          onClick={prevPage}
+          disabled={currentPage === 0}
+          className="absolute left-8 top-1/2 transform -translate-y-1/2 z-20 p-4 text-white/70 hover:text-white transition-colors disabled:opacity-30"
+        >
+          <ChevronLeft className="h-12 w-12" />
+        </button>
 
-              {/* Right Navigation */}
-              <motion.button
-                initial={{ opacity: 0, x: 50 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: 50 }}
-                onClick={nextPage}
-                className="absolute right-8 top-1/2 transform -translate-y-1/2 z-20 p-6 bg-black/60 hover:bg-black/80 text-white rounded-full transition-all duration-300 backdrop-blur-sm group"
-                disabled={currentPage >= totalPages - 1}
-              >
-                <ChevronRight className="h-8 w-8 group-hover:scale-110" />
-              </motion.button>
-            </>
-          )}
-        </AnimatePresence>
+        <button
+          onClick={nextPage}
+          disabled={currentPage >= totalPages - 1}
+          className="absolute right-8 top-1/2 transform -translate-y-1/2 z-20 p-4 text-white/70 hover:text-white transition-colors disabled:opacity-30"
+        >
+          <ChevronRight className="h-12 w-12" />
+        </button>
 
-        {/* Bottom Controls Bar */}
-        <AnimatePresence>
-          {showControls && (
-            <motion.div
-              initial={{ opacity: 0, y: 50 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 50 }}
-              className="absolute bottom-0 left-0 right-0 z-20 bg-gradient-to-t from-black/90 via-black/60 to-transparent p-6"
-            >
-              <div className="flex items-center justify-center text-white">
-                <div className="flex items-center space-x-6 bg-black/50 backdrop-blur-sm px-8 py-4 rounded-full">
-                  <span className="text-lg font-medium">
-                    Page {currentPage + 1} of {totalPages}
-                  </span>
-                  <div className="w-px h-8 bg-white/20"></div>
-                  {!canReadPremium && currentPage < FREE_PREVIEW_PAGES && (
-                    <span className="text-amber-300 text-sm font-semibold">
-                      Free Preview ({FREE_PREVIEW_PAGES - currentPage} pages left)
-                    </span>
-                  )}
-                  <div className="flex space-x-3">
-                    <button className="p-3 hover:bg-white/10 rounded-full transition-colors">
-                      <Bookmark className="h-5 w-5" />
-                    </button>
-                    <button className="p-3 hover:bg-white/10 rounded-full transition-colors">
-                      <Share2 className="h-5 w-5" />
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-
-        {/* Premium Subscription Modal */}
+        {/* Small Purchase Modal - After 3 pages */}
         <AnimatePresence>
           {showSubscriptionModal && (
-            <PremiumSubscriptionModal
-              onClose={() => setShowSubscriptionModal(false)}
-            />
+            <SmallPurchaseModal onClose={() => setShowSubscriptionModal(false)} />
           )}
         </AnimatePresence>
       </motion.div>
