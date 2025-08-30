@@ -12,8 +12,6 @@ const MagazineReaderPage = () => {
   const [totalPages, setTotalPages] = useState(0);
   const [showSubscriptionModal, setShowSubscriptionModal] = useState(false);
   const [isFlipping, setIsFlipping] = useState(false);
-  const [flipDirection, setFlipDirection] = useState('next');
-  const [showPageCurl, setShowPageCurl] = useState(false);
   const { user, isAuthenticated } = useAuth();
 
   const canReadPremium = isAuthenticated && user?.is_premium && user?.subscription_status === 'active';
