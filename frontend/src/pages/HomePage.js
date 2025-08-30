@@ -818,7 +818,7 @@ const HomePage = () => {
               </div>
             </div>
 
-            <div className="grid lg:grid-cols-2 gap-8">
+            <div className="grid lg:grid-cols-2 gap-4">
               {/* Featured Video */}
               <motion.div 
                 className="group cursor-pointer"
