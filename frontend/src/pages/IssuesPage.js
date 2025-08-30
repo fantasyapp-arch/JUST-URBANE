@@ -11,8 +11,6 @@ const IssuesPage = () => {
   const [isReaderOpen, setIsReaderOpen] = useState(false);
   const { user, isAuthenticated } = useAuth();
 
-  const canReadPremium = isAuthenticated && user?.is_premium && user?.subscription_status === 'active';
-
   // Sample magazine covers - GQ style
   const magazineCovers = [
     {
