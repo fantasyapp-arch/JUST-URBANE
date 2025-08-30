@@ -2,7 +2,7 @@ import React, { useRef, useEffect, useState } from 'react';
 import HTMLFlipBook from 'react-pageflip';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
-  X, ChevronLeft, ChevronRight, Crown, Lock
+  X, ChevronLeft, ChevronRight, Crown, Lock, Play
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { Link } from 'react-router-dom';
@@ -17,106 +17,27 @@ const FullScreenMagazineReader = ({ isOpen, onClose, magazineContent = [] }) => 
   const canReadPremium = isAuthenticated && user?.is_premium && user?.subscription_status === 'active';
   const FREE_PREVIEW_PAGES = 3; // Only first 3 pages are free
 
-  // Your uploaded magazine content (simulated from video)
-  const defaultMagazinePages = [
-    {
-      id: 'cover',
-      type: 'cover',
-      title: 'JUST URBANE',
-      subtitle: 'August 2025 Issue',
-      image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&h=1200&fit=crop&crop=face',
-      content: 'Premium Lifestyle Magazine'
-    },
-    {
-      id: 'page-1',
-      type: 'article',
-      title: 'The Art of Modern Style',
-      content: `In the ever-evolving landscape of men's fashion, the modern gentleman must navigate between timeless elegance and contemporary innovation. This comprehensive guide explores the essential elements that define sophisticated style in 2025.
-
-      The foundation of impeccable style begins with understanding quality craftsmanship. From Italian leather goods to bespoke tailoring, investing in premium pieces creates a wardrobe that transcends seasonal trends.
-
-      Key elements include:
-      • Classic tailored suits with modern cuts
-      • Premium leather accessories
-      • Artisanal watches and jewelry
-      • Seasonal color palettes
-      • Sustainable luxury brands`,
-      image: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=600&h=400&fit=crop',
-      category: 'Fashion'
-    },
-    {
-      id: 'page-2', 
-      type: 'article',
-      title: 'Luxury Travel Destinations',
-      content: `Discover the world's most exclusive destinations that define luxury travel in 2025. From private island resorts to urban sanctuaries, these locations offer unparalleled experiences for the discerning traveler.
-
-      Featured destinations include:
-      • Amanzoe, Greece - Clifftop pavilions overlooking the Aegean
-      • The Brando, French Polynesia - Eco-luxury on Marlon Brando's private island  
-      • Aman Tokyo - Urban oasis in the heart of Japan's capital
-      • Four Seasons Safari Lodge Serengeti - Wildlife luxury in Tanzania
-      • Le Labo at Edition Hotels - Scent-focused luxury experiences`,
-      image: 'https://images.unsplash.com/photo-1582719508461-905c673771fd?w=600&h=400&fit=crop',
-      category: 'Travel'
-    },
-    {
-      id: 'page-3',
-      type: 'article', 
-      title: 'Tech Innovations 2025',
-      content: `The technology landscape continues to evolve at breakneck speed, with innovations that will reshape how we live, work, and connect. Here are the most significant tech trends defining 2025.
-
-      Revolutionary developments:
-      • AI-powered personal assistants with emotional intelligence
-      • Sustainable tech manufacturing and circular economy principles  
-      • Quantum computing applications for everyday users
-      • Advanced AR/VR experiences in luxury retail
-      • Blockchain integration in premium brand authentication`,
-      image: 'https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=600&h=400&fit=crop',
-      category: 'Technology'
-    },
-    {
-      id: 'premium-1',
-      type: 'premium',
-      title: 'Investment Strategies for the Elite',
-      content: `PREMIUM CONTENT: Exclusive insights into wealth management strategies employed by ultra-high-net-worth individuals. This comprehensive analysis reveals portfolio diversification techniques, alternative investments, and emerging market opportunities.
-
-      Advanced investment vehicles include:
-      • Private equity and venture capital opportunities
-      • Luxury collectibles as alternative assets
-      • Cryptocurrency and digital asset strategies
-      • Real estate investment trusts in emerging markets
-      • Sustainable and ESG-focused investment portfolios
-
-      Our exclusive research reveals how top-tier investors navigate market volatility while maintaining consistent returns through sophisticated risk management strategies.`,
-      image: 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=600&h=400&fit=crop',
-      category: 'Finance'
-    },
-    {
-      id: 'premium-2',
-      type: 'premium',
-      title: 'Exclusive Watchmaking Mastery',
-      content: `PREMIUM CONTENT: Go behind the scenes with master watchmakers at Patek Philippe, Audemars Piguet, and Vacheron Constantin. Discover the centuries-old techniques that create timepieces worth millions.
-
-      Exclusive insights include:
-      • Hand-engraving techniques passed down through generations
-      • The art of complications: minute repeaters and perpetual calendars
-      • Limited edition collections and their investment potential
-      • Celebrity collections and auction house records
-      • The future of mechanical watchmaking in the digital age
-
-      We gained exclusive access to workshops where a single watch takes over 1,000 hours to complete, revealing why these timepieces command extraordinary prices.`,
-      image: 'https://images.unsplash.com/photo-1594534475808-b18fc33b045e?w=600&h=400&fit=crop',
-      category: 'Luxury'
-    }
-  ];
-
-  const pages = (magazineContent && magazineContent.length > 0) ? magazineContent : defaultMagazinePages;
+  const pages = magazineContent && magazineContent.length > 0 ? magazineContent : [];
 
   useEffect(() => {
     if (pages && Array.isArray(pages)) {
       setTotalPages(pages.length);
     }
   }, [pages]);
+
+  useEffect(() => {
+    // Disable body scrolling when magazine is open
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+
+    // Cleanup on unmount
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isOpen]);
 
   const handlePageFlip = (e) => {
     const newPage = e.data;
@@ -147,6 +68,11 @@ const FullScreenMagazineReader = ({ isOpen, onClose, magazineContent = [] }) => 
     }
   };
 
+  const closeReader = () => {
+    setShowSubscriptionModal(false);
+    onClose();
+  };
+
   if (!isOpen) {
     return null;
   }
@@ -154,7 +80,8 @@ const FullScreenMagazineReader = ({ isOpen, onClose, magazineContent = [] }) => 
   // Loading state
   if (!pages || !Array.isArray(pages) || pages.length === 0) {
     return (
-      <div className="fixed inset-0 bg-black z-50 flex items-center justify-center">
+      <div className="fixed inset-0 bg-black z-50 flex items-center justify-center" 
+           style={{ width: '100vw', height: '100vh' }}>
         <div className="text-white text-center">
           <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-amber-400 mx-auto mb-4"></div>
           <p className="text-xl">Loading Magazine...</p>
@@ -163,54 +90,85 @@ const FullScreenMagazineReader = ({ isOpen, onClose, magazineContent = [] }) => 
     );
   }
 
+  // Calculate optimal size for truly full-screen experience
+  const screenWidth = window.innerWidth;
+  const screenHeight = window.innerHeight;
+  const pageWidth = Math.min(screenWidth * 0.45, 500); // 45% of screen width, max 500px
+  const pageHeight = Math.min(screenHeight * 0.9, 700); // 90% of screen height, max 700px
+
   return (
     <AnimatePresence>
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        className="fixed inset-0 bg-black z-50"
-        style={{ width: '100vw', height: '100vh' }}
+        className="fixed inset-0 bg-black z-50 overflow-hidden"
+        style={{ 
+          width: '100vw', 
+          height: '100vh',
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0
+        }}
       >
         {/* Close Button - Top Right */}
         <button
-          onClick={onClose}
-          className="absolute top-6 right-6 z-30 p-3 bg-black/50 hover:bg-black/70 text-white rounded-full transition-all duration-200 backdrop-blur-sm"
+          onClick={closeReader}
+          className="absolute top-4 right-4 z-40 p-3 bg-black/70 hover:bg-black/90 text-white rounded-full transition-all duration-200 backdrop-blur-sm shadow-lg"
         >
           <X className="h-6 w-6" />
         </button>
 
-        {/* Magazine Container - True Full Screen */}
-        <div className="w-full h-full flex items-center justify-center">
+        {/* Page Counter - Top Left */}
+        <div className="absolute top-4 left-4 z-40 bg-black/70 text-white px-4 py-2 rounded-full backdrop-blur-sm text-sm">
+          {currentPage + 1} / {totalPages}
+          {!canReadPremium && currentPage < FREE_PREVIEW_PAGES && (
+            <span className="ml-2 text-green-400">(Free Preview)</span>
+          )}
+        </div>
+
+        {/* Magazine Container - Truly Full Screen */}
+        <div className="w-full h-full flex items-center justify-center relative">
           <HTMLFlipBook
             ref={flipBookRef}
-            width={Math.min(window.innerWidth * 0.4, 600)}
-            height={Math.min(window.innerHeight * 0.85, 800)}
+            width={pageWidth}
+            height={pageHeight}
             size="stretch"
-            minWidth={400}
-            maxWidth={700}
-            minHeight={600}
-            maxHeight={900}
-            maxShadowOpacity={0.8}
+            minWidth={300}
+            maxWidth={600}
+            minHeight={400}
+            maxHeight={800}
+            maxShadowOpacity={0.9}
             showCover={true}
             mobileScrollSupport={false}
             onFlip={handlePageFlip}
-            className="magazine-flipbook"
+            className="magazine-flipbook shadow-2xl"
             style={{
-              boxShadow: '0 50px 100px -20px rgba(0, 0, 0, 0.8)',
+              boxShadow: '0 40px 80px -10px rgba(0, 0, 0, 0.9)',
+              borderRadius: '8px',
+              overflow: 'hidden'
             }}
-            flippingTime={800}
+            flippingTime={600}
             usePortrait={true}
             startZIndex={0}
             autoSize={false}
             clickEventForward={true}
           >
-            {(pages && Array.isArray(pages)) && pages.map((page, index) => {
+            {pages.map((page, index) => {
               const isPageLocked = !canReadPremium && index >= FREE_PREVIEW_PAGES;
               
               return (
-                <div key={page?.id || `page-${index}`} className="magazine-page bg-white relative overflow-hidden" 
-                     style={{ width: '100%', height: '100%' }}>
+                <div 
+                  key={page?.id || `page-${index}`} 
+                  className="magazine-page bg-white relative overflow-hidden" 
+                  style={{ 
+                    width: '100%', 
+                    height: '100%',
+                    borderRadius: '8px'
+                  }}
+                >
                   {isPageLocked ? (
                     <MagazinePageContent page={page} pageNumber={index + 1} isBlurred={true} />
                   ) : (
@@ -222,27 +180,27 @@ const FullScreenMagazineReader = ({ isOpen, onClose, magazineContent = [] }) => 
           </HTMLFlipBook>
         </div>
 
-        {/* Navigation Arrows - Minimal */}
+        {/* Navigation Arrows - Positioned for full screen */}
         <button
           onClick={prevPage}
           disabled={currentPage === 0}
-          className="absolute left-8 top-1/2 transform -translate-y-1/2 z-20 p-4 text-white/70 hover:text-white transition-colors disabled:opacity-30"
+          className="absolute left-6 top-1/2 transform -translate-y-1/2 z-30 p-4 text-white/80 hover:text-white hover:scale-110 transition-all duration-200 disabled:opacity-30 disabled:cursor-not-allowed"
         >
-          <ChevronLeft className="h-12 w-12" />
+          <ChevronLeft className="h-16 w-16 drop-shadow-lg" />
         </button>
 
         <button
           onClick={nextPage}
-          disabled={currentPage >= totalPages - 1}
-          className="absolute right-8 top-1/2 transform -translate-y-1/2 z-20 p-4 text-white/70 hover:text-white transition-colors disabled:opacity-30"
+          disabled={(!canReadPremium && currentPage >= FREE_PREVIEW_PAGES - 1) || currentPage >= totalPages - 1}
+          className="absolute right-6 top-1/2 transform -translate-y-1/2 z-30 p-4 text-white/80 hover:text-white hover:scale-110 transition-all duration-200 disabled:opacity-30 disabled:cursor-not-allowed"
         >
-          <ChevronRight className="h-12 w-12" />
+          <ChevronRight className="h-16 w-16 drop-shadow-lg" />
         </button>
 
-        {/* Small Purchase Modal - After 3 pages */}
+        {/* Full Screen Subscription Modal - After 3 pages */}
         <AnimatePresence>
           {showSubscriptionModal && (
-            <SmallPurchaseModal onClose={() => setShowSubscriptionModal(false)} />
+            <FullScreenPurchaseModal onClose={() => setShowSubscriptionModal(false)} />
           )}
         </AnimatePresence>
       </motion.div>
@@ -250,7 +208,7 @@ const FullScreenMagazineReader = ({ isOpen, onClose, magazineContent = [] }) => 
   );
 };
 
-// Magazine Page Content Component
+// Magazine Page Content Component - Enhanced for full screen
 const MagazinePageContent = ({ page, pageNumber, isBlurred = false }) => {
   if (!page) {
     return (
@@ -265,31 +223,31 @@ const MagazinePageContent = ({ page, pageNumber, isBlurred = false }) => {
       <div 
         className={`h-full relative overflow-hidden bg-cover bg-center ${isBlurred ? 'blur-sm' : ''}`}
         style={{
-          backgroundImage: `linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.5)), url(${page.image})`
+          backgroundImage: `linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.6)), url(${page.image})`
         }}
       >
-        {/* Magazine Cover Design */}
-        <div className="absolute inset-0 flex flex-col justify-between p-8 text-white">
+        {/* Magazine Cover Design - Full Screen Optimized */}
+        <div className="absolute inset-0 flex flex-col justify-between p-12 text-white">
           {/* Top - Magazine Logo */}
           <div className="text-center">
-            <h1 className="text-6xl font-bold tracking-widest mb-2">{page.title}</h1>
-            <div className="text-amber-300 text-lg tracking-widest uppercase">{page.content}</div>
+            <h1 className="text-7xl font-bold tracking-widest mb-4 drop-shadow-lg">{page.title}</h1>
+            <div className="text-amber-300 text-2xl tracking-widest uppercase font-light">{page.content}</div>
           </div>
 
           {/* Center - Issue Info */}
           <div className="text-center">
-            <div className="text-5xl font-light mb-4">{page.subtitle}</div>
-            <div className="text-xl text-amber-200 tracking-wider">Premium Digital Edition</div>
+            <div className="text-6xl font-light mb-6 drop-shadow-lg">{page.subtitle}</div>
+            <div className="text-2xl text-amber-200 tracking-wider">Premium Digital Edition</div>
           </div>
 
           {/* Bottom - Cover Features */}
-          <div className="text-center space-y-2">
-            <div className="text-lg font-semibold">INSIDE THIS ISSUE</div>
-            <div className="text-sm space-y-1 text-gray-200">
-              <div>• Modern Gentleman's Style Guide</div>
-              <div>• Luxury Travel Destinations 2025</div>
-              <div>• Tech Innovations & Investment</div>
-              <div>• Exclusive Premium Content</div>
+          <div className="text-center space-y-4">
+            <div className="text-2xl font-semibold">INSIDE THIS ISSUE</div>
+            <div className="text-lg space-y-2 text-gray-200 leading-relaxed">
+              <div>• Men's Fashion & Luxury Accessories</div>
+              <div>• Technology Innovations & Smart Living</div>
+              <div>• Premium Travel & Exclusive Destinations</div>
+              <div>• Elite Investment & Business Strategies</div>
             </div>
           </div>
         </div>
@@ -299,42 +257,42 @@ const MagazinePageContent = ({ page, pageNumber, isBlurred = false }) => {
     );
   }
 
-  // Article Page Design
+  // Article Page Design - Enhanced for full screen
   return (
     <div className={`h-full bg-white relative overflow-hidden ${isBlurred ? 'blur-sm' : ''}`}>
       {/* Magazine Page Layout */}
-      <div className="h-full p-8 flex flex-col">
+      <div className="h-full p-10 flex flex-col">
         {/* Header */}
-        <div className="flex items-center justify-between mb-6 pb-3 border-b-2 border-gray-200">
-          <div className="flex items-center space-x-2">
-            <Crown className="h-4 w-4 text-amber-600" />
-            <span className="text-sm font-bold tracking-wider text-gray-800">JUST URBANE</span>
+        <div className="flex items-center justify-between mb-8 pb-4 border-b-2 border-gray-200">
+          <div className="flex items-center space-x-3">
+            <Crown className="h-5 w-5 text-amber-600" />
+            <span className="text-lg font-bold tracking-wider text-gray-800">JUST URBANE</span>
           </div>
-          <div className="text-sm text-gray-500 uppercase tracking-wider">{page.category}</div>
+          <div className="text-lg text-gray-500 uppercase tracking-wider font-medium">{page.category}</div>
         </div>
 
         {/* Article Title */}
-        <h1 className="text-3xl font-serif font-bold text-gray-900 leading-tight mb-6">
+        <h1 className="text-5xl font-serif font-bold text-gray-900 leading-tight mb-8">
           {page.title}
         </h1>
 
         {/* Hero Image */}
         {page.image && (
-          <div className="mb-6 rounded-lg overflow-hidden shadow-md">
+          <div className="mb-8 rounded-xl overflow-hidden shadow-lg">
             <img
               src={page.image}
               alt={page.title}
-              className="w-full h-48 object-cover"
+              className="w-full h-60 object-cover"
             />
           </div>
         )}
 
         {/* Article Content */}
         <div className="flex-1">
-          <div className="prose prose-sm max-w-none text-gray-700 leading-relaxed">
+          <div className="prose prose-lg max-w-none text-gray-700 leading-relaxed">
             {/* Drop Cap */}
-            <p className="text-justify mb-4">
-              <span className="float-left text-6xl font-serif leading-none mr-2 mt-1 text-gray-800">
+            <p className="text-justify mb-6">
+              <span className="float-left text-8xl font-serif leading-none mr-4 mt-2 text-gray-800">
                 {(page.content || '').charAt(0)}
               </span>
               {(page.content || '').split('\n\n')[0]?.slice(1)}
@@ -342,7 +300,7 @@ const MagazinePageContent = ({ page, pageNumber, isBlurred = false }) => {
             
             {/* Rest of content */}
             {(page.content || '').split('\n\n').slice(1).map((paragraph, index) => (
-              <p key={index} className="mb-4 text-justify text-sm">
+              <p key={index} className="mb-6 text-justify text-lg leading-relaxed">
                 {paragraph}
               </p>
             ))}
@@ -351,17 +309,17 @@ const MagazinePageContent = ({ page, pageNumber, isBlurred = false }) => {
 
         {/* Premium Badge */}
         {page.type === 'premium' && (
-          <div className="flex justify-end mt-4">
-            <div className="flex items-center bg-gradient-to-r from-amber-500 to-amber-600 text-white text-xs px-3 py-1 rounded-full">
-              <Crown className="h-3 w-3 mr-1" />
-              Premium
+          <div className="flex justify-end mt-6">
+            <div className="flex items-center bg-gradient-to-r from-amber-500 to-amber-600 text-white text-sm px-4 py-2 rounded-full shadow-lg">
+              <Crown className="h-4 w-4 mr-2" />
+              Premium Content
             </div>
           </div>
         )}
 
         {/* Page Number */}
-        <div className="text-center mt-4">
-          <span className="text-xs text-gray-400">{pageNumber}</span>
+        <div className="text-center mt-6">
+          <span className="text-sm text-gray-400 font-medium">{pageNumber}</span>
         </div>
       </div>
       
@@ -372,75 +330,78 @@ const MagazinePageContent = ({ page, pageNumber, isBlurred = false }) => {
 
 // Purchase Overlay for blurred pages
 const PurchaseOverlay = () => (
-  <div className="absolute inset-0 bg-black/20 flex items-center justify-center">
-    <div className="bg-white/10 backdrop-blur-sm rounded-full p-3">
-      <Lock className="h-8 w-8 text-white" />
+  <div className="absolute inset-0 bg-black/30 flex items-center justify-center backdrop-blur-[1px]">
+    <div className="bg-white/20 backdrop-blur-sm rounded-full p-6 shadow-2xl">
+      <Lock className="h-12 w-12 text-white drop-shadow-lg" />
     </div>
   </div>
 );
 
-// Small Purchase Modal - Appears after 3 pages with blurred background
-const SmallPurchaseModal = ({ onClose }) => {
+// Full Screen Purchase Modal - Matching GQ India style
+const FullScreenPurchaseModal = ({ onClose }) => {
   return (
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="absolute inset-0 bg-black/50 backdrop-blur-md z-40 flex items-center justify-center"
+      className="absolute inset-0 bg-black/80 backdrop-blur-lg z-50 flex items-center justify-center"
       onClick={onClose}
     >
       <motion.div
         initial={{ opacity: 0, scale: 0.9, y: 50 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         exit={{ opacity: 0, scale: 0.9, y: 50 }}
-        className="bg-white rounded-2xl p-8 max-w-md mx-4 shadow-2xl"
+        className="bg-white rounded-3xl p-12 max-w-2xl mx-8 shadow-2xl relative"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 p-2 hover:bg-gray-100 rounded-full transition-colors"
+          className="absolute top-6 right-6 p-3 hover:bg-gray-100 rounded-full transition-colors"
         >
-          <X className="h-5 w-5 text-gray-500" />
+          <X className="h-6 w-6 text-gray-500" />
         </button>
 
         {/* Header */}
-        <div className="text-center mb-6">
-          <div className="w-16 h-16 bg-gradient-to-br from-amber-400 to-amber-600 rounded-full flex items-center justify-center mx-auto mb-4">
-            <Crown className="h-8 w-8 text-white" />
+        <div className="text-center mb-10">
+          <div className="w-20 h-20 bg-gradient-to-br from-amber-400 to-amber-600 rounded-full flex items-center justify-center mx-auto mb-6">
+            <Crown className="h-10 w-10 text-white" />
           </div>
-          <h2 className="text-2xl font-bold text-gray-900 mb-2">
-            Continue Reading
+          <h2 className="text-4xl font-bold text-gray-900 mb-4">
+            Continue Your Journey
           </h2>
-          <p className="text-gray-600">
-            Unlock unlimited digital magazine access
+          <p className="text-xl text-gray-600 leading-relaxed">
+            Unlock unlimited access to premium content, exclusive insights, and the full magazine experience
           </p>
         </div>
 
-        {/* Digital Plan */}
-        <div className="bg-gray-50 rounded-xl p-6 mb-6">
+        {/* Digital Plan - Featured */}
+        <div className="bg-gradient-to-br from-gray-50 to-gray-100 rounded-2xl p-8 mb-8 border-2 border-amber-200">
           <div className="text-center">
-            <div className="bg-black text-white text-sm font-bold px-3 py-1 rounded-full inline-block mb-3">
-              DIGITAL PLAN
+            <div className="bg-black text-white text-lg font-bold px-6 py-2 rounded-full inline-block mb-6">
+              DIGITAL PLAN - RECOMMENDED
             </div>
-            <div className="flex items-center justify-center space-x-3 mb-2">
-              <span className="text-gray-500 line-through">₹1500</span>
-              <span className="text-3xl font-bold text-gray-900">₹499</span>
+            <div className="flex items-center justify-center space-x-4 mb-4">
+              <span className="text-2xl text-gray-500 line-through">₹1500</span>
+              <span className="text-5xl font-bold text-gray-900">₹499</span>
             </div>
-            <p className="text-sm text-gray-600">Annual Digital Subscription</p>
+            <p className="text-xl text-gray-600 mb-2">Annual Digital Subscription</p>
+            <p className="text-lg text-green-600 font-semibold">Save 67% • Best Value</p>
           </div>
         </div>
 
         {/* Features */}
-        <div className="space-y-2 mb-6 text-sm">
+        <div className="grid grid-cols-2 gap-4 mb-10 text-lg">
           {[
             'Unlimited digital magazine access',
-            '3D flip-book reading experience', 
-            'Exclusive premium content',
-            'Ad-free reading experience'
+            'Full-screen 3D reading experience', 
+            'Exclusive premium articles & insights',
+            'Ad-free reading experience',
+            'Early access to new issues',
+            'Download for offline reading'
           ].map((feature, index) => (
             <div key={index} className="flex items-center space-x-3">
-              <div className="w-4 h-4 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0">
+              <div className="w-5 h-5 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0">
                 <div className="w-2 h-2 bg-white rounded-full"></div>
               </div>
               <span className="text-gray-700">{feature}</span>
@@ -448,13 +409,22 @@ const SmallPurchaseModal = ({ onClose }) => {
           ))}
         </div>
 
-        {/* Action Button */}
-        <Link
-          to="/pricing?plan=digital"
-          className="block w-full bg-black hover:bg-gray-800 text-white font-bold text-center py-4 rounded-xl transition-colors text-lg"
-        >
-          Buy Digital Plan - ₹499
-        </Link>
+        {/* Action Buttons */}
+        <div className="flex space-x-4">
+          <Link
+            to="/pricing?plan=digital"
+            className="flex-1 bg-black hover:bg-gray-800 text-white font-bold text-center py-6 rounded-2xl transition-colors text-xl flex items-center justify-center space-x-3"
+          >
+            <Play className="h-6 w-6" />
+            <span>Subscribe Now - ₹499</span>
+          </Link>
+          <button
+            onClick={onClose}
+            className="px-8 py-6 border-2 border-gray-300 text-gray-700 font-semibold rounded-2xl hover:bg-gray-50 transition-colors text-xl"
+          >
+            Maybe Later
+          </button>
+        </div>
       </motion.div>
     </motion.div>
   );
