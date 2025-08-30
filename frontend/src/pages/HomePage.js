@@ -379,12 +379,13 @@ const HomePage = () => {
 
         {/* TRENDING ARTICLES - GQ STYLE */}
         <motion.section 
-          className="bg-gray-50 px-4 py-6 mb-0"
+          className="bg-gray-50 w-full py-6"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.9 }}
         >
-          <div className="max-w-7xl mx-auto">
+          <div className="w-full px-4">
+            <div className="max-w-7xl mx-auto">
             <div className="border-t-2 border-gray-900 pt-6 mb-6">
               <div className="flex items-center justify-between mb-6">
                 <h2 className="text-3xl lg:text-4xl font-serif font-bold text-gray-900">
