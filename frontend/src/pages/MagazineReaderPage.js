@@ -351,7 +351,7 @@ const MagazineReaderPage = () => {
               </motion.div>
             )}
           </motion.div>
-        </div>
+        </AnimatePresence>
       </div>
 
       {/* Enhanced Navigation Controls - Large Click Areas */}
