@@ -390,7 +390,7 @@ const MagazineReaderPage = () => {
         </AnimatePresence>
       </div>
 
-      {/* Navigation Controls - Invisible Until Hover */}
+      {/* Enhanced Navigation Controls - Large Click Areas */}
       <div style={{
         position: 'absolute',
         top: 0,
@@ -400,87 +400,103 @@ const MagazineReaderPage = () => {
         pointerEvents: 'none',
         zIndex: 999999
       }}>
-        <button
+        {/* Left Half - Previous Page */}
+        <div
           onClick={prevPage}
-          disabled={currentPage === 0 || isFlipping}
           style={{
             position: 'absolute',
-            left: '20px',
-            top: '50%',
-            transform: 'translateY(-50%)',
-            width: '80px',
-            height: '80px',
-            backgroundColor: currentPage === 0 || isFlipping ? 'transparent' : 'rgba(0,0,0,0.6)',
-            color: currentPage === 0 || isFlipping ? 'transparent' : 'white',
-            border: 'none',
-            borderRadius: '50%',
-            cursor: currentPage === 0 || isFlipping ? 'not-allowed' : 'pointer',
+            left: 0,
+            top: 0,
+            width: '50%',
+            height: '100%',
+            cursor: currentPage === 0 || isFlipping ? 'not-allowed' : 'w-resize',
+            pointerEvents: 'auto',
             display: 'flex',
             alignItems: 'center',
-            justifyContent: 'center',
-            fontSize: '20px',
+            justifyContent: 'flex-start',
+            paddingLeft: '40px',
             transition: 'all 0.3s ease',
-            opacity: currentPage === 0 || isFlipping ? 0 : 0.7,
-            pointerEvents: 'auto'
+            background: 'transparent'
           }}
           onMouseEnter={(e) => {
             if (!(currentPage === 0 || isFlipping)) {
-              e.target.style.backgroundColor = 'rgba(0,0,0,0.8)';
-              e.target.style.opacity = '1';
-              e.target.style.transform = 'translateY(-50%) scale(1.1)';
+              e.target.style.background = 'linear-gradient(90deg, rgba(0,0,0,0.1) 0%, transparent 70%)';
             }
           }}
           onMouseLeave={(e) => {
-            if (!(currentPage === 0 || isFlipping)) {
-              e.target.style.backgroundColor = 'rgba(0,0,0,0.6)';
-              e.target.style.opacity = '0.7';
-              e.target.style.transform = 'translateY(-50%) scale(1)';
-            }
+            e.target.style.background = 'transparent';
           }}
         >
-          <ChevronLeft size={36} />
-        </button>
+          {!(currentPage === 0 || isFlipping) && (
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 0.6, x: 0 }}
+              whileHover={{ opacity: 1, scale: 1.1 }}
+              style={{
+                width: '60px',
+                height: '60px',
+                backgroundColor: 'rgba(0,0,0,0.7)',
+                borderRadius: '50%',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: 'white',
+                boxShadow: '0 4px 20px rgba(0,0,0,0.3)'
+              }}
+            >
+              <ChevronLeft size={28} />
+            </motion.div>
+          )}
+        </div>
 
-        <button
+        {/* Right Half - Next Page */}
+        <div
           onClick={nextPage}
-          disabled={currentPage >= totalPages - 1 || isFlipping}
           style={{
             position: 'absolute',
-            right: '20px',
-            top: '50%',
-            transform: 'translateY(-50%)',
-            width: '80px',
-            height: '80px',
-            backgroundColor: currentPage >= totalPages - 1 || isFlipping ? 'transparent' : 'rgba(0,0,0,0.6)',
-            color: currentPage >= totalPages - 1 || isFlipping ? 'transparent' : 'white',
-            border: 'none',
-            borderRadius: '50%',
-            cursor: currentPage >= totalPages - 1 || isFlipping ? 'not-allowed' : 'pointer',
+            right: 0,
+            top: 0,
+            width: '50%',
+            height: '100%',
+            cursor: currentPage >= totalPages - 1 || isFlipping ? 'not-allowed' : 'e-resize',
+            pointerEvents: 'auto',
             display: 'flex',
             alignItems: 'center',
-            justifyContent: 'center',
-            fontSize: '20px',
+            justifyContent: 'flex-end',
+            paddingRight: '40px',
             transition: 'all 0.3s ease',
-            opacity: currentPage >= totalPages - 1 || isFlipping ? 0 : 0.7,
-            pointerEvents: 'auto'
+            background: 'transparent'
           }}
           onMouseEnter={(e) => {
             if (!(currentPage >= totalPages - 1 || isFlipping)) {
-              e.target.style.backgroundColor = 'rgba(0,0,0,0.8)';
-              e.target.style.opacity = '1';
-              e.target.style.transform = 'translateY(-50%) scale(1.1)';
+              e.target.style.background = 'linear-gradient(270deg, rgba(0,0,0,0.1) 0%, transparent 70%)';
             }
           }}
           onMouseLeave={(e) => {
-            if (!(currentPage >= totalPages - 1 || isFlipping)) {
-              e.target.style.backgroundColor = 'rgba(0,0,0,0.6)';
-              e.target.style.opacity = '0.7';
-              e.target.style.transform = 'translateY(-50%) scale(1)';
-            }
+            e.target.style.background = 'transparent';
           }}
         >
-          <ChevronRight size={36} />
-        </button>
+          {!(currentPage >= totalPages - 1 || isFlipping) && (
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 0.6, x: 0 }}
+              whileHover={{ opacity: 1, scale: 1.1 }}
+              style={{
+                width: '60px',
+                height: '60px',
+                backgroundColor: 'rgba(0,0,0,0.7)',
+                borderRadius: '50%',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: 'white',
+                boxShadow: '0 4px 20px rgba(0,0,0,0.3)'
+              }}
+            >
+              <ChevronRight size={28} />
+            </motion.div>
+          )}
+        </div>
       </div>
 
       {/* Premium Subscription Modal */}
