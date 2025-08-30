@@ -1,52 +1,38 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate, Link } from 'react-router-dom';
-import { PlayCircle, Calendar, User, Clock, ArrowRight } from 'lucide-react';
+import { PlayCircle, Eye, Calendar, ArrowRight, Star, Sparkles } from 'lucide-react';
+import parseMagazineContent from '../components/MagazineContentParser';
 
 const IssuesPage = () => {
   const navigate = useNavigate();
   
   const openMagazineReader = () => {
     console.log('🔥 Opening magazine reader instantly...');
-    // Navigate immediately to magazine reader - no animations
     navigate('/magazine-reader');
   };
 
-  // Sample magazine issues data
-  const magazineIssues = [
-    {
-      id: 1,
-      title: 'Just Urbane',
-      subtitle: 'August 2025 Issue',
-      description: 'Premium Lifestyle & Technology - Featuring exclusive interviews, luxury travel guides, and cutting-edge tech reviews.',
-      coverImage: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=600&fit=crop&crop=face',
-      publishDate: 'August 2025',
-      author: 'Editorial Team',
-      readTime: '45 min read',
-      isLatest: true,
-      pages: 92,
-      category: 'Lifestyle & Tech',
-      featured: true,
-      previewAvailable: true,
-      tags: ['Tech Reviews', 'Luxury Travel', 'Fashion', 'Automotive']
-    },
-    {
-      id: 2,
-      title: 'Just Urbane',
-      subtitle: 'July 2025 Issue',
-      description: 'Summer Special - Discover the latest in premium fashion, exotic destinations, and innovative gadgets.',
-      coverImage: 'https://images.unsplash.com/photo-1566492031773-4f4e44671d66?w=400&h=600&fit=crop&crop=face',
-      publishDate: 'July 2025',
-      author: 'Editorial Team',
-      readTime: '50 min read',
-      isLatest: false,
-      pages: 88,
-      category: 'Fashion & Travel',
-      featured: false,
-      previewAvailable: false,
-      tags: ['Summer Fashion', 'Travel', 'Gadgets', 'Lifestyle']
-    }
-  ];
+  // Get magazine pages for thumbnails
+  const pages = parseMagazineContent();
+  
+  // Use first 3 pages as thumbnails
+  const magazineThumbnails = pages.slice(0, 3);
+
+  const currentIssue = {
+    title: 'Just Urbane',
+    subtitle: 'August 2025 Edition',
+    description: 'Experience luxury lifestyle, premium fashion, and cutting-edge technology through our immersive digital magazine.',
+    publishDate: 'August 2025',
+    totalPages: pages.length,
+    category: 'Premium Lifestyle',
+    highlights: [
+      'Exclusive Celebrity Interviews',
+      'Luxury Travel Destinations', 
+      'Premium Fashion Collections',
+      'Latest Technology Reviews',
+      'Luxury Automotive Features'
+    ]
+  };
 
   return (
     <div className="min-h-screen bg-gray-50">
