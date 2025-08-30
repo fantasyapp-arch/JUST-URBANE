@@ -175,21 +175,21 @@ const FullScreenMagazineReader = ({ isOpen, onClose, magazineContent = [] }) => 
             width={pageWidth}
             height={pageHeight}
             size="stretch"
-            minWidth={280}
-            maxWidth={600}
-            minHeight={350}
-            maxHeight={800}
+            minWidth={400}          // Increased minimum size
+            maxWidth={900}          // Increased maximum size  
+            minHeight={500}         // Increased minimum size
+            maxHeight={1200}        // Increased maximum size
             maxShadowOpacity={1.0}
             showCover={true}
             mobileScrollSupport={false}
             onFlip={handlePageFlip}
             style={{
-              boxShadow: '0 50px 100px -20px rgba(0, 0, 0, 0.8), 0 30px 60px -30px rgba(0, 0, 0, 0.6)',
-              borderRadius: '12px',
+              boxShadow: '0 60px 120px -25px rgba(0, 0, 0, 0.9), 0 35px 75px -35px rgba(0, 0, 0, 0.7)',
+              borderRadius: '16px',
               overflow: 'hidden',
-              border: '2px solid rgba(255, 255, 255, 0.1)'
+              border: '3px solid rgba(255, 255, 255, 0.15)'
             }}
-            flippingTime={800}
+            flippingTime={600}
             usePortrait={true}
             startZIndex={1000}
             autoSize={false}
