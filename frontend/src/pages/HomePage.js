@@ -1026,7 +1026,7 @@ const HomePage = () => {
               </h2>
             </div>
 
-            <div className="grid md:grid-cols-5 gap-4">
+            <div className="grid md:grid-cols-5 gap-6">
               {[
                 {
                   title: 'Bollywood\'s Power Players: The New Generation of Producers',
