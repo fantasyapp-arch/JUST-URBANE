@@ -212,6 +212,9 @@ const FullScreenMagazineReader = ({ isOpen, onClose, magazineContent = [] }) => 
       </motion.div>
     </AnimatePresence>
   );
+
+  // Render to document.body using React Portal to bypass any CSS conflicts
+  return createPortal(magazineReaderComponent, document.body);
 };
 
 // Magazine Page Content Component - Enhanced for full screen
