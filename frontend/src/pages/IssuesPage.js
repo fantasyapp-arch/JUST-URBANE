@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { PlayCircle } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import FullScreenMagazineReader from '../components/FullScreenMagazineReader';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { parseMagazineContent } from '../components/MagazineContentParser';
 
 const IssuesPage = () => {
