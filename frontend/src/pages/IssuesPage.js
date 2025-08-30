@@ -83,20 +83,7 @@ const IssuesPage = () => {
               <motion.div
                 whileHover={{ scale: 1.05, rotateY: 5 }}
                 transition={{ duration: 0.4 }}
-                animate={isZooming ? { 
-                  scale: 3, 
-                  z: 500,
-                  opacity: 0.8,
-                  transition: { 
-                    duration: 0.8, 
-                    ease: [0.25, 0.46, 0.45, 0.94] 
-                  }
-                } : {}}
                 className="relative"
-                style={{ 
-                  transformOrigin: 'center center',
-                  zIndex: isZooming ? 9999 : 'auto'
-                }}
               >
                 <img
                   src={magazineIssues[0].coverImage}
