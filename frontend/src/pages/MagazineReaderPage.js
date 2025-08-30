@@ -286,32 +286,22 @@ const MagazineReaderPage = () => {
             key={currentPage}
             initial={{ 
               opacity: 0,
-              rotateY: flipDirection === 'next' ? -180 : 180,
-              scale: 0.8,
-              z: -200,
-              rotateX: flipDirection === 'next' ? -8 : 8
+              x: flipDirection === 'next' ? 50 : -50,
+              scale: 0.98
             }}
             animate={{ 
               opacity: 1,
-              rotateY: 0,
-              scale: 1,
-              z: 0,
-              rotateX: 0
+              x: 0,
+              scale: 1
             }}
             exit={{ 
               opacity: 0,
-              rotateY: flipDirection === 'next' ? 180 : -180,
-              scale: 0.8,
-              z: -200,
-              rotateX: flipDirection === 'next' ? 8 : -8
+              x: flipDirection === 'next' ? -50 : 50,
+              scale: 0.98
             }}
             transition={{ 
-              duration: 1.0,
-              ease: [0.25, 0.46, 0.45, 0.94],
-              opacity: { duration: 0.4, delay: flipDirection === 'next' ? 0.3 : 0 },
-              scale: { duration: 0.8, ease: [0.34, 1.56, 0.64, 1] },
-              rotateY: { duration: 1.0, ease: [0.25, 0.46, 0.45, 0.94] },
-              rotateX: { duration: 0.8 }
+              duration: 0.3,
+              ease: [0.25, 0.46, 0.45, 0.94]
             }}
             style={{
               position: 'relative',
@@ -319,8 +309,7 @@ const MagazineReaderPage = () => {
               height: '100vh',
               display: 'flex',
               alignItems: 'center',
-              justifyContent: 'center',
-              transformStyle: 'preserve-3d'
+              justifyContent: 'center'
             }}
           >
             {/* Magazine Page Container - Full Screen */}
