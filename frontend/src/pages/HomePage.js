@@ -300,10 +300,10 @@ const HomePage = () => {
               <div className="max-w-7xl mx-auto">
               <div className="flex items-center justify-between mb-6">
                 <div>
-                  <h2 className="text-3xl lg:text-4xl font-serif font-bold text-gray-900 mb-1">
+                  <h2 className="text-4xl lg:text-5xl font-serif font-bold text-gray-900 mb-3">
                     Technology
                   </h2>
-                  <p className="text-gray-600 text-base lg:text-lg">
+                  <p className="text-gray-600 text-lg lg:text-xl">
                     Latest gadgets, innovation and digital trends
                   </p>
                 </div>
