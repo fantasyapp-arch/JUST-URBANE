@@ -522,14 +522,14 @@ const HomePage = () => {
 
         {/* LIFESTYLE SECTION - MIXED LAYOUT */}
         <motion.section 
-          className="bg-gray-50 w-full py-6"
+          className="bg-gray-50 w-full py-1"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 1.0 }}
         >
-          <div className="w-full px-4">
+          <div className="w-full px-2">
             <div className="max-w-7xl mx-auto">
-            <div className="flex items-center justify-between mb-6">
+            <div className="flex items-center justify-between mb-3">
               <h2 className="text-3xl lg:text-4xl font-serif font-bold text-gray-900">
                 Lifestyle
               </h2>
