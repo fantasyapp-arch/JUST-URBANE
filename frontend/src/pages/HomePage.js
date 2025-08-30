@@ -508,6 +508,7 @@ const HomePage = () => {
                 </div>
               </motion.div>
             ))}
+            </div>
           </div>
         </motion.section>
 
