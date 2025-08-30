@@ -316,7 +316,7 @@ const HomePage = () => {
                 </Link>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {(techArticles.length > 0 ? techArticles.slice(0, 4) : [
                 {
                   id: 1,
