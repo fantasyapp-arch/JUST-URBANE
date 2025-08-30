@@ -348,7 +348,8 @@ const FullScreenPurchaseModal = ({ onClose }) => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="absolute inset-0 bg-black/80 backdrop-blur-lg z-50 flex items-center justify-center"
+      className="absolute inset-0 bg-black/80 backdrop-blur-lg flex items-center justify-center"
+      style={{ zIndex: 10001 }}
       onClick={onClose}
     >
       <motion.div
