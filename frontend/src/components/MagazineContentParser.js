@@ -8,7 +8,7 @@ export const parseMagazineContent = () => {
       type: 'actual-page',
       pageNumber: 1,
       title: 'JUST URBANE - August 2025 Cover',
-      // Using actual magazine cover image
+      // Using actual magazine cover image from your uploads
       pageImage: 'https://customer-assets.emergentagent.com/job_urbane-reader/artifacts/images/75f5e3b75132abfd3bf52f115bb3baa295761809d8e0864108e5a4a5e8aeac13.jpg',
       isFromUpload: true
     },
