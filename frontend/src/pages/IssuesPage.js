@@ -45,23 +45,8 @@ const IssuesPage = () => {
 
   const openMagazineReader = () => {
     console.log('🔥 Opening magazine reader...');
-    try {
-      // Use your uploaded magazine content
-      const magazineContent = parseMagazineContent();
-      console.log('📖 Magazine content parsed:', magazineContent);
-      
-      if (magazineContent && magazineContent.length > 0) {
-        setSelectedIssue(magazineContent);
-        setIsReaderOpen(true);
-        console.log('✅ Magazine reader state updated - Reader should open');
-      } else {
-        console.error('❌ No magazine content available');
-      }
-    } catch (error) {
-      console.error('❌ Error opening magazine reader:', error);
-      // Fallback - still try to open with empty content
-      setIsReaderOpen(true);
-    }
+    // Navigate to dedicated magazine reader page
+    window.location.href = '/magazine-reader';
   };
 
   const closeMagazineReader = () => {
