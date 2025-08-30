@@ -724,14 +724,87 @@ const HomePage = () => {
           </div>
         </motion.section>
 
+        {/* WATCHES & LUXURY SECTION - COMPACT */}
+        <motion.section 
+          className="mb-6"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 1.25 }}
+        >
+          <div className="bg-gray-50 rounded-lg p-6">
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-2xl lg:text-3xl font-serif font-bold text-gray-900">
+                Watches & Luxury
+              </h2>
+              <Link
+                to="/category/watches"
+                className="text-primary-600 hover:text-primary-700 font-semibold"
+              >
+                View All
+              </Link>
+            </div>
+
+            <div className="grid md:grid-cols-4 gap-4">
+              {[
+                {
+                  title: 'Rolex Submariner: The Ultimate Dive Watch',
+                  image: 'https://images.unsplash.com/photo-1523170335258-f5ed11844a49?w=300&h=200&fit=crop',
+                  price: '₹8,50,000'
+                },
+                {
+                  title: 'Patek Philippe Aquanaut: Sporty Elegance',
+                  image: 'https://images.unsplash.com/photo-1594534475808-b18fc33b045e?w=300&h=200&fit=crop',
+                  price: '₹28,00,000'
+                },
+                {
+                  title: 'Audemars Piguet Royal Oak: Icon Redefined',
+                  image: 'https://images.unsplash.com/photo-1606859440495-1306a78b3dd1?w=300&h=200&fit=crop',
+                  price: '₹35,00,000'
+                },
+                {
+                  title: 'Richard Mille: The Future of Watchmaking',
+                  image: 'https://images.unsplash.com/photo-1547996160-81dfa63595aa?w=300&h=200&fit=crop',
+                  price: '₹85,00,000'
+                }
+              ].map((watch, index) => (
+                <motion.div
+                  key={index}
+                  className="group cursor-pointer bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-300"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 1.26 + index * 0.05 }}
+                >
+                  <div className="relative overflow-hidden rounded-t-lg">
+                    <img
+                      src={watch.image}
+                      alt={watch.title}
+                      className="w-full h-32 object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                    <div className="absolute top-2 right-2">
+                      <span className="bg-gold-500 text-black px-2 py-1 rounded text-xs font-bold">
+                        {watch.price}
+                      </span>
+                    </div>
+                  </div>
+                  <div className="p-3">
+                    <h3 className="font-serif font-semibold text-gray-900 group-hover:text-primary-600 transition-colors leading-tight text-sm">
+                      {watch.title}
+                    </h3>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </motion.section>
+
         {/* BUSINESS & FINANCE SECTION */}
         <motion.section 
-          className="mb-16"
+          className="mb-6"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 1.3 }}
         >
-          <div className="border-t border-gray-200 pt-12">
+          <div className="border-t border-gray-200 pt-8">
             <div className="flex items-center justify-between mb-8">
               <h2 className="text-3xl lg:text-4xl font-serif font-bold text-gray-900">
                 Business & Finance
