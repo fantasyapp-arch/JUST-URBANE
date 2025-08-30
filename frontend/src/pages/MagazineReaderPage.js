@@ -270,25 +270,28 @@ const MagazineReaderPage = () => {
             key={currentPage}
             initial={{ 
               opacity: 0,
-              x: flipDirection === 'next' ? 200 : -200,
-              scale: 0.9,
-              rotateY: flipDirection === 'next' ? 15 : -15
+              x: flipDirection === 'next' ? 400 : -400,
+              scale: 0.8,
+              rotateY: flipDirection === 'next' ? 30 : -30,
+              rotateX: 5
             }}
             animate={{ 
               opacity: 1,
               x: 0,
               scale: 1,
-              rotateY: 0
+              rotateY: 0,
+              rotateX: 0
             }}
             exit={{ 
               opacity: 0,
-              x: flipDirection === 'next' ? -200 : 200,
-              scale: 0.9,
-              rotateY: flipDirection === 'next' ? -15 : 15
+              x: flipDirection === 'next' ? -400 : 400,
+              scale: 0.8,
+              rotateY: flipDirection === 'next' ? -30 : 30,
+              rotateX: -5
             }}
             transition={{ 
-              duration: 0.2, // Super fast but with page turn feel
-              ease: [0.4, 0, 0.2, 1] // Sharp easing for snappy page turns
+              duration: 0.4, // Slower to see the turn effect
+              ease: [0.25, 0.46, 0.45, 0.94] // Smooth cubic bezier
             }}
             style={{
               position: 'relative',
@@ -298,7 +301,7 @@ const MagazineReaderPage = () => {
               alignItems: 'center',
               justifyContent: 'center',
               transformStyle: 'preserve-3d',
-              perspective: '1000px'
+              perspective: '1500px'
             }}
             className="page-turn-effect"
           >
