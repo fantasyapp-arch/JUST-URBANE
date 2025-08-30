@@ -96,25 +96,24 @@ const FullScreenMagazineReader = ({ isOpen, onClose, magazineContent = [] }) => 
         bottom: 0,
         width: '100vw',
         height: '100vh',
-        zIndex: 999999,
+        zIndex: 9999999,  // Increased z-index
         backgroundColor: '#000000',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center'
+        display: 'block'  // Changed from flex to ensure full coverage
       }}
     >
       {/* DEBUG: Show that component is rendering */}
       <div style={{
-        position: 'fixed',
+        position: 'absolute',
         top: '10px',
         left: '50%',
         transform: 'translateX(-50%)',
         color: 'yellow',
         backgroundColor: 'red',
-        padding: '10px',
-        zIndex: 1000001,
-        fontSize: '16px',
-        fontWeight: 'bold'
+        padding: '10px 20px',
+        zIndex: 10000000,
+        fontSize: '18px',
+        fontWeight: 'bold',
+        borderRadius: '5px'
       }}>
         FULL-SCREEN MAGAZINE READER ACTIVE - Page {currentPage + 1}/{totalPages}
       </div>
@@ -123,12 +122,12 @@ const FullScreenMagazineReader = ({ isOpen, onClose, magazineContent = [] }) => 
       <button
         onClick={closeReader}
         style={{
-          position: 'fixed',
+          position: 'absolute',
           top: '20px',
           right: '20px',
-          zIndex: 1000000,
+          zIndex: 10000000,
           padding: '15px',
-          backgroundColor: 'rgba(0, 0, 0, 0.8)',
+          backgroundColor: 'rgba(0, 0, 0, 0.9)',
           color: 'white',
           border: 'none',
           borderRadius: '50%',
@@ -142,11 +141,11 @@ const FullScreenMagazineReader = ({ isOpen, onClose, magazineContent = [] }) => 
       {/* Page Counter */}
       <div
         style={{
-          position: 'fixed',
+          position: 'absolute',
           top: '20px',
           left: '20px',
-          zIndex: 1000000,
-          backgroundColor: 'rgba(0, 0, 0, 0.8)',
+          zIndex: 10000000,
+          backgroundColor: 'rgba(0, 0, 0, 0.9)',
           color: 'white',
           padding: '10px 20px',
           borderRadius: '25px',
@@ -162,13 +161,16 @@ const FullScreenMagazineReader = ({ isOpen, onClose, magazineContent = [] }) => 
       {/* Magazine Page - TRULY FULL SCREEN (no margins, no padding) */}
       <div
         style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
           width: '100vw',
           height: '100vh', 
           backgroundColor: 'white',
           overflow: 'hidden',
-          position: 'relative',
           margin: 0,
-          padding: 0
+          padding: 0,
+          zIndex: 1000000
         }}
       >
         <MagazinePageContent 
@@ -183,13 +185,13 @@ const FullScreenMagazineReader = ({ isOpen, onClose, magazineContent = [] }) => 
         onClick={prevPage}
         disabled={currentPage === 0}
         style={{
-          position: 'fixed',
+          position: 'absolute',
           left: '20px',
           top: '50%',
           transform: 'translateY(-50%)',
-          zIndex: 1000000,
+          zIndex: 10000000,
           padding: '20px',
-          backgroundColor: 'rgba(0, 0, 0, 0.7)',
+          backgroundColor: 'rgba(0, 0, 0, 0.8)',
           color: currentPage === 0 ? 'rgba(255, 255, 255, 0.3)' : 'white',
           border: 'none',
           borderRadius: '50%',
@@ -204,13 +206,13 @@ const FullScreenMagazineReader = ({ isOpen, onClose, magazineContent = [] }) => 
         onClick={nextPage}
         disabled={currentPage >= totalPages - 1}
         style={{
-          position: 'fixed',
+          position: 'absolute',
           right: '20px',
           top: '50%',
           transform: 'translateY(-50%)',
-          zIndex: 1000000,
+          zIndex: 10000000,
           padding: '20px',
-          backgroundColor: 'rgba(0, 0, 0, 0.7)',
+          backgroundColor: 'rgba(0, 0, 0, 0.8)',
           color: currentPage >= totalPages - 1 ? 'rgba(255, 255, 255, 0.3)' : 'white',
           border: 'none',
           borderRadius: '50%',
