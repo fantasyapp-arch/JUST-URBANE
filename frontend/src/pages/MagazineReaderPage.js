@@ -63,10 +63,15 @@ const MagazineReaderPage = () => {
     if (currentPage < totalPages - 1) {
       setIsFlipping(true);
       setFlipDirection('next');
+      
+      // More natural page turning timing
       setTimeout(() => {
         setCurrentPage(currentPage + 1);
+      }, 400); // Change page content mid-animation
+      
+      setTimeout(() => {
         setIsFlipping(false);
-      }, 800);
+      }, 1000); // Complete animation timing
     }
   };
 
@@ -76,10 +81,15 @@ const MagazineReaderPage = () => {
     if (currentPage > 0) {
       setIsFlipping(true);
       setFlipDirection('prev');
+      
+      // More natural page turning timing
       setTimeout(() => {
         setCurrentPage(currentPage - 1);
+      }, 400); // Change page content mid-animation
+      
+      setTimeout(() => {
         setIsFlipping(false);
-      }, 800);
+      }, 1000); // Complete animation timing
     }
   };
 
