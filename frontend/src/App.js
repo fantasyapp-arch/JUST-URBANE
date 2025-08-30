@@ -85,7 +85,6 @@ const router = createBrowserRouter([
       { path: "article/:slug", element: <ArticlePage /> },
       { path: "author/:slug", element: <AuthorPage /> },
       { path: "issues", element: <IssuesPage /> },
-      { path: "magazine-reader", element: <MagazineReaderPage /> },
       { path: "reviews", element: <ReviewsPage /> },
       { path: "travel", element: <TravelPage /> },
       { path: "pricing", element: <PricingPage /> },
@@ -99,6 +98,11 @@ const router = createBrowserRouter([
       { path: "subscription-success", element: <PaymentSuccessPage /> },
       { path: "profile", element: <ProfilePage /> },
     ]
+  },
+  // Full-screen magazine reader - separate from Layout (no header/footer)
+  {
+    path: "/magazine-reader",
+    element: <MagazineReaderPage />
   }
 ]);
 
