@@ -272,7 +272,6 @@ const FullScreenMagazineReader = ({ isOpen, onClose, magazineContent = [] }) => 
     </div>
   );
 };
-};
 
 // Magazine Page Content Component - Premium, large-scale design
 const MagazinePageContent = ({ page, pageNumber, isBlurred = false }) => {
