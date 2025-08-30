@@ -372,6 +372,7 @@ const HomePage = () => {
                 ))}
               </div>
             </div>
+          </div>
           </motion.section>
         )}
 
