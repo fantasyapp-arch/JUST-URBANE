@@ -737,7 +737,7 @@ const HomePage = () => {
               </Link>
             </div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
               {[
                 {
                   title: 'Startup Unicorns: The New Billionaire Playbook',
