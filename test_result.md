@@ -936,8 +936,8 @@ frontend:
 
 metadata:
   created_by: "testing_agent"
-  version: "2.8"
-  test_sequence: 10
+  version: "2.9"
+  test_sequence: 11
   run_ui: true
   frontend_tested: true
   backend_tested: true
@@ -956,10 +956,13 @@ metadata:
   post_navigation_fixes_success: true
   review_request_january_30_2025_completed: true
   review_request_january_30_2025_success: true
-  last_test_date: "2025-01-30T19:15:00"
+  magazine_reader_3d_animation_removal_tested: true
+  magazine_reader_3d_animation_removal_success: true
+  last_test_date: "2025-08-30T16:29:42"
   last_test_success_rate: "100.0%"
   review_request_final_verification_completed: true
   review_request_final_verification_success: true
+  magazine_reader_simplified_transitions_verified: true
 
 test_plan:
   current_focus:
