@@ -632,11 +632,11 @@ const MagazinePageContent = ({ page, pageNumber, isBlurred = false }) => {
   );
 };
 
-// Purchase Overlay for premium content
+// Purchase Overlay for premium content - Enhanced for large display
 const PurchaseOverlay = () => (
-  <div className="absolute inset-0 bg-black/40 flex items-center justify-center backdrop-blur-sm">
-    <div className="bg-white/30 backdrop-blur-sm rounded-full p-8 shadow-2xl border-2 border-white/50">
-      <Lock className="h-16 w-16 text-white drop-shadow-2xl" />
+  <div className="absolute inset-0 bg-black/50 flex items-center justify-center backdrop-blur-sm">
+    <div className="bg-white/40 backdrop-blur-md rounded-full p-12 md:p-16 shadow-2xl border-4 border-white/60">
+      <Lock className="h-20 w-20 md:h-28 md:w-28 text-white drop-shadow-2xl" />
     </div>
   </div>
 );
