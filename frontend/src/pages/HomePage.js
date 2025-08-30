@@ -288,12 +288,13 @@ const HomePage = () => {
         {/* TECHNOLOGY SECTION - PROFESSIONAL */}
         {techArticles.length > 0 && (
           <motion.section 
-            className="mb-4"
+            className="bg-white px-4 py-6 mb-0"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.5 }}
           >
-            <div className="flex items-center justify-between mb-3">
+            <div className="max-w-7xl mx-auto">
+              <div className="flex items-center justify-between mb-6">
               <div>
                 <h2 className="text-4xl lg:text-5xl font-serif font-bold text-gray-900 mb-3">
                   Technology
