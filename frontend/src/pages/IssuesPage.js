@@ -1,20 +1,15 @@
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React from 'react';
+import { motion } from 'framer-motion';
 import { useNavigate, Link } from 'react-router-dom';
 import { PlayCircle, Calendar, User, Clock, ArrowRight } from 'lucide-react';
 
 const IssuesPage = () => {
   const navigate = useNavigate();
-  const [isZooming, setIsZooming] = useState(false);
   
   const openMagazineReader = () => {
-    console.log('🔥 Opening magazine reader with smooth zoom...');
-    setIsZooming(true);
-    
-    // Add smooth zoom-in effect before navigation
-    setTimeout(() => {
-      navigate('/magazine-reader');
-    }, 800); // Wait for zoom animation to complete
+    console.log('🔥 Opening magazine reader instantly...');
+    // Navigate immediately to magazine reader - no animations
+    navigate('/magazine-reader');
   };
 
   // Sample magazine issues data
