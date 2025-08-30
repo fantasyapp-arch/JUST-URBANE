@@ -453,16 +453,16 @@ const HomePage = () => {
         >
           <div className="max-w-7xl mx-auto">
             <div className="flex items-center justify-between mb-6">
-            <h2 className="text-2xl lg:text-3xl font-serif font-bold text-gray-900">
-              Automotive
-            </h2>
-            <Link
-              to="/category/automotive"
-              className="text-primary-600 hover:text-primary-700 font-semibold"
-            >
-              View All
-            </Link>
-          </div>
+              <h2 className="text-2xl lg:text-3xl font-serif font-bold text-gray-900">
+                Automotive
+              </h2>
+              <Link
+                to="/category/automotive"
+                className="text-primary-600 hover:text-primary-700 font-semibold"
+              >
+                View All
+              </Link>
+            </div>
 
             <div className="grid md:grid-cols-3 gap-6">
             {[
