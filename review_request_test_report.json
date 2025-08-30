@@ -1,127 +1,50 @@
 {
-  "total": 17,
-  "passed": 17,
+  "total": 7,
+  "passed": 7,
   "failed": 0,
   "success_rate": 100.0,
   "results": [
     {
       "test": "API Health Check",
       "success": true,
-      "message": "Health endpoint responding correctly: {'status': 'healthy', 'message': 'Just Urbane API is running'}",
-      "timestamp": "2025-08-30T10:10:31.529652",
-      "response_data": null
+      "message": "API responding correctly with status 'healthy' and message 'Just Urbane API is running'",
+      "timestamp": "2025-08-30T11:02:44.470832"
     },
     {
       "test": "Magazine Issues API",
       "success": true,
-      "message": "Retrieved 2 magazine issues successfully",
-      "timestamp": "2025-08-30T10:10:31.580345",
-      "response_data": null
-    },
-    {
-      "test": "Magazine Issues Structure",
-      "success": true,
-      "message": "Issues have proper structure with fields: ['id', 'title', 'cover_image', 'release_date', 'is_digital_available']",
-      "timestamp": "2025-08-30T10:10:31.580404",
-      "response_data": null
+      "message": "Retrieved 2 magazine issues with proper structure (id, title, cover_image, release_date, is_digital_available)",
+      "timestamp": "2025-08-30T11:02:44.484468"
     },
     {
       "test": "Articles API",
       "success": true,
-      "message": "Retrieved 20 articles successfully",
-      "timestamp": "2025-08-30T10:10:31.591641",
-      "response_data": null
+      "message": "Retrieved 20 articles with proper magazine content structure, category filtering working (6 fashion articles)",
+      "timestamp": "2025-08-30T11:02:44.505574"
     },
     {
-      "test": "Articles Structure",
+      "test": "Authentication System",
       "success": true,
-      "message": "Articles have proper structure for magazine content",
-      "timestamp": "2025-08-30T10:10:31.591677",
-      "response_data": null
-    },
-    {
-      "test": "Articles Category Filtering",
-      "success": true,
-      "message": "Category filtering working - retrieved 5 fashion articles",
-      "timestamp": "2025-08-30T10:10:31.602346",
-      "response_data": null
+      "message": "User registration and login working correctly for premium access (JWT token generated)",
+      "timestamp": "2025-08-30T11:02:45.021262"
     },
     {
       "test": "Payment Packages API",
       "success": true,
-      "message": "Retrieved 3 subscription packages successfully",
-      "timestamp": "2025-08-30T10:10:31.649814",
-      "response_data": null
+      "message": "All 3 subscription packages available with correct INR pricing (Digital \u20b9499.0, Print \u20b9499.0, Combined \u20b9999.0)",
+      "timestamp": "2025-08-30T11:02:45.028379"
     },
     {
-      "test": "Payment Packages Structure",
+      "test": "Database Connection",
       "success": true,
-      "message": "All expected packages present: ['digital_annual', 'print_annual', 'combined_annual']",
-      "timestamp": "2025-08-30T10:10:31.649865",
-      "response_data": null
-    },
-    {
-      "test": "Payment Packages Pricing",
-      "success": true,
-      "message": "Correct INR pricing: Digital \u20b9499.0, Print \u20b9499.0, Combined \u20b9999.0",
-      "timestamp": "2025-08-30T10:10:31.649881",
-      "response_data": null
-    },
-    {
-      "test": "Payment Packages Currency",
-      "success": true,
-      "message": "All packages correctly set to INR currency",
-      "timestamp": "2025-08-30T10:10:31.649886",
-      "response_data": null
-    },
-    {
-      "test": "Authentication - Registration",
-      "success": true,
-      "message": "User registration working correctly",
-      "timestamp": "2025-08-30T10:10:31.888630",
-      "response_data": null
-    },
-    {
-      "test": "Authentication - Login",
-      "success": true,
-      "message": "JWT authentication working correctly",
-      "timestamp": "2025-08-30T10:10:32.128475",
-      "response_data": null
-    },
-    {
-      "test": "Authentication - Protected Endpoint",
-      "success": true,
-      "message": "JWT authentication working for premium content access",
-      "timestamp": "2025-08-30T10:10:32.179006",
-      "response_data": null
+      "message": "MongoDB connectivity verified - all 4 endpoints responsive with 34 total data records",
+      "timestamp": "2025-08-30T11:02:45.100002"
     },
     {
       "test": "CORS Configuration",
       "success": true,
       "message": "CORS properly configured for frontend communication",
-      "timestamp": "2025-08-30T10:10:32.185064",
-      "response_data": null
-    },
-    {
-      "test": "CORS Actual Request",
-      "success": true,
-      "message": "Frontend can successfully communicate with backend",
-      "timestamp": "2025-08-30T10:10:32.231017",
-      "response_data": null
-    },
-    {
-      "test": "3D Magazine - Issues Support",
-      "success": true,
-      "message": "Magazine issues available for 3D reader: 2 issues",
-      "timestamp": "2025-08-30T10:10:32.241417",
-      "response_data": null
-    },
-    {
-      "test": "3D Magazine - Article Structure",
-      "success": true,
-      "message": "Articles have proper structure for 3D magazine reader",
-      "timestamp": "2025-08-30T10:10:32.251897",
-      "response_data": null
+      "timestamp": "2025-08-30T11:02:45.147516"
     }
   ]
 }
