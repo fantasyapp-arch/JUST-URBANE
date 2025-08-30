@@ -1166,6 +1166,89 @@ const HomePage = () => {
           </div>
         </motion.section>
 
+        {/* FOOD & DRINK SECTION - COMPACT */}
+        <motion.section 
+          className="mb-6"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 1.8 }}
+        >
+          <div className="bg-gradient-to-r from-amber-50 to-orange-50 rounded-lg p-6">
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-2xl lg:text-3xl font-serif font-bold text-gray-900">
+                Food & Drink
+              </h2>
+              <Link
+                to="/category/food-drink"
+                className="text-primary-600 hover:text-primary-700 font-semibold"
+              >
+                View All
+              </Link>
+            </div>
+
+            <div className="grid md:grid-cols-6 gap-4">
+              {[
+                {
+                  title: 'Mumbai\'s Best Fine Dining Restaurants 2025',
+                  image: 'https://images.unsplash.com/photo-1559339352-11d035aa65de?w=250&h=180&fit=crop',
+                  category: 'Dining'
+                },
+                {
+                  title: 'Premium Whiskey Collection Guide',
+                  image: 'https://images.unsplash.com/photo-1569529465841-dfecdab7503b?w=250&h=180&fit=crop',
+                  category: 'Spirits'
+                },
+                {
+                  title: 'Michelin Star Chefs in India',
+                  image: 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=250&h=180&fit=crop',
+                  category: 'Chefs'
+                },
+                {
+                  title: 'Wine Investment: Rare Vintage Guide',
+                  image: 'https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=250&h=180&fit=crop',
+                  category: 'Wine'
+                },
+                {
+                  title: 'Private Chef Services for Elite',
+                  image: 'https://images.unsplash.com/photo-1556909114-5bb7f7b2b214?w=250&h=180&fit=crop',
+                  category: 'Services'
+                },
+                {
+                  title: 'Luxury Food Experiences Worldwide',
+                  image: 'https://images.unsplash.com/photo-1555244162-803834f70033?w=250&h=180&fit=crop',
+                  category: 'Travel'
+                }
+              ].map((item, index) => (
+                <motion.div
+                  key={index}
+                  className="group cursor-pointer bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-300"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 1.81 + index * 0.03 }}
+                >
+                  <div className="relative overflow-hidden rounded-t-lg">
+                    <img
+                      src={item.image}
+                      alt={item.title}
+                      className="w-full h-24 object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                    <div className="absolute top-1 left-1">
+                      <span className="bg-orange-600 text-white px-2 py-0.5 rounded text-xs font-bold">
+                        {item.category}
+                      </span>
+                    </div>
+                  </div>
+                  <div className="p-3">
+                    <h4 className="font-serif font-semibold text-gray-900 group-hover:text-primary-600 transition-colors leading-tight text-xs">
+                      {item.title}
+                    </h4>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </motion.section>
+
         {/* NEWSLETTER SUBSCRIPTION - CLEAN GQ STYLE */}
         <motion.section 
           className="mb-4"
