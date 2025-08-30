@@ -437,7 +437,8 @@ const HomePage = () => {
                   layout="standard"
                   index={index}
                 />
-              ))}
+                ))}
+              </div>
             </div>
           </div>
         </motion.section>
