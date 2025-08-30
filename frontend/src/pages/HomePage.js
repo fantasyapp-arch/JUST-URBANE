@@ -472,12 +472,12 @@ const HomePage = () => {
 
         {/* TRENDING ARTICLES - GQ STYLE */}
         <motion.section 
-          className="mb-16"
+          className="mb-6"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.9 }}
         >
-          <div className="border-t-2 border-gray-900 pt-12 mb-12">
+          <div className="border-t-2 border-gray-900 pt-8 mb-6">
             <div className="flex items-center justify-between mb-8">
               <h2 className="text-3xl lg:text-4xl font-serif font-bold text-gray-900">
                 Trending
