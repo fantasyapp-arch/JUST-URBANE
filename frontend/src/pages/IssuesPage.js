@@ -1,53 +1,17 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { PlayCircle } from 'lucide-react';
-import { useAuth } from '../context/AuthContext';
-import FullScreenMagazineReader from '../components/FullScreenMagazineReader';
 import { useNavigate, Link } from 'react-router-dom';
-import { parseMagazineContent } from '../components/MagazineContentParser';
+import { PlayCircle, Calendar, User, Clock, ArrowRight } from 'lucide-react';
+import FullScreenMagazineReader from '../components/FullScreenMagazineReader';
+import parseMagazineContent from '../components/MagazineContentParser';
 
 const IssuesPage = () => {
   const navigate = useNavigate();
-  const [selectedIssue, setSelectedIssue] = useState(null);
-  const [isReaderOpen, setIsReaderOpen] = useState(false);
-  const { user, isAuthenticated } = useAuth();
-
-  // Sample magazine covers - GQ style
-  const magazineCovers = [
-    {
-      id: 1,
-      title: 'JUST URBANE',
-      subtitle: 'AUGUST 2025',
-      image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=800&fit=crop&crop=face',
-      current: true
-    },
-    {
-      id: 2,
-      title: 'JUST URBANE',
-      subtitle: 'JULY 2025',
-      image: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=600&h=800&fit=crop',
-      current: false
-    },
-    {
-      id: 3,
-      title: 'JUST URBANE', 
-      subtitle: 'JUNE 2025',
-      image: 'https://images.unsplash.com/photo-1582719508461-905c673771fd?w=600&h=800&fit=crop',
-      current: false
-    },
-    {
-      id: 4,
-      title: 'JUST URBANE',
-      subtitle: 'MAY 2025',
-      image: 'https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=600&h=800&fit=crop',
-      current: false
-    }
-  ];
-
+  
   const openMagazineReader = () => {
     console.log('🔥 Opening magazine reader...');
-    // Use window.location for more reliable navigation
-    window.location.href = '/magazine-reader';
+    // Use React Router navigation (not window.location)
+    navigate('/magazine-reader');
   };
 
   const closeMagazineReader = () => {
@@ -55,58 +19,95 @@ const IssuesPage = () => {
     setSelectedIssue(null);
   };
 
+  const [isReaderOpen, setIsReaderOpen] = useState(false);
+  const [selectedIssue, setSelectedIssue] = useState(null);
+
+  // Sample magazine issues data
+  const magazineIssues = [
+    {
+      id: 1,
+      title: 'Just Urbane',
+      subtitle: 'August 2025 Issue',
+      description: 'Premium Lifestyle & Technology - Featuring exclusive interviews, luxury travel guides, and cutting-edge tech reviews.',
+      coverImage: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=600&fit=crop&crop=face',
+      publishDate: 'August 2025',
+      author: 'Editorial Team',
+      readTime: '45 min read',
+      isLatest: true,
+      pages: 92,
+      category: 'Lifestyle & Tech',
+      featured: true,
+      previewAvailable: true,
+      tags: ['Tech Reviews', 'Luxury Travel', 'Fashion', 'Automotive']
+    },
+    {
+      id: 2,
+      title: 'Just Urbane',
+      subtitle: 'July 2025 Issue',
+      description: 'Summer Special - Discover the latest in premium fashion, exotic destinations, and innovative gadgets.',
+      coverImage: 'https://images.unsplash.com/photo-1566492031773-4f4e44671d66?w=400&h=600&fit=crop&crop=face',
+      publishDate: 'July 2025',
+      author: 'Editorial Team',
+      readTime: '50 min read',
+      isLatest: false,
+      pages: 88,
+      category: 'Fashion & Travel',
+      featured: false,
+      previewAvailable: false,
+      tags: ['Summer Fashion', 'Travel', 'Gadgets', 'Lifestyle']
+    }
+  ];
+
   return (
-    <div className="min-h-screen bg-white">
-      {/* Clean Header Section */}
-      <div className="bg-white py-16">
-        <div className="container mx-auto px-4 text-center">
-          <h1 className="text-6xl font-light text-gray-900 mb-6 tracking-wide">
-            Magazine
-          </h1>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Read your favourite magazines anywhere, anytime | Enjoy unlimited access to our archives
-          </p>
+    <div className="min-h-screen bg-gray-50">
+      {/* Hero Section */}
+      <div className="bg-gradient-to-r from-gray-900 via-gray-800 to-black text-white py-16">
+        <div className="container mx-auto px-4">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="text-center max-w-4xl mx-auto"
+          >
+            <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-white to-amber-200 bg-clip-text text-transparent">
+              Digital Magazine Issues
+            </h1>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              Immerse yourself in premium lifestyle content with our interactive digital magazine experience
+            </p>
+          </motion.div>
         </div>
       </div>
 
-      {/* Magazine Covers Grid - Clean GQ Style */}
-      <div className="container mx-auto px-4 pb-20">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
-          {magazineCovers.map((magazine, index) => (
-            <motion.div
-              key={magazine.id}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              className="group cursor-pointer"
-            >
-              {/* Magazine Cover */}
-              <div 
-                className="aspect-[3/4] rounded-lg overflow-hidden shadow-lg mb-6 relative transform transition-transform duration-500 hover:scale-105"
-                style={{
-                  backgroundImage: `linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.5)), url(${magazine.image})`,
-                  backgroundSize: 'cover',
-                  backgroundPosition: 'center'
-                }}
+      {/* Featured Issue Section */}
+      <div className="container mx-auto px-4 py-16">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="mb-16"
+        >
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            {/* Magazine Cover */}
+            <div className="relative group">
+              <motion.div
+                whileHover={{ scale: 1.05, rotateY: 5 }}
+                transition={{ duration: 0.4 }}
+                className="relative"
               >
-                {/* Magazine Title Overlay */}
-                <div className="absolute inset-0 flex flex-col justify-between p-6 text-white">
-                  {/* Top - Magazine Name */}
+                <img
+                  src={magazineIssues[0].coverImage}
+                  alt={`${magazineIssues[0].title} - ${magazineIssues[0].subtitle}`}
+                  className="w-full max-w-md mx-auto rounded-2xl shadow-2xl"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent rounded-2xl"></div>
+                
+                {/* Preview Button Overlay */}
+                <div className="absolute inset-0 flex items-center justify-center">
                   <div className="text-center">
-                    <h2 className="text-xl font-bold tracking-wider mb-1">
-                      {magazine.title}
-                    </h2>
-                    <p className="text-sm opacity-90 tracking-widest">
-                      {magazine.subtitle}
-                    </p>
-                  </div>
-
-                  {/* Bottom - Preview Button */}
-                  <div className="text-center">
-                    {magazine.current ? (
+                    {magazineIssues[0].previewAvailable ? (
                       <button
                         onClick={(e) => {
-                          e.preventDefault();
                           e.stopPropagation();
                           console.log('🎯 Button clicked!');
                           openMagazineReader();
@@ -124,75 +125,94 @@ const IssuesPage = () => {
                     )}
                   </div>
                 </div>
+              </motion.div>
+            </div>
 
-                {/* Hover Overlay */}
-                <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                  <div className="bg-white/20 backdrop-blur-sm rounded-full p-4">
-                    <PlayCircle className="h-8 w-8 text-white" />
-                  </div>
+            {/* Issue Details */}
+            <div className="space-y-6">
+              <div>
+                <div className="flex items-center space-x-3 mb-2">
+                  <span className="bg-amber-100 text-amber-800 text-xs font-semibold px-3 py-1 rounded-full">
+                    Latest Issue
+                  </span>
+                  <span className="bg-green-100 text-green-800 text-xs font-semibold px-3 py-1 rounded-full">
+                    3 Pages Free Preview Available
+                  </span>
+                </div>
+                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-3">
+                  {magazineIssues[0].title}
+                </h2>
+                <h3 className="text-xl text-gray-600 mb-4">{magazineIssues[0].subtitle}</h3>
+                <p className="text-gray-700 text-lg leading-relaxed">
+                  {magazineIssues[0].description}
+                </p>
+              </div>
+
+              <div className="grid grid-cols-2 gap-4 text-sm text-gray-600">
+                <div className="flex items-center space-x-2">
+                  <Calendar className="h-4 w-4" />
+                  <span>{magazineIssues[0].publishDate}</span>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <User className="h-4 w-4" />
+                  <span>{magazineIssues[0].author}</span>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <Clock className="h-4 w-4" />
+                  <span>{magazineIssues[0].readTime}</span>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <span className="font-semibold">{magazineIssues[0].pages} Pages</span>
                 </div>
               </div>
 
-              {/* Magazine Info */}
-              <div className="text-center">
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                  {magazine.subtitle} Issue
-                </h3>
-                {magazine.current && (
-                  <p className="text-sm text-green-600 font-medium">
-                    3 Pages Free Preview Available
-                  </p>
-                )}
+              <div className="flex flex-wrap gap-2">
+                {magazineIssues[0].tags.map((tag, index) => (
+                  <span
+                    key={index}
+                    className="bg-gray-100 text-gray-700 text-sm px-3 py-1 rounded-full"
+                  >
+                    {tag}
+                  </span>
+                ))}
               </div>
-            </motion.div>
-          ))}
-        </div>
+            </div>
+          </div>
+        </motion.div>
 
-        {/* Subscribe Section */}
+        {/* Bottom CTA Section */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="text-center mt-20 bg-gray-50 rounded-2xl p-12 max-w-4xl mx-auto"
+          className="bg-gradient-to-r from-gray-900 to-gray-800 rounded-3xl p-8 md:p-12 text-center text-white"
         >
-          <h2 className="text-3xl font-bold text-gray-900 mb-4">
+          <h3 className="text-2xl md:text-3xl font-bold mb-4">
             Did you know our monthly issues can now be read online?
-          </h2>
-          <p className="text-lg text-gray-600 mb-8">
-            Subscribe to read our August 2025 issue now.
+          </h3>
+          <p className="text-gray-300 text-lg mb-8 max-w-2xl mx-auto">
+            Experience premium digital magazine reading with smooth page transitions, 
+            high-quality visuals, and interactive content.
           </p>
-          
-          <div className="flex items-center justify-center space-x-8 mb-8">
-            <div className="bg-black text-white px-8 py-4 rounded-xl text-center">
-              <div className="font-bold text-lg">GO DIGITAL 1 YEAR</div>
-              <div className="text-gray-300 text-sm">Best Value</div>
-            </div>
-            <div className="text-center">
-              <div className="text-gray-500 line-through text-lg">₹1500</div>
-              <div className="text-4xl font-bold text-gray-900">₹900</div>
-              <div className="text-sm text-gray-600">Save 40%</div>
-            </div>
-          </div>
-
-          <div className="flex items-center justify-center space-x-6">
-            <Link
-              to="/pricing"
-              className="bg-black hover:bg-gray-800 text-white font-semibold px-8 py-4 rounded-xl transition-colors duration-300"
-            >
-              Subscribe Now
-            </Link>
-            <div className="text-gray-400">OR</div>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <button
               onClick={(e) => {
-                e.preventDefault();
+                e.stopPropagation();
                 console.log('🎯 Bottom Free Preview button clicked!');
                 openMagazineReader();
               }}
-              className="border-2 border-black text-black font-semibold px-8 py-4 rounded-xl hover:bg-black hover:text-white transition-all duration-300"
+              className="border-2 border-white text-white font-semibold px-8 py-4 rounded-xl hover:bg-white hover:text-gray-900 transition-all duration-300"
               type="button"
             >
               Free Preview
             </button>
+            <Link
+              to="/pricing"
+              className="bg-amber-500 hover:bg-amber-600 text-white font-semibold px-8 py-4 rounded-xl transition-all duration-300 flex items-center space-x-2"
+            >
+              <span>Subscribe for Full Access</span>
+              <ArrowRight className="h-5 w-5" />
+            </Link>
           </div>
         </motion.div>
       </div>
