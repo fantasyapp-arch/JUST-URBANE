@@ -202,7 +202,7 @@ const HomePage = () => {
       <div className="container mx-auto px-4 py-4">
         
         {/* HERO SECTION - PROFESSIONAL MAGAZINE STYLE */}
-        <section className="mb-20">
+        <section className="mb-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
             {/* Main Hero Article */}
             {featuredArticles[0] && (
