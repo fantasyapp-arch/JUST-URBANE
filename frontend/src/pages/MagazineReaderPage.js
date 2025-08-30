@@ -28,6 +28,66 @@ const MagazineReaderPage = () => {
     }
   }, [pages]);
 
+  // Keyboard Navigation Support
+  useEffect(() => {
+    const handleKeyPress = (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ') {
+        e.preventDefault();
+        nextPage();
+      } else if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        prevPage();
+      } else if (e.key === 'Escape') {
+        closeReader();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyPress);
+    return () => window.removeEventListener('keydown', handleKeyPress);
+  }, [currentPage, totalPages, canReadPremium]);
+
+  // Touch/Swipe Gesture Support
+  useEffect(() => {
+    let startX = 0;
+    let startY = 0;
+
+    const handleTouchStart = (e) => {
+      startX = e.touches[0].clientX;
+      startY = e.touches[0].clientY;
+    };
+
+    const handleTouchEnd = (e) => {
+      const endX = e.changedTouches[0].clientX;
+      const endY = e.changedTouches[0].clientY;
+      const diffX = startX - endX;
+      const diffY = startY - endY;
+
+      // Only respond to horizontal swipes (not vertical scrolling)
+      if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 50) {
+        if (diffX > 0) {
+          // Swipe left - next page
+          nextPage();
+        } else {
+          // Swipe right - previous page
+          prevPage();
+        }
+      }
+    };
+
+    const container = document.querySelector('.magazine-container');
+    if (container) {
+      container.addEventListener('touchstart', handleTouchStart, { passive: true });
+      container.addEventListener('touchend', handleTouchEnd, { passive: true });
+    }
+
+    return () => {
+      if (container) {
+        container.removeEventListener('touchstart', handleTouchStart);
+        container.removeEventListener('touchend', handleTouchEnd);
+      }
+    };
+  }, [currentPage, totalPages, canReadPremium]);
+
   useEffect(() => {
     // COMPLETE full-screen experience - lock body scroll and remove all browser elements
     document.body.style.overflow = 'hidden';
