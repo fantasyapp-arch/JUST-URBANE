@@ -117,7 +117,8 @@ const FullScreenMagazineReader = ({ isOpen, onClose, magazineContent = [] }) => 
         {/* Close Button - Top Right */}
         <button
           onClick={closeReader}
-          className="absolute top-4 right-4 z-40 p-3 bg-black/70 hover:bg-black/90 text-white rounded-full transition-all duration-200 backdrop-blur-sm shadow-lg"
+          className="absolute top-4 right-4 text-white rounded-full transition-all duration-200 backdrop-blur-sm shadow-lg"
+          style={{ zIndex: 10000, backgroundColor: 'rgba(0,0,0,0.7)' }}
         >
           <X className="h-6 w-6" />
         </button>
