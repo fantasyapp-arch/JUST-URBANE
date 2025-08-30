@@ -624,8 +624,9 @@ const HomePage = () => {
                       <span>{article.readTime}</span>
                     </div>
                   </div>
-                </motion.div>
-              ))}
+                  </motion.div>
+                ))}
+              </div>
             </div>
           </div>
         </motion.section>
