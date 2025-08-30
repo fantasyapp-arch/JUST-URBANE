@@ -325,7 +325,7 @@ const MagazineReaderPage = () => {
         <X size={24} />
       </button>
 
-      {/* Magazine Display Area - Realistic Page Curl Effect */}
+      {/* Magazine Display Area - Full Screen Smooth Page Turn */}
       <div style={{
         position: 'absolute',
         top: 0,
@@ -334,151 +334,116 @@ const MagazineReaderPage = () => {
         height: '100%',
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'center',
-        perspective: '1500px'
+        justifyContent: 'center'
       }}>
-        <div className="page-curl-container" style={{
-          width: '90vw',
-          height: '90vh',
-          position: 'relative'
+        <div style={{
+          width: '100vw',
+          height: '100vh',
+          position: 'relative',
+          overflow: 'hidden'
         }}>
-          {/* Next page underneath (when curling) */}
-          {showPageCurl && (currentPage + 1 < totalPages) && (
-            <div className="page-underneath">
-              <div style={{
-                position: 'relative',
-                width: '100%',
-                height: '100%',
-                backgroundColor: '#fff',
-                borderRadius: '8px',
-                boxShadow: '0 10px 30px rgba(0, 0, 0, 0.2)'
-              }}>
-                <img
-                  src={pages[currentPage + 1]?.pageImage}
-                  alt={`Next page - ${currentPage + 2}`}
-                  style={{
-                    width: '100%',
-                    height: '100%',
-                    objectFit: 'contain',
-                    objectPosition: 'center',
-                    borderRadius: '8px'
-                  }}
-                />
-              </div>
-            </div>
-          )}
-          
-          {/* Current page with curl effect */}
-          <div 
-            className={showPageCurl ? 'page-curling' : ''}
+          {/* Full Screen Magazine Page */}
+          <motion.div
+            key={currentPage}
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 1.05 }}
+            transition={{ duration: 0.3, ease: "easeOut" }}
             style={{
               position: 'absolute',
               top: 0,
               left: 0,
               width: '100%',
               height: '100%',
-              zIndex: 20,
-              animation: showPageCurl ? 
-                (flipDirection === 'next' ? 'pageCurlNext 0.8s ease-in-out forwards' : 'pageCurlPrev 0.8s ease-in-out forwards') : 
-                'none'
+              backgroundColor: '#fff'
             }}
           >
-            <div style={{
-              position: 'relative',
-              width: '100%',
-              height: '100%',
-              backgroundColor: '#fff',
-              borderRadius: '8px',
-              boxShadow: showPageCurl ? '0 20px 50px rgba(0, 0, 0, 0.4)' : '0 10px 30px rgba(0, 0, 0, 0.2)',
-              overflow: 'hidden'
-            }}>
-              <img
-                src={pages[currentPage]?.pageImage}
-                alt={`${pages[currentPage]?.title} - Page ${currentPage + 1}`}
-                style={{
-                  width: '100%',
-                  height: '100%',
-                  objectFit: 'contain',
-                  objectPosition: 'center',
-                  filter: isPageLocked ? 'blur(15px)' : 'none'
-                }}
-                onError={(e) => {
-                  e.target.style.display = 'none';
-                  e.target.parentNode.innerHTML = `
-                    <div style="
-                      width: 100%; 
-                      height: 100%; 
-                      background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); 
-                      display: flex; 
-                      flex-direction: column;
-                      align-items: center; 
-                      justify-content: center;
-                      color: #666;
-                      font-size: 32px;
-                      font-weight: 600;
-                      text-align: center;
-                      padding: 60px;
-                    ">
-                      <div style="font-size: 80px; margin-bottom: 30px;">📖</div>
-                      <div>Page ${currentPage + 1}</div>
-                      <div style="font-size: 24px; color: #999; margin-top: 20px; font-weight: 400;">
-                        ${pages[currentPage]?.title}
-                      </div>
-                      <div style="font-size: 18px; color: #bbb; margin-top: 30px; font-weight: 300;">
-                        Just Urbane Magazine - August 2025
-                      </div>
+            <img
+              src={pages[currentPage]?.pageImage}
+              alt={`${pages[currentPage]?.title} - Page ${currentPage + 1}`}
+              style={{
+                width: '100%',
+                height: '100%',
+                objectFit: 'cover',
+                objectPosition: 'center',
+                filter: isPageLocked ? 'blur(15px)' : 'none'
+              }}
+              onError={(e) => {
+                e.target.style.display = 'none';
+                e.target.parentNode.innerHTML = `
+                  <div style="
+                    width: 100%; 
+                    height: 100%; 
+                    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); 
+                    display: flex; 
+                    flex-direction: column;
+                    align-items: center; 
+                    justify-content: center;
+                    color: #666;
+                    font-size: 48px;
+                    font-weight: 600;
+                    text-align: center;
+                    padding: 60px;
+                  ">
+                    <div style="font-size: 120px; margin-bottom: 40px;">📖</div>
+                    <div>Page ${currentPage + 1}</div>
+                    <div style="font-size: 32px; color: #999; margin-top: 30px; font-weight: 400;">
+                      ${pages[currentPage]?.title}
                     </div>
-                  `;
+                    <div style="font-size: 24px; color: #bbb; margin-top: 40px; font-weight: 300;">
+                      Just Urbane Magazine - August 2025
+                    </div>
+                  </div>
+                `;
+              }}
+            />
+            
+            {/* Premium Lock Overlay with Enhanced Crown */}
+            {isPageLocked && (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                style={{
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  bottom: 0,
+                  backgroundColor: 'rgba(0,0,0,0.5)',
+                  backdropFilter: 'blur(15px)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  zIndex: 10
                 }}
-              />
-              
-              {/* Premium Lock Overlay with Enhanced Crown */}
-              {isPageLocked && (
+              >
                 <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
+                  animate={{
+                    scale: [1, 1.2, 1],
+                    rotate: [0, 10, -10, 0],
+                    y: [0, -10, 0]
+                  }}
+                  transition={{
+                    duration: 4,
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                  }}
                   style={{
-                    position: 'absolute',
-                    top: 0,
-                    left: 0,
-                    right: 0,
-                    bottom: 0,
-                    backgroundColor: 'rgba(0,0,0,0.5)',
-                    backdropFilter: 'blur(15px)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    zIndex: 10
+                    background: 'linear-gradient(135deg, #ffd700 0%, #ffed4e 100%)',
+                    borderRadius: '50%',
+                    padding: '50px',
+                    boxShadow: '0 25px 50px rgba(255, 215, 0, 0.4), 0 0 100px rgba(255, 215, 0, 0.2)'
                   }}
                 >
-                  <motion.div
-                    animate={{
-                      scale: [1, 1.2, 1],
-                      rotate: [0, 10, -10, 0],
-                      y: [0, -10, 0]
-                    }}
-                    transition={{
-                      duration: 4,
-                      repeat: Infinity,
-                      ease: "easeInOut"
-                    }}
-                    style={{
-                      background: 'linear-gradient(135deg, #ffd700 0%, #ffed4e 100%)',
-                      borderRadius: '50%',
-                      padding: '50px',
-                      boxShadow: '0 25px 50px rgba(255, 215, 0, 0.4), 0 0 100px rgba(255, 215, 0, 0.2)'
-                    }}
-                  >
-                    <Crown style={{ 
-                      width: '80px', 
-                      height: '80px', 
-                      color: '#b8860b' 
-                    }} />
-                  </motion.div>
+                  <Crown style={{ 
+                    width: '80px', 
+                    height: '80px', 
+                    color: '#b8860b' 
+                  }} />
                 </motion.div>
-              )}
-            </div>
-          </div>
+              </motion.div>
+            )}
+          </motion.div>
         </div>
       </div>
 
