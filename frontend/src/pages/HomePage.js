@@ -541,7 +541,7 @@ const HomePage = () => {
               </Link>
             </div>
 
-            <div className="grid lg:grid-cols-2 gap-6">
+            <div className="grid lg:grid-cols-2 gap-4">
             {/* Featured Lifestyle Article */}
             <motion.div 
               className="group cursor-pointer"
