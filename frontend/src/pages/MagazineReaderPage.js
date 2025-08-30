@@ -290,60 +290,18 @@ const MagazineReaderPage = () => {
               overflow: 'hidden',
               boxShadow: '0 0 50px rgba(0, 0, 0, 0.1)'
             }}>
-              {/* Simple Loading State */}
-              {(!imageLoaded || pageLoading) && (
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  style={{
-                    position: 'absolute',
-                    top: 0,
-                    left: 0,
-                    right: 0,
-                    bottom: 0,
-                    background: '#f8f9fa',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    zIndex: 5
-                  }}
-                >
-                  <div style={{
-                    fontSize: '18px',
-                    color: '#666',
-                    fontWeight: '500'
-                  }}>
-                    Loading page {currentPage + 1}...
-                  </div>
-                </motion.div>
-              )}
-
-              <motion.img
+              <img
                 src={currentPageData.pageImage}
                 alt={`${currentPageData.title} - Page ${currentPage + 1}`}
-                initial={{ opacity: 0 }}
-                animate={{ 
-                  opacity: imageLoaded ? 1 : 0,
-                  filter: isPageLocked ? 'blur(15px)' : 'none'
-                }}
-                transition={{ 
-                  duration: 0.3
-                }}
                 style={{
                   width: '100%',
                   height: '100%',
                   objectFit: 'contain',
                   objectPosition: 'center',
-                  display: 'block'
-                }}
-                onLoad={() => {
-                  setImageLoaded(true);
-                  setPageLoading(false);
+                  display: 'block',
+                  filter: isPageLocked ? 'blur(15px)' : 'none'
                 }}
                 onError={(e) => {
-                  setImageLoaded(true);
-                  setPageLoading(false);
                   e.target.style.display = 'none';
                   e.target.parentNode.innerHTML = `
                     <div style="
