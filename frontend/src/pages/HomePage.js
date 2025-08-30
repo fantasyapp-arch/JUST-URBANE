@@ -521,18 +521,18 @@ const HomePage = () => {
         >
           <div className="max-w-7xl mx-auto">
             <div className="flex items-center justify-between mb-6">
-            <h2 className="text-3xl lg:text-4xl font-serif font-bold text-gray-900">
-              Lifestyle
-            </h2>
-            <Link
-              to="/category/lifestyle"
-              className="text-primary-600 hover:text-primary-700 font-semibold text-lg"
-            >
-              View All
-            </Link>
-          </div>
+              <h2 className="text-3xl lg:text-4xl font-serif font-bold text-gray-900">
+                Lifestyle
+              </h2>
+              <Link
+                to="/category/lifestyle"
+                className="text-primary-600 hover:text-primary-700 font-semibold text-lg"
+              >
+                View All
+              </Link>
+            </div>
 
-          <div className="grid lg:grid-cols-2 gap-8">
+            <div className="grid lg:grid-cols-2 gap-6">
             {/* Featured Lifestyle Article */}
             <motion.div 
               className="group cursor-pointer"
