@@ -124,7 +124,7 @@ const FullScreenMagazineReader = ({ isOpen, onClose, magazineContent = [] }) => 
         </button>
 
         {/* Page Counter - Top Left */}
-        <div className="absolute top-4 left-4 z-40 bg-black/70 text-white px-4 py-2 rounded-full backdrop-blur-sm text-sm">
+        <div className="absolute top-4 left-4 bg-black/70 text-white px-4 py-2 rounded-full backdrop-blur-sm text-sm" style={{ zIndex: 10000 }}>
           {currentPage + 1} / {totalPages}
           {!canReadPremium && currentPage < FREE_PREVIEW_PAGES && (
             <span className="ml-2 text-green-400">(Free Preview)</span>
