@@ -312,7 +312,8 @@ const MagazineReaderPage = () => {
               height: '100%',
               backgroundColor: '#fff',
               overflow: 'hidden',
-              boxShadow: '0 0 50px rgba(0, 0, 0, 0.1)'
+              boxShadow: '0 20px 60px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(0, 0, 0, 0.1)',
+              borderRadius: '8px'
             }}>
               <img
                 src={currentPageData.pageImage}
