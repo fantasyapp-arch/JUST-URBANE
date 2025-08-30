@@ -471,7 +471,7 @@ const HomePage = () => {
               </Link>
             </div>
 
-            <div className="grid md:grid-cols-3 gap-6">
+            <div className="grid md:grid-cols-3 gap-4">
             {[
               {
                 title: 'Lamborghini Revuelto: The New Hybrid Beast',
