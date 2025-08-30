@@ -321,7 +321,7 @@ const MagazineReaderPage = () => {
               overflow: 'hidden',
               boxShadow: '0 0 50px rgba(0, 0, 0, 0.1)'
             }}>
-              {/* Smooth Loading Skeleton */}
+              {/* Simple Loading State */}
               {(!imageLoaded || pageLoading) && (
                 <motion.div
                   initial={{ opacity: 0 }}
@@ -333,26 +333,33 @@ const MagazineReaderPage = () => {
                     left: 0,
                     right: 0,
                     bottom: 0,
-                    background: 'linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%)',
-                    backgroundSize: '200% 100%',
-                    animation: 'shimmer 1.5s ease-in-out infinite',
+                    background: '#f8f9fa',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
                     zIndex: 5
                   }}
-                />
+                >
+                  <div style={{
+                    fontSize: '18px',
+                    color: '#666',
+                    fontWeight: '500'
+                  }}>
+                    Loading page {currentPage + 1}...
+                  </div>
+                </motion.div>
               )}
 
               <motion.img
                 src={currentPageData.pageImage}
                 alt={`${currentPageData.title} - Page ${currentPage + 1}`}
-                initial={{ opacity: 0, scale: 1.1 }}
+                initial={{ opacity: 0 }}
                 animate={{ 
-                  opacity: imageLoaded ? 1 : 0, 
-                  scale: imageLoaded ? 1 : 1.1,
+                  opacity: imageLoaded ? 1 : 0,
                   filter: isPageLocked ? 'blur(15px)' : 'none'
                 }}
                 transition={{ 
-                  duration: 0.6, 
-                  ease: [0.25, 0.46, 0.45, 0.94]
+                  duration: 0.3
                 }}
                 style={{
                   width: '100%',
@@ -363,7 +370,7 @@ const MagazineReaderPage = () => {
                 }}
                 onLoad={() => {
                   setImageLoaded(true);
-                  setTimeout(() => setPageLoading(false), 200);
+                  setPageLoading(false);
                 }}
                 onError={(e) => {
                   setImageLoaded(true);
