@@ -801,13 +801,13 @@ const HomePage = () => {
 
         {/* VIDEOS SECTION - GQ STYLE */}
         <motion.section 
-          className="mb-20"
+          className="mb-2"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 1.1 }}
         >
-          <div className="border-t-2 border-gray-900 pt-12">
-            <div className="flex items-center justify-between mb-12">
+          <div className="border-t-2 border-gray-900 pt-2">
+            <div className="flex items-center justify-between mb-3">
               <div>
                 <h2 className="text-4xl lg:text-5xl font-serif font-bold text-gray-900 mb-3">
                   Videos
