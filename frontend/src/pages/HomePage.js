@@ -862,7 +862,7 @@ const HomePage = () => {
               </motion.div>
 
               {/* Video List */}
-              <div className="space-y-6">
+              <div className="space-y-3">
                 {[
                   {
                     title: 'Luxury Watch Collection Worth ₹50 Crores',
