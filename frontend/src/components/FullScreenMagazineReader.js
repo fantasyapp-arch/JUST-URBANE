@@ -8,6 +8,15 @@ import {
 import { useAuth } from '../context/AuthContext';
 import { Link } from 'react-router-dom';
 
+import React, { useRef, useEffect, useState } from 'react';
+import HTMLFlipBook from 'react-pageflip';
+import { motion, AnimatePresence } from 'framer-motion';
+import { 
+  X, ChevronLeft, ChevronRight, Crown, Lock, Play
+} from 'lucide-react';
+import { useAuth } from '../context/AuthContext';
+import { Link } from 'react-router-dom';
+
 const FullScreenMagazineReader = ({ isOpen, onClose, magazineContent = [] }) => {
   const flipBookRef = useRef();
   const [currentPage, setCurrentPage] = useState(0);
@@ -78,63 +87,50 @@ const FullScreenMagazineReader = ({ isOpen, onClose, magazineContent = [] }) => 
     return null;
   }
 
-  // Loading state
-  if (!pages || !Array.isArray(pages) || pages.length === 0) {
-    const loadingComponent = (
-      <div className="fixed inset-0 bg-black flex items-center justify-center" 
-           style={{ width: '100vw', height: '100vh', zIndex: 9999 }}>
-        <div className="text-white text-center">
-          <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-amber-400 mx-auto mb-4"></div>
-          <p className="text-xl">Loading Magazine...</p>
-        </div>
-      </div>
-    );
-    return createPortal(loadingComponent, document.body);
-  }
-
   // Calculate optimal size for truly full-screen experience
   const screenWidth = window.innerWidth;
   const screenHeight = window.innerHeight;
-  const pageWidth = Math.min(screenWidth * 0.45, 500); // 45% of screen width, max 500px
-  const pageHeight = Math.min(screenHeight * 0.9, 700); // 90% of screen height, max 700px
+  const pageWidth = Math.min(screenWidth * 0.45, 500);
+  const pageHeight = Math.min(screenHeight * 0.9, 700);
 
-  const magazineReaderComponent = (
-    <AnimatePresence>
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        className="fixed inset-0 bg-black overflow-hidden"
-        style={{ 
-          width: '100vw', 
-          height: '100vh',
-          position: 'fixed !important',
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          zIndex: 9999
-        }}
+  return (
+    <div
+      className="fixed inset-0 bg-black z-50"
+      style={{
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        width: '100vw',
+        height: '100vh',
+        zIndex: 9999,
+        backgroundColor: '#000000'
+      }}
+    >
+      {/* Close Button - Top Right */}
+      <button
+        onClick={closeReader}
+        className="absolute top-4 right-4 p-3 bg-black/80 hover:bg-black text-white rounded-full transition-all duration-200 shadow-lg"
+        style={{ zIndex: 10000 }}
       >
-        {/* Close Button - Top Right */}
-        <button
-          onClick={closeReader}
-          className="absolute top-4 right-4 text-white rounded-full transition-all duration-200 backdrop-blur-sm shadow-lg p-3"
-          style={{ zIndex: 10000, backgroundColor: 'rgba(0,0,0,0.7)' }}
-        >
-          <X className="h-6 w-6" />
-        </button>
+        <X className="h-6 w-6" />
+      </button>
 
-        {/* Page Counter - Top Left */}
-        <div className="absolute top-4 left-4 bg-black/70 text-white px-4 py-2 rounded-full backdrop-blur-sm text-sm" style={{ zIndex: 10000 }}>
-          {currentPage + 1} / {totalPages}
-          {!canReadPremium && currentPage < FREE_PREVIEW_PAGES && (
-            <span className="ml-2 text-green-400">(Free Preview)</span>
-          )}
-        </div>
+      {/* Page Counter - Top Left */}
+      <div 
+        className="absolute top-4 left-4 bg-black/80 text-white px-4 py-2 rounded-full text-sm"
+        style={{ zIndex: 10000 }}
+      >
+        {currentPage + 1} / {totalPages}
+        {!canReadPremium && currentPage < FREE_PREVIEW_PAGES && (
+          <span className="ml-2 text-green-400">(Free Preview)</span>
+        )}
+      </div>
 
-        {/* Magazine Container - Truly Full Screen */}
-        <div className="w-full h-full flex items-center justify-center relative">
+      {/* Magazine Container - Centered */}
+      <div className="w-full h-full flex items-center justify-center">
+        {pages && pages.length > 0 ? (
           <HTMLFlipBook
             ref={flipBookRef}
             width={pageWidth}
@@ -182,39 +178,88 @@ const FullScreenMagazineReader = ({ isOpen, onClose, magazineContent = [] }) => 
               );
             })}
           </HTMLFlipBook>
+        ) : (
+          <div className="text-white text-center">
+            <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-amber-400 mx-auto mb-4"></div>
+            <p className="text-xl">Loading Magazine...</p>
+          </div>
+        )}
+      </div>
+
+      {/* Navigation Arrows */}
+      <button
+        onClick={prevPage}
+        disabled={currentPage === 0}
+        className="absolute left-6 top-1/2 transform -translate-y-1/2 p-4 text-white/80 hover:text-white hover:scale-110 transition-all duration-200 disabled:opacity-30 disabled:cursor-not-allowed"
+        style={{ zIndex: 10000 }}
+      >
+        <ChevronLeft className="h-16 w-16 drop-shadow-lg" />
+      </button>
+
+      <button
+        onClick={nextPage}
+        disabled={(!canReadPremium && currentPage >= FREE_PREVIEW_PAGES - 1) || currentPage >= totalPages - 1}
+        className="absolute right-6 top-1/2 transform -translate-y-1/2 p-4 text-white/80 hover:text-white hover:scale-110 transition-all duration-200 disabled:opacity-30 disabled:cursor-not-allowed"
+        style={{ zIndex: 10000 }}
+      >
+        <ChevronRight className="h-16 w-16 drop-shadow-lg" />
+      </button>
+
+      {/* Purchase Modal */}
+      {showSubscriptionModal && (
+        <div
+          className="absolute inset-0 bg-black/90 flex items-center justify-center"
+          style={{ zIndex: 10001 }}
+          onClick={() => setShowSubscriptionModal(false)}
+        >
+          <div
+            className="bg-white rounded-2xl p-8 max-w-md mx-4 shadow-2xl relative"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              onClick={() => setShowSubscriptionModal(false)}
+              className="absolute top-4 right-4 p-2 hover:bg-gray-100 rounded-full"
+            >
+              <X className="h-5 w-5 text-gray-500" />
+            </button>
+
+            <div className="text-center mb-6">
+              <div className="w-16 h-16 bg-gradient-to-br from-amber-400 to-amber-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Crown className="h-8 w-8 text-white" />
+              </div>
+              <h2 className="text-2xl font-bold text-gray-900 mb-2">
+                Continue Reading
+              </h2>
+              <p className="text-gray-600">
+                Unlock unlimited digital magazine access
+              </p>
+            </div>
+
+            <div className="bg-gray-50 rounded-xl p-6 mb-6">
+              <div className="text-center">
+                <div className="bg-black text-white text-sm font-bold px-3 py-1 rounded-full inline-block mb-3">
+                  DIGITAL PLAN
+                </div>
+                <div className="flex items-center justify-center space-x-3 mb-2">
+                  <span className="text-gray-500 line-through">₹1500</span>
+                  <span className="text-3xl font-bold text-gray-900">₹499</span>
+                </div>
+                <p className="text-sm text-gray-600">Annual Digital Subscription</p>
+              </div>
+            </div>
+
+            <Link
+              to="/pricing?plan=digital"
+              className="block w-full bg-black hover:bg-gray-800 text-white font-bold text-center py-4 rounded-xl transition-colors text-lg"
+            >
+              Buy Digital Plan - ₹499
+            </Link>
+          </div>
         </div>
-
-        {/* Navigation Arrows - Positioned for full screen */}
-        <button
-          onClick={prevPage}
-          disabled={currentPage === 0}
-          className="absolute left-6 top-1/2 transform -translate-y-1/2 p-4 text-white/80 hover:text-white hover:scale-110 transition-all duration-200 disabled:opacity-30 disabled:cursor-not-allowed"
-          style={{ zIndex: 10000 }}
-        >
-          <ChevronLeft className="h-16 w-16 drop-shadow-lg" />
-        </button>
-
-        <button
-          onClick={nextPage}
-          disabled={(!canReadPremium && currentPage >= FREE_PREVIEW_PAGES - 1) || currentPage >= totalPages - 1}
-          className="absolute right-6 top-1/2 transform -translate-y-1/2 p-4 text-white/80 hover:text-white hover:scale-110 transition-all duration-200 disabled:opacity-30 disabled:cursor-not-allowed"
-          style={{ zIndex: 10000 }}
-        >
-          <ChevronRight className="h-16 w-16 drop-shadow-lg" />
-        </button>
-
-        {/* Full Screen Subscription Modal - After 3 pages */}
-        <AnimatePresence>
-          {showSubscriptionModal && (
-            <FullScreenPurchaseModal onClose={() => setShowSubscriptionModal(false)} />
-          )}
-        </AnimatePresence>
-      </motion.div>
-    </AnimatePresence>
+      )}
+    </div>
   );
-
-  // Render to document.body using React Portal to bypass any CSS conflicts
-  return createPortal(magazineReaderComponent, document.body);
+};
 };
 
 // Magazine Page Content Component - Enhanced for full screen
