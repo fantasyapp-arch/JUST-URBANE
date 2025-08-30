@@ -198,27 +198,6 @@ const MagazineReaderPage = () => {
           width: 100vw;
           height: 100vh;
         }
-        
-        .page-turn-animation {
-          transition: all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-          transform-origin: center center;
-        }
-        
-        @keyframes pageFlipNext {
-          0% { transform: rotateY(0deg) rotateX(0deg) scale(1); }
-          25% { transform: rotateY(-45deg) rotateX(-10deg) scale(0.9); }
-          50% { transform: rotateY(-90deg) rotateX(-15deg) scale(0.8); }
-          75% { transform: rotateY(-135deg) rotateX(-10deg) scale(0.9); }
-          100% { transform: rotateY(-180deg) rotateX(0deg) scale(1); }
-        }
-        
-        @keyframes pageFlipPrev {
-          0% { transform: rotateY(0deg) rotateX(0deg) scale(1); }
-          25% { transform: rotateY(45deg) rotateX(-10deg) scale(0.9); }
-          50% { transform: rotateY(90deg) rotateX(-15deg) scale(0.8); }
-          75% { transform: rotateY(135deg) rotateX(-10deg) scale(0.9); }
-          100% { transform: rotateY(180deg) rotateX(0deg) scale(1); }
-        }
       `}</style>
       
       <div className="magazine-container" style={{
