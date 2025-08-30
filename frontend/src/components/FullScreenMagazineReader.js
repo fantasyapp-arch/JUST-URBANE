@@ -106,9 +106,9 @@ const FullScreenMagazineReader = ({ isOpen, onClose, magazineContent = [] }) => 
     pageHeight = Math.min(screenHeight * 0.9, 700);
   }
 
-  return (
+  // Full-screen magazine reader component
+  const magazineReader = (
     <div
-      className="fixed inset-0 bg-black z-50"
       style={{
         position: 'fixed',
         top: 0,
@@ -117,10 +117,11 @@ const FullScreenMagazineReader = ({ isOpen, onClose, magazineContent = [] }) => 
         bottom: 0,
         width: '100vw',
         height: '100vh',
-        zIndex: 99999,
+        zIndex: 999999,
         backgroundColor: '#000000',
         margin: 0,
-        padding: 0
+        padding: 0,
+        overflow: 'hidden'
       }}
     >
       {/* Close Button */}
