@@ -90,28 +90,40 @@ const Footer = () => {
               </p>
               <div className="flex space-x-4">
                 <a
-                  href="#"
+                  href="https://www.instagram.com/justurbane"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="w-10 h-10 bg-primary-800 hover:bg-gold-500 rounded-full flex items-center justify-center transition-colors duration-200"
+                  aria-label="Follow us on Instagram"
                 >
                   <Instagram className="h-5 w-5" />
                 </a>
                 <a
-                  href="#"
+                  href="https://www.facebook.com/justurbane"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="w-10 h-10 bg-primary-800 hover:bg-gold-500 rounded-full flex items-center justify-center transition-colors duration-200"
-                >
-                  <Twitter className="h-5 w-5" />
-                </a>
-                <a
-                  href="#"
-                  className="w-10 h-10 bg-primary-800 hover:bg-gold-500 rounded-full flex items-center justify-center transition-colors duration-200"
+                  aria-label="Follow us on Facebook"
                 >
                   <Facebook className="h-5 w-5" />
                 </a>
                 <a
-                  href="#"
+                  href="https://www.linkedin.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="w-10 h-10 bg-primary-800 hover:bg-gold-500 rounded-full flex items-center justify-center transition-colors duration-200"
+                  aria-label="Connect with us on LinkedIn"
                 >
-                  <Youtube className="h-5 w-5" />
+                  <Linkedin className="h-5 w-5" />
+                </a>
+                <a
+                  href="https://www.x.com/justurbane"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 bg-primary-800 hover:bg-gold-500 rounded-full flex items-center justify-center transition-colors duration-200"
+                  aria-label="Follow us on X (Twitter)"
+                >
+                  <Twitter className="h-5 w-5" />
                 </a>
               </div>
             </div>
