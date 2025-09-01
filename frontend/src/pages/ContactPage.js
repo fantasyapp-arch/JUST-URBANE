@@ -50,7 +50,7 @@ const ContactPage = () => {
       icon: Phone,
       title: 'Call Us',
       details: '020 2992989',
-      description: 'Monday to Friday, 9 AM - 6 PM IST',
+      description: 'Call us for immediate assistance',
       color: 'text-green-500'
     },
     {
