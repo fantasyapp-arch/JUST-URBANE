@@ -167,8 +167,8 @@ const Header = () => {
       </div>
 
       {/* COMPREHENSIVE SIDEBAR MENU */}
-      {isMenuOpen && (
-        <div className="fixed inset-0 bg-black/50 z-50" onClick={() => setIsMenuOpen(false)}>
+      {isMobileMenuOpen && (
+        <div className="fixed inset-0 bg-black/50 z-50" onClick={() => setIsMobileMenuOpen(false)}>
           <div 
             className="fixed right-0 top-0 h-full w-80 lg:w-96 bg-white shadow-2xl transform transition-transform duration-300 overflow-y-auto"
             onClick={(e) => e.stopPropagation()}
