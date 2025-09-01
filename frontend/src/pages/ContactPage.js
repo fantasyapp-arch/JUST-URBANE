@@ -289,33 +289,37 @@ const ContactPage = () => {
               </div>
             </div>
 
-            {/* Office Hours */}
-            <div className="bg-gradient-to-br from-gold-50 to-gold-100 rounded-2xl p-8">
-              <div className="flex items-center gap-3 mb-4">
-                <Clock className="h-6 w-6 text-gold-600" />
-                <h3 className="text-xl font-semibold text-primary-900">
-                  Office Hours
-                </h3>
+            {/* Google Maps Integration */}
+            <div className="bg-white rounded-2xl p-8 shadow-sm">
+              <div className="flex items-center gap-3 mb-6">
+                <MapPin className="h-8 w-8 text-gold-500" />
+                <h3 className="text-2xl font-serif font-bold text-primary-900">Interactive Map</h3>
               </div>
-              <div className="space-y-2 text-gray-700">
-                <div className="flex justify-between">
-                  <span>Monday - Friday</span>
-                  <span className="font-medium">9:00 AM - 6:00 PM IST</span>
-                </div>
-                <div className="flex justify-between">
-                  <span>Saturday</span>
-                  <span className="font-medium">10:00 AM - 4:00 PM IST</span>
-                </div>
-                <div className="flex justify-between">
-                  <span>Sunday</span>
-                  <span className="font-medium text-red-600">Closed</span>
-                </div>
+              
+              <div className="relative overflow-hidden rounded-2xl shadow-lg">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3782.7947285934947!2d73.8208324!3d18.4987751!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2bf49b8f7ac69%3A0x8c6a0211375cbaea!2sUrbane%20Jets!5e0!3m2!1sen!2sin!4v1693478534567!5m2!1sen!2sin"
+                  width="100%"
+                  height="400"
+                  style={{ border: 0 }}
+                  allowFullScreen=""
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  className="rounded-xl"
+                  title="Just Urbane Office Location"
+                ></iframe>
               </div>
-              <div className="mt-4 p-4 bg-white rounded-lg">
-                <p className="text-sm text-gray-600">
-                  <strong>Note:</strong> For urgent matters outside business hours, 
-                  please send an email and we'll respond as soon as possible.
-                </p>
+              
+              <div className="mt-6 text-center">
+                <a
+                  href="https://www.google.com/maps/place/Urbane+Jets/@18.4987751,73.8208324,17z/data=!3m1!4b1!4m6!3m5!1s0x3bc2bf49b8f7ac69:0x8c6a0211375cbaea!8m2!3d18.4987751!4d73.8208324!16s%2Fg%2F11h3jgylnr?entry=ttu&g_ep=EgoyMDI1MDgyNS4wIKXMDSoASAFQAw%3D%3D"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-3 rounded-lg transition-colors duration-200 shadow-md hover:shadow-lg"
+                >
+                  <MapPin className="h-5 w-5" />
+                  Open in Google Maps
+                </a>
               </div>
             </div>
           </motion.div>
