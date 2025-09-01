@@ -302,7 +302,7 @@ const Header = () => {
                     <Link
                       to="/urbane-shows"
                       className="block p-3 text-gray-700 hover:bg-gray-50 rounded-lg font-medium transition-colors"
-                      onClick={() => setIsMenuOpen(false)}
+                      onClick={() => setIsMobileMenuOpen(false)}
                     >
                       Urbane Shows
                     </Link>
