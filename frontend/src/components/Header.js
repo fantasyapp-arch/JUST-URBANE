@@ -152,41 +152,22 @@ const Header = () => {
             })}
           </nav>
 
-          {/* RIGHT SIDE ACTIONS */}
-          <div className="flex items-center space-x-3">
-            {/* PREMIUM SUBSCRIBE BUTTON - DESKTOP */}
+          {/* GQ STYLE RIGHT SIDE */}
+          <div className="flex items-center space-x-6">
+            {/* Subscribe Button - GQ Style */}
             <Link
               to="/pricing"
-              className="hidden md:inline-flex relative bg-gradient-to-r from-primary-500 via-primary-600 to-primary-700 hover:from-primary-600 hover:via-primary-700 hover:to-primary-800 text-white px-6 py-3 rounded-full font-bold text-sm uppercase tracking-wider transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl group overflow-hidden"
+              className="hidden md:inline-flex bg-black text-white px-6 py-2 text-sm font-bold uppercase tracking-wider hover:bg-gray-800 transition-colors duration-200"
             >
-              {/* Shimmer effect */}
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
-              
-              {/* Crown icon */}
-              <Crown className="h-4 w-4 mr-2 animate-pulse" />
-              
-              <span className="relative z-10">Subscribe</span>
-              
-              {/* Premium glow effect */}
-              <div className="absolute inset-0 bg-gradient-to-r from-primary-400/50 to-primary-600/50 blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10"></div>
+              Subscribe
             </Link>
 
-            {/* PREMIUM SUBSCRIBE BUTTON - MOBILE (FOCUS) */}
-            <Link
-              to="/pricing"
-              className="md:hidden inline-flex relative bg-gradient-to-r from-primary-500 via-primary-600 to-primary-700 hover:from-primary-600 hover:via-primary-700 hover:to-primary-800 text-white px-4 py-2.5 rounded-full font-bold text-sm transition-all duration-300 transform hover:scale-105 shadow-lg group overflow-hidden"
-            >
-              {/* Crown icon */}
-              <Crown className="h-4 w-4 mr-1.5" />
-              <span className="relative z-10">Subscribe</span>
-            </Link>
-
-            {/* Search - Desktop */}
+            {/* Search Icon */}
             <button
               onClick={() => setIsSearchOpen(true)}
               className="hidden md:block p-2 hover:bg-gray-100 rounded-lg transition-colors"
             >
-              <Search className="h-4 w-4 text-gray-600" />
+              <Search className="h-5 w-5 text-gray-700" />
             </button>
 
             {/* User Menu - Desktop Only */}
