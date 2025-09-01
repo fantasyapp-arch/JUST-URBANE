@@ -105,8 +105,8 @@ const Header = () => {
             </div>
           </Link>
 
-          {/* COMPACT DESKTOP NAVIGATION */}
-          <nav className="hidden lg:flex items-center space-x-6">
+          {/* GQ STYLE NAVIGATION */}
+          <nav className="hidden lg:flex items-center space-x-8">
             {mainHeaderCategories.map((categoryName) => {
               const category = categories.find(cat => cat.name === categoryName);
               return (
