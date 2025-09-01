@@ -107,22 +107,15 @@ const Header = () => {
 
           {/* CENTER NAVIGATION - EXACT GQ STYLE */}
           <nav className="hidden md:flex items-center space-x-12 flex-1 justify-center">
-            {mainHeaderCategories.map((categoryName) => {
-              const category = categories.find(cat => cat.name === categoryName);
-              return (
-                <div
-                  key={categoryName}
-                  className="relative group"
-                  onMouseEnter={() => handleDropdownEnter(categoryName)}
-                  onMouseLeave={handleDropdownLeave}
-                >
-                  <Link
-                    to={`/category/${category.slug}`}
-                    className="font-bold text-gray-900 hover:text-gray-600 transition-colors duration-200 uppercase text-sm tracking-wider py-2"
-                  >
-                    {categoryName}
-                    <ChevronDown className="h-3 w-3 ml-1 transform group-hover:rotate-180 transition-transform duration-200" />
-                  </Link>
+            {['FASHION', 'LIFESTYLE', 'WATCHES', 'CULTURE', 'VIDEOS'].map((categoryName) => (
+              <Link
+                key={categoryName}
+                to={`/category/${categoryName.toLowerCase()}`}
+                className="text-gray-900 hover:text-black font-medium text-sm uppercase tracking-wide transition-colors duration-200"
+              >
+                {categoryName}
+              </Link>
+            ))}
 
                   {/* IMPROVED DROPDOWN SUBMENU WITH BETTER HOVER ZONE */}
                   {activeDropdown === categoryName && (
