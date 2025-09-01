@@ -162,13 +162,13 @@ const Footer = () => {
 
             {/* Company */}
             <div>
-              <h4 className="font-serif text-lg font-semibold mb-6">Company</h4>
+              <h4 className="font-serif text-lg font-semibold mb-6 text-white">Company</h4>
               <ul className="space-y-3">
                 {companyLinks.map((link) => (
                   <li key={link.href}>
                     <Link
                       to={link.href}
-                      className="text-primary-200 hover:text-gold-300 transition-colors duration-200"
+                      className="text-gray-300 hover:text-white transition-colors duration-200"
                     >
                       {link.name}
                     </Link>
