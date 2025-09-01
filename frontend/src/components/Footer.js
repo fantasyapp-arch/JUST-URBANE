@@ -230,15 +230,7 @@ const Footer = () => {
                   </div>
                 </div>
 
-                {/* Business Hours */}
-                <div className="flex items-start space-x-3">
-                  <Clock className="h-5 w-5 text-gold-400 mt-0.5 flex-shrink-0" />
-                  <div>
-                    <p className="text-primary-200 font-medium">Business Hours</p>
-                    <p className="text-white">Mon - Fri: 9:00 AM - 6:00 PM</p>
-                    <p className="text-white">Sat: 10:00 AM - 4:00 PM</p>
-                  </div>
-                </div>
+
               </div>
             </div>
           </div>
