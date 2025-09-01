@@ -29,7 +29,7 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="bg-primary-900 text-white">
+    <footer className="bg-black text-white">
       {/* Newsletter Section */}
       <div className="bg-primary-800 py-12">
         <div className="container mx-auto px-4">
