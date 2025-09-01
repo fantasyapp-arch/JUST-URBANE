@@ -5,7 +5,7 @@ import { useAuth } from '../context/AuthContext';
 import SearchModal from './SearchModal';
 
 const Header = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState(null);
   const [dropdownTimer, setDropdownTimer] = useState(null);
