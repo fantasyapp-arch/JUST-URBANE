@@ -479,19 +479,23 @@ const ContactPage = () => {
             {[
               {
                 q: "How can I contribute an article to Just Urbane?",
-                a: "We welcome high-quality submissions from experienced writers. Please send your pitch to editorial@justurbane.com with your credentials and article outline."
+                a: "We welcome high-quality submissions from experienced writers. Please send your pitch to contact@urbaneluxury.com with your credentials and article outline."
               },
               {
                 q: "Do you accept guest posts or sponsored content?",
-                a: "Yes, we work with select brands and writers for sponsored content that aligns with our editorial standards. Contact advertising@justurbane.com for partnership opportunities."
+                a: "Yes, we work with select brands and writers for sponsored content that aligns with our editorial standards. Contact us at contact@urbaneluxury.com for partnership opportunities."
               },
               {
-                q: "How can I advertise on Just Urbane?",
-                a: "We offer various advertising solutions including display ads, sponsored articles, and newsletter placements. Contact our advertising team for a media kit and pricing."
+                q: "What are your office hours?",
+                a: "We're open Monday to Friday from 9:00 AM to 6:00 PM IST, and Saturday from 10:00 AM to 4:00 PM IST. We're closed on Sundays."
+              },
+              {
+                q: "How can I schedule a meeting at your office?",
+                a: "Please call us at 020 2992989 or email contact@urbaneluxury.com to schedule an appointment. We recommend booking in advance to ensure availability."
               },
               {
                 q: "Can I request a review of my luxury product?",
-                a: "We review select luxury products that align with our audience interests. Submit product information and samples to our editorial team for consideration."
+                a: "We review select luxury products that align with our audience interests. Submit product information to our team at contact@urbaneluxury.com for consideration."
               }
             ].map((faq, index) => (
               <div key={index} className="bg-gray-50 rounded-2xl p-6 hover:shadow-sm transition-shadow">
