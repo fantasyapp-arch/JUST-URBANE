@@ -182,7 +182,7 @@ const Header = () => {
                   className="h-16 w-auto object-contain"
                 />
                 <button
-                  onClick={() => setIsMenuOpen(false)}
+                  onClick={() => setIsMobileMenuOpen(false)}
                   className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
                 >
                   <X className="h-6 w-6 text-gray-600" />
