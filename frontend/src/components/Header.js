@@ -145,65 +145,22 @@ const Header = () => {
             })}
           </nav>
 
-          {/* GQ STYLE RIGHT SIDE */}
-          <div className="flex items-center space-x-6">
-            {/* Subscribe Button - GQ Style */}
+          {/* RIGHT SIDE - SUBSCRIBE & MENU */}
+          <div className="flex items-center space-x-4">
+            {/* Subscribe Button */}
             <Link
               to="/pricing"
-              className="hidden md:inline-flex bg-black text-white px-6 py-2 text-sm font-bold uppercase tracking-wider hover:bg-gray-800 transition-colors duration-200"
+              className="hidden md:inline-block bg-red-600 text-white px-4 py-2 text-xs font-bold uppercase tracking-wider hover:bg-red-700 transition-colors duration-200"
             >
-              Subscribe
+              SUBSCRIBE
             </Link>
 
-            {/* Search Icon */}
+            {/* Menu Button */}
             <button
-              onClick={() => setIsSearchOpen(true)}
-              className="hidden md:block p-2 hover:bg-gray-100 rounded-lg transition-colors"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="p-2 text-gray-700 hover:text-black transition-colors"
             >
-              <Search className="h-5 w-5 text-gray-700" />
-            </button>
-
-            {/* User Menu - Desktop Only */}
-            {isAuthenticated ? (
-              <div className="hidden md:block relative group">
-                <button className="p-2 hover:bg-gray-100 rounded-lg transition-colors">
-                  <User className="h-4 w-4 text-gray-600" />
-                </button>
-                <div className="absolute right-0 top-full mt-2 w-40 bg-white border border-gray-200 rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-                  <Link
-                    to="/account"
-                    className="block px-3 py-2 text-sm text-gray-700 hover:bg-gray-50 flex items-center"
-                  >
-                    <Crown className="h-3 w-3 mr-2 text-primary-500" />
-                    Account
-                  </Link>
-                  <button
-                    onClick={logout}
-                    className="block w-full text-left px-3 py-2 text-sm text-gray-700 hover:bg-gray-50"
-                  >
-                    Sign Out
-                  </button>
-                </div>
-              </div>
-            ) : (
-              <Link
-                to="/login"
-                className="hidden md:block text-sm font-medium text-gray-700 hover:text-primary-600 transition-colors px-3 py-1"
-              >
-                Sign In
-              </Link>
-            )}
-
-            {/* MOBILE MENU TOGGLE */}
-            <button
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
-            >
-              {isMenuOpen ? (
-                <X className="h-5 w-5 text-gray-600" />
-              ) : (
-                <Menu className="h-5 w-5 text-gray-600" />
-              )}
+              <Menu className="h-5 w-5" />
             </button>
           </div>
         </div>
