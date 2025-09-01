@@ -116,33 +116,6 @@ const Header = () => {
                 {categoryName}
               </Link>
             ))}
-
-                  {/* IMPROVED DROPDOWN SUBMENU WITH BETTER HOVER ZONE */}
-                  {activeDropdown === categoryName && (
-                    <div 
-                      className="absolute top-full left-0 w-52 bg-white border border-gray-200 rounded-xl shadow-2xl z-50 overflow-hidden"
-                      onMouseEnter={() => handleDropdownEnter(categoryName)}
-                      onMouseLeave={handleDropdownLeave}
-                    >
-                      {/* Invisible bridge to prevent gap issues */}
-                      <div className="absolute -top-2 left-0 right-0 h-2 bg-transparent"></div>
-                      
-                      <div className="py-3">
-                        {category.subcategories.map((sub) => (
-                          <Link
-                            key={sub}
-                            to={`/category/${category.slug}/${sub.toLowerCase()}`}
-                            className="block px-5 py-3 text-sm text-gray-700 hover:bg-gradient-to-r hover:from-primary-50 hover:to-primary-100 hover:text-primary-700 transition-all duration-200 font-medium"
-                          >
-                            {sub}
-                          </Link>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-                </div>
-              );
-            })}
           </nav>
 
           {/* RIGHT SIDE - SUBSCRIBE & MENU */}
