@@ -61,45 +61,46 @@ const Footer = () => {
 
       {/* Main Footer */}
       <div className="py-16">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-12">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
             {/* Brand */}
-            <div className="lg:col-span-2">
+            <div className="md:col-span-2">
               <Link to="/" className="inline-block mb-6">
                 <img 
                   src="https://customer-assets.emergentagent.com/job_urbane-nexus/artifacts/w4pbaa92_Untitled%20design-10.png" 
                   alt="JUST URBANE" 
-                  className="h-16 w-auto max-w-[300px] object-contain"
+                  className="h-10 w-auto"
                   onError={(e) => {
                     e.target.style.display = 'none';
                     e.target.nextSibling.style.display = 'block';
                   }}
                 />
                 <div 
-                  className="font-serif text-2xl font-black tracking-tight text-white" 
+                  className="font-serif text-xl font-black text-white tracking-tight" 
                   style={{ display: 'none' }}
                 >
                   JUST URBANE
                 </div>
               </Link>
-              <p className="text-primary-200 mb-6 leading-relaxed">
-                India's premier luxury lifestyle magazine, featuring the finest in fashion, culture, travel, and modern living.
+              <p className="text-gray-300 mb-8 text-lg leading-relaxed max-w-lg">
+                Your premier destination for luxury lifestyle, sophisticated culture, 
+                and the finest in contemporary living. Experience the art of refined taste.
               </p>
               <div className="flex space-x-4">
                 <a
                   href="https://www.instagram.com/justurbane"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 bg-primary-800 hover:bg-gold-500 rounded-full flex items-center justify-center transition-colors duration-200"
+                  className="w-10 h-10 bg-gray-800 hover:bg-white hover:text-black rounded-full flex items-center justify-center transition-colors duration-200"
                   aria-label="Follow us on Instagram"
                 >
                   <Instagram className="h-5 w-5" />
                 </a>
                 <a
                   href="https://www.facebook.com/justurbane"
-                  target="_blank"
+                  target="_blank" 
                   rel="noopener noreferrer"
-                  className="w-10 h-10 bg-primary-800 hover:bg-gold-500 rounded-full flex items-center justify-center transition-colors duration-200"
+                  className="w-10 h-10 bg-gray-800 hover:bg-white hover:text-black rounded-full flex items-center justify-center transition-colors duration-200"
                   aria-label="Follow us on Facebook"
                 >
                   <Facebook className="h-5 w-5" />
@@ -108,7 +109,7 @@ const Footer = () => {
                   href="https://www.linkedin.com/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 bg-primary-800 hover:bg-gold-500 rounded-full flex items-center justify-center transition-colors duration-200"
+                  className="w-10 h-10 bg-gray-800 hover:bg-white hover:text-black rounded-full flex items-center justify-center transition-colors duration-200"
                   aria-label="Connect with us on LinkedIn"
                 >
                   <Linkedin className="h-5 w-5" />
@@ -117,7 +118,7 @@ const Footer = () => {
                   href="https://www.x.com/justurbane"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 bg-primary-800 hover:bg-gold-500 rounded-full flex items-center justify-center transition-colors duration-200"
+                  className="w-10 h-10 bg-gray-800 hover:bg-white hover:text-black rounded-full flex items-center justify-center transition-colors duration-200"
                   aria-label="Follow us on X (Twitter)"
                 >
                   <Twitter className="h-5 w-5" />
