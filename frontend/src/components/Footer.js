@@ -6,14 +6,11 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   const categories = [
-    { name: 'Style', slug: 'style' },
-    { name: 'Grooming', slug: 'grooming' },
-    { name: 'Culture', slug: 'culture' },
+    { name: 'Fashion', slug: 'fashion' },
     { name: 'Watches', slug: 'watches' },
-    { name: 'Tech', slug: 'tech' },
-    { name: 'Fitness', slug: 'fitness' },
-    { name: 'Travel', slug: 'travel' },
-    { name: 'Entertainment', slug: 'entertainment' },
+    { name: 'Lifestyle', slug: 'lifestyle' },
+    { name: 'Culture', slug: 'culture' },
+    { name: 'Videos', slug: 'videos' },
   ];
 
   const companyLinks = [
