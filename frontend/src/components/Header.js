@@ -212,7 +212,7 @@ const Header = () => {
                           key={sub}
                           to={`/category/${category.slug}/${sub.toLowerCase()}`}
                           className="block p-2 text-sm text-gray-600 hover:text-primary-600 hover:bg-primary-25 rounded transition-colors"
-                          onClick={() => setIsMenuOpen(false)}
+                          onClick={() => setIsMobileMenuOpen(false)}
                         >
                           {sub}
                         </Link>
