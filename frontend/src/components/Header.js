@@ -238,7 +238,7 @@ const Header = () => {
                         <button
                           onClick={() => {
                             logout();
-                            setIsMenuOpen(false);
+                            setIsMobileMenuOpen(false);
                           }}
                           className="flex items-center w-full p-3 text-gray-700 hover:bg-gray-50 rounded-lg font-medium transition-colors"
                         >
