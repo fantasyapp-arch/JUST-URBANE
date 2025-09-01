@@ -71,24 +71,24 @@ const ContactPage = () => {
 
   const departments = [
     {
+      title: 'General Inquiries',
+      email: 'contact@urbaneluxury.com',
+      description: 'All general questions, support, and information requests'
+    },
+    {
       title: 'Editorial Team',
-      email: 'editorial@justurbane.com',
+      email: 'contact@urbaneluxury.com',
       description: 'Story submissions, press releases, editorial partnerships'
     },
     {
       title: 'Advertising & Partnerships',
-      email: 'advertising@justurbane.com',
+      email: 'contact@urbaneluxury.com',
       description: 'Brand collaborations, sponsored content, advertising opportunities'
     },
     {
       title: 'Technical Support',
-      email: 'support@justurbane.com',
+      email: 'contact@urbaneluxury.com',
       description: 'Website issues, subscription problems, account management'
-    },
-    {
-      title: 'Press & Media',
-      email: 'press@justurbane.com',
-      description: 'Media inquiries, press kit requests, interview opportunities'
     }
   ];
 
