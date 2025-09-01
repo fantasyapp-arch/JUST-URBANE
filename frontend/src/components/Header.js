@@ -325,7 +325,7 @@ const Header = () => {
                       <Link
                         to="/pricing"
                         className="block bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-600 hover:to-primary-700 text-white font-bold py-3 px-4 rounded-xl text-center transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
-                        onClick={() => setIsMenuOpen(false)}
+                        onClick={() => setIsMobileMenuOpen(false)}
                       >
                         <span className="flex items-center justify-center">
                           <Crown className="h-4 w-4 mr-2" />
