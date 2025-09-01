@@ -288,7 +288,7 @@ const Header = () => {
                     <Link
                       to="/subscription"
                       className="block p-3 text-primary-600 hover:bg-primary-50 rounded-lg font-semibold transition-colors"
-                      onClick={() => setIsMenuOpen(false)}
+                      onClick={() => setIsMobileMenuOpen(false)}
                     >
                       Subscription
                     </Link>
