@@ -118,7 +118,7 @@ const Header = () => {
                 >
                   <Link
                     to={`/category/${category.slug}`}
-                    className="flex items-center text-gray-700 hover:text-primary-600 font-medium transition-colors duration-200 text-sm uppercase tracking-wide py-3 px-2"
+                    className="font-bold text-gray-900 hover:text-gray-600 transition-colors duration-200 uppercase text-sm tracking-wider py-2"
                   >
                     {categoryName}
                     <ChevronDown className="h-3 w-3 ml-1 transform group-hover:rotate-180 transition-transform duration-200" />
