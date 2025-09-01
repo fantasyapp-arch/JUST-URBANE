@@ -58,10 +58,7 @@ function Layout() {
   return (
     <div className="App min-h-screen bg-gray-50">
       <Header />
-      <OfferBanner 
-        isVisible={showOfferBanner} 
-        onClose={() => setShowOfferBanner(false)} 
-      />
+
       <main className="flex-1">
         <Outlet />
       </main>
