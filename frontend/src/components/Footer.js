@@ -17,11 +17,10 @@ const Footer = () => {
   ];
 
   const companyLinks = [
-    { name: 'About', href: '/about' },
-    { name: 'Contact', href: '/contact' },
-    { name: 'Editorial Policy', href: '/editorial-policy' },
-    { name: 'Advertise', href: '/advertise' },
-    { name: 'Careers', href: '/careers' },
+    { name: 'About Us', href: '/about' },
+    { name: 'Contact', href: '/contact' }, 
+    { name: 'Privacy Policy', href: '/privacy' },
+    { name: 'Terms of Service', href: '/terms' },
   ];
 
   const serviceLinks = [
