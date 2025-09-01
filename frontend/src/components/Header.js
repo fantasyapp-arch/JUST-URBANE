@@ -250,7 +250,7 @@ const Header = () => {
                       <Link
                         to="/login"
                         className="flex items-center p-3 text-gray-700 hover:bg-gray-50 rounded-lg font-medium transition-colors"
-                        onClick={() => setIsMenuOpen(false)}
+                        onClick={() => setIsMobileMenuOpen(false)}
                       >
                         <User className="h-5 w-5 mr-3 text-primary-500" />
                         Sign In
