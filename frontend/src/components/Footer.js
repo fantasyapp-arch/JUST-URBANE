@@ -31,26 +31,27 @@ const Footer = () => {
   return (
     <footer className="bg-black text-white">
       {/* Newsletter Section */}
-      <div className="bg-primary-800 py-12">
-        <div className="container mx-auto px-4">
-          <div className="text-center max-w-2xl mx-auto">
-            <h3 className="font-serif text-2xl font-bold mb-4">
+      <div className="bg-gray-900 py-16">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="text-center max-w-3xl mx-auto">
+            <h3 className="text-3xl font-serif font-bold mb-4 text-white">
               Stay Updated with Just Urbane
             </h3>
-            <p className="text-primary-200 mb-6">
-              Get the latest in luxury lifestyle, fashion trends, and exclusive content delivered to your inbox.
+            <p className="text-gray-300 mb-8 text-lg">
+              Get the latest in luxury lifestyle, culture, and premium experiences delivered to your inbox
             </p>
+            
             <form className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
               <input
                 type="email"
-                placeholder="Enter your email"
-                className="flex-1 px-4 py-3 rounded-lg text-gray-900 border border-primary-600 focus:ring-2 focus:ring-gold-500 focus:border-transparent outline-none"
+                placeholder="Enter your email address"
+                className="flex-1 px-4 py-3 border border-gray-600 bg-gray-800 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-white focus:border-transparent"
+                required
               />
               <button
                 type="submit"
-                className="bg-gold-500 hover:bg-gold-600 text-white px-6 py-3 rounded-lg font-semibold transition-colors duration-200 flex items-center justify-center gap-2"
+                className="bg-white text-black px-8 py-3 font-semibold hover:bg-gray-100 transition-colors duration-200"
               >
-                <Mail className="h-4 w-4" />
                 Subscribe
               </button>
             </form>
