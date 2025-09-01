@@ -277,7 +277,7 @@ const Header = () => {
                     <Link
                       to="/issues"
                       className="flex items-center p-3 bg-gradient-to-r from-amber-50 to-amber-100 text-amber-800 border border-amber-200 hover:from-amber-100 hover:to-amber-200 rounded-lg font-semibold transition-all duration-200 group"
-                      onClick={() => setIsMenuOpen(false)}
+                      onClick={() => setIsMobileMenuOpen(false)}
                     >
                       <Crown className="h-5 w-5 mr-3 text-amber-600 group-hover:rotate-12 transition-transform" />
                       <span>Digital Magazine</span>
