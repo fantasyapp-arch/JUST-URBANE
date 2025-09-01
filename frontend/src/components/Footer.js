@@ -179,56 +179,45 @@ const Footer = () => {
 
             {/* Contact Information */}
             <div>
-              <h4 className="font-serif text-lg font-semibold mb-6">Contact Us</h4>
+              <h4 className="font-serif text-lg font-semibold mb-6 text-white">Contact</h4>
               <div className="space-y-4">
                 {/* Phone */}
-                <div className="flex items-start space-x-3">
-                  <Phone className="h-5 w-5 text-gold-400 mt-0.5 flex-shrink-0" />
-                  <div>
-                    <p className="text-primary-200 font-medium">Phone</p>
-                    <a 
-                      href="tel:02029992989" 
-                      className="text-white hover:text-gold-300 transition-colors duration-200"
-                    >
-                      020 2992989
-                    </a>
-                  </div>
+                <div>
+                  <p className="text-gray-300 font-medium mb-1">Phone</p>
+                  <a 
+                    href="tel:02029992989" 
+                    className="text-white hover:text-gray-300 transition-colors duration-200"
+                  >
+                    020 2992989
+                  </a>
                 </div>
 
                 {/* Email */}
-                <div className="flex items-start space-x-3">
-                  <Mail className="h-5 w-5 text-gold-400 mt-0.5 flex-shrink-0" />
-                  <div>
-                    <p className="text-primary-200 font-medium">Email</p>
-                    <a 
-                      href="mailto:contact@urbaneluxury.com" 
-                      className="text-white hover:text-gold-300 transition-colors duration-200"
-                    >
-                      contact@urbaneluxury.com
-                    </a>
-                  </div>
+                <div>
+                  <p className="text-gray-300 font-medium mb-1">Email</p>
+                  <a 
+                    href="mailto:contact@urbaneluxury.com" 
+                    className="text-white hover:text-gray-300 transition-colors duration-200"
+                  >
+                    contact@urbaneluxury.com
+                  </a>
                 </div>
 
                 {/* Address */}
-                <div className="flex items-start space-x-3">
-                  <MapPin className="h-5 w-5 text-gold-400 mt-0.5 flex-shrink-0" />
-                  <div>
-                    <p className="text-primary-200 font-medium">Address</p>
-                    <a 
-                      href="https://www.google.com/maps/place/Urbane+Jets/@18.4987751,73.8208324,17z/data=!3m1!4b1!4m6!3m5!1s0x3bc2bf49b8f7ac69:0x8c6a0211375cbaea!8m2!3d18.4987751!4d73.8208324!16s%2Fg%2F11h3jgylnr?entry=ttu&g_ep=EgoyMDI1MDgyNS4wIKXMDSoASAFQAw%3D%3D"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-white hover:text-gold-300 transition-colors duration-200 leading-relaxed"
-                    >
-                      10th floor, Gokhale Business Bay,<br />
-                      A-1001, opp. City Pride,<br />
-                      Paschimanagri, Kothrud,<br />
-                      Pune, Maharashtra 411038
-                    </a>
-                  </div>
+                <div>
+                  <p className="text-gray-300 font-medium mb-1">Address</p>
+                  <a 
+                    href="https://www.google.com/maps/place/Urbane+Jets/@18.4987751,73.8208324,17z/data=!3m1!4b1!4m6!3m5!1s0x3bc2bf49b8f7ac69:0x8c6a0211375cbaea!8m2!3d18.4987751!4d73.8208324!16s%2Fg%2F11h3jgylnr?entry=ttu&g_ep=EgoyMDI1MDgyNS4wIKXMDSoASAFQAw%3D%3D"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-white hover:text-gray-300 transition-colors duration-200 leading-relaxed text-sm"
+                  >
+                    10th floor, Gokhale Business Bay,<br />
+                    A-1001, opp. City Pride,<br />
+                    Paschimanagri, Kothrud,<br />
+                    Pune, Maharashtra 411038
+                  </a>
                 </div>
-
-
               </div>
             </div>
           </div>
