@@ -130,13 +130,13 @@ const Footer = () => {
             <div>
               <h4 className="font-serif text-lg font-semibold mb-6 text-white">Categories</h4>
               <ul className="space-y-3">
-                {categoryLinks.map((link) => (
-                  <li key={link.href}>
+                {categories.map((category) => (
+                  <li key={category.slug}>
                     <Link
-                      to={link.href}
+                      to={`/category/${category.slug}`}
                       className="text-gray-300 hover:text-white transition-colors duration-200"
                     >
-                      {link.name}
+                      {category.name}
                     </Link>
                   </li>
                 ))}
