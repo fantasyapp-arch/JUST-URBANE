@@ -985,6 +985,12 @@ metadata:
   google_maps_integrated: true
   visual_maps_added: true
   contact_optimization_completed: "2025-08-31T06:08:00"
+  header_improved_gq_style: true
+  offer_banner_implemented: true
+  header_navigation_improved: true
+  subscribe_button_styled: true
+  promotional_banner_added: true
+  header_optimization_completed: "2025-09-01T08:30:00"
 
 test_plan:
   current_focus:
