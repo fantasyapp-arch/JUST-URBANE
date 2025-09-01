@@ -67,7 +67,7 @@ const Footer = () => {
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-12">
             {/* Brand */}
-            <div className="lg:col-span-1">
+            <div className="lg:col-span-2">
               <Link to="/" className="inline-block mb-6">
                 <img 
                   src="https://customer-assets.emergentagent.com/job_urbane-nexus/artifacts/w4pbaa92_Untitled%20design-10.png" 
