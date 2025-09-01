@@ -42,21 +42,21 @@ const ContactPage = () => {
     {
       icon: Mail,
       title: 'Email Us',
-      details: 'editorial@justurbane.com',
-      description: 'For editorial inquiries and general questions',
+      details: 'contact@urbaneluxury.com',
+      description: 'For all inquiries and general questions',
       color: 'text-blue-500'
     },
     {
       icon: Phone,
       title: 'Call Us',
-      details: '+91 98765 43210',
-      description: 'Monday to Friday, 10 AM - 6 PM IST',
+      details: '020 2992989',
+      description: 'Monday to Friday, 9 AM - 6 PM IST',
       color: 'text-green-500'
     },
     {
       icon: MapPin,
       title: 'Visit Us',
-      details: 'Mumbai, Maharashtra, India',
+      details: 'Pune, Maharashtra, India',
       description: 'By appointment only',
       color: 'text-red-500'
     },
