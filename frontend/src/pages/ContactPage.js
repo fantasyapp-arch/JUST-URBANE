@@ -489,10 +489,7 @@ const ContactPage = () => {
                 q: "Do you accept guest posts or sponsored content?",
                 a: "Yes, we work with select brands and writers for sponsored content that aligns with our editorial standards. Contact us at contact@urbaneluxury.com for partnership opportunities."
               },
-              {
-                q: "What are your office hours?",
-                a: "We're open Monday to Friday from 9:00 AM to 6:00 PM IST, and Saturday from 10:00 AM to 4:00 PM IST. We're closed on Sundays."
-              },
+
               {
                 q: "How can I schedule a meeting at your office?",
                 a: "Please call us at 020 2992989 or email contact@urbaneluxury.com to schedule an appointment. We recommend booking in advance to ensure availability."
