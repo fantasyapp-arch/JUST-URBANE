@@ -199,7 +199,7 @@ const Header = () => {
                     <Link
                       to={`/category/${category.slug}`}
                       className="flex items-center justify-between p-3 text-gray-900 hover:bg-primary-50 hover:text-primary-600 rounded-lg font-semibold transition-all duration-200"
-                      onClick={() => setIsMenuOpen(false)}
+                      onClick={() => setIsMobileMenuOpen(false)}
                     >
                       <span className="text-lg">{category.name}</span>
                       <ChevronRight className="h-5 w-5" />
