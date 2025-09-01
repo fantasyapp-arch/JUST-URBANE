@@ -53,8 +53,6 @@ const queryClient = new QueryClient({
 
 // Layout component
 function Layout() {
-  const [showOfferBanner, setShowOfferBanner] = React.useState(true);
-
   return (
     <div className="App min-h-screen bg-gray-50">
       <Header />
