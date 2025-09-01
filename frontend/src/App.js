@@ -9,6 +9,7 @@ import { AuthProvider } from './context/AuthContext';
 // Components
 import Header from './components/Header';
 import Footer from './components/Footer';
+import OfferBanner from './components/OfferBanner';
 
 // Pages
 import HomePage from './pages/HomePage';
