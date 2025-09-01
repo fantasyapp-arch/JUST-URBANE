@@ -58,24 +58,7 @@ const Header = () => {
     }
   ];
 
-  // Main important categories for clean header
-  const mainHeaderCategories = ['Fashion', 'Tech', 'Auto', 'Travel', 'People'];
 
-  // Improved dropdown handlers with delay
-  const handleDropdownEnter = (categoryName) => {
-    if (dropdownTimer) {
-      clearTimeout(dropdownTimer);
-      setDropdownTimer(null);
-    }
-    setActiveDropdown(categoryName);
-  };
-
-  const handleDropdownLeave = () => {
-    const timer = setTimeout(() => {
-      setActiveDropdown(null);
-    }, 300); // 300ms delay before closing
-    setDropdownTimer(timer);
-  };
 
   return (
     <header className="bg-white border-b border-gray-200 sticky top-0 z-50">
