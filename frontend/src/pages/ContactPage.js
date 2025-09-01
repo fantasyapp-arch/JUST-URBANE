@@ -392,13 +392,13 @@ const ContactPage = () => {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a 
-                href="mailto:editorial@justurbane.com"
+                href="mailto:contact@urbaneluxury.com"
                 className="btn-primary bg-gold-500 hover:bg-gold-600"
               >
                 Email Us
               </a>
               <a 
-                href="tel:+919876543210"
+                href="tel:02029992989"
                 className="btn-secondary"
               >
                 Call Now
