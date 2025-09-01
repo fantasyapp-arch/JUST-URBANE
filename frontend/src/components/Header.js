@@ -106,9 +106,7 @@ const Header = () => {
                 <span>Pune, Maharashtra</span>
               </div>
             </div>
-            <div className="text-primary-200">
-              <span>Mon-Fri: 9AM-6PM | Sat: 10AM-4PM</span>
-            </div>
+
           </div>
         </div>
       </div>
