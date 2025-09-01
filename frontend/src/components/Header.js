@@ -81,7 +81,39 @@ const Header = () => {
   };
 
   return (
-    <header className="bg-white shadow-lg sticky top-0 z-50">
+    <>
+      {/* TOP CONTACT BAR */}
+      <div className="bg-primary-900 text-white py-2 hidden md:block">
+        <div className="container mx-auto px-4">
+          <div className="flex items-center justify-between text-sm">
+            <div className="flex items-center space-x-6">
+              <a 
+                href="tel:02029992989" 
+                className="flex items-center space-x-2 hover:text-gold-300 transition-colors"
+              >
+                <Phone className="h-4 w-4" />
+                <span>020 2992989</span>
+              </a>
+              <a 
+                href="mailto:contact@urbaneluxury.com" 
+                className="flex items-center space-x-2 hover:text-gold-300 transition-colors"
+              >
+                <Mail className="h-4 w-4" />
+                <span>contact@urbaneluxury.com</span>
+              </a>
+              <div className="flex items-center space-x-2 text-primary-200">
+                <MapPin className="h-4 w-4" />
+                <span>Pune, Maharashtra</span>
+              </div>
+            </div>
+            <div className="text-primary-200">
+              <span>Mon-Fri: 9AM-6PM | Sat: 10AM-4PM</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <header className="bg-white shadow-lg sticky top-0 z-50">
       {/* CLEAN MAIN HEADER - NO BLUE STRIP */}
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-24 lg:h-32">{/* BIGGER NAVBAR FOR BIGGER LOGO */}
