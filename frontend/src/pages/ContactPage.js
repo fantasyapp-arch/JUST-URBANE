@@ -322,6 +322,139 @@ const ContactPage = () => {
         </div>
       </div>
 
+      {/* Location Section */}
+      <div className="bg-gray-50 py-20">
+        <div className="container mx-auto px-4">
+          <motion.div 
+            className="text-center mb-16"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.6 }}
+          >
+            <h2 className="section-title">Visit Our Office</h2>
+            <p className="text-gray-600 max-w-2xl mx-auto">
+              Located in the heart of Pune, our office is easily accessible and designed for professional meetings.
+            </p>
+          </motion.div>
+
+          <div className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
+            {/* Address Details */}
+            <motion.div 
+              className="bg-white rounded-2xl p-8 shadow-sm"
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 0.8 }}
+            >
+              <div className="flex items-center gap-3 mb-6">
+                <MapPin className="h-8 w-8 text-gold-500" />
+                <h3 className="text-2xl font-serif font-bold text-primary-900">Office Address</h3>
+              </div>
+
+              <div className="space-y-4">
+                <div className="p-4 bg-gray-50 rounded-lg">
+                  <h4 className="font-semibold text-gray-900 mb-2">Just Urbane Office</h4>
+                  <p className="text-gray-700 leading-relaxed">
+                    10th floor, Gokhale Business Bay,<br />
+                    A-1001, opp. City Pride,<br />
+                    Paschimanagri, Kothrud,<br />
+                    Pune, Maharashtra 411038<br />
+                    India
+                  </p>
+                </div>
+
+                <div className="grid sm:grid-cols-2 gap-4">
+                  <div className="flex items-center gap-3 p-3 bg-blue-50 rounded-lg">
+                    <Phone className="h-5 w-5 text-blue-600" />
+                    <div>
+                      <p className="text-sm text-gray-600">Phone</p>
+                      <a href="tel:02029992989" className="font-medium text-blue-600 hover:text-blue-700">
+                        020 2992989
+                      </a>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-3 p-3 bg-green-50 rounded-lg">
+                    <Mail className="h-5 w-5 text-green-600" />
+                    <div>
+                      <p className="text-sm text-gray-600">Email</p>
+                      <a href="mailto:contact@urbaneluxury.com" className="font-medium text-green-600 hover:text-green-700">
+                        contact@urbaneluxury.com
+                      </a>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="pt-4">
+                  <a
+                    href="https://www.google.com/maps/place/Urbane+Jets/@18.4987751,73.8208324,17z/data=!3m1!4b1!4m6!3m5!1s0x3bc2bf49b8f7ac69:0x8c6a0211375cbaea!8m2!3d18.4987751!4d73.8208324!16s%2Fg%2F11h3jgylnr?entry=ttu&g_ep=EgoyMDI1MDgyNS4wIKXMDSoASAFQAw%3D%3D"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 bg-gold-500 hover:bg-gold-600 text-white font-semibold px-6 py-3 rounded-lg transition-colors duration-200"
+                  >
+                    <MapPin className="h-5 w-5" />
+                    View on Google Maps
+                  </a>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Transportation & Directions */}
+            <motion.div 
+              className="bg-white rounded-2xl p-8 shadow-sm"
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 1 }}
+            >
+              <h3 className="text-2xl font-serif font-bold text-primary-900 mb-6">Getting Here</h3>
+              
+              <div className="space-y-6">
+                <div>
+                  <h4 className="font-semibold text-gray-900 mb-3 flex items-center gap-2">
+                    <div className="w-3 h-3 bg-blue-500 rounded-full"></div>
+                    By Metro
+                  </h4>
+                  <p className="text-gray-700 pl-5">
+                    Nearest Metro Station: Vanaz Metro Station (2.5 km away)<br />
+                    Take a taxi or bus from the metro station to reach our office.
+                  </p>
+                </div>
+
+                <div>
+                  <h4 className="font-semibold text-gray-900 mb-3 flex items-center gap-2">
+                    <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                    By Car
+                  </h4>
+                  <p className="text-gray-700 pl-5">
+                    Ample parking available in the building.<br />
+                    Located opposite City Pride complex for easy identification.
+                  </p>
+                </div>
+
+                <div>
+                  <h4 className="font-semibold text-gray-900 mb-3 flex items-center gap-2">
+                    <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                    By Bus
+                  </h4>
+                  <p className="text-gray-700 pl-5">
+                    Multiple bus routes serve the Kothrud area.<br />
+                    Nearest bus stop: Paschimanagri (500m walking distance).
+                  </p>
+                </div>
+
+                <div className="bg-amber-50 p-4 rounded-lg border-l-4 border-amber-400">
+                  <h4 className="font-semibold text-amber-800 mb-2">💡 Visiting Tips</h4>
+                  <ul className="text-amber-700 text-sm space-y-1">
+                    <li>• Please schedule appointments in advance</li>
+                    <li>• Visitor parking available on basement levels</li>
+                    <li>• Building has elevator access to 10th floor</li>
+                    <li>• Reception will guide you to our office</li>
+                  </ul>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </div>
+
       {/* FAQ Section */}
       <div className="bg-white py-20">
         <div className="container mx-auto px-4">
