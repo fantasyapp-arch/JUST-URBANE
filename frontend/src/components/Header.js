@@ -103,7 +103,7 @@ const Header = () => {
             {/* Subscribe Button */}
             <Link
               to="/pricing"
-              className="hidden md:inline-block bg-red-600 text-white px-4 py-2 text-xs font-bold uppercase tracking-wider hover:bg-red-700 transition-colors duration-200"
+              className="hidden md:inline-block bg-amber-500 text-white px-4 py-2 text-xs font-bold uppercase tracking-wider hover:bg-amber-600 transition-colors duration-200"
             >
               SUBSCRIBE
             </Link>
