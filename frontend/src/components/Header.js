@@ -103,7 +103,10 @@ const Header = () => {
             {/* Subscribe Button */}
             <Link
               to="/pricing"
-              className="hidden md:inline-block bg-amber-500 text-white px-4 py-2 text-xs font-bold uppercase tracking-wider hover:bg-amber-600 transition-colors duration-200"
+              className="hidden md:inline-block text-white px-4 py-2 text-xs font-bold uppercase tracking-wider transition-colors duration-200"
+              style={{ backgroundColor: '#263483' }}
+              onMouseEnter={(e) => e.target.style.backgroundColor = '#1e2968'}
+              onMouseLeave={(e) => e.target.style.backgroundColor = '#263483'}
             >
               SUBSCRIBE
             </Link>
