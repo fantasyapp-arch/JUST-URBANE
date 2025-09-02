@@ -85,13 +85,26 @@ const Header = () => {
             </div>
           </Link>
 
-          {/* CENTER NAVIGATION - EXACT GQ STYLE */}
+          {/* DESKTOP NAVIGATION */}
           <nav className="hidden md:flex items-center space-x-12 flex-1 justify-center">
             {['FASHION', 'LIFESTYLE', 'WATCHES', 'CULTURE', 'VIDEOS'].map((categoryName) => (
               <Link
                 key={categoryName}
                 to={`/category/${categoryName.toLowerCase()}`}
                 className="text-gray-900 hover:text-black font-medium text-sm uppercase tracking-wide transition-colors duration-200"
+              >
+                {categoryName}
+              </Link>
+            ))}
+          </nav>
+
+          {/* MOBILE NAVIGATION - SELECTIVE CATEGORIES */}
+          <nav className="md:hidden flex items-center space-x-6 flex-1 justify-center px-4">
+            {['FASHION', 'WATCHES', 'CULTURE'].map((categoryName) => (
+              <Link
+                key={categoryName}
+                to={`/category/${categoryName.toLowerCase()}`}
+                className="text-gray-900 hover:text-black font-medium text-xs uppercase tracking-wide transition-colors duration-200"
               >
                 {categoryName}
               </Link>
@@ -111,7 +124,7 @@ const Header = () => {
             {/* Menu Button */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="p-2 text-gray-700 hover:text-black transition-colors"
+              className="p-2 text-gray-700 hover:text-black transition-colors md:hidden"
             >
               <Menu className="h-5 w-5" />
             </button>
