@@ -71,14 +71,14 @@ const Header = () => {
             <img 
               src="https://customer-assets.emergentagent.com/job_urbane-nexus/artifacts/w4pbaa92_Untitled%20design-10.png" 
               alt="JUST URBANE" 
-              className="h-12 w-auto object-contain"
+              className="h-14 w-auto object-contain"
               onError={(e) => {
                 e.target.style.display = 'none';
                 e.target.nextSibling.style.display = 'block';
               }}
             />
             <div 
-              className="font-serif text-2xl font-black text-gray-900" 
+              className="font-serif text-3xl font-black text-gray-900" 
               style={{ display: 'none' }}
             >
               JUST URBANE
