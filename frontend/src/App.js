@@ -30,6 +30,7 @@ import RegisterPage from './pages/RegisterPage';
 import PaymentSuccessPage from './pages/PaymentSuccessPage';
 import ProfilePage from './pages/ProfilePage';
 import SubcategoryPage from './pages/SubcategoryPage';
+import RoyalAtlantisPage from './pages/RoyalAtlantisPage';
 
 // Suppress React Router v7 future flag warnings
 const originalWarn = console.warn;
