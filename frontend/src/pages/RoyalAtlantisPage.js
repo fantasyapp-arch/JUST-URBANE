@@ -12,7 +12,7 @@ const RoyalAtlantisPage = () => {
     author: "Chahat Dalal",
     date: "July 2022",
     readTime: "8 min read",
-    heroImage: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+    heroImage: "https://customer-assets.emergentagent.com/job_slick-page-turner/artifacts/jcqtiy5s_phy2015.rst.ath.atlantiswithpalm-angle-colour-hr.jpg",
     tags: ['Dubai', 'Luxury Travel', 'Atlantis', 'Palm Jumeirah', 'Resort', 'Aquaventure', 'Luxury Stays']
   };
 
