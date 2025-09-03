@@ -50,6 +50,22 @@
     @apply card overflow-hidden cursor-pointer;
   }
   
+  .animate-fadeIn {
+    animation: fadeIn 0.3s ease-in-out;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    max-height: 0;
+  }
+  to {
+    opacity: 1;
+    max-height: 500px;
+  }
+}
+  
   .article-card-image {
     @apply w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500;
   }
