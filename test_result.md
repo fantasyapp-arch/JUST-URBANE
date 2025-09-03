@@ -1018,6 +1018,9 @@ metadata:
   newsletter_duplicate_removal_verified: true
   newsletter_duplicate_removal_success: true
   newsletter_verification_date: "2025-01-03T11:25:00"
+  footer_mobile_responsiveness_tested: true
+  footer_mobile_responsiveness_success: true
+  footer_mobile_testing_date: "2025-01-03T14:36:00"
 
 test_plan:
   current_focus:
