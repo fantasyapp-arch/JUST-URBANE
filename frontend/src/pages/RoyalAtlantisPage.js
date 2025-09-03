@@ -137,12 +137,12 @@ const RoyalAtlantisPage = () => {
 
           <figure className="my-8">
             <img 
-              src="https://images.unsplash.com/photo-1613395877344-13d4a8e0d49e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-              alt="The iconic Atlantis The Palm Dubai with its majestic architecture"
+              src="https://customer-assets.emergentagent.com/job_slick-page-turner/artifacts/4j4cxvva_phy2018.rst.ath.atpdayshot-landscape-hr-2.jpg"
+              alt="Atlantis The Palm Dubai - A magnificent view during daytime showcasing the resort's grandeur"
               className="w-full h-64 md:h-96 object-cover rounded-lg shadow-lg"
             />
             <figcaption className="text-sm text-gray-600 mt-3 text-center italic">
-              The iconic Atlantis The Palm Dubai with its majestic architecture
+              Atlantis The Palm Dubai - A magnificent view during daytime showcasing the resort's grandeur
             </figcaption>
           </figure>
 
