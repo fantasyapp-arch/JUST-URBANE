@@ -62,11 +62,30 @@ const Header = () => {
 
   return (
     <header className="bg-white border-b border-gray-200 sticky top-0 z-50">
-      {/* HEADER WITHOUT LOGO */}
+      {/* PERFECT STRAIGHT HEADER */}
       <div className="max-w-6xl mx-auto px-6">
         <div className="flex items-center justify-between h-16">
           
-          {/* CENTER NAVIGATION - FULL WIDTH */}
+          {/* LOGO - LEFT SIDE */}
+          <Link to="/" className="flex-shrink-0">
+            <img 
+              src="https://customer-assets.emergentagent.com/job_urbane-nexus/artifacts/w4pbaa92_Untitled%20design-10.png" 
+              alt="JUST URBANE" 
+              className="h-32 w-auto object-contain"
+              onError={(e) => {
+                e.target.style.display = 'none';
+                e.target.nextSibling.style.display = 'block';
+              }}
+            />
+            <div 
+              className="font-serif text-7xl font-black text-gray-900" 
+              style={{ display: 'none' }}
+            >
+              JUST URBANE
+            </div>
+          </Link>
+
+          {/* CENTER NAVIGATION - EXACT GQ STYLE */}
           <nav className="hidden md:flex items-center space-x-12 flex-1 justify-center">
             {['FASHION', 'LIFESTYLE', 'WATCHES', 'CULTURE', 'VIDEOS'].map((categoryName) => (
               <Link
