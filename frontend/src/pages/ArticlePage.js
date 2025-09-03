@@ -142,9 +142,9 @@ const ArticlePage = () => {
     luxury: "Live Well"
   };
 
-  const categoryLabel = categoryLabels[article.category] || "Category";
+  const categoryLabel = categoryLabels[displayArticle?.category] || "Category";
   const canReadPremium = isAuthenticated && user?.is_premium && user?.subscription_status === 'active';
-  const isLocked = article?.is_locked || (article?.is_premium && !canReadPremium);
+  const isLocked = displayArticle?.is_locked || (displayArticle?.is_premium && !canReadPremium);
 
   const openMagazineReader = () => {
     if (allArticles && allArticles.length > 0) {
