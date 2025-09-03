@@ -949,7 +949,7 @@ frontend:
 metadata:
   created_by: "testing_agent"
   version: "2.9"
-  test_sequence: 11
+  test_sequence: 12
   run_ui: true
   frontend_tested: true
   backend_tested: true
@@ -1003,6 +1003,9 @@ metadata:
   subscribe_button_styled: true
   promotional_banner_added: true
   header_optimization_completed: "2025-09-01T08:30:00"
+  newsletter_duplicate_removal_verified: true
+  newsletter_duplicate_removal_success: true
+  newsletter_verification_date: "2025-01-03T11:25:00"
 
 test_plan:
   current_focus:
