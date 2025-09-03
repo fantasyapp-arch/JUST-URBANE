@@ -101,7 +101,7 @@ const ArticlePage = () => {
   // Use fallback article if API fails and slug matches
   const displayArticle = article || (slug === 'atlantis-the-palm-dubai' ? atlantisArticle : null);
 
-  if (error && slug !== 'atlantis-the-palm-dubai') {
+  if (!displayArticle || (error && slug !== 'atlantis-the-palm-dubai')) {
     return (
       <div className="min-h-screen bg-white flex items-center justify-center">
         <div className="text-center">
