@@ -33,14 +33,15 @@ const Footer = () => {
       {/* Main Footer */}
       <div className="py-16 md:py-20">
         <div className="max-w-7xl mx-auto px-6 md:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-16">
+          {/* Desktop Layout */}
+          <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-16">
             {/* Brand */}
-            <div className="md:col-span-2 lg:col-span-1 text-center md:text-left">
+            <div className="md:col-span-2 lg:col-span-1">
               <Link to="/" className="inline-block mb-8">
                 <img 
                   src="https://customer-assets.emergentagent.com/job_gq-style-mag/artifacts/zuxg2ei2_Untitled%20design-15.png" 
                   alt="JUST URBANE" 
-                  className="h-20 md:h-20 lg:h-24 w-auto mx-auto md:mx-0"
+                  className="h-20 lg:h-24 w-auto"
                   onError={(e) => {
                     e.target.style.display = 'none';
                     e.target.nextSibling.style.display = 'block';
@@ -53,11 +54,11 @@ const Footer = () => {
                   JUST URBANE
                 </div>
               </Link>
-              <p className="text-gray-300 mb-8 text-base md:text-lg leading-relaxed max-w-sm mx-auto md:mx-0">
+              <p className="text-gray-300 mb-8 text-base md:text-lg leading-relaxed max-w-sm">
                 Your premier destination for luxury lifestyle, sophisticated culture, 
                 and the finest in contemporary living. Experience the art of refined taste.
               </p>
-              <div className="flex justify-center md:justify-start space-x-4">
+              <div className="flex space-x-4">
                 <a
                   href="https://www.instagram.com/justurbane"
                   target="_blank"
@@ -98,7 +99,7 @@ const Footer = () => {
             </div>
 
             {/* Categories */}
-            <div className="text-center md:text-left">
+            <div>
               <h4 className="font-serif text-xl font-bold mb-8 text-white">Categories</h4>
               <ul className="space-y-4">
                 {categories.map((category) => (
@@ -115,7 +116,7 @@ const Footer = () => {
             </div>
 
             {/* Services */}
-            <div className="text-center md:text-left">
+            <div>
               <h4 className="font-serif text-xl font-bold mb-8 text-white">Services</h4>
               <ul className="space-y-4">
                 {serviceLinks.map((link) => (
@@ -132,7 +133,7 @@ const Footer = () => {
             </div>
 
             {/* Contact Information */}
-            <div className="text-center md:text-left">
+            <div>
               <h4 className="font-serif text-xl font-bold mb-8 text-white">Contact</h4>
               <div className="space-y-6">
                 {/* Phone */}
@@ -209,36 +210,110 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Company Links - Mobile & Tablet Premium Section */}
-          <div className="mt-16 pt-12 border-t border-gray-800 lg:hidden">
-            <div className="text-center">
-              <h4 className="font-serif text-xl font-bold mb-8 text-white">Company</h4>
-              <div className="grid grid-cols-2 gap-6 mb-12">
-                {companyLinks.map((link) => (
-                  <Link
-                    key={link.href}
-                    to={link.href}
-                    className="text-gray-300 hover:text-white transition-colors duration-200 text-base font-medium hover:translate-y-[-1px] transform"
-                  >
-                    {link.name}
-                  </Link>
-                ))}
-              </div>
-              
-              {/* Mobile Newsletter Section */}
-              <div className="bg-gray-900 rounded-lg p-8">
-                <h5 className="font-serif text-lg font-bold mb-4 text-white">Stay Connected</h5>
-                <p className="text-gray-400 text-sm mb-6">Get luxury lifestyle updates delivered to your inbox</p>
-                <div className="flex flex-col space-y-3">
-                  <input 
-                    type="email"
-                    placeholder="Enter your email address"
-                    className="px-4 py-3 bg-gray-800 border border-gray-700 text-white placeholder-gray-400 focus:outline-none focus:border-white transition-colors text-base rounded"
-                  />
-                  <button className="bg-white text-black px-6 py-3 font-semibold hover:bg-gray-200 transition-colors text-base rounded">
-                    Subscribe Now
-                  </button>
+          {/* Mobile Layout - GQ India Style */}
+          <div className="md:hidden text-center space-y-8">
+            {/* Logo */}
+            <div>
+              <Link to="/" className="inline-block">
+                <img 
+                  src="https://customer-assets.emergentagent.com/job_gq-style-mag/artifacts/zuxg2ei2_Untitled%20design-15.png" 
+                  alt="JUST URBANE" 
+                  className="h-16 w-auto mx-auto"
+                  onError={(e) => {
+                    e.target.style.display = 'none';
+                    e.target.nextSibling.style.display = 'block';
+                  }}
+                />
+                <div 
+                  className="font-serif text-2xl font-black text-white tracking-tight mt-2" 
+                  style={{ display: 'none' }}
+                >
+                  JUST URBANE
                 </div>
+              </Link>
+            </div>
+
+            {/* Social Media Icons */}
+            <div className="flex justify-center space-x-4">
+              <a
+                href="https://www.facebook.com/justurbane"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-12 h-12 bg-transparent border-2 border-gray-600 hover:border-white rounded-full flex items-center justify-center transition-all duration-300"
+                aria-label="Follow us on Facebook"
+              >
+                <Facebook className="h-5 w-5" />
+              </a>
+              <a
+                href="https://www.x.com/justurbane"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-12 h-12 bg-transparent border-2 border-gray-600 hover:border-white rounded-full flex items-center justify-center transition-all duration-300"
+                aria-label="Follow us on X (Twitter)"
+              >
+                <Twitter className="h-5 w-5" />
+              </a>
+              <a
+                href="https://www.instagram.com/justurbane"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-12 h-12 bg-transparent border-2 border-gray-600 hover:border-white rounded-full flex items-center justify-center transition-all duration-300"
+                aria-label="Follow us on Instagram"
+              >
+                <Instagram className="h-5 w-5" />
+              </a>
+              <a
+                href="https://www.linkedin.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-12 h-12 bg-transparent border-2 border-gray-600 hover:border-white rounded-full flex items-center justify-center transition-all duration-300"
+                aria-label="Connect with us on LinkedIn"
+              >
+                <Linkedin className="h-5 w-5" />
+              </a>
+            </div>
+
+            {/* More From Just Urbane */}
+            <div className="border-t border-gray-800 pt-8">
+              <h4 className="text-white font-bold text-lg mb-2 tracking-wider">MORE FROM JUST URBANE</h4>
+              <div className="text-gray-400">⌄</div>
+            </div>
+
+            {/* Main Links */}
+            <div className="space-y-6">
+              <Link to="/about" className="block text-white font-medium text-lg hover:text-gray-300 transition-colors">
+                About Just Urbane
+              </Link>
+              <Link to="/terms" className="block text-white font-medium text-lg hover:text-gray-300 transition-colors">
+                Terms of Service
+              </Link>
+              <Link to="/contact" className="block text-white font-medium text-lg hover:text-gray-300 transition-colors">
+                Contact
+              </Link>
+              <Link to="/pricing" className="block text-white font-medium text-lg hover:text-gray-300 transition-colors">
+                Subscriptions
+              </Link>
+              <Link to="/issues" className="block text-white font-medium text-lg hover:text-gray-300 transition-colors">
+                Magazine
+              </Link>
+              <Link to="/reviews" className="block text-white font-medium text-lg hover:text-gray-300 transition-colors">
+                Reviews
+              </Link>
+            </div>
+
+            {/* Privacy Information */}
+            <div className="border-t border-gray-800 pt-6">
+              <div className="flex items-center justify-center space-x-2 mb-4">
+                <span className="text-blue-500 text-sm">🛡️</span>
+                <span className="text-white font-bold text-sm tracking-wider">PRIVACY INFORMATION</span>
+              </div>
+            </div>
+
+            {/* India Dropdown */}
+            <div>
+              <div className="inline-flex items-center px-6 py-2 border border-gray-600 rounded text-white">
+                <span className="mr-2">India</span>
+                <span className="text-gray-400">⌄</span>
               </div>
             </div>
           </div>
