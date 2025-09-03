@@ -32,15 +32,15 @@ const Footer = () => {
     <footer className="bg-black text-white">
       {/* Main Footer */}
       <div className="py-16 md:py-20">
-        <div className="max-w-7xl mx-auto px-4 md:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-16">
+        <div className="max-w-7xl mx-auto px-6 md:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-16">
             {/* Brand */}
-            <div className="md:col-span-2 lg:col-span-1">
+            <div className="md:col-span-2 lg:col-span-1 text-center md:text-left">
               <Link to="/" className="inline-block mb-8">
                 <img 
                   src="https://customer-assets.emergentagent.com/job_gq-style-mag/artifacts/zuxg2ei2_Untitled%20design-15.png" 
                   alt="JUST URBANE" 
-                  className="h-16 md:h-20 lg:h-24 w-auto"
+                  className="h-20 md:h-20 lg:h-24 w-auto mx-auto md:mx-0"
                   onError={(e) => {
                     e.target.style.display = 'none';
                     e.target.nextSibling.style.display = 'block';
@@ -53,11 +53,11 @@ const Footer = () => {
                   JUST URBANE
                 </div>
               </Link>
-              <p className="text-gray-300 mb-8 text-base md:text-lg leading-relaxed max-w-sm">
+              <p className="text-gray-300 mb-8 text-base md:text-lg leading-relaxed max-w-sm mx-auto md:mx-0">
                 Your premier destination for luxury lifestyle, sophisticated culture, 
                 and the finest in contemporary living. Experience the art of refined taste.
               </p>
-              <div className="flex space-x-4">
+              <div className="flex justify-center md:justify-start space-x-4">
                 <a
                   href="https://www.instagram.com/justurbane"
                   target="_blank"
@@ -98,7 +98,7 @@ const Footer = () => {
             </div>
 
             {/* Categories */}
-            <div>
+            <div className="text-center md:text-left">
               <h4 className="font-serif text-xl font-bold mb-8 text-white">Categories</h4>
               <ul className="space-y-4">
                 {categories.map((category) => (
@@ -115,7 +115,7 @@ const Footer = () => {
             </div>
 
             {/* Services */}
-            <div>
+            <div className="text-center md:text-left">
               <h4 className="font-serif text-xl font-bold mb-8 text-white">Services</h4>
               <ul className="space-y-4">
                 {serviceLinks.map((link) => (
@@ -132,7 +132,7 @@ const Footer = () => {
             </div>
 
             {/* Contact Information */}
-            <div>
+            <div className="text-center md:text-left">
               <h4 className="font-serif text-xl font-bold mb-8 text-white">Contact</h4>
               <div className="space-y-6">
                 {/* Phone */}
@@ -176,7 +176,7 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Company Links - Desktop */}
+          {/* Company Links & Newsletter - Desktop */}
           <div className="hidden lg:block mt-16 pt-12 border-t border-gray-800">
             <div className="flex items-center justify-between">
               <div>
@@ -209,19 +209,37 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Company Links - Mobile Only */}
-          <div className="mt-12 pt-8 border-t border-gray-800 lg:hidden">
-            <h4 className="font-serif text-lg font-bold mb-6 text-white">Company</h4>
-            <div className="grid grid-cols-2 gap-4">
-              {companyLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  to={link.href}
-                  className="text-gray-300 hover:text-white transition-colors duration-200 text-base"
-                >
-                  {link.name}
-                </Link>
-              ))}
+          {/* Company Links - Mobile & Tablet Premium Section */}
+          <div className="mt-16 pt-12 border-t border-gray-800 lg:hidden">
+            <div className="text-center">
+              <h4 className="font-serif text-xl font-bold mb-8 text-white">Company</h4>
+              <div className="grid grid-cols-2 gap-6 mb-12">
+                {companyLinks.map((link) => (
+                  <Link
+                    key={link.href}
+                    to={link.href}
+                    className="text-gray-300 hover:text-white transition-colors duration-200 text-base font-medium hover:translate-y-[-1px] transform"
+                  >
+                    {link.name}
+                  </Link>
+                ))}
+              </div>
+              
+              {/* Mobile Newsletter Section */}
+              <div className="bg-gray-900 rounded-lg p-8">
+                <h5 className="font-serif text-lg font-bold mb-4 text-white">Stay Connected</h5>
+                <p className="text-gray-400 text-sm mb-6">Get luxury lifestyle updates delivered to your inbox</p>
+                <div className="flex flex-col space-y-3">
+                  <input 
+                    type="email"
+                    placeholder="Enter your email address"
+                    className="px-4 py-3 bg-gray-800 border border-gray-700 text-white placeholder-gray-400 focus:outline-none focus:border-white transition-colors text-base rounded"
+                  />
+                  <button className="bg-white text-black px-6 py-3 font-semibold hover:bg-gray-200 transition-colors text-base rounded">
+                    Subscribe Now
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
