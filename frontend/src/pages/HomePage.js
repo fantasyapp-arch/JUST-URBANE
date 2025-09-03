@@ -280,12 +280,12 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* LIFESTYLE SECTION */}
+      {/* LUXURY TRAVEL SECTION */}
       <section className="bg-gray-50 py-16">
         <div className="max-w-6xl mx-auto px-6">
           <div className="mb-12">
-            <h2 className="text-3xl font-serif font-bold text-gray-900 mb-4">Lifestyle</h2>
-            <p className="text-gray-600 text-lg">Premium living and luxury experiences</p>
+            <h2 className="text-3xl font-serif font-bold text-gray-900 mb-4">Luxury Travel</h2>
+            <p className="text-gray-600 text-lg">Premium destinations and luxury experiences</p>
           </div>
           
           <div className="grid md:grid-cols-2 gap-8">
