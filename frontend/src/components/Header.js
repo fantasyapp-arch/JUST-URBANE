@@ -124,22 +124,21 @@ const Header = () => {
 
       {/* COMPREHENSIVE SIDEBAR MENU */}
       {isMobileMenuOpen && (
-        <div className="fixed inset-0 bg-black/50 z-50" onClick={() => {
-          setIsMobileMenuOpen(false);
-          setOpenCategory(null);
-        }}>
+        <div className="fixed inset-0 bg-black/50 z-50" onClick={() => setIsMobileMenuOpen(false)}>
           <div 
             className="fixed right-0 top-0 h-full w-80 lg:w-96 bg-white shadow-2xl transform transition-transform duration-300 overflow-y-auto"
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Sidebar Header - No Logo */}
+            {/* Sidebar Header */}
             <div className="p-6 border-b border-gray-200">
-              <div className="flex items-center justify-end">
+              <div className="flex items-center justify-between">
+                <img 
+                  src="https://customer-assets.emergentagent.com/job_urbane-nexus/artifacts/w4pbaa92_Untitled%20design-10.png" 
+                  alt="JUST URBANE" 
+                  className="h-16 w-auto object-contain"
+                />
                 <button
-                  onClick={() => {
-                    setIsMobileMenuOpen(false);
-                    setOpenCategory(null);
-                  }}
+                  onClick={() => setIsMobileMenuOpen(false)}
                   className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
                 >
                   <X className="h-6 w-6 text-gray-600" />
