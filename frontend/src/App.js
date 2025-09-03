@@ -57,6 +57,7 @@ const queryClient = new QueryClient({
 function Layout() {
   return (
     <div className="App min-h-screen bg-gray-50">
+      <ScrollToTop />
       <Header />
 
       <main className="flex-1">
