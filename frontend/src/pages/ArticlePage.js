@@ -399,7 +399,7 @@ const ArticlePage = () => {
               className="inline-flex items-center text-gray-600 hover:text-gray-900 font-medium transition-colors"
             >
               <ArrowLeft className="h-4 w-4 mr-2" />
-              Back to {article.category} Articles
+              Back to {displayArticle.category} Articles
             </Link>
           </motion.div>
         </div>
