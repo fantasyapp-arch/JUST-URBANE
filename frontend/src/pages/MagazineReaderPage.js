@@ -176,241 +176,67 @@ const MagazineReaderPage = () => {
   return (
     <>
       <style>{`
-        .magazine-reader {
-          position: fixed;
-          top: 0;
-          left: 0;
+        .hover-visible {
+          opacity: 0 !important;
+          transition: opacity 0.3s ease;
+        }
+        
+        .magazine-container:hover .hover-visible {
+          opacity: 1 !important;
+        }
+        
+        .magazine-container {
           width: 100vw;
           height: 100vh;
-          background: linear-gradient(135deg, #0f0c29 0%, #24243e 50%, #0f0c29 100%);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          z-index: 999999;
-          overflow: hidden;
-        }
-        
-        .magazine-page-container {
-          position: relative;
-          max-width: 95vw;
-          max-height: 95vh;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          border-radius: 16px;
-          box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
-          overflow: hidden;
-        }
-        
-        .magazine-page {
-          max-width: 100%;
-          max-height: 100%;
-          object-fit: contain;
-          border-radius: 16px;
-          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-          transition: all 0.3s ease;
-        }
-        
-        .controls-overlay {
-          position: absolute;
-          top: 20px;
-          right: 20px;
-          display: flex;
-          gap: 12px;
-          opacity: 0;
-          transition: opacity 0.3s ease;
-          z-index: 1000001;
-        }
-        
-        .magazine-reader:hover .controls-overlay {
-          opacity: 1;
-        }
-        
-        .control-button {
-          width: 48px;
-          height: 48px;
-          border: none;
-          border-radius: 50%;
-          background: rgba(255, 255, 255, 0.1);
-          backdrop-filter: blur(20px);
-          color: white;
-          cursor: pointer;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          transition: all 0.3s ease;
-          border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-        
-        .control-button:hover {
-          background: rgba(255, 255, 255, 0.2);
-          transform: scale(1.1);
-        }
-        
-        .navigation-area {
-          position: absolute;
-          top: 0;
-          width: 40%;
-          height: 100%;
-          display: flex;
-          align-items: center;
-          z-index: 1000000;
-          cursor: pointer;
-          transition: all 0.3s ease;
-        }
-        
-        .navigation-area.left {
-          left: 0;
-          justify-content: flex-start;
-          padding-left: 40px;
-          background: linear-gradient(90deg, rgba(0,0,0,0.05) 0%, transparent 100%);
-        }
-        
-        .navigation-area.right {
-          right: 0;
-          justify-content: flex-end;
-          padding-right: 40px;
-          background: linear-gradient(270deg, rgba(0,0,0,0.05) 0%, transparent 100%);
-        }
-        
-        .navigation-area:hover {
-          background: linear-gradient(90deg, rgba(255,255,255,0.1) 0%, transparent 100%);
-        }
-        
-        .navigation-area.right:hover {
-          background: linear-gradient(270deg, rgba(255,255,255,0.1) 0%, transparent 100%);
-        }
-        
-        .nav-button {
-          width: 56px;
-          height: 56px;
-          border: none;
-          border-radius: 50%;
-          background: rgba(255, 255, 255, 0.1);
-          backdrop-filter: blur(20px);
-          color: white;
-          cursor: pointer;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          transition: all 0.3s ease;
-          border: 1px solid rgba(255, 255, 255, 0.2);
-          opacity: 0;
-        }
-        
-        .navigation-area:hover .nav-button {
-          opacity: 1;
-          transform: scale(1.1);
-        }
-        
-        .nav-button:hover {
-          background: rgba(255, 255, 255, 0.25);
-          box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-        }
-        
-        .page-indicator {
-          position: absolute;
-          bottom: 30px;
-          left: 50%;
-          transform: translateX(-50%);
-          background: rgba(0, 0, 0, 0.6);
-          backdrop-filter: blur(20px);
-          padding: 12px 24px;
-          border-radius: 30px;
-          color: white;
-          font-size: 14px;
-          font-weight: 600;
-          border: 1px solid rgba(255, 255, 255, 0.1);
-          opacity: 0;
-          transition: opacity 0.3s ease;
-        }
-        
-        .magazine-reader:hover .page-indicator {
-          opacity: 1;
-        }
-        
-        @media (max-width: 768px) {
-          .magazine-page-container {
-            max-width: 100vw;
-            max-height: 100vh;
-            border-radius: 0;
-          }
-          
-          .magazine-page {
-            border-radius: 0;
-            width: 100vw;
-            height: 100vh;
-            object-fit: cover;
-          }
-          
-          .controls-overlay {
-            top: 10px;
-            right: 10px;
-            gap: 8px;
-          }
-          
-          .control-button {
-            width: 40px;
-            height: 40px;
-          }
-          
-          .navigation-area {
-            width: 50%;
-          }
-          
-          .navigation-area.left {
-            padding-left: 20px;
-          }
-          
-          .navigation-area.right {
-            padding-right: 20px;
-          }
-          
-          .nav-button {
-            width: 48px;
-            height: 48px;
-          }
-          
-          .page-indicator {
-            bottom: 20px;
-            padding: 8px 16px;
-            font-size: 12px;
-          }
-        }
-        
-        @media (max-width: 480px) {
-          .controls-overlay {
-            opacity: 1;
-          }
-          
-          .page-indicator {
-            opacity: 1;
-          }
-          
-          .nav-button {
-            opacity: 0.7;
-          }
-          
-          .navigation-area:hover .nav-button {
-            opacity: 1;
-          }
         }
       `}</style>
       
-      <div className="magazine-reader" 
-           onMouseEnter={() => setShowControls(true)}
-           onMouseLeave={() => setShowControls(false)}>
-        
-        {/* Top Controls */}
-        <div className="controls-overlay">
-          <button
-            className="control-button"
-            onClick={closeReader}
-            title="Close Reader"
-          >
-            <X size={20} />
-          </button>
-        </div>
+      <div className="magazine-container" style={{
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        width: '100vw',
+        height: '100vh',
+        backgroundColor: '#000',
+        margin: 0,
+        padding: 0,
+        overflow: 'hidden',
+        zIndex: 999999
+      }}>
+        {/* Hidden Close Button - Appears on hover */}
+      <button
+        onClick={closeReader}
+        style={{
+          position: 'absolute',
+          top: '20px',
+          right: '20px',
+          padding: '12px',
+          backgroundColor: 'rgba(0,0,0,0.7)',
+          color: 'white',
+          border: 'none',
+          borderRadius: '50%',
+          cursor: 'pointer',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          width: '50px',
+          height: '50px',
+          opacity: 0,
+          transition: 'all 0.3s ease',
+          zIndex: 1000000
+        }}
+        onMouseEnter={(e) => {
+          e.target.style.backgroundColor = 'rgba(0,0,0,0.9)';
+          e.target.style.transform = 'scale(1.1)';
+        }}
+        onMouseLeave={(e) => {
+          e.target.style.backgroundColor = 'rgba(0,0,0,0.7)';
+          e.target.style.transform = 'scale(1)';
+        }}
+        className="hover-visible"
+      >
+        <X size={24} />
+      </button>
 
         {/* Main Magazine Display */}
         <div className="magazine-page-container">
