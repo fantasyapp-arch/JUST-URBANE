@@ -195,22 +195,22 @@ const Footer = () => {
       </div>
 
       {/* Bottom Bar */}
-      <div className="border-t border-gray-800 py-8">
-        <div className="max-w-6xl mx-auto px-6">
+      <div className="border-t border-gray-800 py-6 md:py-8">
+        <div className="max-w-6xl mx-auto px-4 md:px-6">
           <div className="flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0">
-            <p className="text-gray-400 text-sm">
+            <p className="text-gray-400 text-xs md:text-sm text-center md:text-left">
               © {currentYear} Just Urbane. All rights reserved.
             </p>
-            <div className="flex space-x-6 text-sm">
+            <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-6 text-xs md:text-sm">
               <Link 
                 to="/privacy" 
-                className="text-gray-400 hover:text-white transition-colors duration-200"
+                className="text-gray-400 hover:text-white transition-colors duration-200 text-center sm:text-left"
               >
                 Privacy Policy
               </Link>
               <Link 
                 to="/terms" 
-                className="text-gray-400 hover:text-white transition-colors duration-200"
+                className="text-gray-400 hover:text-white transition-colors duration-200 text-center sm:text-left"
               >
                 Terms of Service
               </Link>
