@@ -86,6 +86,7 @@ const router = createBrowserRouter([
       { path: "category/:slug", element: <CategoryPage /> },
       { path: "category/:category/:subcategory", element: <SubcategoryPage /> },
       { path: "article/:slug", element: <ArticlePage /> },
+      { path: "atlantis-the-palm-dubai", element: <RoyalAtlantisPage /> },
       { path: "author/:slug", element: <AuthorPage /> },
       { path: "issues", element: <IssuesPage /> },
       { path: "reviews", element: <ReviewsPage /> },
