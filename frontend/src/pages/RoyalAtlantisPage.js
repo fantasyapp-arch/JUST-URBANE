@@ -227,6 +227,17 @@ const RoyalAtlantisPage = () => {
             "Atlantis is surrounded by a sandy beach which is only accessible to hotel guests. The water is very shallow and usually tepid which makes it a great place to practice some stand-up paddling or water sports."
           </blockquote>
 
+          <figure className="my-8">
+            <img 
+              src="https://customer-assets.emergentagent.com/job_slick-page-turner/artifacts/nz28aebm_theroyalpool-night.jpg"
+              alt="The Royal Pool at Atlantis The Palm illuminated beautifully at night - a magical aquatic paradise"
+              className="w-full h-64 md:h-96 object-cover rounded-lg shadow-lg"
+            />
+            <figcaption className="text-sm text-gray-600 mt-3 text-center italic">
+              The Royal Pool at Atlantis The Palm illuminated beautifully at night - a magical aquatic paradise
+            </figcaption>
+          </figure>
+
           <h3 className="text-2xl font-serif font-bold text-gray-900 mt-10 mb-6">
             Culinary Experiences
           </h3>
