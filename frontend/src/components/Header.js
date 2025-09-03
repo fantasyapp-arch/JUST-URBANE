@@ -159,7 +159,10 @@ const Header = () => {
                         <Link
                           to={`/category/${category.slug}`}
                           className="block p-2 text-sm text-primary-600 hover:text-primary-700 hover:bg-primary-25 rounded transition-colors font-medium"
-                          onClick={() => setIsMobileMenuOpen(false)}
+                          onClick={() => {
+                            setIsMobileMenuOpen(false);
+                            setOpenCategory(null);
+                          }}
                         >
                           View All {category.name}
                         </Link>
@@ -170,7 +173,10 @@ const Header = () => {
                             key={sub}
                             to={`/category/${category.slug}/${sub.toLowerCase()}`}
                             className="block p-2 text-sm text-gray-600 hover:text-primary-600 hover:bg-primary-25 rounded transition-colors"
-                            onClick={() => setIsMobileMenuOpen(false)}
+                            onClick={() => {
+                              setIsMobileMenuOpen(false);
+                              setOpenCategory(null);
+                            }}
                           >
                             {sub}
                           </Link>
