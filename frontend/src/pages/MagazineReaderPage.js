@@ -737,6 +737,7 @@ const MagazineReaderPage = () => {
             </motion.div>
           </motion.div>
         )}
+      </div>
     </>
   );
 };
