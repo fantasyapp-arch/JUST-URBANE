@@ -297,25 +297,34 @@ const HomePage = () => {
                 transition={{ duration: 0.6, delay: index * 0.2 }}
                 className="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow group"
               >
-                <div className="relative">
-                  <img 
-                    src={article.image}
-                    alt={article.title}
-                    className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
-                </div>
-                <div className="p-6">
-                  <h3 className="text-2xl font-serif font-bold text-gray-900 mb-3 group-hover:text-gray-600 transition-colors">
-                    {article.title}
-                  </h3>
-                  <p className="text-gray-600 mb-4 leading-relaxed">
-                    {article.excerpt}
-                  </p>
-                  <div className="flex items-center justify-between text-sm text-gray-500">
-                    <span>{article.author}</span>
-                    <span>{article.readTime}</span>
+                <Link to={article.slug ? `/article/${article.slug}` : '#'} className="block">
+                  <div className="relative">
+                    <img 
+                      src={article.image}
+                      alt={article.title}
+                      className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
+                    {article.category && (
+                      <div className="absolute top-4 left-4">
+                        <span className="bg-blue-600 text-white px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wide">
+                          {article.category}
+                        </span>
+                      </div>
+                    )}
                   </div>
-                </div>
+                  <div className="p-6">
+                    <h3 className="text-2xl font-serif font-bold text-gray-900 mb-3 group-hover:text-gray-600 transition-colors">
+                      {article.title}
+                    </h3>
+                    <p className="text-gray-600 mb-4 leading-relaxed">
+                      {article.excerpt}
+                    </p>
+                    <div className="flex items-center justify-between text-sm text-gray-500">
+                      <span>{article.author}</span>
+                      <span>{article.readTime}</span>
+                    </div>
+                  </div>
+                </Link>
               </motion.article>
             ))}
           </div>
