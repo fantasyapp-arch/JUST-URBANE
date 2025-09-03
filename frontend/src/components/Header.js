@@ -7,7 +7,6 @@ import SearchModal from './SearchModal';
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
-  const [openCategory, setOpenCategory] = useState(null);
   const { logout, isAuthenticated } = useAuth();
 
   // Main categories with subcategories as per PDF
