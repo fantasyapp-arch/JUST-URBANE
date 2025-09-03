@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Menu, X, Search, User, Crown, ChevronRight, ChevronDown } from 'lucide-react';
+import { Menu, X, Search, User, Crown, ChevronRight } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import SearchModal from './SearchModal';
 
