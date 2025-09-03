@@ -164,8 +164,8 @@ const ArticlePage = () => {
   const shareArticle = () => {
     if (navigator.share) {
       navigator.share({
-        title: article.title,
-        text: article.dek,
+        title: displayArticle.title,
+        text: displayArticle.subtitle || displayArticle.dek,
         url: window.location.href,
       });
     } else {
