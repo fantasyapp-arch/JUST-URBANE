@@ -8,47 +8,47 @@
       "test": "API Health Check",
       "success": true,
       "message": "Core API is healthy and responsive",
-      "timestamp": "2025-08-30T16:10:22.626273",
+      "timestamp": "2025-09-03T16:11:55.805408",
       "response_data": null
     },
     {
       "test": "Core Service - Articles API",
       "success": true,
       "message": "Responsive (HTTP 200)",
-      "timestamp": "2025-08-30T16:10:22.658996",
+      "timestamp": "2025-09-03T16:11:55.833168",
       "response_data": null
     },
     {
       "test": "Core Service - Categories API",
       "success": true,
       "message": "Responsive (HTTP 200)",
-      "timestamp": "2025-08-30T16:10:22.674198",
+      "timestamp": "2025-09-03T16:11:55.850211",
       "response_data": null
     },
     {
       "test": "Core Service - Payment Packages API",
       "success": true,
       "message": "Responsive (HTTP 200)",
-      "timestamp": "2025-08-30T16:10:22.725633",
+      "timestamp": "2025-09-03T16:11:55.898882",
       "response_data": null
     },
     {
       "test": "Core Backend Services",
       "success": true,
       "message": "All 3 core services responsive",
-      "timestamp": "2025-08-30T16:10:22.725672",
+      "timestamp": "2025-09-03T16:11:55.898919",
       "response_data": null
     },
     {
       "test": "User Registration",
       "success": true,
       "message": "User registered successfully",
-      "timestamp": "2025-08-30T16:10:23.052899",
+      "timestamp": "2025-09-03T16:11:57.041521",
       "response_data": {
-        "email": "testuser_1756570222@justurbane.com",
+        "email": "testuser_1756915915@justurbane.com",
         "name": "Premium Test User",
-        "id": "f18b820c-70de-4fa8-8bac-5a0dcb2911a8",
-        "created_at": "2025-08-30T16:10:23.044254",
+        "id": "14b51712-4b31-4312-b8ba-b4e18cbb9643",
+        "created_at": "2025-09-03T16:11:56.927672",
         "is_premium": false,
         "subscription_status": "inactive"
       }
@@ -57,105 +57,105 @@
       "test": "User Login",
       "success": true,
       "message": "Login successful, JWT token received",
-      "timestamp": "2025-08-30T16:10:23.346109",
+      "timestamp": "2025-09-03T16:11:57.292602",
       "response_data": null
     },
     {
       "test": "JWT Token Generation",
       "success": true,
       "message": "JWT token successfully generated during login",
-      "timestamp": "2025-08-30T16:10:23.346184",
+      "timestamp": "2025-09-03T16:11:57.292662",
       "response_data": null
     },
     {
       "test": "JWT Authentication - Protected Endpoint",
       "success": true,
       "message": "JWT authentication working for protected endpoints (HTTP 200)",
-      "timestamp": "2025-08-30T16:10:23.403395",
+      "timestamp": "2025-09-03T16:11:57.347476",
       "response_data": null
     },
     {
       "test": "JWT Authentication - Invalid Token",
       "success": true,
       "message": "Invalid tokens properly rejected",
-      "timestamp": "2025-08-30T16:10:23.455493",
+      "timestamp": "2025-09-03T16:11:57.401401",
       "response_data": null
     },
     {
       "test": "Magazine Reader API - Required Fields",
       "success": false,
       "message": "Missing field coverage: hero_image: 0/10",
-      "timestamp": "2025-08-30T16:10:23.479690",
+      "timestamp": "2025-09-03T16:11:57.417102",
       "response_data": null
     },
     {
       "test": "Premium Content System - Content Mix",
       "success": true,
       "message": "Found 1 premium and 19 free articles",
-      "timestamp": "2025-08-30T16:10:23.479728",
+      "timestamp": "2025-09-03T16:11:57.417161",
       "response_data": null
     },
     {
       "test": "Premium Access Control",
       "success": true,
       "message": "Premium content properly gated (locked: False, truncated: False, marker: True)",
-      "timestamp": "2025-08-30T16:10:23.531116",
+      "timestamp": "2025-09-03T16:11:57.466177",
       "response_data": null
     },
     {
       "test": "Magazine Data Quality - Content Length",
       "success": false,
       "message": "Content issues in 2/5 articles: Review Test Article: insufficient content (50 chars); JWT Authentication Test Article: insufficient content (101 chars)",
-      "timestamp": "2025-08-30T16:10:23.531160",
+      "timestamp": "2025-09-03T16:11:57.466227",
       "response_data": null
     },
     {
       "test": "Magazine Data Quality - Formatting",
       "success": true,
       "message": "All tested articles have proper formatting",
-      "timestamp": "2025-08-30T16:10:23.531168",
+      "timestamp": "2025-09-03T16:11:57.466235",
       "response_data": null
     },
     {
       "test": "Magazine Category Distribution",
       "success": true,
-      "message": "Good category distribution: {'tech': 15, 'technology': 1, 'fashion': 3, 'auto': 1}",
-      "timestamp": "2025-08-30T16:10:23.531191",
+      "message": "Good category distribution: {'tech': 16, 'technology': 1, 'fashion': 3}",
+      "timestamp": "2025-09-03T16:11:57.466259",
       "response_data": null
     },
     {
       "test": "Payment Packages",
       "success": true,
       "message": "Correct INR pricing: Digital \u20b9499.0, Print \u20b9499.0, Combined \u20b9999.0",
-      "timestamp": "2025-08-30T16:10:23.542899",
+      "timestamp": "2025-09-03T16:11:57.474772",
       "response_data": null
     },
     {
       "test": "Payment Currency",
       "success": true,
       "message": "Currency set to INR for all packages",
-      "timestamp": "2025-08-30T16:10:23.542934",
+      "timestamp": "2025-09-03T16:11:57.474804",
       "response_data": null
     },
     {
       "test": "Categories Count",
       "success": true,
       "message": "Retrieved expected 9 categories",
-      "timestamp": "2025-08-30T16:10:23.553646",
+      "timestamp": "2025-09-03T16:11:57.483931",
       "response_data": null
     },
     {
       "test": "GQ Categories Structure",
       "success": true,
       "message": "All 9 GQ-style categories present: Fashion, Business, Technology, Finance, Travel, Health, Culture, Art, Entertainment",
-      "timestamp": "2025-08-30T16:10:23.553679",
+      "timestamp": "2025-09-03T16:11:57.483967",
       "response_data": null
     },
     {
       "test": "Categories Listing",
       "success": true,
       "message": "Retrieved 9 categories",
-      "timestamp": "2025-08-30T16:10:23.553687",
+      "timestamp": "2025-09-03T16:11:57.483975",
       "response_data": null
     }
   ]
