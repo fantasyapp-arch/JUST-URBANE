@@ -1057,6 +1057,9 @@ metadata:
   scroll_to_top_navigation_tested: true
   scroll_to_top_navigation_success: true
   scroll_to_top_testing_date: "2025-01-03T18:45:00"
+  gq_india_mobile_footer_tested: true
+  gq_india_mobile_footer_success: true
+  gq_india_mobile_footer_testing_date: "2025-01-03T19:30:00"
 
 test_plan:
   current_focus:
