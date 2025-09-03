@@ -129,34 +129,55 @@ const Header = () => {
               </div>
             </div>
 
-            {/* CATEGORIES WITH SUBCATEGORIES */}
+            {/* COLLAPSIBLE CATEGORIES WITH SUBCATEGORIES */}
             <div className="p-4">
               <nav className="space-y-2">
                 {categories.map((category) => (
                   <div key={category.slug} className="border-b border-gray-100 pb-4 mb-4">
-                    {/* Main Category */}
-                    <Link
-                      to={`/category/${category.slug}`}
-                      className="flex items-center justify-between p-3 text-gray-900 hover:bg-primary-50 hover:text-primary-600 rounded-lg font-semibold transition-all duration-200"
-                      onClick={() => setIsMobileMenuOpen(false)}
+                    {/* Main Category - Click to toggle subcategories */}
+                    <button
+                      onClick={() => setOpenCategory(openCategory === category.slug ? null : category.slug)}
+                      className="flex items-center justify-between w-full p-3 text-gray-900 hover:bg-primary-50 hover:text-primary-600 rounded-lg font-semibold transition-all duration-200"
                     >
                       <span className="text-lg">{category.name}</span>
-                      <ChevronRight className="h-5 w-5" />
-                    </Link>
+                      {openCategory === category.slug ? (
+                        <ChevronDown className="h-5 w-5" />
+                      ) : (
+                        <ChevronRight className="h-5 w-5" />
+                      )}
+                    </button>
                     
-                    {/* Subcategories */}
-                    <div className="ml-4 mt-2 space-y-1">
-                      {category.subcategories.map((sub) => (
+                    {/* Subcategories - Only show when category is clicked */}
+                    {openCategory === category.slug && (
+                      <div className="ml-4 mt-2 space-y-1 animate-fadeIn">
+                        {/* Main Category Link */}
                         <Link
-                          key={sub}
-                          to={`/category/${category.slug}/${sub.toLowerCase()}`}
-                          className="block p-2 text-sm text-gray-600 hover:text-primary-600 hover:bg-primary-25 rounded transition-colors"
-                          onClick={() => setIsMobileMenuOpen(false)}
+                          to={`/category/${category.slug}`}
+                          className="block p-2 text-sm text-primary-600 hover:text-primary-700 hover:bg-primary-25 rounded transition-colors font-medium"
+                          onClick={() => {
+                            setIsMobileMenuOpen(false);
+                            setOpenCategory(null);
+                          }}
                         >
-                          {sub}
+                          View All {category.name}
                         </Link>
-                      ))}
-                    </div>
+                        
+                        {/* Individual Subcategory Links */}
+                        {category.subcategories.map((sub) => (
+                          <Link
+                            key={sub}
+                            to={`/category/${category.slug}/${sub.toLowerCase()}`}
+                            className="block p-2 text-sm text-gray-600 hover:text-primary-600 hover:bg-primary-25 rounded transition-colors"
+                            onClick={() => {
+                              setIsMobileMenuOpen(false);
+                              setOpenCategory(null);
+                            }}
+                          >
+                            {sub}
+                          </Link>
+                        ))}
+                      </div>
+                    )}
                   </div>
                 ))}
 
