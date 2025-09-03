@@ -200,12 +200,12 @@ const RoyalAtlantisPage = () => {
 
           <figure className="my-8">
             <img 
-              src="https://images.unsplash.com/photo-1583212292454-1fe6229603b7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-              alt="The Lost Chambers Aquarium brings the myth of Atlantis to life"
+              src="https://customer-assets.emergentagent.com/job_slick-page-turner/artifacts/dqllyif6_ossiano-dininginterior3.jpg"
+              alt="Ossiano restaurant at Atlantis The Palm - fine dining with underwater views bringing the myth of Atlantis to life"
               className="w-full h-64 md:h-96 object-cover rounded-lg shadow-lg"
             />
             <figcaption className="text-sm text-gray-600 mt-3 text-center italic">
-              The Lost Chambers Aquarium brings the myth of Atlantis to life
+              Ossiano restaurant at Atlantis The Palm - fine dining with underwater views bringing the myth of Atlantis to life
             </figcaption>
           </figure>
 
