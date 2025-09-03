@@ -308,14 +308,6 @@ const Footer = () => {
                 <span className="text-white font-bold text-sm tracking-wider">PRIVACY INFORMATION</span>
               </div>
             </div>
-
-            {/* India Dropdown */}
-            <div>
-              <div className="inline-flex items-center px-6 py-2 border border-gray-600 rounded text-white">
-                <span className="mr-2">India</span>
-                <span className="text-gray-400">⌄</span>
-              </div>
-            </div>
           </div>
         </div>
       </div>
