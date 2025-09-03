@@ -227,6 +227,17 @@ const RoyalAtlantisPage = () => {
 
           <figure className="my-8">
             <img 
+              src="https://customer-assets.emergentagent.com/job_slick-page-turner/artifacts/hvr25apg_guest-activities-and-services-pool-and-beach-26-08-2015-4224ext.jpg"
+              alt="Family enjoying snorkeling and beach activities at Atlantis The Palm - crystal clear waters and perfect family fun"
+              className="w-full h-64 md:h-96 object-cover rounded-lg shadow-lg"
+            />
+            <figcaption className="text-sm text-gray-600 mt-3 text-center italic">
+              Family enjoying snorkeling and beach activities at Atlantis The Palm - crystal clear waters and perfect family fun
+            </figcaption>
+          </figure>
+
+          <figure className="my-8">
+            <img 
               src="https://customer-assets.emergentagent.com/job_slick-page-turner/artifacts/nz28aebm_theroyalpool-night.jpg"
               alt="The Royal Pool at Atlantis The Palm illuminated beautifully at night - a magical aquatic paradise"
               className="w-full h-64 md:h-96 object-cover rounded-lg shadow-lg"
