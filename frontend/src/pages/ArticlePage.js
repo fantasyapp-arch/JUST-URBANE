@@ -207,13 +207,13 @@ const ArticlePage = () => {
 
           {/* Title */}
           <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 leading-tight mb-6">
-            {article.title}
+            {displayArticle.title}
           </h1>
 
           {/* Subtitle/Dek */}
-          {article.dek && (
+          {(displayArticle.dek || displayArticle.subtitle) && (
             <p className="text-xl md:text-2xl text-gray-600 leading-relaxed mb-8 font-light">
-              {article.dek}
+              {displayArticle.dek || displayArticle.subtitle}
             </p>
           )}
 
@@ -222,26 +222,26 @@ const ArticlePage = () => {
             {/* Author */}
             <div className="flex items-center">
               <User className="h-4 w-4 mr-2" />
-              <span className="font-medium">By {article.author_name}</span>
+              <span className="font-medium">By {displayArticle.author_name || displayArticle.author?.name || displayArticle.author}</span>
             </div>
 
             {/* Date */}
             <div className="flex items-center">
               <Calendar className="h-4 w-4 mr-2" />
-              <time>{formatDate(article.published_at)}</time>
+              <time>{displayArticle.publishDate ? formatDate(displayArticle.publishDate) : displayArticle.date}</time>
             </div>
 
             {/* Reading Time */}
             <div className="flex items-center">
               <Clock className="h-4 w-4 mr-2" />
-              <span>{formatReadingTime(article.reading_time)}</span>
+              <span>{displayArticle.readingTime ? `${displayArticle.readingTime} min read` : formatReadingTime(displayArticle.reading_time)}</span>
             </div>
 
             {/* Views */}
-            {article.view_count > 0 && (
+            {displayArticle.view_count > 0 && (
               <div className="flex items-center">
                 <Eye className="h-4 w-4 mr-2" />
-                <span>{article.view_count.toLocaleString()} views</span>
+                <span>{displayArticle.view_count.toLocaleString()} views</span>
               </div>
             )}
 
