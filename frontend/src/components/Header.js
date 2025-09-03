@@ -110,14 +110,9 @@ const Header = () => {
             className="fixed right-0 top-0 h-full w-80 lg:w-96 bg-white shadow-2xl transform transition-transform duration-300 overflow-y-auto"
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Sidebar Header */}
+            {/* Sidebar Header - No Logo */}
             <div className="p-6 border-b border-gray-200">
-              <div className="flex items-center justify-between">
-                <img 
-                  src="https://customer-assets.emergentagent.com/job_urbane-nexus/artifacts/w4pbaa92_Untitled%20design-10.png" 
-                  alt="JUST URBANE" 
-                  className="h-16 w-auto object-contain"
-                />
+              <div className="flex items-center justify-end">
                 <button
                   onClick={() => setIsMobileMenuOpen(false)}
                   className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
