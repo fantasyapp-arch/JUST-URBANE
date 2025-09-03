@@ -46,6 +46,30 @@ const SubcategoryPage = () => {
     people: "Entertainment"
   }[category] || "Category";
 
+  // Featured articles for specific subcategories
+  const featuredArticles = {
+    'travel-luxury': [
+      {
+        id: 'atlantis-the-palm-dubai',
+        title: "Atlantis The Palm: A Mythical Journey to Dubai's Crown Jewel",
+        dek: "Experience the luxury and opulence of Dubai's most iconic resort, where myth meets reality in the heart of Palm Jumeirah",
+        author_name: "Chahat Dalal",
+        published_at: "2022-07-01T00:00:00Z",
+        reading_time: 8,
+        hero_image: "https://customer-assets.emergentagent.com/job_slick-page-turner/artifacts/jcqtiy5s_phy2015.rst.ath.atlantiswithpalm-angle-colour-hr.jpg",
+        category: "travel",
+        subcategory: "luxury",
+        slug: "atlantis-the-palm-dubai",
+        view_count: 2850,
+        is_premium: false,
+        is_featured: true
+      }
+    ]
+  };
+
+  // Get featured articles for current subcategory
+  const currentFeatured = featuredArticles[`${category}-${subcategory}`] || [];
+
   // Filter articles
   const filteredArticles = articles.filter(article => {
     if (!searchQuery.trim()) return true;
