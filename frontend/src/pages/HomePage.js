@@ -12,7 +12,7 @@ const HomePage = () => {
     author: "Arjun Malhotra",
     date: "Jan 15, 2025",
     readTime: "8 min read",
-    image: "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80"
+    image: "https://images.unsplash.com/photo-1559839049-2b350c4284cb?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
   };
 
   // Featured Articles by Category
