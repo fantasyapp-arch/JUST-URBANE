@@ -10,7 +10,7 @@ import time
 from datetime import datetime
 
 class ArticleAPITester:
-    def __init__(self, base_url: str = "https://slick-page-turner.preview.emergentagent.com"):
+    def __init__(self, base_url: str = "https://gq-style-mag.preview.emergentagent.com"):
         self.base_url = base_url
         self.session = requests.Session()
         self.test_results = []
