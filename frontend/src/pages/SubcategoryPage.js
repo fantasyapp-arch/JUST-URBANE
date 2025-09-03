@@ -70,8 +70,11 @@ const SubcategoryPage = () => {
   // Get featured articles for current subcategory
   const currentFeatured = featuredArticles[`${category}-${subcategory}`] || [];
 
+  // Combine featured articles with regular articles
+  const allArticles = [...currentFeatured, ...articles];
+
   // Filter articles
-  const filteredArticles = articles.filter(article => {
+  const filteredArticles = allArticles.filter(article => {
     if (!searchQuery.trim()) return true;
     const query = searchQuery.toLowerCase();
     return article.title.toLowerCase().includes(query) ||
