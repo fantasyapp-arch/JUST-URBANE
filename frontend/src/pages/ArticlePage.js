@@ -312,7 +312,7 @@ const ArticlePage = () => {
               <PremiumContentGate article={displayArticle} showPreview={true} />
             ) : (
               // Full content for free articles or subscribed users
-              <div>
+              <div className="article-content">
                 {displayArticle.content ? (
                   <div dangerouslySetInnerHTML={{ __html: displayArticle.content }} />
                 ) : displayArticle.body ? (
@@ -324,6 +324,39 @@ const ArticlePage = () => {
                 ) : (
                   <p>No content available</p>
                 )}
+                
+                <style jsx>{`
+                  .article-content img.article-image {
+                    width: 100%;
+                    height: 400px;
+                    object-fit: cover;
+                    border-radius: 12px;  
+                    margin: 2rem 0;
+                    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+                  }
+                  .article-content blockquote {
+                    border-left: 4px solid #3b82f6;
+                    background: #f8fafc;
+                    padding: 1.5rem;
+                    margin: 2rem 0;
+                    font-style: italic;
+                    font-size: 1.2rem;
+                    color: #1e40af;
+                  }
+                  .article-content h3 {
+                    font-size: 1.8rem;
+                    font-weight: bold;
+                    margin: 2rem 0 1rem 0;
+                    color: #1f2937;
+                  }
+                  .article-content p.lead {
+                    font-size: 1.25rem;
+                    font-weight: 500;
+                    color: #374151;
+                    line-height: 1.7;
+                    margin-bottom: 1.5rem;
+                  }
+                `}</style>
               </div>
             )}
           </motion.div>
