@@ -277,7 +277,7 @@ const ArticlePage = () => {
         </motion.div>
 
         {/* Hero Image */}
-        {article.hero_image && (
+        {(displayArticle.hero_image || displayArticle.heroImage) && (
           <motion.div 
             className="mb-12 max-w-6xl mx-auto"
             initial={{ opacity: 0, scale: 0.95 }}
@@ -286,8 +286,8 @@ const ArticlePage = () => {
           >
             <div className="relative overflow-hidden rounded-2xl">
               <img
-                src={article.hero_image}
-                alt={article.title}
+                src={displayArticle.hero_image || displayArticle.heroImage}
+                alt={displayArticle.title}
                 className="w-full h-96 md:h-[600px] object-cover"
                 onError={(e) => {
                   e.target.src = '/placeholder-article.jpg';
@@ -307,17 +307,23 @@ const ArticlePage = () => {
             transition={{ duration: 0.6, delay: 0.4 }}
           >
             {/* Show content based on access */}
-            {article.is_premium && isLocked ? (
+            {displayArticle.is_premium && isLocked ? (
               // Premium content gate for locked articles
-              <PremiumContentGate article={article} showPreview={true} />
+              <PremiumContentGate article={displayArticle} showPreview={true} />
             ) : (
               // Full content for free articles or subscribed users
               <div>
-                {article.body.split('\n\n').map((paragraph, index) => (
-                  <p key={index} className="mb-6 text-gray-700 leading-relaxed text-lg">
-                    {paragraph}
-                  </p>
-                ))}
+                {displayArticle.content ? (
+                  <div dangerouslySetInnerHTML={{ __html: displayArticle.content }} />
+                ) : displayArticle.body ? (
+                  displayArticle.body.split('\n\n').map((paragraph, index) => (
+                    <p key={index} className="mb-6 text-gray-700 leading-relaxed text-lg">
+                      {paragraph}
+                    </p>
+                  ))
+                ) : (
+                  <p>No content available</p>
+                )}
               </div>
             )}
           </motion.div>
