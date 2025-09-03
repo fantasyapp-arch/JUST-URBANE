@@ -244,9 +244,61 @@ const RoyalAtlantisPage = () => {
             You could stay at Atlantis for three weeks and dine at a different spot every day. Lunch was at the White. We loved the boho design of the WHITE and of course the amazing view from the infinity pool right at the beach. My favourite was the avocado & truffle pizza while sipping on margaritas.
           </p>
 
+          <figure className="my-8">
+            <img 
+              src="https://customer-assets.emergentagent.com/job_slick-page-turner/artifacts/c97hh41r_seafiresteakhouse-locallyproducedburratasalad1.jpg"
+              alt="Exquisite locally produced burrata salad at Seafire Steakhouse - a perfect blend of fresh ingredients and premium presentation"
+              className="w-full h-64 md:h-96 object-cover rounded-lg shadow-lg"
+            />
+            <figcaption className="text-sm text-gray-600 mt-3 text-center italic">
+              Exquisite locally produced burrata salad at Seafire Steakhouse - a perfect blend of fresh ingredients and premium presentation
+            </figcaption>
+          </figure>
+
           <p className="text-lg text-gray-800 leading-relaxed mb-6">
             Dinner was at our very own Hell's Kitchen, sorry I meant Bread Street Kitchen and Bar by Gordon Ramsay. The restaurant feels like an outpost of London in Dubai with the iconic red telephone booth adding sass to the vibe. The portions are generous, and each dish is heart-warming and made with the finest ingredients.
           </p>
+
+          <figure className="my-8">
+            <img 
+              src="https://customer-assets.emergentagent.com/job_slick-page-turner/artifacts/3pqxqk8y_bsk-food-wingscopy-490766.jpg"
+              alt="Signature wings at Bread Street Kitchen by Gordon Ramsay - perfectly prepared with authentic flavors"
+              className="w-full h-64 md:h-96 object-cover rounded-lg shadow-lg"
+            />
+            <figcaption className="text-sm text-gray-600 mt-3 text-center italic">
+              Signature wings at Bread Street Kitchen by Gordon Ramsay - perfectly prepared with authentic flavors
+            </figcaption>
+          </figure>
+
+          <p className="text-lg text-gray-800 leading-relaxed mb-6">
+            The culinary journey continues at Nobu, where Japanese fine dining meets innovative artistry. The cocktails are as spectacular as the food - each drink is crafted with precision and presented as a work of art.
+          </p>
+
+          <figure className="my-8">
+            <img 
+              src="https://customer-assets.emergentagent.com/job_slick-page-turner/artifacts/akx8vctw_nobu-blacksamurai-cocktail.jpg"
+              alt="Black Samurai cocktail at Nobu - an artistic masterpiece with blackberries and premium spirits"
+              className="w-full h-64 md:h-96 object-cover rounded-lg shadow-lg"
+            />
+            <figcaption className="text-sm text-gray-600 mt-3 text-center italic">
+              Black Samurai cocktail at Nobu - an artistic masterpiece with blackberries and premium spirits
+            </figcaption>
+          </figure>
+
+          <p className="text-lg text-gray-800 leading-relaxed mb-6">
+            No meal at Nobu is complete without experiencing their exquisite desserts. The Valrhona dark chocolate dessert is a symphony of flavors and textures that perfectly caps off the dining experience.
+          </p>
+
+          <figure className="my-8">
+            <img 
+              src="https://customer-assets.emergentagent.com/job_slick-page-turner/artifacts/f8du00p6_nobu-varlonadarkchocolate-dessert.png"
+              alt="Valrhona dark chocolate dessert at Nobu - an elegant finale to exceptional dining"
+              className="w-full h-64 md:h-96 object-cover rounded-lg shadow-lg"
+            />
+            <figcaption className="text-sm text-gray-600 mt-3 text-center italic">
+              Valrhona dark chocolate dessert at Nobu - an elegant finale to exceptional dining
+            </figcaption>
+          </figure>
 
           <h3 className="text-2xl font-serif font-bold text-gray-900 mt-10 mb-6">
             Final Thoughts
