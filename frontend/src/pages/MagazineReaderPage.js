@@ -522,114 +522,42 @@ const MagazineReaderPage = () => {
           </AnimatePresence>
         </div>
 
-      {/* Enhanced Navigation Controls - Large Click Areas */}
-      <div style={{
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        width: '100%',
-        height: '100%',
-        pointerEvents: 'none',
-        zIndex: 999999
-      }}>
-        {/* Left Half - Previous Page */}
-        <div
-          onClick={prevPage}
-          style={{
-            position: 'absolute',
-            left: 0,
-            top: 0,
-            width: '50%',
-            height: '100%',
-            cursor: currentPage === 0 || isFlipping ? 'not-allowed' : 'pointer',
-            pointerEvents: 'auto',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'flex-start',
-            paddingLeft: '40px',
-            transition: 'all 0.3s ease',
-            background: 'transparent'
-          }}
-          onMouseEnter={(e) => {
-            if (!(currentPage === 0 || isFlipping)) {
-              e.target.style.background = 'linear-gradient(90deg, rgba(0,0,0,0.05) 0%, transparent 70%)';
-            }
-          }}
-          onMouseLeave={(e) => {
-            e.target.style.background = 'transparent';
-          }}
-        >
-          {!(currentPage === 0 || isFlipping) && (
-            <motion.div
-              initial={{ opacity: 0, x: -10 }}
-              animate={{ opacity: 0.4, x: 0 }}
-              whileHover={{ opacity: 0.8, scale: 1.05 }}
-              style={{
-                width: '50px',
-                height: '50px',
-                backgroundColor: 'rgba(0,0,0,0.6)',
-                borderRadius: '50%',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                color: 'white',
-                boxShadow: '0 2px 10px rgba(0,0,0,0.2)'
-              }}
+        {/* Navigation Areas */}
+        {currentPage > 0 && (
+          <div className="navigation-area left" onClick={prevPage}>
+            <motion.button
+              className="nav-button"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
+              disabled={isFlipping}
             >
               <ChevronLeft size={24} />
-            </motion.div>
-          )}
-        </div>
+            </motion.button>
+          </div>
+        )}
 
-        {/* Right Half - Next Page */}
-        <div
-          onClick={nextPage}
-          style={{
-            position: 'absolute',
-            right: 0,
-            top: 0,
-            width: '50%',
-            height: '100%',
-            cursor: currentPage >= totalPages - 1 || isFlipping ? 'not-allowed' : 'pointer',
-            pointerEvents: 'auto',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'flex-end',
-            paddingRight: '40px',
-            transition: 'all 0.3s ease',
-            background: 'transparent'
-          }}
-          onMouseEnter={(e) => {
-            if (!(currentPage >= totalPages - 1 || isFlipping)) {
-              e.target.style.background = 'linear-gradient(270deg, rgba(0,0,0,0.05) 0%, transparent 70%)';
-            }
-          }}
-          onMouseLeave={(e) => {
-            e.target.style.background = 'transparent';
-          }}
-        >
-          {!(currentPage >= totalPages - 1 || isFlipping) && (
-            <motion.div
-              initial={{ opacity: 0, x: 10 }}
-              animate={{ opacity: 0.4, x: 0 }}
-              whileHover={{ opacity: 0.8, scale: 1.05 }}
-              style={{
-                width: '50px',
-                height: '50px',
-                backgroundColor: 'rgba(0,0,0,0.6)',
-                borderRadius: '50%',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                color: 'white',
-                boxShadow: '0 2px 10px rgba(0,0,0,0.2)'
-              }}
+        {currentPage < totalPages - 1 && !(!canReadPremium && currentPage >= FREE_PREVIEW_PAGES - 1) && (
+          <div className="navigation-area right" onClick={nextPage}>
+            <motion.button
+              className="nav-button"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
+              disabled={isFlipping}
             >
               <ChevronRight size={24} />
-            </motion.div>
+            </motion.button>
+          </div>
+        )}
+
+        {/* Page Indicator */}
+        <div className="page-indicator">
+          Page {currentPage + 1} of {totalPages}
+          {!canReadPremium && currentPage >= FREE_PREVIEW_PAGES - 1 && (
+            <span style={{ marginLeft: '12px', color: '#ffd700' }}>
+              • Premium Required
+            </span>
           )}
         </div>
-      </div>
 
       {/* Premium Subscription Modal */}
       {showSubscriptionModal && (
