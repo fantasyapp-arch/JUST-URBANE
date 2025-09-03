@@ -185,6 +185,17 @@ const RoyalAtlantisPage = () => {
             As an imperial guest we had access to the exclusive Imperial Club Lounge and decided to begin with tea, whose spread was fit for kings and queens. The lounge overlooks a sunset terrace with a view of the tranquil Arabian Sea. With happy tummies, we strutted to The Lost Chambers aquarium.
           </p>
 
+          <figure className="my-8">
+            <img 
+              src="https://customer-assets.emergentagent.com/job_slick-page-turner/artifacts/pqm94rpj_conciergelounge-interiorcopy-345813.jpg"
+              alt="The exclusive Imperial Club Lounge at Atlantis The Palm - luxury and comfort fit for royalty"
+              className="w-full h-64 md:h-96 object-cover rounded-lg shadow-lg"
+            />
+            <figcaption className="text-sm text-gray-600 mt-3 text-center italic">
+              The exclusive Imperial Club Lounge at Atlantis The Palm - luxury and comfort fit for royalty
+            </figcaption>
+          </figure>
+
           <p className="text-lg text-gray-800 leading-relaxed mb-6">
             The legend of Atlantis truly comes alive amidst the intriguing tunnels and passageways. There is adventure and education in equal measure here. Not only can you spend hours watching the magical sea creatures, but in the chambers, you'll learn about the history of Atlantis, which has been lost for thousands of years.
           </p>
