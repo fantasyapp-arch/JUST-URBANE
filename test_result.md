@@ -1079,6 +1079,9 @@ test_plan:
   review_request_january_30_2025_success_rate: "100.0%"
   newsletter_duplicate_removal_verified: true
   newsletter_duplicate_removal_success_rate: "100.0%"
+  premium_footer_improvements_tested: true
+  premium_footer_improvements_success: true
+  premium_footer_testing_date: "2025-01-03T12:00:00"
 
 agent_communication:
   - agent: "testing"
