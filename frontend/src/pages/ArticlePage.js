@@ -362,7 +362,7 @@ const ArticlePage = () => {
           </motion.div>
 
           {/* Article Tags */}
-          {article.tags && article.tags.length > 0 && !isLocked && (
+          {displayArticle.tags && displayArticle.tags.length > 0 && !isLocked && (
             <motion.div 
               className="mt-12 pt-8 border-t border-gray-200"
               initial={{ opacity: 0 }}
@@ -374,7 +374,7 @@ const ArticlePage = () => {
                 <span className="font-medium text-gray-900">Tags</span>
               </div>
               <div className="flex flex-wrap gap-2">
-                {article.tags.map((tag) => (
+                {displayArticle.tags.map((tag) => (
                   <Link
                     key={tag}
                     to={`/search?q=${encodeURIComponent(tag)}`}
@@ -395,7 +395,7 @@ const ArticlePage = () => {
             transition={{ duration: 0.6, delay: 0.8 }}
           >
             <Link
-              to={`/category/${article.category}`}
+              to={`/category/${displayArticle.category}`}
               className="inline-flex items-center text-gray-600 hover:text-gray-900 font-medium transition-colors"
             >
               <ArrowLeft className="h-4 w-4 mr-2" />
