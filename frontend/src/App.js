@@ -78,7 +78,7 @@ function Layout() {
   );
 }
 
-// Create router with minimal configuration to avoid warnings
+// Create router with scroll restoration
 const router = createBrowserRouter([
   {
     path: "/",
