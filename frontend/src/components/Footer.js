@@ -323,11 +323,12 @@ const Footer = () => {
       {/* Premium Bottom Bar */}
       <div className="border-t border-gray-800 py-8 md:py-10">
         <div className="max-w-7xl mx-auto px-6 md:px-8">
-          <div className="flex flex-col md:flex-row items-center justify-between space-y-6 md:space-y-0">
-            <p className="text-gray-400 text-sm md:text-base font-medium text-center md:text-left order-2 md:order-1">
+          {/* Desktop Bottom Bar */}
+          <div className="hidden md:flex md:flex-row items-center justify-between">
+            <p className="text-gray-400 text-sm md:text-base font-medium">
               © {currentYear} Just Urbane. All rights reserved. Luxury redefined.
             </p>
-            <div className="flex flex-col sm:flex-row items-center space-y-3 sm:space-y-0 sm:space-x-8 text-sm md:text-base order-1 md:order-2">
+            <div className="flex items-center space-x-8 text-sm md:text-base">
               <Link 
                 to="/privacy" 
                 className="text-gray-400 hover:text-white transition-colors duration-200 font-medium hover:translate-y-[-1px] transform"
@@ -347,6 +348,13 @@ const Footer = () => {
                 About Us
               </Link>
             </div>
+          </div>
+          
+          {/* Mobile Bottom Bar - GQ Style */}
+          <div className="md:hidden text-center">
+            <p className="text-gray-400 text-xs leading-relaxed">
+              © {currentYear} Just Urbane. All rights reserved. Use of this website constitutes acceptance of our Terms of Service and Privacy Policy.
+            </p>
           </div>
         </div>
       </div>
