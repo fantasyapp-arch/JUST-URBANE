@@ -64,6 +64,17 @@ const HomePage = () => {
 
   const lifestyleArticles = [
     {
+      title: "Atlantis The Palm: A Mythical Journey to Dubai's Crown Jewel",
+      excerpt: "Experience the luxury and opulence of Dubai's most iconic resort, where myth meets reality in the heart of Palm Jumeirah",
+      author: "Chahat Dalal",
+      date: "July 2022",
+      readTime: "8 min read",
+      image: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      category: "Travel",
+      subcategory: "Luxury Stays",
+      slug: "atlantis-the-palm-dubai"
+    },
+    {
       title: "The Art of Fine Dining at Home",
       excerpt: "Creating restaurant-quality culinary experiences in the comfort of your own space",
       author: "Chef Anita Sharma",
