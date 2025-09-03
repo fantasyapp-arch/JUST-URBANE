@@ -63,12 +63,12 @@ const Header = () => {
 
   return (
     <header className="bg-white border-b border-gray-200 sticky top-0 z-50">
-      {/* HEADER WITHOUT LOGO */}
+      {/* CLEAN HEADER - NO BLANK SPACE */}
       <div className="max-w-6xl mx-auto px-6">
-        <div className="flex items-center justify-between h-16">
+        <div className="flex items-center justify-center h-16">
           
-          {/* CENTER NAVIGATION - FULL WIDTH */}
-          <nav className="hidden md:flex items-center space-x-12 flex-1 justify-center">
+          {/* CENTER NAVIGATION - NO FLEX-1 TO AVOID BLANK SPACE */}
+          <nav className="hidden md:flex items-center space-x-12">
             {['FASHION', 'LIFESTYLE', 'WATCHES', 'CULTURE', 'VIDEOS'].map((categoryName) => (
               <Link
                 key={categoryName}
@@ -80,8 +80,8 @@ const Header = () => {
             ))}
           </nav>
 
-          {/* RIGHT SIDE - SUBSCRIBE & MENU */}
-          <div className="flex items-center space-x-4">
+          {/* RIGHT SIDE - ABSOLUTE POSITIONED */}
+          <div className="absolute right-6 flex items-center space-x-4">
             {/* Subscribe Button */}
             <Link
               to="/pricing"
