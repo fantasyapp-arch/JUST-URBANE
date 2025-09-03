@@ -106,7 +106,10 @@ const Header = () => {
 
       {/* COMPREHENSIVE SIDEBAR MENU */}
       {isMobileMenuOpen && (
-        <div className="fixed inset-0 bg-black/50 z-50" onClick={() => setIsMobileMenuOpen(false)}>
+        <div className="fixed inset-0 bg-black/50 z-50" onClick={() => {
+          setIsMobileMenuOpen(false);
+          setOpenCategory(null);
+        }}>
           <div 
             className="fixed right-0 top-0 h-full w-80 lg:w-96 bg-white shadow-2xl transform transition-transform duration-300 overflow-y-auto"
             onClick={(e) => e.stopPropagation()}
@@ -115,7 +118,10 @@ const Header = () => {
             <div className="p-6 border-b border-gray-200">
               <div className="flex items-center justify-end">
                 <button
-                  onClick={() => setIsMobileMenuOpen(false)}
+                  onClick={() => {
+                    setIsMobileMenuOpen(false);
+                    setOpenCategory(null);
+                  }}
                   className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
                 >
                   <X className="h-6 w-6 text-gray-600" />
