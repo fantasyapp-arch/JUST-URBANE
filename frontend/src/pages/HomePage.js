@@ -50,7 +50,7 @@ const HomePage = () => {
       author: "Vikram Singh",
       date: "Jan 11, 2025",
       readTime: "10 min read",
-      image: "https://images.unsplash.com/photo-1547996160-81dfa63595aa?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+      image: "https://images.unsplash.com/photo-1604242692760-2f7b0c26856d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
     },
     {
       title: "Vintage Watch Collecting: A Beginner's Guide",
@@ -58,7 +58,7 @@ const HomePage = () => {
       author: "Rajesh Gupta",
       date: "Jan 10, 2025",
       readTime: "8 min read",
-      image: "https://images.unsplash.com/photo-1524592094714-0f0654e20314?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+      image: "https://images.unsplash.com/photo-1600003014755-ba31aa59c4b6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
     }
   ];
 
