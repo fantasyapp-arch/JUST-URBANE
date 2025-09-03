@@ -43,35 +43,13 @@ const RoyalAtlantisPage = () => {
         </div>
       </div>
 
-      {/* Hero Section */}
+      {/* Hero Image Only */}
       <div className="relative h-96 md:h-[500px] overflow-hidden">
         <img 
           src={article.heroImage}
-          alt={article.title}
+          alt="Atlantis The Palm Dubai aerial view"
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-black bg-opacity-40"></div>
-        <div className="absolute inset-0 flex items-center justify-center">
-          <div className="max-w-4xl mx-auto px-6 text-center text-white">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-            >
-              <div className="mb-4">
-                <span className="inline-block bg-blue-600 text-white px-4 py-2 rounded-full text-sm font-medium uppercase tracking-wide">
-                  {article.category} • {article.subcategory}
-                </span>
-              </div>
-              <h1 className="text-3xl md:text-5xl font-serif font-bold mb-4 leading-tight">
-                {article.title}
-              </h1>
-              <p className="text-xl md:text-2xl text-gray-200 leading-relaxed">
-                {article.subtitle}
-              </p>
-            </motion.div>
-          </div>
-        </div>
       </div>
 
       {/* Article Content */}
