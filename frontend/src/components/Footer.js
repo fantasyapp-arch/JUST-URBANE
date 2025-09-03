@@ -31,81 +31,81 @@ const Footer = () => {
   return (
     <footer className="bg-black text-white">
       {/* Main Footer */}
-      <div className="py-12 md:py-16">
-        <div className="max-w-6xl mx-auto px-4 md:px-6">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 md:gap-12">
+      <div className="py-16 md:py-20">
+        <div className="max-w-7xl mx-auto px-4 md:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-16">
             {/* Brand */}
-            <div className="sm:col-span-2 lg:col-span-2">
-              <Link to="/" className="inline-block mb-6">
+            <div className="md:col-span-2 lg:col-span-1">
+              <Link to="/" className="inline-block mb-8">
                 <img 
-                  src="https://customer-assets.emergentagent.com/job_urbane-nexus/artifacts/w4pbaa92_Untitled%20design-10.png" 
+                  src="https://customer-assets.emergentagent.com/job_gq-style-mag/artifacts/zuxg2ei2_Untitled%20design-15.png" 
                   alt="JUST URBANE" 
-                  className="h-8 md:h-10 w-auto"
+                  className="h-16 md:h-20 lg:h-24 w-auto"
                   onError={(e) => {
                     e.target.style.display = 'none';
                     e.target.nextSibling.style.display = 'block';
                   }}
                 />
                 <div 
-                  className="font-serif text-lg md:text-xl font-black text-white tracking-tight" 
+                  className="font-serif text-2xl md:text-3xl font-black text-white tracking-tight" 
                   style={{ display: 'none' }}
                 >
                   JUST URBANE
                 </div>
               </Link>
-              <p className="text-gray-300 mb-6 md:mb-8 text-sm md:text-lg leading-relaxed">
+              <p className="text-gray-300 mb-8 text-base md:text-lg leading-relaxed max-w-sm">
                 Your premier destination for luxury lifestyle, sophisticated culture, 
-                and the finest in contemporary living.
+                and the finest in contemporary living. Experience the art of refined taste.
               </p>
-              <div className="flex space-x-3 md:space-x-4">
+              <div className="flex space-x-4">
                 <a
                   href="https://www.instagram.com/justurbane"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-9 h-9 md:w-10 md:h-10 bg-gray-800 hover:bg-white hover:text-black rounded-full flex items-center justify-center transition-colors duration-200"
+                  className="w-12 h-12 bg-gray-800 hover:bg-white hover:text-black rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110"
                   aria-label="Follow us on Instagram"
                 >
-                  <Instagram className="h-4 w-4 md:h-5 md:w-5" />
+                  <Instagram className="h-6 w-6" />
                 </a>
                 <a
                   href="https://www.facebook.com/justurbane"
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="w-9 h-9 md:w-10 md:h-10 bg-gray-800 hover:bg-white hover:text-black rounded-full flex items-center justify-center transition-colors duration-200"
+                  className="w-12 h-12 bg-gray-800 hover:bg-white hover:text-black rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110"
                   aria-label="Follow us on Facebook"
                 >
-                  <Facebook className="h-4 w-4 md:h-5 md:w-5" />
+                  <Facebook className="h-6 w-6" />
                 </a>
                 <a
                   href="https://www.linkedin.com/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-9 h-9 md:w-10 md:h-10 bg-gray-800 hover:bg-white hover:text-black rounded-full flex items-center justify-center transition-colors duration-200"
+                  className="w-12 h-12 bg-gray-800 hover:bg-white hover:text-black rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110"
                   aria-label="Connect with us on LinkedIn"
                 >
-                  <Linkedin className="h-4 w-4 md:h-5 md:w-5" />
+                  <Linkedin className="h-6 w-6" />
                 </a>
                 <a
                   href="https://www.x.com/justurbane"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-9 h-9 md:w-10 md:h-10 bg-gray-800 hover:bg-white hover:text-black rounded-full flex items-center justify-center transition-colors duration-200"
+                  className="w-12 h-12 bg-gray-800 hover:bg-white hover:text-black rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110"
                   aria-label="Follow us on X (Twitter)"
                 >
-                  <Twitter className="h-4 w-4 md:h-5 md:w-5" />
+                  <Twitter className="h-6 w-6" />
                 </a>
               </div>
             </div>
 
             {/* Categories */}
             <div>
-              <h4 className="font-serif text-base md:text-lg font-semibold mb-4 md:mb-6 text-white">Categories</h4>
-              <ul className="space-y-2 md:space-y-3">
+              <h4 className="font-serif text-xl font-bold mb-8 text-white">Categories</h4>
+              <ul className="space-y-4">
                 {categories.map((category) => (
                   <li key={category.slug}>
                     <Link
                       to={`/category/${category.slug}`}
-                      className="text-gray-300 hover:text-white transition-colors duration-200 text-sm md:text-base"
+                      className="text-gray-300 hover:text-white transition-colors duration-200 text-base hover:translate-x-1 inline-block transform"
                     >
                       {category.name}
                     </Link>
@@ -116,13 +116,13 @@ const Footer = () => {
 
             {/* Services */}
             <div>
-              <h4 className="font-serif text-base md:text-lg font-semibold mb-4 md:mb-6 text-white">Services</h4>
-              <ul className="space-y-2 md:space-y-3">
+              <h4 className="font-serif text-xl font-bold mb-8 text-white">Services</h4>
+              <ul className="space-y-4">
                 {serviceLinks.map((link) => (
                   <li key={link.href}>
                     <Link
                       to={link.href}
-                      className="text-gray-300 hover:text-white transition-colors duration-200 text-sm md:text-base"
+                      className="text-gray-300 hover:text-white transition-colors duration-200 text-base hover:translate-x-1 inline-block transform"
                     >
                       {link.name}
                     </Link>
@@ -132,15 +132,15 @@ const Footer = () => {
             </div>
 
             {/* Contact Information */}
-            <div className="sm:col-span-2 lg:col-span-1">
-              <h4 className="font-serif text-base md:text-lg font-semibold mb-4 md:mb-6 text-white">Contact</h4>
-              <div className="space-y-3 md:space-y-4">
+            <div>
+              <h4 className="font-serif text-xl font-bold mb-8 text-white">Contact</h4>
+              <div className="space-y-6">
                 {/* Phone */}
                 <div>
-                  <p className="text-gray-400 font-medium mb-1 text-xs md:text-sm">Phone</p>
+                  <p className="text-gray-400 font-semibold mb-2 text-sm uppercase tracking-wide">Phone</p>
                   <a 
                     href="tel:02029992989" 
-                    className="text-white hover:text-gray-300 transition-colors duration-200 text-sm md:text-base"
+                    className="text-white hover:text-gray-300 transition-colors duration-200 text-base font-medium"
                   >
                     020 2992989
                   </a>
@@ -148,10 +148,10 @@ const Footer = () => {
 
                 {/* Email */}
                 <div>
-                  <p className="text-gray-400 font-medium mb-1 text-xs md:text-sm">Email</p>
+                  <p className="text-gray-400 font-semibold mb-2 text-sm uppercase tracking-wide">Email</p>
                   <a 
                     href="mailto:contact@urbaneluxury.com" 
-                    className="text-white hover:text-gray-300 transition-colors duration-200 text-sm md:text-base break-all"
+                    className="text-white hover:text-gray-300 transition-colors duration-200 text-base font-medium break-all"
                   >
                     contact@urbaneluxury.com
                   </a>
@@ -159,12 +159,12 @@ const Footer = () => {
 
                 {/* Address */}
                 <div>
-                  <p className="text-gray-400 font-medium mb-1 text-xs md:text-sm">Address</p>
+                  <p className="text-gray-400 font-semibold mb-2 text-sm uppercase tracking-wide">Address</p>
                   <a 
                     href="https://www.google.com/maps/place/Urbane+Jets/@18.4987751,73.8208324,17z/data=!3m1!4b1!4m6!3m5!1s0x3bc2bf49b8f7ac69:0x8c6a0211375cbaea!8m2!3d18.4987751!4d73.8208324!16s%2Fg%2F11h3jgylnr?entry=ttu&g_ep=EgoyMDI1MDgyNS4wIKXMDSoASAFQAw%3D%3D"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-white hover:text-gray-300 transition-colors duration-200 leading-relaxed text-xs md:text-sm block"
+                    className="text-white hover:text-gray-300 transition-colors duration-200 leading-relaxed text-base block font-medium"
                   >
                     10th floor, Gokhale Business Bay,<br />
                     A-1001, opp. City Pride,<br />
@@ -176,15 +176,48 @@ const Footer = () => {
             </div>
           </div>
 
+          {/* Company Links - Desktop */}
+          <div className="hidden lg:block mt-16 pt-12 border-t border-gray-800">
+            <div className="flex items-center justify-between">
+              <div>
+                <h4 className="font-serif text-xl font-bold mb-6 text-white">Company</h4>
+                <div className="flex space-x-8">
+                  {companyLinks.map((link) => (
+                    <Link
+                      key={link.href}
+                      to={link.href}
+                      className="text-gray-300 hover:text-white transition-colors duration-200 text-base hover:translate-y-[-2px] inline-block transform"
+                    >
+                      {link.name}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+              <div className="text-right">
+                <p className="text-gray-400 text-sm mb-2">Subscribe to our newsletter</p>
+                <div className="flex">
+                  <input 
+                    type="email"
+                    placeholder="Enter your email"
+                    className="px-4 py-2 bg-gray-800 border border-gray-700 text-white placeholder-gray-400 focus:outline-none focus:border-white transition-colors text-sm"
+                  />
+                  <button className="bg-white text-black px-6 py-2 font-semibold hover:bg-gray-200 transition-colors text-sm">
+                    Subscribe
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
           {/* Company Links - Mobile Only */}
-          <div className="mt-8 pt-8 border-t border-gray-800 lg:hidden">
-            <h4 className="font-serif text-base font-semibold mb-4 text-white">Company</h4>
-            <div className="grid grid-cols-2 gap-3">
+          <div className="mt-12 pt-8 border-t border-gray-800 lg:hidden">
+            <h4 className="font-serif text-lg font-bold mb-6 text-white">Company</h4>
+            <div className="grid grid-cols-2 gap-4">
               {companyLinks.map((link) => (
                 <Link
                   key={link.href}
                   to={link.href}
-                  className="text-gray-300 hover:text-white transition-colors duration-200 text-sm"
+                  className="text-gray-300 hover:text-white transition-colors duration-200 text-base"
                 >
                   {link.name}
                 </Link>
