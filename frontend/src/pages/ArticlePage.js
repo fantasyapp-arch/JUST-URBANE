@@ -31,7 +31,77 @@ const ArticlePage = () => {
     );
   }
 
-  if (error || !article) {
+  // Fallback article data for Royal Atlantis Palm
+  const atlantisArticle = {
+    id: 'atlantis-the-palm-dubai',
+    slug: 'atlantis-the-palm-dubai',
+    title: 'Atlantis The Palm: A Mythical Journey to Dubai\'s Crown Jewel',
+    subtitle: 'This month we head to Atlantis, the Palm in Dubai. And, trust me it isn\'t just a picturesque resort on world\'s largest man-made island, but instead is reminiscent of the castles from your yesteryears fairy tale',
+    category: 'Travel',
+    subcategory: 'Luxury Stays',
+    author: { name: 'Chahat Dalal' },
+    publishDate: '2022-07-01T00:00:00Z',
+    readingTime: 8,
+    heroImage: 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+    isPremium: false,
+    tags: ['Dubai', 'Luxury Travel', 'Atlantis', 'Palm Jumeirah', 'Resort', 'Aquaventure', 'Luxury Stays'],
+    content: `
+<p class="lead">Atlantis - the lost island, filled with myths and magic, it's a story that captures one's imagination, inspired by Plato who told the story of Atlantis around 360 B.C. He proclaimed the founders of Atlantis, were half-god and half-human. Well, Atlantis the Palm Dubai makes sure to treat you like God.</p>
+
+<p>Lost cities, mystic ships and hidden treasures, are all part of the alluring marine world. Of all these, the lost city of Atlantis tops the list but trust Dubai to build its own sunken city and surround it with the magnificent royal structure that can put any palace to shame.</p>
+
+<blockquote>Legend says that the Atlantis was built by Poseidon - the God of Sea, of storms and earthquakes when he fell in love with a mortal woman Cleito.</blockquote>
+
+<p>Legend says that the Atlantis was built by Poseidon - the God of Sea, of storms and earthquakes when he fell in love with a mortal woman Cleito. He made this city on top of a hill, on an isolated island in the sea, to protect her and named it Atlantis. The legendary Atlantis Dubai was the first resort to be built on the world's largest man-made island and is themed on the myth of Atlantis.</p>
+
+<p>This resort is a crown on the apex of Palm Jumeirah, it's a city in its own right only this place is not lost. Atlantis' towers of red bricks remind me of a castle set in a fairy tale, its iconic central arch opens a gateway to a magical kingdom.</p>
+
+<img src="https://images.unsplash.com/photo-1613395877344-13d4a8e0d49e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="The iconic Atlantis The Palm Dubai with its majestic architecture" class="article-image" />
+
+<p>Either side of this arch looks like wings extended to embrace its grandeur with elaborate playgrounds, gardens filled with butterflies and birds, and water bodies to soothe the soul every few steps. The lobby is dominated by a ceiling-high, multicoloured glass sculpture that looks like Medusa's head filled with colourful snakes rising from a fountain.</p>
+
+<h3>A Two-Day Journey of Luxury</h3>
+
+<p>We decided that a stay at a resort of such exuberance deserves all our time. You know a resort is big when it has its own map. We embarked on our two-day journey of luxury and opulence. We were welcomed with goodie bags in the room with certain essentials required for our visit - like a cap, waterproof phone cover etc. The devil is in the details.</p>
+
+<p>The resort's underwater theme is strictly adhered to with a palette of ocean blue and white and sea-inspired sculptures and furnishings all over. At times the hotel feels more like a mall, there are shops selling everything from luxury jewellery to toys, art, perfume, clothes, souvenirs and even property and homes!</p>
+
+<blockquote>The hotel on finer scrutiny seems like a movie set that even has soundtracks as the music keeps playing through speakers hidden in hedges.</blockquote>
+
+<h3>The Lost Chambers Aquarium</h3>
+
+<p>As an imperial guest we had access to the exclusive Imperial Club Lounge and decided to begin with tea, whose spread was fit for kings and queens. The lounge overlooks a sunset terrace with a view of the tranquil Arabian Sea. With happy tummies, we strutted to The Lost Chambers aquarium.</p>
+
+<p>The legend of Atlantis truly comes alive amidst the intriguing tunnels and passageways. There is adventure and education in equal measure here. Not only can you spend hours watching the magical sea creatures, but in the chambers, you'll learn about the history of Atlantis, which has been lost for thousands of years.</p>
+
+<img src="https://images.unsplash.com/photo-1583212292454-1fe6229603b7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="The Lost Chambers Aquarium brings the myth of Atlantis to life" class="article-image" />
+
+<h3>Aquaventure Waterpark Adventures</h3>
+
+<p>I woke up the next day even before the alarm rang out of sheer excitement for the adventurous day ahead. Our agenda for the day was to have fun at the AQUAVENTURE WATERPARK! The water park consists of impressive water rides and adventures fit for all ages.</p>
+
+<p>Our favourite was the Poseidon Revenge which begins as you climb into one of the two launching capsules with your feet on a trapdoor. The ride pulls away the floor beneath your feet, plummeting you 31 metres down through the loops of the 116-metre water slide, as you freefall at a speed of 60 km/h.</p>
+
+<blockquote>Atlantis is surrounded by a sandy beach which is only accessible to hotel guests. The water is very shallow and usually tepid which makes it a great place to practice some stand-up paddling or water sports.</blockquote>
+
+<h3>Culinary Experiences</h3>
+
+<p>You could stay at Atlantis for three weeks and dine at a different spot every day. Lunch was at the White. We loved the boho design of the WHITE and of course the amazing view from the infinity pool right at the beach. My favourite was the avocado & truffle pizza while sipping on margaritas.</p>
+
+<p>Dinner was at our very own Hell's Kitchen, sorry I meant Bread Street Kitchen and Bar by Gordon Ramsay. The restaurant feels like an outpost of London in Dubai with the iconic red telephone booth adding sass to the vibe. The portions are generous, and each dish is heart-warming and made with the finest ingredients.</p>
+
+<h3>Final Thoughts</h3>
+
+<p>Atlantis The Palm is certainly more than just a resort in Dubai, this place feels like stepping into another world full of relaxation, enjoyment & pleasure for all kinds of travellers. Regardless of whether you are a solo traveller, family with kids, a couple or a bunch of friends who like to party this resort has got you covered!</p>
+
+<p>We only stayed here for two nights which clearly wasn't enough to explore the whole hotel to the fullest but now we know that the Atlantis The Palm Dubai is the most famous and sought-after hotel in Dubai for good reason!</p>
+    `
+  };
+
+  // Use fallback article if API fails and slug matches
+  const displayArticle = article || (slug === 'atlantis-the-palm-dubai' ? atlantisArticle : null);
+
+  if (error && slug !== 'atlantis-the-palm-dubai') {
     return (
       <div className="min-h-screen bg-white flex items-center justify-center">
         <div className="text-center">
