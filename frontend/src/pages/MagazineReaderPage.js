@@ -238,113 +238,121 @@ const MagazineReaderPage = () => {
         <X size={24} />
       </button>
 
-        {/* Main Magazine Display */}
-        <div className="magazine-page-container">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={currentPage}
-              initial={{ opacity: 0, scale: 0.95, rotateY: 15 }}
-              animate={{ opacity: 1, scale: 1, rotateY: 0 }}
-              exit={{ opacity: 0, scale: 0.95, rotateY: -15 }}
-              transition={{ 
-                duration: 0.4, 
-                ease: [0.4, 0, 0.2, 1],
-                staggerChildren: 0.1
+      {/* Magazine Display Area - Full Screen Smooth Page Turn */}
+      <div style={{
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        width: '100%',
+        height: '100%',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center'
+      }}>
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={currentPage}
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -50 }}
+            transition={{ duration: 0.25, ease: "easeInOut" }}
+            style={{
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              width: '100vw',
+              height: '100vh',
+              backgroundColor: '#fff'
+            }}
+          >
+            <img
+              src={pages[currentPage]?.pageImage}
+              alt={`${pages[currentPage]?.title} - Page ${currentPage + 1}`}
+              style={{
+                width: '100%',
+                height: '100%',
+                objectFit: 'contain',
+                objectPosition: 'center',
+                filter: isPageLocked ? 'blur(15px)' : 'none'
               }}
-              style={{ position: 'relative' }}
-            >
-              <img
-                className="magazine-page"
-                src={pages[currentPage]?.pageImage}
-                alt={`${pages[currentPage]?.title} - Page ${currentPage + 1}`}
-                style={{
-                  filter: isPageLocked ? 'blur(8px) brightness(0.7)' : 'none',
-                  transition: 'filter 0.3s ease'
-                }}
-                onError={(e) => {
-                  const fallbackContent = document.createElement('div');
-                  fallbackContent.style.cssText = `
-                    width: 800px;
-                    height: 1000px;
-                    max-width: 95vw;
-                    max-height: 95vh;
-                    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-                    display: flex;
+              onError={(e) => {
+                e.target.style.display = 'none';
+                e.target.parentNode.innerHTML = `
+                  <div style="
+                    width: 100%; 
+                    height: 100%; 
+                    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); 
+                    display: flex; 
                     flex-direction: column;
-                    align-items: center;
+                    align-items: center; 
                     justify-content: center;
                     color: #666;
-                    font-size: clamp(24px, 4vw, 48px);
+                    font-size: 48px;
                     font-weight: 600;
                     text-align: center;
                     padding: 60px;
-                    border-radius: 16px;
-                    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-                  `;
-                  fallbackContent.innerHTML = `
-                    <div style="font-size: clamp(60px, 8vw, 120px); margin-bottom: 40px;">📖</div>
+                  ">
+                    <div style="font-size: 120px; margin-bottom: 40px;">📖</div>
                     <div>Page ${currentPage + 1}</div>
-                    <div style="font-size: clamp(18px, 3vw, 32px); color: #999; margin-top: 30px; font-weight: 400;">
-                      ${pages[currentPage]?.title || 'Just Urbane'}
+                    <div style="font-size: 32px; color: #999; margin-top: 30px; font-weight: 400;">
+                      ${pages[currentPage]?.title}
                     </div>
-                    <div style="font-size: clamp(14px, 2.5vw, 24px); color: #bbb; margin-top: 40px; font-weight: 300;">
+                    <div style="font-size: 24px; color: #bbb; margin-top: 40px; font-weight: 300;">
                       Just Urbane Magazine - August 2025
                     </div>
-                  `;
-                  e.target.parentNode.replaceChild(fallbackContent, e.target);
+                  </div>
+                `;
+              }}
+            />
+            
+            {/* Premium Lock Overlay with Enhanced Crown */}
+            {isPageLocked && (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                style={{
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  bottom: 0,
+                  backgroundColor: 'rgba(0,0,0,0.5)',
+                  backdropFilter: 'blur(15px)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  zIndex: 10
                 }}
-              />
-              
-              {/* Premium Lock Overlay */}
-              {isPageLocked && (
+              >
                 <motion.div
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
+                  animate={{
+                    scale: [1, 1.2, 1],
+                    rotate: [0, 10, -10, 0],
+                    y: [0, -10, 0]
+                  }}
+                  transition={{
+                    duration: 4,
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                  }}
                   style={{
-                    position: 'absolute',
-                    top: 0,
-                    left: 0,
-                    right: 0,
-                    bottom: 0,
-                    background: 'linear-gradient(135deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.6) 100%)',
-                    backdropFilter: 'blur(20px)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    borderRadius: '16px',
-                    zIndex: 20
+                    background: 'linear-gradient(135deg, #ffd700 0%, #ffed4e 100%)',
+                    borderRadius: '50%',
+                    padding: '50px',
+                    boxShadow: '0 25px 50px rgba(255, 215, 0, 0.4), 0 0 100px rgba(255, 215, 0, 0.2)'
                   }}
                 >
-                  <motion.div
-                    animate={{
-                      scale: [1, 1.1, 1],
-                      rotate: [0, 5, -5, 0],
-                      y: [0, -8, 0]
-                    }}
-                    transition={{
-                      duration: 3,
-                      repeat: Infinity,
-                      ease: "easeInOut"
-                    }}
-                    style={{
-                      background: 'linear-gradient(135deg, #ffd700 0%, #ffed4e 100%)',
-                      borderRadius: '50%',
-                      padding: 'clamp(30px, 5vw, 50px)',
-                      boxShadow: '0 20px 40px rgba(255, 215, 0, 0.5), 0 0 80px rgba(255, 215, 0, 0.3)',
-                      border: '3px solid rgba(255, 255, 255, 0.3)'
-                    }}
-                  >
-                    <Crown style={{ 
-                      width: 'clamp(40px, 6vw, 80px)', 
-                      height: 'clamp(40px, 6vw, 80px)', 
-                      color: '#b8860b' 
-                    }} />
-                  </motion.div>
+                  <Crown style={{ 
+                    width: '80px', 
+                    height: '80px', 
+                    color: '#b8860b' 
+                  }} />
                 </motion.div>
-              )}
-            </motion.div>
-          </AnimatePresence>
-        </div>
+              </motion.div>
+            )}
+          </motion.div>
+        </AnimatePresence>
+      </div>
 
         {/* Navigation Areas */}
         {currentPage > 0 && (
