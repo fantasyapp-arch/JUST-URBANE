@@ -1095,6 +1095,9 @@ test_plan:
   premium_footer_improvements_tested: true
   premium_footer_improvements_success: true
   premium_footer_testing_date: "2025-01-03T12:00:00"
+  premium_mobile_footer_improvements_tested: true
+  premium_mobile_footer_improvements_success: true
+  premium_mobile_footer_testing_date: "2025-01-03T12:15:00"
 
 agent_communication:
   - agent: "testing"
