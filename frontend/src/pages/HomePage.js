@@ -297,7 +297,7 @@ const HomePage = () => {
                 transition={{ duration: 0.6, delay: index * 0.2 }}
                 className="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow group"
               >
-                <Link to={article.slug ? `/article/${article.slug}` : '#'} className="block">
+                <Link to={article.slug === 'atlantis-the-palm-dubai' ? '/atlantis-the-palm-dubai' : (article.slug ? `/article/${article.slug}` : '#')} className="block">
                   <div className="relative">
                     <img 
                       src={article.image}
