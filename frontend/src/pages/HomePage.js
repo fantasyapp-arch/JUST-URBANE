@@ -69,7 +69,7 @@ const HomePage = () => {
       author: "Chahat Dalal",
       date: "July 2022",
       readTime: "8 min read",
-      image: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      image: "https://customer-assets.emergentagent.com/job_slick-page-turner/artifacts/jcqtiy5s_phy2015.rst.ath.atlantiswithpalm-angle-colour-hr.jpg",
       category: "Travel",
       subcategory: "Luxury Stays",
       slug: "atlantis-the-palm-dubai"
