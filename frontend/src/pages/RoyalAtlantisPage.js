@@ -248,6 +248,82 @@ const RoyalAtlantisPage = () => {
           </figure>
 
           <h3 className="text-2xl font-serif font-bold text-gray-900 mt-10 mb-6">
+            Signature Underwater Suites
+          </h3>
+
+          <p className="text-lg text-gray-800 leading-relaxed mb-6">
+            The Neptune and Poseidon Underwater Suites are truly the crown jewel of Atlantis The Palm. These extraordinary accommodations offer floor-to-ceiling windows into the mesmerizing world of The Ambassador Lagoon, where 65,000 marine animals glide past your bedroom and living space.
+          </p>
+
+          <figure className="my-8">
+            <img 
+              src="https://customer-assets.emergentagent.com/job_slick-page-turner/artifacts/087etp4c_underwatersuite-coupleinlivingroom.jpg"
+              alt="Couple relaxing in the luxurious underwater suite living room - floor-to-ceiling aquarium views creating an otherworldly experience"
+              className="w-full h-64 md:h-96 object-cover rounded-lg shadow-lg"
+            />
+            <figcaption className="text-sm text-gray-600 mt-3 text-center italic">
+              Couple relaxing in the luxurious underwater suite living room - floor-to-ceiling aquarium views creating an otherworldly experience
+            </figcaption>
+          </figure>
+
+          <p className="text-lg text-gray-800 leading-relaxed mb-6">
+            Waking up to the gentle movement of rays, sharks, and tropical fish creates an almost dreamlike experience. The suites feature opulent furnishings, Egyptian cotton linens, and marble bathrooms that rival the finest palaces, all while being surrounded by the mysteries of the deep.
+          </p>
+
+          <figure className="my-8">
+            <img 
+              src="https://customer-assets.emergentagent.com/job_slick-page-turner/artifacts/enbkmd9u_phy2020.rms.sig.underwatersuite.lifestyle.bedroomcouple-mr%20%281%29.jpg"
+              alt="Romantic underwater suite bedroom with spectacular aquarium views - the ultimate luxury accommodation experience"
+              className="w-full h-64 md:h-96 object-cover rounded-lg shadow-lg"
+            />
+            <figcaption className="text-sm text-gray-600 mt-3 text-center italic">
+              Romantic underwater suite bedroom with spectacular aquarium views - the ultimate luxury accommodation experience
+            </figcaption>
+          </figure>
+
+          <p className="text-lg text-gray-800 leading-relaxed mb-6">
+            The bathroom itself is a masterpiece, featuring a deep soaking tub where you can unwind while watching the aquatic ballet unfold before your eyes. Every detail has been carefully curated to create an atmosphere of unparalleled luxury and wonder.
+          </p>
+
+          <figure className="my-8">
+            <img 
+              src="https://customer-assets.emergentagent.com/job_slick-page-turner/artifacts/vmfhnhhv_underwatersuitebathroom1-865660.jpg"
+              alt="Luxurious underwater suite bathroom with aquarium views - bathing while surrounded by marine life"
+              className="w-full h-64 md:h-96 object-cover rounded-lg shadow-lg"
+            />
+            <figcaption className="text-sm text-gray-600 mt-3 text-center italic">
+              Luxurious underwater suite bathroom with aquarium views - bathing while surrounded by marine life
+            </figcaption>
+          </figure>
+
+          <blockquote className="border-l-4 border-blue-500 bg-blue-50 p-6 my-8 italic text-xl text-blue-900 leading-relaxed">
+            "Living beneath the sea in these suites is like dwelling in Poseidon's palace - where every glance reveals new wonders of the deep."
+          </blockquote>
+
+          <h3 className="text-2xl font-serif font-bold text-gray-900 mt-10 mb-6">
+            Evening Entertainment at Hakkasan
+          </h3>
+
+          <p className="text-lg text-gray-800 leading-relaxed mb-6">
+            As the sun sets over Dubai, the sophisticated nightlife at Atlantis comes alive. Hakkasan, the world-renowned Cantonese restaurant and nightclub, offers an elevated dining and entertainment experience that perfectly complements the resort's luxury ambiance.
+          </p>
+
+          <figure className="my-8">
+            <img 
+              src="https://customer-assets.emergentagent.com/job_slick-page-turner/artifacts/wckneswt_hakkasan-lounge.jpg"
+              alt="Hakkasan lounge at Atlantis The Palm - sophisticated ambiance with modern design and premium entertainment"
+              className="w-full h-64 md:h-96 object-cover rounded-lg shadow-lg"
+            />
+            <figcaption className="text-sm text-gray-600 mt-3 text-center italic">
+              Hakkasan lounge at Atlantis The Palm - sophisticated ambiance with modern design and premium entertainment
+            </figcaption>
+          </figure>
+
+          <p className="text-lg text-gray-800 leading-relaxed mb-6">
+            The sleek interiors, featuring dark wood and atmospheric lighting, create an intimate setting perfect for enjoying signature cocktails and world-class Cantonese cuisine. The venue transforms as the evening progresses, offering both refined dining and vibrant nightlife under one roof.
+          </p>
+
+          <h3 className="text-2xl font-serif font-bold text-gray-900 mt-10 mb-6">
             Culinary Experiences
           </h3>
 
