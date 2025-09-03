@@ -247,12 +247,12 @@ const Footer = () => {
 
       {/* Premium Bottom Bar */}
       <div className="border-t border-gray-800 py-8 md:py-10">
-        <div className="max-w-7xl mx-auto px-4 md:px-8">
-          <div className="flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0">
-            <p className="text-gray-400 text-sm md:text-base font-medium text-center md:text-left">
+        <div className="max-w-7xl mx-auto px-6 md:px-8">
+          <div className="flex flex-col md:flex-row items-center justify-between space-y-6 md:space-y-0">
+            <p className="text-gray-400 text-sm md:text-base font-medium text-center md:text-left order-2 md:order-1">
               © {currentYear} Just Urbane. All rights reserved. Luxury redefined.
             </p>
-            <div className="flex flex-col sm:flex-row items-center space-y-2 sm:space-y-0 sm:space-x-8 text-sm md:text-base">
+            <div className="flex flex-col sm:flex-row items-center space-y-3 sm:space-y-0 sm:space-x-8 text-sm md:text-base order-1 md:order-2">
               <Link 
                 to="/privacy" 
                 className="text-gray-400 hover:text-white transition-colors duration-200 font-medium hover:translate-y-[-1px] transform"
