@@ -23,7 +23,7 @@ const HomePage = () => {
       author: "Priya Sharma",
       date: "Jan 14, 2025",
       readTime: "6 min read",
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+      image: "https://images.unsplash.com/photo-1613909671501-f9678ffc1d33?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
     },
     {
       title: "Milan Fashion Week: Spring 2025 Highlights",
@@ -31,7 +31,7 @@ const HomePage = () => {
       author: "Alessandro Rossi",
       date: "Jan 13, 2025", 
       readTime: "5 min read",
-      image: "https://images.unsplash.com/photo-1469334031218-e382a71b716b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+      image: "https://images.unsplash.com/photo-1591884807235-1dc6c2e148b1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
     },
     {
       title: "Luxury Accessories: Investment Pieces That Last",
@@ -39,7 +39,7 @@ const HomePage = () => {
       author: "Kavya Singh",
       date: "Jan 12, 2025",
       readTime: "7 min read",
-      image: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+      image: "https://images.unsplash.com/photo-1591348278863-a8fb3887e2aa?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
     }
   ];
 
