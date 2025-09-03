@@ -150,6 +150,17 @@ const RoyalAtlantisPage = () => {
             Either side of this arch looks like wings extended to embrace its grandeur with elaborate playgrounds, gardens filled with butterflies and birds, and water bodies to soothe the soul every few steps. The lobby is dominated by a ceiling-high, multicoloured glass sculpture that looks like Medusa's head filled with colourful snakes rising from a fountain.
           </p>
 
+          <figure className="my-8">
+            <img 
+              src="https://customer-assets.emergentagent.com/job_slick-page-turner/artifacts/cfuimrxd_atlantisthepalm-interior-dalechihulyglasssculpture.jpg"
+              alt="Dale Chihuly's magnificent glass sculpture in the Atlantis lobby - a colorful masterpiece resembling Medusa's head"
+              className="w-full h-64 md:h-96 object-cover rounded-lg shadow-lg"
+            />
+            <figcaption className="text-sm text-gray-600 mt-3 text-center italic">
+              Dale Chihuly's magnificent glass sculpture in the Atlantis lobby - a colorful masterpiece resembling Medusa's head
+            </figcaption>
+          </figure>
+
           <h3 className="text-2xl font-serif font-bold text-gray-900 mt-10 mb-6">
             A Two-Day Journey of Luxury
           </h3>
