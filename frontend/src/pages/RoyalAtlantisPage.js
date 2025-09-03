@@ -54,6 +54,26 @@ const RoyalAtlantisPage = () => {
 
       {/* Article Content */}
       <div className="max-w-4xl mx-auto px-6 py-12">
+        
+        {/* Article Title Section */}
+        <motion.div 
+          className="text-center mb-12"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
+          <div className="mb-4">
+            <span className="inline-block bg-blue-600 text-white px-4 py-2 rounded-full text-sm font-medium uppercase tracking-wide">
+              {article.category} • {article.subcategory}
+            </span>
+          </div>
+          <h1 className="text-3xl md:text-5xl font-serif font-bold mb-4 leading-tight text-gray-900">
+            {article.title}
+          </h1>
+          <p className="text-xl md:text-2xl text-gray-600 leading-relaxed">
+            {article.subtitle}
+          </p>
+        </motion.div>
         {/* Article Meta */}
         <motion.div 
           className="flex flex-wrap items-center gap-6 mb-8 pb-8 border-b border-gray-200"
