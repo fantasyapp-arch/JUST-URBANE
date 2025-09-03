@@ -181,11 +181,11 @@ const ArticlePage = () => {
           <nav className="flex items-center space-x-2 text-sm text-gray-500">
             <Link to="/" className="hover:text-gray-900 font-medium">Home</Link>
             <span>/</span>
-            <Link to={`/category/${article.category}`} className="hover:text-gray-900 font-medium capitalize">
-              {article.category}
+            <Link to={`/category/${displayArticle.category}`} className="hover:text-gray-900 font-medium capitalize">
+              {displayArticle.category}
             </Link>
             <span>/</span>
-            <span className="text-gray-900 font-bold">{article.title}</span>
+            <span className="text-gray-900 font-bold">{displayArticle.title}</span>
           </nav>
         </div>
       </div>
