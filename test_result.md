@@ -1084,6 +1084,11 @@ metadata:
   gq_india_mobile_footer_tested: true
   gq_india_mobile_footer_success: true
   gq_india_mobile_footer_testing_date: "2025-01-03T19:30:00"
+  header_modifications_tested: true
+  header_modifications_success: true
+  header_logo_removal_verified: true
+  dropdown_subcategories_verified: true
+  header_modifications_testing_date: "2025-01-03T14:21:00"
 
 test_plan:
   current_focus:
