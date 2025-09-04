@@ -392,19 +392,19 @@ class JustUrbaneAPITester:
             if response.status_code == 200:
                 categories = response.json()
                 if isinstance(categories, list):
-                    # Check for expected 9 GQ-style categories
-                    expected_categories = ["Fashion", "Business", "Technology", "Finance", "Travel", "Health", "Culture", "Art", "Entertainment"]
+                    # Check for expected 10 GQ-style categories (including Food)
+                    expected_categories = ["Fashion", "Business", "Technology", "Finance", "Travel", "Health", "Culture", "Art", "Entertainment", "Food"]
                     category_names = [cat.get("name", "") for cat in categories]
                     
-                    if len(categories) == 9:
-                        self.log_test("Categories Count", True, f"Retrieved expected 9 categories")
+                    if len(categories) == 10:
+                        self.log_test("Categories Count", True, f"Retrieved expected 10 categories (including Food)")
                     else:
-                        self.log_test("Categories Count", False, f"Expected 9 categories, got {len(categories)}")
+                        self.log_test("Categories Count", False, f"Expected 10 categories, got {len(categories)}")
                     
                     # Check if all expected categories are present
                     missing_categories = [cat for cat in expected_categories if cat not in category_names]
                     if not missing_categories:
-                        self.log_test("GQ Categories Structure", True, "All 9 GQ-style categories present: " + ", ".join(category_names))
+                        self.log_test("GQ Categories Structure", True, "All 10 GQ-style categories present: " + ", ".join(category_names))
                     else:
                         self.log_test("GQ Categories Structure", False, f"Missing categories: {missing_categories}. Found: {category_names}")
                     
