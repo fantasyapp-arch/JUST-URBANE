@@ -63,29 +63,27 @@ With awards like 2019 Scotch Whiskey Masters Gold, 2019 World Whiskey Awards Sil
             await db.articles.insert_one(scottish_leader_article)
             print("✅ Scottish Leader article added successfully!")
         
-        # Ensure drinks category exists
-        drinks_category = await db.categories.find_one({"slug": "drinks"})
-        if not drinks_category:
-            drinks_cat = {
-                "id": str(uuid.uuid4()),
-                "name": "Drinks",
-                "slug": "drinks",
-                "description": "Premium spirits, cocktails, and beverage reviews",
-                "subcategories": ["whiskey review", "cocktails", "wine", "spirits"]
-            }
-            await db.categories.insert_one(drinks_cat)
-            print("✅ Drinks category added!")
-        else:
-            # Update subcategories if needed
-            if "whiskey review" not in drinks_category.get("subcategories", []):
+        # Ensure food category has drinks subcategory
+        food_category = await db.categories.find_one({"slug": "food"})
+        if food_category:
+            # Update subcategories if needed (some categories might not have subcategories field)
+            if "subcategories" not in food_category:
                 await db.categories.update_one(
-                    {"slug": "drinks"},
-                    {"$addToSet": {"subcategories": "whiskey review"}}
+                    {"slug": "food"},
+                    {"$set": {"subcategories": ["chefs", "dining", "drinks", "food review"]}}
                 )
-                print("✅ Added 'whiskey review' subcategory to drinks!")
+                print("✅ Added subcategories to food category!")
+            elif "drinks" not in food_category.get("subcategories", []):
+                await db.categories.update_one(
+                    {"slug": "food"},
+                    {"$addToSet": {"subcategories": "drinks"}}
+                )
+                print("✅ Added 'drinks' subcategory to food category!")
+        else:
+            print("❌ Food category not found!")
         
         # Verify the data
-        article_count = await db.articles.count_documents({"category": "drinks"})
+        article_count = await db.articles.count_documents({"category": "food", "subcategory": "drinks"})
         print(f"✅ Total drinks articles: {article_count}")
         
         categories_count = await db.categories.count_documents({})
