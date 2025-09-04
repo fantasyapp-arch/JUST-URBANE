@@ -166,7 +166,7 @@ const Header = () => {
                       {category.subcategories.map((sub) => (
                         <Link
                           key={sub}
-                          to={`/category/${category.slug}/${sub.toLowerCase()}`}
+                          to={`/category/${category.slug}/${sub.toLowerCase().replace(/\s+/g, '-')}`}
                           className="block p-2 text-sm text-gray-600 hover:text-primary-600 hover:bg-primary-25 rounded transition-colors"
                           onClick={() => setIsMobileMenuOpen(false)}
                         >
