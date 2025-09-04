@@ -17,12 +17,12 @@ const SubcategoryPage = () => {
     const fetchArticles = async () => {
       try {
         setIsLoading(true);
-        console.log(`Fetching: category=${category}, subcategory=${decodedSubcategory}`);
+        console.log(`Fetching: category=${category}, subcategory=${subcategory}`);
         const response = await api.get('/articles', {
-          params: { category, subcategory: decodedSubcategory, limit: 50 }
+          params: { category, subcategory, limit: 50 }
         });
         setArticles(response.data || []);
-        console.log(`Got ${response.data?.length || 0} articles for subcategory: ${decodedSubcategory}`);
+        console.log(`Got ${response.data?.length || 0} articles`);
       } catch (err) {
         console.error('Error:', err);
       } finally {
@@ -30,10 +30,10 @@ const SubcategoryPage = () => {
       }
     };
 
-    if (category && decodedSubcategory) {
+    if (category && subcategory) {
       fetchArticles();
     }
-  }, [category, decodedSubcategory]);
+  }, [category, subcategory]);
 
   const pageTitle = decodedSubcategory.toUpperCase();
   const categoryLabel = {
