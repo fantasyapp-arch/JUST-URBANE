@@ -39,7 +39,7 @@ const Header = () => {
     {
       name: 'Food',
       slug: 'food',
-      subcategories: ['Dining', 'Chefs', 'Drinks', 'Trends', 'Recipes']
+      subcategories: ['Dining', 'Chefs', 'Drinks', 'Food Review', 'Trends', 'Recipes']
     },
     {
       name: 'Aviation',
