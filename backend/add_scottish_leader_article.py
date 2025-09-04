@@ -32,9 +32,9 @@ The whiskey, when sipped with water and a few cubes of ice, tasted pleasant or r
 
 With awards like 2019 Scotch Whiskey Masters Gold, 2019 World Whiskey Awards Silver, 2020 International Wine and Spirits Competition Silver and 2021 Scotch Whiskey Masters Silver, Scottish Leader Original is available across India in Punjab (Rs 1,500), Maharashtra (Rs 2,750), Karnataka (Rs 2,449) and Telangana (Rs 2,150).""",
             "author_name": "Harshit Srinivas",
-            "author_id": "harshit-srinivas",
-            "category": "drinks",
-            "subcategory": "whiskey review", 
+            "author_id": "harshit-srinivas", 
+            "category": "food",
+            "subcategory": "drinks", 
             "tags": ["scottish whiskey", "whiskey review", "scotch", "distell international", "aspri spirits", "premium spirits", "scottish leader"],
             "hero_image": "https://customer-assets.emergentagent.com/job_premium-articles/artifacts/yfjyheh0_Scottish%20Leader_2.jpg",
             "gallery": [
