@@ -12,6 +12,9 @@ const SubcategoryPage = () => {
   const [articles, setArticles] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
+  // Normalize subcategory parameter - convert dashes to spaces for API calls
+  const normalizedSubcategory = subcategory ? subcategory.replace(/-/g, ' ') : subcategory;
+
   // Fetch articles directly
   useEffect(() => {
     const fetchArticles = async () => {
