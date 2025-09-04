@@ -1189,6 +1189,74 @@ class JustUrbaneAPITester:
         except Exception as e:
             self.log_test("Scottish Leader Whiskey Review Testing", False, f"Error: {str(e)}")
 
+    def test_database_consistency_for_whiskey(self):
+        """Test database consistency for whiskey article data structure"""
+        print("\n🔍 DATABASE CONSISTENCY TESTING FOR WHISKEY ARTICLES")
+        print("=" * 50)
+        
+        try:
+            # Test if any whiskey-related articles exist with proper structure
+            response = self.session.get(f"{self.base_url}/api/articles?limit=50", timeout=10)
+            if response.status_code == 200:
+                all_articles = response.json()
+                
+                # Look for any whiskey or drinks related articles
+                whiskey_articles = []
+                drinks_articles = []
+                
+                for article in all_articles:
+                    title = article.get("title", "").lower()
+                    category = article.get("category", "").lower()
+                    subcategory = article.get("subcategory", "").lower()
+                    tags = article.get("tags", [])
+                    
+                    if "whiskey" in title or "whisky" in title or "scottish leader" in title:
+                        whiskey_articles.append(article)
+                    
+                    if category == "drinks" or "drinks" in tags:
+                        drinks_articles.append(article)
+                
+                # Report findings
+                if whiskey_articles:
+                    self.log_test("Whiskey Articles Found", True, f"Found {len(whiskey_articles)} whiskey-related articles")
+                    for article in whiskey_articles:
+                        title = article.get("title", "Unknown")
+                        category = article.get("category", "Unknown")
+                        subcategory = article.get("subcategory", "None")
+                        self.log_test(f"Whiskey Article - {title[:30]}...", True, f"Category: {category}, Subcategory: {subcategory}")
+                else:
+                    self.log_test("Whiskey Articles Found", False, "No whiskey-related articles found in database")
+                
+                if drinks_articles:
+                    self.log_test("Drinks Category Articles", True, f"Found {len(drinks_articles)} drinks category articles")
+                    for article in drinks_articles[:3]:  # Show first 3
+                        title = article.get("title", "Unknown")
+                        subcategory = article.get("subcategory", "None")
+                        self.log_test(f"Drinks Article - {title[:30]}...", True, f"Subcategory: {subcategory}")
+                else:
+                    self.log_test("Drinks Category Articles", False, "No drinks category articles found")
+                
+                # Test article data structure consistency
+                if all_articles:
+                    sample_article = all_articles[0]
+                    required_fields = ["id", "title", "slug", "dek", "body", "category", "subcategory", "author_name", "author_id", "published_at", "created_at", "updated_at", "reading_time"]
+                    
+                    missing_fields = []
+                    for field in required_fields:
+                        if field not in sample_article:
+                            missing_fields.append(field)
+                    
+                    if not missing_fields:
+                        self.log_test("Article Data Structure", True, f"All required fields present in article model: {', '.join(required_fields)}")
+                    else:
+                        self.log_test("Article Data Structure", False, f"Missing fields in article model: {', '.join(missing_fields)}")
+                
+            else:
+                self.log_test("Database Consistency Check", False, f"Failed to retrieve articles: HTTP {response.status_code}")
+                
+        except Exception as e:
+            self.log_test("Database Consistency Check", False, f"Error: {str(e)}")
+
     def run_comprehensive_tests(self):
         """Run all tests in sequence - Updated for Scottish Leader Whiskey Review Focus"""
         print("🚀 Starting Just Urbane Scottish Leader Whiskey Review Backend Testing")
