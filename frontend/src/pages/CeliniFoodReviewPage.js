@@ -150,7 +150,7 @@ const CeliniFoodReviewPage = () => {
 
           <figure className="my-6 sm:my-8 -mx-2 sm:-mx-4">
             <img 
-              src="https://customer-assets.emergentagent.com/job_just-urbane-revamp/artifacts/atuk7005_Spaghetti%20Aglio%2C%20Olio%20e%20Peperoncino.jpg"
+              src="https://customer-assets.emergentagent.com/job_premium-articles/artifacts/ce12z1ib_Spaghetti%20Aglio%2C%20Olio%20e%20Peperoncino.jpg"
               alt="Spaghetti Aglio, Olio e Peperoncino - Classic Italian pasta with garlic, olive oil, and chili perfectly prepared at Celini"
               className="w-full h-48 sm:h-64 md:h-96 object-cover rounded-lg shadow-lg"
             />
