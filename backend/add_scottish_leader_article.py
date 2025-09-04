@@ -15,7 +15,7 @@ MONGO_URL = os.environ.get('MONGO_URL', 'mongodb://localhost:27017/just_urbane')
 async def add_scottish_leader_article():
     # Connect to MongoDB
     client = AsyncIOMotorClient(MONGO_URL)
-    db = client.justurbane
+    db = client.just_urbane
     
     try:
         # Create the Scottish Leader article
