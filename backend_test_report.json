@@ -1,119 +1,49 @@
 {
-  "total": 16,
-  "passed": 16,
-  "failed": 0,
-  "success_rate": 100.0,
+  "total": 6,
+  "passed": 5,
+  "failed": 1,
+  "success_rate": 83.33333333333334,
   "results": [
     {
       "test": "Health Check",
       "success": true,
       "message": "API is healthy and responding",
-      "timestamp": "2025-09-04T17:39:24.076828",
+      "timestamp": "2025-09-04T17:52:09.157582",
       "response_data": null
     },
     {
-      "test": "France Article - General Listing",
+      "test": "Travel/Guides Subcategory Filter",
       "success": true,
-      "message": "Found 1 France-related articles in general listing",
-      "timestamp": "2025-09-04T17:39:24.093916",
+      "message": "\u2705 Found 1 sustainable travel article in guides: 'Travel With A Clear Conscious'",
+      "timestamp": "2025-09-04T17:52:09.171011",
       "response_data": null
     },
     {
-      "test": "France Article - Travel Category",
+      "test": "Travel/Culture Subcategory Empty",
       "success": true,
-      "message": "France article found in travel category (6 total travel articles)",
-      "timestamp": "2025-09-04T17:39:24.104606",
+      "message": "\u2705 Travel/culture subcategory is empty (article moved out)",
+      "timestamp": "2025-09-04T17:52:09.182559",
       "response_data": null
     },
     {
-      "test": "France Article - Adventure Subcategory",
-      "success": true,
-      "message": "France article found in travel/adventure subcategory (2 total)",
-      "timestamp": "2025-09-04T17:39:24.113651",
+      "test": "Sustainable Travel Article Search",
+      "success": false,
+      "message": "\u274c Could not find sustainable travel article in travel category",
+      "timestamp": "2025-09-04T17:52:09.196190",
       "response_data": null
     },
     {
-      "test": "France Article - Slug Retrieval",
+      "test": "Travel Category Count",
       "success": true,
-      "message": "Successfully retrieved France article by slug: when-in-france-travel-destinations",
-      "timestamp": "2025-09-04T17:39:24.123560",
+      "message": "\u2705 Travel category has 6 articles (includes sustainable travel)",
+      "timestamp": "2025-09-04T17:52:09.196226",
       "response_data": null
     },
     {
-      "test": "France Article - Title",
+      "test": "Guides Subcategory Creation",
       "success": true,
-      "message": "Correct title found: 'When In France'",
-      "timestamp": "2025-09-04T17:39:24.123602",
-      "response_data": null
-    },
-    {
-      "test": "France Article - Category",
-      "success": true,
-      "message": "Correct category: 'travel'",
-      "timestamp": "2025-09-04T17:39:24.123610",
-      "response_data": null
-    },
-    {
-      "test": "France Article - Subcategory",
-      "success": true,
-      "message": "Correct subcategory: 'adventure'",
-      "timestamp": "2025-09-04T17:39:24.123616",
-      "response_data": null
-    },
-    {
-      "test": "France Article - Author",
-      "success": true,
-      "message": "Correct author: 'Amisha Shirgave'",
-      "timestamp": "2025-09-04T17:39:24.123622",
-      "response_data": null
-    },
-    {
-      "test": "France Article - Slug",
-      "success": true,
-      "message": "Correct slug: 'when-in-france-travel-destinations'",
-      "timestamp": "2025-09-04T17:39:24.123627",
-      "response_data": null
-    },
-    {
-      "test": "France Article - Hero Image",
-      "success": true,
-      "message": "Hero image accessible: https://customer-assets.emergentagent.com/job_urbane-articles/artifacts/asfm7icv_Paris%20%283%29.jpg",
-      "timestamp": "2025-09-04T17:39:24.311803",
-      "response_data": null
-    },
-    {
-      "test": "France Article - Gallery Images",
-      "success": true,
-      "message": "Gallery images accessible: 5/8 images",
-      "timestamp": "2025-09-04T17:39:24.666673",
-      "response_data": null
-    },
-    {
-      "test": "France Article - Image Count",
-      "success": true,
-      "message": "Sufficient gallery images: 8 images (expected 4+)",
-      "timestamp": "2025-09-04T17:39:24.666712",
-      "response_data": null
-    },
-    {
-      "test": "Travel/Adventure Category System",
-      "success": true,
-      "message": "Travel/adventure category working: 2 articles found",
-      "timestamp": "2025-09-04T17:39:24.676153",
-      "response_data": null
-    },
-    {
-      "test": "France Article in Category System",
-      "success": true,
-      "message": "France article properly categorized in travel/adventure",
-      "timestamp": "2025-09-04T17:39:24.676187",
-      "response_data": null
-    },
-    {
-      "test": "Travel Category Exists",
-      "success": true,
-      "message": "Travel category found in categories API",
-      "timestamp": "2025-09-04T17:39:24.684762",
+      "message": "\u2705 'guides' is now a valid subcategory for travel category",
+      "timestamp": "2025-09-04T17:52:09.196235",
       "response_data": null
     }
   ]
