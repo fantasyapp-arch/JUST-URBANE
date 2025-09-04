@@ -152,6 +152,7 @@ class ArticleCreate(BaseModel):
     hero_image: Optional[str] = None
     gallery: List[str] = []
     category: str
+    subcategory: Optional[str] = None  # NEW: subcategory field
     tags: List[str] = []
     is_premium: bool = False
     is_featured: bool = False
