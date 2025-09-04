@@ -10,7 +10,7 @@ import uuid
 from datetime import datetime
 
 # MongoDB connection
-MONGO_URL = os.environ.get('MONGO_URL', 'mongodb://mongodb:27017')
+MONGO_URL = os.environ.get('MONGO_URL', 'mongodb://localhost:27017/just_urbane')
 
 async def add_scottish_leader_article():
     # Connect to MongoDB
