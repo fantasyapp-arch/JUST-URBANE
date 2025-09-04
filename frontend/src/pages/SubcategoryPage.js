@@ -96,6 +96,7 @@ const SubcategoryPage = () => {
             article.slug === 'celini-food-review-mumbai' ? '/celini-food-review-mumbai' : 
             article.slug === 'scottish-leader-whiskey-review' ? '/scottish-leader-whiskey-review' :
             article.slug === 'when-in-france-travel-destinations' ? '/when-in-france-travel-destinations' :
+            article.slug === 'sustainable-travel-conscious-guide' ? '/sustainable-travel-conscious-guide' :
             `/article/${article.slug || article.id}`}
         className="group block bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300"
       >
