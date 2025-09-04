@@ -1,126 +1,252 @@
 {
-  "total": 17,
-  "passed": 14,
-  "failed": 3,
-  "success_rate": 82.35294117647058,
+  "total": 35,
+  "passed": 2,
+  "failed": 33,
+  "success_rate": 5.714285714285714,
   "results": [
     {
       "test": "Health Check",
       "success": true,
       "message": "API is healthy and responding",
-      "timestamp": "2025-09-04T14:41:30.870045",
+      "timestamp": "2025-09-04T16:01:44.565415",
       "response_data": null
     },
     {
-      "test": "Drinks Category - Scottish Leader Article Present",
-      "success": true,
-      "message": "Scottish Leader whiskey review found in drinks category with 1 total drinks articles",
-      "timestamp": "2025-09-04T14:41:30.879833",
-      "response_data": null
-    },
-    {
-      "test": "Scottish Leader Article Details",
-      "success": true,
-      "message": "Slug: scottish-leader-whiskey-review, Subcategory: whiskey review",
-      "timestamp": "2025-09-04T14:41:30.879866",
-      "response_data": null
-    },
-    {
-      "test": "Whiskey Review Subcategory (hyphen) - Scottish Leader",
-      "success": true,
-      "message": "Scottish Leader found in whiskey-review subcategory with 1 articles",
-      "timestamp": "2025-09-04T14:41:30.889800",
-      "response_data": null
-    },
-    {
-      "test": "Whiskey Review Subcategory (space) - Scottish Leader",
-      "success": true,
-      "message": "Scottish Leader found in 'whiskey review' subcategory with 1 articles",
-      "timestamp": "2025-09-04T14:41:30.902526",
-      "response_data": null
-    },
-    {
-      "test": "Subcategory URL Parameter Normalization",
-      "success": true,
-      "message": "Both 'whiskey-review' and 'whiskey review' return same results (1 articles)",
-      "timestamp": "2025-09-04T14:41:30.902559",
-      "response_data": null
-    },
-    {
-      "test": "Scottish Leader Article Retrieval by Slug",
-      "success": true,
-      "message": "Successfully retrieved article: Scottish Leader Original Whiskey",
-      "timestamp": "2025-09-04T14:41:30.910381",
-      "response_data": null
-    },
-    {
-      "test": "Database Subcategory Format",
-      "success": true,
-      "message": "Stored subcategory format: 'whiskey review' (category: 'drinks')",
-      "timestamp": "2025-09-04T14:41:30.910418",
-      "response_data": null
-    },
-    {
-      "test": "Scottish Leader Article - Content Verification",
-      "success": true,
-      "message": "Article properly structured: category=drinks, subcategory=whiskey review, content_length=1469",
-      "timestamp": "2025-09-04T14:41:30.910430",
-      "response_data": null
-    },
-    {
-      "test": "Subcategory Format Analysis",
-      "success": true,
-      "message": "Stored: 'whiskey review', Normalized: 'whiskey review'",
-      "timestamp": "2025-09-04T14:41:30.910436",
-      "response_data": null
-    },
-    {
-      "test": "Drinks Category System",
+      "test": "Categories API",
       "success": false,
-      "message": "Categories API failed: HTTP 500",
-      "timestamp": "2025-09-04T14:41:30.920026",
+      "message": "HTTP 404: {\"detail\":\"Not Found\"}",
+      "timestamp": "2025-09-04T16:01:44.731825",
       "response_data": null
     },
     {
-      "test": "Categories Listing",
+      "test": "Article Distribution Setup",
       "success": false,
-      "message": "HTTP 500: Internal Server Error",
-      "timestamp": "2025-09-04T14:41:30.929541",
+      "message": "Failed to get articles: HTTP 404",
+      "timestamp": "2025-09-04T16:01:44.766896",
       "response_data": null
     },
     {
-      "test": "Articles Listing",
-      "success": true,
-      "message": "Retrieved 20 articles",
-      "timestamp": "2025-09-04T14:41:30.938004",
-      "response_data": null
-    },
-    {
-      "test": "Articles Category Filter",
-      "success": true,
-      "message": "Retrieved 0 style articles",
-      "timestamp": "2025-09-04T14:41:30.945337",
-      "response_data": null
-    },
-    {
-      "test": "Featured Articles",
-      "success": true,
-      "message": "Retrieved 20 featured articles",
-      "timestamp": "2025-09-04T14:41:30.953619",
-      "response_data": null
-    },
-    {
-      "test": "Trending Articles",
-      "success": true,
-      "message": "Retrieved 9 trending articles",
-      "timestamp": "2025-09-04T14:41:30.961315",
-      "response_data": null
-    },
-    {
-      "test": "Database Consistency Check",
+      "test": "Category Filter - Fashion",
       "success": false,
-      "message": "Error: 'NoneType' object has no attribute 'lower'",
-      "timestamp": "2025-09-04T14:41:30.971473",
+      "message": "HTTP 404",
+      "timestamp": "2025-09-04T16:01:44.778784",
+      "response_data": null
+    },
+    {
+      "test": "Category Filter - Technology",
+      "success": false,
+      "message": "HTTP 404",
+      "timestamp": "2025-09-04T16:01:44.789954",
+      "response_data": null
+    },
+    {
+      "test": "Category Filter - Food",
+      "success": false,
+      "message": "HTTP 404",
+      "timestamp": "2025-09-04T16:01:44.802452",
+      "response_data": null
+    },
+    {
+      "test": "Category Filter - Auto",
+      "success": false,
+      "message": "HTTP 404",
+      "timestamp": "2025-09-04T16:01:44.811658",
+      "response_data": null
+    },
+    {
+      "test": "Category Filter - Travel",
+      "success": false,
+      "message": "HTTP 404",
+      "timestamp": "2025-09-04T16:01:44.931645",
+      "response_data": null
+    },
+    {
+      "test": "Category Filter - Business",
+      "success": false,
+      "message": "HTTP 404",
+      "timestamp": "2025-09-04T16:01:44.945420",
+      "response_data": null
+    },
+    {
+      "test": "Category Filter - Health",
+      "success": false,
+      "message": "HTTP 404",
+      "timestamp": "2025-09-04T16:01:44.955602",
+      "response_data": null
+    },
+    {
+      "test": "Category Filter - Culture",
+      "success": false,
+      "message": "HTTP 404",
+      "timestamp": "2025-09-04T16:01:44.965587",
+      "response_data": null
+    },
+    {
+      "test": "Category Filtering System",
+      "success": false,
+      "message": "Only 0/8 category filters working",
+      "timestamp": "2025-09-04T16:01:44.965635",
+      "response_data": null
+    },
+    {
+      "test": "Subcategory Filter - food/drinks",
+      "success": false,
+      "message": "HTTP 404",
+      "timestamp": "2025-09-04T16:01:44.985149",
+      "response_data": null
+    },
+    {
+      "test": "Subcategory Filter - auto/cars",
+      "success": false,
+      "message": "HTTP 404",
+      "timestamp": "2025-09-04T16:01:45.131249",
+      "response_data": null
+    },
+    {
+      "test": "Subcategory Filter - travel/luxury",
+      "success": false,
+      "message": "HTTP 404",
+      "timestamp": "2025-09-04T16:01:45.231324",
+      "response_data": null
+    },
+    {
+      "test": "Subcategory Filter - fashion/men",
+      "success": false,
+      "message": "HTTP 404",
+      "timestamp": "2025-09-04T16:01:45.250358",
+      "response_data": null
+    },
+    {
+      "test": "Subcategory Filter - fashion/women",
+      "success": false,
+      "message": "HTTP 404",
+      "timestamp": "2025-09-04T16:01:45.269182",
+      "response_data": null
+    },
+    {
+      "test": "Subcategory Filter - technology/smartphones",
+      "success": false,
+      "message": "HTTP 404",
+      "timestamp": "2025-09-04T16:01:45.288644",
+      "response_data": null
+    },
+    {
+      "test": "Subcategory Filtering System",
+      "success": false,
+      "message": "Only 0/6 subcategory filters working",
+      "timestamp": "2025-09-04T16:01:45.288682",
+      "response_data": null
+    },
+    {
+      "test": "Data Consistency Setup",
+      "success": false,
+      "message": "Failed to get articles: HTTP 404",
+      "timestamp": "2025-09-04T16:01:45.297658",
+      "response_data": null
+    },
+    {
+      "test": "Cross-Category - Fashion",
+      "success": false,
+      "message": "HTTP 404 for fashion",
+      "timestamp": "2025-09-04T16:01:45.308265",
+      "response_data": null
+    },
+    {
+      "test": "Cross-Category - Technology",
+      "success": false,
+      "message": "HTTP 404 for technology",
+      "timestamp": "2025-09-04T16:01:45.318136",
+      "response_data": null
+    },
+    {
+      "test": "Cross-Category - Food",
+      "success": false,
+      "message": "HTTP 404 for food",
+      "timestamp": "2025-09-04T16:01:45.327511",
+      "response_data": null
+    },
+    {
+      "test": "Cross-Category - Auto",
+      "success": false,
+      "message": "HTTP 404 for auto",
+      "timestamp": "2025-09-04T16:01:45.336551",
+      "response_data": null
+    },
+    {
+      "test": "Cross-Category - Travel",
+      "success": false,
+      "message": "HTTP 404 for travel",
+      "timestamp": "2025-09-04T16:01:45.346503",
+      "response_data": null
+    },
+    {
+      "test": "Cross-Category - Performance",
+      "success": true,
+      "message": "Consistent performance: avg 0.01s, max 0.01s",
+      "timestamp": "2025-09-04T16:01:45.346551",
+      "response_data": null
+    },
+    {
+      "test": "Cross-Category Functionality",
+      "success": false,
+      "message": "Only 0/5 categories show consistent behavior",
+      "timestamp": "2025-09-04T16:01:45.346559",
+      "response_data": null
+    },
+    {
+      "test": "Endpoint - Categories API - should return 13 categories",
+      "success": false,
+      "message": "\u274c /categories failed: HTTP 404",
+      "timestamp": "2025-09-04T16:01:45.356044",
+      "response_data": null
+    },
+    {
+      "test": "Endpoint - Fashion articles",
+      "success": false,
+      "message": "\u274c /articles?category=fashion failed: HTTP 404",
+      "timestamp": "2025-09-04T16:01:45.366645",
+      "response_data": null
+    },
+    {
+      "test": "Endpoint - Technology articles",
+      "success": false,
+      "message": "\u274c /articles?category=technology failed: HTTP 404",
+      "timestamp": "2025-09-04T16:01:45.400805",
+      "response_data": null
+    },
+    {
+      "test": "Endpoint - Food/Drinks - Scottish Leader + Fine Beverages",
+      "success": false,
+      "message": "\u274c /articles?category=food&subcategory=drinks failed: HTTP 404",
+      "timestamp": "2025-09-04T16:01:45.410105",
+      "response_data": null
+    },
+    {
+      "test": "Endpoint - Auto/Cars articles",
+      "success": false,
+      "message": "\u274c /articles?category=auto&subcategory=cars failed: HTTP 404",
+      "timestamp": "2025-09-04T16:01:45.418546",
+      "response_data": null
+    },
+    {
+      "test": "Endpoint - Travel/Luxury content",
+      "success": false,
+      "message": "\u274c /articles?category=travel&subcategory=luxury failed: HTTP 404",
+      "timestamp": "2025-09-04T16:01:45.426683",
+      "response_data": null
+    },
+    {
+      "test": "Endpoint - Overall article listing",
+      "success": false,
+      "message": "\u274c /articles failed: HTTP 404",
+      "timestamp": "2025-09-04T16:01:45.436121",
+      "response_data": null
+    },
+    {
+      "test": "Specific Endpoints",
+      "success": false,
+      "message": "Only 0/7 required endpoints working",
+      "timestamp": "2025-09-04T16:01:45.436158",
       "response_data": null
     }
   ]
