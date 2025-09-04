@@ -20,9 +20,9 @@ const SubcategoryPage = () => {
     const fetchArticles = async () => {
       try {
         setIsLoading(true);
-        console.log(`Fetching: category=${category}, subcategory=${subcategory}`);
+        console.log(`Fetching: category=${category}, subcategory=${normalizedSubcategory}`);
         const response = await api.get('/articles', {
-          params: { category, subcategory, limit: 50 }
+          params: { category, subcategory: normalizedSubcategory, limit: 50 }
         });
         setArticles(response.data || []);
         console.log(`Got ${response.data?.length || 0} articles`);
@@ -33,10 +33,10 @@ const SubcategoryPage = () => {
       }
     };
 
-    if (category && subcategory) {
+    if (category && normalizedSubcategory) {
       fetchArticles();
     }
-  }, [category, subcategory]);
+  }, [category, normalizedSubcategory]);
 
   const pageTitle = subcategory.toUpperCase();
   const categoryLabel = {
