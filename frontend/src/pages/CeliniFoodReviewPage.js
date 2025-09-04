@@ -12,7 +12,7 @@ const CeliniFoodReviewPage = () => {
     author: "Team Urbane",
     date: "June 2022",
     readTime: "6 min read",
-    heroImage: "https://customer-assets.emergentagent.com/job_just-urbane-revamp/artifacts/oaskh2yo_Celini.JPG",
+    heroImage: "https://customer-assets.emergentagent.com/job_premium-articles/artifacts/hlost84c_Celini.JPG",
     tags: ['Italian Cuisine', 'Mumbai Restaurants', 'Grand Hyatt', 'Fine Dining', 'Chef Gianfranco', 'Restaurant Review', 'Celini']
   };
 
