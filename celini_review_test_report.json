@@ -1,6 +1,6 @@
 {
-  "total": 12,
-  "passed": 12,
+  "total": 13,
+  "passed": 13,
   "failed": 0,
   "success_rate": 100.0,
   "results": [
@@ -8,84 +8,91 @@
       "test": "API Health Check",
       "success": true,
       "message": "API is healthy: Just Urbane API is running",
-      "timestamp": "2025-09-04T13:15:23.007510",
+      "timestamp": "2025-09-04T13:16:01.196560",
       "response_data": null
     },
     {
       "test": "Food Category Articles - Celini Present",
       "success": true,
       "message": "Celini article found in food category. Total food articles: 4",
-      "timestamp": "2025-09-04T13:15:23.016054",
+      "timestamp": "2025-09-04T13:16:01.208401",
+      "response_data": null
+    },
+    {
+      "test": "Food Review Subcategory (hyphen)",
+      "success": true,
+      "message": "Celini found with 'food-review' parameter. Articles: 1",
+      "timestamp": "2025-09-04T13:16:01.216791",
       "response_data": null
     },
     {
       "test": "Food Review Subcategory (space)",
       "success": true,
       "message": "Celini found with 'food review' parameter. Articles: 1",
-      "timestamp": "2025-09-04T13:15:23.034212",
+      "timestamp": "2025-09-04T13:16:01.224502",
       "response_data": null
     },
     {
       "test": "Food Review Subcategory",
       "success": true,
-      "message": "Celini article accessible via subcategory filtering (hyphen: False, space: True)",
-      "timestamp": "2025-09-04T13:15:23.034249",
+      "message": "Celini article accessible via subcategory filtering (hyphen: True, space: True)",
+      "timestamp": "2025-09-04T13:16:01.224537",
       "response_data": null
     },
     {
       "test": "Single Article Retrieval by Slug",
       "success": true,
       "message": "Successfully retrieved Celini article: 'A bit of Italiano at the newly re-launched Celini'",
-      "timestamp": "2025-09-04T13:15:23.043081",
+      "timestamp": "2025-09-04T13:16:01.235585",
       "response_data": null
     },
     {
       "test": "Article Content Structure",
       "success": true,
       "message": "All required fields present and valid. Details: title: A bit of Italiano at the newly...; category: food...; subcategory: food review...",
-      "timestamp": "2025-09-04T13:15:23.043137",
+      "timestamp": "2025-09-04T13:16:01.235658",
       "response_data": null
     },
     {
       "test": "Article Content - Title",
       "success": true,
       "message": "Title contains 'Celini': A bit of Italiano at the newly re-launched Celini",
-      "timestamp": "2025-09-04T13:15:23.043144",
+      "timestamp": "2025-09-04T13:16:01.235666",
       "response_data": null
     },
     {
       "test": "Article Content - Category",
       "success": true,
       "message": "Category is 'food': food",
-      "timestamp": "2025-09-04T13:15:23.043150",
+      "timestamp": "2025-09-04T13:16:01.235674",
       "response_data": null
     },
     {
       "test": "Article Content - Subcategory",
       "success": true,
       "message": "Subcategory is food review: food review",
-      "timestamp": "2025-09-04T13:15:23.043156",
+      "timestamp": "2025-09-04T13:16:01.235678",
       "response_data": null
     },
     {
       "test": "Article Content - Body Length",
       "success": true,
       "message": "Content length: 2664 characters",
-      "timestamp": "2025-09-04T13:15:23.043162",
+      "timestamp": "2025-09-04T13:16:01.235684",
       "response_data": null
     },
     {
       "test": "Article Content - Hero Image",
       "success": true,
       "message": "Hero image URL present: https://customer-assets.emergentagent.com/job_just...",
-      "timestamp": "2025-09-04T13:15:23.043167",
+      "timestamp": "2025-09-04T13:16:01.235689",
       "response_data": null
     },
     {
       "test": "Article Content - Gallery",
       "success": true,
       "message": "Gallery has 2 images",
-      "timestamp": "2025-09-04T13:15:23.043171",
+      "timestamp": "2025-09-04T13:16:01.235694",
       "response_data": null
     }
   ]
