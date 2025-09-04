@@ -217,7 +217,7 @@ const CeliniFoodReviewPage = () => {
 
         {/* Tags */}
         <motion.div 
-          className="mt-12 pt-8 border-t border-gray-200"
+          className="mt-8 sm:mt-12 pt-6 sm:pt-8 border-t border-gray-200 px-2"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.6 }}
