@@ -891,6 +891,18 @@ backend:
         agent: "testing"
         comment: "🍽️ FOOD REVIEW SUBCATEGORY FUNCTIONALITY TESTING COMPLETED - SEPTEMBER 4, 2025 - 100% SUCCESS RATE (5/5 priority tests passed). ✅ FOOD REVIEW SUBCATEGORY NAVIGATION: Direct navigation to /category/food/food-review now shows 1 article (Celini) instead of 0 - URL parameter normalization fix working perfectly. SubcategoryPage converts 'food-review' to 'food review' for API calls as intended. ✅ HEADER NAVIGATION: Mobile menu Food Review navigation working correctly - clicking 'Food Review' in mobile menu navigates to correct URL (/category/food/food-review) and shows articles. ✅ ARTICLE PAGE ACCESSIBILITY: Celini article page at /celini-food-review-mumbai loads properly with complete content structure, 6 images, author attribution, and proper formatting. ✅ BREADCRUMB NAVIGATION: All breadcrumb links working correctly from article page - Home → Food → Food Review navigation functional, 'Back to Food Reviews' link navigates properly to subcategory page. ✅ URL CONSISTENCY: URL formats handled properly - frontend uses URL-safe slugs (food-review) while backend API receives normalized parameters (food review). API calls show 'subcategory=food+review' confirming proper normalization. Console logs confirm: 'Fetching: category=food, subcategory=food review' and 'Got 1 articles'. CRITICAL SUCCESS: All fixes implemented correctly - SubcategoryPage normalization resolves mismatch between frontend routing and backend API expectations. The '0 articles' issue is completely resolved."
 
+  - task: "Scottish Leader Whiskey Review Backend Testing"
+    implemented: false
+    working: "NA"
+    file: "backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: "NA"
+        agent: "testing"
+        comment: "🥃 SCOTTISH LEADER WHISKEY REVIEW BACKEND TESTING COMPLETED - JANUARY 3, 2025 - ARTICLE NOT FOUND (62.5% API success rate, 10/16 tests passed). ❌ CRITICAL FINDING: Scottish Leader Whiskey article does NOT exist in the database. ✅ BACKEND API FUNCTIONALITY: All core backend APIs working correctly - Health Check (✅), Categories API (✅ 10 categories including Food), Articles API (✅ 46 total articles), Subcategory filtering (✅ URL parameter normalization working). ❌ MISSING CONTENT: No 'Drinks' category exists (available: Fashion, Business, Technology, Finance, Travel, Health, Culture, Art, Entertainment, Food). No Scottish Leader Whiskey article found with expected slug 'scottish-leader-whiskey-review' or alternatives. ✅ DRINKS SUBCATEGORY: Found 1 article in food/drinks subcategory: 'Fine Beverages: World of Premium Drinks' by Ananya Krishnan, but contains no Scottish Leader or whiskey content. ✅ SUBCATEGORY NORMALIZATION: URL parameter handling working correctly - both 'whiskey-review' and 'whiskey review' return same results (0 articles as expected since no whiskey articles exist). CONCLUSION: Backend APIs are fully functional and ready to support Scottish Leader Whiskey article when it's created. The issue is missing content, not backend functionality."
+
 frontend:
   - task: "Privacy Policy Page Implementation"
     implemented: true
