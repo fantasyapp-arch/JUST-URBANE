@@ -244,11 +244,11 @@ const SustainableTravelPage = () => {
           transition={{ duration: 0.6, delay: 0.8 }}
         >
           <Link 
-            to="/category/travel/culture"
+            to="/category/travel/guides"
             className="inline-flex items-center text-green-600 hover:text-green-700 font-medium group"
           >
             <ArrowLeft className="h-4 w-4 mr-2 group-hover:-translate-x-1 transition-transform" />
-            Back to Travel Culture
+            Back to Travel Guides
           </Link>
         </motion.div>
       </div>
