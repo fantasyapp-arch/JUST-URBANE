@@ -131,6 +131,7 @@ class Article(BaseModel):
     hero_image: Optional[str] = None
     gallery: List[str] = []
     category: str
+    subcategory: Optional[str] = None  # NEW: subcategory field
     tags: List[str] = []
     author_id: str
     author_name: str
