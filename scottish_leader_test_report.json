@@ -1,0 +1,99 @@
+{
+  "total": 13,
+  "passed": 12,
+  "failed": 1,
+  "success_rate": 92.3076923076923,
+  "results": [
+    {
+      "test": "Drinks Category API - Scottish Leader Found",
+      "success": true,
+      "message": "Found Scottish Leader article in drinks category (total: 1 articles)",
+      "timestamp": "2025-09-04T14:42:36.782828",
+      "response_data": null
+    },
+    {
+      "test": "Article Structure Validation",
+      "success": true,
+      "message": "All required fields present: id, title, slug, dek, body, category, subcategory, author_name, author_id, published_at, created_at, updated_at, reading_time",
+      "timestamp": "2025-09-04T14:42:36.782869",
+      "response_data": null
+    },
+    {
+      "test": "Whiskey Review Subcategory (hyphen)",
+      "success": true,
+      "message": "Scottish Leader found in whiskey-review subcategory (1 articles)",
+      "timestamp": "2025-09-04T14:42:36.792663",
+      "response_data": null
+    },
+    {
+      "test": "Whiskey Review Subcategory (URL encoded)",
+      "success": true,
+      "message": "Scottish Leader found in 'whiskey+review' subcategory (1 articles)",
+      "timestamp": "2025-09-04T14:42:36.802380",
+      "response_data": null
+    },
+    {
+      "test": "Single Article Retrieval - Complete Data",
+      "success": true,
+      "message": "All required fields present in article: Scottish Leader Original Whiskey",
+      "timestamp": "2025-09-04T14:42:36.810000",
+      "response_data": null
+    },
+    {
+      "test": "Article Title Verification",
+      "success": true,
+      "message": "Title contains 'Scottish Leader': Scottish Leader Original Whiskey",
+      "timestamp": "2025-09-04T14:42:36.810037",
+      "response_data": null
+    },
+    {
+      "test": "Article Category Verification",
+      "success": true,
+      "message": "Category is 'drinks': drinks",
+      "timestamp": "2025-09-04T14:42:36.810044",
+      "response_data": null
+    },
+    {
+      "test": "Article Subcategory Verification",
+      "success": true,
+      "message": "Subcategory contains 'whiskey': whiskey review",
+      "timestamp": "2025-09-04T14:42:36.810050",
+      "response_data": null
+    },
+    {
+      "test": "Categories API",
+      "success": false,
+      "message": "HTTP 500: Internal Server Error",
+      "timestamp": "2025-09-04T14:42:36.817933",
+      "response_data": null
+    },
+    {
+      "test": "Database Consistency - Data Types",
+      "success": true,
+      "message": "All 10 data type checks passed",
+      "timestamp": "2025-09-04T14:42:36.827813",
+      "response_data": null
+    },
+    {
+      "test": "Subcategory Normalization",
+      "success": true,
+      "message": "Subcategory uses spaces: 'whiskey review'",
+      "timestamp": "2025-09-04T14:42:36.827847",
+      "response_data": null
+    },
+    {
+      "test": "Hero Image Accessibility",
+      "success": true,
+      "message": "Hero image accessible: https://customer-assets.emergentagent.com/job_prem...",
+      "timestamp": "2025-09-04T14:42:37.062514",
+      "response_data": null
+    },
+    {
+      "test": "Gallery Images Accessibility",
+      "success": true,
+      "message": "2/2 gallery images accessible",
+      "timestamp": "2025-09-04T14:42:37.177192",
+      "response_data": null
+    }
+  ]
+}
