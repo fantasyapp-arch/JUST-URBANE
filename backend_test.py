@@ -2271,16 +2271,16 @@ class JustUrbaneAPITester:
         return self.generate_report()
 
 def main():
-    """Main testing function for France Travel Article Integration"""
-    print("🇫🇷 Starting France Travel Article Integration Testing")
+    """Main testing function for Travel/Guides Subcategory Fix Verification"""
+    print("🎯 Starting Travel/Guides Subcategory Fix Verification Testing")
     print("=" * 70)
     
     # Use the backend URL from frontend environment (production URL) with /api prefix
     backend_url = "https://magazine-ui-update.preview.emergentagent.com/api"
     tester = JustUrbaneAPITester(backend_url)
     
-    # Run France travel article integration tests
-    report = tester.run_france_travel_article_tests()
+    # Run travel/guides subcategory fix verification tests
+    report = tester.run_travel_guides_fix_verification()
     
     # Save detailed report
     with open("/app/backend_test_report.json", "w") as f:
