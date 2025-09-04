@@ -1206,9 +1206,9 @@ class JustUrbaneAPITester:
                 
                 for article in all_articles:
                     title = article.get("title", "").lower()
-                    category = article.get("category", "").lower()
-                    subcategory = article.get("subcategory", "").lower()
-                    tags = article.get("tags", [])
+                    category = article.get("category", "").lower() if article.get("category") else ""
+                    subcategory = article.get("subcategory", "").lower() if article.get("subcategory") else ""
+                    tags = article.get("tags", []) if article.get("tags") else []
                     
                     if "whiskey" in title or "whisky" in title or "scottish leader" in title:
                         whiskey_articles.append(article)
