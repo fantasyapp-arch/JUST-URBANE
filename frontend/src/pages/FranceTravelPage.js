@@ -151,6 +151,29 @@ const FranceTravelPage = () => {
             It has a gorgeous yet wild appeal, with stylish seaside cities, steep granite peaks, and unspoiled forests. It is also a destination for snorkelling and scuba diving, with 1,000 kilometres of lovely blue shoreline to uncover. You might come across much free-roaming wildlife such as pigs, cows, and goats. But there is nothing to worry about as there are no harmful snakes to disrupt your vacation.
           </p>
 
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 my-6 sm:my-8 -mx-2 sm:-mx-4">
+            <figure>
+              <img 
+                src="https://customer-assets.emergentagent.com/job_urbane-articles/artifacts/bmn4zpsi_corsica%20%282%29.jpg"
+                alt="Corsica coastal beauty - pristine beaches and dramatic cliffs meeting the Mediterranean Sea"
+                className="w-full h-48 sm:h-64 object-cover rounded-lg shadow-lg"
+              />
+              <figcaption className="text-sm text-gray-600 mt-3 text-center italic px-2">
+                Corsica's pristine beaches and dramatic coastal formations
+              </figcaption>
+            </figure>
+            <figure>
+              <img 
+                src="https://customer-assets.emergentagent.com/job_urbane-articles/artifacts/o978n16c_Corsica%20%283%29.jpg"
+                alt="Corsica wilderness and natural landscapes showcasing the island's untamed beauty"
+                className="w-full h-48 sm:h-64 object-cover rounded-lg shadow-lg"
+              />
+              <figcaption className="text-sm text-gray-600 mt-3 text-center italic px-2">
+                The untamed wilderness and natural beauty of Corsica's interior
+              </figcaption>
+            </figure>
+          </div>
+
           <h3 className="text-2xl font-serif font-bold text-gray-900 mt-10 mb-6">
             Paris and Versailles
           </h3>
