@@ -1,119 +1,112 @@
 {
-  "total": 16,
+  "total": 15,
   "passed": 13,
-  "failed": 3,
-  "success_rate": 81.25,
+  "failed": 2,
+  "success_rate": 86.66666666666667,
   "results": [
     {
       "test": "Health Check",
       "success": true,
       "message": "API is healthy and responding",
-      "timestamp": "2025-09-04T08:39:26.232910",
+      "timestamp": "2025-09-04T08:40:55.549721",
       "response_data": null
     },
     {
       "test": "Food Category - Celini Article Present",
-      "success": false,
-      "message": "Celini food review not found in 4 food articles",
-      "timestamp": "2025-09-04T08:39:26.247662",
-      "response_data": null
-    },
-    {
-      "test": "Food Articles Available",
       "success": true,
-      "message": "Available food articles: Master Chefs: Culinary Visionaries, Fine Dining Excellence: Culinary Experiences, Fine Beverages: World of Premium Drinks, A bit of Italiano at the newly re-launched Celini",
-      "timestamp": "2025-09-04T08:39:26.247698",
+      "message": "Celini food review found in food category with 4 total food articles",
+      "timestamp": "2025-09-04T08:40:55.567603",
       "response_data": null
     },
     {
       "test": "Food Review Subcategory - Celini Article",
       "success": true,
       "message": "Celini article found in food-review subcategory with 1 articles",
-      "timestamp": "2025-09-04T08:39:26.281107",
+      "timestamp": "2025-09-04T08:40:55.580626",
       "response_data": null
     },
     {
       "test": "Celini Article - Content Structure",
       "success": false,
       "message": "Issues with: subcategory=None",
-      "timestamp": "2025-09-04T08:39:26.293049",
+      "timestamp": "2025-09-04T08:40:55.593758",
       "response_data": null
     },
     {
       "test": "Celini Article - Hero Image",
       "success": true,
       "message": "Hero image present: https://customer-assets.emergentagent.com/job_just...",
-      "timestamp": "2025-09-04T08:39:26.293087",
+      "timestamp": "2025-09-04T08:40:55.593798",
       "response_data": null
     },
     {
       "test": "Celini Article - Gallery Images",
       "success": true,
       "message": "Gallery has 2 images (required: 2+)",
-      "timestamp": "2025-09-04T08:39:26.293095",
+      "timestamp": "2025-09-04T08:40:55.593806",
       "response_data": null
     },
     {
       "test": "Celini Article Retrieval by Slug",
       "success": true,
       "message": "Successfully retrieved Celini article: A bit of Italiano at the newly re-launched Celini",
-      "timestamp": "2025-09-04T08:39:26.293101",
+      "timestamp": "2025-09-04T08:40:55.593811",
       "response_data": null
     },
     {
       "test": "Food Category System",
       "success": true,
       "message": "Food category exists in categories API",
-      "timestamp": "2025-09-04T08:39:26.307629",
+      "timestamp": "2025-09-04T08:40:55.607255",
       "response_data": null
     },
     {
       "test": "Categories Count",
       "success": false,
       "message": "Expected 9 categories, got 10",
-      "timestamp": "2025-09-04T08:39:26.322311",
+      "timestamp": "2025-09-04T08:40:55.617068",
       "response_data": null
     },
     {
       "test": "GQ Categories Structure",
       "success": true,
       "message": "All 9 GQ-style categories present: Fashion, Business, Technology, Finance, Travel, Health, Culture, Art, Entertainment, Food",
-      "timestamp": "2025-09-04T08:39:26.322352",
+      "timestamp": "2025-09-04T08:40:55.617104",
       "response_data": null
     },
     {
       "test": "Categories Listing",
       "success": true,
       "message": "Retrieved 10 categories",
-      "timestamp": "2025-09-04T08:39:26.322360",
+      "timestamp": "2025-09-04T08:40:55.617112",
       "response_data": null
     },
     {
       "test": "Articles Listing",
       "success": true,
       "message": "Retrieved 20 articles",
-      "timestamp": "2025-09-04T08:39:26.332760",
+      "timestamp": "2025-09-04T08:40:55.628646",
       "response_data": null
     },
     {
       "test": "Articles Category Filter",
       "success": true,
       "message": "Retrieved 0 style articles",
-      "timestamp": "2025-09-04T08:39:26.384858",
+      "timestamp": "2025-09-04T08:40:55.681260",
       "response_data": null
     },
     {
       "test": "Featured Articles",
       "success": true,
       "message": "Retrieved 20 featured articles",
-      "timestamp": "2025-09-04T08:39:26.396810",
+      "timestamp": "2025-09-04T08:40:55.692344",
       "response_data": null
     },
     {
       "test": "Trending Articles",
       "success": true,
       "message": "Retrieved 9 trending articles",
-      "timestamp": "2025-09-04T08:39:26.411474",
+      "timestamp": "2025-09-04T08:40:55.701489",
       "response_data": null
     }
   ]
