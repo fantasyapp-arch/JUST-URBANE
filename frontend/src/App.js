@@ -32,6 +32,7 @@ import PaymentSuccessPage from './pages/PaymentSuccessPage';
 import ProfilePage from './pages/ProfilePage';
 import SubcategoryPage from './pages/SubcategoryPage';
 import RoyalAtlantisPage from './pages/RoyalAtlantisPage';
+import CeliniFoodReviewPage from './pages/CeliniFoodReviewPage';
 import PrivacyPage from './pages/PrivacyPage';
 import TermsPage from './pages/TermsPage';
 
