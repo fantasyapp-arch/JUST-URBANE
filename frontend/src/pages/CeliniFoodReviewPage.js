@@ -163,13 +163,13 @@ const CeliniFoodReviewPage = () => {
             The Spaghetti Aglio, Olio e Peperoncino stood out as a masterpiece of simplicity. This classic Roman dish, prepared with just garlic, olive oil, and chili, showcased Chef Gianfranco's ability to elevate the most basic ingredients into something extraordinary. The pasta was cooked to perfect al dente, and each strand was beautifully coated with the aromatic oil, creating a harmonious balance of flavors that danced on the palate.
           </p>
 
-          <figure className="my-8">
+          <figure className="my-6 sm:my-8 -mx-2 sm:-mx-4">
             <img 
               src="https://customer-assets.emergentagent.com/job_just-urbane-revamp/artifacts/n51l3mul_Caprese%20and%20Prosciutto.jpg"
               alt="Caprese and Prosciutto - Fresh mozzarella, cherry tomatoes, basil, and premium prosciutto representing the finest Italian antipasti"
-              className="w-full h-64 md:h-96 object-cover rounded-lg shadow-lg"
+              className="w-full h-48 sm:h-64 md:h-96 object-cover rounded-lg shadow-lg"
             />
-            <figcaption className="text-sm text-gray-600 mt-3 text-center italic">
+            <figcaption className="text-sm text-gray-600 mt-3 text-center italic px-2">
               Caprese and Prosciutto - Fresh mozzarella, cherry tomatoes, basil, and premium prosciutto representing the finest Italian antipasti
             </figcaption>
           </figure>
