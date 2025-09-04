@@ -55,7 +55,7 @@ Deciding your destination is the most important step. A considerable point to ke
             "author_name": "Komal Bhandekar",
             "author_id": "komal-bhandekar",
             "category": "travel",
-            "subcategory": "guides",
+            "subcategory": "culture",
             "tags": ["sustainable travel", "eco-tourism", "responsible travel", "environment", "green travel", "carbon footprint", "conservation", "prince harry", "travalyst", "eco-conscious"],
             "hero_image": "https://customer-assets.emergentagent.com/job_magazine-ui-update/artifacts/uzjm9ne7_shutterstock_1982804408-_Converted_.jpg",
             "gallery": [
