@@ -8,7 +8,7 @@ const SustainableTravelPage = () => {
     title: "Travel With A Clear Conscious",
     subtitle: "You have been there and done that how about doing it a different way this time? I am not talking about making a bucket list, I am talking about travelling with a consciousness. Travelling sustainably so that your future generations can see the places you love.",
     category: "Travel",
-    subcategory: "Culture",
+    subcategory: "Guides",
     author: "Komal Bhandekar",
     date: "August 2022",
     readTime: "5 min read",
