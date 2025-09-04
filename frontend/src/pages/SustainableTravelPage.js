@@ -216,6 +216,17 @@ const SustainableTravelPage = () => {
             Deciding your destination is the most important step. A considerable point to keep in mind while selecting a destination is how far the place is and what mode of transportation you would require to reach there. To travel in a more environmentally friendly manner, consider participating in eco-tourism. These kinds of businesses provide vacations to locations all over the world, giving each one a high priority for sustainability.
           </p>
 
+          <figure className="my-6 sm:my-8 -mx-2 sm:-mx-4">
+            <img 
+              src="https://customer-assets.emergentagent.com/job_magazine-ui-update/artifacts/9edzgrib_shutterstock_1611400012.jpg"
+              alt="Sustainable travel destinations mapping - Exploring eco-friendly locations and responsible tourism planning"
+              className="w-full h-48 sm:h-64 md:h-96 object-cover rounded-lg shadow-lg"
+            />
+            <figcaption className="text-sm text-gray-600 mt-3 text-center italic px-2">
+              Map out your sustainable travel destinations and plan eco-conscious journeys that benefit local communities
+            </figcaption>
+          </figure>
+
         </motion.article>
 
         {/* Tags */}
