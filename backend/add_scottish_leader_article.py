@@ -35,7 +35,7 @@ With awards like 2019 Scotch Whiskey Masters Gold, 2019 World Whiskey Awards Sil
             "author_id": "harshit-srinivas", 
             "category": "food",
             "subcategory": "drinks", 
-            "tags": ["scottish whiskey", "whiskey review", "scotch", "distell international", "aspri spirits", "premium spirits", "scottish leader"],
+            "tags": ["scottish whiskey", "whiskey review", "scotch", "distell international", "aspri spirits", "premium spirits", "scottish leader", "drinks", "food"],
             "hero_image": "https://customer-assets.emergentagent.com/job_premium-articles/artifacts/yfjyheh0_Scottish%20Leader_2.jpg",
             "gallery": [
                 "https://customer-assets.emergentagent.com/job_premium-articles/artifacts/yfjyheh0_Scottish%20Leader_2.jpg",
