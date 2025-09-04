@@ -10,7 +10,7 @@ import time
 from datetime import datetime
 
 class PremiumPricingTester:
-    def __init__(self, base_url: str = "https://urbane-luxury.preview.emergentagent.com"):
+    def __init__(self, base_url: str = "https://just-urbane-revamp.preview.emergentagent.com"):
         self.base_url = base_url
         self.session = requests.Session()
         self.auth_token = None
