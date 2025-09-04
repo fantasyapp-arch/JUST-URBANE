@@ -42,10 +42,12 @@ With awards like 2019 Scotch Whiskey Masters Gold, 2019 World Whiskey Awards Sil
                 "https://customer-assets.emergentagent.com/job_premium-articles/artifacts/714p0anm_Scottish%20Leader_3.jpg"
             ],
             "published_at": datetime.now(),
+            "created_at": datetime.now(),
+            "updated_at": datetime.now(),
             "is_featured": True,
             "is_trending": False,
             "is_premium": False,
-            "read_time": 5,
+            "reading_time": 5,
             "view_count": 0,
             "like_count": 0,
             "share_count": 0
