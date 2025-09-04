@@ -1,119 +1,126 @@
 {
-  "total": 16,
-  "passed": 10,
-  "failed": 6,
-  "success_rate": 62.5,
+  "total": 17,
+  "passed": 14,
+  "failed": 3,
+  "success_rate": 82.35294117647058,
   "results": [
     {
       "test": "Health Check",
       "success": true,
       "message": "API is healthy and responding",
-      "timestamp": "2025-09-04T14:23:30.698474",
+      "timestamp": "2025-09-04T14:41:30.870045",
       "response_data": null
     },
     {
       "test": "Drinks Category - Scottish Leader Article Present",
-      "success": false,
-      "message": "Scottish Leader whiskey review not found in 0 drinks articles",
-      "timestamp": "2025-09-04T14:23:30.709102",
+      "success": true,
+      "message": "Scottish Leader whiskey review found in drinks category with 1 total drinks articles",
+      "timestamp": "2025-09-04T14:41:30.879833",
       "response_data": null
     },
     {
-      "test": "Drinks Articles Available",
+      "test": "Scottish Leader Article Details",
       "success": true,
-      "message": "Available drinks articles: ",
-      "timestamp": "2025-09-04T14:23:30.709134",
+      "message": "Slug: scottish-leader-whiskey-review, Subcategory: whiskey review",
+      "timestamp": "2025-09-04T14:41:30.879866",
       "response_data": null
     },
     {
       "test": "Whiskey Review Subcategory (hyphen) - Scottish Leader",
-      "success": false,
-      "message": "Scottish Leader not found in whiskey-review subcategory (0 articles)",
-      "timestamp": "2025-09-04T14:23:30.720484",
+      "success": true,
+      "message": "Scottish Leader found in whiskey-review subcategory with 1 articles",
+      "timestamp": "2025-09-04T14:41:30.889800",
       "response_data": null
     },
     {
       "test": "Whiskey Review Subcategory (space) - Scottish Leader",
-      "success": false,
-      "message": "Scottish Leader not found in 'whiskey review' subcategory (0 articles)",
-      "timestamp": "2025-09-04T14:23:30.768411",
+      "success": true,
+      "message": "Scottish Leader found in 'whiskey review' subcategory with 1 articles",
+      "timestamp": "2025-09-04T14:41:30.902526",
       "response_data": null
     },
     {
       "test": "Subcategory URL Parameter Normalization",
       "success": true,
-      "message": "Both 'whiskey-review' and 'whiskey review' return same results (0 articles)",
-      "timestamp": "2025-09-04T14:23:30.768458",
+      "message": "Both 'whiskey-review' and 'whiskey review' return same results (1 articles)",
+      "timestamp": "2025-09-04T14:41:30.902559",
       "response_data": null
     },
     {
       "test": "Scottish Leader Article Retrieval by Slug",
-      "success": false,
-      "message": "Scottish Leader article not found at expected slug: scottish-leader-whiskey-review",
-      "timestamp": "2025-09-04T14:23:30.779198",
+      "success": true,
+      "message": "Successfully retrieved article: Scottish Leader Original Whiskey",
+      "timestamp": "2025-09-04T14:41:30.910381",
       "response_data": null
     },
     {
-      "test": "Alternative Slug Search",
-      "success": false,
-      "message": "Scottish Leader article not found with alternative slugs: scottish-leader-whiskey, scottish-leader-review, scottish-leader-whisky-review",
-      "timestamp": "2025-09-04T14:23:30.809693",
+      "test": "Database Subcategory Format",
+      "success": true,
+      "message": "Stored subcategory format: 'whiskey review' (category: 'drinks')",
+      "timestamp": "2025-09-04T14:41:30.910418",
+      "response_data": null
+    },
+    {
+      "test": "Scottish Leader Article - Content Verification",
+      "success": true,
+      "message": "Article properly structured: category=drinks, subcategory=whiskey review, content_length=1469",
+      "timestamp": "2025-09-04T14:41:30.910430",
+      "response_data": null
+    },
+    {
+      "test": "Subcategory Format Analysis",
+      "success": true,
+      "message": "Stored: 'whiskey review', Normalized: 'whiskey review'",
+      "timestamp": "2025-09-04T14:41:30.910436",
       "response_data": null
     },
     {
       "test": "Drinks Category System",
       "success": false,
-      "message": "Drinks category not found. Available: Fashion, Business, Technology, Finance, Travel, Health, Culture, Art, Entertainment, Food",
-      "timestamp": "2025-09-04T14:23:30.817613",
-      "response_data": null
-    },
-    {
-      "test": "Categories Count",
-      "success": true,
-      "message": "Retrieved expected 10 categories (including Food)",
-      "timestamp": "2025-09-04T14:23:30.824780",
-      "response_data": null
-    },
-    {
-      "test": "GQ Categories Structure",
-      "success": true,
-      "message": "All 10 GQ-style categories present: Fashion, Business, Technology, Finance, Travel, Health, Culture, Art, Entertainment, Food",
-      "timestamp": "2025-09-04T14:23:30.824815",
+      "message": "Categories API failed: HTTP 500",
+      "timestamp": "2025-09-04T14:41:30.920026",
       "response_data": null
     },
     {
       "test": "Categories Listing",
-      "success": true,
-      "message": "Retrieved 10 categories",
-      "timestamp": "2025-09-04T14:23:30.824822",
+      "success": false,
+      "message": "HTTP 500: Internal Server Error",
+      "timestamp": "2025-09-04T14:41:30.929541",
       "response_data": null
     },
     {
       "test": "Articles Listing",
       "success": true,
       "message": "Retrieved 20 articles",
-      "timestamp": "2025-09-04T14:23:30.832906",
+      "timestamp": "2025-09-04T14:41:30.938004",
       "response_data": null
     },
     {
       "test": "Articles Category Filter",
       "success": true,
       "message": "Retrieved 0 style articles",
-      "timestamp": "2025-09-04T14:23:30.840040",
+      "timestamp": "2025-09-04T14:41:30.945337",
       "response_data": null
     },
     {
       "test": "Featured Articles",
       "success": true,
       "message": "Retrieved 20 featured articles",
-      "timestamp": "2025-09-04T14:23:30.848534",
+      "timestamp": "2025-09-04T14:41:30.953619",
       "response_data": null
     },
     {
       "test": "Trending Articles",
       "success": true,
       "message": "Retrieved 9 trending articles",
-      "timestamp": "2025-09-04T14:23:30.856293",
+      "timestamp": "2025-09-04T14:41:30.961315",
+      "response_data": null
+    },
+    {
+      "test": "Database Consistency Check",
+      "success": false,
+      "message": "Error: 'NoneType' object has no attribute 'lower'",
+      "timestamp": "2025-09-04T14:41:30.971473",
       "response_data": null
     }
   ]
