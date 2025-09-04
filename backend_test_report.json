@@ -1,252 +1,329 @@
 {
-  "total": 35,
-  "passed": 2,
-  "failed": 33,
-  "success_rate": 5.714285714285714,
+  "total": 46,
+  "passed": 45,
+  "failed": 1,
+  "success_rate": 97.82608695652173,
   "results": [
     {
       "test": "Health Check",
       "success": true,
       "message": "API is healthy and responding",
-      "timestamp": "2025-09-04T16:01:44.565415",
+      "timestamp": "2025-09-04T16:02:18.039291",
       "response_data": null
     },
     {
-      "test": "Categories API",
-      "success": false,
-      "message": "HTTP 404: {\"detail\":\"Not Found\"}",
-      "timestamp": "2025-09-04T16:01:44.731825",
+      "test": "Categories API - Count",
+      "success": true,
+      "message": "Retrieved 13 categories (expected ~13)",
+      "timestamp": "2025-09-04T16:02:18.054956",
       "response_data": null
     },
     {
-      "test": "Article Distribution Setup",
+      "test": "Categories API - Structure",
+      "success": true,
+      "message": "Categories retrieved with proper structure: Fashion, Business, Technology, Finance, Travel, Health, Culture, Art",
+      "timestamp": "2025-09-04T16:02:18.055027",
+      "response_data": null
+    },
+    {
+      "test": "Category Distribution - Fashion",
+      "success": true,
+      "message": "6 articles in fashion",
+      "timestamp": "2025-09-04T16:02:18.063476",
+      "response_data": null
+    },
+    {
+      "test": "Category Distribution - Technology",
+      "success": true,
+      "message": "5 articles in technology",
+      "timestamp": "2025-09-04T16:02:18.063514",
+      "response_data": null
+    },
+    {
+      "test": "Category Distribution - Food",
+      "success": true,
+      "message": "5 articles in food",
+      "timestamp": "2025-09-04T16:02:18.063523",
+      "response_data": null
+    },
+    {
+      "test": "Category Distribution - Auto",
+      "success": true,
+      "message": "5 articles in auto",
+      "timestamp": "2025-09-04T16:02:18.063529",
+      "response_data": null
+    },
+    {
+      "test": "Category Distribution - Travel",
+      "success": true,
+      "message": "4 articles in travel",
+      "timestamp": "2025-09-04T16:02:18.063536",
+      "response_data": null
+    },
+    {
+      "test": "Category Distribution - Business",
       "success": false,
-      "message": "Failed to get articles: HTTP 404",
-      "timestamp": "2025-09-04T16:01:44.766896",
+      "message": "No articles found in business",
+      "timestamp": "2025-09-04T16:02:18.063542",
+      "response_data": null
+    },
+    {
+      "test": "Article Distribution",
+      "success": true,
+      "message": "Good distribution: 5/6 major categories have content",
+      "timestamp": "2025-09-04T16:02:18.063550",
+      "response_data": null
+    },
+    {
+      "test": "Distribution Summary",
+      "success": true,
+      "message": "Total: 31 articles across 7 categories",
+      "timestamp": "2025-09-04T16:02:18.063557",
       "response_data": null
     },
     {
       "test": "Category Filter - Fashion",
-      "success": false,
-      "message": "HTTP 404",
-      "timestamp": "2025-09-04T16:01:44.778784",
+      "success": true,
+      "message": "Retrieved 6 fashion articles, all properly categorized",
+      "timestamp": "2025-09-04T16:02:18.074854",
       "response_data": null
     },
     {
       "test": "Category Filter - Technology",
-      "success": false,
-      "message": "HTTP 404",
-      "timestamp": "2025-09-04T16:01:44.789954",
+      "success": true,
+      "message": "Retrieved 5 technology articles, all properly categorized",
+      "timestamp": "2025-09-04T16:02:18.110313",
       "response_data": null
     },
     {
       "test": "Category Filter - Food",
-      "success": false,
-      "message": "HTTP 404",
-      "timestamp": "2025-09-04T16:01:44.802452",
+      "success": true,
+      "message": "Retrieved 5 food articles, all properly categorized",
+      "timestamp": "2025-09-04T16:02:18.120597",
       "response_data": null
     },
     {
       "test": "Category Filter - Auto",
-      "success": false,
-      "message": "HTTP 404",
-      "timestamp": "2025-09-04T16:01:44.811658",
+      "success": true,
+      "message": "Retrieved 5 auto articles, all properly categorized",
+      "timestamp": "2025-09-04T16:02:18.131562",
       "response_data": null
     },
     {
       "test": "Category Filter - Travel",
-      "success": false,
-      "message": "HTTP 404",
-      "timestamp": "2025-09-04T16:01:44.931645",
+      "success": true,
+      "message": "Retrieved 4 travel articles, all properly categorized",
+      "timestamp": "2025-09-04T16:02:18.143030",
       "response_data": null
     },
     {
       "test": "Category Filter - Business",
-      "success": false,
-      "message": "HTTP 404",
-      "timestamp": "2025-09-04T16:01:44.945420",
+      "success": true,
+      "message": "Retrieved 0 business articles, all properly categorized",
+      "timestamp": "2025-09-04T16:02:18.190927",
       "response_data": null
     },
     {
       "test": "Category Filter - Health",
-      "success": false,
-      "message": "HTTP 404",
-      "timestamp": "2025-09-04T16:01:44.955602",
+      "success": true,
+      "message": "Retrieved 0 health articles, all properly categorized",
+      "timestamp": "2025-09-04T16:02:18.198884",
       "response_data": null
     },
     {
       "test": "Category Filter - Culture",
-      "success": false,
-      "message": "HTTP 404",
-      "timestamp": "2025-09-04T16:01:44.965587",
+      "success": true,
+      "message": "Retrieved 0 culture articles, all properly categorized",
+      "timestamp": "2025-09-04T16:02:18.247023",
       "response_data": null
     },
     {
       "test": "Category Filtering System",
-      "success": false,
-      "message": "Only 0/8 category filters working",
-      "timestamp": "2025-09-04T16:01:44.965635",
+      "success": true,
+      "message": "8/8 category filters working correctly",
+      "timestamp": "2025-09-04T16:02:18.247061",
       "response_data": null
     },
     {
       "test": "Subcategory Filter - food/drinks",
-      "success": false,
-      "message": "HTTP 404",
-      "timestamp": "2025-09-04T16:01:44.985149",
+      "success": true,
+      "message": "URL normalization working: 2 articles for Scottish Leader + Fine Beverages",
+      "timestamp": "2025-09-04T16:02:18.261212",
       "response_data": null
     },
     {
       "test": "Subcategory Filter - auto/cars",
-      "success": false,
-      "message": "HTTP 404",
-      "timestamp": "2025-09-04T16:01:45.131249",
+      "success": true,
+      "message": "URL normalization working: 1 articles for Auto articles",
+      "timestamp": "2025-09-04T16:02:18.274279",
       "response_data": null
     },
     {
       "test": "Subcategory Filter - travel/luxury",
-      "success": false,
-      "message": "HTTP 404",
-      "timestamp": "2025-09-04T16:01:45.231324",
+      "success": true,
+      "message": "URL normalization working: 1 articles for Travel content",
+      "timestamp": "2025-09-04T16:02:18.329372",
       "response_data": null
     },
     {
       "test": "Subcategory Filter - fashion/men",
-      "success": false,
-      "message": "HTTP 404",
-      "timestamp": "2025-09-04T16:01:45.250358",
+      "success": true,
+      "message": "URL normalization working: 2 articles for Men's fashion",
+      "timestamp": "2025-09-04T16:02:18.342413",
       "response_data": null
     },
     {
       "test": "Subcategory Filter - fashion/women",
-      "success": false,
-      "message": "HTTP 404",
-      "timestamp": "2025-09-04T16:01:45.269182",
+      "success": true,
+      "message": "URL normalization working: 1 articles for Women's fashion",
+      "timestamp": "2025-09-04T16:02:18.397588",
       "response_data": null
     },
     {
       "test": "Subcategory Filter - technology/smartphones",
-      "success": false,
-      "message": "HTTP 404",
-      "timestamp": "2025-09-04T16:01:45.288644",
+      "success": true,
+      "message": "URL normalization working: 0 articles for Smartphone articles",
+      "timestamp": "2025-09-04T16:02:18.411283",
       "response_data": null
     },
     {
       "test": "Subcategory Filtering System",
-      "success": false,
-      "message": "Only 0/6 subcategory filters working",
-      "timestamp": "2025-09-04T16:01:45.288682",
+      "success": true,
+      "message": "6/6 subcategory filters working",
+      "timestamp": "2025-09-04T16:02:18.411314",
       "response_data": null
     },
     {
-      "test": "Data Consistency Setup",
-      "success": false,
-      "message": "Failed to get articles: HTTP 404",
-      "timestamp": "2025-09-04T16:01:45.297658",
+      "test": "Data Consistency - Required Fields",
+      "success": true,
+      "message": "20/20 articles (100.0%) have all required fields",
+      "timestamp": "2025-09-04T16:02:18.418990",
+      "response_data": null
+    },
+    {
+      "test": "Data Consistency - Structure",
+      "success": true,
+      "message": "20/20 articles (100.0%) have proper data structure",
+      "timestamp": "2025-09-04T16:02:18.419026",
+      "response_data": null
+    },
+    {
+      "test": "Data Consistency - Image URLs",
+      "success": true,
+      "message": "All image URLs are properly formatted",
+      "timestamp": "2025-09-04T16:02:18.419032",
+      "response_data": null
+    },
+    {
+      "test": "Data Consistency - ID Fields",
+      "success": true,
+      "message": "All articles use 'id' field consistently",
+      "timestamp": "2025-09-04T16:02:18.419040",
       "response_data": null
     },
     {
       "test": "Cross-Category - Fashion",
-      "success": false,
-      "message": "HTTP 404 for fashion",
-      "timestamp": "2025-09-04T16:01:45.308265",
+      "success": true,
+      "message": "Consistent structure: 6 articles, response time: 0.01s",
+      "timestamp": "2025-09-04T16:02:18.426624",
       "response_data": null
     },
     {
       "test": "Cross-Category - Technology",
-      "success": false,
-      "message": "HTTP 404 for technology",
-      "timestamp": "2025-09-04T16:01:45.318136",
+      "success": true,
+      "message": "Consistent structure: 5 articles, response time: 0.01s",
+      "timestamp": "2025-09-04T16:02:18.433067",
       "response_data": null
     },
     {
       "test": "Cross-Category - Food",
-      "success": false,
-      "message": "HTTP 404 for food",
-      "timestamp": "2025-09-04T16:01:45.327511",
+      "success": true,
+      "message": "Consistent structure: 5 articles, response time: 0.01s",
+      "timestamp": "2025-09-04T16:02:18.440118",
       "response_data": null
     },
     {
       "test": "Cross-Category - Auto",
-      "success": false,
-      "message": "HTTP 404 for auto",
-      "timestamp": "2025-09-04T16:01:45.336551",
+      "success": true,
+      "message": "Consistent structure: 5 articles, response time: 0.01s",
+      "timestamp": "2025-09-04T16:02:18.447111",
       "response_data": null
     },
     {
       "test": "Cross-Category - Travel",
-      "success": false,
-      "message": "HTTP 404 for travel",
-      "timestamp": "2025-09-04T16:01:45.346503",
+      "success": true,
+      "message": "Consistent structure: 4 articles, response time: 0.01s",
+      "timestamp": "2025-09-04T16:02:18.454422",
       "response_data": null
     },
     {
       "test": "Cross-Category - Performance",
       "success": true,
       "message": "Consistent performance: avg 0.01s, max 0.01s",
-      "timestamp": "2025-09-04T16:01:45.346551",
+      "timestamp": "2025-09-04T16:02:18.454453",
       "response_data": null
     },
     {
       "test": "Cross-Category Functionality",
-      "success": false,
-      "message": "Only 0/5 categories show consistent behavior",
-      "timestamp": "2025-09-04T16:01:45.346559",
+      "success": true,
+      "message": "5/5 categories show consistent behavior",
+      "timestamp": "2025-09-04T16:02:18.454460",
       "response_data": null
     },
     {
       "test": "Endpoint - Categories API - should return 13 categories",
-      "success": false,
-      "message": "\u274c /categories failed: HTTP 404",
-      "timestamp": "2025-09-04T16:01:45.356044",
+      "success": true,
+      "message": "\u2705 /categories returned 13 items",
+      "timestamp": "2025-09-04T16:02:18.461798",
       "response_data": null
     },
     {
       "test": "Endpoint - Fashion articles",
-      "success": false,
-      "message": "\u274c /articles?category=fashion failed: HTTP 404",
-      "timestamp": "2025-09-04T16:01:45.366645",
+      "success": true,
+      "message": "\u2705 /articles?category=fashion returned 6 items",
+      "timestamp": "2025-09-04T16:02:18.468081",
       "response_data": null
     },
     {
       "test": "Endpoint - Technology articles",
-      "success": false,
-      "message": "\u274c /articles?category=technology failed: HTTP 404",
-      "timestamp": "2025-09-04T16:01:45.400805",
+      "success": true,
+      "message": "\u2705 /articles?category=technology returned 5 items",
+      "timestamp": "2025-09-04T16:02:18.474648",
       "response_data": null
     },
     {
       "test": "Endpoint - Food/Drinks - Scottish Leader + Fine Beverages",
-      "success": false,
-      "message": "\u274c /articles?category=food&subcategory=drinks failed: HTTP 404",
-      "timestamp": "2025-09-04T16:01:45.410105",
+      "success": true,
+      "message": "\u2705 /articles?category=food&subcategory=drinks returned 2 items",
+      "timestamp": "2025-09-04T16:02:18.481036",
       "response_data": null
     },
     {
       "test": "Endpoint - Auto/Cars articles",
-      "success": false,
-      "message": "\u274c /articles?category=auto&subcategory=cars failed: HTTP 404",
-      "timestamp": "2025-09-04T16:01:45.418546",
+      "success": true,
+      "message": "\u2705 /articles?category=auto&subcategory=cars returned 1 items",
+      "timestamp": "2025-09-04T16:02:18.487149",
       "response_data": null
     },
     {
       "test": "Endpoint - Travel/Luxury content",
-      "success": false,
-      "message": "\u274c /articles?category=travel&subcategory=luxury failed: HTTP 404",
-      "timestamp": "2025-09-04T16:01:45.426683",
+      "success": true,
+      "message": "\u2705 /articles?category=travel&subcategory=luxury returned 1 items",
+      "timestamp": "2025-09-04T16:02:18.493405",
       "response_data": null
     },
     {
       "test": "Endpoint - Overall article listing",
-      "success": false,
-      "message": "\u274c /articles failed: HTTP 404",
-      "timestamp": "2025-09-04T16:01:45.436121",
+      "success": true,
+      "message": "\u2705 /articles returned 20 items",
+      "timestamp": "2025-09-04T16:02:18.500295",
       "response_data": null
     },
     {
       "test": "Specific Endpoints",
-      "success": false,
-      "message": "Only 0/7 required endpoints working",
-      "timestamp": "2025-09-04T16:01:45.436158",
+      "success": true,
+      "message": "7/7 required endpoints working correctly",
+      "timestamp": "2025-09-04T16:02:18.500327",
       "response_data": null
     }
   ]
