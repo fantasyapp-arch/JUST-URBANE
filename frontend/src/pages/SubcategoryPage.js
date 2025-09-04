@@ -95,6 +95,7 @@ const SubcategoryPage = () => {
         to={article.slug === 'atlantis-the-palm-dubai' ? '/atlantis-the-palm-dubai' : 
             article.slug === 'celini-food-review-mumbai' ? '/celini-food-review-mumbai' : 
             article.slug === 'scottish-leader-whiskey-review' ? '/scottish-leader-whiskey-review' :
+            article.slug === 'when-in-france-travel-destinations' ? '/when-in-france-travel-destinations' :
             `/article/${article.slug || article.id}`}
         className="group block bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300"
       >
