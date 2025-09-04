@@ -186,6 +186,17 @@ const FranceTravelPage = () => {
             Paris' evocative medieval neighbourhoods and beautiful boulevards are among the city's other attractions. The UNESCO-listed Château de Versailles is a short rail trip from Paris. This lavish 17th-century palace, built for Louis XIV (the "Sun King"), is a testimony to the French monarch's greatness and ultimate power.
           </p>
 
+          <figure className="my-6 sm:my-8 -mx-2 sm:-mx-4">
+            <img 
+              src="https://customer-assets.emergentagent.com/job_urbane-articles/artifacts/wn9rzw2p_Paris.jpg"
+              alt="Paris, France - Iconic Parisian architecture and city views showcasing the elegant urban landscape"
+              className="w-full h-48 sm:h-64 md:h-96 object-cover rounded-lg shadow-lg"
+            />
+            <figcaption className="text-sm text-gray-600 mt-3 text-center italic px-2">
+              The timeless elegance of Parisian architecture and urban sophistication
+            </figcaption>
+          </figure>
+
           <blockquote className="border-l-4 border-blue-500 bg-blue-50 p-6 my-8 italic text-xl text-blue-900 leading-relaxed">
             "A perfect kiss, the perfect picture before the Eiffel Tower is a dream. Paris is a major European centre known for its splendour and joie de vivre."
           </blockquote>
