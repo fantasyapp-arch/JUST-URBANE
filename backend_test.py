@@ -1761,8 +1761,8 @@ def main():
     print("🚀 Starting Just Urbane Standardized Category System Testing")
     print("=" * 70)
     
-    # Use the backend URL from frontend environment (production URL)
-    backend_url = "https://magazine-editor.preview.emergentagent.com"
+    # Use the backend URL from frontend environment (production URL) with /api prefix
+    backend_url = "https://magazine-editor.preview.emergentagent.com/api"
     tester = JustUrbaneAPITester(backend_url)
     
     # Run comprehensive standardized category tests
