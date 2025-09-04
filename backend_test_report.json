@@ -1,112 +1,119 @@
 {
-  "total": 15,
-  "passed": 13,
-  "failed": 2,
-  "success_rate": 86.66666666666667,
+  "total": 16,
+  "passed": 10,
+  "failed": 6,
+  "success_rate": 62.5,
   "results": [
     {
       "test": "Health Check",
       "success": true,
       "message": "API is healthy and responding",
-      "timestamp": "2025-09-04T13:14:11.499829",
+      "timestamp": "2025-09-04T14:23:30.698474",
       "response_data": null
     },
     {
-      "test": "Food Category - Celini Article Present",
-      "success": true,
-      "message": "Celini food review found in food category with 4 total food articles",
-      "timestamp": "2025-09-04T13:14:11.512434",
-      "response_data": null
-    },
-    {
-      "test": "Food Review Subcategory - Celini Article",
+      "test": "Drinks Category - Scottish Leader Article Present",
       "success": false,
-      "message": "Celini article not found in food-review subcategory (0 articles)",
-      "timestamp": "2025-09-04T13:14:11.931791",
+      "message": "Scottish Leader whiskey review not found in 0 drinks articles",
+      "timestamp": "2025-09-04T14:23:30.709102",
       "response_data": null
     },
     {
-      "test": "Celini Article - Content Structure",
+      "test": "Drinks Articles Available",
+      "success": true,
+      "message": "Available drinks articles: ",
+      "timestamp": "2025-09-04T14:23:30.709134",
+      "response_data": null
+    },
+    {
+      "test": "Whiskey Review Subcategory (hyphen) - Scottish Leader",
       "success": false,
-      "message": "Issues with: subcategory=food review",
-      "timestamp": "2025-09-04T13:14:11.944293",
+      "message": "Scottish Leader not found in whiskey-review subcategory (0 articles)",
+      "timestamp": "2025-09-04T14:23:30.720484",
       "response_data": null
     },
     {
-      "test": "Celini Article - Hero Image",
-      "success": true,
-      "message": "Hero image present: https://customer-assets.emergentagent.com/job_just...",
-      "timestamp": "2025-09-04T13:14:11.944335",
+      "test": "Whiskey Review Subcategory (space) - Scottish Leader",
+      "success": false,
+      "message": "Scottish Leader not found in 'whiskey review' subcategory (0 articles)",
+      "timestamp": "2025-09-04T14:23:30.768411",
       "response_data": null
     },
     {
-      "test": "Celini Article - Gallery Images",
+      "test": "Subcategory URL Parameter Normalization",
       "success": true,
-      "message": "Gallery has 2 images (required: 2+)",
-      "timestamp": "2025-09-04T13:14:11.944343",
+      "message": "Both 'whiskey-review' and 'whiskey review' return same results (0 articles)",
+      "timestamp": "2025-09-04T14:23:30.768458",
       "response_data": null
     },
     {
-      "test": "Celini Article Retrieval by Slug",
-      "success": true,
-      "message": "Successfully retrieved Celini article: A bit of Italiano at the newly re-launched Celini",
-      "timestamp": "2025-09-04T13:14:11.944348",
+      "test": "Scottish Leader Article Retrieval by Slug",
+      "success": false,
+      "message": "Scottish Leader article not found at expected slug: scottish-leader-whiskey-review",
+      "timestamp": "2025-09-04T14:23:30.779198",
       "response_data": null
     },
     {
-      "test": "Food Category System",
-      "success": true,
-      "message": "Food category exists in categories API",
-      "timestamp": "2025-09-04T13:14:11.958573",
+      "test": "Alternative Slug Search",
+      "success": false,
+      "message": "Scottish Leader article not found with alternative slugs: scottish-leader-whiskey, scottish-leader-review, scottish-leader-whisky-review",
+      "timestamp": "2025-09-04T14:23:30.809693",
+      "response_data": null
+    },
+    {
+      "test": "Drinks Category System",
+      "success": false,
+      "message": "Drinks category not found. Available: Fashion, Business, Technology, Finance, Travel, Health, Culture, Art, Entertainment, Food",
+      "timestamp": "2025-09-04T14:23:30.817613",
       "response_data": null
     },
     {
       "test": "Categories Count",
       "success": true,
       "message": "Retrieved expected 10 categories (including Food)",
-      "timestamp": "2025-09-04T13:14:12.035209",
+      "timestamp": "2025-09-04T14:23:30.824780",
       "response_data": null
     },
     {
       "test": "GQ Categories Structure",
       "success": true,
       "message": "All 10 GQ-style categories present: Fashion, Business, Technology, Finance, Travel, Health, Culture, Art, Entertainment, Food",
-      "timestamp": "2025-09-04T13:14:12.035247",
+      "timestamp": "2025-09-04T14:23:30.824815",
       "response_data": null
     },
     {
       "test": "Categories Listing",
       "success": true,
       "message": "Retrieved 10 categories",
-      "timestamp": "2025-09-04T13:14:12.035254",
+      "timestamp": "2025-09-04T14:23:30.824822",
       "response_data": null
     },
     {
       "test": "Articles Listing",
       "success": true,
       "message": "Retrieved 20 articles",
-      "timestamp": "2025-09-04T13:14:12.044850",
+      "timestamp": "2025-09-04T14:23:30.832906",
       "response_data": null
     },
     {
       "test": "Articles Category Filter",
       "success": true,
       "message": "Retrieved 0 style articles",
-      "timestamp": "2025-09-04T13:14:12.055935",
+      "timestamp": "2025-09-04T14:23:30.840040",
       "response_data": null
     },
     {
       "test": "Featured Articles",
       "success": true,
       "message": "Retrieved 20 featured articles",
-      "timestamp": "2025-09-04T13:14:12.066103",
+      "timestamp": "2025-09-04T14:23:30.848534",
       "response_data": null
     },
     {
       "test": "Trending Articles",
       "success": true,
       "message": "Retrieved 9 trending articles",
-      "timestamp": "2025-09-04T13:14:12.075209",
+      "timestamp": "2025-09-04T14:23:30.856293",
       "response_data": null
     }
   ]
