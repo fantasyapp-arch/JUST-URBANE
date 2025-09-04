@@ -913,7 +913,9 @@ async def get_articles(
     if category:
         filter_dict["category"] = category
     if subcategory:
-        filter_dict["subcategory"] = subcategory  # NEW: subcategory filtering
+        # Normalize subcategory parameter: convert hyphens to spaces for database lookup
+        normalized_subcategory = subcategory.replace("-", " ")
+        filter_dict["subcategory"] = normalized_subcategory
     if featured is not None:
         filter_dict["is_featured"] = featured
     if trending is not None:
