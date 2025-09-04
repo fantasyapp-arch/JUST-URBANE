@@ -34,6 +34,7 @@ import SubcategoryPage from './pages/SubcategoryPage';
 import RoyalAtlantisPage from './pages/RoyalAtlantisPage';
 import CeliniFoodReviewPage from './pages/CeliniFoodReviewPage';
 import ScottishLeaderReviewPage from './pages/ScottishLeaderReviewPage';
+import FranceTravelPage from './pages/FranceTravelPage';
 import PrivacyPage from './pages/PrivacyPage';
 import TermsPage from './pages/TermsPage';
 
