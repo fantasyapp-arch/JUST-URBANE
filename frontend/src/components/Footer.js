@@ -4,6 +4,7 @@ import { Instagram, Twitter, Facebook, Linkedin, ChevronDown, ChevronUp } from '
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
+  const [isCategoriesExpanded, setIsCategoriesExpanded] = useState(false);
 
   const categories = [
     { name: 'Fashion', slug: 'fashion' },
