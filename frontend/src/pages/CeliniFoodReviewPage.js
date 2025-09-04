@@ -148,13 +148,13 @@ const CeliniFoodReviewPage = () => {
             All these also resonate with the Italian fare that conjured before our eyes at the table with a melange of flavours. Let's dive into the culinary journey that awaited us at Celini.
           </p>
 
-          <figure className="my-8">
+          <figure className="my-6 sm:my-8 -mx-2 sm:-mx-4">
             <img 
               src="https://customer-assets.emergentagent.com/job_just-urbane-revamp/artifacts/atuk7005_Spaghetti%20Aglio%2C%20Olio%20e%20Peperoncino.jpg"
               alt="Spaghetti Aglio, Olio e Peperoncino - Classic Italian pasta with garlic, olive oil, and chili perfectly prepared at Celini"
-              className="w-full h-64 md:h-96 object-cover rounded-lg shadow-lg"
+              className="w-full h-48 sm:h-64 md:h-96 object-cover rounded-lg shadow-lg"
             />
-            <figcaption className="text-sm text-gray-600 mt-3 text-center italic">
+            <figcaption className="text-sm text-gray-600 mt-3 text-center italic px-2">
               Spaghetti Aglio, Olio e Peperoncino - Classic Italian pasta with garlic, olive oil, and chili perfectly prepared at Celini
             </figcaption>
           </figure>
