@@ -96,6 +96,7 @@ const router = createBrowserRouter([
       { path: "atlantis-the-palm-dubai", element: <RoyalAtlantisPage /> },
       { path: "celini-food-review-mumbai", element: <CeliniFoodReviewPage /> },
       { path: "scottish-leader-whiskey-review", element: <ScottishLeaderReviewPage /> },
+      { path: "when-in-france-travel-destinations", element: <FranceTravelPage /> },
       { path: "author/:slug", element: <AuthorPage /> },
       { path: "issues", element: <IssuesPage /> },
       { path: "reviews", element: <ReviewsPage /> },
