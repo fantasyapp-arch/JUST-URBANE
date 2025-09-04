@@ -1,161 +1,119 @@
 {
-  "total": 21,
-  "passed": 19,
-  "failed": 2,
-  "success_rate": 90.47619047619048,
+  "total": 16,
+  "passed": 13,
+  "failed": 3,
+  "success_rate": 81.25,
   "results": [
     {
-      "test": "API Health Check",
+      "test": "Health Check",
       "success": true,
-      "message": "Core API is healthy and responsive",
-      "timestamp": "2025-09-03T16:11:55.805408",
+      "message": "API is healthy and responding",
+      "timestamp": "2025-09-04T08:39:26.232910",
       "response_data": null
     },
     {
-      "test": "Core Service - Articles API",
-      "success": true,
-      "message": "Responsive (HTTP 200)",
-      "timestamp": "2025-09-03T16:11:55.833168",
-      "response_data": null
-    },
-    {
-      "test": "Core Service - Categories API",
-      "success": true,
-      "message": "Responsive (HTTP 200)",
-      "timestamp": "2025-09-03T16:11:55.850211",
-      "response_data": null
-    },
-    {
-      "test": "Core Service - Payment Packages API",
-      "success": true,
-      "message": "Responsive (HTTP 200)",
-      "timestamp": "2025-09-03T16:11:55.898882",
-      "response_data": null
-    },
-    {
-      "test": "Core Backend Services",
-      "success": true,
-      "message": "All 3 core services responsive",
-      "timestamp": "2025-09-03T16:11:55.898919",
-      "response_data": null
-    },
-    {
-      "test": "User Registration",
-      "success": true,
-      "message": "User registered successfully",
-      "timestamp": "2025-09-03T16:11:57.041521",
-      "response_data": {
-        "email": "testuser_1756915915@justurbane.com",
-        "name": "Premium Test User",
-        "id": "14b51712-4b31-4312-b8ba-b4e18cbb9643",
-        "created_at": "2025-09-03T16:11:56.927672",
-        "is_premium": false,
-        "subscription_status": "inactive"
-      }
-    },
-    {
-      "test": "User Login",
-      "success": true,
-      "message": "Login successful, JWT token received",
-      "timestamp": "2025-09-03T16:11:57.292602",
-      "response_data": null
-    },
-    {
-      "test": "JWT Token Generation",
-      "success": true,
-      "message": "JWT token successfully generated during login",
-      "timestamp": "2025-09-03T16:11:57.292662",
-      "response_data": null
-    },
-    {
-      "test": "JWT Authentication - Protected Endpoint",
-      "success": true,
-      "message": "JWT authentication working for protected endpoints (HTTP 200)",
-      "timestamp": "2025-09-03T16:11:57.347476",
-      "response_data": null
-    },
-    {
-      "test": "JWT Authentication - Invalid Token",
-      "success": true,
-      "message": "Invalid tokens properly rejected",
-      "timestamp": "2025-09-03T16:11:57.401401",
-      "response_data": null
-    },
-    {
-      "test": "Magazine Reader API - Required Fields",
+      "test": "Food Category - Celini Article Present",
       "success": false,
-      "message": "Missing field coverage: hero_image: 0/10",
-      "timestamp": "2025-09-03T16:11:57.417102",
+      "message": "Celini food review not found in 4 food articles",
+      "timestamp": "2025-09-04T08:39:26.247662",
       "response_data": null
     },
     {
-      "test": "Premium Content System - Content Mix",
+      "test": "Food Articles Available",
       "success": true,
-      "message": "Found 1 premium and 19 free articles",
-      "timestamp": "2025-09-03T16:11:57.417161",
+      "message": "Available food articles: Master Chefs: Culinary Visionaries, Fine Dining Excellence: Culinary Experiences, Fine Beverages: World of Premium Drinks, A bit of Italiano at the newly re-launched Celini",
+      "timestamp": "2025-09-04T08:39:26.247698",
       "response_data": null
     },
     {
-      "test": "Premium Access Control",
+      "test": "Food Review Subcategory - Celini Article",
       "success": true,
-      "message": "Premium content properly gated (locked: False, truncated: False, marker: True)",
-      "timestamp": "2025-09-03T16:11:57.466177",
+      "message": "Celini article found in food-review subcategory with 1 articles",
+      "timestamp": "2025-09-04T08:39:26.281107",
       "response_data": null
     },
     {
-      "test": "Magazine Data Quality - Content Length",
+      "test": "Celini Article - Content Structure",
       "success": false,
-      "message": "Content issues in 2/5 articles: Review Test Article: insufficient content (50 chars); JWT Authentication Test Article: insufficient content (101 chars)",
-      "timestamp": "2025-09-03T16:11:57.466227",
+      "message": "Issues with: subcategory=None",
+      "timestamp": "2025-09-04T08:39:26.293049",
       "response_data": null
     },
     {
-      "test": "Magazine Data Quality - Formatting",
+      "test": "Celini Article - Hero Image",
       "success": true,
-      "message": "All tested articles have proper formatting",
-      "timestamp": "2025-09-03T16:11:57.466235",
+      "message": "Hero image present: https://customer-assets.emergentagent.com/job_just...",
+      "timestamp": "2025-09-04T08:39:26.293087",
       "response_data": null
     },
     {
-      "test": "Magazine Category Distribution",
+      "test": "Celini Article - Gallery Images",
       "success": true,
-      "message": "Good category distribution: {'tech': 16, 'technology': 1, 'fashion': 3}",
-      "timestamp": "2025-09-03T16:11:57.466259",
+      "message": "Gallery has 2 images (required: 2+)",
+      "timestamp": "2025-09-04T08:39:26.293095",
       "response_data": null
     },
     {
-      "test": "Payment Packages",
+      "test": "Celini Article Retrieval by Slug",
       "success": true,
-      "message": "Correct INR pricing: Digital \u20b9499.0, Print \u20b9499.0, Combined \u20b9999.0",
-      "timestamp": "2025-09-03T16:11:57.474772",
+      "message": "Successfully retrieved Celini article: A bit of Italiano at the newly re-launched Celini",
+      "timestamp": "2025-09-04T08:39:26.293101",
       "response_data": null
     },
     {
-      "test": "Payment Currency",
+      "test": "Food Category System",
       "success": true,
-      "message": "Currency set to INR for all packages",
-      "timestamp": "2025-09-03T16:11:57.474804",
+      "message": "Food category exists in categories API",
+      "timestamp": "2025-09-04T08:39:26.307629",
       "response_data": null
     },
     {
       "test": "Categories Count",
-      "success": true,
-      "message": "Retrieved expected 9 categories",
-      "timestamp": "2025-09-03T16:11:57.483931",
+      "success": false,
+      "message": "Expected 9 categories, got 10",
+      "timestamp": "2025-09-04T08:39:26.322311",
       "response_data": null
     },
     {
       "test": "GQ Categories Structure",
       "success": true,
-      "message": "All 9 GQ-style categories present: Fashion, Business, Technology, Finance, Travel, Health, Culture, Art, Entertainment",
-      "timestamp": "2025-09-03T16:11:57.483967",
+      "message": "All 9 GQ-style categories present: Fashion, Business, Technology, Finance, Travel, Health, Culture, Art, Entertainment, Food",
+      "timestamp": "2025-09-04T08:39:26.322352",
       "response_data": null
     },
     {
       "test": "Categories Listing",
       "success": true,
-      "message": "Retrieved 9 categories",
-      "timestamp": "2025-09-03T16:11:57.483975",
+      "message": "Retrieved 10 categories",
+      "timestamp": "2025-09-04T08:39:26.322360",
+      "response_data": null
+    },
+    {
+      "test": "Articles Listing",
+      "success": true,
+      "message": "Retrieved 20 articles",
+      "timestamp": "2025-09-04T08:39:26.332760",
+      "response_data": null
+    },
+    {
+      "test": "Articles Category Filter",
+      "success": true,
+      "message": "Retrieved 0 style articles",
+      "timestamp": "2025-09-04T08:39:26.384858",
+      "response_data": null
+    },
+    {
+      "test": "Featured Articles",
+      "success": true,
+      "message": "Retrieved 20 featured articles",
+      "timestamp": "2025-09-04T08:39:26.396810",
+      "response_data": null
+    },
+    {
+      "test": "Trending Articles",
+      "success": true,
+      "message": "Retrieved 9 trending articles",
+      "timestamp": "2025-09-04T08:39:26.411474",
       "response_data": null
     }
   ]
