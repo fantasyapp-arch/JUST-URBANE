@@ -35,7 +35,7 @@ const SubcategoryPage = () => {
     }
   }, [category, subcategory]);
 
-  const pageTitle = decodedSubcategory.toUpperCase();
+  const pageTitle = subcategory.toUpperCase();
   const categoryLabel = {
     fashion: "Look Good",
     tech: "Get Smart", 
