@@ -84,7 +84,7 @@ With awards like 2019 Scotch Whiskey Masters Gold, 2019 World Whiskey Awards Sil
         
         # Verify the data
         article_count = await db.articles.count_documents({"category": "food", "subcategory": "drinks"})
-        print(f"✅ Total drinks articles: {article_count}")
+        print(f"✅ Total food/drinks articles: {article_count}")
         
         categories_count = await db.categories.count_documents({})
         print(f"✅ Total categories: {categories_count}")
