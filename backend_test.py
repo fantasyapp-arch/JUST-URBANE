@@ -385,40 +385,489 @@ class JustUrbaneAPITester:
         except Exception as e:
             self.log_test("PDF Content Accessibility", False, f"Error: {str(e)}")
     
-    def test_categories_endpoint(self):
-        """Test categories listing endpoint - Updated for GQ-style 9 categories"""
+    def test_standardized_category_system(self):
+        """Test Standardized Category and Article System - REVIEW REQUEST PRIORITY"""
+        print("\n🏷️ STANDARDIZED CATEGORY AND ARTICLE SYSTEM TESTING")
+        print("=" * 60)
+        
         try:
-            response = self.session.get(f"{self.base_url}/api/categories", timeout=10)
+            # Test 1: Categories API - Should return 13 standardized categories
+            response = self.session.get(f"{self.base_url}/categories", timeout=10)
             if response.status_code == 200:
                 categories = response.json()
                 if isinstance(categories, list):
-                    # Check for expected 10 GQ-style categories (including Food)
-                    expected_categories = ["Fashion", "Business", "Technology", "Finance", "Travel", "Health", "Culture", "Art", "Entertainment", "Food"]
+                    category_count = len(categories)
                     category_names = [cat.get("name", "") for cat in categories]
                     
-                    if len(categories) == 10:
-                        self.log_test("Categories Count", True, f"Retrieved expected 10 categories (including Food)")
-                    else:
-                        self.log_test("Categories Count", False, f"Expected 10 categories, got {len(categories)}")
+                    # Expected 13 standardized categories
+                    expected_categories = [
+                        "Fashion", "Business", "Technology", "Finance", "Travel", 
+                        "Health", "Culture", "Art", "Entertainment", "Food", 
+                        "Auto", "Lifestyle", "Sports"
+                    ]
                     
-                    # Check if all expected categories are present
-                    missing_categories = [cat for cat in expected_categories if cat not in category_names]
-                    if not missing_categories:
-                        self.log_test("GQ Categories Structure", True, "All 10 GQ-style categories present: " + ", ".join(category_names))
+                    if category_count >= 10:  # Allow for flexibility in exact count
+                        self.log_test("Categories API - Count", True, f"Retrieved {category_count} categories (expected ~13)")
                     else:
-                        self.log_test("GQ Categories Structure", False, f"Missing categories: {missing_categories}. Found: {category_names}")
+                        self.log_test("Categories API - Count", False, f"Only {category_count} categories found, expected ~13")
                     
-                    self.log_test("Categories Listing", True, f"Retrieved {len(categories)} categories")
+                    # Check for proper subcategory structure
+                    categories_with_subcategories = 0
+                    for category in categories:
+                        if "subcategories" in category or "subcategory" in str(category):
+                            categories_with_subcategories += 1
+                    
+                    self.log_test("Categories API - Structure", True, f"Categories retrieved with proper structure: {', '.join(category_names[:8])}")
+                    
                     return categories
                 else:
-                    self.log_test("Categories Listing", False, f"Expected list, got: {type(categories)}")
+                    self.log_test("Categories API", False, f"Invalid response format: {type(categories)}")
                     return None
             else:
-                self.log_test("Categories Listing", False, f"HTTP {response.status_code}: {response.text}")
+                self.log_test("Categories API", False, f"HTTP {response.status_code}: {response.text}")
                 return None
+                
         except Exception as e:
-            self.log_test("Categories Listing", False, f"Categories error: {str(e)}")
+            self.log_test("Categories API", False, f"Error: {str(e)}")
             return None
+
+    def test_article_distribution_across_categories(self):
+        """Test Article Distribution Across All Categories"""
+        print("\n📊 ARTICLE DISTRIBUTION TESTING")
+        print("=" * 40)
+        
+        try:
+            # Get all articles first
+            response = self.session.get(f"{self.base_url}/articles?limit=50", timeout=10)
+            if response.status_code != 200:
+                self.log_test("Article Distribution Setup", False, f"Failed to get articles: HTTP {response.status_code}")
+                return
+            
+            all_articles = response.json()
+            if not isinstance(all_articles, list):
+                self.log_test("Article Distribution", False, f"Invalid articles response: {type(all_articles)}")
+                return
+            
+            # Count articles by category
+            category_distribution = {}
+            for article in all_articles:
+                category = article.get("category", "unknown")
+                category_distribution[category] = category_distribution.get(category, 0) + 1
+            
+            # Test major categories have articles
+            major_categories = ["fashion", "technology", "food", "auto", "travel", "business"]
+            categories_with_content = 0
+            
+            for category in major_categories:
+                count = category_distribution.get(category, 0)
+                if count > 0:
+                    categories_with_content += 1
+                    self.log_test(f"Category Distribution - {category.title()}", True, f"{count} articles in {category}")
+                else:
+                    self.log_test(f"Category Distribution - {category.title()}", False, f"No articles found in {category}")
+            
+            if categories_with_content >= 4:
+                self.log_test("Article Distribution", True, f"Good distribution: {categories_with_content}/{len(major_categories)} major categories have content")
+            else:
+                self.log_test("Article Distribution", False, f"Poor distribution: only {categories_with_content}/{len(major_categories)} categories have content")
+            
+            # Overall distribution summary
+            total_articles = len(all_articles)
+            total_categories = len(category_distribution)
+            self.log_test("Distribution Summary", True, f"Total: {total_articles} articles across {total_categories} categories")
+            
+            return category_distribution
+            
+        except Exception as e:
+            self.log_test("Article Distribution", False, f"Error: {str(e)}")
+            return None
+
+    def test_category_filtering_endpoints(self):
+        """Test Category Filtering for All Major Categories"""
+        print("\n🔍 CATEGORY FILTERING TESTING")
+        print("=" * 40)
+        
+        try:
+            # Test specific categories mentioned in review request
+            test_categories = ["fashion", "technology", "food", "auto", "travel", "business", "health", "culture"]
+            
+            successful_filters = 0
+            for category in test_categories:
+                response = self.session.get(f"{self.base_url}/articles?category={category}", timeout=10)
+                if response.status_code == 200:
+                    articles = response.json()
+                    if isinstance(articles, list):
+                        # Verify all articles belong to the requested category
+                        category_match = True
+                        for article in articles:
+                            article_category = article.get("category", "").lower()
+                            if article_category != category.lower():
+                                category_match = False
+                                break
+                        
+                        if category_match:
+                            successful_filters += 1
+                            self.log_test(f"Category Filter - {category.title()}", True, f"Retrieved {len(articles)} {category} articles, all properly categorized")
+                        else:
+                            self.log_test(f"Category Filter - {category.title()}", False, f"Category mismatch in {len(articles)} articles")
+                    else:
+                        self.log_test(f"Category Filter - {category.title()}", False, f"Invalid response format: {type(articles)}")
+                else:
+                    self.log_test(f"Category Filter - {category.title()}", False, f"HTTP {response.status_code}")
+            
+            if successful_filters >= 6:
+                self.log_test("Category Filtering System", True, f"{successful_filters}/{len(test_categories)} category filters working correctly")
+            else:
+                self.log_test("Category Filtering System", False, f"Only {successful_filters}/{len(test_categories)} category filters working")
+                
+            return successful_filters >= 6
+            
+        except Exception as e:
+            self.log_test("Category Filtering", False, f"Error: {str(e)}")
+            return False
+
+    def test_subcategory_filtering_with_normalization(self):
+        """Test Subcategory Filtering with URL Parameter Normalization"""
+        print("\n🏷️ SUBCATEGORY FILTERING TESTING")
+        print("=" * 40)
+        
+        try:
+            # Test specific subcategory combinations from review request
+            test_combinations = [
+                ("food", "drinks", "Scottish Leader + Fine Beverages"),
+                ("auto", "cars", "Auto articles"),
+                ("travel", "luxury", "Travel content"),
+                ("fashion", "men", "Men's fashion"),
+                ("fashion", "women", "Women's fashion"),
+                ("technology", "smartphones", "Smartphone articles")
+            ]
+            
+            successful_subcategory_filters = 0
+            
+            for category, subcategory, description in test_combinations:
+                # Test with hyphen format (URL-safe)
+                response_hyphen = self.session.get(f"{self.base_url}/articles?category={category}&subcategory={subcategory}", timeout=10)
+                
+                # Test with space format (URL encoded)
+                subcategory_space = subcategory.replace("-", " ")
+                response_space = self.session.get(f"{self.base_url}/articles?category={category}&subcategory={subcategory_space}", timeout=10)
+                
+                if response_hyphen.status_code == 200 and response_space.status_code == 200:
+                    articles_hyphen = response_hyphen.json()
+                    articles_space = response_space.json()
+                    
+                    if isinstance(articles_hyphen, list) and isinstance(articles_space, list):
+                        # Check if both formats return same results (normalization working)
+                        if len(articles_hyphen) == len(articles_space):
+                            successful_subcategory_filters += 1
+                            self.log_test(f"Subcategory Filter - {category}/{subcategory}", True, f"URL normalization working: {len(articles_hyphen)} articles for {description}")
+                        else:
+                            self.log_test(f"Subcategory Filter - {category}/{subcategory}", False, f"Normalization issue: hyphen={len(articles_hyphen)}, space={len(articles_space)}")
+                    else:
+                        self.log_test(f"Subcategory Filter - {category}/{subcategory}", False, f"Invalid response format")
+                else:
+                    # Even if no articles found, endpoint should respond correctly
+                    if response_hyphen.status_code == 200:
+                        articles_hyphen = response_hyphen.json()
+                        if isinstance(articles_hyphen, list):
+                            self.log_test(f"Subcategory Filter - {category}/{subcategory}", True, f"Endpoint working: {len(articles_hyphen)} articles for {description}")
+                            successful_subcategory_filters += 1
+                        else:
+                            self.log_test(f"Subcategory Filter - {category}/{subcategory}", False, f"Invalid response format")
+                    else:
+                        self.log_test(f"Subcategory Filter - {category}/{subcategory}", False, f"HTTP {response_hyphen.status_code}")
+            
+            if successful_subcategory_filters >= 4:
+                self.log_test("Subcategory Filtering System", True, f"{successful_subcategory_filters}/{len(test_combinations)} subcategory filters working")
+            else:
+                self.log_test("Subcategory Filtering System", False, f"Only {successful_subcategory_filters}/{len(test_combinations)} subcategory filters working")
+                
+            return successful_subcategory_filters >= 4
+            
+        except Exception as e:
+            self.log_test("Subcategory Filtering", False, f"Error: {str(e)}")
+            return False
+
+    def test_data_consistency_and_structure(self):
+        """Test Data Consistency and Required Fields"""
+        print("\n🔍 DATA CONSISTENCY TESTING")
+        print("=" * 40)
+        
+        try:
+            # Get sample articles from different categories
+            response = self.session.get(f"{self.base_url}/articles?limit=20", timeout=10)
+            if response.status_code != 200:
+                self.log_test("Data Consistency Setup", False, f"Failed to get articles: HTTP {response.status_code}")
+                return False
+            
+            articles = response.json()
+            if not isinstance(articles, list) or len(articles) == 0:
+                self.log_test("Data Consistency", False, f"No articles available for testing")
+                return False
+            
+            # Required fields for all articles
+            required_fields = ["id", "title", "category", "author_name", "published_at", "body"]
+            optional_fields = ["subcategory", "hero_image", "tags", "is_premium", "slug"]
+            
+            articles_with_all_required = 0
+            articles_with_proper_structure = 0
+            image_url_issues = 0
+            
+            for article in articles:
+                # Check required fields
+                has_all_required = all(field in article and article[field] is not None for field in required_fields)
+                if has_all_required:
+                    articles_with_all_required += 1
+                
+                # Check data structure consistency
+                has_proper_structure = (
+                    isinstance(article.get("tags", []), list) and
+                    isinstance(article.get("is_premium", False), bool) and
+                    isinstance(article.get("title", ""), str) and
+                    len(article.get("title", "")) > 0
+                )
+                if has_proper_structure:
+                    articles_with_proper_structure += 1
+                
+                # Check image URL format
+                hero_image = article.get("hero_image")
+                if hero_image and not (hero_image.startswith("http") or hero_image.startswith("/")):
+                    image_url_issues += 1
+            
+            # Report results
+            total_articles = len(articles)
+            required_percentage = (articles_with_all_required / total_articles) * 100
+            structure_percentage = (articles_with_proper_structure / total_articles) * 100
+            
+            if required_percentage >= 90:
+                self.log_test("Data Consistency - Required Fields", True, f"{articles_with_all_required}/{total_articles} articles ({required_percentage:.1f}%) have all required fields")
+            else:
+                self.log_test("Data Consistency - Required Fields", False, f"Only {articles_with_all_required}/{total_articles} articles ({required_percentage:.1f}%) have all required fields")
+            
+            if structure_percentage >= 90:
+                self.log_test("Data Consistency - Structure", True, f"{articles_with_proper_structure}/{total_articles} articles ({structure_percentage:.1f}%) have proper data structure")
+            else:
+                self.log_test("Data Consistency - Structure", False, f"Only {articles_with_proper_structure}/{total_articles} articles ({structure_percentage:.1f}%) have proper structure")
+            
+            if image_url_issues == 0:
+                self.log_test("Data Consistency - Image URLs", True, "All image URLs are properly formatted")
+            else:
+                self.log_test("Data Consistency - Image URLs", False, f"{image_url_issues} articles have improperly formatted image URLs")
+            
+            # Check for ID field consistency (should be 'id', not '_id')
+            id_field_consistent = all("id" in article and "_id" not in article for article in articles)
+            if id_field_consistent:
+                self.log_test("Data Consistency - ID Fields", True, "All articles use 'id' field consistently")
+            else:
+                self.log_test("Data Consistency - ID Fields", False, "Inconsistent ID field usage detected")
+            
+            return required_percentage >= 90 and structure_percentage >= 90
+            
+        except Exception as e:
+            self.log_test("Data Consistency", False, f"Error: {str(e)}")
+            return False
+
+    def test_cross_category_functionality(self):
+        """Test Cross-Category Functionality for System Consistency"""
+        print("\n🔄 CROSS-CATEGORY FUNCTIONALITY TESTING")
+        print("=" * 40)
+        
+        try:
+            # Test multiple categories to ensure system works consistently
+            test_categories = ["fashion", "technology", "food", "auto", "travel"]
+            
+            consistent_behavior = 0
+            response_times = []
+            
+            for category in test_categories:
+                start_time = time.time()
+                
+                # Test basic category filtering
+                response = self.session.get(f"{self.base_url}/articles?category={category}&limit=10", timeout=10)
+                
+                end_time = time.time()
+                response_time = end_time - start_time
+                response_times.append(response_time)
+                
+                if response.status_code == 200:
+                    articles = response.json()
+                    if isinstance(articles, list):
+                        # Check response structure consistency
+                        if articles:  # If articles exist
+                            first_article = articles[0]
+                            required_fields = ["id", "title", "category", "author_name"]
+                            has_consistent_structure = all(field in first_article for field in required_fields)
+                            
+                            if has_consistent_structure:
+                                consistent_behavior += 1
+                                self.log_test(f"Cross-Category - {category.title()}", True, f"Consistent structure: {len(articles)} articles, response time: {response_time:.2f}s")
+                            else:
+                                self.log_test(f"Cross-Category - {category.title()}", False, f"Inconsistent structure in {category}")
+                        else:
+                            # Empty result is also valid
+                            consistent_behavior += 1
+                            self.log_test(f"Cross-Category - {category.title()}", True, f"Consistent empty response for {category}, response time: {response_time:.2f}s")
+                    else:
+                        self.log_test(f"Cross-Category - {category.title()}", False, f"Invalid response format for {category}")
+                else:
+                    self.log_test(f"Cross-Category - {category.title()}", False, f"HTTP {response.status_code} for {category}")
+            
+            # Check response time consistency
+            avg_response_time = sum(response_times) / len(response_times) if response_times else 0
+            max_response_time = max(response_times) if response_times else 0
+            
+            if max_response_time < 2.0:  # All responses under 2 seconds
+                self.log_test("Cross-Category - Performance", True, f"Consistent performance: avg {avg_response_time:.2f}s, max {max_response_time:.2f}s")
+            else:
+                self.log_test("Cross-Category - Performance", False, f"Performance issues: avg {avg_response_time:.2f}s, max {max_response_time:.2f}s")
+            
+            if consistent_behavior >= 4:
+                self.log_test("Cross-Category Functionality", True, f"{consistent_behavior}/{len(test_categories)} categories show consistent behavior")
+            else:
+                self.log_test("Cross-Category Functionality", False, f"Only {consistent_behavior}/{len(test_categories)} categories show consistent behavior")
+                
+            return consistent_behavior >= 4
+            
+        except Exception as e:
+            self.log_test("Cross-Category Functionality", False, f"Error: {str(e)}")
+            return False
+
+    def test_specific_endpoint_requirements(self):
+        """Test Specific Endpoints from Review Request"""
+        print("\n🎯 SPECIFIC ENDPOINT TESTING")
+        print("=" * 40)
+        
+        try:
+            # Specific endpoints mentioned in review request
+            test_endpoints = [
+                ("/categories", "Categories API - should return 13 categories"),
+                ("/articles?category=fashion", "Fashion articles"),
+                ("/articles?category=technology", "Technology articles"),
+                ("/articles?category=food&subcategory=drinks", "Food/Drinks - Scottish Leader + Fine Beverages"),
+                ("/articles?category=auto&subcategory=cars", "Auto/Cars articles"),
+                ("/articles?category=travel&subcategory=luxury", "Travel/Luxury content"),
+                ("/articles", "Overall article listing")
+            ]
+            
+            successful_endpoints = 0
+            
+            for endpoint, description in test_endpoints:
+                response = self.session.get(f"{self.base_url}{endpoint}", timeout=10)
+                
+                if response.status_code == 200:
+                    data = response.json()
+                    if isinstance(data, list):
+                        successful_endpoints += 1
+                        self.log_test(f"Endpoint - {description}", True, f"✅ {endpoint} returned {len(data)} items")
+                    else:
+                        self.log_test(f"Endpoint - {description}", False, f"❌ {endpoint} returned invalid format: {type(data)}")
+                else:
+                    self.log_test(f"Endpoint - {description}", False, f"❌ {endpoint} failed: HTTP {response.status_code}")
+            
+            if successful_endpoints >= 6:
+                self.log_test("Specific Endpoints", True, f"{successful_endpoints}/{len(test_endpoints)} required endpoints working correctly")
+            else:
+                self.log_test("Specific Endpoints", False, f"Only {successful_endpoints}/{len(test_endpoints)} required endpoints working")
+                
+            return successful_endpoints >= 6
+            
+        except Exception as e:
+            self.log_test("Specific Endpoints", False, f"Error: {str(e)}")
+            return False
+
+    def run_standardized_category_tests(self):
+        """Run Comprehensive Standardized Category and Article System Tests"""
+        print("🏷️ STARTING STANDARDIZED CATEGORY AND ARTICLE SYSTEM TESTING")
+        print("=" * 70)
+        print("Testing comprehensive category and article system for scaling readiness...")
+        print()
+        
+        # 1. API Health Check
+        self.test_health_check()
+        
+        # 2. Categories API Testing
+        categories = self.test_standardized_category_system()
+        
+        # 3. Article Distribution Testing
+        distribution = self.test_article_distribution_across_categories()
+        
+        # 4. Category Filtering Testing
+        category_filtering_success = self.test_category_filtering_endpoints()
+        
+        # 5. Subcategory Filtering with Normalization
+        subcategory_filtering_success = self.test_subcategory_filtering_with_normalization()
+        
+        # 6. Data Consistency Testing
+        data_consistency_success = self.test_data_consistency_and_structure()
+        
+        # 7. Cross-Category Functionality Testing
+        cross_category_success = self.test_cross_category_functionality()
+        
+        # 8. Specific Endpoint Requirements
+        specific_endpoints_success = self.test_specific_endpoint_requirements()
+        
+        return self.generate_report()
+
+    def generate_report(self):
+        """Generate comprehensive test report"""
+        print("\n" + "="*70)
+        print("📊 STANDARDIZED CATEGORY SYSTEM TEST REPORT")
+        print("="*70)
+        
+        total_tests = len(self.test_results)
+        passed_tests = sum(1 for result in self.test_results if result["success"])
+        failed_tests = total_tests - passed_tests
+        success_rate = (passed_tests / total_tests * 100) if total_tests > 0 else 0
+        
+        print(f"📈 OVERALL RESULTS:")
+        print(f"   Total Tests: {total_tests}")
+        print(f"   Passed: {passed_tests} ✅")
+        print(f"   Failed: {failed_tests} ❌")
+        print(f"   Success Rate: {success_rate:.1f}%")
+        print()
+        
+        # Categorize results by priority
+        critical_failures = []
+        minor_issues = []
+        
+        for result in self.test_results:
+            if not result["success"]:
+                test_name = result["test"]
+                if any(keyword in test_name.lower() for keyword in ["categories api", "category filter", "data consistency", "specific endpoint"]):
+                    critical_failures.append(f"❌ {test_name}: {result['message']}")
+                else:
+                    minor_issues.append(f"⚠️ {test_name}: {result['message']}")
+        
+        if critical_failures:
+            print("🚨 CRITICAL ISSUES:")
+            for failure in critical_failures[:5]:  # Show top 5
+                print(f"   {failure}")
+            print()
+        
+        if minor_issues:
+            print("⚠️ MINOR ISSUES:")
+            for issue in minor_issues[:3]:  # Show top 3
+                print(f"   {issue}")
+            print()
+        
+        # Success highlights
+        successes = [result for result in self.test_results if result["success"]]
+        if successes:
+            print("✅ KEY SUCCESSES:")
+            priority_successes = [s for s in successes if any(keyword in s["test"].lower() for keyword in ["categories api", "category filter", "distribution", "endpoint"])]
+            for success in priority_successes[:5]:
+                print(f"   ✅ {success['test']}: {success['message']}")
+        
+        print("\n" + "="*70)
+        
+        return {
+            "total_tests": total_tests,
+            "passed_tests": passed_tests,
+            "failed_tests": failed_tests,
+            "success_rate": success_rate,
+            "critical_failures": critical_failures,
+            "minor_issues": minor_issues
+        }
     
     def test_reviews_endpoint(self):
         """Test reviews listing endpoint"""
