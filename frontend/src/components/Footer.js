@@ -290,7 +290,7 @@ const Footer = () => {
               
               {/* Expandable Categories */}
               {isCategoriesExpanded && (
-                <div className="mt-6 space-y-4 animate-fade-in">
+                <div className="mt-6 space-y-4 animate-fadeIn overflow-hidden transition-all duration-300 ease-in-out">
                   {categories.map((category) => (
                     <Link
                       key={category.slug}
