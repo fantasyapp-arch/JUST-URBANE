@@ -38,7 +38,7 @@ const SustainableTravelPage = () => {
             <span>/</span>
             <Link to="/category/travel" className="hover:text-gray-900 font-medium">Travel</Link>
             <span>/</span>
-            <Link to="/category/travel/culture" className="hover:text-gray-900 font-medium">Culture</Link>
+            <Link to="/category/travel/guides" className="hover:text-gray-900 font-medium">Guides</Link>
             <span>/</span>
             <span className="text-gray-900 font-bold">Sustainable Travel Guide</span>
           </nav>
