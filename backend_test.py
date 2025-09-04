@@ -876,13 +876,156 @@ class JustUrbaneAPITester:
         
         return self.generate_report()
 
+    def test_celini_food_review_integration(self):
+        """Test Celini Food Review Article Integration - PRIORITY TEST"""
+        print("\n🍽️ CELINI FOOD REVIEW INTEGRATION TESTING")
+        print("=" * 50)
+        
+        try:
+            # Test 1: Food Category Articles - Check if Celini article is included
+            response = self.session.get(f"{self.base_url}/api/articles?category=food", timeout=10)
+            if response.status_code == 200:
+                food_articles = response.json()
+                if isinstance(food_articles, list):
+                    celini_found = False
+                    celini_article = None
+                    
+                    for article in food_articles:
+                        title = article.get("title", "").lower()
+                        if "celini" in title and "food" in title and "review" in title:
+                            celini_found = True
+                            celini_article = article
+                            break
+                    
+                    if celini_found:
+                        self.log_test("Food Category - Celini Article Present", True, f"Celini food review found in food category with {len(food_articles)} total food articles")
+                    else:
+                        self.log_test("Food Category - Celini Article Present", False, f"Celini food review not found in {len(food_articles)} food articles")
+                        # List available food articles for debugging
+                        food_titles = [a.get("title", "Unknown") for a in food_articles[:5]]
+                        self.log_test("Food Articles Available", True, f"Available food articles: {', '.join(food_titles)}")
+                else:
+                    self.log_test("Food Category Articles", False, f"Invalid response format: {type(food_articles)}")
+            else:
+                self.log_test("Food Category Articles", False, f"HTTP {response.status_code}: {response.text}")
+            
+            # Test 2: Food Review Subcategory Filtering
+            response = self.session.get(f"{self.base_url}/api/articles?category=food&subcategory=food-review", timeout=10)
+            if response.status_code == 200:
+                food_review_articles = response.json()
+                if isinstance(food_review_articles, list):
+                    celini_in_subcategory = False
+                    for article in food_review_articles:
+                        title = article.get("title", "").lower()
+                        if "celini" in title:
+                            celini_in_subcategory = True
+                            break
+                    
+                    if celini_in_subcategory:
+                        self.log_test("Food Review Subcategory - Celini Article", True, f"Celini article found in food-review subcategory with {len(food_review_articles)} articles")
+                    else:
+                        self.log_test("Food Review Subcategory - Celini Article", False, f"Celini article not found in food-review subcategory ({len(food_review_articles)} articles)")
+                else:
+                    self.log_test("Food Review Subcategory", False, f"Invalid response format: {type(food_review_articles)}")
+            else:
+                self.log_test("Food Review Subcategory", False, f"HTTP {response.status_code}: {response.text}")
+            
+            # Test 3: Single Article Retrieval by Slug
+            response = self.session.get(f"{self.base_url}/api/articles/celini-food-review-mumbai", timeout=10)
+            if response.status_code == 200:
+                celini_article = response.json()
+                
+                # Test 4: Article Content Structure Verification
+                required_fields = ["title", "hero_image", "gallery", "category", "subcategory", "author_name"]
+                field_check = {}
+                
+                for field in required_fields:
+                    if field in celini_article and celini_article[field] is not None:
+                        field_check[field] = True
+                    else:
+                        field_check[field] = False
+                
+                # Check specific requirements
+                title_correct = "celini" in celini_article.get("title", "").lower()
+                category_correct = celini_article.get("category") == "food"
+                subcategory_correct = celini_article.get("subcategory") == "food-review"
+                author_correct = celini_article.get("author_name") == "Team Urbane"
+                
+                # Check gallery has 2 food images
+                gallery = celini_article.get("gallery", [])
+                gallery_correct = isinstance(gallery, list) and len(gallery) >= 2
+                
+                # Check hero image exists
+                hero_image = celini_article.get("hero_image")
+                hero_image_correct = hero_image is not None and len(str(hero_image)) > 0
+                
+                if title_correct and category_correct and subcategory_correct and author_correct:
+                    self.log_test("Celini Article - Content Structure", True, f"All required fields present: category={celini_article.get('category')}, subcategory={celini_article.get('subcategory')}, author={celini_article.get('author_name')}")
+                else:
+                    issues = []
+                    if not title_correct: issues.append("title")
+                    if not category_correct: issues.append(f"category={celini_article.get('category')}")
+                    if not subcategory_correct: issues.append(f"subcategory={celini_article.get('subcategory')}")
+                    if not author_correct: issues.append(f"author={celini_article.get('author_name')}")
+                    self.log_test("Celini Article - Content Structure", False, f"Issues with: {', '.join(issues)}")
+                
+                if hero_image_correct:
+                    self.log_test("Celini Article - Hero Image", True, f"Hero image present: {str(hero_image)[:50]}...")
+                else:
+                    self.log_test("Celini Article - Hero Image", False, f"Hero image missing or invalid: {hero_image}")
+                
+                if gallery_correct:
+                    self.log_test("Celini Article - Gallery Images", True, f"Gallery has {len(gallery)} images (required: 2+)")
+                else:
+                    self.log_test("Celini Article - Gallery Images", False, f"Gallery insufficient: {len(gallery) if isinstance(gallery, list) else 'invalid'} images")
+                
+                self.log_test("Celini Article Retrieval by Slug", True, f"Successfully retrieved Celini article: {celini_article.get('title')}")
+                
+            elif response.status_code == 404:
+                self.log_test("Celini Article Retrieval by Slug", False, "Celini article not found at expected slug: celini-food-review-mumbai")
+            else:
+                self.log_test("Celini Article Retrieval by Slug", False, f"HTTP {response.status_code}: {response.text}")
+            
+            # Test 5: Food Category System - Verify Food category exists
+            response = self.session.get(f"{self.base_url}/api/categories", timeout=10)
+            if response.status_code == 200:
+                categories = response.json()
+                if isinstance(categories, list):
+                    food_category_found = False
+                    for category in categories:
+                        if category.get("name", "").lower() == "food":
+                            food_category_found = True
+                            break
+                    
+                    if food_category_found:
+                        self.log_test("Food Category System", True, "Food category exists in categories API")
+                    else:
+                        category_names = [cat.get("name", "Unknown") for cat in categories]
+                        self.log_test("Food Category System", False, f"Food category not found. Available: {', '.join(category_names)}")
+                else:
+                    self.log_test("Food Category System", False, f"Invalid categories response: {type(categories)}")
+            else:
+                self.log_test("Food Category System", False, f"Categories API failed: HTTP {response.status_code}")
+                
+        except Exception as e:
+            self.log_test("Celini Food Review Integration", False, f"Error: {str(e)}")
+
     def run_comprehensive_tests(self):
-        """Run all tests in sequence - Updated for Magazine Flip Book Focus"""
-        print("🚀 Starting Just Urbane Magazine Flip Book Backend Testing")
+        """Run all tests in sequence - Updated for Celini Food Review Focus"""
+        print("🚀 Starting Just Urbane Celini Food Review Backend Testing")
         print("=" * 70)
         
-        # Run Magazine Flip Book focused tests
-        return self.run_magazine_flip_book_tests()
+        # 1. API Health Check
+        self.test_health_check()
+        
+        # 2. PRIORITY: Celini Food Review Integration Tests
+        self.test_celini_food_review_integration()
+        
+        # 3. Supporting tests
+        self.test_categories_endpoint()
+        self.test_articles_endpoint()
+        
+        return self.generate_report()
     
     def generate_report(self):
         """Generate comprehensive test report"""
