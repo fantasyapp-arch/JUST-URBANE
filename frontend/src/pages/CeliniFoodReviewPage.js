@@ -69,10 +69,10 @@ const CeliniFoodReviewPage = () => {
               {article.category} • {article.subcategory}
             </span>
           </div>
-          <h1 className="text-3xl md:text-5xl font-serif font-bold mb-4 leading-tight text-gray-900">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-serif font-bold mb-4 leading-tight text-gray-900 px-2">
             {article.title}
           </h1>
-          <p className="text-xl md:text-2xl text-gray-600 leading-relaxed">
+          <p className="text-lg sm:text-xl md:text-2xl text-gray-600 leading-relaxed px-2">
             {article.subtitle}
           </p>
         </motion.div>
