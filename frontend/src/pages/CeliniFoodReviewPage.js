@@ -79,7 +79,7 @@ const CeliniFoodReviewPage = () => {
 
         {/* Article Meta */}
         <motion.div 
-          className="flex flex-wrap items-center gap-6 mb-8 pb-8 border-b border-gray-200"
+          className="flex flex-wrap items-center gap-4 sm:gap-6 mb-6 sm:mb-8 pb-6 sm:pb-8 border-b border-gray-200 px-2"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
