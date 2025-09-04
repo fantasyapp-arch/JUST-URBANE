@@ -334,14 +334,6 @@ const Footer = () => {
                 Reviews
               </Link>
             </div>
-
-            {/* Privacy Information */}
-            <div className="border-t border-gray-800 pt-6">
-              <div className="flex items-center justify-center space-x-2 mb-4">
-                <span className="text-blue-500 text-sm">🛡️</span>
-                <span className="text-white font-bold text-sm tracking-wider">PRIVACY INFORMATION</span>
-              </div>
-            </div>
           </div>
         </div>
       </div>
