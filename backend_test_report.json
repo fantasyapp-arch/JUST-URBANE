@@ -1,329 +1,119 @@
 {
-  "total": 46,
-  "passed": 45,
-  "failed": 1,
-  "success_rate": 97.82608695652173,
+  "total": 16,
+  "passed": 16,
+  "failed": 0,
+  "success_rate": 100.0,
   "results": [
     {
       "test": "Health Check",
       "success": true,
       "message": "API is healthy and responding",
-      "timestamp": "2025-09-04T16:02:18.039291",
+      "timestamp": "2025-09-04T16:31:10.148611",
       "response_data": null
     },
     {
-      "test": "Categories API - Count",
+      "test": "France Article - General Listing",
       "success": true,
-      "message": "Retrieved 13 categories (expected ~13)",
-      "timestamp": "2025-09-04T16:02:18.054956",
+      "message": "Found 1 France-related articles in general listing",
+      "timestamp": "2025-09-04T16:31:10.163837",
       "response_data": null
     },
     {
-      "test": "Categories API - Structure",
+      "test": "France Article - Travel Category",
       "success": true,
-      "message": "Categories retrieved with proper structure: Fashion, Business, Technology, Finance, Travel, Health, Culture, Art",
-      "timestamp": "2025-09-04T16:02:18.055027",
+      "message": "France article found in travel category (5 total travel articles)",
+      "timestamp": "2025-09-04T16:31:10.173616",
       "response_data": null
     },
     {
-      "test": "Category Distribution - Fashion",
+      "test": "France Article - Adventure Subcategory",
       "success": true,
-      "message": "6 articles in fashion",
-      "timestamp": "2025-09-04T16:02:18.063476",
+      "message": "France article found in travel/adventure subcategory (2 total)",
+      "timestamp": "2025-09-04T16:31:10.183745",
       "response_data": null
     },
     {
-      "test": "Category Distribution - Technology",
+      "test": "France Article - Slug Retrieval",
       "success": true,
-      "message": "5 articles in technology",
-      "timestamp": "2025-09-04T16:02:18.063514",
+      "message": "Successfully retrieved France article by slug: when-in-france-travel-destinations",
+      "timestamp": "2025-09-04T16:31:10.195050",
       "response_data": null
     },
     {
-      "test": "Category Distribution - Food",
+      "test": "France Article - Title",
       "success": true,
-      "message": "5 articles in food",
-      "timestamp": "2025-09-04T16:02:18.063523",
+      "message": "Correct title found: 'When In France'",
+      "timestamp": "2025-09-04T16:31:10.195090",
       "response_data": null
     },
     {
-      "test": "Category Distribution - Auto",
+      "test": "France Article - Category",
       "success": true,
-      "message": "5 articles in auto",
-      "timestamp": "2025-09-04T16:02:18.063529",
+      "message": "Correct category: 'travel'",
+      "timestamp": "2025-09-04T16:31:10.195097",
       "response_data": null
     },
     {
-      "test": "Category Distribution - Travel",
+      "test": "France Article - Subcategory",
       "success": true,
-      "message": "4 articles in travel",
-      "timestamp": "2025-09-04T16:02:18.063536",
+      "message": "Correct subcategory: 'adventure'",
+      "timestamp": "2025-09-04T16:31:10.195104",
       "response_data": null
     },
     {
-      "test": "Category Distribution - Business",
-      "success": false,
-      "message": "No articles found in business",
-      "timestamp": "2025-09-04T16:02:18.063542",
-      "response_data": null
-    },
-    {
-      "test": "Article Distribution",
+      "test": "France Article - Author",
       "success": true,
-      "message": "Good distribution: 5/6 major categories have content",
-      "timestamp": "2025-09-04T16:02:18.063550",
+      "message": "Correct author: 'Amisha Shirgave'",
+      "timestamp": "2025-09-04T16:31:10.195110",
       "response_data": null
     },
     {
-      "test": "Distribution Summary",
+      "test": "France Article - Slug",
       "success": true,
-      "message": "Total: 31 articles across 7 categories",
-      "timestamp": "2025-09-04T16:02:18.063557",
+      "message": "Correct slug: 'when-in-france-travel-destinations'",
+      "timestamp": "2025-09-04T16:31:10.195115",
       "response_data": null
     },
     {
-      "test": "Category Filter - Fashion",
+      "test": "France Article - Hero Image",
       "success": true,
-      "message": "Retrieved 6 fashion articles, all properly categorized",
-      "timestamp": "2025-09-04T16:02:18.074854",
+      "message": "Hero image accessible: https://customer-assets.emergentagent.com/job_urbane-articles/artifacts/asfm7icv_Paris%20%283%29.jpg",
+      "timestamp": "2025-09-04T16:31:10.366240",
       "response_data": null
     },
     {
-      "test": "Category Filter - Technology",
+      "test": "France Article - Gallery Images",
       "success": true,
-      "message": "Retrieved 5 technology articles, all properly categorized",
-      "timestamp": "2025-09-04T16:02:18.110313",
+      "message": "Gallery images accessible: 4/4 images",
+      "timestamp": "2025-09-04T16:31:10.615649",
       "response_data": null
     },
     {
-      "test": "Category Filter - Food",
+      "test": "France Article - Image Count",
       "success": true,
-      "message": "Retrieved 5 food articles, all properly categorized",
-      "timestamp": "2025-09-04T16:02:18.120597",
+      "message": "Sufficient gallery images: 4 images (expected 4+)",
+      "timestamp": "2025-09-04T16:31:10.615694",
       "response_data": null
     },
     {
-      "test": "Category Filter - Auto",
+      "test": "Travel/Adventure Category System",
       "success": true,
-      "message": "Retrieved 5 auto articles, all properly categorized",
-      "timestamp": "2025-09-04T16:02:18.131562",
+      "message": "Travel/adventure category working: 2 articles found",
+      "timestamp": "2025-09-04T16:31:10.628669",
       "response_data": null
     },
     {
-      "test": "Category Filter - Travel",
+      "test": "France Article in Category System",
       "success": true,
-      "message": "Retrieved 4 travel articles, all properly categorized",
-      "timestamp": "2025-09-04T16:02:18.143030",
+      "message": "France article properly categorized in travel/adventure",
+      "timestamp": "2025-09-04T16:31:10.628712",
       "response_data": null
     },
     {
-      "test": "Category Filter - Business",
+      "test": "Travel Category Exists",
       "success": true,
-      "message": "Retrieved 0 business articles, all properly categorized",
-      "timestamp": "2025-09-04T16:02:18.190927",
-      "response_data": null
-    },
-    {
-      "test": "Category Filter - Health",
-      "success": true,
-      "message": "Retrieved 0 health articles, all properly categorized",
-      "timestamp": "2025-09-04T16:02:18.198884",
-      "response_data": null
-    },
-    {
-      "test": "Category Filter - Culture",
-      "success": true,
-      "message": "Retrieved 0 culture articles, all properly categorized",
-      "timestamp": "2025-09-04T16:02:18.247023",
-      "response_data": null
-    },
-    {
-      "test": "Category Filtering System",
-      "success": true,
-      "message": "8/8 category filters working correctly",
-      "timestamp": "2025-09-04T16:02:18.247061",
-      "response_data": null
-    },
-    {
-      "test": "Subcategory Filter - food/drinks",
-      "success": true,
-      "message": "URL normalization working: 2 articles for Scottish Leader + Fine Beverages",
-      "timestamp": "2025-09-04T16:02:18.261212",
-      "response_data": null
-    },
-    {
-      "test": "Subcategory Filter - auto/cars",
-      "success": true,
-      "message": "URL normalization working: 1 articles for Auto articles",
-      "timestamp": "2025-09-04T16:02:18.274279",
-      "response_data": null
-    },
-    {
-      "test": "Subcategory Filter - travel/luxury",
-      "success": true,
-      "message": "URL normalization working: 1 articles for Travel content",
-      "timestamp": "2025-09-04T16:02:18.329372",
-      "response_data": null
-    },
-    {
-      "test": "Subcategory Filter - fashion/men",
-      "success": true,
-      "message": "URL normalization working: 2 articles for Men's fashion",
-      "timestamp": "2025-09-04T16:02:18.342413",
-      "response_data": null
-    },
-    {
-      "test": "Subcategory Filter - fashion/women",
-      "success": true,
-      "message": "URL normalization working: 1 articles for Women's fashion",
-      "timestamp": "2025-09-04T16:02:18.397588",
-      "response_data": null
-    },
-    {
-      "test": "Subcategory Filter - technology/smartphones",
-      "success": true,
-      "message": "URL normalization working: 0 articles for Smartphone articles",
-      "timestamp": "2025-09-04T16:02:18.411283",
-      "response_data": null
-    },
-    {
-      "test": "Subcategory Filtering System",
-      "success": true,
-      "message": "6/6 subcategory filters working",
-      "timestamp": "2025-09-04T16:02:18.411314",
-      "response_data": null
-    },
-    {
-      "test": "Data Consistency - Required Fields",
-      "success": true,
-      "message": "20/20 articles (100.0%) have all required fields",
-      "timestamp": "2025-09-04T16:02:18.418990",
-      "response_data": null
-    },
-    {
-      "test": "Data Consistency - Structure",
-      "success": true,
-      "message": "20/20 articles (100.0%) have proper data structure",
-      "timestamp": "2025-09-04T16:02:18.419026",
-      "response_data": null
-    },
-    {
-      "test": "Data Consistency - Image URLs",
-      "success": true,
-      "message": "All image URLs are properly formatted",
-      "timestamp": "2025-09-04T16:02:18.419032",
-      "response_data": null
-    },
-    {
-      "test": "Data Consistency - ID Fields",
-      "success": true,
-      "message": "All articles use 'id' field consistently",
-      "timestamp": "2025-09-04T16:02:18.419040",
-      "response_data": null
-    },
-    {
-      "test": "Cross-Category - Fashion",
-      "success": true,
-      "message": "Consistent structure: 6 articles, response time: 0.01s",
-      "timestamp": "2025-09-04T16:02:18.426624",
-      "response_data": null
-    },
-    {
-      "test": "Cross-Category - Technology",
-      "success": true,
-      "message": "Consistent structure: 5 articles, response time: 0.01s",
-      "timestamp": "2025-09-04T16:02:18.433067",
-      "response_data": null
-    },
-    {
-      "test": "Cross-Category - Food",
-      "success": true,
-      "message": "Consistent structure: 5 articles, response time: 0.01s",
-      "timestamp": "2025-09-04T16:02:18.440118",
-      "response_data": null
-    },
-    {
-      "test": "Cross-Category - Auto",
-      "success": true,
-      "message": "Consistent structure: 5 articles, response time: 0.01s",
-      "timestamp": "2025-09-04T16:02:18.447111",
-      "response_data": null
-    },
-    {
-      "test": "Cross-Category - Travel",
-      "success": true,
-      "message": "Consistent structure: 4 articles, response time: 0.01s",
-      "timestamp": "2025-09-04T16:02:18.454422",
-      "response_data": null
-    },
-    {
-      "test": "Cross-Category - Performance",
-      "success": true,
-      "message": "Consistent performance: avg 0.01s, max 0.01s",
-      "timestamp": "2025-09-04T16:02:18.454453",
-      "response_data": null
-    },
-    {
-      "test": "Cross-Category Functionality",
-      "success": true,
-      "message": "5/5 categories show consistent behavior",
-      "timestamp": "2025-09-04T16:02:18.454460",
-      "response_data": null
-    },
-    {
-      "test": "Endpoint - Categories API - should return 13 categories",
-      "success": true,
-      "message": "\u2705 /categories returned 13 items",
-      "timestamp": "2025-09-04T16:02:18.461798",
-      "response_data": null
-    },
-    {
-      "test": "Endpoint - Fashion articles",
-      "success": true,
-      "message": "\u2705 /articles?category=fashion returned 6 items",
-      "timestamp": "2025-09-04T16:02:18.468081",
-      "response_data": null
-    },
-    {
-      "test": "Endpoint - Technology articles",
-      "success": true,
-      "message": "\u2705 /articles?category=technology returned 5 items",
-      "timestamp": "2025-09-04T16:02:18.474648",
-      "response_data": null
-    },
-    {
-      "test": "Endpoint - Food/Drinks - Scottish Leader + Fine Beverages",
-      "success": true,
-      "message": "\u2705 /articles?category=food&subcategory=drinks returned 2 items",
-      "timestamp": "2025-09-04T16:02:18.481036",
-      "response_data": null
-    },
-    {
-      "test": "Endpoint - Auto/Cars articles",
-      "success": true,
-      "message": "\u2705 /articles?category=auto&subcategory=cars returned 1 items",
-      "timestamp": "2025-09-04T16:02:18.487149",
-      "response_data": null
-    },
-    {
-      "test": "Endpoint - Travel/Luxury content",
-      "success": true,
-      "message": "\u2705 /articles?category=travel&subcategory=luxury returned 1 items",
-      "timestamp": "2025-09-04T16:02:18.493405",
-      "response_data": null
-    },
-    {
-      "test": "Endpoint - Overall article listing",
-      "success": true,
-      "message": "\u2705 /articles returned 20 items",
-      "timestamp": "2025-09-04T16:02:18.500295",
-      "response_data": null
-    },
-    {
-      "test": "Specific Endpoints",
-      "success": true,
-      "message": "7/7 required endpoints working correctly",
-      "timestamp": "2025-09-04T16:02:18.500327",
+      "message": "Travel category found in categories API",
+      "timestamp": "2025-09-04T16:31:10.637432",
       "response_data": null
     }
   ]
