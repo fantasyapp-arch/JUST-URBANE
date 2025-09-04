@@ -2109,6 +2109,150 @@ class JustUrbaneAPITester:
             self.log_test("France Travel Article Integration", False, f"Error during testing: {str(e)}")
             return False
 
+    def test_travel_guides_subcategory_fix(self):
+        """Test Travel/Guides Subcategory Fix - URGENT FIX VERIFICATION"""
+        print("\n🎯 TRAVEL/GUIDES SUBCATEGORY FIX VERIFICATION")
+        print("=" * 60)
+        print("Testing sustainable travel article in travel/guides subcategory...")
+        print()
+        
+        try:
+            # Test 1: Travel/Guides Subcategory Filter
+            print("🔍 Testing /api/articles?category=travel&subcategory=guides")
+            response_guides = self.session.get(f"{self.base_url}/articles?category=travel&subcategory=guides", timeout=10)
+            
+            if response_guides.status_code == 200:
+                guides_articles = response_guides.json()
+                if isinstance(guides_articles, list):
+                    guides_count = len(guides_articles)
+                    if guides_count == 1:
+                        sustainable_article = guides_articles[0]
+                        article_title = sustainable_article.get("title", "")
+                        if "sustainable" in article_title.lower() or "travel" in article_title.lower():
+                            self.log_test("Travel/Guides Subcategory Filter", True, f"✅ Found 1 sustainable travel article in guides: '{article_title}'")
+                        else:
+                            self.log_test("Travel/Guides Subcategory Filter", False, f"❌ Found article but not sustainable travel: '{article_title}'")
+                    elif guides_count > 1:
+                        self.log_test("Travel/Guides Subcategory Filter", False, f"❌ Expected 1 article, found {guides_count} in travel/guides")
+                    else:
+                        self.log_test("Travel/Guides Subcategory Filter", False, f"❌ No articles found in travel/guides subcategory")
+                else:
+                    self.log_test("Travel/Guides Subcategory Filter", False, f"❌ Invalid response format: {type(guides_articles)}")
+            else:
+                self.log_test("Travel/Guides Subcategory Filter", False, f"❌ HTTP {response_guides.status_code}: {response_guides.text}")
+            
+            # Test 2: Travel/Culture Subcategory Should Be Empty
+            print("🔍 Testing /api/articles?category=travel&subcategory=culture (should be empty)")
+            response_culture = self.session.get(f"{self.base_url}/articles?category=travel&subcategory=culture", timeout=10)
+            
+            if response_culture.status_code == 200:
+                culture_articles = response_culture.json()
+                if isinstance(culture_articles, list):
+                    culture_count = len(culture_articles)
+                    if culture_count == 0:
+                        self.log_test("Travel/Culture Subcategory Empty", True, "✅ Travel/culture subcategory is empty (article moved out)")
+                    else:
+                        self.log_test("Travel/Culture Subcategory Empty", False, f"❌ Found {culture_count} articles in travel/culture (should be 0)")
+                else:
+                    self.log_test("Travel/Culture Subcategory Empty", False, f"❌ Invalid response format: {type(culture_articles)}")
+            else:
+                self.log_test("Travel/Culture Subcategory Empty", False, f"❌ HTTP {response_culture.status_code}")
+            
+            # Test 3: Find Sustainable Travel Article by Searching
+            print("🔍 Finding sustainable travel article for individual verification")
+            response_travel = self.session.get(f"{self.base_url}/articles?category=travel", timeout=10)
+            
+            sustainable_article_found = None
+            if response_travel.status_code == 200:
+                travel_articles = response_travel.json()
+                if isinstance(travel_articles, list):
+                    # Look for sustainable travel article
+                    for article in travel_articles:
+                        title = article.get("title", "").lower()
+                        if "sustainable" in title or ("travel" in title and "guide" in title):
+                            sustainable_article_found = article
+                            break
+                    
+                    if sustainable_article_found:
+                        article_id = sustainable_article_found.get("id")
+                        article_slug = sustainable_article_found.get("slug")
+                        
+                        # Test 4: Article Subcategory Field Verification
+                        if article_id:
+                            print(f"🔍 Testing individual article retrieval: {article_id}")
+                            response_individual = self.session.get(f"{self.base_url}/articles/{article_id}", timeout=10)
+                            
+                            if response_individual.status_code == 200:
+                                individual_article = response_individual.json()
+                                subcategory = individual_article.get("subcategory", "")
+                                
+                                if subcategory == "guides":
+                                    self.log_test("Article Subcategory Field", True, f"✅ Sustainable travel article has subcategory='guides': '{individual_article.get('title', '')}'")
+                                else:
+                                    self.log_test("Article Subcategory Field", False, f"❌ Article subcategory is '{subcategory}', expected 'guides'")
+                            else:
+                                self.log_test("Article Subcategory Field", False, f"❌ Failed to retrieve individual article: HTTP {response_individual.status_code}")
+                        
+                        # Test 5: Article Retrieval by Slug
+                        if article_slug:
+                            print(f"🔍 Testing article retrieval by slug: {article_slug}")
+                            response_slug = self.session.get(f"{self.base_url}/articles/{article_slug}", timeout=10)
+                            
+                            if response_slug.status_code == 200:
+                                slug_article = response_slug.json()
+                                slug_subcategory = slug_article.get("subcategory", "")
+                                
+                                if slug_subcategory == "guides":
+                                    self.log_test("Article Slug Retrieval Subcategory", True, f"✅ Article by slug has subcategory='guides'")
+                                else:
+                                    self.log_test("Article Slug Retrieval Subcategory", False, f"❌ Article by slug subcategory is '{slug_subcategory}', expected 'guides'")
+                            else:
+                                self.log_test("Article Slug Retrieval Subcategory", False, f"❌ Failed to retrieve article by slug: HTTP {response_slug.status_code}")
+                    else:
+                        self.log_test("Sustainable Travel Article Search", False, "❌ Could not find sustainable travel article in travel category")
+            
+            # Test 6: Travel Category Count Verification
+            print("🔍 Testing travel category still includes the sustainable travel article")
+            if response_travel.status_code == 200 and isinstance(travel_articles, list):
+                travel_count = len(travel_articles)
+                if travel_count >= 1:
+                    self.log_test("Travel Category Count", True, f"✅ Travel category has {travel_count} articles (includes sustainable travel)")
+                else:
+                    self.log_test("Travel Category Count", False, f"❌ Travel category only has {travel_count} articles")
+            else:
+                self.log_test("Travel Category Count", False, "❌ Failed to get travel category articles")
+            
+            # Test 7: Guides Subcategory Creation Verification
+            print("🔍 Testing 'guides' is now a valid subcategory for travel category")
+            # This is verified by the successful response from travel/guides filter above
+            if response_guides.status_code == 200:
+                self.log_test("Guides Subcategory Creation", True, "✅ 'guides' is now a valid subcategory for travel category")
+            else:
+                self.log_test("Guides Subcategory Creation", False, "❌ 'guides' subcategory not properly created for travel category")
+            
+            return True
+            
+        except Exception as e:
+            self.log_test("Travel/Guides Subcategory Fix", False, f"❌ Error during testing: {str(e)}")
+            return False
+
+    def run_travel_guides_fix_verification(self):
+        """Run Travel/Guides Subcategory Fix Verification Tests"""
+        print("🎯 STARTING TRAVEL/GUIDES SUBCATEGORY FIX VERIFICATION")
+        print("=" * 70)
+        print("Verifying sustainable travel article is now correctly appearing in travel/guides subcategory...")
+        print()
+        
+        # 1. Basic connectivity
+        if not self.test_health_check():
+            print("❌ API health check failed - stopping tests")
+            return self.generate_report()
+        
+        # 2. Run the specific fix verification tests
+        self.test_travel_guides_subcategory_fix()
+        
+        return self.generate_report()
+
     def run_france_travel_article_tests(self):
         """Run France Travel Article Integration Tests - REVIEW REQUEST"""
         print("🇫🇷 STARTING FRANCE TRAVEL ARTICLE INTEGRATION TESTING")
