@@ -92,7 +92,9 @@ const SubcategoryPage = () => {
       transition={{ duration: 0.5, delay: index * 0.1 }}
     >
       <Link
-        to={article.slug === 'atlantis-the-palm-dubai' ? '/atlantis-the-palm-dubai' : `/article/${article.slug || article.id}`}
+        to={article.slug === 'atlantis-the-palm-dubai' ? '/atlantis-the-palm-dubai' : 
+            article.slug === 'celini-food-review-mumbai' ? '/celini-food-review-mumbai' : 
+            `/article/${article.slug || article.id}`}
         className="group block bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300"
       >
         <div className="relative overflow-hidden">
