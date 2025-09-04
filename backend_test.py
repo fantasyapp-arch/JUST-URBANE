@@ -1272,6 +1272,9 @@ class JustUrbaneAPITester:
         self.test_categories_endpoint()
         self.test_articles_endpoint()
         
+        # 4. Database consistency for whiskey articles
+        self.test_database_consistency_for_whiskey()
+        
         return self.generate_report()
     
     def generate_report(self):
