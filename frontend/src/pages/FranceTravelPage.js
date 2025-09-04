@@ -213,6 +213,17 @@ const FranceTravelPage = () => {
             So basically, you get to visit, stand, or even run through fields that have a lavender scent. No wonder painters found inspiration for bright works of art in this dreamy environment. The monks of the abbey and the local honeybees tend to these lovely lavender fields. Visitors are welcome to stay with them for a peaceful spiritual retreat.
           </p>
 
+          <figure className="my-6 sm:my-8 -mx-2 sm:-mx-4">
+            <img 
+              src="https://customer-assets.emergentagent.com/job_urbane-articles/artifacts/lyt2pdxx_Lavender%202.jpg"
+              alt="Provence, France - Endless lavender fields stretching across the countryside in beautiful purple waves"
+              className="w-full h-48 sm:h-64 md:h-96 object-cover rounded-lg shadow-lg"
+            />
+            <figcaption className="text-sm text-gray-600 mt-3 text-center italic px-2">
+              The enchanting lavender fields of Provence - a fragrant paradise that inspires artists and soothes the soul
+            </figcaption>
+          </figure>
+
           <h3 className="text-2xl font-serif font-bold text-gray-900 mt-10 mb-6">
             Mont Saint-Michel
           </h3>
