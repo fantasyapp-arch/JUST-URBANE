@@ -165,7 +165,7 @@ const CeliniFoodReviewPage = () => {
 
           <figure className="my-6 sm:my-8 -mx-2 sm:-mx-4">
             <img 
-              src="https://customer-assets.emergentagent.com/job_just-urbane-revamp/artifacts/n51l3mul_Caprese%20and%20Prosciutto.jpg"
+              src="https://customer-assets.emergentagent.com/job_premium-articles/artifacts/613khkg5_Caprese%20and%20Prosciutto.jpg"
               alt="Caprese and Prosciutto - Fresh mozzarella, cherry tomatoes, basil, and premium prosciutto representing the finest Italian antipasti"
               className="w-full h-48 sm:h-64 md:h-96 object-cover rounded-lg shadow-lg"
             />
