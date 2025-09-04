@@ -98,6 +98,7 @@ const router = createBrowserRouter([
       { path: "celini-food-review-mumbai", element: <CeliniFoodReviewPage /> },
       { path: "scottish-leader-whiskey-review", element: <ScottishLeaderReviewPage /> },
       { path: "when-in-france-travel-destinations", element: <FranceTravelPage /> },
+      { path: "sustainable-travel-conscious-guide", element: <SustainableTravelPage /> },
       { path: "author/:slug", element: <AuthorPage /> },
       { path: "issues", element: <IssuesPage /> },
       { path: "reviews", element: <ReviewsPage /> },
