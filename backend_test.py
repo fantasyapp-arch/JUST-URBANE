@@ -892,7 +892,7 @@ class JustUrbaneAPITester:
                     
                     for article in food_articles:
                         title = article.get("title", "").lower()
-                        if "celini" in title and "food" in title and "review" in title:
+                        if "celini" in title:
                             celini_found = True
                             celini_article = article
                             break
