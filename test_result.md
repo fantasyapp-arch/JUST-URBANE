@@ -1236,12 +1236,25 @@ frontend:
 
 metadata:
   created_by: "testing_agent"
-  version: "3.0"
-  test_sequence: 13
+  version: "3.1"
+  test_sequence: 14
   run_ui: true
   frontend_tested: true
   backend_tested: true
   comprehensive_testing_completed: true
+  sustainable_travel_article_tested: true
+  sustainable_travel_article_success: true
+  sustainable_travel_backend_integration_verified: true
+  sustainable_travel_api_endpoints_working: true
+  sustainable_travel_category_filtering_working: true
+  sustainable_travel_subcategory_filtering_working: true
+  sustainable_travel_single_retrieval_working: true
+  sustainable_travel_content_structure_verified: true
+  sustainable_travel_image_count_verified: true
+  sustainable_travel_testing_date: "2025-01-03T21:30:00"
+  last_test_date: "2025-01-03T21:30:00"
+  last_test_success_rate: "92.3%"
+  sustainable_travel_article_production_ready: true
   pricing_page_badge_positioning_tested: true
   subscription_modal_enhancement_tested: true
   magazine_flipbook_backend_tested: true
