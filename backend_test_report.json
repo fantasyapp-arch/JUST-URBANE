@@ -1,112 +1,112 @@
 {
   "total": 15,
-  "passed": 15,
-  "failed": 0,
-  "success_rate": 100.0,
+  "passed": 13,
+  "failed": 2,
+  "success_rate": 86.66666666666667,
   "results": [
     {
       "test": "Health Check",
       "success": true,
       "message": "API is healthy and responding",
-      "timestamp": "2025-09-04T08:42:58.246744",
+      "timestamp": "2025-09-04T13:14:11.499829",
       "response_data": null
     },
     {
       "test": "Food Category - Celini Article Present",
       "success": true,
       "message": "Celini food review found in food category with 4 total food articles",
-      "timestamp": "2025-09-04T08:42:58.261386",
+      "timestamp": "2025-09-04T13:14:11.512434",
       "response_data": null
     },
     {
       "test": "Food Review Subcategory - Celini Article",
-      "success": true,
-      "message": "Celini article found in food-review subcategory with 1 articles",
-      "timestamp": "2025-09-04T08:42:58.276339",
+      "success": false,
+      "message": "Celini article not found in food-review subcategory (0 articles)",
+      "timestamp": "2025-09-04T13:14:11.931791",
       "response_data": null
     },
     {
       "test": "Celini Article - Content Structure",
-      "success": true,
-      "message": "All required fields present: category=food, subcategory=food-review, author=Team Urbane",
-      "timestamp": "2025-09-04T08:42:58.288585",
+      "success": false,
+      "message": "Issues with: subcategory=food review",
+      "timestamp": "2025-09-04T13:14:11.944293",
       "response_data": null
     },
     {
       "test": "Celini Article - Hero Image",
       "success": true,
       "message": "Hero image present: https://customer-assets.emergentagent.com/job_just...",
-      "timestamp": "2025-09-04T08:42:58.288623",
+      "timestamp": "2025-09-04T13:14:11.944335",
       "response_data": null
     },
     {
       "test": "Celini Article - Gallery Images",
       "success": true,
       "message": "Gallery has 2 images (required: 2+)",
-      "timestamp": "2025-09-04T08:42:58.288630",
+      "timestamp": "2025-09-04T13:14:11.944343",
       "response_data": null
     },
     {
       "test": "Celini Article Retrieval by Slug",
       "success": true,
       "message": "Successfully retrieved Celini article: A bit of Italiano at the newly re-launched Celini",
-      "timestamp": "2025-09-04T08:42:58.288635",
+      "timestamp": "2025-09-04T13:14:11.944348",
       "response_data": null
     },
     {
       "test": "Food Category System",
       "success": true,
       "message": "Food category exists in categories API",
-      "timestamp": "2025-09-04T08:42:58.299377",
+      "timestamp": "2025-09-04T13:14:11.958573",
       "response_data": null
     },
     {
       "test": "Categories Count",
       "success": true,
       "message": "Retrieved expected 10 categories (including Food)",
-      "timestamp": "2025-09-04T08:42:58.310746",
+      "timestamp": "2025-09-04T13:14:12.035209",
       "response_data": null
     },
     {
       "test": "GQ Categories Structure",
       "success": true,
       "message": "All 10 GQ-style categories present: Fashion, Business, Technology, Finance, Travel, Health, Culture, Art, Entertainment, Food",
-      "timestamp": "2025-09-04T08:42:58.310789",
+      "timestamp": "2025-09-04T13:14:12.035247",
       "response_data": null
     },
     {
       "test": "Categories Listing",
       "success": true,
       "message": "Retrieved 10 categories",
-      "timestamp": "2025-09-04T08:42:58.310796",
+      "timestamp": "2025-09-04T13:14:12.035254",
       "response_data": null
     },
     {
       "test": "Articles Listing",
       "success": true,
       "message": "Retrieved 20 articles",
-      "timestamp": "2025-09-04T08:42:58.322199",
+      "timestamp": "2025-09-04T13:14:12.044850",
       "response_data": null
     },
     {
       "test": "Articles Category Filter",
       "success": true,
       "message": "Retrieved 0 style articles",
-      "timestamp": "2025-09-04T08:42:58.374660",
+      "timestamp": "2025-09-04T13:14:12.055935",
       "response_data": null
     },
     {
       "test": "Featured Articles",
       "success": true,
       "message": "Retrieved 20 featured articles",
-      "timestamp": "2025-09-04T08:42:58.386481",
+      "timestamp": "2025-09-04T13:14:12.066103",
       "response_data": null
     },
     {
       "test": "Trending Articles",
       "success": true,
       "message": "Retrieved 9 trending articles",
-      "timestamp": "2025-09-04T08:42:58.396944",
+      "timestamp": "2025-09-04T13:14:12.075209",
       "response_data": null
     }
   ]
