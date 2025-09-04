@@ -1756,17 +1756,232 @@ class JustUrbaneAPITester:
             "results": self.test_results
         }
 
+    def test_france_travel_article_integration(self):
+        """Test France Travel Article Integration - REVIEW REQUEST PRIORITY"""
+        print("\n🇫🇷 FRANCE TRAVEL ARTICLE INTEGRATION TESTING")
+        print("=" * 60)
+        
+        try:
+            # Test 1: Article Retrieval - Test if France travel article is accessible via API
+            print("\n1. Testing Article Retrieval...")
+            
+            # Test /api/articles endpoint to see if the article appears in results
+            response = self.session.get(f"{self.base_url}/articles", timeout=10)
+            if response.status_code == 200:
+                all_articles = response.json()
+                france_articles = [a for a in all_articles if "france" in a.get("title", "").lower() or "when in france" in a.get("title", "").lower()]
+                
+                if france_articles:
+                    self.log_test("France Article - General Listing", True, f"Found {len(france_articles)} France-related articles in general listing")
+                    france_article = france_articles[0]  # Use the first France article found
+                else:
+                    self.log_test("France Article - General Listing", False, "No France travel articles found in general listing")
+                    return False
+            else:
+                self.log_test("France Article - General Listing", False, f"Failed to get articles: HTTP {response.status_code}")
+                return False
+            
+            # Test 2: Category filtering /api/articles?category=travel
+            print("\n2. Testing Category Filtering...")
+            response = self.session.get(f"{self.base_url}/articles?category=travel", timeout=10)
+            if response.status_code == 200:
+                travel_articles = response.json()
+                france_in_travel = [a for a in travel_articles if "france" in a.get("title", "").lower() or "when in france" in a.get("title", "").lower()]
+                
+                if france_in_travel:
+                    self.log_test("France Article - Travel Category", True, f"France article found in travel category ({len(travel_articles)} total travel articles)")
+                else:
+                    self.log_test("France Article - Travel Category", False, f"France article not found in travel category (found {len(travel_articles)} travel articles)")
+            else:
+                self.log_test("France Article - Travel Category", False, f"Travel category filtering failed: HTTP {response.status_code}")
+            
+            # Test 3: Subcategory filtering /api/articles?category=travel&subcategory=adventure
+            print("\n3. Testing Subcategory Filtering...")
+            response = self.session.get(f"{self.base_url}/articles?category=travel&subcategory=adventure", timeout=10)
+            if response.status_code == 200:
+                adventure_articles = response.json()
+                france_in_adventure = [a for a in adventure_articles if "france" in a.get("title", "").lower() or "when in france" in a.get("title", "").lower()]
+                
+                if france_in_adventure:
+                    self.log_test("France Article - Adventure Subcategory", True, f"France article found in travel/adventure subcategory ({len(adventure_articles)} total)")
+                else:
+                    self.log_test("France Article - Adventure Subcategory", False, f"France article not found in travel/adventure subcategory (found {len(adventure_articles)} articles)")
+            else:
+                self.log_test("France Article - Adventure Subcategory", False, f"Adventure subcategory filtering failed: HTTP {response.status_code}")
+            
+            # Test 4: Single article retrieval by slug /api/articles/when-in-france-travel-destinations
+            print("\n4. Testing Single Article Retrieval...")
+            france_slug = "when-in-france-travel-destinations"
+            response = self.session.get(f"{self.base_url}/articles/{france_slug}", timeout=10)
+            if response.status_code == 200:
+                france_article_detail = response.json()
+                self.log_test("France Article - Slug Retrieval", True, f"Successfully retrieved France article by slug: {france_slug}")
+                
+                # Use this detailed article for further testing
+                france_article = france_article_detail
+            else:
+                self.log_test("France Article - Slug Retrieval", False, f"Failed to retrieve France article by slug: HTTP {response.status_code}")
+                # Fall back to the article found in general listing
+                if 'france_article' not in locals():
+                    return False
+            
+            # Test 5: Data Structure - Verify the article has all required fields
+            print("\n5. Testing Data Structure...")
+            
+            # Check title
+            title = france_article.get("title", "")
+            if "when in france" in title.lower():
+                self.log_test("France Article - Title", True, f"Correct title found: '{title}'")
+            else:
+                self.log_test("France Article - Title", False, f"Title mismatch. Expected 'When In France', got: '{title}'")
+            
+            # Check category
+            category = france_article.get("category", "")
+            if category.lower() == "travel":
+                self.log_test("France Article - Category", True, f"Correct category: '{category}'")
+            else:
+                self.log_test("France Article - Category", False, f"Category mismatch. Expected 'travel', got: '{category}'")
+            
+            # Check subcategory
+            subcategory = france_article.get("subcategory", "")
+            if subcategory and subcategory.lower() == "adventure":
+                self.log_test("France Article - Subcategory", True, f"Correct subcategory: '{subcategory}'")
+            else:
+                self.log_test("France Article - Subcategory", False, f"Subcategory mismatch. Expected 'adventure', got: '{subcategory}'")
+            
+            # Check author
+            author = france_article.get("author_name", "")
+            if "amisha shirgave" in author.lower():
+                self.log_test("France Article - Author", True, f"Correct author: '{author}'")
+            else:
+                self.log_test("France Article - Author", False, f"Author mismatch. Expected 'Amisha Shirgave', got: '{author}'")
+            
+            # Check slug
+            slug = france_article.get("slug", "")
+            if slug == "when-in-france-travel-destinations":
+                self.log_test("France Article - Slug", True, f"Correct slug: '{slug}'")
+            else:
+                self.log_test("France Article - Slug", False, f"Slug mismatch. Expected 'when-in-france-travel-destinations', got: '{slug}'")
+            
+            # Test 6: Hero image and gallery images accessibility
+            print("\n6. Testing Image URLs...")
+            
+            # Check hero image
+            hero_image = france_article.get("hero_image", "")
+            if hero_image:
+                # Test if hero image URL is accessible
+                try:
+                    img_response = self.session.head(hero_image, timeout=5)
+                    if img_response.status_code == 200:
+                        self.log_test("France Article - Hero Image", True, f"Hero image accessible: {hero_image}")
+                    else:
+                        self.log_test("France Article - Hero Image", False, f"Hero image not accessible (HTTP {img_response.status_code}): {hero_image}")
+                except:
+                    # If HEAD request fails, just check if URL is properly formatted
+                    if hero_image.startswith(('http://', 'https://', '/')):
+                        self.log_test("France Article - Hero Image", True, f"Hero image URL properly formatted: {hero_image}")
+                    else:
+                        self.log_test("France Article - Hero Image", False, f"Hero image URL malformed: {hero_image}")
+            else:
+                self.log_test("France Article - Hero Image", False, "No hero image found")
+            
+            # Check gallery images
+            gallery = france_article.get("gallery", [])
+            if isinstance(gallery, list) and len(gallery) >= 4:  # Expecting 4 gallery images (Corsica, Loire Valley, Mont Saint-Michel, Strasbourg)
+                accessible_images = 0
+                expected_locations = ["corsica", "loire", "mont saint-michel", "strasbourg", "paris"]
+                
+                for i, img_url in enumerate(gallery[:5]):  # Test up to 5 images
+                    try:
+                        img_response = self.session.head(img_url, timeout=5)
+                        if img_response.status_code == 200:
+                            accessible_images += 1
+                    except:
+                        # If HEAD request fails, check URL format
+                        if img_url.startswith(('http://', 'https://', '/')):
+                            accessible_images += 1
+                
+                if accessible_images >= 4:
+                    self.log_test("France Article - Gallery Images", True, f"Gallery images accessible: {accessible_images}/{len(gallery)} images")
+                else:
+                    self.log_test("France Article - Gallery Images", False, f"Gallery images accessibility issues: only {accessible_images}/{len(gallery)} accessible")
+                
+                # Check if gallery has expected count (5 total: Paris hero + 4 gallery)
+                if len(gallery) >= 4:
+                    self.log_test("France Article - Image Count", True, f"Sufficient gallery images: {len(gallery)} images (expected 4+)")
+                else:
+                    self.log_test("France Article - Image Count", False, f"Insufficient gallery images: {len(gallery)} images (expected 4+)")
+            else:
+                self.log_test("France Article - Gallery Images", False, f"Gallery missing or insufficient: {len(gallery) if isinstance(gallery, list) else 'invalid'} images")
+            
+            # Test 7: Category System - Confirm travel/adventure category structure is working
+            print("\n7. Testing Category System...")
+            
+            # Check if there are now 2 articles in travel/adventure (including the France article)
+            response = self.session.get(f"{self.base_url}/articles?category=travel&subcategory=adventure", timeout=10)
+            if response.status_code == 200:
+                adventure_articles = response.json()
+                if len(adventure_articles) >= 1:  # At least the France article should be there
+                    self.log_test("Travel/Adventure Category System", True, f"Travel/adventure category working: {len(adventure_articles)} articles found")
+                    
+                    # Check if France article is among them
+                    france_in_results = any("france" in a.get("title", "").lower() for a in adventure_articles)
+                    if france_in_results:
+                        self.log_test("France Article in Category System", True, "France article properly categorized in travel/adventure")
+                    else:
+                        self.log_test("France Article in Category System", False, "France article not found in travel/adventure category")
+                else:
+                    self.log_test("Travel/Adventure Category System", False, "No articles found in travel/adventure category")
+            else:
+                self.log_test("Travel/Adventure Category System", False, f"Category system test failed: HTTP {response.status_code}")
+            
+            # Test 8: Verify "travel" category exists with "adventure" subcategory
+            response = self.session.get(f"{self.base_url}/categories", timeout=10)
+            if response.status_code == 200:
+                categories = response.json()
+                travel_category_exists = any(cat.get("name", "").lower() == "travel" for cat in categories)
+                
+                if travel_category_exists:
+                    self.log_test("Travel Category Exists", True, "Travel category found in categories API")
+                else:
+                    self.log_test("Travel Category Exists", False, "Travel category not found in categories API")
+            else:
+                self.log_test("Travel Category Exists", False, f"Categories API failed: HTTP {response.status_code}")
+            
+            return True
+            
+        except Exception as e:
+            self.log_test("France Travel Article Integration", False, f"Error during testing: {str(e)}")
+            return False
+
+    def run_france_travel_article_tests(self):
+        """Run France Travel Article Integration Tests - REVIEW REQUEST"""
+        print("🇫🇷 STARTING FRANCE TRAVEL ARTICLE INTEGRATION TESTING")
+        print("=" * 70)
+        print("Testing backend integration of the new France travel article...")
+        print()
+        
+        # 1. API Health Check
+        if not self.test_health_check():
+            print("❌ Health check failed - stopping tests")
+            return self.generate_report()
+        
+        # 2. France Travel Article Integration Tests
+        self.test_france_travel_article_integration()
+        
+        return self.generate_report()
+
 def main():
-    """Main testing function for Standardized Category System"""
-    print("🚀 Starting Just Urbane Standardized Category System Testing")
+    """Main testing function for France Travel Article Integration"""
+    print("🇫🇷 Starting France Travel Article Integration Testing")
     print("=" * 70)
     
     # Use the backend URL from frontend environment (production URL) with /api prefix
     backend_url = "https://urbane-articles.preview.emergentagent.com/api"
     tester = JustUrbaneAPITester(backend_url)
     
-    # Run comprehensive standardized category tests
-    report = tester.run_standardized_category_tests()
+    # Run France travel article integration tests
+    report = tester.run_france_travel_article_tests()
     
     # Save detailed report
     with open("/app/backend_test_report.json", "w") as f:
