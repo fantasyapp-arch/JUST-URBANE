@@ -12,6 +12,9 @@ const SubcategoryPage = () => {
   const [articles, setArticles] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
+  // URL decode the subcategory parameter
+  const decodedSubcategory = subcategory ? decodeURIComponent(subcategory) : subcategory;
+
   // Fetch articles directly
   useEffect(() => {
     const fetchArticles = async () => {
