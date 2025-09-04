@@ -23,7 +23,7 @@ async def add_scottish_leader_article():
             "id": str(uuid.uuid4()),
             "slug": "scottish-leader-whiskey-review",
             "title": "Scottish Leader Original Whiskey",
-            "subtitle": "Scottish Leader Original whiskey is a blend of malt and grain whiskies, which has been recently introduced in India. But, does it have all that to fare against the existing great whiskeys in the market?",
+            "dek": "Scottish Leader Original whiskey is a blend of malt and grain whiskies, which has been recently introduced in India. But, does it have all that to fare against the existing great whiskeys in the market?",
             "body": """2022 couldn't have started better for whiskey lovers in India! After 45 years of splendid history, Distell International and Aspri Spirits joined hands to introduce the Scottish Leader Original whiskey in India. Honestly, I have never fallen in the category of whiskey drinkers for an obvious reason – its taste. But, when the brand insisted on trying out its very first launch product, I thought to myself, why not give it a try?
 
 Unboxing the hamper, you find a bottle of whiskey in a red carton reminiscent of a famous brand, a pair of whiskey glasses, a peg measurer and a handy flask. The alcohol percentage in the whiskey is 42.8 percent volume per volume, and besides that, on the nose the Scottish Leader Original hints us of a malt, sherry or oak, with a soft smokiness behind.
