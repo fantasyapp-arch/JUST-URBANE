@@ -276,8 +276,41 @@ const Footer = () => {
 
             {/* More From Just Urbane */}
             <div className="border-t border-gray-800 pt-8">
-              <h4 className="text-white font-bold text-lg mb-2 tracking-wider">MORE FROM JUST URBANE</h4>
-              <div className="text-gray-400">⌄</div>
+              <button 
+                onClick={() => setIsCategoriesExpanded(!isCategoriesExpanded)}
+                className="flex items-center justify-center space-x-2 w-full hover:text-gray-300 transition-colors duration-200"
+              >
+                <h4 className="text-white font-bold text-lg tracking-wider">MORE FROM JUST URBANE</h4>
+                {isCategoriesExpanded ? (
+                  <ChevronUp className="h-5 w-5 text-gray-400" />
+                ) : (
+                  <ChevronDown className="h-5 w-5 text-gray-400" />
+                )}
+              </button>
+              
+              {/* Expandable Categories */}
+              {isCategoriesExpanded && (
+                <div className="mt-6 space-y-4 animate-fade-in">
+                  {categories.map((category) => (
+                    <Link
+                      key={category.slug}
+                      to={`/category/${category.slug}`}
+                      className="block text-gray-300 hover:text-white transition-colors duration-200 text-base font-medium"
+                    >
+                      {category.name}
+                    </Link>
+                  ))}
+                  {serviceLinks.slice(0, 3).map((link) => (
+                    <Link
+                      key={link.href}
+                      to={link.href}
+                      className="block text-gray-300 hover:text-white transition-colors duration-200 text-base font-medium"
+                    >
+                      {link.name}
+                    </Link>
+                  ))}
+                </div>
+              )}
             </div>
 
             {/* Main Links */}
