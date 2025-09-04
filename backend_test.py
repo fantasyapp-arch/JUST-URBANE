@@ -1010,16 +1010,195 @@ class JustUrbaneAPITester:
         except Exception as e:
             self.log_test("Celini Food Review Integration", False, f"Error: {str(e)}")
 
+    def test_scottish_leader_whiskey_review(self):
+        """Test Scottish Leader Whiskey Article Backend Functionality - PRIORITY TEST"""
+        print("\n🥃 SCOTTISH LEADER WHISKEY REVIEW TESTING")
+        print("=" * 50)
+        
+        try:
+            # Test 1: Drinks Category - Check if Scottish Leader article appears
+            response = self.session.get(f"{self.base_url}/api/articles?category=drinks", timeout=10)
+            if response.status_code == 200:
+                drinks_articles = response.json()
+                if isinstance(drinks_articles, list):
+                    scottish_leader_found = False
+                    scottish_leader_article = None
+                    
+                    for article in drinks_articles:
+                        title = article.get("title", "").lower()
+                        if "scottish leader" in title or "scottish-leader" in title:
+                            scottish_leader_found = True
+                            scottish_leader_article = article
+                            break
+                    
+                    if scottish_leader_found:
+                        self.log_test("Drinks Category - Scottish Leader Article Present", True, f"Scottish Leader whiskey review found in drinks category with {len(drinks_articles)} total drinks articles")
+                        
+                        # Store article details for further testing
+                        article_slug = scottish_leader_article.get("slug", "")
+                        article_subcategory = scottish_leader_article.get("subcategory", "")
+                        self.log_test("Scottish Leader Article Details", True, f"Slug: {article_slug}, Subcategory: {article_subcategory}")
+                        
+                    else:
+                        self.log_test("Drinks Category - Scottish Leader Article Present", False, f"Scottish Leader whiskey review not found in {len(drinks_articles)} drinks articles")
+                        # List available drinks articles for debugging
+                        drinks_titles = [a.get("title", "Unknown") for a in drinks_articles[:5]]
+                        self.log_test("Drinks Articles Available", True, f"Available drinks articles: {', '.join(drinks_titles)}")
+                else:
+                    self.log_test("Drinks Category Articles", False, f"Invalid response format: {type(drinks_articles)}")
+            else:
+                self.log_test("Drinks Category Articles", False, f"HTTP {response.status_code}: {response.text}")
+            
+            # Test 2: Whiskey Review Subcategory Filtering (with hyphen)
+            response = self.session.get(f"{self.base_url}/api/articles?category=drinks&subcategory=whiskey-review", timeout=10)
+            if response.status_code == 200:
+                whiskey_review_articles_hyphen = response.json()
+                if isinstance(whiskey_review_articles_hyphen, list):
+                    scottish_leader_in_subcategory_hyphen = False
+                    for article in whiskey_review_articles_hyphen:
+                        title = article.get("title", "").lower()
+                        if "scottish leader" in title or "scottish-leader" in title:
+                            scottish_leader_in_subcategory_hyphen = True
+                            break
+                    
+                    if scottish_leader_in_subcategory_hyphen:
+                        self.log_test("Whiskey Review Subcategory (hyphen) - Scottish Leader", True, f"Scottish Leader found in whiskey-review subcategory with {len(whiskey_review_articles_hyphen)} articles")
+                    else:
+                        self.log_test("Whiskey Review Subcategory (hyphen) - Scottish Leader", False, f"Scottish Leader not found in whiskey-review subcategory ({len(whiskey_review_articles_hyphen)} articles)")
+                else:
+                    self.log_test("Whiskey Review Subcategory (hyphen)", False, f"Invalid response format: {type(whiskey_review_articles_hyphen)}")
+            else:
+                self.log_test("Whiskey Review Subcategory (hyphen)", False, f"HTTP {response.status_code}: {response.text}")
+            
+            # Test 3: Whiskey Review Subcategory Filtering (with space - URL encoded)
+            response = self.session.get(f"{self.base_url}/api/articles?category=drinks&subcategory=whiskey%20review", timeout=10)
+            if response.status_code == 200:
+                whiskey_review_articles_space = response.json()
+                if isinstance(whiskey_review_articles_space, list):
+                    scottish_leader_in_subcategory_space = False
+                    for article in whiskey_review_articles_space:
+                        title = article.get("title", "").lower()
+                        if "scottish leader" in title or "scottish-leader" in title:
+                            scottish_leader_in_subcategory_space = True
+                            break
+                    
+                    if scottish_leader_in_subcategory_space:
+                        self.log_test("Whiskey Review Subcategory (space) - Scottish Leader", True, f"Scottish Leader found in 'whiskey review' subcategory with {len(whiskey_review_articles_space)} articles")
+                    else:
+                        self.log_test("Whiskey Review Subcategory (space) - Scottish Leader", False, f"Scottish Leader not found in 'whiskey review' subcategory ({len(whiskey_review_articles_space)} articles)")
+                        
+                    # Compare results between hyphen and space versions
+                    if len(whiskey_review_articles_hyphen) == len(whiskey_review_articles_space):
+                        self.log_test("Subcategory URL Parameter Normalization", True, f"Both 'whiskey-review' and 'whiskey review' return same results ({len(whiskey_review_articles_hyphen)} articles)")
+                    else:
+                        self.log_test("Subcategory URL Parameter Normalization", False, f"Different results: hyphen={len(whiskey_review_articles_hyphen)}, space={len(whiskey_review_articles_space)}")
+                        
+                else:
+                    self.log_test("Whiskey Review Subcategory (space)", False, f"Invalid response format: {type(whiskey_review_articles_space)}")
+            else:
+                self.log_test("Whiskey Review Subcategory (space)", False, f"HTTP {response.status_code}: {response.text}")
+            
+            # Test 4: Single Article Retrieval by Expected Slug
+            expected_slug = "scottish-leader-whiskey-review"
+            response = self.session.get(f"{self.base_url}/api/articles/{expected_slug}", timeout=10)
+            if response.status_code == 200:
+                scottish_leader_article = response.json()
+                
+                # Test 5: Database Subcategory Format Check
+                stored_subcategory = scottish_leader_article.get("subcategory", "")
+                stored_category = scottish_leader_article.get("category", "")
+                article_title = scottish_leader_article.get("title", "")
+                
+                self.log_test("Scottish Leader Article Retrieval by Slug", True, f"Successfully retrieved article: {article_title}")
+                self.log_test("Database Subcategory Format", True, f"Stored subcategory format: '{stored_subcategory}' (category: '{stored_category}')")
+                
+                # Verify article content structure
+                required_fields = ["title", "category", "subcategory", "author_name", "body"]
+                field_check = {}
+                
+                for field in required_fields:
+                    if field in scottish_leader_article and scottish_leader_article[field] is not None:
+                        field_check[field] = True
+                    else:
+                        field_check[field] = False
+                
+                # Check specific requirements
+                title_correct = "scottish leader" in article_title.lower()
+                category_correct = stored_category.lower() == "drinks"
+                has_content = len(scottish_leader_article.get("body", "")) > 100
+                
+                if title_correct and category_correct and has_content:
+                    self.log_test("Scottish Leader Article - Content Verification", True, f"Article properly structured: category={stored_category}, subcategory={stored_subcategory}, content_length={len(scottish_leader_article.get('body', ''))}")
+                else:
+                    issues = []
+                    if not title_correct: issues.append("title format")
+                    if not category_correct: issues.append(f"category={stored_category}")
+                    if not has_content: issues.append("insufficient content")
+                    self.log_test("Scottish Leader Article - Content Verification", False, f"Issues with: {', '.join(issues)}")
+                
+                # Check if subcategory matches expected format for filtering
+                if stored_subcategory:
+                    # Test if the stored format works with both URL parameter formats
+                    normalized_subcategory = stored_subcategory.replace("-", " ")
+                    self.log_test("Subcategory Format Analysis", True, f"Stored: '{stored_subcategory}', Normalized: '{normalized_subcategory}'")
+                else:
+                    self.log_test("Subcategory Format Analysis", False, "No subcategory stored in database")
+                
+            elif response.status_code == 404:
+                self.log_test("Scottish Leader Article Retrieval by Slug", False, f"Scottish Leader article not found at expected slug: {expected_slug}")
+                
+                # Try alternative slug formats
+                alternative_slugs = [
+                    "scottish-leader-whiskey",
+                    "scottish-leader-review",
+                    "scottish-leader-whisky-review"
+                ]
+                
+                for alt_slug in alternative_slugs:
+                    alt_response = self.session.get(f"{self.base_url}/api/articles/{alt_slug}", timeout=10)
+                    if alt_response.status_code == 200:
+                        self.log_test(f"Alternative Slug Found", True, f"Scottish Leader article found at: {alt_slug}")
+                        break
+                else:
+                    self.log_test("Alternative Slug Search", False, f"Scottish Leader article not found with alternative slugs: {', '.join(alternative_slugs)}")
+                    
+            else:
+                self.log_test("Scottish Leader Article Retrieval by Slug", False, f"HTTP {response.status_code}: {response.text}")
+            
+            # Test 6: Drinks Category System - Verify Drinks category exists
+            response = self.session.get(f"{self.base_url}/api/categories", timeout=10)
+            if response.status_code == 200:
+                categories = response.json()
+                if isinstance(categories, list):
+                    drinks_category_found = False
+                    for category in categories:
+                        if category.get("name", "").lower() == "drinks":
+                            drinks_category_found = True
+                            break
+                    
+                    if drinks_category_found:
+                        self.log_test("Drinks Category System", True, "Drinks category exists in categories API")
+                    else:
+                        category_names = [cat.get("name", "Unknown") for cat in categories]
+                        self.log_test("Drinks Category System", False, f"Drinks category not found. Available: {', '.join(category_names)}")
+                else:
+                    self.log_test("Drinks Category System", False, f"Invalid categories response: {type(categories)}")
+            else:
+                self.log_test("Drinks Category System", False, f"Categories API failed: HTTP {response.status_code}")
+                
+        except Exception as e:
+            self.log_test("Scottish Leader Whiskey Review Testing", False, f"Error: {str(e)}")
+
     def run_comprehensive_tests(self):
-        """Run all tests in sequence - Updated for Celini Food Review Focus"""
-        print("🚀 Starting Just Urbane Celini Food Review Backend Testing")
+        """Run all tests in sequence - Updated for Scottish Leader Whiskey Review Focus"""
+        print("🚀 Starting Just Urbane Scottish Leader Whiskey Review Backend Testing")
         print("=" * 70)
         
         # 1. API Health Check
         self.test_health_check()
         
-        # 2. PRIORITY: Celini Food Review Integration Tests
-        self.test_celini_food_review_integration()
+        # 2. PRIORITY: Scottish Leader Whiskey Review Tests
+        self.test_scottish_leader_whiskey_review()
         
         # 3. Supporting tests
         self.test_categories_endpoint()
