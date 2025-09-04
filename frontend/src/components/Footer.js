@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Instagram, Twitter, Facebook, Linkedin } from 'lucide-react';
+import { Instagram, Twitter, Facebook, Linkedin, ChevronDown, ChevronUp } from 'lucide-react';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
