@@ -6,16 +6,36 @@ import { useArticles } from '../hooks/useArticles';
 import { formatDateShort } from '../utils/formatters';
 
 const HomePage = () => {
-  // Hero Article
-  const heroArticle = {
-    title: "The Art of Modern Luxury: Where Heritage Meets Innovation",
-    excerpt: "Exploring how contemporary luxury brands balance traditional craftsmanship with cutting-edge innovation to create timeless masterpieces that define the future of premium lifestyle.",
-    category: "Culture",
-    author: "Arjun Malhotra",
-    date: "Jan 15, 2025",
-    readTime: "8 min read",
-    image: "https://images.unsplash.com/photo-1559839049-2b350c4284cb?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
+  // Fetch real articles from database
+  const { data: articles = [], isLoading } = useArticles({ limit: 20 });
+
+  // Helper function to get article route
+  const getArticleRoute = (article) => {
+    const slug = article.slug;
+    // Use dedicated routes for our integrated articles
+    if (slug === 'atlantis-the-palm-dubai') return '/atlantis-the-palm-dubai';
+    if (slug === 'celini-food-review-mumbai') return '/celini-food-review-mumbai';
+    if (slug === 'scottish-leader-whiskey-review') return '/scottish-leader-whiskey-review';
+    if (slug === 'when-in-france-travel-destinations') return '/when-in-france-travel-destinations';
+    if (slug === 'sustainable-travel-conscious-guide') return '/sustainable-travel-conscious-guide';
+    if (slug === 'perfect-suit-guide-men-corporate-dressing') return '/perfect-suit-guide-men-corporate-dressing';
+    if (slug === 'oscars-2022-best-dressed-fashion-red-carpet') return '/oscars-2022-best-dressed-fashion-red-carpet';
+    if (slug === 'sunseeker-65-sport-luxury-yacht-review') return '/sunseeker-65-sport-luxury-yacht-review';
+    if (slug === 'double-wristing-smartwatch-traditional-watch-trend') return '/double-wristing-smartwatch-traditional-watch-trend';
+    if (slug === 'aastha-gill-buzz-queen-bollywood-singer-interview') return '/aastha-gill-buzz-queen-bollywood-singer-interview';
+    return `/article/${slug}`;
   };
+
+  // Filter articles by category
+  const fashionArticles = articles.filter(article => article.category === 'fashion');
+  const technologyArticles = articles.filter(article => article.category === 'technology');
+  const travelArticles = articles.filter(article => article.category === 'travel');
+  const peopleArticles = articles.filter(article => article.category === 'people');
+  const luxuryArticles = articles.filter(article => article.category === 'luxury');
+  const foodArticles = articles.filter(article => article.category === 'food');
+
+  // Select hero article (use luxury yacht as hero)
+  const heroArticle = luxuryArticles.find(article => article.slug?.includes('sunseeker')) || luxuryArticles[0] || articles[0];
 
   // Featured Articles by Category
   const fashionArticles = [
