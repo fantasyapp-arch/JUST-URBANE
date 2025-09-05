@@ -267,90 +267,120 @@ const MagazineReader = ({ isOpen, onClose }) => {
 const PremiumSubscriptionGate = () => {
   return (
     <div 
-      className="relative w-full bg-gradient-to-br from-slate-900 via-slate-800 to-black text-white rounded-lg shadow-2xl overflow-hidden"
+      className="relative w-full bg-gradient-to-br from-gray-50 via-white to-gray-100 text-gray-900 rounded-lg shadow-2xl overflow-hidden border border-gray-200"
       style={{
         aspectRatio: '2622/3236',
         maxHeight: '90vh'
       }}
     >
-      {/* Premium Background Pattern */}
-      <div className="absolute inset-0 opacity-5">
-        <div 
-          className="w-full h-full"
-          style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M50 50m-20 0a20,20 0 1,1 40,0a20,20 0 1,1 -40,0'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-          }}
-        />
+      {/* Professional Header */}
+      <div className="bg-gradient-to-r from-slate-800 to-slate-900 text-white p-8 text-center">
+        <div className="mb-6">
+          <div className="w-16 h-16 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg className="h-8 w-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+            </svg>
+          </div>
+          <h1 className="text-2xl font-bold mb-2">Premium Content</h1>
+          <p className="text-gray-300 text-sm">Continue reading with full access</p>
+        </div>
       </div>
 
-      {/* Content */}
-      <div className="relative z-10 h-full flex flex-col justify-center items-center text-center p-8 lg:p-12">
-        {/* Premium Crown Icon */}
-        <div className="mb-8">
-          <div className="relative">
-            <div className="absolute inset-0 bg-gradient-to-r from-amber-400/30 to-amber-600/30 blur-2xl rounded-full"></div>
-            <div className="relative w-24 h-24 bg-gradient-to-br from-amber-500 to-amber-600 rounded-full flex items-center justify-center shadow-2xl">
-              <Crown className="h-12 w-12 text-white" />
-            </div>
-          </div>
-        </div>
-
-        {/* Main Content */}
-        <div className="mb-8">
-          <h1 className="text-3xl lg:text-4xl font-bold mb-4">
-            <span className="bg-gradient-to-r from-amber-300 to-amber-500 bg-clip-text text-transparent">
-              Premium Content Awaits
-            </span>
-          </h1>
-          <p className="text-xl text-gray-300 mb-6 max-w-md leading-relaxed">
-            Continue reading with full access to our premium digital magazine
-          </p>
-        </div>
-
-        {/* Subscription Box */}
-        <div className="bg-black/40 backdrop-blur-sm border border-amber-500/20 rounded-2xl p-8 max-w-sm w-full mb-8">
-          <div className="text-center mb-6">
-            <div className="text-4xl font-bold text-white mb-2">₹99</div>
-            <div className="text-amber-400 text-sm uppercase tracking-wide">Per Month</div>
-          </div>
+      {/* Main Content */}
+      <div className="p-8 text-center">
+        <div className="max-w-md mx-auto">
+          <h2 className="text-xl font-semibold text-gray-900 mb-6">
+            Just Urbane Digital Magazine
+          </h2>
           
-          <div className="space-y-3 mb-6 text-sm">
-            <div className="flex items-center gap-3">
-              <Check className="h-4 w-4 text-amber-400 flex-shrink-0" />
-              <span className="text-gray-300">Full magazine access</span>
+          {/* Subscription Plans */}
+          <div className="space-y-4 mb-8">
+            {/* Monthly Plan */}
+            <div className="border-2 border-blue-500 rounded-xl p-6 bg-blue-50">
+              <div className="flex items-center justify-between mb-4">
+                <div>
+                  <h3 className="font-semibold text-gray-900">Monthly Access</h3>
+                  <p className="text-sm text-gray-600">Full magazine library</p>
+                </div>
+                <div className="text-right">
+                  <div className="text-2xl font-bold text-blue-600">₹99</div>
+                  <div className="text-sm text-gray-500">/month</div>
+                </div>
+              </div>
+              <Link
+                to="/pricing"
+                className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 px-6 rounded-lg font-semibold text-center block transition-colors duration-200"
+              >
+                Subscribe Monthly
+              </Link>
             </div>
-            <div className="flex items-center gap-3">
-              <Check className="h-4 w-4 text-amber-400 flex-shrink-0" />
-              <span className="text-gray-300">Premium articles & insights</span>
-            </div>
-            <div className="flex items-center gap-3">
-              <Check className="h-4 w-4 text-amber-400 flex-shrink-0" />
-              <span className="text-gray-300">Early access to new issues</span>
-            </div>
-            <div className="flex items-center gap-3">
-              <Check className="h-4 w-4 text-amber-400 flex-shrink-0" />
-              <span className="text-gray-300">Ad-free reading experience</span>
+
+            {/* Annual Plan */}
+            <div className="border border-gray-300 rounded-xl p-6 bg-white relative">
+              <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
+                <span className="bg-green-500 text-white px-3 py-1 rounded-full text-xs font-semibold">
+                  SAVE 20%
+                </span>
+              </div>
+              <div className="flex items-center justify-between mb-4">
+                <div>
+                  <h3 className="font-semibold text-gray-900">Annual Access</h3>
+                  <p className="text-sm text-gray-600">12 months full access</p>
+                </div>
+                <div className="text-right">
+                  <div className="text-2xl font-bold text-gray-900">₹999</div>
+                  <div className="text-sm text-gray-500">/year</div>
+                  <div className="text-xs text-green-600">Save ₹189</div>
+                </div>
+              </div>
+              <Link
+                to="/pricing"
+                className="w-full bg-gray-900 hover:bg-gray-800 text-white py-3 px-6 rounded-lg font-semibold text-center block transition-colors duration-200"
+              >
+                Subscribe Annually
+              </Link>
             </div>
           </div>
-          
-          <Link
-            to="/pricing"
-            className="w-full bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white py-4 px-6 rounded-xl font-semibold text-center block transition-all duration-300 transform hover:scale-105 shadow-lg"
-          >
-            Subscribe Now
-          </Link>
-        </div>
 
-        {/* Additional Info */}
-        <div className="text-center text-gray-400 text-sm">
-          <p className="mb-2">Join thousands of premium readers</p>
-          <div className="flex items-center justify-center gap-2">
-            <Star className="h-4 w-4 text-amber-400 fill-current" />
-            <Star className="h-4 w-4 text-amber-400 fill-current" />
-            <Star className="h-4 w-4 text-amber-400 fill-current" />
-            <Star className="h-4 w-4 text-amber-400 fill-current" />
-            <Star className="h-4 w-4 text-amber-400 fill-current" />
-            <span className="ml-2">4.9/5 reader rating</span>
+          {/* Features */}
+          <div className="bg-gray-50 rounded-xl p-6 mb-6">
+            <h4 className="font-semibold text-gray-900 mb-4">What's Included:</h4>
+            <div className="space-y-3 text-sm text-gray-700">
+              <div className="flex items-center gap-3">
+                <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+                <span>Complete magazine archives</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+                <span>Premium articles & insights</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+                <span>Early access to new issues</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+                <span>Ad-free reading experience</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+                <span>Offline reading capability</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Trust Indicators */}
+          <div className="text-center text-gray-500 text-xs">
+            <p className="mb-2">Trusted by 10,000+ readers worldwide</p>
+            <div className="flex justify-center items-center gap-1 mb-2">
+              {[...Array(5)].map((_, i) => (
+                <svg key={i} className="h-3 w-3 text-yellow-400 fill-current" viewBox="0 0 20 20">
+                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                </svg>
+              ))}
+              <span className="ml-2">4.8/5 rating</span>
+            </div>
+            <p>Cancel anytime • Secure payment • 30-day money back</p>
           </div>
         </div>
       </div>
