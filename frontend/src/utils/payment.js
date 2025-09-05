@@ -1,28 +1,10 @@
 import { api } from './api';
 
-// Stripe Payment Functions
-export const createCheckoutSession = async (packageId) => {
-  const response = await api.post('/payments/create-checkout', {
-    package_id: packageId,
-    origin_url: window.location.origin
-  });
-  return response.data;
-};
-
-export const getPaymentStatus = async (sessionId) => {
-  const response = await api.get(`/payments/status/${sessionId}`);
-  return response.data;
-};
-
-export const createSmartSubscription = async (subscriptionData) => {
-  const response = await api.post('/payments/create-smart-subscription', subscriptionData);
-  return response.data;
-};
-
 // Razorpay Payment Functions
-export const createRazorpayOrder = async (packageId) => {
+export const createRazorpayOrder = async (packageId, customerDetails) => {
   const response = await api.post('/payments/razorpay/create-order', {
     package_id: packageId,
+    customer_details: customerDetails,
     payment_method: 'razorpay'
   });
   return response.data;
@@ -45,7 +27,7 @@ export const loadRazorpayScript = () => {
 };
 
 // Initialize Razorpay payment
-export const initializeRazorpayPayment = async (orderData, userEmail = null) => {
+export const initializeRazorpayPayment = async (orderData, customerDetails) => {
   const isScriptLoaded = await loadRazorpayScript();
   
   if (!isScriptLoaded) {
@@ -60,7 +42,11 @@ export const initializeRazorpayPayment = async (orderData, userEmail = null) => 
       name: 'Just Urbane',
       description: orderData.package_name,
       order_id: orderData.order_id,
-      prefill: userEmail ? { email: userEmail } : {},
+      prefill: {
+        name: customerDetails.full_name,
+        email: customerDetails.email,
+        contact: customerDetails.phone
+      },
       theme: {
         color: '#1f2937'
       },
@@ -71,7 +57,7 @@ export const initializeRazorpayPayment = async (orderData, userEmail = null) => 
             razorpay_payment_id: response.razorpay_payment_id,
             razorpay_signature: response.razorpay_signature,
             package_id: orderData.package_id,
-            user_email: userEmail
+            customer_details: customerDetails
           });
           resolve(verification);
         } catch (error) {
@@ -90,17 +76,19 @@ export const initializeRazorpayPayment = async (orderData, userEmail = null) => 
   });
 };
 
+// Get payment packages
+export const getPaymentPackages = async () => {
+  const response = await api.get('/payments/packages');
+  return response.data;
+};
+
 const paymentApi = {
-  // Stripe methods
-  createCheckoutSession,
-  getPaymentStatus,
-  createSmartSubscription,
-  
   // Razorpay methods
   createRazorpayOrder,
   verifyRazorpayPayment,
   loadRazorpayScript,
-  initializeRazorpayPayment
+  initializeRazorpayPayment,
+  getPaymentPackages
 };
 
 export const formatPrice = (amount) => {
