@@ -414,202 +414,106 @@ const MagazineReaderPage = () => {
         Page {currentPage + 1} of {totalPages}
       </div>
 
-      {/* Bottom Controls Bar */}
+      {/* Subscription Modal */}
       <AnimatePresence>
-        {showControls && (
+        {showSubscriptionModal && (
           <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 50 }}
-            className="absolute bottom-0 left-0 right-0 z-20 bg-gradient-to-t from-black/90 via-black/70 to-transparent p-4"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            style={{
+              position: 'fixed',
+              top: 0,
+              left: 0,
+              width: '100vw',
+              height: '100vh',
+              backgroundColor: 'rgba(0,0,0,0.8)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              zIndex: 9999999
+            }}
+            onClick={() => setShowSubscriptionModal(false)}
           >
-            <div className="flex items-center justify-center text-white">
-              <div className="flex items-center space-x-6 bg-black/50 backdrop-blur-sm px-6 py-3 rounded-2xl">
-                <div className="flex items-center space-x-2">
-                  <div className="w-2 h-2 bg-amber-400 rounded-full"></div>
-                  <span className="text-sm font-medium">Just Urbane • August 2025</span>
-                </div>
-                <div className="w-px h-6 bg-white/20"></div>
-                <div className="flex items-center space-x-2 text-sm">
-                  <span>Digital Magazine</span>
-                  <span className="text-amber-400">•</span>
-                  <span>A4 Format</span>
-                  <span className="text-amber-400">•</span>
-                  <span>High Resolution PDF</span>
-                </div>
-                <div className="w-px h-6 bg-white/20"></div>
-                <div className="flex space-x-2">
-                  <button 
-                    onClick={handleDownload}
-                    className="p-2 hover:bg-white/10 rounded-lg transition-colors"
-                    title="Download PDF"
-                  >
-                    <Download className="h-4 w-4" />
-                  </button>
-                  <button 
-                    onClick={handleRotate}
-                    className="p-2 hover:bg-white/10 rounded-lg transition-colors"
-                    title="Rotate"
-                  >
-                    <RotateCw className="h-4 w-4" />
-                  </button>
-                  <button 
-                    className="p-2 hover:bg-white/10 rounded-lg transition-colors"
-                    title="Print"
-                  >
-                    <Printer className="h-4 w-4" />
-                  </button>
-                </div>
+            <motion.div
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.8, opacity: 0 }}
+              onClick={(e) => e.stopPropagation()}
+              style={{
+                backgroundColor: 'white',
+                padding: '40px',
+                borderRadius: '20px',
+                textAlign: 'center',
+                maxWidth: '500px',
+                width: '90%',
+                boxShadow: '0 25px 50px rgba(0,0,0,0.3)'
+              }}
+            >
+              <div style={{
+                fontSize: '64px',
+                marginBottom: '20px'
+              }}>
+                👑
               </div>
-            </div>
+              <h3 style={{
+                fontSize: '24px',
+                fontWeight: 'bold',
+                marginBottom: '15px',
+                color: '#333'
+              }}>
+                Premium Content
+              </h3>
+              <p style={{
+                fontSize: '16px',
+                color: '#666',
+                marginBottom: '30px'
+              }}>
+                This content is available to premium subscribers only.
+                Subscribe now to continue reading.
+              </p>
+              <div style={{
+                display: 'flex',
+                gap: '15px',
+                justifyContent: 'center'
+              }}>
+                <Link
+                  to="/pricing"
+                  style={{
+                    backgroundColor: '#ffd700',
+                    color: '#333',
+                    padding: '12px 24px',
+                    borderRadius: '8px',
+                    textDecoration: 'none',
+                    fontWeight: 'bold',
+                    fontSize: '16px'
+                  }}
+                >
+                  Subscribe Now
+                </Link>
+                <button
+                  onClick={() => setShowSubscriptionModal(false)}
+                  style={{
+                    backgroundColor: '#f0f0f0',
+                    color: '#333',
+                    padding: '12px 24px',
+                    borderRadius: '8px',
+                    border: 'none',
+                    fontWeight: 'bold',
+                    fontSize: '16px',
+                    cursor: 'pointer'
+                  }}
+                >
+                  Close
+                </button>
+              </div>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
-
-      {/* Premium Subscription Modal */}
-      {showSubscriptionModal && (
-        <div style={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          backgroundColor: 'rgba(0,0,0,0.95)',
-          backdropFilter: 'blur(10px)',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          zIndex: 2000000
-        }} onClick={() => setShowSubscriptionModal(false)}>
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8, y: 50 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.8, y: 50 }}
-            style={{
-              backgroundColor: 'white',
-              borderRadius: '24px',
-              padding: '60px',
-              maxWidth: '550px',
-              margin: '20px',
-              textAlign: 'center',
-              boxShadow: '0 40px 100px rgba(0,0,0,0.6)'
-            }}
-            onClick={(e) => e.stopPropagation()}
-          >
-            <motion.div
-              animate={{
-                rotate: [0, 10, -10, 0],
-                scale: [1, 1.1, 1]
-              }}
-              transition={{
-                duration: 2,
-                repeat: Infinity,
-                ease: "easeInOut"
-              }}
-              style={{
-                width: '100px',
-                height: '100px',
-                background: 'linear-gradient(135deg, #ffd700 0%, #ffed4e 100%)',
-                borderRadius: '50%',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                margin: '0 auto 40px',
-                boxShadow: '0 15px 30px rgba(255, 215, 0, 0.3)'
-              }}
-            >
-              <Crown style={{ width: '50px', height: '50px', color: '#b8860b' }} />
-            </motion.div>
-            
-            <h2 style={{ 
-              fontSize: '32px', 
-              fontWeight: 'bold', 
-              marginBottom: '20px',
-              color: '#111'
-            }}>
-              Unlock Your Journey
-            </h2>
-            <p style={{ 
-              fontSize: '18px', 
-              color: '#666', 
-              marginBottom: '40px',
-              lineHeight: '1.6'
-            }}>
-              Continue reading the complete Just Urbane magazine with unlimited access to premium content, exclusive insights, and luxury lifestyle stories.
-            </p>
-            
-            <div style={{
-              background: 'linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%)',
-              borderRadius: '20px',
-              padding: '35px',
-              marginBottom: '40px'
-            }}>
-              <div style={{ 
-                fontSize: '42px', 
-                fontWeight: 'bold',
-                color: '#111',
-                marginBottom: '10px'
-              }}>
-                ₹499
-              </div>
-              <div style={{ 
-                fontSize: '18px', 
-                color: '#666',
-                marginBottom: '8px'
-              }}>
-                Annual Digital Subscription
-              </div>
-              <div style={{ 
-                fontSize: '16px', 
-                color: '#10b981',
-                fontWeight: '700'
-              }}>
-                Save 67% • Best Value
-              </div>
-            </div>
-            
-            <div style={{ display: 'flex', gap: '20px' }}>
-              <Link
-                to="/pricing?plan=digital"
-                style={{
-                  flex: 1,
-                  display: 'inline-block',
-                  background: 'linear-gradient(135deg, #000 0%, #333 100%)',
-                  color: 'white',
-                  padding: '18px 30px',
-                  borderRadius: '15px',
-                  textDecoration: 'none',
-                  fontSize: '18px',
-                  fontWeight: '600',
-                  transition: 'all 0.3s ease'
-                }}
-              >
-                Subscribe Now
-              </Link>
-              
-              <button
-                onClick={() => setShowSubscriptionModal(false)}
-                style={{
-                  flex: 1,
-                  padding: '18px 30px',
-                  backgroundColor: '#f5f5f5',
-                  color: '#666',
-                  border: 'none',
-                  borderRadius: '15px',
-                  fontSize: '18px',
-                  cursor: 'pointer',
-                  transition: 'all 0.3s ease'
-                }}
-                onMouseEnter={(e) => e.target.style.backgroundColor = '#e5e5e5'}
-                onMouseLeave={(e) => e.target.style.backgroundColor = '#f5f5f5'}
-              >
-                Maybe Later
-              </button>
-            </div>
-          </motion.div>
-        </div>
-      )}
     </div>
+    </>
+  );
   );
 };
 
