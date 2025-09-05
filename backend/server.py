@@ -430,10 +430,11 @@ async def create_razorpay_order(
     try:
         # Create Razorpay order
         amount_in_paise = int(package["price"] * 100)
+        receipt_id = f"ord_{order_request.package_id[:8]}_{current_user['id'][:8]}_{int(datetime.utcnow().timestamp())}"[:40]
         razorpay_order = razorpay_client.order.create({
             "amount": amount_in_paise,
             "currency": package["currency"],
-            "receipt": f"order_{order_request.package_id}_{current_user['id']}_{int(datetime.utcnow().timestamp())}",
+            "receipt": receipt_id,
             "notes": {
                 "package_id": order_request.package_id,
                 "user_email": order_request.customer_details.email,
