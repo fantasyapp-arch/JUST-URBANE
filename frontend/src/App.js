@@ -38,6 +38,7 @@ import FranceTravelPage from './pages/FranceTravelPage';
 import SustainableTravelPage from './pages/SustainableTravelPage';
 import MensFashionSuitGuidePage from './pages/MensFashionSuitGuidePage';
 import OscarsFashionPage from './pages/OscarsFashionPage';
+import SunseekerYachtPage from './pages/SunseekerYachtPage';
 import PrivacyPage from './pages/PrivacyPage';
 import TermsPage from './pages/TermsPage';
 
