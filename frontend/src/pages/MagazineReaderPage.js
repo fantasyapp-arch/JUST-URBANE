@@ -194,120 +194,47 @@ const MagazineReaderPage = () => {
         )}
       </AnimatePresence>
 
-      {/* Magazine Display Area - Full Screen Smooth Page Turn */}
-      <div style={{
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        width: '100%',
-        height: '100%',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center'
-      }}>
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={currentPage}
-            initial={{ opacity: 0, x: 50 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -50 }}
-            transition={{ duration: 0.25, ease: "easeInOut" }}
+      {/* Magazine Display Area */}
+      <div 
+        ref={containerRef}
+        className="flex items-center justify-center h-full p-4 pt-20 pb-16"
+        onClick={toggleControls}
+      >
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          className="relative bg-white shadow-2xl rounded-lg overflow-hidden"
+          style={{
+            width: DISPLAY_WIDTH * zoom,
+            height: DISPLAY_HEIGHT * zoom,
+            transform: `rotate(${rotation}deg)`,
+            maxWidth: '95vw',
+            maxHeight: '95vh'
+          }}
+        >
+          {/* PDF Display with A4 Proportions */}
+          <iframe
+            src={`${magazinePdfUrl}#toolbar=0&navpanes=0&scrollbar=0&view=Fit`}
+            className="w-full h-full border-0"
+            title="Just Urbane August 2025 Digital Magazine"
             style={{
-              position: 'absolute',
-              top: 0,
-              left: 0,
-              width: '100vw',
-              height: '100vh',
-              backgroundColor: '#fff'
+              filter: 'drop-shadow(0 25px 50px rgba(0, 0, 0, 0.5))'
             }}
-          >
-            <img
-              src={pages[currentPage]?.pageImage}
-              alt={`${pages[currentPage]?.title} - Page ${currentPage + 1}`}
-              style={{
-                width: '100%',
-                height: '100%',
-                objectFit: 'contain',
-                objectPosition: 'center',
-                filter: isPageLocked ? 'blur(15px)' : 'none'
-              }}
-              onError={(e) => {
-                e.target.style.display = 'none';
-                e.target.parentNode.innerHTML = `
-                  <div style="
-                    width: 100%; 
-                    height: 100%; 
-                    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); 
-                    display: flex; 
-                    flex-direction: column;
-                    align-items: center; 
-                    justify-content: center;
-                    color: #666;
-                    font-size: 48px;
-                    font-weight: 600;
-                    text-align: center;
-                    padding: 60px;
-                  ">
-                    <div style="font-size: 120px; margin-bottom: 40px;">📖</div>
-                    <div>Page ${currentPage + 1}</div>
-                    <div style="font-size: 32px; color: #999; margin-top: 30px; font-weight: 400;">
-                      ${pages[currentPage]?.title}
-                    </div>
-                    <div style="font-size: 24px; color: #bbb; margin-top: 40px; font-weight: 300;">
-                      Just Urbane Magazine - August 2025
-                    </div>
-                  </div>
-                `;
-              }}
-            />
-            
-            {/* Premium Lock Overlay with Enhanced Crown */}
-            {isPageLocked && (
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                style={{
-                  position: 'absolute',
-                  top: 0,
-                  left: 0,
-                  right: 0,
-                  bottom: 0,
-                  backgroundColor: 'rgba(0,0,0,0.5)',
-                  backdropFilter: 'blur(15px)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  zIndex: 10
-                }}
-              >
-                <motion.div
-                  animate={{
-                    scale: [1, 1.2, 1],
-                    rotate: [0, 10, -10, 0],
-                    y: [0, -10, 0]
-                  }}
-                  transition={{
-                    duration: 4,
-                    repeat: Infinity,
-                    ease: "easeInOut"
-                  }}
-                  style={{
-                    background: 'linear-gradient(135deg, #ffd700 0%, #ffed4e 100%)',
-                    borderRadius: '50%',
-                    padding: '50px',
-                    boxShadow: '0 25px 50px rgba(255, 215, 0, 0.4), 0 0 100px rgba(255, 215, 0, 0.2)'
-                  }}
-                >
-                  <Crown style={{ 
-                    width: '80px', 
-                    height: '80px', 
-                    color: '#b8860b' 
-                  }} />
-                </motion.div>
-              </motion.div>
-            )}
-          </motion.div>
-        </AnimatePresence>
+          />
+          
+          {/* A4 Size Info Badge */}
+          <div className="absolute bottom-4 left-4 bg-black/70 backdrop-blur-sm text-white px-3 py-2 rounded-lg text-sm">
+            <div className="flex items-center space-x-2">
+              <BookOpen className="h-4 w-4 text-amber-400" />
+              <span>A4 Format • {DISPLAY_WIDTH}×{DISPLAY_HEIGHT}px</span>
+            </div>
+          </div>
+
+          {/* Resolution Badge */}
+          <div className="absolute top-4 right-4 bg-gradient-to-r from-amber-500 to-amber-600 text-white px-3 py-2 rounded-lg text-sm font-medium">
+            High Resolution PDF
+          </div>
+        </motion.div>
       </div>
 
       {/* Enhanced Navigation Controls - Large Click Areas */}
