@@ -87,7 +87,7 @@ const PricingPage = () => {
       savings: '50% OFF'
     },
     {
-      id: 'print',
+      id: 'print_annual',
       name: 'Print Subscription',
       shortName: 'Print',
       price: '₹499',
