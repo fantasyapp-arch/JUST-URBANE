@@ -11,7 +11,7 @@ from datetime import datetime
 from typing import Dict, Any, Optional
 
 class JustUrbaneAPITester:
-    def __init__(self, base_url: str = "https://magazine-ui-update.preview.emergentagent.com/api"):
+    def __init__(self, base_url: str = "https://travel-conscious.preview.emergentagent.com/api"):
         self.base_url = base_url
         self.session = requests.Session()
         self.auth_token = None
@@ -1038,7 +1038,7 @@ class JustUrbaneAPITester:
         try:
             checkout_data = {
                 "package_id": "digital_annual",
-                "origin_url": "https://magazine-ui-update.preview.emergentagent.com"
+                "origin_url": "https://travel-conscious.preview.emergentagent.com"
             }
             
             response = self.session.post(
@@ -2276,7 +2276,7 @@ def main():
     print("=" * 70)
     
     # Use the backend URL from frontend environment (production URL) with /api prefix
-    backend_url = "https://magazine-ui-update.preview.emergentagent.com/api"
+    backend_url = "https://travel-conscious.preview.emergentagent.com/api"
     tester = JustUrbaneAPITester(backend_url)
     
     # Run travel/guides subcategory fix verification tests
