@@ -170,7 +170,11 @@ const MagazineReader = ({ isOpen, onClose }) => {
         {/* Magazine content */}
         <div className="relative max-w-4xl max-h-full mx-4 my-16">
           {showSubscriptionGate ? (
-            <PremiumSubscriptionGate />
+            <div className="w-full h-full bg-red-500 text-white p-8">
+              <h1>SUBSCRIPTION GATE TEST</h1>
+              <p>If you see this, the subscription gate logic is working</p>
+              <PremiumSubscriptionGate />
+            </div>
           ) : (
             <div className="relative">
               {/* Main image - always show cached version to prevent white flash */}
