@@ -35,10 +35,10 @@ const AboutPage = () => {
     },
     {
       name: 'Komal Bhandekar',
-      role: 'Culture Correspondent',
+      role: 'Sustainable Travel Expert',
       image: 'https://images.unsplash.com/photo-1494790108755-2616b612b1bb?w=300',
-      bio: 'Arts and culture journalist covering contemporary Indian art, music, and literature.',
-      social: { twitter: '@priyanair', instagram: '@priyanair_culture' }
+      bio: 'Environmental travel journalist promoting conscious tourism and sustainable luxury experiences.',
+      social: { twitter: '@komal_travel', instagram: '@komalbhandekar' }
     }
   ];
 
