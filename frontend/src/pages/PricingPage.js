@@ -349,29 +349,29 @@ const PricingPage = () => {
           </div>
         </div>
 
-        {/* Premium Trust Section */}
+        {/* Premium Trust Section - Simplified */}
         <motion.div 
-          className="bg-white rounded-3xl p-12 shadow-xl max-w-6xl mx-auto mb-20"
-          initial={{ opacity: 0, y: 40 }}
+          className="bg-white/70 backdrop-blur-sm rounded-2xl lg:rounded-3xl p-8 lg:p-12 shadow-lg border border-gray-200/50 max-w-5xl mx-auto mb-12 lg:mb-16"
+          initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 1 }}
         >
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-serif font-bold text-gray-900 mb-4">
-              Why 50,000+ Readers Trust Just Urbane
+          <div className="text-center mb-8 lg:mb-12">
+            <h2 className="text-2xl lg:text-3xl xl:text-4xl font-serif font-bold text-gray-900 mb-4">
+              Trusted by 50,000+ Readers
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-base lg:text-lg xl:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
               Join India's most discerning community of lifestyle enthusiasts and industry leaders.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
             {[
               {
                 icon: Star,
                 title: "Premium Content",
                 description: "Curated by industry experts, our content sets the gold standard for luxury lifestyle journalism.",
-                stats: "500+ Premium Articles"
+                stats: "500+ Articles"
               },
               {
                 icon: Users,
@@ -383,33 +383,32 @@ const PricingPage = () => {
                 icon: Award,
                 title: "Award Winning",
                 description: "Recognized globally for excellence in digital publishing and content curation.",
-                stats: "15+ Industry Awards"
+                stats: "15+ Awards"
               }
             ].map((feature, index) => {
               const FeatureIcon = feature.icon;
               return (
                 <motion.div
                   key={feature.title}
-                  className="text-center group"
-                  initial={{ opacity: 0, y: 30 }}
+                  className="text-center"
+                  initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 1.2 + index * 0.2 }}
-                  whileHover={{ y: -8 }}
                 >
-                  <div className="w-16 h-16 mx-auto mb-6 bg-gradient-to-br from-primary-100 to-primary-200 rounded-2xl flex items-center justify-center group-hover:shadow-lg transition-all duration-300">
-                    <FeatureIcon className="h-8 w-8 text-primary-600" />
+                  <div className="w-12 h-12 lg:w-16 lg:h-16 mx-auto mb-4 lg:mb-6 bg-gradient-to-br from-blue-100 to-indigo-200 rounded-xl lg:rounded-2xl flex items-center justify-center">
+                    <FeatureIcon className="h-6 w-6 lg:h-8 lg:w-8 text-blue-600" />
                   </div>
                   
-                  <h3 className="text-xl font-serif font-semibold mb-3 text-gray-900">
+                  <h3 className="text-lg lg:text-xl font-serif font-semibold mb-2 lg:mb-3 text-gray-900">
                     {feature.title}
                   </h3>
                   
-                  <p className="text-gray-600 mb-3 leading-relaxed">
+                  <p className="text-gray-600 mb-3 leading-relaxed text-sm lg:text-base">
                     {feature.description}
                   </p>
 
-                  <div className="inline-block px-4 py-2 bg-gradient-to-r from-primary-50 to-primary-100 rounded-full">
-                    <span className="text-primary-700 font-semibold text-sm">{feature.stats}</span>
+                  <div className="inline-block px-3 py-1 lg:px-4 lg:py-2 bg-gradient-to-r from-blue-50 to-indigo-100 rounded-full">
+                    <span className="text-blue-700 font-semibold text-xs lg:text-sm">{feature.stats}</span>
                   </div>
                 </motion.div>
               );
