@@ -66,33 +66,19 @@ const MagazineReader = ({ isOpen, onClose }) => {
     return () => document.removeEventListener('keydown', handleKeyPress);
   }, [isOpen, currentPage, isTransitioning]);
 
-  // Smooth page navigation with preloading check
+  // Simplified page navigation
   const nextPage = useCallback(() => {
     if (isTransitioning) return;
     
-    console.log(`Trying to go to next page. Current: ${currentPage}, Free pages limit: ${FREE_PREVIEW_PAGES}, Can read premium: ${canReadPremium}`);
+    console.log(`Trying to go to next page. Current: ${currentPage}`);
     
-    // If we're on the last free page (index 2 = page 3) and user doesn't have premium access
-    if (!canReadPremium && currentPage >= FREE_PREVIEW_PAGES - 1) {
-      console.log("User reached free limit, showing subscription gate");
-      // Set to special subscription gate index
-      setCurrentPage(999); // Use 999 as special subscription gate indicator
-      return;
-    }
-    
-    // Normal navigation for premium users or within free pages
-    if (currentPage < pages.length - 1) {
-      const nextPageIndex = currentPage + 1;
-      console.log(`Moving to page ${nextPageIndex + 1}`);
-      if (imagesLoaded.has(nextPageIndex) || !canReadPremium) {
-        setIsTransitioning(true);
-        setTimeout(() => {
-          setCurrentPage(nextPageIndex);
-          setIsTransitioning(false);
-        }, 50);
-      }
-    }
-  }, [currentPage, pages.length, imagesLoaded, canReadPremium, isTransitioning]);
+    // Always increment page number for testing
+    setIsTransitioning(true);
+    setTimeout(() => {
+      setCurrentPage(currentPage + 1);
+      setIsTransitioning(false);
+    }, 50);
+  }, [currentPage, isTransitioning]);
 
   const prevPage = useCallback(() => {
     if (isTransitioning || currentPage <= 0) return;
