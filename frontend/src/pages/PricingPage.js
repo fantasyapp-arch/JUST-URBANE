@@ -122,63 +122,60 @@ const PricingPage = () => {
       
       {/* Main Container with Professional Spacing */}
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 py-12 lg:py-20">
-        {/* Luxury Header Section */}
-        <motion.div 
-          className="text-center mb-20"
-          initial={{ opacity: 0, y: -30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-        >
-          {/* Trust Indicators */}
+        {/* Premium Header Section - Redesigned */}
+        <div className="text-center mb-16 lg:mb-20">
+          {/* Trust Indicators - Refined */}
           <motion.div 
-            className="flex justify-center items-center space-x-8 mb-8"
+            className="flex flex-wrap justify-center items-center gap-6 lg:gap-8 mb-8 lg:mb-12"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <div className="flex items-center text-gray-600">
-              <Users className="h-5 w-5 mr-2 text-primary-500" />
-              <span className="text-sm font-medium">50,000+ Happy Readers</span>
+            <div className="flex items-center text-gray-600 bg-white/60 backdrop-blur-sm px-4 py-2 rounded-full border border-gray-200/50">
+              <Users className="h-4 w-4 mr-2 text-blue-500" />
+              <span className="text-sm font-medium">50,000+ Readers</span>
             </div>
-            <div className="flex items-center text-gray-600">
-              <TrendingUp className="h-5 w-5 mr-2 text-green-500" />
-              <span className="text-sm font-medium">98% Satisfaction Rate</span>
+            <div className="flex items-center text-gray-600 bg-white/60 backdrop-blur-sm px-4 py-2 rounded-full border border-gray-200/50">
+              <TrendingUp className="h-4 w-4 mr-2 text-green-500" />
+              <span className="text-sm font-medium">98% Satisfaction</span>
             </div>
-            <div className="flex items-center text-gray-600">
-              <Award className="h-5 w-5 mr-2 text-yellow-500" />
-              <span className="text-sm font-medium">Award Winning Content</span>
+            <div className="flex items-center text-gray-600 bg-white/60 backdrop-blur-sm px-4 py-2 rounded-full border border-gray-200/50">
+              <Award className="h-4 w-4 mr-2 text-amber-500" />
+              <span className="text-sm font-medium">Award Winning</span>
             </div>
           </motion.div>
 
+          {/* Main Title - Professional Typography */}
           <motion.h1 
-            className="text-6xl lg:text-7xl font-serif font-bold bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 bg-clip-text text-transparent mb-6"
-            initial={{ opacity: 0, scale: 0.9 }}
+            className="text-4xl lg:text-6xl xl:text-7xl font-serif font-bold text-gray-900 mb-6 lg:mb-8 leading-tight"
+            initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.3 }}
           >
-            Choose Your Experience
+            Premium Subscription Plans
           </motion.h1>
           
+          {/* Subtitle - Better Spacing */}
           <motion.p 
-            className="text-2xl text-gray-700 max-w-4xl mx-auto leading-relaxed font-light"
+            className="text-lg lg:text-xl xl:text-2xl text-gray-600 max-w-4xl mx-auto leading-relaxed font-light mb-8"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.5 }}
           >
-            Join India's most exclusive lifestyle community. Premium content, luxury insights, and unparalleled access to the world of sophistication.
+            Choose the perfect plan for your lifestyle. Premium content, exclusive insights, and unparalleled access to luxury.
           </motion.p>
 
-          {/* Premium Guarantee Badge */}
+          {/* Guarantee Badge - Enhanced */}
           <motion.div
-            className="inline-flex items-center mt-8 px-6 py-3 bg-gradient-to-r from-green-50 to-emerald-50 border border-green-200 rounded-full"
-            initial={{ opacity: 0, scale: 0.8 }}
+            className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-green-50 to-emerald-50 border border-green-200/50 rounded-full backdrop-blur-sm"
+            initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6, delay: 0.7 }}
           >
             <div className="w-2 h-2 bg-green-500 rounded-full mr-3 animate-pulse"></div>
             <span className="text-green-700 font-semibold text-sm">7-Day Money Back Guarantee • Cancel Anytime</span>
           </motion.div>
-        </motion.div>
+        </div>
 
         {/* PREMIUM Pricing Cards Grid */}
         <div className="max-w-7xl mx-auto mb-20">
