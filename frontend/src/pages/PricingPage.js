@@ -131,11 +131,11 @@ const PricingPage = () => {
       </div>
 
       {/* Pricing Cards with Highlight Focus */}
-      <div className="relative -mt-16 lg:-mt-24 max-w-7xl mx-auto px-6 lg:px-8 pb-16 lg:pb-24">
+      <div className="relative -mt-16 lg:-mt-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16 lg:pb-24">
         {/* Subtle highlight effect only around pricing cards */}
         <div className="absolute inset-x-0 top-16 bottom-0 bg-black bg-opacity-10 rounded-3xl pointer-events-none animate-pulse"></div>
         
-        <div className="relative z-30 grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-6">
+        <div className="relative z-30 grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-6">
           {plans.map((plan, index) => (
             <motion.div
               key={plan.id}
