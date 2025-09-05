@@ -4,26 +4,29 @@ import { Link } from 'react-router-dom';
 import { Calendar, Clock, User, Share2, Bookmark, ArrowLeft } from 'lucide-react';
 
 const MensFashionSuitGuidePage = () => {
-  const [isLoading, setIsLoading] = useState(true);
+  const article = {
+    title: "Perfect Suit Guide for Men",
+    subtitle: "Master the art of corporate dressing with this comprehensive guide to building the perfect suit wardrobe. Learn from style icon Steve Harvey's insights on creating 75 unique combinations with just the essentials.",
+    category: "Fashion",
+    subcategory: "Men",
+    author: "Harshit Srinivas",
+    date: "September 2025",
+    readTime: "5 min read",
+    heroImage: "https://customer-assets.emergentagent.com/job_premium-urbane-1/artifacts/7cp5zt1z_shutterstock_516918613.jpg",
+    tags: ['Men\'s Fashion', 'Corporate Dressing', 'Suit Guide', 'Steve Harvey', 'Professional Style', 'Wardrobe Essentials', 'Business Attire', 'Style Tips', 'Fashion Guide', 'Corporate Fashion']
+  };
 
-  useEffect(() => {
-    // Simulate loading time for smooth experience
-    setTimeout(() => setIsLoading(false), 1000);
-    
-    // Scroll to top when component mounts
-    window.scrollTo(0, 0);
-  }, []);
-
-  if (isLoading) {
-    return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-gray-900 mx-auto"></div>
-          <p className="mt-4 text-gray-600">Loading article...</p>
-        </div>
-      </div>
-    );
-  }
+  const shareArticle = () => {
+    if (navigator.share) {
+      navigator.share({
+        title: article.title,
+        text: article.subtitle,
+        url: window.location.href,
+      });
+    } else {
+      navigator.clipboard.writeText(window.location.href);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-white">
