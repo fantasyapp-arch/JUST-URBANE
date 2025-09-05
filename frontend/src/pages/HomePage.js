@@ -83,35 +83,37 @@ const HomePage = () => {
               className="space-y-6"
             >
               <div className="inline-block bg-gray-100 text-gray-800 px-4 py-2 rounded-full text-sm font-medium uppercase tracking-wide">
-                {heroArticle.category}
+                {heroArticle?.category || 'Luxury'}
               </div>
               <h1 className="text-4xl lg:text-5xl font-serif font-bold text-gray-900 leading-tight">
-                {heroArticle.title}
+                {heroArticle?.title || 'Welcome to Just Urbane'}
               </h1>
               <p className="text-xl text-gray-600 leading-relaxed">
-                {heroArticle.excerpt}
+                {heroArticle?.body?.substring(0, 200) + '...' || 'Discover the finest in luxury lifestyle, fashion, and culture.'}
               </p>
               <div className="flex items-center space-x-6 text-sm text-gray-500">
                 <span className="flex items-center">
                   <User className="h-4 w-4 mr-2" />
-                  {heroArticle.author}
+                  {heroArticle?.author_name || 'Just Urbane'}
                 </span>
                 <span className="flex items-center">
                   <Calendar className="h-4 w-4 mr-2" />
-                  {heroArticle.date}
+                  {heroArticle?.published_at ? formatDateShort(heroArticle.published_at) : 'Today'}
                 </span>
                 <span className="flex items-center">
                   <Clock className="h-4 w-4 mr-2" />
-                  {heroArticle.readTime}
+                  {heroArticle?.reading_time || 5} min read
                 </span>
               </div>
-              <Link 
-                to="/article/hero-article"
-                className="inline-flex items-center text-gray-900 font-semibold hover:text-gray-600 transition-colors"
-              >
-                Read Article
-                <ArrowRight className="h-4 w-4 ml-2" />
-              </Link>
+              {heroArticle && (
+                <Link 
+                  to={getArticleRoute(heroArticle)}
+                  className="inline-flex items-center text-gray-900 font-semibold hover:text-gray-600 transition-colors"
+                >
+                  Read Article
+                  <ArrowRight className="h-4 w-4 ml-2" />
+                </Link>
+              )}
             </motion.div>
 
             {/* Hero Image */}
@@ -122,9 +124,12 @@ const HomePage = () => {
               className="relative"
             >
               <img 
-                src={heroArticle.image}
-                alt={heroArticle.title}
+                src={heroArticle?.hero_image || 'https://images.unsplash.com/photo-1559839049-2b350c4284cb?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80'}
+                alt={heroArticle?.title || 'Just Urbane'}
                 className="w-full h-96 lg:h-[500px] object-cover rounded-lg shadow-lg"
+                onError={(e) => {
+                  e.target.src = 'https://images.unsplash.com/photo-1559839049-2b350c4284cb?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80';
+                }}
               />
             </motion.div>
           </div>
