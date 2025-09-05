@@ -87,7 +87,7 @@ const Header = () => {
 
           {/* CENTER NAVIGATION - EXACT GQ STYLE */}
           <nav className="hidden md:flex items-center space-x-12 flex-1 justify-center">
-            {['FASHION', 'LIFESTYLE', 'WATCHES', 'CULTURE', 'VIDEOS'].map((categoryName) => (
+            {['FASHION', 'TECH', 'LIFESTYLE', 'WATCHES', 'CULTURE', 'VIDEOS'].map((categoryName) => (
               <Link
                 key={categoryName}
                 to={`/category/${categoryName.toLowerCase()}`}
