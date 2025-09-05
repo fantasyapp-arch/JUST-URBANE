@@ -9,7 +9,7 @@ import json
 from datetime import datetime
 
 class SustainableTravelTester:
-    def __init__(self, base_url: str = "https://luxury-magazine.preview.emergentagent.com/api"):
+    def __init__(self, base_url: str = "https://urbane-ui-revamp.preview.emergentagent.com/api"):
         self.base_url = base_url
         self.session = requests.Session()
         self.test_results = []

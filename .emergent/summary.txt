@@ -1,26 +1,30 @@
 <analysis>
-The trajectory details the evolution of the Just Urbane application, initiated by a previous AI engineer and continued by the current one. The initial phase focused on UI enhancements, specifically redesigning  to match premium article layouts and iteratively refining  branding. The subsequent major task was integrating the Razorpay payment gateway. After receiving live Razorpay credentials, the engineer configured the backend and frontend, replacing an existing Stripe integration. A critical bug emerged where the Pay Now button failed to redirect to Razorpay. This was diagnosed as an authentication issue for order creation, leading to backend modifications in  to allow optional authentication (guest checkout) for Razorpay order and verification endpoints. The payment flow, including dynamic customer address collection for print subscriptions, was successfully fixed and verified through extensive backend testing and frontend screenshots.
+The trajectory details a complex iterative development process. Initially, the previous AI engineer focused on UI enhancements and integrated Razorpay, replacing Stripe. The current AI engineer inherited this with a critical Pay Now bug, which was fixed by allowing optional authentication for Razorpay backend endpoints. Subsequently, the user requested design reversions for the  (first to a simpler theme, then back to the original premium design). The final phase involved resolving specific UI bugs on the pricing page: a missing icon on the Print Subscription card, adding a highlight effect on page load, and fixing greyed-out colors in the Why Choose Just Urbane section caused by an overly broad highlight, alongside ensuring proper hover effects on the pricing cards. All issues were progressively addressed and verified with screenshots.
 </analysis>
 
 <product_requirements>
-The Just Urbane application is a luxury digital magazine platform. The development aimed to improve content presentation, refine branding, and expand payment options.
+The Just Urbane application is a luxury digital magazine platform. Development aimed to improve content presentation, refine branding, and expand payment options.
+
 **Completed tasks by previous AI engineer:**
 *   **Men's Fashion Article Page Enhancement:** The Perfect Suit Guide for Men article () was refactored for a premium aesthetic, including breadcrumbs, a hero section, rich content, tags, back navigation, and new images.
 *   **Footer Branding Updates:** The footer () copyright text was updated to © 2025 Just Urbane. All rights reserved. Designed and Developed by Satmat Group with Satmat Group hyperlinked.
+
 **Tasks completed in this trajectory by current AI engineer:**
-*   **Razorpay Payment Gateway Integration:** Integrate Razorpay for magazine purchases. This initially involved integrating it alongside Stripe.
-*   **Razorpay Flow Refinement and Bug Fix:**
-    *   Remove Stripe gateway completely.
-    *   Change payment options to a generic Select Plan button.
-    *   Integrate a customer details form (Full Name, Email, Phone) with address collection for print/print+digital subscriptions, and embed the Pay Now button within this form, ensuring Razorpay redirection.
+*   **Razorpay Payment Gateway Integration & Flow Refinement:** Integrate Razorpay for magazine purchases. This involved removing Stripe completely, changing payment options to Select Plan buttons, integrating a customer details form () with conditional address collection for print subscriptions, and embedding the Pay Now button, ensuring Razorpay redirection. A critical bug was fixed by allowing optional user authentication (guest checkout) for Razorpay order creation and verification.
+*   **Pricing Page UI/UX Enhancements & Bug Fixes:**
+    *   Reverted the  design to an earlier, simpler theme (design-only, functionality preserved).
+    *   Undid the previous reversion, restoring the page to its original premium design.
+    *   Fixed a missing icon on the Print Subscription plan.
+    *   Implemented a page-load highlight effect on the pricing page.
+    *   Resolved a bug where the highlight effect caused the Why Choose Just Urbane section to appear grey and ensured hover effects on pricing cards were functional.
 </product_requirements>
 
 <key_technical_concepts>
 -   **Full-stack Development**: React (frontend), FastAPI (backend), MongoDB (database).
--   **UI/UX & Styling**: Responsive design, React components, Modal implementation.
--   **Payment Gateway Integration**: Razorpay (new integration), Stripe (removed).
--   **API Design**: FastAPI endpoints, Pydantic models.
--   **Environment Management**:  variables for sensitive keys.
+-   **UI/UX & Styling**: React components, CSS (Tailwind CSS likely used for styling classes), Framer Motion (for animations), Modal implementation, responsive design.
+-   **Payment Gateway Integration**: Razorpay.
+-   **API Design**: FastAPI endpoints, Pydantic models for data validation.
+-   **Environment Management**:  files for configuration.
 </key_technical_concepts>
 
 <code_architecture>
@@ -29,54 +33,45 @@ The application uses a full-stack architecture with FastAPI for the backend, Rea
 
 
 -   ****: Stores environment variables for the backend.
-    -   **Changes Made**:  (rzp_live_RDvDvJ94tbQgS1) and  (Yp6p0UVUQp3eRnHqOKugykaK) were added.  was removed.
+    -   **Changes Made**:  and  were added.  was removed.
 -   ****: The main FastAPI backend application.
-    -   **Changes Made**:
-        -   Initially, Razorpay configuration, Pydantic models (RazorpayOrderRequest, RazorpayPaymentVerification), and API endpoints (, ) were added.
-        -   All Stripe-related imports, configurations, and API endpoints were completely removed.
-        -   A new  Pydantic model was created.
-        -   The  model was updated to include optional  for print subscriptions.
-        -   The  and  endpoints were modified to allow optional user authentication (guest checkout) to fix the Pay Now bug.
+    -   **Changes Made**: Added Razorpay configuration, Pydantic models (RazorpayOrderRequest, RazorpayPaymentVerification), and API endpoints (, ). All Stripe-related imports, configurations, and API endpoints were completely removed. A new  Pydantic model was created, and the  model was updated to include optional . The Razorpay order creation and verification endpoints were modified to allow optional user authentication (guest checkout).
 -   ****: Lists Python dependencies.
     -   **Changes Made**:  was added.
 -   ****: Stores environment variables for the frontend.
-    -   **Changes Made**:  (rzp_live_RDvDvJ94tbQgS1) was added.  was removed.
+    -   **Changes Made**:  was added.  was removed.
 -   ****: React component for a specific article.
-    -   **Changes Made**: Refactored to include breadcrumbs, hero section, rich content styling, tags, and back navigation, aligning with premium article designs. Three new images integrated.
+    -   **Changes Made**: Refactored to include breadcrumbs, hero section, rich content styling, tags, and back navigation, aligning with premium article designs. Three new images were integrated.
 -   ****: Global footer component.
     -   **Changes Made**: Updated copyright text to © 2025 Just Urbane. All rights reserved. Designed and Developed by Satmat Group with a hyperlink for Satmat Group.
 -   ****: Displays subscription plans and payment options.
-    -   **Changes Made**:
-        -   Initially, integrated Razorpay alongside Stripe, dynamically loading the Razorpay SDK and adjusting plan data.
-        -   Later, refactored to remove all Stripe-related UI.
-        -   Modified to display Select Plan buttons instead of direct payment options.
-        -   Integrated the new  component, which opens upon Select Plan click.
+    -   **Changes Made**: Initially integrated Razorpay, removed Stripe UI. Changed to display Select Plan buttons, integrating the new . Later, underwent design reversions (simplified, then restored premium). Finally, fixed a missing icon for the Print subscription, implemented a focused highlight area around pricing cards with a pulsing animation, and enhanced hover effects (scale, shadow, upward movement, blue ring, background tint) while ensuring the Why Choose Just Urbane section displayed correct, vibrant colors and was properly visible.
 -   ****: Utility file for payment API calls.
-    -   **Changes Made**:
-        -   Initially, added functions for  and .
-        -   Later, all Stripe-related functions were removed.
+    -   **Changes Made**: Added functions for  and . All Stripe-related functions were removed.
 -   ****: A newly created React component.
     -   **Summary**: Handles customer personal details (Full Name, Email, Phone Number) and conditionally renders address fields for print/print+digital subscriptions. It integrates the Pay Now button, initiating the Razorpay payment flow with collected details.
 </code_architecture>
 
 <pending_tasks>
--   **Frontend Testing Confirmation**: The user needs to confirm whether to proceed with automated frontend testing for the completely implemented and fixed Razorpay payment flow.
+-   **Frontend Testing Confirmation**: The user needs to confirm whether to proceed with automated frontend testing for the completely implemented and fixed Razorpay payment flow and updated UI.
 </pending_tasks>
 
 <current_work>
-Immediately before this summary request, the AI engineer was actively engaged in fixing a critical bug in the Razorpay payment flow. The user reported that clicking Pay Now was not redirecting to Razorpay.
+Immediately before this summary request, the AI engineer was actively engaged in fixing two user-reported visual issues on the . The user reported that some colours are showing grey where why choose just urbane is and that a highlighted type should be happend when hovering over plans.
 
-The investigation revealed that the backend Razorpay order creation endpoint () was requiring authentication, which prevented guest users from initiating payments. To resolve this, the AI engineer modified  to make the authentication for both  and  endpoints optional, allowing guest checkout.
+Upon investigation via a screenshot, it was identified that:
+1.  A previously implemented full-page dark overlay was causing the Why Choose Just Urbane section's vibrant colors to appear muted or grey.
+2.  The hover effects on the pricing cards were not functioning as intended.
 
-After this backend fix, a comprehensive testing process was executed:
-1.  **Backend API Testing**: Confirmed that Razorpay order creation worked successfully without prior user authentication, returning a valid Razorpay order ID.
-2.  **Frontend Payment Flow Testing (via screenshots)**:
-    *   Verified that filling customer details and clicking Pay Now now correctly opened the Razorpay payment modal, displaying the amount and various payment options.
-    *   Confirmed that for print subscriptions, the dynamic address collection fields (Address Line 1, City, State, Postal Code, Country) appeared and were marked as required, demonstrating smart address validation.
+To resolve these, the AI engineer made several modifications to :
+*   The full-page overlay that was causing the grey colors was removed.
+*   A more subtle and *focused* highlight area was implemented specifically around the pricing cards, including a gentle pulsing animation to draw attention.
+*   The hover interactions for the pricing cards were significantly enhanced, incorporating multiple visual feedback layers such as scaling up (), an increased shadow (), a slight upward movement (), a blue ring highlight (), and a subtle background tint ().
+*   Z-index issues were addressed to ensure proper layering, making sure that the Why Choose Just Urbane section was fully visible and displayed its intended vibrant colors without interference.
 
-All backend tests passed with a 100% success rate, confirming the complete resolution of the Pay Now bug and the full functionality of the Razorpay payment flow with customer details and conditional address collection.
+The work was concluded with multiple verification screenshots, confirming that all sections now display their intended vibrant colors and that the professional hover effects on the pricing cards are fully functional, providing clear visual feedback.
 </current_work>
 
 <optional_next_step>
-Ask the user if they want to proceed with frontend automated testing for the fixed Razorpay payment flow.
+Ask the user if they would like to proceed with automated frontend testing for the now stable Razorpay payment flow and updated UI.
 </optional_next_step>
