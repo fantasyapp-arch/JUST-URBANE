@@ -11,7 +11,7 @@ from datetime import datetime
 from typing import Dict, Any, Optional
 
 class JustUrbaneAPITester:
-    def __init__(self, base_url: str = "https://luxmag-platform.preview.emergentagent.com/api"):
+    def __init__(self, base_url: str = "https://style-luxury-mag.preview.emergentagent.com/api"):
         self.base_url = base_url
         self.session = requests.Session()
         self.auth_token = None
@@ -1038,7 +1038,7 @@ class JustUrbaneAPITester:
         try:
             checkout_data = {
                 "package_id": "digital_annual",
-                "origin_url": "https://luxmag-platform.preview.emergentagent.com"
+                "origin_url": "https://style-luxury-mag.preview.emergentagent.com"
             }
             
             response = self.session.post(
@@ -2454,7 +2454,7 @@ def main():
     print("=" * 70)
     
     # Use the backend URL from frontend environment (production URL) with /api prefix
-    backend_url = "https://luxmag-platform.preview.emergentagent.com/api"
+    backend_url = "https://style-luxury-mag.preview.emergentagent.com/api"
     tester = JustUrbaneAPITester(backend_url)
     
     # Run men's fashion article integration tests
