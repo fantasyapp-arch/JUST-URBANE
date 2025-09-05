@@ -2270,17 +2270,195 @@ class JustUrbaneAPITester:
         
         return self.generate_report()
 
+    def test_mens_fashion_article_integration(self):
+        """Test Men's Fashion Article Integration - REVIEW REQUEST PRIORITY"""
+        print("\n👔 MEN'S FASHION ARTICLE INTEGRATION TESTING")
+        print("=" * 60)
+        
+        try:
+            # Test 1: Fashion Category Articles - Test `/api/articles?category=fashion`
+            print("Testing Fashion Category Articles...")
+            response = self.session.get(f"{self.base_url}/articles?category=fashion", timeout=10)
+            if response.status_code == 200:
+                fashion_articles = response.json()
+                if isinstance(fashion_articles, list):
+                    self.log_test("Fashion Category Articles", True, f"Retrieved {len(fashion_articles)} fashion articles")
+                    
+                    # Look for the specific men's fashion article
+                    mens_suit_article = None
+                    for article in fashion_articles:
+                        if "Perfect Suit Guide for Men" in article.get("title", "") or "perfect-suit-guide-men-corporate-dressing" in article.get("slug", ""):
+                            mens_suit_article = article
+                            break
+                    
+                    if mens_suit_article:
+                        self.log_test("Men's Fashion Article in Category", True, f"Found 'Perfect Suit Guide for Men' in fashion category")
+                    else:
+                        self.log_test("Men's Fashion Article in Category", False, "Perfect Suit Guide for Men not found in fashion category")
+                else:
+                    self.log_test("Fashion Category Articles", False, f"Invalid response format: {type(fashion_articles)}")
+                    return False
+            else:
+                self.log_test("Fashion Category Articles", False, f"HTTP {response.status_code}: {response.text}")
+                return False
+            
+            # Test 2: Men Subcategory Articles - Test `/api/articles?category=fashion&subcategory=men`
+            print("Testing Men Subcategory Articles...")
+            response = self.session.get(f"{self.base_url}/articles?category=fashion&subcategory=men", timeout=10)
+            if response.status_code == 200:
+                mens_articles = response.json()
+                if isinstance(mens_articles, list):
+                    self.log_test("Men Subcategory Articles", True, f"Retrieved {len(mens_articles)} men's fashion articles")
+                    
+                    # Verify the men's suit article appears in subcategory
+                    mens_suit_in_subcategory = None
+                    for article in mens_articles:
+                        if "Perfect Suit Guide for Men" in article.get("title", "") or "perfect-suit-guide-men-corporate-dressing" in article.get("slug", ""):
+                            mens_suit_in_subcategory = article
+                            break
+                    
+                    if mens_suit_in_subcategory:
+                        self.log_test("Men's Suit Article in Subcategory", True, "Perfect Suit Guide found in fashion/men subcategory")
+                    else:
+                        self.log_test("Men's Suit Article in Subcategory", False, "Perfect Suit Guide not found in men subcategory")
+                else:
+                    self.log_test("Men Subcategory Articles", False, f"Invalid response format: {type(mens_articles)}")
+            else:
+                self.log_test("Men Subcategory Articles", False, f"HTTP {response.status_code}: {response.text}")
+            
+            # Test 3: Single Article Retrieval by Slug - Test `/api/articles/perfect-suit-guide-men-corporate-dressing`
+            print("Testing Single Article Retrieval by Slug...")
+            response = self.session.get(f"{self.base_url}/articles/perfect-suit-guide-men-corporate-dressing", timeout=10)
+            if response.status_code == 200:
+                article = response.json()
+                if isinstance(article, dict):
+                    self.log_test("Single Article Retrieval by Slug", True, f"Successfully retrieved article: {article.get('title', 'Unknown')}")
+                    
+                    # Test 4: Article Content Verification - Verify all required fields
+                    print("Verifying Article Content and Fields...")
+                    required_fields = {
+                        "title": "Perfect Suit Guide for Men",
+                        "author_name": "Harshit Srinivas",
+                        "category": "fashion",
+                        "subcategory": "men",
+                        "slug": "perfect-suit-guide-men-corporate-dressing"
+                    }
+                    
+                    field_verification_results = []
+                    for field, expected_value in required_fields.items():
+                        actual_value = article.get(field, "")
+                        if field == "title" and expected_value in actual_value:
+                            field_verification_results.append(f"✅ {field}: Contains '{expected_value}'")
+                        elif field != "title" and str(actual_value).lower() == str(expected_value).lower():
+                            field_verification_results.append(f"✅ {field}: {actual_value}")
+                        else:
+                            field_verification_results.append(f"❌ {field}: Expected '{expected_value}', got '{actual_value}'")
+                    
+                    # Check for hero image (shutterstock URL)
+                    hero_image = article.get("hero_image", "")
+                    if hero_image and ("shutterstock" in hero_image.lower() or "http" in hero_image):
+                        field_verification_results.append(f"✅ hero_image: {hero_image}")
+                    else:
+                        field_verification_results.append(f"❌ hero_image: Missing or invalid ({hero_image})")
+                    
+                    # Check for body content
+                    body = article.get("body", "")
+                    if body and len(body) > 100:
+                        field_verification_results.append(f"✅ body: {len(body)} characters of content")
+                    else:
+                        field_verification_results.append(f"❌ body: Insufficient content ({len(body)} characters)")
+                    
+                    # Log detailed verification results
+                    passed_fields = sum(1 for result in field_verification_results if result.startswith("✅"))
+                    total_fields = len(field_verification_results)
+                    
+                    if passed_fields == total_fields:
+                        self.log_test("Article Content Verification", True, f"All {total_fields} fields verified correctly: {', '.join([r.split(': ')[0].replace('✅ ', '') for r in field_verification_results if r.startswith('✅')])}")
+                    else:
+                        failed_fields = [r for r in field_verification_results if r.startswith("❌")]
+                        self.log_test("Article Content Verification", False, f"Field verification issues: {'; '.join(failed_fields)}")
+                    
+                    # Print detailed field verification
+                    print("   Field Verification Details:")
+                    for result in field_verification_results:
+                        print(f"     {result}")
+                    
+                else:
+                    self.log_test("Single Article Retrieval by Slug", False, f"Invalid response format: {type(article)}")
+                    return False
+            else:
+                self.log_test("Single Article Retrieval by Slug", False, f"HTTP {response.status_code}: {response.text}")
+                return False
+            
+            # Test 5: Categories API - Test `/api/categories` for fashion category with men subcategory
+            print("Testing Categories API for Fashion Category...")
+            response = self.session.get(f"{self.base_url}/categories", timeout=10)
+            if response.status_code == 200:
+                categories = response.json()
+                if isinstance(categories, list):
+                    fashion_category = None
+                    for category in categories:
+                        if category.get("name", "").lower() == "fashion" or category.get("slug", "").lower() == "fashion":
+                            fashion_category = category
+                            break
+                    
+                    if fashion_category:
+                        self.log_test("Fashion Category in Categories API", True, f"Fashion category found: {fashion_category.get('name', 'Unknown')}")
+                        
+                        # Check if men subcategory exists (might be in subcategories field or inferred from articles)
+                        subcategories = fashion_category.get("subcategories", [])
+                        if subcategories and any("men" in str(sub).lower() for sub in subcategories):
+                            self.log_test("Men Subcategory in Fashion", True, "Men subcategory found in fashion category")
+                        else:
+                            # Check if men subcategory exists by testing articles
+                            response_check = self.session.get(f"{self.base_url}/articles?category=fashion&subcategory=men&limit=1", timeout=10)
+                            if response_check.status_code == 200:
+                                check_articles = response_check.json()
+                                if isinstance(check_articles, list) and len(check_articles) > 0:
+                                    self.log_test("Men Subcategory in Fashion", True, "Men subcategory functional (verified via articles)")
+                                else:
+                                    self.log_test("Men Subcategory in Fashion", False, "Men subcategory not found or no articles")
+                            else:
+                                self.log_test("Men Subcategory in Fashion", False, f"Cannot verify men subcategory: HTTP {response_check.status_code}")
+                    else:
+                        self.log_test("Fashion Category in Categories API", False, "Fashion category not found in categories API")
+                else:
+                    self.log_test("Categories API", False, f"Invalid response format: {type(categories)}")
+            else:
+                self.log_test("Categories API", False, f"HTTP {response.status_code}: {response.text}")
+            
+            return True
+            
+        except Exception as e:
+            self.log_test("Men's Fashion Article Integration", False, f"Error during testing: {str(e)}")
+            return False
+
+    def run_mens_fashion_integration_tests(self):
+        """Run Men's Fashion Article Integration Tests - REVIEW REQUEST FOCUS"""
+        print("👔 STARTING MEN'S FASHION ARTICLE INTEGRATION TESTING")
+        print("=" * 70)
+        print("Testing Men's Fashion article integration as per review request...")
+        print()
+        
+        # 1. API Health Check
+        self.test_health_check()
+        
+        # 2. Men's Fashion Article Integration (Primary Focus)
+        self.test_mens_fashion_article_integration()
+        
+        return self.generate_report()
+
 def main():
-    """Main testing function for Travel/Guides Subcategory Fix Verification"""
-    print("🎯 Starting Travel/Guides Subcategory Fix Verification Testing")
+    """Main testing function for Men's Fashion Article Integration"""
+    print("👔 Starting Men's Fashion Article Integration Testing")
     print("=" * 70)
     
     # Use the backend URL from frontend environment (production URL) with /api prefix
     backend_url = "https://premium-urbane-1.preview.emergentagent.com/api"
     tester = JustUrbaneAPITester(backend_url)
     
-    # Run travel/guides subcategory fix verification tests
-    report = tester.run_travel_guides_fix_verification()
+    # Run men's fashion article integration tests
+    report = tester.run_mens_fashion_integration_tests()
     
     # Save detailed report
     with open("/app/backend_test_report.json", "w") as f:
