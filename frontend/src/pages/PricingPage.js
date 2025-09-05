@@ -9,10 +9,49 @@ const PricingPage = () => {
   const [selectedPlan, setSelectedPlan] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [hoveredPlan, setHoveredPlan] = useState(null);
+  const [paymentLoading, setPaymentLoading] = useState(null);
 
   const handlePlanSelect = (plan) => {
     setSelectedPlan(plan);
     setIsModalOpen(true);
+  };
+
+  // Handle Razorpay payment
+  const handleRazorpayPayment = async (packageId) => {
+    setPaymentLoading(`razorpay-${packageId}`);
+    try {
+      const orderData = await createRazorpayOrder(packageId);
+      const result = await initializeRazorpayPayment(orderData);
+      
+      if (result.status === 'success') {
+        alert('Payment successful! Your subscription is now active.');
+        // Redirect to success page or refresh user data
+        window.location.reload();
+      }
+    } catch (error) {
+      console.error('Razorpay payment error:', error);
+      alert(error.message || 'Payment failed. Please try again.');
+    } finally {
+      setPaymentLoading(null);
+    }
+  };
+
+  // Handle Stripe payment
+  const handleStripePayment = async (packageId) => {
+    setPaymentLoading(`stripe-${packageId}`);
+    try {
+      const checkoutData = await createCheckoutSession(packageId);
+      
+      if (checkoutData.checkout_url) {
+        window.location.href = checkoutData.checkout_url;
+      } else {
+        throw new Error('No checkout URL received');
+      }
+    } catch (error) {
+      console.error('Stripe payment error:', error);
+      alert(error.message || 'Payment failed. Please try again.');
+      setPaymentLoading(null);
+    }
   };
 
   const plans = [
