@@ -12,6 +12,8 @@ const CustomerDetailsModal = ({ isOpen, onClose, selectedPlan, onPaymentSuccess 
     email: '',
     full_name: '',
     phone: '',
+    password: '',
+    confirm_password: '',
     address_line_1: '',
     address_line_2: '',
     city: '',
