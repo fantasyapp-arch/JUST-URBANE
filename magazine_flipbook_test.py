@@ -10,7 +10,7 @@ from datetime import datetime
 from typing import Dict, Any, List
 
 class MagazineFlipBookTester:
-    def __init__(self, base_url: str = "https://justurbane-luxury.preview.emergentagent.com"):
+    def __init__(self, base_url: str = "https://justurbane-payment.preview.emergentagent.com"):
         self.base_url = base_url
         self.session = requests.Session()
         self.test_results = []
