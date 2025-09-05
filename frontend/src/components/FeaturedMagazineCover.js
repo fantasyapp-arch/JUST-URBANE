@@ -193,7 +193,7 @@ const FeaturedMagazineCover = ({ issue, onReadClick, canRead }) => {
 
         {/* Main Action Button */}
         <button
-          onClick={() => setIsMagazineOpen(true)}
+          onClick={() => canRead ? onReadClick(issue.articles) : null}
           className="w-full py-6 px-8 rounded-2xl font-bold text-lg transition-all duration-300 transform bg-gradient-to-r from-amber-600 to-amber-700 hover:from-amber-700 hover:to-amber-800 text-white hover:scale-105 shadow-lg"
         >
           <BookOpen className="inline h-6 w-6 mr-3" />
