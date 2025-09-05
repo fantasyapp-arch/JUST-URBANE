@@ -8,63 +8,63 @@
       "test": "Health Check",
       "success": true,
       "message": "API is healthy and responding",
-      "timestamp": "2025-09-05T10:50:30.253032",
+      "timestamp": "2025-09-05T12:45:01.579151",
       "response_data": null
     },
     {
       "test": "Fashion Category Articles",
       "success": true,
       "message": "Retrieved 7 fashion articles",
-      "timestamp": "2025-09-05T10:50:30.263656",
+      "timestamp": "2025-09-05T12:45:01.600108",
       "response_data": null
     },
     {
       "test": "Men's Fashion Article in Category",
       "success": true,
       "message": "Found 'Perfect Suit Guide for Men' in fashion category",
-      "timestamp": "2025-09-05T10:50:30.263713",
+      "timestamp": "2025-09-05T12:45:01.600141",
       "response_data": null
     },
     {
       "test": "Men Subcategory Articles",
       "success": true,
       "message": "Retrieved 3 men's fashion articles",
-      "timestamp": "2025-09-05T10:50:30.275129",
+      "timestamp": "2025-09-05T12:45:01.611431",
       "response_data": null
     },
     {
       "test": "Men's Suit Article in Subcategory",
       "success": true,
       "message": "Perfect Suit Guide found in fashion/men subcategory",
-      "timestamp": "2025-09-05T10:50:30.275164",
+      "timestamp": "2025-09-05T12:45:01.611461",
       "response_data": null
     },
     {
       "test": "Single Article Retrieval by Slug",
       "success": true,
       "message": "Successfully retrieved article: Perfect Suit Guide for Men: Corporate Dressing Excellence",
-      "timestamp": "2025-09-05T10:50:30.284324",
+      "timestamp": "2025-09-05T12:45:01.628747",
       "response_data": null
     },
     {
       "test": "Article Content Verification",
       "success": true,
       "message": "All 7 fields verified correctly: title, author_name, category, subcategory, slug, hero_image, body",
-      "timestamp": "2025-09-05T10:50:30.284390",
+      "timestamp": "2025-09-05T12:45:01.628805",
       "response_data": null
     },
     {
       "test": "Fashion Category in Categories API",
       "success": true,
       "message": "Fashion category found: Fashion",
-      "timestamp": "2025-09-05T10:50:30.295305",
+      "timestamp": "2025-09-05T12:45:01.640695",
       "response_data": null
     },
     {
       "test": "Men Subcategory in Fashion",
       "success": true,
       "message": "Men subcategory functional (verified via articles)",
-      "timestamp": "2025-09-05T10:50:30.306165",
+      "timestamp": "2025-09-05T12:45:01.648223",
       "response_data": null
     }
   ]
