@@ -60,7 +60,7 @@ const IssuesPage = () => {
                 <img
                   src={featuredMagazine?.pageImage || 'https://images.unsplash.com/photo-1586953135225-fc4e67e98b90?w=600&h=800'}
                   alt="Just Urbane Magazine"
-                  className="w-full aspect-[210/297] object-cover rounded-xl group-hover:scale-[1.02] transition-transform duration-500"
+                  className="w-full aspect-[2622/3236] object-cover rounded-xl group-hover:scale-[1.02] transition-transform duration-500"
                 />
                 
                 {/* Overlay */}
