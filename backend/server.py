@@ -579,7 +579,7 @@ async def razorpay_webhook(request: Request):
             
             if order_id:
                 # Update order status
-                await db.orders.update_one(
+                db.orders.update_one(
                     {"razorpay_order_id": order_id},
                     {"$set": {"webhook_received": True, "webhook_at": datetime.utcnow()}}
                 )
