@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import { Clock, User, Calendar, Share2, BookOpen, ArrowLeft, Heart } from 'lucide-react';
+import React from 'react';
+import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import { Calendar, Clock, User, Share2, Bookmark, ArrowLeft } from 'lucide-react';
 
 const MensFashionSuitGuidePage = () => {
   const [isLoading, setIsLoading] = useState(true);
