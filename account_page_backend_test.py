@@ -175,8 +175,16 @@ class AccountPageBackendTester:
                     "description": description
                 }
             
-            # Check completeness
-            complete_fields = sum(1 for analysis in field_analysis.values() if analysis["present"] and analysis["has_value"])
+            # Check completeness (subscription fields can be None for free users)
+            complete_fields = 0
+            for field, analysis in field_analysis.items():
+                if analysis["present"]:
+                    # For subscription fields, None is a valid value for free users
+                    if field in ["subscription_type", "subscription_status", "subscription_expires_at"]:
+                        complete_fields += 1
+                    elif analysis["has_value"]:
+                        complete_fields += 1
+            
             total_fields = len(account_page_fields)
             completeness_percentage = (complete_fields / total_fields) * 100
             
