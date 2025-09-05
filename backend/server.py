@@ -104,9 +104,22 @@ class PaymentRequest(BaseModel):
     package_id: str  # digital_annual, print_annual, combined_annual
     origin_url: str
 
+class CustomerDetails(BaseModel):
+    email: str
+    full_name: str
+    phone: str
+    # Address fields (required for print subscriptions)
+    address_line_1: Optional[str] = None
+    address_line_2: Optional[str] = None
+    city: Optional[str] = None
+    state: Optional[str] = None
+    postal_code: Optional[str] = None
+    country: Optional[str] = "India"
+
 class RazorpayOrderRequest(BaseModel):
     package_id: str
-    payment_method: str = "razorpay"  # razorpay or stripe
+    customer_details: CustomerDetails
+    payment_method: str = "razorpay"
 
 class RazorpayOrder(BaseModel):
     id: str
@@ -119,7 +132,7 @@ class RazorpayPaymentVerification(BaseModel):
     razorpay_payment_id: str
     razorpay_signature: str
     package_id: str
-    user_email: Optional[str] = None
+    customer_details: CustomerDetails
 
 class SubscriptionRequest(BaseModel):
     package_id: str
