@@ -56,7 +56,7 @@ const PricingPage = () => {
 
   const plans = [
     {
-      id: 'digital',
+      id: 'digital_annual',
       name: 'Digital Subscription',
       shortName: 'Digital',
       price: '₹499',
