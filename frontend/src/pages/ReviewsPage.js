@@ -190,14 +190,6 @@ const ReviewsPage = () => {
 };
 
 export default ReviewsPage;
-    {
-      id: '2',
-      title: 'Rolex Submariner: Timeless Diving Excellence',
-      slug: 'rolex-submariner-review',
-      product: 'Rolex Submariner Date',
-      brand: 'Rolex',
-      score: 9.8,
-      pros: ['Iconic design', 'Swiss craftsmanship', 'Excellent resale value', 'Water resistance to 300m'],
       cons: ['Premium price', 'Long waiting lists', 'Limited availability'],
       specs: {
         'Case Size': '41mm',
