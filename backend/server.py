@@ -807,6 +807,212 @@ async def stripe_webhook(request: Request):
         print(f"Webhook error: {str(e)}")
         raise HTTPException(status_code=400, detail="Webhook processing failed")
 
+# Razorpay Payment Routes
+@app.post("/api/payments/razorpay/create-order")
+async def create_razorpay_order(
+    order_request: RazorpayOrderRequest,
+    current_user = Depends(get_current_user_optional)
+):
+    """Create Razorpay order for subscription"""
+    
+    if not razorpay_client:
+        raise HTTPException(status_code=500, detail="Razorpay not configured")
+    
+    # Validate package
+    if order_request.package_id not in SUBSCRIPTION_PACKAGES:
+        raise HTTPException(status_code=400, detail="Invalid subscription package")
+    
+    package = SUBSCRIPTION_PACKAGES[order_request.package_id]
+    amount_in_paise = int(package["amount"] * 100)  # Convert to paise
+    
+    try:
+        # Create Razorpay order
+        razorpay_order = razorpay_client.order.create({
+            "amount": amount_in_paise,
+            "currency": "INR",
+            "payment_capture": 1,
+            "notes": {
+                "package_id": order_request.package_id,
+                "user_id": current_user.get("id") if current_user else None,
+                "user_email": current_user.get("email") if current_user else None
+            }
+        })
+        
+        # Store transaction in database
+        transaction = {
+            "id": str(uuid.uuid4()),
+            "order_id": razorpay_order["id"],
+            "user_id": current_user.get("id") if current_user else None,
+            "user_email": current_user.get("email") if current_user else None,
+            "package_id": order_request.package_id,
+            "amount": package["amount"],
+            "currency": "INR",
+            "payment_status": "initiated",
+            "payment_method": "razorpay",
+            "status": "created",
+            "created_at": datetime.utcnow(),
+            "updated_at": datetime.utcnow(),
+            "requires_delivery": order_request.package_id in ["print_annual", "combined_annual"]
+        }
+        
+        db.payment_transactions.insert_one(transaction)
+        
+        return {
+            "order_id": razorpay_order["id"],
+            "amount": razorpay_order["amount"],
+            "currency": razorpay_order["currency"],
+            "key_id": RAZORPAY_KEY_ID,
+            "package_name": package["name"],
+            "package_features": package["features"]
+        }
+        
+    except Exception as e:
+        print(f"Razorpay order creation error: {str(e)}")
+        raise HTTPException(status_code=500, detail="Failed to create Razorpay order")
+
+@app.post("/api/payments/razorpay/verify")
+async def verify_razorpay_payment(
+    verification_data: RazorpayPaymentVerification,
+    current_user = Depends(get_current_user_optional)
+):
+    """Verify Razorpay payment and update subscription"""
+    
+    if not razorpay_client:
+        raise HTTPException(status_code=500, detail="Razorpay not configured")
+    
+    try:
+        # Verify payment signature
+        razorpay_client.utility.verify_payment_signature({
+            'razorpay_order_id': verification_data.razorpay_order_id,
+            'razorpay_payment_id': verification_data.razorpay_payment_id,
+            'razorpay_signature': verification_data.razorpay_signature
+        })
+        
+        # Get transaction
+        transaction = db.payment_transactions.find_one({
+            "order_id": verification_data.razorpay_order_id
+        })
+        
+        if not transaction:
+            raise HTTPException(status_code=404, detail="Transaction not found")
+        
+        # Update transaction status
+        db.payment_transactions.update_one(
+            {"order_id": verification_data.razorpay_order_id},
+            {
+                "$set": {
+                    "payment_id": verification_data.razorpay_payment_id,
+                    "payment_status": "paid",
+                    "status": "complete",
+                    "updated_at": datetime.utcnow()
+                }
+            }
+        )
+        
+        # Update user subscription
+        user_email = transaction.get("user_email") or verification_data.user_email
+        if user_email:
+            subscription_end_date = datetime.utcnow() + timedelta(days=365)  # All are annual
+            
+            subscription_update = {
+                "is_premium": True,
+                "subscription_status": "active",
+                "subscription_package": transaction["package_id"],
+                "subscription_end_date": subscription_end_date,
+                "updated_at": datetime.utcnow()
+            }
+            
+            db.users.update_one(
+                {"email": user_email},
+                {"$set": subscription_update}
+            )
+        
+        return {
+            "status": "success",
+            "payment_status": "paid",
+            "package": transaction["package_id"],
+            "message": "Payment verified successfully"
+        }
+        
+    except razorpay.errors.SignatureVerificationError:
+        # Update transaction as failed
+        db.payment_transactions.update_one(
+            {"order_id": verification_data.razorpay_order_id},
+            {
+                "$set": {
+                    "payment_status": "failed",
+                    "status": "failed",
+                    "updated_at": datetime.utcnow()
+                }
+            }
+        )
+        raise HTTPException(status_code=400, detail="Invalid payment signature")
+    
+    except Exception as e:
+        print(f"Payment verification error: {str(e)}")
+        raise HTTPException(status_code=500, detail="Payment verification failed")
+
+@app.post("/api/payments/razorpay/webhook")
+async def razorpay_webhook(request: Request):
+    """Handle Razorpay webhooks"""
+    
+    try:
+        body = await request.body()
+        webhook_signature = request.headers.get('X-Razorpay-Signature', '')
+        webhook_secret = os.getenv('RAZORPAY_WEBHOOK_SECRET')
+        
+        if webhook_secret:
+            # Verify webhook signature
+            razorpay_client.utility.verify_webhook_signature(
+                body.decode(), 
+                webhook_signature, 
+                webhook_secret
+            )
+        
+        payload = json.loads(body)
+        event = payload.get('event')
+        payment_entity = payload.get('payload', {}).get('payment', {}).get('entity', {})
+        
+        if event == 'payment.captured':
+            order_id = payment_entity.get('order_id')
+            payment_id = payment_entity.get('id')
+            
+            # Update transaction
+            db.payment_transactions.update_one(
+                {"order_id": order_id},
+                {
+                    "$set": {
+                        "payment_id": payment_id,
+                        "payment_status": "paid",
+                        "status": "complete",
+                        "webhook_event": event,
+                        "updated_at": datetime.utcnow()
+                    }
+                }
+            )
+            
+        elif event == 'payment.failed':
+            order_id = payment_entity.get('order_id')
+            
+            # Update transaction
+            db.payment_transactions.update_one(
+                {"order_id": order_id},
+                {
+                    "$set": {
+                        "payment_status": "failed",
+                        "status": "failed",
+                        "webhook_event": event,
+                        "updated_at": datetime.utcnow()
+                    }
+                }
+            )
+        
+        return {"status": "ok"}
+        
+    except Exception as e:
+        print(f"Razorpay webhook error: {str(e)}")
+        raise HTTPException(status_code=400, detail="Webhook processing failed")
+
 @app.post("/api/payments/create-smart-subscription")
 async def create_smart_subscription(
     subscription_data: dict,
