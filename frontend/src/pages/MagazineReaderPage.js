@@ -237,114 +237,57 @@ const MagazineReaderPage = () => {
         </motion.div>
       </div>
 
-      {/* Enhanced Navigation Controls - Large Click Areas */}
-      <div style={{
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        width: '100%',
-        height: '100%',
-        pointerEvents: 'none',
-        zIndex: 999999
-      }}>
-        {/* Left Half - Previous Page */}
-        <div
-          onClick={prevPage}
-          style={{
-            position: 'absolute',
-            left: 0,
-            top: 0,
-            width: '50%',
-            height: '100%',
-            cursor: currentPage === 0 || isFlipping ? 'not-allowed' : 'pointer',
-            pointerEvents: 'auto',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'flex-start',
-            paddingLeft: '40px',
-            transition: 'all 0.3s ease',
-            background: 'transparent'
-          }}
-          onMouseEnter={(e) => {
-            if (!(currentPage === 0 || isFlipping)) {
-              e.target.style.background = 'linear-gradient(90deg, rgba(0,0,0,0.05) 0%, transparent 70%)';
-            }
-          }}
-          onMouseLeave={(e) => {
-            e.target.style.background = 'transparent';
-          }}
-        >
-          {!(currentPage === 0 || isFlipping) && (
-            <motion.div
-              initial={{ opacity: 0, x: -10 }}
-              animate={{ opacity: 0.4, x: 0 }}
-              whileHover={{ opacity: 0.8, scale: 1.05 }}
-              style={{
-                width: '50px',
-                height: '50px',
-                backgroundColor: 'rgba(0,0,0,0.6)',
-                borderRadius: '50%',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                color: 'white',
-                boxShadow: '0 2px 10px rgba(0,0,0,0.2)'
-              }}
-            >
-              <ChevronLeft size={24} />
-            </motion.div>
-          )}
-        </div>
-
-        {/* Right Half - Next Page */}
-        <div
-          onClick={nextPage}
-          style={{
-            position: 'absolute',
-            right: 0,
-            top: 0,
-            width: '50%',
-            height: '100%',
-            cursor: currentPage >= totalPages - 1 || isFlipping ? 'not-allowed' : 'pointer',
-            pointerEvents: 'auto',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'flex-end',
-            paddingRight: '40px',
-            transition: 'all 0.3s ease',
-            background: 'transparent'
-          }}
-          onMouseEnter={(e) => {
-            if (!(currentPage >= totalPages - 1 || isFlipping)) {
-              e.target.style.background = 'linear-gradient(270deg, rgba(0,0,0,0.05) 0%, transparent 70%)';
-            }
-          }}
-          onMouseLeave={(e) => {
-            e.target.style.background = 'transparent';
-          }}
-        >
-          {!(currentPage >= totalPages - 1 || isFlipping) && (
-            <motion.div
-              initial={{ opacity: 0, x: 10 }}
-              animate={{ opacity: 0.4, x: 0 }}
-              whileHover={{ opacity: 0.8, scale: 1.05 }}
-              style={{
-                width: '50px',
-                height: '50px',
-                backgroundColor: 'rgba(0,0,0,0.6)',
-                borderRadius: '50%',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                color: 'white',
-                boxShadow: '0 2px 10px rgba(0,0,0,0.2)'
-              }}
-            >
-              <ChevronRight size={24} />
-            </motion.div>
-          )}
-        </div>
-      </div>
+      {/* Bottom Controls Bar */}
+      <AnimatePresence>
+        {showControls && (
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 50 }}
+            className="absolute bottom-0 left-0 right-0 z-20 bg-gradient-to-t from-black/90 via-black/70 to-transparent p-4"
+          >
+            <div className="flex items-center justify-center text-white">
+              <div className="flex items-center space-x-6 bg-black/50 backdrop-blur-sm px-6 py-3 rounded-2xl">
+                <div className="flex items-center space-x-2">
+                  <div className="w-2 h-2 bg-amber-400 rounded-full"></div>
+                  <span className="text-sm font-medium">Just Urbane • August 2025</span>
+                </div>
+                <div className="w-px h-6 bg-white/20"></div>
+                <div className="flex items-center space-x-2 text-sm">
+                  <span>Digital Magazine</span>
+                  <span className="text-amber-400">•</span>
+                  <span>A4 Format</span>
+                  <span className="text-amber-400">•</span>
+                  <span>High Resolution PDF</span>
+                </div>
+                <div className="w-px h-6 bg-white/20"></div>
+                <div className="flex space-x-2">
+                  <button 
+                    onClick={handleDownload}
+                    className="p-2 hover:bg-white/10 rounded-lg transition-colors"
+                    title="Download PDF"
+                  >
+                    <Download className="h-4 w-4" />
+                  </button>
+                  <button 
+                    onClick={handleRotate}
+                    className="p-2 hover:bg-white/10 rounded-lg transition-colors"
+                    title="Rotate"
+                  >
+                    <RotateCw className="h-4 w-4" />
+                  </button>
+                  <button 
+                    className="p-2 hover:bg-white/10 rounded-lg transition-colors"
+                    title="Print"
+                  >
+                    <Printer className="h-4 w-4" />
+                  </button>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Premium Subscription Modal */}
       {showSubscriptionModal && (
