@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { Check, Crown, Star, Zap, Sparkles, ChevronRight, Award, Users, TrendingUp } from 'lucide-react';
+import { Check, Crown, Star, Zap, Sparkles, ChevronRight, Award, Users, TrendingUp, CreditCard } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import SubscriptionModal from '../components/SubscriptionModal';
+import { createRazorpayOrder, initializeRazorpayPayment, createCheckoutSession, formatPrice } from '../utils/payment';
 
 const PricingPage = () => {
   const [selectedPlan, setSelectedPlan] = useState(null);
