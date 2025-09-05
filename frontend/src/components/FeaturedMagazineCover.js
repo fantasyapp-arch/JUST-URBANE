@@ -125,11 +125,16 @@ const FeaturedMagazineCover = ({ issue, onReadClick, canRead }) => {
           </div>
         </div>
 
-        {/* Featured Articles Preview */}
+        {/* Featured Content Preview */}
         <div>
-          <h4 className="font-bold text-gray-900 mb-4 text-lg">In this issue:</h4>
+          <h4 className="font-bold text-gray-900 mb-4 text-lg">What's inside:</h4>
           <div className="space-y-4">
-            {issue.articles.slice(0, 4).map((article, index) => (
+            {[
+              { title: "Premium Lifestyle Articles", category: "lifestyle", description: "Luxury living and sophisticated choices" },
+              { title: "Fashion & Style Guides", category: "fashion", description: "Latest trends and timeless elegance" },
+              { title: "Technology Reviews", category: "technology", description: "Cutting-edge gadgets and innovations" },
+              { title: "Travel Destinations", category: "travel", description: "Exclusive locations and experiences" }
+            ].map((item, index) => (
               <div key={article.id} className="flex items-start space-x-4 p-4 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors">
                 <div className="w-16 h-16 bg-gray-200 rounded-lg overflow-hidden flex-shrink-0">
                   {article.hero_image ? (
