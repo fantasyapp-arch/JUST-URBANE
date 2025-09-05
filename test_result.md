@@ -1905,16 +1905,12 @@ metadata:
 
 test_plan:
   current_focus:
-    - "Razorpay Payment System Fix Verification - COMPLETED SUCCESSFULLY - 100% SUCCESS RATE"
-    - "CRITICAL VERIFICATION: All 5 priority areas from Pay Now button fix review request verified working perfectly"
-    - "GUEST CHECKOUT FUNCTIONALITY: /api/payments/razorpay/create-order working without authentication for all subscription types"
-    - "ADDRESS VALIDATION: Smart validation for print subscriptions (print_annual, combined_annual) requiring address fields"
-    - "PAYMENT VERIFICATION: /api/payments/razorpay/verify supporting guest checkout with automatic user creation"
-    - "COMPLETE PAYMENT FLOW: End-to-end payment process functional without authentication requirements"
-    - "ERROR HANDLING: Comprehensive validation for missing fields, invalid packages, and signature verification"
-    - "DATABASE OPERATIONS: Orders stored correctly with proper Razorpay integration and transaction tracking"
-    - "WEBHOOK FUNCTIONALITY: /api/payments/razorpay/webhook accessible and processing payment events"
-    - "PAY NOW BUTTON ISSUE RESOLVED: Guest users can complete payment flow without authentication barriers"
+    - "Fashion Men Subcategory Cleanup and Image Fix - CRITICAL ISSUES FOUND"
+    - "CLEANUP REQUIRED: Found 3 articles in Fashion > Men subcategory, expected only 1 article"
+    - "IMAGE FIX NEEDED: Perfect Suit Guide hero image returns HTTP 422 (Unprocessable Entity)"
+    - "ARTICLES TO REMOVE: 'The Art of Timeless Tailoring' and 'Modern Gentleman's Grooming Essentials'"
+    - "ARTICLE TO KEEP: 'Perfect Suit Guide for Men: Corporate Dressing Excellence' with working hero image"
+    - "HERO IMAGE ISSUE: https://images.shutterstock.com/image-photo/confident-businessman-perfect-tailored-suit-600nw-2234567890.jpg returns HTTP 422"
   stuck_tasks:
   test_all: true
   test_priority: "high_first"
