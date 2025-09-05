@@ -68,24 +68,27 @@ const MagazineReader = ({ isOpen, onClose }) => {
 
   // Smooth page navigation with preloading check
   const nextPage = useCallback(() => {
-    if (isTransitioning || currentPage >= pages.length - 1) return;
+    if (isTransitioning) return;
     
-    // Check if user can access premium content
+    // If we're on the last free page and user doesn't have premium access
     if (!canReadPremium && currentPage >= FREE_PREVIEW_PAGES - 1) {
-      setCurrentPage(FREE_PREVIEW_PAGES); // Go to subscription page
+      // Go directly to subscription gate (we'll use a special index)
+      setCurrentPage(FREE_PREVIEW_PAGES);
       return;
     }
     
-    // Only transition if next image is loaded
-    const nextPageIndex = currentPage + 1;
-    if (imagesLoaded.has(nextPageIndex) || nextPageIndex >= FREE_PREVIEW_PAGES) {
-      setIsTransitioning(true);
-      setTimeout(() => {
-        setCurrentPage(nextPageIndex);
-        setIsTransitioning(false);
-      }, 50); // Minimal delay for smoothness
+    // Normal navigation for premium users or within free pages
+    if (currentPage < pages.length - 1) {
+      const nextPageIndex = currentPage + 1;
+      if (imagesLoaded.has(nextPageIndex) || !canReadPremium) {
+        setIsTransitioning(true);
+        setTimeout(() => {
+          setCurrentPage(nextPageIndex);
+          setIsTransitioning(false);
+        }, 50);
+      }
     }
-  }, [currentPage, pages.length, imagesLoaded, canReadPremium]);
+  }, [currentPage, pages.length, imagesLoaded, canReadPremium, isTransitioning]);
 
   const prevPage = useCallback(() => {
     if (isTransitioning || currentPage <= 0) return;
