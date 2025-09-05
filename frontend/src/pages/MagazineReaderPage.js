@@ -433,7 +433,6 @@ const MagazineReaderPage = () => {
         </div>
       )}
     </div>
-    </>
   );
 };
 
