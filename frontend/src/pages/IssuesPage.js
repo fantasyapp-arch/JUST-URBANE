@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate, Link } from 'react-router-dom';
-import { PlayCircle, Eye, Calendar, ArrowRight, Star, Sparkles } from 'lucide-react';
+import { PlayCircle, Eye, Calendar, ArrowRight, Star, Sparkles, Clock, Users, Award } from 'lucide-react';
 import parseMagazineContent from '../components/MagazineContentParser';
 
 const IssuesPage = () => {
@@ -12,210 +12,211 @@ const IssuesPage = () => {
     navigate('/magazine-reader');
   };
 
-  // Get magazine pages for thumbnails
+  // Get magazine pages for thumbnails - only use first one
   const pages = parseMagazineContent();
-  
-  // Use first 3 pages as thumbnails
-  const magazineThumbnails = pages.slice(0, 3);
-
-  const currentIssue = {
-    title: 'Just Urbane',
-    subtitle: 'August 2025 Premium Edition',
-    description: 'Experience the pinnacle of luxury lifestyle, premium fashion, and cutting-edge technology through our world-class digital magazine platform.',
-    publishDate: 'August 2025',
-    totalPages: pages.length,
-    category: 'Luxury Lifestyle Magazine',
-    highlights: [
-      'Exclusive Celebrity Interviews & Features',
-      'World-Class Luxury Travel Destinations', 
-      'Premium Fashion Collections & Trends',
-      'High-End Technology & Innovation Reviews',
-      'Luxury Automotive & Lifestyle Features',
-      'Art, Culture & Premium Entertainment Content'
-    ]
-  };
+  const featuredMagazine = pages[0];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100">
-      {/* Premium Hero Section */}
-      <div className="relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-black via-gray-900 to-black opacity-90"></div>
-        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1586953135225-fc4e67e98b90?w=1920&h=1080')] bg-cover bg-center"></div>
-        
-        <div className="relative z-10 container mx-auto px-6 md:px-8 py-24">
+    <div className="min-h-screen bg-white">
+      
+      {/* Clean Header Section */}
+      <div className="bg-gradient-to-r from-gray-900 via-black to-gray-900 text-white">
+        <div className="max-w-7xl mx-auto px-8 py-16">
           <motion.div
-            initial={{ opacity: 0, y: 40 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1 }}
-            className="text-center max-w-5xl mx-auto"
+            transition={{ duration: 0.8 }}
+            className="text-center"
           >
-            <div className="flex justify-center mb-8">
-              <div className="bg-gradient-to-r from-amber-400 to-gold-500 text-black px-8 py-3 rounded-full text-lg font-bold tracking-wide shadow-lg">
-                <Sparkles className="inline h-5 w-5 mr-3" />
-                PREMIUM DIGITAL MAGAZINE
-              </div>
+            <div className="inline-flex items-center bg-amber-500 text-black px-6 py-2 rounded-full text-sm font-semibold mb-8">
+              <Sparkles className="w-4 h-4 mr-2" />
+              DIGITAL MAGAZINE
             </div>
-            
-            <h1 className="text-6xl md:text-8xl font-bold mb-10 bg-gradient-to-r from-white via-amber-200 to-gold-300 bg-clip-text text-transparent leading-tight">
-              Just Urbane
+            <h1 className="text-5xl md:text-6xl font-bold mb-6 leading-tight">
+              Just Urbane Magazine
             </h1>
-            
-            <p className="text-2xl md:text-3xl text-gray-300 mb-6 font-light">
-              {currentIssue.subtitle}
-            </p>
-            
-            <p className="text-xl md:text-2xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
-              {currentIssue.description}
+            <p className="text-xl text-gray-300 max-w-2xl mx-auto">
+              Premium lifestyle content featuring luxury fashion, technology, and exclusive interviews
             </p>
           </motion.div>
         </div>
       </div>
 
-      {/* Magazine Preview Section */}
-      <div className="container mx-auto px-6 md:px-8 py-20">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.3 }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-4xl md:text-6xl font-bold text-gray-900 mb-8">
-            Premium Digital Magazine Collection
-          </h2>
-          <p className="text-xl md:text-2xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
-            Discover our world-class digital magazine featuring luxury lifestyle, premium fashion, cutting-edge technology, and exclusive content curated for the sophisticated reader
-          </p>
-        </motion.div>
-
-        {/* Magazine Thumbnails */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-20 px-4">
-          {magazineThumbnails.map((page, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 + index * 0.1 }}
-              className="relative group cursor-pointer"
-              onClick={openMagazineReader}
-            >
-              <div className="relative overflow-hidden rounded-3xl shadow-2xl group-hover:shadow-3xl transition-all duration-500 bg-white p-2">
+      {/* Main Content Section */}
+      <div className="max-w-7xl mx-auto px-8 py-16">
+        
+        {/* Featured Magazine & Info Grid */}
+        <div className="grid lg:grid-cols-2 gap-16 items-center mb-20">
+          
+          {/* Left: Featured Magazine */}
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="relative"
+          >
+            <div className="relative group cursor-pointer" onClick={openMagazineReader}>
+              <div className="bg-gradient-to-br from-gray-100 to-gray-200 rounded-2xl p-6 shadow-2xl group-hover:shadow-3xl transition-all duration-500">
                 <img
-                  src={page.pageImage}
-                  alt={`Premium Magazine Page ${index + 1}`}
-                  className="w-full h-96 object-cover rounded-2xl group-hover:scale-105 transition-transform duration-700"
+                  src={featuredMagazine?.pageImage || 'https://images.unsplash.com/photo-1586953135225-fc4e67e98b90?w=600&h=800'}
+                  alt="Just Urbane Magazine"
+                  className="w-full h-96 object-cover rounded-xl group-hover:scale-[1.02] transition-transform duration-500"
                 />
                 
                 {/* Overlay */}
-                <div className="absolute inset-2 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl"></div>
-                
-                {/* Premium Badge */}
-                <div className="absolute top-6 right-6 bg-gradient-to-r from-amber-400 to-gold-500 text-black px-4 py-2 rounded-full text-sm font-bold">
-                  Premium Content
-                </div>
-                
-                {/* Preview Button */}
-                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <button className="bg-white/20 backdrop-blur-md text-white px-8 py-4 rounded-full font-semibold hover:bg-white/30 transition-all duration-300 flex items-center space-x-3 shadow-xl">
-                    <Eye className="h-5 w-5" />
+                <div className="absolute inset-6 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl flex items-center justify-center">
+                  <button className="bg-white text-black px-8 py-3 rounded-full font-semibold flex items-center space-x-3 shadow-lg">
+                    <Eye className="w-5 h-5" />
                     <span>Read Magazine</span>
                   </button>
                 </div>
               </div>
               
-              <div className="mt-6 text-center">
-                <h3 className="text-xl font-bold text-gray-900 mb-3">
-                  {page.title || `Premium Edition Page ${index + 1}`}
-                </h3>
-                <p className="text-lg text-gray-600">
-                  {index === 0 ? 'Luxury Fashion & Style' : index === 1 ? 'Exclusive Celebrity Features' : 'Premium Lifestyle & Travel'}
-                </p>
+              {/* Badge */}
+              <div className="absolute -top-3 -right-3 bg-amber-500 text-black px-4 py-2 rounded-full text-sm font-bold shadow-lg">
+                Latest Issue
               </div>
-            </motion.div>
-          ))}
-        </div>
+            </div>
+          </motion.div>
 
-        {/* Issue Highlights */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
-          className="bg-white rounded-3xl shadow-2xl p-10 md:p-16 mb-20 mx-4"
-        >
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          {/* Right: Magazine Info */}
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="space-y-8"
+          >
             <div>
-              <div className="flex items-center space-x-4 mb-8">
-                <Star className="h-8 w-8 text-amber-500" />
-                <span className="text-amber-600 font-bold text-xl">Premium Magazine Features</span>
+              <h2 className="text-4xl font-bold text-gray-900 mb-4">
+                August 2025 Premium Edition
+              </h2>
+              <p className="text-lg text-gray-600 leading-relaxed">
+                Dive into our latest digital magazine featuring exclusive celebrity interviews, luxury travel destinations, premium fashion trends, and cutting-edge technology reviews.
+              </p>
+            </div>
+
+            {/* Stats */}
+            <div className="grid grid-cols-3 gap-6">
+              <div className="text-center p-4 bg-gray-50 rounded-xl">
+                <div className="text-2xl font-bold text-gray-900">{pages.length}</div>
+                <div className="text-sm text-gray-600">Pages</div>
               </div>
-              
-              <h3 className="text-4xl md:text-5xl font-bold text-gray-900 mb-8">
-                Luxury Content Inside
-              </h3>
-              
-              <div className="space-y-6">
-                {currentIssue.highlights.map((highlight, index) => (
-                  <div key={index} className="flex items-center space-x-4">
-                    <div className="w-3 h-3 bg-gradient-to-r from-amber-400 to-gold-500 rounded-full flex-shrink-0"></div>
-                    <span className="text-gray-700 text-xl font-medium">{highlight}</span>
+              <div className="text-center p-4 bg-gray-50 rounded-xl">
+                <div className="text-2xl font-bold text-gray-900">15</div>
+                <div className="text-sm text-gray-600">Articles</div>
+              </div>
+              <div className="text-center p-4 bg-gray-50 rounded-xl">
+                <div className="text-2xl font-bold text-gray-900">30</div>
+                <div className="text-sm text-gray-600">Min Read</div>
+              </div>
+            </div>
+
+            {/* Features */}
+            <div className="space-y-4">
+              <h3 className="text-xl font-semibold text-gray-900">What's Inside</h3>
+              <div className="space-y-3">
+                {[
+                  'Exclusive Celebrity Interviews',
+                  'Luxury Travel Destinations',
+                  'Premium Fashion Collections',
+                  'Latest Technology Reviews',
+                  'Art & Culture Features'
+                ].map((feature, index) => (
+                  <div key={index} className="flex items-center space-x-3">
+                    <div className="w-2 h-2 bg-amber-500 rounded-full"></div>
+                    <span className="text-gray-700">{feature}</span>
                   </div>
                 ))}
               </div>
             </div>
-            
-            <div className="text-center lg:text-right">
-              <div className="bg-gradient-to-br from-gray-900 via-black to-gray-800 rounded-3xl p-10 text-white shadow-2xl">
-                <div className="text-7xl font-bold mb-4 bg-gradient-to-r from-amber-400 to-gold-500 bg-clip-text text-transparent">{currentIssue.totalPages}</div>
-                <div className="text-2xl text-gray-300 mb-6">Premium Pages</div>
-                <div className="text-amber-400 font-bold text-lg">
-                  {currentIssue.publishDate}
-                </div>
-                <div className="mt-4 text-gray-400 text-sm">
-                  World-Class Content
-                </div>
-              </div>
-            </div>
-          </div>
-        </motion.div>
 
-        {/* Premium CTA Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.8 }}
-          className="bg-gradient-to-r from-black via-gray-900 to-black rounded-3xl p-10 md:p-16 text-center text-white relative overflow-hidden mx-4"
-        >
-          <div className="absolute inset-0 bg-gradient-to-r from-amber-500/20 via-gold-500/20 to-amber-500/20"></div>
-          <div className="relative z-10">
-            <h3 className="text-4xl md:text-5xl font-bold mb-8">
-              Experience Premium Digital Magazine
-            </h3>
-            <p className="text-xl md:text-2xl text-gray-300 mb-10 max-w-3xl mx-auto leading-relaxed">
-              Immerse yourself in luxury lifestyle content with our premium digital magazine. Start with 3 pages free preview, then unlock the complete premium experience with exclusive interviews, luxury insights, and world-class content.
-            </p>
-            
-            <div className="flex flex-col sm:flex-row gap-8 justify-center items-center">
+            {/* CTA Buttons */}
+            <div className="flex flex-col sm:flex-row gap-4">
               <button
                 onClick={openMagazineReader}
-                className="bg-gradient-to-r from-amber-500 to-gold-600 hover:from-amber-600 hover:to-gold-700 text-black font-bold px-12 py-5 rounded-2xl transition-all duration-300 transform hover:scale-105 flex items-center space-x-4 shadow-2xl text-lg"
+                className="bg-black text-white px-8 py-4 rounded-xl font-semibold hover:bg-gray-800 transition-colors duration-300 flex items-center justify-center space-x-3"
               >
-                <PlayCircle className="h-7 w-7" />
-                <span>Start Premium Preview</span>
+                <PlayCircle className="w-5 h-5" />
+                <span>Read Now</span>
               </button>
               
               <Link
                 to="/pricing"
-                className="border-2 border-white text-white hover:bg-white hover:text-black font-bold px-12 py-5 rounded-2xl transition-all duration-300 flex items-center space-x-4 text-lg"
+                className="border-2 border-black text-black px-8 py-4 rounded-xl font-semibold hover:bg-black hover:text-white transition-all duration-300 flex items-center justify-center space-x-3"
               >
-                <span>View Premium Plans</span>
-                <ArrowRight className="h-6 w-6" />
+                <span>Subscribe</span>
+                <ArrowRight className="w-5 h-5" />
               </Link>
             </div>
+          </motion.div>
+        </div>
+
+        {/* Magazine Highlights */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.6 }}
+          className="bg-gray-50 rounded-2xl p-12 mb-16"
+        >
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">Premium Content Experience</h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              Discover why thousands of readers choose Just Urbane for their luxury lifestyle content
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            <div className="text-center space-y-4">
+              <div className="w-16 h-16 bg-amber-500 rounded-full flex items-center justify-center mx-auto">
+                <Award className="w-8 h-8 text-white" />
+              </div>
+              <h3 className="text-xl font-semibold text-gray-900">Award-Winning Content</h3>
+              <p className="text-gray-600">Curated by industry experts and recognized for editorial excellence</p>
+            </div>
             
-            <div className="mt-10 text-lg text-gray-400">
-              <span>✨ No credit card required for premium preview</span>
+            <div className="text-center space-y-4">
+              <div className="w-16 h-16 bg-amber-500 rounded-full flex items-center justify-center mx-auto">
+                <Users className="w-8 h-8 text-white" />
+              </div>
+              <h3 className="text-xl font-semibold text-gray-900">Exclusive Access</h3>
+              <p className="text-gray-600">Get behind-the-scenes content and exclusive interviews</p>
+            </div>
+            
+            <div className="text-center space-y-4">
+              <div className="w-16 h-16 bg-amber-500 rounded-full flex items-center justify-center mx-auto">
+                <Clock className="w-8 h-8 text-white" />
+              </div>
+              <h3 className="text-xl font-semibold text-gray-900">Always Fresh</h3>
+              <p className="text-gray-600">New content updated regularly with the latest trends</p>
             </div>
           </div>
         </motion.div>
+
+        {/* Final CTA */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.8 }}
+          className="text-center bg-black text-white rounded-2xl p-12"
+        >
+          <h2 className="text-3xl font-bold mb-6">Ready to Experience Premium?</h2>
+          <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
+            Start with 3 pages free, then unlock complete access to our premium digital magazine
+          </p>
+          
+          <button
+            onClick={openMagazineReader}
+            className="bg-amber-500 hover:bg-amber-600 text-black font-bold px-10 py-4 rounded-xl transition-all duration-300 transform hover:scale-105 inline-flex items-center space-x-3"
+          >
+            <PlayCircle className="w-6 h-6" />
+            <span>Start Reading</span>
+          </button>
+          
+          <div className="mt-6 text-sm text-gray-400">
+            ✨ No credit card required for preview
+          </div>
+        </motion.div>
+
       </div>
     </div>
   );
