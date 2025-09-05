@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   X, ZoomIn, ZoomOut, Download, Maximize, Minimize,
-  RotateCw, BookOpen, Printer
+  RotateCw, BookOpen, Printer, Crown
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { Link } from 'react-router-dom';
