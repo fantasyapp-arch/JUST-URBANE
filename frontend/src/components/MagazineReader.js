@@ -282,23 +282,6 @@ const MagazineReader = ({ articles, isOpen, onClose, initialPageIndex = 0 }) => 
           )}
         </AnimatePresence>
 
-        {/* Premium Subscription Modal */}
-        <AnimatePresence>
-          {showSubscriptionModal && (
-            <PremiumSubscriptionModal
-              onClose={() => setShowSubscriptionModal(false)}
-            />
-          )}
-        </AnimatePresence>
-
-        {/* Table of Contents Modal */}
-        <TableOfContentsModal
-          isOpen={showTableOfContents}
-          onClose={() => setShowTableOfContents(false)}
-          articles={articles}
-          onPageSelect={goToPage}
-          currentPage={currentPage}
-        />
       </motion.div>
     </AnimatePresence>
   );
