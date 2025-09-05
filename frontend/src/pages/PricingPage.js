@@ -160,7 +160,11 @@ const PricingPage = () => {
               <div className="p-6 lg:p-8">
                 {/* Plan Header */}
                 <div className="text-center mb-8">
-                  <div className={`w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-${plan.color}-500 to-${plan.color}-600 flex items-center justify-center`}>
+                  <div className={`w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br flex items-center justify-center ${
+                    plan.id === 'digital_annual' ? 'from-blue-500 to-blue-600' :
+                    plan.id === 'print_annual' ? 'from-emerald-500 to-emerald-600' :
+                    'from-indigo-500 to-indigo-600'
+                  }`}>
                     {plan.id === 'digital_annual' && <Zap className="w-8 h-8 text-white" />}
                     {plan.id === 'print_annual' && <Star className="w-8 h-8 text-white" />}
                     {plan.id === 'combined_annual' && <Crown className="w-8 h-8 text-white" />}
