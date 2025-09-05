@@ -12,7 +12,37 @@ const TravelPage = () => {
   const [sortBy, setSortBy] = useState('newest');
   const [searchQuery, setSearchQuery] = useState('');
 
-  // Mock travel destinations data
+  // Fetch real travel articles from database
+  const { data: articles = [], isLoading } = useArticles({ category: 'travel', limit: 20 });
+
+  // Get article route helper
+  const getArticleRoute = (article) => {
+    const slug = article.slug;
+    if (slug === 'when-in-france-travel-destinations') return '/when-in-france-travel-destinations';
+    if (slug === 'sustainable-travel-conscious-guide') return '/sustainable-travel-conscious-guide';
+    return `/article/${slug}`;
+  };
+
+  // Transform real articles into destination format
+  const destinations = articles.map(article => ({
+    id: article.id,
+    name: article.title,
+    slug: article.slug,
+    region: article.subcategory === 'adventure' ? 'Europe' : 'Global',
+    type: article.subcategory === 'guides' ? 'Sustainable Travel' : 'Adventure Travel',
+    hero_image: article.hero_image,
+    gallery: [article.hero_image],
+    description: article.body.substring(0, 200) + '...',
+    experiences: ['Premium experiences', 'Luxury accommodations', 'Cultural immersion', 'Exclusive access'],
+    best_time_to_visit: 'Year-round',
+    price_range: '₹50,000 - ₹150,000 per trip',
+    rating: 4.8,
+    featured: true,
+    created_at: article.published_at,
+    author: article.author_name
+  }));
+
+  // Mock travel destinations data (keeping as fallback if no real articles)
   const destinations = [
     {
       id: '1',
