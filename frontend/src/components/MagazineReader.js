@@ -247,14 +247,9 @@ const MagazineReader = ({ isOpen, onClose }) => {
               />
             ))}
             {!canReadPremium && (
-              <button
-                onClick={() => setCurrentPage(FREE_PREVIEW_PAGES)}
-                className={`w-2 h-2 rounded-full transition-colors ${
-                  currentPage >= FREE_PREVIEW_PAGES ? 'bg-amber-400' : 'bg-white/40 hover:bg-white/60'
-                }`}
-              >
-                <Lock className="h-1 w-1" />
-              </button>
+              <div className={`w-2 h-2 rounded-full transition-colors ${
+                currentPage >= FREE_PREVIEW_PAGES ? 'bg-amber-400' : 'bg-white/40'
+              }`} />
             )}
           </div>
         </>
