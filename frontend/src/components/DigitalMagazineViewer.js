@@ -239,7 +239,7 @@ const DigitalMagazineViewer = ({ isOpen, onClose }) => {
                       className="p-2 hover:bg-white/10 rounded-lg transition-colors"
                       title="Print"
                     >
-                      <Print className="h-4 w-4" />
+                      <Printer className="h-4 w-4" />
                     </button>
                   </div>
                 </div>
