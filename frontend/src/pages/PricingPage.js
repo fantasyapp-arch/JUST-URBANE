@@ -134,7 +134,7 @@ const PricingPage = () => {
       </div>
 
       {/* Pricing Cards */}
-      <div className="relative -mt-16 lg:-mt-24 max-w-7xl mx-auto px-6 lg:px-8 pb-16 lg:pb-24">
+      <div className="relative -mt-16 lg:-mt-24 max-w-7xl mx-auto px-6 lg:px-8 pb-16 lg:pb-24 z-30">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-6">
           {plans.map((plan, index) => (
             <motion.div
@@ -144,7 +144,7 @@ const PricingPage = () => {
               transition={{ duration: 0.6, delay: index * 0.1 }}
               className={`relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 ${
                 plan.popular ? 'ring-2 ring-blue-500 lg:scale-105' : ''
-              }`}
+              } z-40`}
               onMouseEnter={() => setHoveredPlan(plan.id)}
               onMouseLeave={() => setHoveredPlan(null)}
             >
