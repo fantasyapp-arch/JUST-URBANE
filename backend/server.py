@@ -332,7 +332,7 @@ async def health_check():
 @app.post("/api/auth/register", response_model=Token)
 async def register(user: UserCreate):
     # Check if user exists
-    existing_user = await db.users.find_one({"email": user.email})
+    existing_user = db.users.find_one({"email": user.email})
     if existing_user:
         raise HTTPException(status_code=400, detail="Email already registered")
     
@@ -344,7 +344,7 @@ async def register(user: UserCreate):
     user_dict["created_at"] = datetime.utcnow()
     del user_dict["password"]
     
-    await db.users.insert_one(user_dict)
+    db.users.insert_one(user_dict)
     
     # Create access token
     access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
