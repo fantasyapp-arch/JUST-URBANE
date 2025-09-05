@@ -77,10 +77,17 @@ const CustomerDetailsModal = ({ isOpen, onClose, selectedPlan, onPaymentSuccess 
     setIsProcessing(true);
     
     try {
+      console.log('Creating Razorpay order with data:', {
+        packageId: selectedPlan.id,
+        customerDetails: formData
+      });
+      
       // Create Razorpay order
       const orderData = await createRazorpayOrder(selectedPlan.id, formData);
+      console.log('Order created successfully:', orderData);
       
       // Initialize Razorpay payment
+      console.log('Initializing Razorpay payment...');
       const result = await initializeRazorpayPayment(orderData, formData);
       
       if (result.status === 'success') {
@@ -90,8 +97,23 @@ const CustomerDetailsModal = ({ isOpen, onClose, selectedPlan, onPaymentSuccess 
         alert('Payment successful! Your subscription is now active.');
       }
     } catch (error) {
-      console.error('Payment error:', error);
-      alert(error.message || 'Payment failed. Please try again.');
+      console.error('Payment error details:', {
+        message: error.message,
+        response: error.response?.data,
+        status: error.response?.status
+      });
+      
+      let errorMessage = 'Payment failed. Please try again.';
+      
+      if (error.response?.status === 401) {
+        errorMessage = 'Please login first to complete the payment.';
+      } else if (error.response?.data?.detail) {
+        errorMessage = error.response.data.detail;
+      } else if (error.message) {
+        errorMessage = error.message;
+      }
+      
+      alert(errorMessage);
     } finally {
       setIsProcessing(false);
     }
