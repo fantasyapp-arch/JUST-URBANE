@@ -54,13 +54,25 @@ const ReviewsPage = () => {
     featured: true
   }));
 
-  // Fallback reviews data if no real articles available
-  const fallbackReviews = [
-    {
-      id: '1',
-      title: 'Apple Watch Ultra 2: The Ultimate Luxury Smartwatch',
-      slug: 'apple-watch-ultra-2-review',
-      product: 'Apple Watch Ultra 2',
+  // Filter categories based on available reviews
+  const availableCategories = [...new Set(reviews.map(review => review.category))];
+
+  // Categories for filtering (updated to use real categories)
+  const categories = [
+    { id: 'all', name: 'All Categories', icon: '📱' },
+    ...availableCategories.map(cat => ({
+      id: cat,
+      name: cat.charAt(0).toUpperCase() + cat.slice(1),
+      icon: cat === 'food' ? '🍽️' : cat === 'luxury' ? '⛵' : '📱'
+    }))
+  ];
+
+  // Mock fallback review (can be removed when not needed)
+  const mockReview = {
+    id: '1',
+    title: 'Luxury Experience Review',
+    slug: 'luxury-experience-review',
+    product: 'Premium Service',
       brand: 'Apple',
       score: 9.2,
       pros: ['Premium titanium build', 'Exceptional battery life', 'Comprehensive health tracking', 'Bright Always-On display'],
