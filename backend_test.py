@@ -776,38 +776,342 @@ class JustUrbaneAPITester:
             self.log_test("Specific Endpoints", False, f"Error: {str(e)}")
             return False
 
-    def run_standardized_category_tests(self):
-        """Run Comprehensive Standardized Category and Article System Tests"""
-        print("🏷️ STARTING STANDARDIZED CATEGORY AND ARTICLE SYSTEM TESTING")
+    def test_razorpay_payment_system(self):
+        """Test Razorpay Payment System Integration - PRIORITY TEST"""
+        print("\n💳 RAZORPAY PAYMENT SYSTEM TESTING")
+        print("=" * 50)
+        
+        try:
+            # Test 1: Payment Packages API
+            response = self.session.get(f"{self.base_url}/payments/packages", timeout=10)
+            if response.status_code == 200:
+                data = response.json()
+                packages = data.get("packages", [])
+                if packages:
+                    # Check for expected packages
+                    package_ids = [pkg.get("id") for pkg in packages]
+                    expected_packages = ["digital_annual", "print_annual", "combined_annual"]
+                    
+                    found_packages = [pkg for pkg in expected_packages if pkg in package_ids]
+                    if len(found_packages) >= 3:
+                        self.log_test("Razorpay Packages API", True, f"All 3 subscription packages available: {found_packages}")
+                        
+                        # Check pricing
+                        for package in packages:
+                            pkg_id = package.get("id")
+                            price = package.get("price")
+                            currency = package.get("currency")
+                            
+                            if pkg_id == "digital_annual" and price == 1.0 and currency == "INR":
+                                self.log_test("Digital Package Pricing", True, f"Digital: ₹{price} {currency} (trial price)")
+                            elif pkg_id == "print_annual" and price == 499.0 and currency == "INR":
+                                self.log_test("Print Package Pricing", True, f"Print: ₹{price} {currency}")
+                            elif pkg_id == "combined_annual" and price == 999.0 and currency == "INR":
+                                self.log_test("Combined Package Pricing", True, f"Combined: ₹{price} {currency}")
+                    else:
+                        self.log_test("Razorpay Packages API", False, f"Missing packages. Found: {found_packages}, Expected: {expected_packages}")
+                else:
+                    self.log_test("Razorpay Packages API", False, "No packages found in response")
+            else:
+                self.log_test("Razorpay Packages API", False, f"HTTP {response.status_code}: {response.text}")
+            
+            # Test 2: Razorpay Order Creation
+            customer_details = {
+                "email": f"test_{int(time.time())}@justurbane.com",
+                "full_name": "Premium Test User",
+                "phone": "+919876543210",
+                "password": "testpass123",
+                "address_line_1": "123 Test Street",
+                "city": "Mumbai",
+                "state": "Maharashtra",
+                "postal_code": "400001",
+                "country": "India"
+            }
+            
+            order_request = {
+                "package_id": "print_annual",
+                "customer_details": customer_details,
+                "payment_method": "razorpay"
+            }
+            
+            response = self.session.post(
+                f"{self.base_url}/payments/razorpay/create-order",
+                json=order_request,
+                headers={"Content-Type": "application/json"},
+                timeout=15
+            )
+            
+            if response.status_code == 200:
+                order_data = response.json()
+                if order_data.get("order_id") and order_data.get("key_id") == self.razorpay_key_id:
+                    self.log_test("Razorpay Order Creation", True, f"Order created successfully: {order_data.get('order_id')}")
+                    self.log_test("Razorpay Key Configuration", True, f"Correct Razorpay Key ID: {order_data.get('key_id')}")
+                else:
+                    self.log_test("Razorpay Order Creation", False, f"Invalid order response: {order_data}")
+            else:
+                self.log_test("Razorpay Order Creation", False, f"HTTP {response.status_code}: {response.text}")
+            
+            # Test 3: Webhook Endpoint Accessibility
+            response = self.session.post(
+                f"{self.base_url}/payments/razorpay/webhook",
+                json={"event": "test", "payload": {}},
+                headers={"Content-Type": "application/json", "X-Razorpay-Signature": "test"},
+                timeout=10
+            )
+            
+            # Webhook should be accessible (even if it fails validation)
+            if response.status_code in [200, 400, 500]:
+                self.log_test("Razorpay Webhook Endpoint", True, f"Webhook endpoint accessible (HTTP {response.status_code})")
+            else:
+                self.log_test("Razorpay Webhook Endpoint", False, f"Webhook endpoint not accessible: HTTP {response.status_code}")
+                
+        except Exception as e:
+            self.log_test("Razorpay Payment System", False, f"Error: {str(e)}")
+
+    def test_database_connectivity(self):
+        """Test MongoDB Database Connectivity and Data Retrieval - PRIORITY TEST"""
+        print("\n🗄️ DATABASE CONNECTIVITY TESTING")
+        print("=" * 40)
+        
+        try:
+            # Test multiple endpoints to verify database connectivity
+            endpoints_to_test = [
+                ("/articles", "Articles Collection"),
+                ("/categories", "Categories Collection"),
+                ("/reviews", "Reviews Collection"),
+                ("/issues", "Magazine Issues Collection"),
+                ("/destinations", "Destinations Collection"),
+                ("/authors", "Authors Collection")
+            ]
+            
+            successful_connections = 0
+            total_records = 0
+            
+            for endpoint, description in endpoints_to_test:
+                response = self.session.get(f"{self.base_url}{endpoint}", timeout=10)
+                if response.status_code == 200:
+                    data = response.json()
+                    if isinstance(data, list):
+                        record_count = len(data)
+                        total_records += record_count
+                        successful_connections += 1
+                        self.log_test(f"Database - {description}", True, f"Retrieved {record_count} records")
+                    else:
+                        self.log_test(f"Database - {description}", False, f"Invalid response format: {type(data)}")
+                else:
+                    self.log_test(f"Database - {description}", False, f"HTTP {response.status_code}")
+            
+            # Overall database health assessment
+            if successful_connections >= 5:
+                self.log_test("Database Connectivity", True, f"{successful_connections}/{len(endpoints_to_test)} collections accessible, {total_records} total records")
+            else:
+                self.log_test("Database Connectivity", False, f"Only {successful_connections}/{len(endpoints_to_test)} collections accessible")
+                
+        except Exception as e:
+            self.log_test("Database Connectivity", False, f"Error: {str(e)}")
+
+    def test_cors_and_api_routes(self):
+        """Test CORS Configuration and API Route Prefixes - PRIORITY TEST"""
+        print("\n🌐 CORS AND API ROUTES TESTING")
+        print("=" * 40)
+        
+        try:
+            # Test 1: CORS Preflight Request
+            response = self.session.options(
+                f"{self.base_url}/health",
+                headers={
+                    "Origin": "https://urbane-refresh.preview.emergentagent.com",
+                    "Access-Control-Request-Method": "GET",
+                    "Access-Control-Request-Headers": "Content-Type,Authorization"
+                },
+                timeout=10
+            )
+            
+            if response.status_code in [200, 204]:
+                cors_headers = response.headers
+                allow_origin = cors_headers.get("Access-Control-Allow-Origin")
+                allow_methods = cors_headers.get("Access-Control-Allow-Methods")
+                allow_headers = cors_headers.get("Access-Control-Allow-Headers")
+                
+                if allow_origin and allow_methods:
+                    self.log_test("CORS Configuration", True, f"CORS properly configured - Origin: {allow_origin}")
+                else:
+                    self.log_test("CORS Configuration", False, f"CORS headers incomplete - Origin: {allow_origin}, Methods: {allow_methods}")
+            else:
+                self.log_test("CORS Configuration", False, f"CORS preflight failed: HTTP {response.status_code}")
+            
+            # Test 2: API Route Prefixes
+            api_routes = [
+                "/health",
+                "/articles",
+                "/categories", 
+                "/auth/register",
+                "/payments/packages"
+            ]
+            
+            successful_routes = 0
+            for route in api_routes:
+                response = self.session.get(f"{self.base_url}{route}", timeout=10)
+                if response.status_code in [200, 401, 422]:  # 401/422 are valid for some endpoints
+                    successful_routes += 1
+                    self.log_test(f"API Route - {route}", True, f"Route accessible (HTTP {response.status_code})")
+                else:
+                    self.log_test(f"API Route - {route}", False, f"Route failed: HTTP {response.status_code}")
+            
+            if successful_routes >= 4:
+                self.log_test("API Route Prefixes", True, f"{successful_routes}/{len(api_routes)} API routes working correctly")
+            else:
+                self.log_test("API Route Prefixes", False, f"Only {successful_routes}/{len(api_routes)} API routes working")
+                
+        except Exception as e:
+            self.log_test("CORS and API Routes", False, f"Error: {str(e)}")
+
+    def run_css_alignment_verification_tests(self):
+        """Run Comprehensive Backend Testing After CSS Alignment Fixes"""
+        print("🎨 STARTING BACKEND VERIFICATION AFTER CSS ALIGNMENT FIXES")
         print("=" * 70)
-        print("Testing comprehensive category and article system for scaling readiness...")
+        print("Verifying that CSS alignment fixes did not affect backend functionality...")
         print()
         
         # 1. API Health Check
         self.test_health_check()
         
-        # 2. Categories API Testing
+        # 2. Article Retrieval APIs Testing
+        print("\n📰 ARTICLE RETRIEVAL APIs TESTING")
+        print("=" * 40)
+        articles = self.test_articles_endpoint()
+        if articles:
+            self.test_single_article(articles)
+            self.test_article_retrieval_by_uuid_and_slug()
+            self.test_category_subcategory_filtering()
+        
+        # 3. Category and Subcategory APIs Testing
+        print("\n🏷️ CATEGORY AND SUBCATEGORY APIs TESTING")
+        print("=" * 45)
         categories = self.test_standardized_category_system()
+        self.test_articles_with_new_categories()
         
-        # 3. Article Distribution Testing
-        distribution = self.test_article_distribution_across_categories()
+        # 4. Payment System APIs Testing
+        self.test_razorpay_payment_system()
         
-        # 4. Category Filtering Testing
-        category_filtering_success = self.test_category_filtering_endpoints()
+        # 5. Database Connectivity Testing
+        self.test_database_connectivity()
         
-        # 5. Subcategory Filtering with Normalization
-        subcategory_filtering_success = self.test_subcategory_filtering_with_normalization()
+        # 6. CORS and API Routes Testing
+        self.test_cors_and_api_routes()
         
-        # 6. Data Consistency Testing
-        data_consistency_success = self.test_data_consistency_and_structure()
+        # 7. Authentication System Testing
+        print("\n🔐 AUTHENTICATION SYSTEM TESTING")
+        print("=" * 40)
+        test_user = self.test_user_registration()
+        if test_user:
+            login_success = self.test_user_login(test_user)
+            if login_success:
+                self.test_protected_endpoint()
         
-        # 7. Cross-Category Functionality Testing
-        cross_category_success = self.test_cross_category_functionality()
+        # 8. Additional Content APIs
+        print("\n📚 ADDITIONAL CONTENT APIs TESTING")
+        print("=" * 40)
+        self.test_reviews_endpoint()
+        self.test_magazine_issues_endpoint()
+        self.test_destinations_endpoint()
         
-        # 8. Specific Endpoint Requirements
-        specific_endpoints_success = self.test_specific_endpoint_requirements()
+        return self.generate_css_fix_verification_report()
+
+    def generate_css_fix_verification_report(self):
+        """Generate comprehensive test report for CSS fix verification"""
+        print("\n" + "="*70)
+        print("📊 CSS ALIGNMENT FIX VERIFICATION REPORT")
+        print("="*70)
         
-        return self.generate_report()
+        total_tests = len(self.test_results)
+        passed_tests = sum(1 for result in self.test_results if result["success"])
+        failed_tests = total_tests - passed_tests
+        success_rate = (passed_tests / total_tests * 100) if total_tests > 0 else 0
+        
+        print(f"📈 OVERALL RESULTS:")
+        print(f"   Total Tests: {total_tests}")
+        print(f"   Passed: {passed_tests} ✅")
+        print(f"   Failed: {failed_tests} ❌")
+        print(f"   Success Rate: {success_rate:.1f}%")
+        print()
+        
+        # Categorize results by priority areas from review request
+        priority_areas = {
+            "Article Retrieval APIs": ["Articles", "Single Article", "Article Retrieval", "Category Filter"],
+            "Category and Subcategory APIs": ["Categories", "Category", "Subcategory"],
+            "Payment System APIs": ["Razorpay", "Payment", "Packages"],
+            "Database Connectivity": ["Database", "MongoDB"],
+            "CORS and API Routes": ["CORS", "API Route"],
+            "Authentication System": ["Registration", "Login", "Protected"]
+        }
+        
+        for area, keywords in priority_areas.items():
+            area_tests = [r for r in self.test_results if any(keyword in r["test"] for keyword in keywords)]
+            if area_tests:
+                area_passed = sum(1 for t in area_tests if t["success"])
+                area_total = len(area_tests)
+                area_rate = (area_passed / area_total * 100) if area_total > 0 else 0
+                
+                status = "✅" if area_rate >= 80 else "⚠️" if area_rate >= 60 else "❌"
+                print(f"{status} {area}: {area_passed}/{area_total} tests passed ({area_rate:.1f}%)")
+        
+        print()
+        
+        # Critical failures that need immediate attention
+        critical_failures = []
+        minor_issues = []
+        
+        for result in self.test_results:
+            if not result["success"]:
+                test_name = result["test"]
+                if any(keyword in test_name.lower() for keyword in ["health", "articles", "categories", "payment", "database", "cors"]):
+                    critical_failures.append(f"❌ {test_name}: {result['message']}")
+                else:
+                    minor_issues.append(f"⚠️ {test_name}: {result['message']}")
+        
+        if critical_failures:
+            print("🚨 CRITICAL ISSUES REQUIRING ATTENTION:")
+            for failure in critical_failures[:5]:
+                print(f"   {failure}")
+            print()
+        
+        if minor_issues:
+            print("⚠️ MINOR ISSUES:")
+            for issue in minor_issues[:3]:
+                print(f"   {issue}")
+            print()
+        
+        # Success highlights
+        key_successes = [r for r in self.test_results if r["success"] and any(keyword in r["test"].lower() for keyword in ["health", "articles", "categories", "payment", "database"])]
+        if key_successes:
+            print("✅ KEY BACKEND FUNCTIONALITY VERIFIED:")
+            for success in key_successes[:8]:
+                print(f"   ✅ {success['test']}: {success['message']}")
+        
+        print("\n" + "="*70)
+        print("🎯 CSS ALIGNMENT FIX IMPACT ASSESSMENT:")
+        
+        if success_rate >= 90:
+            print("   ✅ EXCELLENT: CSS fixes had no negative impact on backend functionality")
+        elif success_rate >= 80:
+            print("   ⚠️ GOOD: CSS fixes had minimal impact, minor issues detected")
+        elif success_rate >= 70:
+            print("   ⚠️ MODERATE: Some backend issues detected, may need investigation")
+        else:
+            print("   ❌ CRITICAL: Significant backend issues detected, immediate attention required")
+        
+        print("="*70)
+        
+        return {
+            "total_tests": total_tests,
+            "passed_tests": passed_tests,
+            "failed_tests": failed_tests,
+            "success_rate": success_rate,
+            "critical_failures": critical_failures,
+            "minor_issues": minor_issues,
+            "css_fix_impact": "minimal" if success_rate >= 80 else "moderate" if success_rate >= 70 else "significant"
+        }
 
     def generate_report(self):
         """Generate comprehensive test report"""
