@@ -1,8 +1,11 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Link } from 'react-router-dom';
+import HTMLFlipBook from 'react-pageflip';
 import { 
   X, ZoomIn, ZoomOut, Download, Maximize, Minimize,
-  RotateCw, BookOpen, Printer
+  RotateCw, BookOpen, Printer, Crown, Menu, ChevronLeft, 
+  ChevronRight, Bookmark, Share2
 } from 'lucide-react';
 
 const MagazineReader = ({ articles, isOpen, onClose, initialPageIndex = 0 }) => {
