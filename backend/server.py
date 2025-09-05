@@ -113,6 +113,7 @@ class CustomerDetails(BaseModel):
     email: str
     full_name: str
     phone: str
+    password: str  # Required password field
     # Address fields (required for print subscriptions)
     address_line_1: Optional[str] = None
     address_line_2: Optional[str] = None
