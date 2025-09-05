@@ -84,11 +84,11 @@ const CategoryPage = () => {
       { name: 'Accessories', slug: 'accessories', description: 'Watches & jewelry' },
       { name: 'Trends', slug: 'trends', description: 'Latest fashion trends' }
     ],
-    tech: [
+    technology: [
       { name: 'Gadgets', slug: 'gadgets', description: 'Latest devices' },
       { name: 'Mobile', slug: 'mobile', description: 'Smartphones & apps' },
       { name: 'Smart', slug: 'smart', description: 'Smart home tech' },
-      { name: 'Future', slug: 'future', description: 'Emerging technology' },
+      { name: 'AI', slug: 'ai', description: 'Artificial Intelligence' },
       { name: 'Reviews', slug: 'reviews', description: 'Product reviews' }
     ],
     auto: [
