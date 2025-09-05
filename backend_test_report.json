@@ -8,42 +8,42 @@
       "test": "Health Check",
       "success": true,
       "message": "API is healthy and responding",
-      "timestamp": "2025-09-04T17:52:09.157582",
+      "timestamp": "2025-09-05T10:33:07.162061",
       "response_data": null
     },
     {
       "test": "Travel/Guides Subcategory Filter",
       "success": true,
       "message": "\u2705 Found 1 sustainable travel article in guides: 'Travel With A Clear Conscious'",
-      "timestamp": "2025-09-04T17:52:09.171011",
+      "timestamp": "2025-09-05T10:33:07.196343",
       "response_data": null
     },
     {
       "test": "Travel/Culture Subcategory Empty",
       "success": true,
       "message": "\u2705 Travel/culture subcategory is empty (article moved out)",
-      "timestamp": "2025-09-04T17:52:09.182559",
+      "timestamp": "2025-09-05T10:33:07.246479",
       "response_data": null
     },
     {
       "test": "Sustainable Travel Article Search",
       "success": false,
       "message": "\u274c Could not find sustainable travel article in travel category",
-      "timestamp": "2025-09-04T17:52:09.196190",
+      "timestamp": "2025-09-05T10:33:07.292464",
       "response_data": null
     },
     {
       "test": "Travel Category Count",
       "success": true,
       "message": "\u2705 Travel category has 6 articles (includes sustainable travel)",
-      "timestamp": "2025-09-04T17:52:09.196226",
+      "timestamp": "2025-09-05T10:33:07.292507",
       "response_data": null
     },
     {
       "test": "Guides Subcategory Creation",
       "success": true,
       "message": "\u2705 'guides' is now a valid subcategory for travel category",
-      "timestamp": "2025-09-04T17:52:09.196235",
+      "timestamp": "2025-09-05T10:33:07.292515",
       "response_data": null
     }
   ]
