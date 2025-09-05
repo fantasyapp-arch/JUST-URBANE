@@ -32,20 +32,14 @@ const MagazineReaderPage = () => {
   // Keyboard Navigation Support
   useEffect(() => {
     const handleKeyPress = (e) => {
-      if (e.key === 'ArrowRight' || e.key === ' ') {
-        e.preventDefault();
-        nextPage();
-      } else if (e.key === 'ArrowLeft') {
-        e.preventDefault();
-        prevPage();
-      } else if (e.key === 'Escape') {
+      if (e.key === 'Escape') {
         closeReader();
       }
     };
 
     window.addEventListener('keydown', handleKeyPress);
     return () => window.removeEventListener('keydown', handleKeyPress);
-  }, [currentPage, totalPages, canReadPremium]);
+  }, []);
 
   // Touch/Swipe Gesture Support
   useEffect(() => {
