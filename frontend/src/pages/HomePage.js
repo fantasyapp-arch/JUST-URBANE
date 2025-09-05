@@ -408,44 +408,49 @@ const HomePage = () => {
         </section>
       )}
 
-      {/* VIDEOS SECTION */}
+      {/* FEATURED ARTICLES SECTION */}
       <section className="bg-gray-900 py-16">
         <div className="max-w-6xl mx-auto px-6">
           <div className="mb-12">
-            <h2 className="text-3xl font-serif font-bold text-white mb-4">Videos</h2>
-            <p className="text-gray-300 text-lg">Premium video content and exclusive interviews</p>
+            <h2 className="text-3xl font-serif font-bold text-white mb-4">Featured Stories</h2>
+            <p className="text-gray-300 text-lg">Exclusive content and premium experiences</p>
           </div>
           
           <div className="grid md:grid-cols-3 gap-8">
-            {videoContent.map((video, index) => (
+            {[...fashionArticles, ...travelArticles, ...peopleArticles].slice(0, 3).map((article, index) => (
               <motion.div 
-                key={index}
+                key={article.id}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 className="relative group cursor-pointer"
               >
-                <div className="relative overflow-hidden rounded-lg">
-                  <img 
-                    src={video.thumbnail}
-                    alt={video.title}
-                    className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
-                  <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
-                    <Play className="h-12 w-12 text-white opacity-80 group-hover:opacity-100 transition-opacity" />
+                <Link to={getArticleRoute(article)}>
+                  <div className="relative overflow-hidden rounded-lg">
+                    <img 
+                      src={article.hero_image}
+                      alt={article.title}
+                      className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+                      onError={(e) => {
+                        e.target.src = 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80';
+                      }}
+                    />
+                    <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                      <ArrowRight className="h-8 w-8 text-white" />
+                    </div>
+                    <div className="absolute bottom-4 right-4 bg-black bg-opacity-70 text-white px-2 py-1 rounded text-sm">
+                      {article.reading_time} min
+                    </div>
                   </div>
-                  <div className="absolute bottom-4 right-4 bg-black bg-opacity-70 text-white px-2 py-1 rounded text-sm">
-                    {video.duration}
+                  <div className="mt-4">
+                    <span className="inline-block bg-gray-800 text-gray-300 px-3 py-1 rounded-full text-xs font-medium uppercase tracking-wide mb-2">
+                      {article.category}
+                    </span>
+                    <h3 className="text-lg font-semibold text-white group-hover:text-gray-300 transition-colors">
+                      {article.title}
+                    </h3>
                   </div>
-                </div>
-                <div className="mt-4">
-                  <span className="inline-block bg-gray-800 text-gray-300 px-3 py-1 rounded-full text-xs font-medium uppercase tracking-wide mb-2">
-                    {video.category}
-                  </span>
-                  <h3 className="text-lg font-semibold text-white group-hover:text-gray-300 transition-colors">
-                    {video.title}
-                  </h3>
-                </div>
+                </Link>
               </motion.div>
             ))}
           </div>
