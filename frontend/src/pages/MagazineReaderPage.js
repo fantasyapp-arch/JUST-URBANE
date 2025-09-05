@@ -198,78 +198,93 @@ const MagazineReaderPage = () => {
         <X size={24} />
       </button>
 
-      {/* Top Controls Bar */}
-      <AnimatePresence>
-        {showControls && (
+      {/* Magazine Display Area - Full Screen Page Turn */}
+      <div style={{
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        width: '100%',
+        height: '100%',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center'
+      }}>
+        <AnimatePresence mode="wait">
           <motion.div
-            initial={{ opacity: 0, y: -50 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -50 }}
-            className="absolute top-0 left-0 right-0 z-20 bg-gradient-to-b from-black/90 via-black/70 to-transparent p-4"
+            key={currentPage}
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -50 }}
+            transition={{ duration: 0.25, ease: "easeInOut" }}
+            style={{
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              width: '100vw',
+              height: '100vh',
+              backgroundColor: '#fff'
+            }}
           >
-            <div className="flex items-center justify-between text-white max-w-7xl mx-auto">
-              <div className="flex items-center space-x-4">
-                <button
-                  onClick={closeReader}
-                  className="p-3 hover:bg-white/10 rounded-full transition-colors"
-                  title="Close"
+            <iframe
+              src={currentPageData?.pageImage}
+              alt={`${currentPageData?.title} - Page ${currentPage + 1}`}
+              style={{
+                width: '100%',
+                height: '100%',
+                border: 'none',
+                filter: isPageLocked ? 'blur(15px)' : 'none'
+              }}
+              title={`Page ${currentPage + 1}`}
+            />
+            
+            {/* Premium Lock Overlay */}
+            {isPageLocked && (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                style={{
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  bottom: 0,
+                  backgroundColor: 'rgba(0,0,0,0.5)',
+                  backdropFilter: 'blur(15px)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  zIndex: 10
+                }}
+              >
+                <motion.div
+                  animate={{
+                    scale: [1, 1.2, 1],
+                    rotate: [0, 10, -10, 0],
+                    y: [0, -10, 0]
+                  }}
+                  transition={{
+                    duration: 4,
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                  }}
+                  style={{
+                    background: 'linear-gradient(135deg, #ffd700 0%, #ffed4e 100%)',
+                    borderRadius: '50%',
+                    padding: '50px',
+                    boxShadow: '0 25px 50px rgba(255, 215, 0, 0.4), 0 0 100px rgba(255, 215, 0, 0.2)'
+                  }}
                 >
-                  <X className="h-6 w-6" />
-                </button>
-                <div className="flex items-center space-x-3">
-                  <BookOpen className="h-6 w-6 text-amber-400" />
-                  <div>
-                    <h1 className="text-xl font-bold">JUST URBANE</h1>
-                    <p className="text-sm text-gray-300">August 2025 • Digital Magazine</p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="flex items-center space-x-2">
-                <button
-                  onClick={handleZoomOut}
-                  className="p-2 hover:bg-white/10 rounded-lg transition-colors"
-                  title="Zoom Out"
-                >
-                  <ZoomOut className="h-5 w-5" />
-                </button>
-                <span className="text-sm px-2 py-1 bg-white/10 rounded">
-                  {Math.round(zoom * 100)}%
-                </span>
-                <button
-                  onClick={handleZoomIn}
-                  className="p-2 hover:bg-white/10 rounded-lg transition-colors"
-                  title="Zoom In"
-                >
-                  <ZoomIn className="h-5 w-5" />
-                </button>
-                <div className="w-px h-6 bg-white/20 mx-2"></div>
-                <button
-                  onClick={handleRotate}
-                  className="p-2 hover:bg-white/10 rounded-lg transition-colors"
-                  title="Rotate"
-                >
-                  <RotateCw className="h-5 w-5" />
-                </button>
-                <button
-                  onClick={toggleFullscreen}
-                  className="p-2 hover:bg-white/10 rounded-lg transition-colors"
-                  title="Toggle Fullscreen"
-                >
-                  {isFullscreen ? <Minimize className="h-5 w-5" /> : <Maximize className="h-5 w-5" />}
-                </button>
-                <button
-                  onClick={handleDownload}
-                  className="p-2 hover:bg-white/10 rounded-lg transition-colors"
-                  title="Download PDF"
-                >
-                  <Download className="h-5 w-5" />
-                </button>
-              </div>
-            </div>
+                  <Crown style={{ 
+                    width: '80px', 
+                    height: '80px', 
+                    color: '#b8860b' 
+                  }} />
+                </motion.div>
+              </motion.div>
+            )}
           </motion.div>
-        )}
-      </AnimatePresence>
+        </AnimatePresence>
+      </div>
 
       {/* Magazine Display Area */}
       <div 
