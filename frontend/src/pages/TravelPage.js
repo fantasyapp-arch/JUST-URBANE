@@ -416,7 +416,7 @@ const TravelPage = () => {
       </div>
 
       {/* Destinations Grid */}
-      <div className="container mx-auto px-4 py-12">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {filteredDestinations.length > 0 ? (
           <motion.div 
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
