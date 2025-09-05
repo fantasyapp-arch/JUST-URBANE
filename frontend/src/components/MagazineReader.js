@@ -66,19 +66,26 @@ const MagazineReader = ({ isOpen, onClose }) => {
     return () => document.removeEventListener('keydown', handleKeyPress);
   }, [isOpen, currentPage, isTransitioning]);
 
-  // Simplified page navigation
+  // Simplified page navigation - trigger subscription gate after 3 pages
   const nextPage = useCallback(() => {
     if (isTransitioning) return;
     
-    console.log(`Trying to go to next page. Current: ${currentPage}`);
+    // If user has reached the subscription limit (3 free pages)
+    if (!canReadPremium && currentPage >= FREE_PREVIEW_PAGES - 1) {
+      // Set to a special subscription page index
+      setCurrentPage(100); // Use 100 as subscription gate indicator
+      return;
+    }
     
-    // Always increment page number for testing
-    setIsTransitioning(true);
-    setTimeout(() => {
-      setCurrentPage(currentPage + 1);
-      setIsTransitioning(false);
-    }, 50);
-  }, [currentPage, isTransitioning]);
+    // Normal navigation within free pages
+    if (currentPage < pages.length - 1) {
+      setIsTransitioning(true);
+      setTimeout(() => {
+        setCurrentPage(currentPage + 1);
+        setIsTransitioning(false);
+      }, 50);
+    }
+  }, [currentPage, isTransitioning, canReadPremium]);
 
   const prevPage = useCallback(() => {
     if (isTransitioning || currentPage <= 0) return;
