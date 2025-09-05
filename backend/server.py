@@ -495,7 +495,7 @@ async def verify_razorpay_payment(
             raise HTTPException(status_code=404, detail="Package not found")
         
         # Update order status
-        await db.orders.update_one(
+        db.orders.update_one(
             {"razorpay_order_id": order_id},
             {
                 "$set": {
@@ -509,7 +509,7 @@ async def verify_razorpay_payment(
         
         # Update user subscription
         subscription_expires_at = datetime.utcnow() + timedelta(days=365)  # 1 year
-        await db.users.update_one(
+        db.users.update_one(
             {"id": current_user["id"]},
             {
                 "$set": {
@@ -535,7 +535,7 @@ async def verify_razorpay_payment(
             "created_at": datetime.utcnow()
         }
         
-        await db.transactions.insert_one(transaction_doc)
+        db.transactions.insert_one(transaction_doc)
         
         return {
             "status": "success",
