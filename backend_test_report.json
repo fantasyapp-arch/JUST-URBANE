@@ -1,71 +1,26 @@
 {
-  "total": 9,
-  "passed": 9,
-  "failed": 0,
-  "success_rate": 100.0,
-  "results": [
-    {
-      "test": "Health Check",
-      "success": true,
-      "message": "API is healthy and responding",
-      "timestamp": "2025-09-05T13:48:28.275381",
-      "response_data": null
-    },
-    {
-      "test": "Fashion Category Articles",
-      "success": true,
-      "message": "Retrieved 7 fashion articles",
-      "timestamp": "2025-09-05T13:48:28.284717",
-      "response_data": null
-    },
-    {
-      "test": "Men's Fashion Article in Category",
-      "success": true,
-      "message": "Found 'Perfect Suit Guide for Men' in fashion category",
-      "timestamp": "2025-09-05T13:48:28.284748",
-      "response_data": null
-    },
-    {
-      "test": "Men Subcategory Articles",
-      "success": true,
-      "message": "Retrieved 3 men's fashion articles",
-      "timestamp": "2025-09-05T13:48:28.293467",
-      "response_data": null
-    },
-    {
-      "test": "Men's Suit Article in Subcategory",
-      "success": true,
-      "message": "Perfect Suit Guide found in fashion/men subcategory",
-      "timestamp": "2025-09-05T13:48:28.293505",
-      "response_data": null
-    },
-    {
-      "test": "Single Article Retrieval by Slug",
-      "success": true,
-      "message": "Successfully retrieved article: Perfect Suit Guide for Men: Corporate Dressing Excellence",
-      "timestamp": "2025-09-05T13:48:28.302817",
-      "response_data": null
-    },
-    {
-      "test": "Article Content Verification",
-      "success": true,
-      "message": "All 7 fields verified correctly: title, author_name, category, subcategory, slug, hero_image, body",
-      "timestamp": "2025-09-05T13:48:28.302881",
-      "response_data": null
-    },
-    {
-      "test": "Fashion Category in Categories API",
-      "success": true,
-      "message": "Fashion category found: Fashion",
-      "timestamp": "2025-09-05T13:48:28.310913",
-      "response_data": null
-    },
-    {
-      "test": "Men Subcategory in Fashion",
-      "success": true,
-      "message": "Men subcategory found in fashion category",
-      "timestamp": "2025-09-05T13:48:28.310945",
-      "response_data": null
-    }
-  ]
+  "total_tests": 38,
+  "passed_tests": 23,
+  "failed_tests": 15,
+  "success_rate": 60.526315789473685,
+  "critical_failures": [
+    "\u274c Articles Listing: HTTP 404: {\"detail\":\"Not Found\"}",
+    "\u274c Articles - Fashion Category: HTTP 404 for fashion",
+    "\u274c Articles - Business Category: HTTP 404 for business",
+    "\u274c Articles - Technology Category: HTTP 404 for technology",
+    "\u274c Articles - Finance Category: HTTP 404 for finance",
+    "\u274c Articles - Travel Category: HTTP 404 for travel",
+    "\u274c Articles - Health Category: HTTP 404 for health",
+    "\u274c Articles - Culture Category: HTTP 404 for culture",
+    "\u274c Articles - Art Category: HTTP 404 for art",
+    "\u274c Articles - Entertainment Category: HTTP 404 for entertainment"
+  ],
+  "minor_issues": [
+    "\u26a0\ufe0f API Route - /auth/register: Route failed: HTTP 405",
+    "\u26a0\ufe0f User Registration: HTTP 404: {\"detail\":\"Not Found\"}",
+    "\u26a0\ufe0f Reviews Listing: HTTP 404: {\"detail\":\"Not Found\"}",
+    "\u26a0\ufe0f Magazine Issues: HTTP 404: {\"detail\":\"Not Found\"}",
+    "\u26a0\ufe0f Travel Destinations: HTTP 404: {\"detail\":\"Not Found\"}"
+  ],
+  "css_fix_impact": "significant"
 }
