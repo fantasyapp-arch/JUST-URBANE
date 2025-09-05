@@ -71,18 +71,18 @@ const IssuesPage = () => {
       </div>
 
       {/* Magazine Preview Section */}
-      <div className="container mx-auto px-4 py-16">
+      <div className="container mx-auto px-6 md:px-8 py-20">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.3 }}
-          className="text-center mb-12"
+          className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-            Inside This Issue
+          <h2 className="text-4xl md:text-6xl font-bold text-gray-900 mb-8">
+            Premium Digital Magazine Collection
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Get a sneak peek of our premium content with these exclusive pages from the August 2025 edition
+          <p className="text-xl md:text-2xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
+            Discover our world-class digital magazine featuring luxury lifestyle, premium fashion, cutting-edge technology, and exclusive content curated for the sophisticated reader
           </p>
         </motion.div>
 
