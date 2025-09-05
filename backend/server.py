@@ -643,27 +643,27 @@ async def create_article(article: ArticleCreate, current_user: dict = Depends(ge
 
 @app.get("/api/categories", response_model=List[Category])
 async def get_categories():
-    categories = await db.categories.find().to_list(length=None)
+    categories = list(db.categories.find())
     return prepare_list_response(categories)
 
 @app.get("/api/reviews", response_model=List[Review])
 async def get_reviews():
-    reviews = await db.reviews.find().to_list(length=None)
+    reviews = list(db.reviews.find())
     return prepare_list_response(reviews)
 
 @app.get("/api/issues", response_model=List[Issue])
 async def get_issues():
-    issues = await db.issues.find().to_list(length=None)
+    issues = list(db.issues.find())
     return prepare_list_response(issues)
 
 @app.get("/api/destinations", response_model=List[Destination])
 async def get_destinations():
-    destinations = await db.destinations.find().to_list(length=None)
+    destinations = list(db.destinations.find())
     return prepare_list_response(destinations)
 
 @app.get("/api/authors", response_model=List[Author])
 async def get_authors():
-    authors = await db.authors.find().to_list(length=None)
+    authors = list(db.authors.find())
     return prepare_list_response(authors)
 
 if __name__ == "__main__":
