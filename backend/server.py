@@ -363,7 +363,7 @@ async def register(user: UserCreate):
 @app.post("/api/auth/login", response_model=Token)
 async def login(user: UserLogin):
     # Find user
-    db_user = await db.users.find_one({"email": user.email})
+    db_user = db.users.find_one({"email": user.email})
     if not db_user or not verify_password(user.password, db_user["hashed_password"]):
         raise HTTPException(status_code=400, detail="Incorrect email or password")
     
