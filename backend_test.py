@@ -2758,8 +2758,8 @@ def main():
     print("🎨 Starting Backend Verification After CSS Alignment Fixes")
     print("=" * 70)
     
-    # Use the backend URL from frontend environment (production URL) with /api prefix
-    backend_url = "https://urbane-refresh.preview.emergentagent.com/api"
+    # Use the backend URL from frontend environment (production URL)
+    backend_url = "https://urbane-refresh.preview.emergentagent.com"
     tester = JustUrbaneAPITester(backend_url)
     
     # Run CSS alignment verification tests
