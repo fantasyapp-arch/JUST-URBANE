@@ -102,28 +102,7 @@ const MagazineReaderPage = () => {
     navigate('/issues');
   };
 
-  if (!pages.length) {
-    return (
-      <div style={{
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        width: '100vw',
-        height: '100vh',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: '#000',
-        color: 'white',
-        fontSize: '18px'
-      }}>
-        Loading magazine...
-      </div>
-    );
-  }
 
-  const currentPageData = pages[currentPage];
-  const isPageLocked = !canReadPremium && currentPage >= FREE_PREVIEW_PAGES;
 
   return (
     <>
