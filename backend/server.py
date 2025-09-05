@@ -303,9 +303,15 @@ async def get_current_user(credentials: HTTPAuthorizationCredentials = Depends(s
 
 def convert_objectid_to_str(item):
     if isinstance(item, dict):
-        return {k: (str(v) if isinstance(v, ObjectId) else convert_objectid_to_str(v)) for k, v in item.items()}
+        return {k: (str(v) if isinstance(v, ObjectId) else 
+                   (v.isoformat() if isinstance(v, datetime) else convert_objectid_to_str(v))) 
+                for k, v in item.items()}
     elif isinstance(item, list):
         return [convert_objectid_to_str(i) for i in item]
+    elif isinstance(item, ObjectId):
+        return str(item)
+    elif isinstance(item, datetime):
+        return item.isoformat()
     else:
         return item
 
