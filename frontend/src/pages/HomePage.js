@@ -141,6 +141,29 @@ const HomePage = () => {
         </div>
       </section>
 
+      {/* DIGITAL MAGAZINE SECTION */}
+      <section className="bg-gradient-to-br from-gray-900 via-gray-800 to-black text-white py-20">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="text-center mb-12">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+            >
+              <h2 className="text-4xl font-serif font-bold mb-4">Digital Magazine</h2>
+              <p className="text-gray-300 text-lg">Experience our premium content in stunning A4 digital format</p>
+            </motion.div>
+          </div>
+          
+          <div className="flex justify-center">
+            <MagazineThumbnail 
+              onReadClick={() => setIsMagazineOpen(true)}
+              className="transform hover:scale-105 transition-transform duration-300"
+            />
+          </div>
+        </div>
+      </section>
+
       {/* FASHION SECTION */}
       {fashionArticles.length > 0 && (
         <section className="bg-gray-50 py-16">
