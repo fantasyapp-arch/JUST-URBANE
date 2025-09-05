@@ -22,20 +22,17 @@ const MagazineReader = ({ articles, isOpen, onClose, initialPageIndex = 0 }) => 
   const DISPLAY_HEIGHT = Math.round((A4_HEIGHT / A4_WIDTH) * DISPLAY_WIDTH);
 
   useEffect(() => {
-    if (articles && articles.length > 0) {
-      // Calculate total pages: cover + articles + back cover
-      const articlePages = articles.length * 2; // 2 pages per article (spread)
-      setTotalPages(articlePages + 2); // +2 for front and back covers
+    const handleEscape = (e) => {
+      if (e.key === 'Escape') {
+        onClose();
+      }
+    };
+    
+    if (isOpen) {
+      document.addEventListener('keydown', handleEscape);
+      return () => document.removeEventListener('keydown', handleEscape);
     }
-  }, [articles]);
-
-  useEffect(() => {
-    if (flipBookRef.current && initialPageIndex > 0) {
-      setTimeout(() => {
-        flipBookRef.current.pageFlip().flip(initialPageIndex);
-      }, 500);
-    }
-  }, [initialPageIndex]);
+  }, [isOpen, onClose]);
 
   const handlePageFlip = (e) => {
     const newPage = e.data;
