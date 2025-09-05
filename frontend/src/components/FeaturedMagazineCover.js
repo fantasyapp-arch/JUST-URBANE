@@ -197,27 +197,19 @@ const FeaturedMagazineCover = ({ issue, onReadClick, canRead }) => {
 
         {/* Main Action Button */}
         <button
-          onClick={() => canRead ? onReadClick(issue.articles) : null}
-          className={`w-full py-6 px-8 rounded-2xl font-bold text-lg transition-all duration-300 transform ${
-            canRead
-              ? 'bg-gradient-to-r from-amber-600 to-amber-700 hover:from-amber-700 hover:to-amber-800 text-white hover:scale-105 shadow-lg'
-              : 'bg-gray-200 text-gray-500 cursor-not-allowed'
-          }`}
-          disabled={!canRead}
+          onClick={() => setIsMagazineOpen(true)}
+          className="w-full py-6 px-8 rounded-2xl font-bold text-lg transition-all duration-300 transform bg-gradient-to-r from-amber-600 to-amber-700 hover:from-amber-700 hover:to-amber-800 text-white hover:scale-105 shadow-lg"
         >
-          {canRead ? (
-            <>
-              <BookOpen className="inline h-6 w-6 mr-3" />
-              Read Digital Magazine
-            </>
-          ) : (
-            <>
-              <Lock className="inline h-6 w-6 mr-3" />
-              Subscribe to Read Full Magazine
-            </>
-          )}
+          <BookOpen className="inline h-6 w-6 mr-3" />
+          View Digital Magazine
         </button>
       </motion.div>
+      
+      {/* Digital Magazine Viewer */}
+      <DigitalMagazineViewer 
+        isOpen={isMagazineOpen} 
+        onClose={() => setIsMagazineOpen(false)} 
+      />
     </div>
   );
 };
