@@ -104,6 +104,7 @@ const router = createBrowserRouter([
       { path: "sustainable-travel-conscious-guide", element: <SustainableTravelPage /> },
       { path: "perfect-suit-guide-men-corporate-dressing", element: <MensFashionSuitGuidePage /> },
       { path: "oscars-2022-best-dressed-fashion-red-carpet", element: <OscarsFashionPage /> },
+      { path: "sunseeker-65-sport-luxury-yacht-review", element: <SunseekerYachtPage /> },
       { path: "author/:slug", element: <AuthorPage /> },
       { path: "issues", element: <IssuesPage /> },
       { path: "reviews", element: <ReviewsPage /> },
