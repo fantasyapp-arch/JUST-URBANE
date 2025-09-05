@@ -519,6 +519,9 @@ async def verify_razorpay_payment(
         customer_email = payment_data.customer_details.email
         existing_user = db.users.find_one({"email": customer_email})
         
+        # Determine if user gets digital magazine access based on subscription type
+        has_digital_access = payment_data.package_id in ["digital_annual", "combined_annual"]
+        
         if not existing_user:
             # Create new user from customer details
             user_doc = {
@@ -526,8 +529,9 @@ async def verify_razorpay_payment(
                 "email": customer_email,
                 "full_name": payment_data.customer_details.full_name,
                 "hashed_password": None,  # No password for guest users
-                "is_premium": True,
+                "is_premium": has_digital_access,  # Only digital and combined get premium access
                 "subscription_type": payment_data.package_id,
+                "subscription_status": "active",  # Set active status for magazine access
                 "subscription_expires_at": datetime.utcnow() + timedelta(days=365),
                 "created_at": datetime.utcnow()
             }
@@ -540,8 +544,9 @@ async def verify_razorpay_payment(
                 {"email": customer_email},
                 {
                     "$set": {
-                        "is_premium": True,
+                        "is_premium": has_digital_access,  # Only digital and combined get premium access
                         "subscription_type": payment_data.package_id,
+                        "subscription_status": "active",  # Set active status for magazine access
                         "subscription_expires_at": subscription_expires_at
                     }
                 }
