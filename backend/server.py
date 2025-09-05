@@ -222,8 +222,10 @@ class Review(BaseModel):
     id: Optional[str] = None
     title: str
     body: str
-    rating: float
-    product_name: str
+    rating: Optional[float] = None
+    score: Optional[float] = None  # Alternative to rating
+    product_name: Optional[str] = None
+    product: Optional[str] = None  # Alternative to product_name
     author_name: str
     published_at: datetime = datetime.utcnow()
 
