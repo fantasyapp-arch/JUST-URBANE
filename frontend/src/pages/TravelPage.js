@@ -176,7 +176,7 @@ const TravelPage = () => {
     }
 
     return filtered;
-  }, [searchQuery, selectedRegion, selectedType, sortBy]);
+  }, [destinations, searchQuery, selectedRegion, selectedType, sortBy]);
 
   const featuredDestinations = destinations.filter(dest => dest.featured);
 
