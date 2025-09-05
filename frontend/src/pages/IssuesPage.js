@@ -138,35 +138,38 @@ const IssuesPage = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.6 }}
-          className="bg-white rounded-3xl shadow-xl p-8 md:p-12 mb-16"
+          className="bg-white rounded-3xl shadow-2xl p-10 md:p-16 mb-20 mx-4"
         >
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div>
-              <div className="flex items-center space-x-3 mb-6">
-                <Star className="h-6 w-6 text-amber-500" />
-                <span className="text-amber-600 font-semibold text-lg">Featured Content</span>
+              <div className="flex items-center space-x-4 mb-8">
+                <Star className="h-8 w-8 text-amber-500" />
+                <span className="text-amber-600 font-bold text-xl">Premium Magazine Features</span>
               </div>
               
-              <h3 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-                What's Inside
+              <h3 className="text-4xl md:text-5xl font-bold text-gray-900 mb-8">
+                Luxury Content Inside
               </h3>
               
-              <div className="space-y-4">
+              <div className="space-y-6">
                 {currentIssue.highlights.map((highlight, index) => (
-                  <div key={index} className="flex items-center space-x-3">
-                    <div className="w-2 h-2 bg-gradient-to-r from-amber-400 to-gold-500 rounded-full"></div>
-                    <span className="text-gray-700 text-lg">{highlight}</span>
+                  <div key={index} className="flex items-center space-x-4">
+                    <div className="w-3 h-3 bg-gradient-to-r from-amber-400 to-gold-500 rounded-full flex-shrink-0"></div>
+                    <span className="text-gray-700 text-xl font-medium">{highlight}</span>
                   </div>
                 ))}
               </div>
             </div>
             
             <div className="text-center lg:text-right">
-              <div className="bg-gradient-to-br from-gray-900 to-black rounded-2xl p-8 text-white">
-                <div className="text-6xl font-bold mb-2">{currentIssue.totalPages}</div>
-                <div className="text-xl text-gray-300 mb-4">Premium Pages</div>
-                <div className="text-amber-400 font-semibold">
+              <div className="bg-gradient-to-br from-gray-900 via-black to-gray-800 rounded-3xl p-10 text-white shadow-2xl">
+                <div className="text-7xl font-bold mb-4 bg-gradient-to-r from-amber-400 to-gold-500 bg-clip-text text-transparent">{currentIssue.totalPages}</div>
+                <div className="text-2xl text-gray-300 mb-6">Premium Pages</div>
+                <div className="text-amber-400 font-bold text-lg">
                   {currentIssue.publishDate}
+                </div>
+                <div className="mt-4 text-gray-400 text-sm">
+                  World-Class Content
                 </div>
               </div>
             </div>
