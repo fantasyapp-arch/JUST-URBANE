@@ -96,40 +96,7 @@ const MagazineReaderPage = () => {
     };
   }, []);
 
-  const nextPage = () => {
-    if (isFlipping) return;
-    
-    if (!canReadPremium && currentPage >= FREE_PREVIEW_PAGES - 1) {
-      setShowSubscriptionModal(true);
-      return;
-    }
-    
-    if (currentPage < totalPages - 1) {
-      setIsFlipping(true);
-      // Instant page change with smooth transition
-      setCurrentPage(currentPage + 1);
-      
-      // Quick reset for next interaction
-      setTimeout(() => {
-        setIsFlipping(false);
-      }, 250);
-    }
-  };
 
-  const prevPage = () => {
-    if (isFlipping) return;
-    
-    if (currentPage > 0) {
-      setIsFlipping(true);
-      // Instant page change with smooth transition
-      setCurrentPage(currentPage - 1);
-      
-      // Quick reset for next interaction
-      setTimeout(() => {
-        setIsFlipping(false);
-      }, 250);
-    }
-  };
 
   const closeReader = () => {
     navigate('/issues');
