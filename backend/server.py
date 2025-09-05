@@ -448,7 +448,7 @@ async def create_razorpay_order(
             "created_at": datetime.utcnow()
         }
         
-        await db.orders.insert_one(order_doc)
+        db.orders.insert_one(order_doc)
         
         return {
             "order_id": razorpay_order["id"],
