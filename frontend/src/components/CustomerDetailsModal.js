@@ -280,11 +280,14 @@ const CustomerDetailsModal = ({ isOpen, onClose, selectedPlan, onPaymentSuccess 
                         className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 ${
                           errors.password ? 'border-red-500' : 'border-gray-300'
                         }`}
-                        placeholder="Create a password"
+                        placeholder="Create a password (min 6 characters)"
                       />
                       {errors.password && (
                         <p className="text-red-500 text-sm mt-1">{errors.password}</p>
                       )}
+                      <p className="text-xs text-gray-500 mt-1">
+                        This password will be used to log in to your account later
+                      </p>
                     </div>
 
                     <div>
