@@ -7,10 +7,19 @@ import {
 
 const MagazineReader = ({ articles, isOpen, onClose, initialPageIndex = 0 }) => {
   const containerRef = useRef();
+  const flipBookRef = useRef();
   const [zoom, setZoom] = useState(1);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [showControls, setShowControls] = useState(true);
   const [rotation, setRotation] = useState(0);
+  const [currentPage, setCurrentPage] = useState(0);
+  const [showSubscriptionModal, setShowSubscriptionModal] = useState(false);
+  const [showTableOfContents, setShowTableOfContents] = useState(false);
+  
+  // Premium access control
+  const canReadPremium = true; // This should come from user context
+  const FREE_PREVIEW_PAGES = 3;
+  const totalPages = articles ? articles.length * 2 + 2 : 2; // Cover + articles + back cover
 
   // Real magazine PDF URL
   const magazinePdfUrl = "https://customer-assets.emergentagent.com/job_luxmag-tech-nav-fix/artifacts/qhmo66rl_Just%20Urbane%20August%202025%20-%20E-Magazine-2.pdf";
