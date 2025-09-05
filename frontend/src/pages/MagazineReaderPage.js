@@ -10,35 +10,24 @@ import { Link } from 'react-router-dom';
 
 const MagazineReaderPage = () => {
   const navigate = useNavigate();
-  const [currentPage, setCurrentPage] = useState(0);
-  const [totalPages, setTotalPages] = useState(0);
-  const [showSubscriptionModal, setShowSubscriptionModal] = useState(false);
-  const [isFlipping, setIsFlipping] = useState(false);
+  const containerRef = useRef();
+  const [zoom, setZoom] = useState(1);
+  const [isFullscreen, setIsFullscreen] = useState(false);
+  const [showControls, setShowControls] = useState(true);
+  const [rotation, setRotation] = useState(0);
   const { user, isAuthenticated } = useAuth();
 
-  // Debug user authentication status
-  console.log('🔍 Magazine Reader Auth Check:', {
-    isAuthenticated,
-    user: user ? {
-      email: user.email,
-      is_premium: user.is_premium,
-      subscription_status: user.subscription_status,
-      subscription_type: user.subscription_type
-    } : null
-  });
+  // Real magazine PDF URL - your uploaded PDF
+  const magazinePdfUrl = "https://customer-assets.emergentagent.com/job_luxmag-tech-nav-fix/artifacts/qhmo66rl_Just%20Urbane%20August%202025%20-%20E-Magazine-2.pdf";
+  
+  // A4 dimensions for proper display
+  const A4_WIDTH = 595;
+  const A4_HEIGHT = 842;
+  const DISPLAY_WIDTH = 900;
+  const DISPLAY_HEIGHT = Math.round((A4_HEIGHT / A4_WIDTH) * DISPLAY_WIDTH);
 
   const canReadPremium = isAuthenticated && user?.is_premium && user?.subscription_status === 'active';
   console.log('📖 Can read premium?', canReadPremium);
-  
-  const FREE_PREVIEW_PAGES = 3;
-
-  const pages = parseMagazineContent();
-
-  useEffect(() => {
-    if (pages && Array.isArray(pages)) {
-      setTotalPages(pages.length);
-    }
-  }, [pages]);
 
   // Keyboard Navigation Support
   useEffect(() => {
