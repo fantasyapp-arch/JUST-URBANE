@@ -391,6 +391,12 @@ async def login(user: UserLogin):
         "user": user_response
     }
 
+@app.get("/api/auth/me")
+async def get_current_user_info(current_user: dict = Depends(get_current_user)):
+    """Get current user information"""
+    user_response = {k: v for k, v in current_user.items() if k != "hashed_password"}
+    return prepare_item_response(user_response)
+
 # Payment endpoints - Razorpay only
 @app.get("/api/payments/packages")
 async def get_payment_packages():
