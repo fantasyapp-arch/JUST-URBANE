@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, ChevronLeft, ChevronRight, Crown } from 'lucide-react';
+import { 
+  X, ZoomIn, ZoomOut, Download, Maximize, Minimize,
+  RotateCw, BookOpen, Printer
+} from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { Link } from 'react-router-dom';
-import parseMagazineContent from '../components/MagazineContentParser';
 
 const MagazineReaderPage = () => {
   const navigate = useNavigate();
