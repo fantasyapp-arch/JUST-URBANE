@@ -1,20 +1,9 @@
 import React, { useRef, useEffect, useState } from 'react';
-import HTMLFlipBook from 'react-pageflip';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
-  X, ChevronLeft, ChevronRight, ZoomIn, ZoomOut, 
-  Home, Bookmark, Share2, Settings, Maximize, 
-  Minimize, RotateCw, Menu, Crown, Lock
+  X, ZoomIn, ZoomOut, Download, Maximize, Minimize,
+  RotateCw, BookOpen, Printer
 } from 'lucide-react';
-import { useAuth } from '../context/AuthContext';
-import { Link } from 'react-router-dom';
-import { 
-  ArticlePageLeft, 
-  ArticlePageRight, 
-  LockedArticlePage, 
-  SubscriptionPromotionPage, 
-  TableOfContentsModal 
-} from './MagazinePages';
 
 const MagazineReader = ({ articles, isOpen, onClose, initialPageIndex = 0 }) => {
   const flipBookRef = useRef();
