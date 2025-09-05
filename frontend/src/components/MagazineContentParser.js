@@ -8,7 +8,7 @@ export const parseMagazineContent = () => {
       type: 'actual-page',
       pageNumber: 1,
       title: 'JUST URBANE - August 2025 Cover',
-      pageImage: 'https://customer-assets.emergentagent.com/job_luxmag-tech-nav-fix/artifacts/qhmo66rl_Just%20Urbane%20August%202025%20-%20E-Magazine-2.pdf#page=1',
+      pageImage: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&h=1200&fit=crop&crop=face',
       isFromUpload: true
     },
     {
@@ -16,7 +16,7 @@ export const parseMagazineContent = () => {
       type: 'actual-page', 
       pageNumber: 2,
       title: 'Contents Page',
-      pageImage: 'https://customer-assets.emergentagent.com/job_luxmag-tech-nav-fix/artifacts/qhmo66rl_Just%20Urbane%20August%202025%20-%20E-Magazine-2.pdf#page=2',
+      pageImage: 'https://images.unsplash.com/photo-1586953208448-b95a79798f07?w=800&h=1200&fit=crop',
       isFromUpload: true
     },
     {
@@ -24,7 +24,7 @@ export const parseMagazineContent = () => {
       type: 'actual-page',
       pageNumber: 3, 
       title: 'From the Publisher\'s Desk',
-      pageImage: 'https://customer-assets.emergentagent.com/job_luxmag-tech-nav-fix/artifacts/qhmo66rl_Just%20Urbane%20August%202025%20-%20E-Magazine-2.pdf#page=3',
+      pageImage: 'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=800&h=1200&fit=crop',
       isFromUpload: true
     },
     // Premium pages (after 3 free pages) - More pages from your updated magazine
