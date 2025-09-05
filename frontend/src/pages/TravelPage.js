@@ -42,8 +42,8 @@ const TravelPage = () => {
     author: article.author_name
   }));
 
-  // Mock travel destinations data (keeping as fallback if no real articles)
-  const destinations = [
+  // Fallback destinations if no real articles (can be removed later)
+  const fallbackDestinations = [
     {
       id: '1',
       name: 'Rajasthan Palace Hotels',
