@@ -287,57 +287,7 @@ const MagazineReader = ({ articles, isOpen, onClose, initialPageIndex = 0 }) => 
   );
 };
 
-// Magazine Cover Component
-const MagazineCover = () => {
-  const currentDate = new Date();
-  const monthYear = currentDate.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
-
-  return (
-    <div className="h-full flex flex-col justify-between p-8 relative overflow-hidden">
-      {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute inset-0 bg-gradient-to-br from-amber-500/20 to-transparent"></div>
-      </div>
-
-      <div className="relative z-10">
-        {/* Header */}
-        <div className="text-center mb-8">
-          <div className="flex items-center justify-center space-x-2 mb-2">
-            <Crown className="h-8 w-8 text-amber-400" />
-            <h1 className="text-4xl font-bold tracking-wider">JUST URBANE</h1>
-          </div>
-          <p className="text-amber-200 text-sm tracking-widest uppercase">Premium Digital Magazine</p>
-        </div>
-
-        {/* Issue Info */}
-        <div className="text-center mb-12">
-          <p className="text-2xl font-light">{monthYear} Issue</p>
-          <p className="text-amber-300 text-sm mt-2">The Modern Gentleman's Guide</p>
-        </div>
-      </div>
-
-      <div className="relative z-10">
-        {/* Featured Headlines */}
-        <div className="space-y-2 mb-8">
-          <div className="text-center">
-            <h2 className="text-xl font-semibold mb-2">Inside This Issue</h2>
-            <div className="space-y-1 text-sm text-gray-300">
-              <p>• Style Essentials for the Modern Man</p>
-              <p>• Tech Innovations Changing Everything</p>
-              <p>• Investment Strategies That Work</p>
-              <p>• Luxury Travel Destinations</p>
-            </div>
-          </div>
-        </div>
-
-        {/* Footer */}
-        <div className="text-center text-xs text-gray-400">
-          <p>Premium Subscription Required</p>
-        </div>
-      </div>
-    </div>
-  );
-};
+export default MagazineReader;
 
 // Back Cover Component
 const BackCover = () => (
