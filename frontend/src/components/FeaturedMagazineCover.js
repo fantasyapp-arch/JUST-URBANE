@@ -53,13 +53,13 @@ const FeaturedMagazineCover = ({ issue, onReadClick, canRead }) => {
           <div className="absolute bottom-24 left-8 right-8">
             <div className="bg-white/15 backdrop-blur-sm rounded-xl p-6">
               <div className="text-amber-300 text-sm font-bold uppercase tracking-wide mb-2">
-                {heroArticle?.category || 'Featured'}
+                DIGITAL MAGAZINE
               </div>
               <h2 className="text-white font-bold text-xl lg:text-2xl mb-3 line-clamp-3 leading-tight">
-                {heroArticle?.title || 'Premium Lifestyle Content'}
+                Premium Content in A4 Format
               </h2>
               <div className="text-white/90 text-sm font-light">
-                By {heroArticle?.author_name || 'Editorial Team'}
+                High Resolution PDF • Interactive Experience
               </div>
             </div>
           </div>
