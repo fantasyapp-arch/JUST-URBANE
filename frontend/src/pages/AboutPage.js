@@ -20,14 +20,21 @@ const AboutPage = () => {
       social: { twitter: '@amisha_travel', instagram: '@amishashirgave' }
     },
     {
-      name: 'Rahul Sharma',
-      role: 'Fashion & Style Editor',
+      name: 'Rugved Marathe',
+      role: 'Fashion & Celebrity Editor',
       image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300',
-      bio: 'Fashion consultant and style expert with decade of luxury lifestyle journalism.',
-      social: { twitter: '@rahulstyle', instagram: '@rahulsharma_style' }
+      bio: 'Fashion correspondent covering red carpet events and celebrity style. Expert coverage of awards ceremonies and Hollywood fashion.',
+      social: { twitter: '@rugved_fashion', instagram: '@rugvedmarathe' }
     },
     {
-      name: 'Priya Nair',
+      name: 'Krishna Mohod',
+      role: 'Technology & Innovation Editor',
+      image: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=300',
+      bio: 'Technology journalist specializing in luxury gadgets and wearable tech. Known for trend-setting coverage of smartwatch innovations.',
+      social: { twitter: '@krishna_tech', instagram: '@krishnamohod' }
+    },
+    {
+      name: 'Komal Bhandekar',
       role: 'Culture Correspondent',
       image: 'https://images.unsplash.com/photo-1494790108755-2616b612b1bb?w=300',
       bio: 'Arts and culture journalist covering contemporary Indian art, music, and literature.',
