@@ -134,21 +134,69 @@ const MagazineReaderPage = () => {
 
 
   return (
-    <div
-      className={`fixed inset-0 bg-black/95 z-50 overflow-hidden ${
-        isFullscreen ? 'z-[100]' : ''
-      }`}
-      style={{ margin: 0, padding: 0 }}
-    >
-      {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-5">
-        <div 
-          className="w-full h-full"
-          style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-          }}
-        />
-      </div>
+    <>
+      <style>{`
+        .hover-visible {
+          opacity: 0 !important;
+          transition: opacity 0.3s ease;
+        }
+        
+        .magazine-container:hover .hover-visible {
+          opacity: 1 !important;
+        }
+        
+        .magazine-container {
+          width: 100vw;
+          height: 100vh;
+        }
+      `}</style>
+      
+      <div className="magazine-container" style={{
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        width: '100vw',
+        height: '100vh',
+        backgroundColor: '#000',
+        margin: 0,
+        padding: 0,
+        overflow: 'hidden',
+        zIndex: 999999
+      }}>
+        {/* Close Button */}
+      <button
+        onClick={closeReader}
+        style={{
+          position: 'absolute',
+          top: '20px',
+          right: '20px',
+          padding: '12px',
+          backgroundColor: 'rgba(0,0,0,0.7)',
+          color: 'white',
+          border: 'none',
+          borderRadius: '50%',
+          cursor: 'pointer',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          width: '50px',
+          height: '50px',
+          opacity: 0,
+          transition: 'all 0.3s ease',
+          zIndex: 1000000
+        }}
+        onMouseEnter={(e) => {
+          e.target.style.backgroundColor = 'rgba(0,0,0,0.9)';
+          e.target.style.transform = 'scale(1.1)';
+        }}
+        onMouseLeave={(e) => {
+          e.target.style.backgroundColor = 'rgba(0,0,0,0.7)';
+          e.target.style.transform = 'scale(1)';
+        }}
+        className="hover-visible"
+      >
+        <X size={24} />
+      </button>
 
       {/* Top Controls Bar */}
       <AnimatePresence>
