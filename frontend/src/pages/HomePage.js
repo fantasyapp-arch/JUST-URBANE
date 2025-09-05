@@ -10,6 +10,9 @@ import DigitalMagazineViewer from '../components/DigitalMagazineViewer';
 const HomePage = () => {
   // Fetch real articles from database
   const { data: articles = [], isLoading } = useArticles({ limit: 20 });
+  
+  // Magazine viewer state
+  const [isMagazineOpen, setIsMagazineOpen] = useState(false);
 
   // Helper function to get article route
   const getArticleRoute = (article) => {
