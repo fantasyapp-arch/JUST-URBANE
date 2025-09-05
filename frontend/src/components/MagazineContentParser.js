@@ -33,7 +33,7 @@ export const parseMagazineContent = () => {
       type: 'actual-page-premium',
       pageNumber: 4,
       title: 'Tech News - Premium Content',
-      pageImage: 'https://customer-assets.emergentagent.com/job_luxmag-tech-nav-fix/artifacts/qhmo66rl_Just%20Urbane%20August%202025%20-%20E-Magazine-2.pdf#page=4',
+      pageImage: 'https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=800&h=1200&fit=crop',
       isPremium: true,
       isFromUpload: true
     },
@@ -42,7 +42,7 @@ export const parseMagazineContent = () => {
       type: 'actual-page-premium',
       pageNumber: 5,
       title: 'Dell XPS 14 Review - Premium',
-      pageImage: 'https://customer-assets.emergentagent.com/job_luxmag-tech-nav-fix/artifacts/qhmo66rl_Just%20Urbane%20August%202025%20-%20E-Magazine-2.pdf#page=5',
+      pageImage: 'https://images.unsplash.com/photo-1587614382346-4ec70e388b28?w=800&h=1200&fit=crop',
       isPremium: true,
       isFromUpload: true
     },
@@ -51,7 +51,7 @@ export const parseMagazineContent = () => {
       type: 'actual-page-premium',
       pageNumber: 6,
       title: 'Cover Story - Tapan Singhel - Premium',
-      pageImage: 'https://customer-assets.emergentagent.com/job_luxmag-tech-nav-fix/artifacts/qhmo66rl_Just%20Urbane%20August%202025%20-%20E-Magazine-2.pdf#page=6',
+      pageImage: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&h=1200&fit=crop&crop=top',
       isPremium: true,
       isFromUpload: true
     },
@@ -61,7 +61,7 @@ export const parseMagazineContent = () => {
       type: 'actual-page-premium',
       pageNumber: 7,
       title: 'Fashion & Style - Premium',
-      pageImage: 'https://customer-assets.emergentagent.com/job_luxmag-tech-nav-fix/artifacts/qhmo66rl_Just%20Urbane%20August%202025%20-%20E-Magazine-2.pdf#page=7',
+      pageImage: 'https://images.unsplash.com/photo-1445205170230-053b83016050?w=800&h=1200&fit=crop',
       isPremium: true,
       isFromUpload: true
     },
@@ -70,7 +70,7 @@ export const parseMagazineContent = () => {
       type: 'actual-page-premium',
       pageNumber: 8,
       title: 'Luxury Watches - Premium',
-      pageImage: 'https://customer-assets.emergentagent.com/job_luxmag-tech-nav-fix/artifacts/qhmo66rl_Just%20Urbane%20August%202025%20-%20E-Magazine-2.pdf#page=8',
+      pageImage: 'https://images.unsplash.com/photo-1523170335258-f5c216654a3a?w=800&h=1200&fit=crop',
       isPremium: true,
       isFromUpload: true
     },
@@ -79,7 +79,7 @@ export const parseMagazineContent = () => {
       type: 'actual-page-premium',
       pageNumber: 9,
       title: 'Travel & Destinations - Premium',
-      pageImage: 'https://customer-assets.emergentagent.com/job_luxmag-tech-nav-fix/artifacts/qhmo66rl_Just%20Urbane%20August%202025%20-%20E-Magazine-2.pdf#page=9',
+      pageImage: 'https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=800&h=1200&fit=crop',
       isPremium: true,
       isFromUpload: true
     },
@@ -88,7 +88,7 @@ export const parseMagazineContent = () => {
       type: 'actual-page-premium',
       pageNumber: 10,
       title: 'Automotive Excellence - Premium',
-      pageImage: 'https://customer-assets.emergentagent.com/job_luxmag-tech-nav-fix/artifacts/qhmo66rl_Just%20Urbane%20August%202025%20-%20E-Magazine-2.pdf#page=10',
+      pageImage: 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=800&h=1200&fit=crop',
       isPremium: true,
       isFromUpload: true
     },
@@ -97,7 +97,7 @@ export const parseMagazineContent = () => {
       type: 'actual-page-premium',
       pageNumber: 11,
       title: 'Food & Dining - Premium',
-      pageImage: 'https://customer-assets.emergentagent.com/job_luxmag-tech-nav-fix/artifacts/qhmo66rl_Just%20Urbane%20August%202025%20-%20E-Magazine-2.pdf#page=11',
+      pageImage: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&h=1200&fit=crop',
       isPremium: true,
       isFromUpload: true
     },
@@ -106,7 +106,7 @@ export const parseMagazineContent = () => {
       type: 'actual-page-premium',
       pageNumber: 12,
       title: 'Business & Finance - Premium',
-      pageImage: 'https://customer-assets.emergentagent.com/job_luxmag-tech-nav-fix/artifacts/qhmo66rl_Just%20Urbane%20August%202025%20-%20E-Magazine-2.pdf#page=12',
+      pageImage: 'https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=800&h=1200&fit=crop',
       isPremium: true,
       isFromUpload: true
     },
@@ -115,7 +115,7 @@ export const parseMagazineContent = () => {
       type: 'actual-page-premium',
       pageNumber: 13,
       title: 'Health & Wellness - Premium',
-      pageImage: 'https://customer-assets.emergentagent.com/job_luxmag-tech-nav-fix/artifacts/qhmo66rl_Just%20Urbane%20August%202025%20-%20E-Magazine-2.pdf#page=13',
+      pageImage: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&h=1200&fit=crop',
       isPremium: true,
       isFromUpload: true
     },
@@ -124,7 +124,7 @@ export const parseMagazineContent = () => {
       type: 'actual-page-premium',
       pageNumber: 14,
       title: 'Culture & Arts - Premium',
-      pageImage: 'https://customer-assets.emergentagent.com/job_luxmag-tech-nav-fix/artifacts/qhmo66rl_Just%20Urbane%20August%202025%20-%20E-Magazine-2.pdf#page=14',
+      pageImage: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=1200&fit=crop',
       isPremium: true,
       isFromUpload: true
     },
@@ -133,7 +133,7 @@ export const parseMagazineContent = () => {
       type: 'actual-page-premium',
       pageNumber: 15,
       title: 'Back Cover',
-      pageImage: 'https://customer-assets.emergentagent.com/job_luxmag-tech-nav-fix/artifacts/qhmo66rl_Just%20Urbane%20August%202025%20-%20E-Magazine-2.pdf#page=15',
+      pageImage: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&h=1200&fit=crop&crop=bottom',
       isPremium: true,
       isFromUpload: true
     }
