@@ -104,6 +104,23 @@ class PaymentRequest(BaseModel):
     package_id: str  # digital_annual, print_annual, combined_annual
     origin_url: str
 
+class RazorpayOrderRequest(BaseModel):
+    package_id: str
+    payment_method: str = "razorpay"  # razorpay or stripe
+
+class RazorpayOrder(BaseModel):
+    id: str
+    amount: int  # Amount in paise
+    currency: str
+    status: str
+
+class RazorpayPaymentVerification(BaseModel):
+    razorpay_order_id: str
+    razorpay_payment_id: str
+    razorpay_signature: str
+    package_id: str
+    user_email: Optional[str] = None
+
 class SubscriptionRequest(BaseModel):
     package_id: str
     user_details: Optional[Dict[str, Any]] = None  # For print subscriptions
