@@ -1,26 +1,33 @@
 {
-  "total_tests": 38,
-  "passed_tests": 23,
-  "failed_tests": 15,
-  "success_rate": 60.526315789473685,
+  "total_tests": 48,
+  "passed_tests": 26,
+  "failed_tests": 22,
+  "success_rate": 54.166666666666664,
   "critical_failures": [
-    "\u274c Articles Listing: HTTP 404: {\"detail\":\"Not Found\"}",
-    "\u274c Articles - Fashion Category: HTTP 404 for fashion",
-    "\u274c Articles - Business Category: HTTP 404 for business",
-    "\u274c Articles - Technology Category: HTTP 404 for technology",
-    "\u274c Articles - Finance Category: HTTP 404 for finance",
-    "\u274c Articles - Travel Category: HTTP 404 for travel",
-    "\u274c Articles - Health Category: HTTP 404 for health",
-    "\u274c Articles - Culture Category: HTTP 404 for culture",
-    "\u274c Articles - Art Category: HTTP 404 for art",
-    "\u274c Articles - Entertainment Category: HTTP 404 for entertainment"
+    "\u274c Health Check: HTTP 404: {\"detail\":\"Not Found\"}",
+    "\u274c Categories API: HTTP 404: {\"detail\":\"Not Found\"}",
+    "\u274c Database - Articles Collection: HTTP 404",
+    "\u274c Database - Categories Collection: HTTP 404",
+    "\u274c Database - Reviews Collection: HTTP 404",
+    "\u274c Database - Magazine Issues Collection: HTTP 404",
+    "\u274c Database - Destinations Collection: HTTP 404",
+    "\u274c Database - Authors Collection: HTTP 404",
+    "\u274c Database Connectivity: Only 0/6 collections accessible",
+    "\u274c API Route - /health: Route failed: HTTP 404",
+    "\u274c API Route - /articles: Route failed: HTTP 404",
+    "\u274c API Route - /categories: Route failed: HTTP 404",
+    "\u274c API Route - /payments/packages: Route failed: HTTP 404"
   ],
   "minor_issues": [
-    "\u26a0\ufe0f API Route - /auth/register: Route failed: HTTP 405",
-    "\u26a0\ufe0f User Registration: HTTP 404: {\"detail\":\"Not Found\"}",
-    "\u26a0\ufe0f Reviews Listing: HTTP 404: {\"detail\":\"Not Found\"}",
-    "\u26a0\ufe0f Magazine Issues: HTTP 404: {\"detail\":\"Not Found\"}",
-    "\u26a0\ufe0f Travel Destinations: HTTP 404: {\"detail\":\"Not Found\"}"
+    "\u26a0\ufe0f Single Article: HTTP 404: {\"detail\":\"Article not found\"}",
+    "\u26a0\ufe0f Article Retrieval by UUID: HTTP 404: {\"detail\":\"Article not found\"}",
+    "\u26a0\ufe0f Article UUID/Slug Test: Error: cannot access local variable 'article_by_uuid' where it is not associated with a value",
+    "\u26a0\ufe0f Razorpay Packages API: HTTP 404: {\"detail\":\"Not Found\"}",
+    "\u26a0\ufe0f Razorpay Order Creation: HTTP 404: {\"detail\":\"Not Found\"}",
+    "\u26a0\ufe0f Razorpay Webhook Endpoint: Webhook endpoint not accessible: HTTP 404",
+    "\u26a0\ufe0f API Route - /auth/register: Route failed: HTTP 404",
+    "\u26a0\ufe0f API Route Prefixes: Only 0/5 API routes working",
+    "\u26a0\ufe0f User Registration: HTTP 422: {\"detail\":[{\"type\":\"missing\",\"loc\":[\"body\",\"full_name\"],\"msg\":\"Field required\",\"input\":{\"name\":\"Premium Test User\",\"email\":\"testuser_1757111721@justurbane.com\",\"password\":\"premium123\"},\"url\":\"https://errors.pydantic.dev/2.11/v/missing\"}]}"
   ],
   "css_fix_impact": "significant"
 }
