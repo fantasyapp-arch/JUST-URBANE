@@ -72,6 +72,42 @@ const MagazineReader = ({ articles, isOpen, onClose, initialPageIndex = 0 }) => 
     document.body.removeChild(link);
   };
 
+  const handlePageFlip = (e) => {
+    const newPage = e.data;
+    setCurrentPage(newPage);
+    
+    // Show subscription modal when user tries to go beyond free preview
+    if (!canReadPremium && newPage >= FREE_PREVIEW_PAGES) {
+      setTimeout(() => {
+        setShowSubscriptionModal(true);
+      }, 500);
+    }
+  };
+
+  const nextPage = () => {
+    if (flipBookRef.current) {
+      // Prevent going beyond free preview for non-premium users
+      if (!canReadPremium && currentPage >= FREE_PREVIEW_PAGES - 1) {
+        setShowSubscriptionModal(true);
+        return;
+      }
+      flipBookRef.current.pageFlip().flipNext();
+    }
+  };
+
+  const prevPage = () => {
+    if (flipBookRef.current) {
+      flipBookRef.current.pageFlip().flipPrev();
+    }
+  };
+
+  const goToPage = (pageIndex) => {
+    if (flipBookRef.current) {
+      flipBookRef.current.pageFlip().flip(pageIndex);
+    }
+    setShowTableOfContents(false);
+  };
+
   if (!isOpen) return null;
 
   return (
