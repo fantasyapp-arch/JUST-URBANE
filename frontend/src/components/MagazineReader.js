@@ -287,8 +287,6 @@ const MagazineReader = ({ articles, isOpen, onClose, initialPageIndex = 0 }) => 
   );
 };
 
-export default MagazineReader;
-
 // Back Cover Component
 const BackCover = () => (
   <div className="h-full flex flex-col justify-center items-center p-8 text-center">
