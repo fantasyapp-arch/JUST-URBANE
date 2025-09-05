@@ -95,30 +95,29 @@ const CustomerDetailsModal = ({ isOpen, onClose, selectedPlan, onPaymentSuccess 
       const result = await initializeRazorpayPayment(orderData, formData);
       
       if (result.status === 'success') {
+        console.log('🎉 Payment successful, result:', result);
+        
         // Handle auto-login after payment
         if (result.access_token) {
+          console.log('🔑 Setting new access token...');
+          
           // Store the token and user data (auto-login)
           localStorage.setItem('token', result.access_token);
+          
           // Update API auth header
           const { api } = await import('../utils/api');
           api.defaults.headers.common['Authorization'] = `Bearer ${result.access_token}`;
-          // Refresh user context with new user data
-          await refreshUser();
+          
+          console.log('🔄 Refreshing user context...');
+          // Force token update and refresh user context
+          window.location.reload(); // Simple solution to ensure fresh auth state
         }
         
         onPaymentSuccess(result);
         onClose();
         
         // Show success message
-        alert('Payment successful! Your subscription is now active.');
-        
-        // Redirect to magazine page if user has digital access
-        if (result.has_digital_access) {
-          // Small delay to allow success message to be seen
-          setTimeout(() => {
-            navigate('/issues');
-          }, 1500);
-        }
+        alert('Payment successful! Your subscription is now active. Page will refresh to update your access.');
       }
     } catch (error) {
       console.error('Payment error details:', {
