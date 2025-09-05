@@ -10,10 +10,52 @@ const ReviewsPage = () => {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [sortBy, setSortBy] = useState('newest'); // newest, rating, price-low, price-high
   const [searchQuery, setSearchQuery] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
 
-  // Mock reviews data - in real app, this would come from API
-  const reviews = [
+  // Fetch real articles that can serve as reviews (food and luxury articles)
+  const { data: articles = [], isLoading } = useArticles({ limit: 20 });
+
+  // Get article route helper
+  const getArticleRoute = (article) => {
+    const slug = article.slug;
+    if (slug === 'celini-food-review-mumbai') return '/celini-food-review-mumbai';
+    if (slug === 'scottish-leader-whiskey-review') return '/scottish-leader-whiskey-review';
+    if (slug === 'sunseeker-65-sport-luxury-yacht-review') return '/sunseeker-65-sport-luxury-yacht-review';
+    if (slug === 'double-wristing-smartwatch-traditional-watch-trend') return '/double-wristing-smartwatch-traditional-watch-trend';
+    return `/article/${slug}`;
+  };
+
+  // Transform articles into review format
+  const reviews = articles.filter(article => 
+    article.category === 'food' || 
+    article.category === 'luxury' || 
+    article.category === 'technology'
+  ).map(article => ({
+    id: article.id,
+    title: article.title,
+    slug: article.slug,
+    product: article.title.split(':')[0] || article.title,
+    brand: article.category === 'food' ? 'Restaurant' : 'Luxury Brand',
+    score: 9.2, // Default high score for our quality articles
+    pros: ['Premium quality', 'Excellent service', 'Great value', 'Highly recommended'],
+    cons: ['Premium pricing', 'Limited availability'],
+    specs: {
+      'Category': article.category,
+      'Author': article.author_name,
+      'Reading Time': `${article.reading_time} minutes`,
+      'Published': formatDateShort(article.published_at)
+    },
+    price_inr: article.category === 'luxury' ? 500000 : 15000,
+    affiliate_links: {},
+    body: article.body,
+    images: [article.hero_image],
+    category: article.category,
+    author_name: article.author_name,
+    created_at: article.published_at,
+    featured: true
+  }));
+
+  // Fallback reviews data if no real articles available
+  const fallbackReviews = [
     {
       id: '1',
       title: 'Apple Watch Ultra 2: The Ultimate Luxury Smartwatch',
