@@ -181,37 +181,37 @@ const IssuesPage = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.8 }}
-          className="bg-gradient-to-r from-black via-gray-900 to-black rounded-3xl p-8 md:p-12 text-center text-white relative overflow-hidden"
+          className="bg-gradient-to-r from-black via-gray-900 to-black rounded-3xl p-10 md:p-16 text-center text-white relative overflow-hidden mx-4"
         >
-          <div className="absolute inset-0 bg-gradient-to-r from-amber-500/10 via-gold-500/10 to-amber-500/10"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-amber-500/20 via-gold-500/20 to-amber-500/20"></div>
           <div className="relative z-10">
-            <h3 className="text-3xl md:text-4xl font-bold mb-6">
-              Ready to Experience Premium?
+            <h3 className="text-4xl md:text-5xl font-bold mb-8">
+              Experience Premium Digital Magazine
             </h3>
-            <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
-              Start with 3 pages free, then unlock the complete digital magazine experience with premium content, exclusive interviews, and luxury lifestyle insights.
+            <p className="text-xl md:text-2xl text-gray-300 mb-10 max-w-3xl mx-auto leading-relaxed">
+              Immerse yourself in luxury lifestyle content with our premium digital magazine. Start with 3 pages free preview, then unlock the complete premium experience with exclusive interviews, luxury insights, and world-class content.
             </p>
             
-            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
+            <div className="flex flex-col sm:flex-row gap-8 justify-center items-center">
               <button
                 onClick={openMagazineReader}
-                className="bg-gradient-to-r from-amber-500 to-gold-600 hover:from-amber-600 hover:to-gold-700 text-black font-bold px-10 py-4 rounded-2xl transition-all duration-300 transform hover:scale-105 flex items-center space-x-3 shadow-xl"
+                className="bg-gradient-to-r from-amber-500 to-gold-600 hover:from-amber-600 hover:to-gold-700 text-black font-bold px-12 py-5 rounded-2xl transition-all duration-300 transform hover:scale-105 flex items-center space-x-4 shadow-2xl text-lg"
               >
-                <PlayCircle className="h-6 w-6" />
-                <span>Start Free Preview</span>
+                <PlayCircle className="h-7 w-7" />
+                <span>Start Premium Preview</span>
               </button>
               
               <Link
                 to="/pricing"
-                className="border-2 border-white text-white hover:bg-white hover:text-black font-semibold px-10 py-4 rounded-2xl transition-all duration-300 flex items-center space-x-3"
+                className="border-2 border-white text-white hover:bg-white hover:text-black font-bold px-12 py-5 rounded-2xl transition-all duration-300 flex items-center space-x-4 text-lg"
               >
-                <span>View Subscription Plans</span>
-                <ArrowRight className="h-5 w-5" />
+                <span>View Premium Plans</span>
+                <ArrowRight className="h-6 w-6" />
               </Link>
             </div>
             
-            <div className="mt-8 text-sm text-gray-400">
-              <span>✨ No credit card required for preview</span>
+            <div className="mt-10 text-lg text-gray-400">
+              <span>✨ No credit card required for premium preview</span>
             </div>
           </div>
         </motion.div>
