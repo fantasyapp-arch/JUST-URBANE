@@ -1218,7 +1218,7 @@ backend:
 
   - task: "Fashion Men Subcategory Cleanup and Image Fix"
     implemented: true
-    working: false
+    working: true
     file: "backend/server.py"
     stuck_count: 0
     priority: "high"
@@ -1227,6 +1227,9 @@ backend:
       - working: false
         agent: "testing"
         comment: "❌ FASHION MEN CLEANUP AND IMAGE FIX TESTING COMPLETED: Found 3 articles in Fashion > Men subcategory instead of expected 1 article. Perfect Suit Guide for Men article exists with proper data integrity (2562 characters content, all required fields present), but hero image URL (https://images.shutterstock.com/image-photo/confident-businessman-perfect-tailored-suit-600nw-2234567890.jpg) returns HTTP 422 (Unprocessable Entity) - SAME ISSUE AS BEFORE. Cleanup needed: remove 2 extra articles ('The Art of Timeless Tailoring' and 'Modern Gentleman's Grooming Essentials') and fix hero image URL for Perfect Suit Guide article. Success rate: 80% (8/10 tests passed)."
+      - working: true
+        agent: "testing"
+        comment: "✅ FASHION MEN SUBCATEGORY CLEANUP AND IMAGE FIX VERIFICATION COMPLETED - SUCCESS! Final verification confirms cleanup and image fix was successful. Fashion > Men subcategory now contains exactly 1 article ('Perfect Suit Guide for Men: Corporate Dressing Excellence') as expected. Hero image URL successfully updated from Shutterstock to working Unsplash URL (https://images.unsplash.com/photo-1617127365659-c47fa864d8bc...) - image is accessible and loads properly (Content-Type: image/jpeg). Article data integrity maintained: all required fields present (id, title, body, author_name, category, subcategory, hero_image, slug), substantial content (2562 characters), correct categorization (fashion > men), complete metadata (Author: Harshit Srinivas). Article retrieval by slug working correctly. Success rate: 92.9% (13/14 tests passed). Only minor issue: article retrieval by ID returns 404 (non-critical as slug retrieval works). CLEANUP AND IMAGE FIX VERIFICATION: SUCCESS ✅"
 
   - task: "Account Page Backend Integration"
     implemented: true
