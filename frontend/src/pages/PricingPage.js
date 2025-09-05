@@ -78,8 +78,24 @@ const PricingPage = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
-      {/* Highlight Overlay */}
-      <div className="fixed inset-0 bg-black bg-opacity-20 z-10 pointer-events-none animate-fade-in"></div>
+      {/* Highlight Overlay with Animation */}
+      <div 
+        className="fixed inset-0 bg-black bg-opacity-20 z-10 pointer-events-none"
+        style={{
+          animation: 'fadeIn 1s ease-in-out'
+        }}
+      ></div>
+      
+      <style jsx>{`
+        @keyframes fadeIn {
+          from {
+            opacity: 0;
+          }
+          to {
+            opacity: 1;
+          }
+        }
+      `}</style>
       
       {/* Header Section */}
       <div className="relative overflow-hidden bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 z-20">
