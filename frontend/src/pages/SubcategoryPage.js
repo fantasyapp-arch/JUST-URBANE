@@ -100,6 +100,7 @@ const SubcategoryPage = () => {
             article.slug === 'perfect-suit-guide-men-corporate-dressing' ? '/perfect-suit-guide-men-corporate-dressing' :
             article.slug === 'oscars-2022-best-dressed-fashion-red-carpet' ? '/oscars-2022-best-dressed-fashion-red-carpet' :
             article.slug === 'sunseeker-65-sport-luxury-yacht-review' ? '/sunseeker-65-sport-luxury-yacht-review' :
+            article.slug === 'double-wristing-smartwatch-traditional-watch-trend' ? '/double-wristing-smartwatch-traditional-watch-trend' :
             `/article/${article.slug || article.id}`}
         className="group block bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300"
       >
