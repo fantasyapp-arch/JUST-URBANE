@@ -133,7 +133,9 @@ const MagazineReader = ({ isOpen, onClose }) => {
       <div className="absolute top-0 left-0 right-0 z-10 bg-gradient-to-b from-black/80 to-transparent p-4">
         <div className="flex items-center justify-between text-white">
           <div className="flex items-center space-x-3">
-            <Crown className="h-5 w-5 text-amber-400" />
+            <div className="w-6 h-6 bg-amber-400 rounded flex items-center justify-center">
+              <span className="text-black font-bold text-sm">JU</span>
+            </div>
             <span className="text-lg font-bold">JUST URBANE</span>
           </div>
           <button
