@@ -330,7 +330,9 @@ const SearchPage = () => {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.4 }}
           >
-            <div className="text-6xl mb-6">😔</div>
+            <div className="w-16 h-16 mx-auto mb-6 bg-gray-100 rounded-full flex items-center justify-center">
+              <Search className="h-8 w-8 text-gray-400" />
+            </div>
             <h3 className="text-2xl font-serif font-bold text-primary-900 mb-4">
               No Results Found
             </h3>
