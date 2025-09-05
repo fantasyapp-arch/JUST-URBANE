@@ -614,12 +614,12 @@ async def get_articles(
 @app.get("/api/articles/{article_id}")
 async def get_article(article_id: str):
     # Try to find by ID first, then by slug
-    article = await db.articles.find_one({"$or": [{"id": article_id}, {"slug": article_id}]})
+    article = db.articles.find_one({"$or": [{"id": article_id}, {"slug": article_id}]})
     if not article:
         raise HTTPException(status_code=404, detail="Article not found")
     
     # Increment view count
-    await db.articles.update_one(
+    db.articles.update_one(
         {"_id": article["_id"]},
         {"$inc": {"views": 1}}
     )
