@@ -342,29 +342,36 @@ const Footer = () => {
       <div className="border-t border-gray-800 py-8 md:py-10">
         <div className="max-w-7xl mx-auto px-6 md:px-8">
           {/* Desktop Bottom Bar */}
-          <div className="hidden md:flex md:flex-row items-center justify-between">
-            <p className="text-gray-400 text-sm md:text-base font-medium">
-              © {currentYear} Just Urbane. All rights reserved. Luxury redefined.
-            </p>
-            <div className="flex items-center space-x-8 text-sm md:text-base">
-              <Link 
-                to="/privacy" 
-                className="text-gray-400 hover:text-white transition-colors duration-200 font-medium hover:translate-y-[-1px] transform"
-              >
-                Privacy Policy
-              </Link>
-              <Link 
-                to="/terms" 
-                className="text-gray-400 hover:text-white transition-colors duration-200 font-medium hover:translate-y-[-1px] transform"
-              >
-                Terms of Service
-              </Link>
-              <Link 
-                to="/about" 
-                className="text-gray-400 hover:text-white transition-colors duration-200 font-medium hover:translate-y-[-1px] transform"
-              >
-                About Us
-              </Link>
+          <div className="hidden md:flex md:flex-col space-y-4">
+            <div className="flex flex-row items-center justify-between">
+              <p className="text-gray-400 text-sm md:text-base font-medium">
+                © {currentYear} Just Urbane. All rights reserved. Luxury redefined.
+              </p>
+              <div className="flex items-center space-x-8 text-sm md:text-base">
+                <Link 
+                  to="/privacy" 
+                  className="text-gray-400 hover:text-white transition-colors duration-200 font-medium hover:translate-y-[-1px] transform"
+                >
+                  Privacy Policy
+                </Link>
+                <Link 
+                  to="/terms" 
+                  className="text-gray-400 hover:text-white transition-colors duration-200 font-medium hover:translate-y-[-1px] transform"
+                >
+                  Terms of Service
+                </Link>
+                <Link 
+                  to="/about" 
+                  className="text-gray-400 hover:text-white transition-colors duration-200 font-medium hover:translate-y-[-1px] transform"
+                >
+                  About Us
+                </Link>
+              </div>
+            </div>
+            <div className="text-center">
+              <p className="text-gray-500 text-sm font-medium">
+                Designed and Developed by <span className="text-gray-300 font-semibold">satmat group</span>
+              </p>
             </div>
           </div>
           
