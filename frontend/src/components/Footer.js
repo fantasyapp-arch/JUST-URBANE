@@ -344,7 +344,7 @@ const Footer = () => {
           {/* Desktop Bottom Bar */}
           <div className="hidden md:flex md:justify-center">
             <p className="text-gray-400 text-sm md:text-base font-medium text-center">
-              © {currentYear} Just Urbane. Designed and Developed by{' '}
+              © {currentYear} Just Urbane. All rights reserved. Designed and Developed by{' '}
               <a 
                 href="https://satmatgroup.com" 
                 target="_blank" 
