@@ -20,17 +20,18 @@ const IssuesPage = () => {
 
   const currentIssue = {
     title: 'Just Urbane',
-    subtitle: 'August 2025 Edition',
-    description: 'Experience luxury lifestyle, premium fashion, and cutting-edge technology through our immersive digital magazine.',
+    subtitle: 'August 2025 Premium Edition',
+    description: 'Experience the pinnacle of luxury lifestyle, premium fashion, and cutting-edge technology through our world-class digital magazine platform.',
     publishDate: 'August 2025',
     totalPages: pages.length,
-    category: 'Premium Lifestyle',
+    category: 'Luxury Lifestyle Magazine',
     highlights: [
-      'Exclusive Celebrity Interviews',
-      'Luxury Travel Destinations', 
-      'Premium Fashion Collections',
-      'Latest Technology Reviews',
-      'Luxury Automotive Features'
+      'Exclusive Celebrity Interviews & Features',
+      'World-Class Luxury Travel Destinations', 
+      'Premium Fashion Collections & Trends',
+      'High-End Technology & Innovation Reviews',
+      'Luxury Automotive & Lifestyle Features',
+      'Art, Culture & Premium Entertainment Content'
     ]
   };
 
