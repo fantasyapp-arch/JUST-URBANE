@@ -1987,9 +1987,20 @@ test_plan:
   core_api_functionality_verified: true
   cors_configuration_verified: true
   frontend_redesign_impact_verified: false
-  sustainable_travel_article_tested: true
-  sustainable_travel_article_success_rate: "92.3%"
-  sustainable_travel_article_testing_date: "2025-01-03T21:30:00"
+  sunseeker_yacht_article_tested: true
+  sunseeker_yacht_article_success_rate: "86.7%"
+  sunseeker_yacht_article_testing_date: "2025-09-05T17:36:00"
+  sunseeker_yacht_luxury_category_verified: true
+  sunseeker_yacht_yachts_subcategory_verified: true
+  sunseeker_yacht_article_title_verified: true
+  sunseeker_yacht_author_verified: true
+  sunseeker_yacht_categorization_verified: true
+  sunseeker_yacht_content_quality_verified: true
+  sunseeker_yacht_tags_verified: true
+  sunseeker_yacht_hero_image_accessible: true
+  sunseeker_yacht_gallery_image_accessible: true
+  sunseeker_yacht_slug_retrieval_verified: true
+  sunseeker_yacht_both_images_verified: true
   sustainable_travel_backend_verified: true
   sustainable_travel_api_endpoints_verified: true
   sustainable_travel_category_filtering_verified: true
