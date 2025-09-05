@@ -95,6 +95,17 @@ const CustomerDetailsModal = ({ isOpen, onClose, selectedPlan, onPaymentSuccess 
       const result = await initializeRazorpayPayment(orderData, formData);
       
       if (result.status === 'success') {
+        // Handle auto-login after payment
+        if (result.access_token) {
+          // Store the token and user data (auto-login)
+          localStorage.setItem('token', result.access_token);
+          // Update API auth header
+          const { api } = await import('../utils/api');
+          api.defaults.headers.common['Authorization'] = `Bearer ${result.access_token}`;
+          // Refresh user context with new user data
+          await refreshUser();
+        }
+        
         onPaymentSuccess(result);
         onClose();
         
