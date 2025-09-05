@@ -14,7 +14,20 @@ const MagazineReaderPage = () => {
   const [isFlipping, setIsFlipping] = useState(false);
   const { user, isAuthenticated } = useAuth();
 
+  // Debug user authentication status
+  console.log('🔍 Magazine Reader Auth Check:', {
+    isAuthenticated,
+    user: user ? {
+      email: user.email,
+      is_premium: user.is_premium,
+      subscription_status: user.subscription_status,
+      subscription_type: user.subscription_type
+    } : null
+  });
+
   const canReadPremium = isAuthenticated && user?.is_premium && user?.subscription_status === 'active';
+  console.log('📖 Can read premium?', canReadPremium);
+  
   const FREE_PREVIEW_PAGES = 3;
 
   const pages = parseMagazineContent();
