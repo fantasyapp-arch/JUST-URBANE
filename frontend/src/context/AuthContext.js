@@ -33,22 +33,28 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  // Refresh user data (call after payment success)
-  const refreshUser = async () => {
-    if (token) {
-      console.log('🔄 Refreshing user data after payment...');
-      const userData = await fetchUserData();
-      if (userData) {
-        console.log('✅ User data refreshed:', userData);
-        setUser(userData);
-        return userData;
-      } else {
-        console.log('❌ Failed to refresh user data');
-      }
-    } else {
-      console.log('❌ No token available for refresh');
+  // Update token and refresh user data (for payment success)
+  const updateTokenAndUser = async (newToken) => {
+    console.log('🔑 Updating token and user data...');
+    
+    // Store new token
+    localStorage.setItem('token', newToken);
+    setToken(newToken);
+    
+    // Set authorization header
+    api.defaults.headers.common['Authorization'] = `Bearer ${newToken}`;
+    
+    // Fetch fresh user data with new token
+    try {
+      const response = await api.get('/auth/me');
+      const userData = response.data;
+      console.log('✅ Fresh user data loaded:', userData);
+      setUser(userData);
+      return userData;
+    } catch (error) {
+      console.error('❌ Failed to fetch fresh user data:', error);
+      return null;
     }
-    return null;
   };
 
   useEffect(() => {
