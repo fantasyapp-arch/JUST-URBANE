@@ -459,7 +459,7 @@ const TravelPage = () => {
 
       {/* CTA Section */}
       <div className="bg-gradient-to-r from-blue-900 to-teal-800 text-white py-16">
-        <div className="container mx-auto px-4 text-center">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div 
             className="max-w-2xl mx-auto"
             initial={{ opacity: 0, y: 20 }}
