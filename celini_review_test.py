@@ -9,7 +9,7 @@ import json
 from datetime import datetime
 
 class CeliniFoodReviewTester:
-    def __init__(self, base_url: str = "https://luxmag-tech-nav-fix.preview.emergentagent.com"):
+    def __init__(self, base_url: str = "https://urbane-refresh.preview.emergentagent.com"):
         self.base_url = base_url
         self.session = requests.Session()
         self.test_results = []

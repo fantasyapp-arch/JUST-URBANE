@@ -11,7 +11,7 @@ def test_aastha_gill_images():
     """Test all 4 Aastha Gill article images"""
     
     # Get the article data
-    response = requests.get("https://luxmag-tech-nav-fix.preview.emergentagent.com/api/articles/aastha-gill-buzz-queen-bollywood-singer-interview")
+    response = requests.get("https://urbane-refresh.preview.emergentagent.com/api/articles/aastha-gill-buzz-queen-bollywood-singer-interview")
     
     if response.status_code != 200:
         print(f"❌ Failed to get article: HTTP {response.status_code}")
