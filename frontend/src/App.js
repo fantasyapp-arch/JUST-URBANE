@@ -100,6 +100,7 @@ const router = createBrowserRouter([
       { path: "scottish-leader-whiskey-review", element: <ScottishLeaderReviewPage /> },
       { path: "when-in-france-travel-destinations", element: <FranceTravelPage /> },
       { path: "sustainable-travel-conscious-guide", element: <SustainableTravelPage /> },
+      { path: "perfect-suit-guide-men-corporate-dressing", element: <MensFashionSuitGuidePage /> },
       { path: "author/:slug", element: <AuthorPage /> },
       { path: "issues", element: <IssuesPage /> },
       { path: "reviews", element: <ReviewsPage /> },
