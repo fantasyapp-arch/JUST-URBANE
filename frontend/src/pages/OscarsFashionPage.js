@@ -243,12 +243,31 @@ const OscarsFashionPage = () => {
 
           <figure className="my-6 sm:my-8 -mx-2 sm:-mx-4">
             <img 
-              src={article.galleryImages[3]}
-              alt="Elite fashion moments and designer collaborations at the Academy Awards"
+              src={article.galleryImages[6]}
+              alt="Jason Momoa in his distinctive upcycled tuxedo with Ukraine support accessories"
               className="w-full h-48 sm:h-64 md:h-96 object-cover rounded-lg shadow-lg"
             />
             <figcaption className="text-sm text-gray-600 mt-3 text-center italic px-2">
-              Elite fashion moments and designer collaborations at the Oscars
+              Hollywood glamour at its finest with impeccable styling and designer fashion statements
+            </figcaption>
+          </figure>
+
+          <h3 className="text-2xl font-serif font-bold text-gray-900 mt-10 mb-6">
+            Pearly Hues - Nikolaj Coster-Waldau
+          </h3>
+
+          <p className="text-lg text-gray-800 leading-relaxed mb-6">
+            The Game of Thrones actor Nikolaj Coster-Waldau and executive producer for Best Animated Feature Film nominee "Flee" was seen donning a cream-colored tuxedo at the 2022 Academy Awards, bringing sophisticated elegance to the red carpet.
+          </p>
+
+          <figure className="my-6 sm:my-8 -mx-2 sm:-mx-4">
+            <img 
+              src={article.galleryImages[7]}
+              alt="Celebrity fashion portraits showcasing sophisticated Oscar night styling and designer fashion"
+              className="w-full h-48 sm:h-64 md:h-96 object-cover rounded-lg shadow-lg"
+            />
+            <figcaption className="text-sm text-gray-600 mt-3 text-center italic px-2">
+              Sophisticated Oscar night fashion featuring bold design choices and luxury brand partnerships
             </figcaption>
           </figure>
 
