@@ -87,7 +87,7 @@ const IssuesPage = () => {
         </motion.div>
 
         {/* Magazine Thumbnails */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-20 px-4">
           {magazineThumbnails.map((page, index) => (
             <motion.div
               key={index}
@@ -97,36 +97,36 @@ const IssuesPage = () => {
               className="relative group cursor-pointer"
               onClick={openMagazineReader}
             >
-              <div className="relative overflow-hidden rounded-2xl shadow-2xl group-hover:shadow-3xl transition-all duration-500">
+              <div className="relative overflow-hidden rounded-3xl shadow-2xl group-hover:shadow-3xl transition-all duration-500 bg-white p-2">
                 <img
                   src={page.pageImage}
-                  alt={`Page ${index + 1} Preview`}
-                  className="w-full h-96 object-cover group-hover:scale-110 transition-transform duration-700"
+                  alt={`Premium Magazine Page ${index + 1}`}
+                  className="w-full h-96 object-cover rounded-2xl group-hover:scale-105 transition-transform duration-700"
                 />
                 
                 {/* Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div className="absolute inset-2 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl"></div>
                 
-                {/* Page Number Badge */}
-                <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm text-gray-900 px-3 py-1 rounded-full text-sm font-bold">
-                  Page {index + 1}
+                {/* Premium Badge */}
+                <div className="absolute top-6 right-6 bg-gradient-to-r from-amber-400 to-gold-500 text-black px-4 py-2 rounded-full text-sm font-bold">
+                  Premium Content
                 </div>
                 
                 {/* Preview Button */}
                 <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <button className="bg-white/20 backdrop-blur-md text-white px-6 py-3 rounded-full font-semibold hover:bg-white/30 transition-all duration-300 flex items-center space-x-2">
+                  <button className="bg-white/20 backdrop-blur-md text-white px-8 py-4 rounded-full font-semibold hover:bg-white/30 transition-all duration-300 flex items-center space-x-3 shadow-xl">
                     <Eye className="h-5 w-5" />
-                    <span>Preview</span>
+                    <span>Read Magazine</span>
                   </button>
                 </div>
               </div>
               
-              <div className="mt-4 text-center">
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                  {page.title || `Page ${index + 1}`}
+              <div className="mt-6 text-center">
+                <h3 className="text-xl font-bold text-gray-900 mb-3">
+                  {page.title || `Premium Edition Page ${index + 1}`}
                 </h3>
-                <p className="text-sm text-gray-600">
-                  {index === 0 ? 'Fashion & Style' : index === 1 ? 'Celebrity Features' : 'Luxury Travel'}
+                <p className="text-lg text-gray-600">
+                  {index === 0 ? 'Luxury Fashion & Style' : index === 1 ? 'Exclusive Celebrity Features' : 'Premium Lifestyle & Travel'}
                 </p>
               </div>
             </motion.div>
