@@ -40,6 +40,7 @@ import MensFashionSuitGuidePage from './pages/MensFashionSuitGuidePage';
 import OscarsFashionPage from './pages/OscarsFashionPage';
 import SunseekerYachtPage from './pages/SunseekerYachtPage';
 import DualWristingPage from './pages/DualWristingPage';
+import AasthaGillPage from './pages/AasthaGillPage';
 import PrivacyPage from './pages/PrivacyPage';
 import TermsPage from './pages/TermsPage';
 
