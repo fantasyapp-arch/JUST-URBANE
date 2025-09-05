@@ -359,6 +359,7 @@ async def register(user: UserCreate):
     )
     
     user_response = {k: v for k, v in user_dict.items() if k != "hashed_password"}
+    user_response = prepare_item_response(user_response)
     
     return {
         "access_token": access_token,
