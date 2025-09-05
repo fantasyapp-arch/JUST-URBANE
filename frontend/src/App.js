@@ -102,6 +102,7 @@ const router = createBrowserRouter([
       { path: "when-in-france-travel-destinations", element: <FranceTravelPage /> },
       { path: "sustainable-travel-conscious-guide", element: <SustainableTravelPage /> },
       { path: "perfect-suit-guide-men-corporate-dressing", element: <MensFashionSuitGuidePage /> },
+      { path: "oscars-2022-best-dressed-fashion-red-carpet", element: <OscarsFashionPage /> },
       { path: "author/:slug", element: <AuthorPage /> },
       { path: "issues", element: <IssuesPage /> },
       { path: "reviews", element: <ReviewsPage /> },
