@@ -286,47 +286,132 @@ const MagazineReaderPage = () => {
         </AnimatePresence>
       </div>
 
-      {/* Magazine Display Area */}
-      <div 
-        ref={containerRef}
-        className="flex items-center justify-center h-full p-4 pt-20 pb-16"
-        onClick={toggleControls}
-      >
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          className="relative bg-white shadow-2xl rounded-lg overflow-hidden"
+      {/* Navigation Controls */}
+      <div style={{
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        width: '100%',
+        height: '100%',
+        pointerEvents: 'none',
+        zIndex: 999999
+      }}>
+        {/* Left Half - Previous Page */}
+        <div
+          onClick={prevPage}
           style={{
-            width: DISPLAY_WIDTH * zoom,
-            height: DISPLAY_HEIGHT * zoom,
-            transform: `rotate(${rotation}deg)`,
-            maxWidth: '95vw',
-            maxHeight: '95vh'
+            position: 'absolute',
+            left: 0,
+            top: 0,
+            width: '50%',
+            height: '100%',
+            cursor: currentPage === 0 || isFlipping ? 'not-allowed' : 'pointer',
+            pointerEvents: 'auto',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'flex-start',
+            paddingLeft: '40px',
+            transition: 'all 0.3s ease',
+            background: 'transparent'
+          }}
+          onMouseEnter={(e) => {
+            if (!(currentPage === 0 || isFlipping)) {
+              e.target.style.background = 'linear-gradient(90deg, rgba(0,0,0,0.05) 0%, transparent 70%)';
+            }
+          }}
+          onMouseLeave={(e) => {
+            e.target.style.background = 'transparent';
           }}
         >
-          {/* PDF Display with A4 Proportions */}
-          <iframe
-            src={`${magazinePdfUrl}#toolbar=0&navpanes=0&scrollbar=0&view=Fit`}
-            className="w-full h-full border-0"
-            title="Just Urbane August 2025 Digital Magazine"
-            style={{
-              filter: 'drop-shadow(0 25px 50px rgba(0, 0, 0, 0.5))'
-            }}
-          />
-          
-          {/* A4 Size Info Badge */}
-          <div className="absolute bottom-4 left-4 bg-black/70 backdrop-blur-sm text-white px-3 py-2 rounded-lg text-sm">
-            <div className="flex items-center space-x-2">
-              <BookOpen className="h-4 w-4 text-amber-400" />
-              <span>A4 Format • {DISPLAY_WIDTH}×{DISPLAY_HEIGHT}px</span>
-            </div>
-          </div>
+          {!(currentPage === 0 || isFlipping) && (
+            <motion.div
+              initial={{ opacity: 0, x: -10 }}
+              animate={{ opacity: 0.4, x: 0 }}
+              whileHover={{ opacity: 0.8, scale: 1.05 }}
+              style={{
+                width: '50px',
+                height: '50px',
+                backgroundColor: 'rgba(0,0,0,0.6)',
+                borderRadius: '50%',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: 'white',
+                boxShadow: '0 2px 10px rgba(0,0,0,0.2)'
+              }}
+            >
+              <ChevronLeft size={24} />
+            </motion.div>
+          )}
+        </div>
 
-          {/* Resolution Badge */}
-          <div className="absolute top-4 right-4 bg-gradient-to-r from-amber-500 to-amber-600 text-white px-3 py-2 rounded-lg text-sm font-medium">
-            High Resolution PDF
-          </div>
-        </motion.div>
+        {/* Right Half - Next Page */}
+        <div
+          onClick={nextPage}
+          style={{
+            position: 'absolute',
+            right: 0,
+            top: 0,
+            width: '50%',
+            height: '100%',
+            cursor: currentPage >= totalPages - 1 || isFlipping ? 'not-allowed' : 'pointer',
+            pointerEvents: 'auto',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'flex-end',
+            paddingRight: '40px',
+            transition: 'all 0.3s ease',
+            background: 'transparent'
+          }}
+          onMouseEnter={(e) => {
+            if (!(currentPage >= totalPages - 1 || isFlipping)) {
+              e.target.style.background = 'linear-gradient(270deg, rgba(0,0,0,0.05) 0%, transparent 70%)';
+            }
+          }}
+          onMouseLeave={(e) => {
+            e.target.style.background = 'transparent';
+          }}
+        >
+          {!(currentPage >= totalPages - 1 || isFlipping) && (
+            <motion.div
+              initial={{ opacity: 0, x: 10 }}
+              animate={{ opacity: 0.4, x: 0 }}
+              whileHover={{ opacity: 0.8, scale: 1.05 }}
+              style={{
+                width: '50px',
+                height: '50px',
+                backgroundColor: 'rgba(0,0,0,0.6)',
+                borderRadius: '50%',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: 'white',
+                boxShadow: '0 2px 10px rgba(0,0,0,0.2)'
+              }}
+            >
+              <ChevronRight size={24} />
+            </motion.div>
+          )}
+        </div>
+      </div>
+
+      {/* Page Indicator */}
+      <div style={{
+        position: 'absolute',
+        bottom: '20px',
+        left: '50%',
+        transform: 'translateX(-50%)',
+        backgroundColor: 'rgba(0,0,0,0.8)',
+        color: 'white',
+        padding: '10px 20px',
+        borderRadius: '25px',
+        fontSize: '14px',
+        fontWeight: 'bold',
+        backdropFilter: 'blur(10px)',
+        border: '1px solid rgba(255,255,255,0.1)',
+        zIndex: 999999
+      }}>
+        Page {currentPage + 1} of {totalPages}
       </div>
 
       {/* Bottom Controls Bar */}
