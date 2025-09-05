@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom';
 import { Star, Filter, Search, TrendingUp, Award, ShoppingCart, ExternalLink } from 'lucide-react';
 import { motion } from 'framer-motion';
 import LoadingSpinner, { SkeletonCard } from '../components/LoadingSpinner';
-import { formatPrice } from '../utils/formatters';
+import { formatPrice, formatDateShort } from '../utils/formatters';
+import { useArticles } from '../hooks/useArticles';
 
 const ReviewsPage = () => {
   const [selectedCategory, setSelectedCategory] = useState('all');
