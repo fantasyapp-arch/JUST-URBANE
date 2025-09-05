@@ -17,7 +17,11 @@ const OscarsFashionPage = () => {
       "https://customer-assets.emergentagent.com/job_luxmag-platform/artifacts/566l18wf_94_AR_0526.jpg",
       "https://customer-assets.emergentagent.com/job_luxmag-platform/artifacts/c0dpwc9i_94_AR_0377.jpg", 
       "https://customer-assets.emergentagent.com/job_luxmag-platform/artifacts/w3vk01ug_94_AR_0903.jpg",
-      "https://customer-assets.emergentagent.com/job_luxmag-platform/artifacts/psfl1dmc_94_AR_0615.jpg"
+      "https://customer-assets.emergentagent.com/job_luxmag-platform/artifacts/psfl1dmc_94_AR_0615.jpg",
+      "https://customer-assets.emergentagent.com/job_luxmag-platform/artifacts/geeqo4rh_94_AR_0848.jpg",
+      "https://customer-assets.emergentagent.com/job_luxmag-platform/artifacts/48qamudk_94_AR_0660.jpg",
+      "https://customer-assets.emergentagent.com/job_luxmag-platform/artifacts/viltuaeq_94_AR_0892%20-%20Copy.jpg",
+      "https://customer-assets.emergentagent.com/job_luxmag-platform/artifacts/wuo6l24b_94_AR_0665.jpg"
     ],
     tags: ['Oscars', 'Red Carpet', 'Fashion', 'Celebrity Style', 'Academy Awards', 'Designer Gowns', 'Hollywood Fashion', 'Best Dressed', '2022 Oscars']
   };
