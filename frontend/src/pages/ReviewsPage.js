@@ -190,7 +190,6 @@ const ReviewsPage = () => {
 };
 
 export default ReviewsPage;
-      cons: ['Premium price', 'Long waiting lists', 'Limited availability'],
       specs: {
         'Case Size': '41mm',
         'Material': 'Oystersteel',
