@@ -478,12 +478,6 @@ const HomePage = () => {
           </div>
         </div>
       </section>
-
-      {/* Digital Magazine Viewer */}
-      <DigitalMagazineViewer 
-        isOpen={isMagazineOpen} 
-        onClose={() => setIsMagazineOpen(false)} 
-      />
     </div>
   );
 };
