@@ -405,10 +405,9 @@ async def get_payment_packages():
 
 @app.post("/api/payments/razorpay/create-order")
 async def create_razorpay_order(
-    order_request: RazorpayOrderRequest,
-    current_user: dict = Depends(get_current_user)
+    order_request: RazorpayOrderRequest
 ):
-    """Create Razorpay order for subscription with customer details"""
+    """Create Razorpay order for subscription with customer details - Guest checkout allowed"""
     
     if not razorpay_client:
         raise HTTPException(status_code=500, detail="Razorpay not configured")
@@ -432,7 +431,7 @@ async def create_razorpay_order(
     try:
         # Create Razorpay order
         amount_in_paise = int(package["price"] * 100)
-        receipt_id = f"ord_{order_request.package_id[:8]}_{current_user['id'][:8]}_{int(datetime.utcnow().timestamp())}"[:40]
+        receipt_id = f"ord_{order_request.package_id[:8]}_{order_request.customer_details.email[:8]}_{int(datetime.utcnow().timestamp())}"[:40]
         razorpay_order = razorpay_client.order.create({
             "amount": amount_in_paise,
             "currency": package["currency"],
@@ -444,11 +443,11 @@ async def create_razorpay_order(
             }
         })
         
-        # Store order in database
+        # Store order in database (guest order)
         order_doc = {
             "id": str(uuid.uuid4()),
             "razorpay_order_id": razorpay_order["id"],
-            "user_id": current_user["id"],
+            "user_id": None,  # Guest order
             "customer_details": order_request.customer_details.dict(),
             "package_id": order_request.package_id,
             "amount": package["price"],
