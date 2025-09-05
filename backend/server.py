@@ -574,6 +574,7 @@ async def verify_razorpay_payment(
             "status": "success",
             "message": "Payment verified and subscription activated",
             "subscription_type": payment_data.package_id,
+            "has_digital_access": has_digital_access,
             "expires_at": (datetime.utcnow() + timedelta(days=365)).isoformat(),
             "user_created": existing_user is None
         }
