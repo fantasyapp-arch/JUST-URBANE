@@ -16,16 +16,49 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [token, setToken] = useState(localStorage.getItem('token'));
 
-  useEffect(() => {
-    if (token) {
-      // Set token in API headers
-      api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-      
-      // You could verify token here by calling a /me endpoint
-      // For now, we'll just assume token is valid if it exists
-      setUser({ token });
+  // Fetch user data from /me endpoint
+  const fetchUserData = async () => {
+    if (!token) return null;
+    
+    try {
+      const response = await api.get('/auth/me');
+      return response.data;
+    } catch (error) {
+      console.error('Failed to fetch user data:', error);
+      // If token is invalid, clear it
+      if (error.response?.status === 401) {
+        logout();
+      }
+      return null;
     }
-    setLoading(false);
+  };
+
+  // Refresh user data (call after payment success)
+  const refreshUser = async () => {
+    if (token) {
+      const userData = await fetchUserData();
+      setUser(userData);
+      return userData;
+    }
+    return null;
+  };
+
+  useEffect(() => {
+    const initAuth = async () => {
+      if (token) {
+        // Set token in API headers
+        api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+        
+        // Fetch full user data
+        const userData = await fetchUserData();
+        if (userData) {
+          setUser(userData);
+        }
+      }
+      setLoading(false);
+    };
+
+    initAuth();
   }, [token]);
 
   const login = async (email, password) => {
@@ -35,7 +68,7 @@ export const AuthProvider = ({ children }) => {
         password
       });
       
-      const { access_token } = response.data;
+      const { access_token, user: userData } = response.data;
       
       // Store token
       localStorage.setItem('token', access_token);
@@ -44,10 +77,10 @@ export const AuthProvider = ({ children }) => {
       // Set authorization header
       api.defaults.headers.common['Authorization'] = `Bearer ${access_token}`;
       
-      // Set user
-      setUser({ token: access_token, email });
+      // Set user with full data from login response
+      setUser(userData);
       
-      return { success: true };
+      return { success: true, user: userData };
     } catch (error) {
       console.error('Login error:', error);
       return { 
@@ -61,10 +94,19 @@ export const AuthProvider = ({ children }) => {
     try {
       const response = await api.post('/auth/register', userData);
       
-      // Auto-login after registration
-      const loginResult = await login(userData.email, userData.password);
+      const { access_token, user: newUser } = response.data;
       
-      return loginResult;
+      // Store token
+      localStorage.setItem('token', access_token);
+      setToken(access_token);
+      
+      // Set authorization header
+      api.defaults.headers.common['Authorization'] = `Bearer ${access_token}`;
+      
+      // Set user with full data from registration response
+      setUser(newUser);
+      
+      return { success: true, user: newUser };
     } catch (error) {
       console.error('Registration error:', error);
       return { 
@@ -86,6 +128,7 @@ export const AuthProvider = ({ children }) => {
     login,
     register,
     logout,
+    refreshUser,
     loading,
     isAuthenticated: !!user
   };
