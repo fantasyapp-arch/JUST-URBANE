@@ -105,17 +105,8 @@ const Header = () => {
             ))}
           </nav>
 
-          {/* RIGHT SIDE - SEARCH, SUBSCRIBE & MENU */}
+          {/* RIGHT SIDE - SUBSCRIBE & MENU */}
           <div className="flex items-center space-x-4">
-            {/* Search Button */}
-            <button
-              onClick={() => setIsSearchOpen(true)}
-              className="hidden md:flex items-center justify-center p-2 text-gray-700 hover:text-black transition-colors"
-              aria-label="Search"
-            >
-              <Search className="h-5 w-5" />
-            </button>
-
             {/* Subscribe Button */}
             <Link
               to="/pricing"
