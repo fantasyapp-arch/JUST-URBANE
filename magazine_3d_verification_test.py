@@ -10,7 +10,7 @@ import time
 from datetime import datetime
 
 class Magazine3DVerificationTester:
-    def __init__(self, base_url: str = "https://style-luxury-mag.preview.emergentagent.com"):
+    def __init__(self, base_url: str = "https://luxmag-tech-nav-fix.preview.emergentagent.com"):
         self.base_url = base_url
         self.session = requests.Session()
         self.test_results = []
