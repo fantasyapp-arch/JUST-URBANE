@@ -66,15 +66,9 @@ const FeaturedMagazineCover = ({ issue, onReadClick, canRead }) => {
 
           {/* Interactive Overlay */}
           <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-            {canRead ? (
-              <div className="bg-white/20 backdrop-blur-sm rounded-full p-6 transform group-hover:scale-110 transition-transform duration-300">
-                <Play className="h-10 w-10 text-white fill-current" />
-              </div>
-            ) : (
-              <div className="bg-white/20 backdrop-blur-sm rounded-full p-6">
-                <Lock className="h-10 w-10 text-white" />
-              </div>
-            )}
+            <div className="bg-white/20 backdrop-blur-sm rounded-full p-6 transform group-hover:scale-110 transition-transform duration-300">
+              <BookOpen className="h-10 w-10 text-white" />
+            </div>
           </div>
 
           {/* Premium Badge */}
