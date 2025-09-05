@@ -15,6 +15,7 @@ const MagazineReaderPage = () => {
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [showControls, setShowControls] = useState(true);
   const [rotation, setRotation] = useState(0);
+  const [showSubscriptionModal, setShowSubscriptionModal] = useState(false);
   const { user, isAuthenticated } = useAuth();
 
   // Real magazine PDF URL - your uploaded PDF
