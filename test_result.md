@@ -1956,7 +1956,7 @@ metadata:
 
 test_plan:
   current_focus:
-    - "Oscars Fashion Article Final Verification - 9 Images Integration"
+    - "Sunseeker Yacht Article Integration Testing - Luxury > Yachts Category"
   stuck_tasks:
   test_all: true
   test_priority: "high_first"
