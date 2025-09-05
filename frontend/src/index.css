@@ -21,12 +21,7 @@
     font-family: 'Playfair Display', Georgia, serif;
   }
   
-  .container {
-    margin: 0 !important;
-    padding: 0 !important;
-    max-width: none !important;
-    width: 100% !important;
-  }
+  /* Removed problematic container override that was causing alignment issues */
 }
 
 @layer components {
