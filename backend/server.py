@@ -214,7 +214,7 @@ class ArticleCreate(BaseModel):
 class Category(BaseModel):
     id: Optional[str] = None
     name: str
-    display_name: str
+    display_name: Optional[str] = None
     description: Optional[str] = None
     subcategories: List[str] = []
 
