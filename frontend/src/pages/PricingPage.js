@@ -267,7 +267,7 @@ const PricingPage = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 1 }}
-          className="mt-16 text-center"
+          className="mt-16 text-center z-30 relative"
         >
           <p className="text-gray-600 mb-4">Have questions about our subscription plans?</p>
           <Link 
