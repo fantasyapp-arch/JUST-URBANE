@@ -103,25 +103,25 @@ const FeaturedMagazineCover = ({ issue, onReadClick, canRead }) => {
           </p>
         </div>
 
-        {/* Issue Stats - GQ Style */}
+        {/* Magazine Stats */}
         <div className="grid grid-cols-3 gap-6 py-6 border-y border-gray-200">
           <div className="text-center">
-            <div className="text-2xl font-bold text-gray-900">{issue.articles.length}</div>
-            <div className="text-sm text-gray-600">Articles</div>
+            <div className="text-2xl font-bold text-gray-900">A4</div>
+            <div className="text-sm text-gray-600">Format</div>
           </div>
           <div className="text-center">
             <div className="text-2xl font-bold text-gray-900 flex items-center justify-center">
-              <Crown className="h-5 w-5 text-amber-600 mr-1" />
-              {premiumArticles.length}
+              <BookOpen className="h-5 w-5 text-amber-600 mr-1" />
+              PDF
             </div>
-            <div className="text-sm text-gray-600">Premium</div>
+            <div className="text-sm text-gray-600">Digital</div>
           </div>
           <div className="text-center">
             <div className="text-2xl font-bold text-gray-900 flex items-center justify-center">
               <Eye className="h-5 w-5 text-gray-600 mr-1" />
-              {totalViews > 1000 ? `${(totalViews/1000).toFixed(1)}k` : totalViews}
+              HD
             </div>
-            <div className="text-sm text-gray-600">Views</div>
+            <div className="text-sm text-gray-600">Quality</div>
           </div>
         </div>
 
