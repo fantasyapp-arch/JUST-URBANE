@@ -121,11 +121,11 @@ const MagazineReader = ({ isOpen, onClose }) => {
   // Debug logging
   console.log(`Current page: ${currentPage}, Free pages: ${FREE_PREVIEW_PAGES}, Total pages: ${pages.length}, Can read premium: ${canReadPremium}, Show subscription gate: ${showSubscriptionGate}`);
 
-  // Force subscription gate to show after 3 pages
-  const showSubscriptionGate = !canReadPremium && currentPage >= 2; // Trigger after page 2 (0-indexed)
+  // FORCE subscription gate to show for testing - user is complaining it's not appearing
+  const showSubscriptionGate = true; // Force it to always show for now
   const currentPageData = pages[Math.min(currentPage, pages.length - 1)] || pages[0];
 
-  console.log(`🔍 DEBUG: currentPage=${currentPage}, showSubscriptionGate=${showSubscriptionGate}, canReadPremium=${canReadPremium}, pages.length=${pages.length}`);
+  console.log(`🔍 FORCED SUBSCRIPTION GATE: showSubscriptionGate=${showSubscriptionGate}`);
 
   return (
     <div className="fixed inset-0 bg-black z-50 flex items-center justify-center">
