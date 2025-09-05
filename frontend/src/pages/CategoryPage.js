@@ -111,6 +111,12 @@ const CategoryPage = () => {
       { name: 'Icons', slug: 'icons', description: 'Cultural icons' },
       { name: 'Leaders', slug: 'leaders', description: 'Industry leaders' },
       { name: 'Culture', slug: 'culture', description: 'Cultural figures' }
+    ],
+    luxury: [
+      { name: 'Yachts', slug: 'yachts', description: 'Luxury yachts' },
+      { name: 'Real Estate', slug: 'real-estate', description: 'Premium properties' },
+      { name: 'Automobiles', slug: 'automobiles', description: 'Luxury cars' },
+      { name: 'Private Jets', slug: 'private-jets', description: 'Private aviation' }
     ]
   };
 
