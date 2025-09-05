@@ -130,7 +130,17 @@ const CategoryPage = () => {
       transition={{ duration: 0.5, delay: index * 0.1 }}
     >
       <Link
-        to={`/article/${article.slug || article.id}`}
+        to={article.slug === 'atlantis-the-palm-dubai' ? '/atlantis-the-palm-dubai' : 
+            article.slug === 'celini-food-review-mumbai' ? '/celini-food-review-mumbai' : 
+            article.slug === 'scottish-leader-whiskey-review' ? '/scottish-leader-whiskey-review' :
+            article.slug === 'when-in-france-travel-destinations' ? '/when-in-france-travel-destinations' :
+            article.slug === 'sustainable-travel-conscious-guide' ? '/sustainable-travel-conscious-guide' :
+            article.slug === 'perfect-suit-guide-men-corporate-dressing' ? '/perfect-suit-guide-men-corporate-dressing' :
+            article.slug === 'oscars-2022-best-dressed-fashion-red-carpet' ? '/oscars-2022-best-dressed-fashion-red-carpet' :
+            article.slug === 'sunseeker-65-sport-luxury-yacht-review' ? '/sunseeker-65-sport-luxury-yacht-review' :
+            article.slug === 'double-wristing-smartwatch-traditional-watch-trend' ? '/double-wristing-smartwatch-traditional-watch-trend' :
+            article.slug === 'aastha-gill-buzz-queen-bollywood-singer-interview' ? '/aastha-gill-buzz-queen-bollywood-singer-interview' :
+            `/article/${article.slug || article.id}`}
         className="group block bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300"
       >
         {/* Image */}
