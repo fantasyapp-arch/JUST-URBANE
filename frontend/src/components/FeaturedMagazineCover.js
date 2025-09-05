@@ -96,10 +96,10 @@ const FeaturedMagazineCover = ({ issue, onReadClick, canRead }) => {
             </span>
           </div>
           <h3 className="text-4xl font-bold text-gray-900 mb-4">
-            This magazine access is exclusive to our subscribers.
+            Just Urbane August 2025 Digital Magazine
           </h3>
           <p className="text-xl text-gray-600 leading-relaxed">
-            Subscribe now and get immediate access.
+            Experience premium content in high-resolution A4 format with interactive PDF viewing.
           </p>
         </div>
 
