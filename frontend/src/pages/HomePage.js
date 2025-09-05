@@ -37,101 +37,16 @@ const HomePage = () => {
   // Select hero article (use luxury yacht as hero)
   const heroArticle = luxuryArticles.find(article => article.slug?.includes('sunseeker')) || luxuryArticles[0] || articles[0];
 
-  // Featured Articles by Category
-  const fashionArticles = [
-    {
-      title: "Timeless Elegance: The Modern Gentleman's Guide",
-      excerpt: "Master the art of sophisticated dressing with essential style principles that transcend seasonal trends",
-      author: "Priya Sharma",
-      date: "Jan 14, 2025",
-      readTime: "6 min read",
-      image: "https://images.unsplash.com/photo-1613909671501-f9678ffc1d33?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-    },
-    {
-      title: "Milan Fashion Week: Spring 2025 Highlights",
-      excerpt: "The latest collections from Italy's fashion capital showcase innovation and traditional craftsmanship",
-      author: "Alessandro Rossi",
-      date: "Jan 13, 2025", 
-      readTime: "5 min read",
-      image: "https://images.unsplash.com/photo-1591884807235-1dc6c2e148b1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-    },
-    {
-      title: "Luxury Accessories: Investment Pieces That Last",
-      excerpt: "Building a sophisticated wardrobe with timeless luxury accessories that retain their value",
-      author: "Kavya Singh",
-      date: "Jan 12, 2025",
-      readTime: "7 min read",
-      image: "https://images.unsplash.com/photo-1591348278863-a8fb3887e2aa?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-    }
-  ];
-
-  const watchesArticles = [
-    {
-      title: "Patek Philippe: The Pinnacle of Swiss Horology",
-      excerpt: "Understanding what makes this manufacturer the most revered name in luxury watchmaking",
-      author: "Vikram Singh",
-      date: "Jan 11, 2025",
-      readTime: "10 min read",
-      image: "https://images.unsplash.com/photo-1604242692760-2f7b0c26856d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-    },
-    {
-      title: "Vintage Watch Collecting: A Beginner's Guide",
-      excerpt: "How to start building a prestigious collection of vintage timepieces with confidence",
-      author: "Rajesh Gupta",
-      date: "Jan 10, 2025",
-      readTime: "8 min read",
-      image: "https://images.unsplash.com/photo-1600003014755-ba31aa59c4b6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-    }
-  ];
-
-  const lifestyleArticles = [
-    {
-      title: "Atlantis The Palm: A Mythical Journey to Dubai's Crown Jewel",
-      excerpt: "Experience the luxury and opulence of Dubai's most iconic resort, where myth meets reality in the heart of Palm Jumeirah",
-      author: "Chahat Dalal",
-      date: "July 2022",
-      readTime: "8 min read",
-      image: "https://customer-assets.emergentagent.com/job_slick-page-turner/artifacts/jcqtiy5s_phy2015.rst.ath.atlantiswithpalm-angle-colour-hr.jpg",
-      category: "Travel",
-      subcategory: "Luxury Stays",
-      slug: "atlantis-the-palm-dubai"
-    },
-    {
-      title: "The Art of Fine Dining at Home",
-      excerpt: "Creating restaurant-quality culinary experiences in the comfort of your own space",
-      author: "Chef Anita Sharma",
-      date: "Jan 9, 2025",
-      readTime: "9 min read",
-      image: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-    },
-    {
-      title: "Luxury Travel: Hidden Gems of 2025",
-      excerpt: "Exclusive destinations that offer unparalleled experiences for the discerning traveler",
-      author: "Rohit Kumar", 
-      date: "Jan 8, 2025",
-      readTime: "12 min read",
-      image: "https://images.unsplash.com/photo-1488646953014-85cb44e25828?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-    }
-  ];
-
-  const cultureArticles = [
-    {
-      title: "Contemporary Art: Investment Trends 2025",
-      excerpt: "Navigating the modern art market with expert insights and strategic guidance",
-      author: "Dr. Maya Patel",
-      date: "Jan 7, 2025",
-      readTime: "11 min read", 
-      image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-    },
-    {
-      title: "Opera Houses: Architectural Marvels",
-      excerpt: "Exploring the world's most stunning cultural landmarks and their timeless beauty",
-      author: "Isabella Martinez",
-      date: "Jan 6, 2025",
-      readTime: "8 min read",
-      image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-    }
-  ];
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-white flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gray-900 mx-auto mb-4"></div>
+          <p className="text-gray-600">Loading premium content...</p>
+        </div>
+      </div>
+    );
+  }
 
   const videoContent = [
     {
