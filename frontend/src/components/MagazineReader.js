@@ -189,15 +189,46 @@ const MagazineReader = ({ articles, isOpen, onClose, initialPageIndex = 0 }) => 
 
         {/* Magazine Container */}
         <div 
+          ref={containerRef}
           className="flex items-center justify-center h-full p-4 pt-20 pb-20"
           onClick={toggleControls}
-          style={{ transform: `scale(${zoom})` }}
         >
-          <HTMLFlipBook
-            ref={flipBookRef}
-            width={400}
-            height={600}
-            size="fixed"
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="relative bg-white shadow-2xl rounded-lg overflow-hidden"
+            style={{
+              width: DISPLAY_WIDTH * zoom,
+              height: DISPLAY_HEIGHT * zoom,
+              transform: `rotate(${rotation}deg)`,
+              maxWidth: '95vw',
+              maxHeight: '95vh'
+            }}
+          >
+            {/* PDF Display with A4 Proportions */}
+            <iframe
+              src={`${magazinePdfUrl}#toolbar=0&navpanes=0&scrollbar=0&view=FitH`}
+              className="w-full h-full border-0"
+              title="Just Urbane August 2025 Digital Magazine"
+              style={{
+                filter: 'drop-shadow(0 25px 50px rgba(0, 0, 0, 0.5))'
+              }}
+            />
+            
+            {/* A4 Size Info Badge */}
+            <div className="absolute bottom-4 left-4 bg-black/70 backdrop-blur-sm text-white px-3 py-2 rounded-lg text-sm">
+              <div className="flex items-center space-x-2">
+                <BookOpen className="h-4 w-4 text-amber-400" />
+                <span>A4 Format • {DISPLAY_WIDTH}×{DISPLAY_HEIGHT}px</span>
+              </div>
+            </div>
+
+            {/* Resolution Badge */}
+            <div className="absolute top-4 right-4 bg-gradient-to-r from-amber-500 to-amber-600 text-white px-3 py-2 rounded-lg text-sm font-medium">
+              High Resolution PDF
+            </div>
+          </motion.div>
+        </div>
             minWidth={300}
             maxWidth={800}
             minHeight={450}
