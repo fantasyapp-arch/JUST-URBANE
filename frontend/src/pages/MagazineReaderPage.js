@@ -514,7 +514,6 @@ const MagazineReaderPage = () => {
     </div>
     </>
   );
-  );
 };
 
 export default MagazineReaderPage;
