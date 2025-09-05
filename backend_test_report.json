@@ -1,49 +1,49 @@
 {
   "total": 6,
-  "passed": 5,
-  "failed": 1,
-  "success_rate": 83.33333333333334,
+  "passed": 3,
+  "failed": 3,
+  "success_rate": 50.0,
   "results": [
     {
       "test": "Health Check",
       "success": true,
       "message": "API is healthy and responding",
-      "timestamp": "2025-09-05T10:33:07.162061",
+      "timestamp": "2025-09-05T10:49:05.494352",
       "response_data": null
     },
     {
-      "test": "Travel/Guides Subcategory Filter",
+      "test": "Fashion Category Articles",
       "success": true,
-      "message": "\u2705 Found 1 sustainable travel article in guides: 'Travel With A Clear Conscious'",
-      "timestamp": "2025-09-05T10:33:07.196343",
+      "message": "Retrieved 6 fashion articles",
+      "timestamp": "2025-09-05T10:49:05.505192",
       "response_data": null
     },
     {
-      "test": "Travel/Culture Subcategory Empty",
-      "success": true,
-      "message": "\u2705 Travel/culture subcategory is empty (article moved out)",
-      "timestamp": "2025-09-05T10:33:07.246479",
-      "response_data": null
-    },
-    {
-      "test": "Sustainable Travel Article Search",
+      "test": "Men's Fashion Article in Category",
       "success": false,
-      "message": "\u274c Could not find sustainable travel article in travel category",
-      "timestamp": "2025-09-05T10:33:07.292464",
+      "message": "Perfect Suit Guide for Men not found in fashion category",
+      "timestamp": "2025-09-05T10:49:05.505228",
       "response_data": null
     },
     {
-      "test": "Travel Category Count",
+      "test": "Men Subcategory Articles",
       "success": true,
-      "message": "\u2705 Travel category has 6 articles (includes sustainable travel)",
-      "timestamp": "2025-09-05T10:33:07.292507",
+      "message": "Retrieved 2 men's fashion articles",
+      "timestamp": "2025-09-05T10:49:05.514886",
       "response_data": null
     },
     {
-      "test": "Guides Subcategory Creation",
-      "success": true,
-      "message": "\u2705 'guides' is now a valid subcategory for travel category",
-      "timestamp": "2025-09-05T10:33:07.292515",
+      "test": "Men's Suit Article in Subcategory",
+      "success": false,
+      "message": "Perfect Suit Guide not found in men subcategory",
+      "timestamp": "2025-09-05T10:49:05.514928",
+      "response_data": null
+    },
+    {
+      "test": "Single Article Retrieval by Slug",
+      "success": false,
+      "message": "HTTP 404: {\"detail\":\"Article not found\"}",
+      "timestamp": "2025-09-05T10:49:05.563742",
       "response_data": null
     }
   ]
