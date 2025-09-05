@@ -135,8 +135,8 @@ const MagazineReader = ({ isOpen, onClose }) => {
   // Debug logging
   console.log(`Current page: ${currentPage}, Free pages: ${FREE_PREVIEW_PAGES}, Total pages: ${pages.length}, Can read premium: ${canReadPremium}, Show subscription gate: ${showSubscriptionGate}`);
 
-  // Show subscription gate for premium pages
-  const showSubscriptionGate = !canReadPremium && currentPage >= FREE_PREVIEW_PAGES;
+  // Show subscription gate for premium pages  
+  const showSubscriptionGate = !canReadPremium && currentPage === 999; // Special subscription gate index
   const currentPageData = pages[Math.min(currentPage, pages.length - 1)] || pages[0];
 
   return (
