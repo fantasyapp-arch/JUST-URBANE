@@ -1932,12 +1932,7 @@ metadata:
 
 test_plan:
   current_focus:
-    - "Fashion Men Subcategory Cleanup and Image Fix - CRITICAL ISSUES FOUND"
-    - "CLEANUP REQUIRED: Found 3 articles in Fashion > Men subcategory, expected only 1 article"
-    - "IMAGE FIX NEEDED: Perfect Suit Guide hero image returns HTTP 422 (Unprocessable Entity)"
-    - "ARTICLES TO REMOVE: 'The Art of Timeless Tailoring' and 'Modern Gentleman's Grooming Essentials'"
-    - "ARTICLE TO KEEP: 'Perfect Suit Guide for Men: Corporate Dressing Excellence' with working hero image"
-    - "HERO IMAGE ISSUE: https://images.shutterstock.com/image-photo/confident-businessman-perfect-tailored-suit-600nw-2234567890.jpg returns HTTP 422"
+    - "Oscars Fashion Article with 4 Additional Images Backend Testing"
   stuck_tasks:
   test_all: true
   test_priority: "high_first"
