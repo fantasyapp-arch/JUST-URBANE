@@ -118,14 +118,8 @@ const MagazineReader = ({ isOpen, onClose }) => {
 
   if (!isOpen || pages.length === 0) return null;
 
-  // Debug logging
-  console.log(`Current page: ${currentPage}, Free pages: ${FREE_PREVIEW_PAGES}, Total pages: ${pages.length}, Can read premium: ${canReadPremium}, Show subscription gate: ${showSubscriptionGate}`);
-
-  // Force subscription gate to show immediately for debugging
-  console.log("🔍 DEBUGGING: About to set showSubscriptionGate");
-  const showSubscriptionGate = true;
-  console.log("🔍 DEBUGGING: showSubscriptionGate is now:", showSubscriptionGate);
-  
+  // Simple subscription gate logic - show after page 2 (3rd page)  
+  const showSubscriptionGate = !canReadPremium && currentPage >= 2;
   const currentPageData = pages[Math.min(currentPage, pages.length - 1)] || pages[0];
 
   return (
