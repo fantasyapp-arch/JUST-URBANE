@@ -125,8 +125,8 @@ const MagazineReader = ({ isOpen, onClose }) => {
 
   if (!isOpen || pages.length === 0) return null;
 
-  // Simple subscription gate logic - show after page 2 (3rd page)  
-  const showSubscriptionGate = !canReadPremium && currentPage >= 2;
+  // Show subscription gate when currentPage = 100 (special indicator)
+  const showSubscriptionGate = !canReadPremium && currentPage === 100;
   const currentPageData = pages[Math.min(currentPage, pages.length - 1)] || pages[0];
 
   return (
