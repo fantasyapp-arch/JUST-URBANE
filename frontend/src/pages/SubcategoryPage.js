@@ -98,6 +98,7 @@ const SubcategoryPage = () => {
             article.slug === 'when-in-france-travel-destinations' ? '/when-in-france-travel-destinations' :
             article.slug === 'sustainable-travel-conscious-guide' ? '/sustainable-travel-conscious-guide' :
             article.slug === 'perfect-suit-guide-men-corporate-dressing' ? '/perfect-suit-guide-men-corporate-dressing' :
+            article.slug === 'oscars-2022-best-dressed-fashion-red-carpet' ? '/oscars-2022-best-dressed-fashion-red-carpet' :
             `/article/${article.slug || article.id}`}
         className="group block bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300"
       >
