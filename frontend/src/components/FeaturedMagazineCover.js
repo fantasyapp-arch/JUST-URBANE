@@ -3,21 +3,18 @@ import { motion } from 'framer-motion';
 import { Play, Lock, Crown, BookOpen, Eye, Calendar } from 'lucide-react';
 
 const FeaturedMagazineCover = ({ issue, onReadClick, canRead }) => {
-  const [isMagazineOpen, setIsMagazineOpen] = useState(false);
-  
-  // Use real magazine data instead of fake issue data
-  const realMagazineData = {
-    title: "Just Urbane",
-    displayDate: "August 2025",
-    subtitle: "Premium Digital Magazine",
-    articles: issue?.articles || [],
-    pdfUrl: "https://customer-assets.emergentagent.com/job_luxmag-tech-nav-fix/artifacts/qhmo66rl_Just%20Urbane%20August%202025%20-%20E-Magazine-2.pdf"
-  };
+  if (!issue || !issue.articles || issue.articles.length === 0) {
+    return null;
+  }
 
+  const heroArticle = issue.articles.find(a => a.hero_image) || issue.articles[0];
   const monthName = "AUGUST";
   const year = "2025";
-  const premiumArticles = realMagazineData.articles.filter(a => a.is_premium) || [];
-  const totalViews = realMagazineData.articles.reduce((sum, article) => sum + (article.view_count || 0), 0) || 2500;
+  const premiumArticles = issue.articles.filter(a => a.is_premium);
+  const totalViews = issue.articles.reduce((sum, article) => sum + (article.view_count || 0), 0);
+  
+  // Real magazine PDF URL
+  const realMagazinePdfUrl = "https://customer-assets.emergentagent.com/job_luxmag-tech-nav-fix/artifacts/qhmo66rl_Just%20Urbane%20August%202025%20-%20E-Magazine-2.pdf";
 
   return (
     <div className="grid lg:grid-cols-2 gap-12 items-center">
