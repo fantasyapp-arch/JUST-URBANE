@@ -85,15 +85,15 @@ const Header = () => {
             </div>
           </Link>
 
-          {/* CENTER NAVIGATION - EXACT GQ STYLE */}
+          {/* CENTER NAVIGATION - REAL DATABASE CATEGORIES */}
           <nav className="hidden md:flex items-center space-x-12 flex-1 justify-center">
             {[
               { name: 'FASHION', slug: 'fashion' },
-              { name: 'TECH', slug: 'technology' },
-              { name: 'LIFESTYLE', slug: 'lifestyle' },
-              { name: 'WATCHES', slug: 'watches' },
-              { name: 'CULTURE', slug: 'culture' },
-              { name: 'VIDEOS', slug: 'videos' }
+              { name: 'TECHNOLOGY', slug: 'technology' },
+              { name: 'TRAVEL', slug: 'travel' },
+              { name: 'PEOPLE', slug: 'people' },
+              { name: 'LUXURY', slug: 'luxury' },
+              { name: 'AUTO', slug: 'auto' }
             ].map((category) => (
               <Link
                 key={category.name}
