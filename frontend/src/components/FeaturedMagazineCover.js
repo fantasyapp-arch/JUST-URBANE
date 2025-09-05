@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import { Play, Lock, Crown, BookOpen, Eye, Calendar } from 'lucide-react';
-import DigitalMagazineViewer from './DigitalMagazineViewer';
 
 const FeaturedMagazineCover = ({ issue, onReadClick, canRead }) => {
   const [isMagazineOpen, setIsMagazineOpen] = useState(false);
