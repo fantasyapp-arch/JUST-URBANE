@@ -203,6 +203,36 @@ const OscarsFashionPage = () => {
             Timothée's risqué fit proved that fashion and timeless design shouldn't be bound by gender. Chalamet's sequined black suit by Louis Vuitton felt particularly fresh given it was plucked from Nicolas Ghesquière's spring 2022 womenswear collection. The two-piece was accentuated by Cartier's layered necklaces and white gold rings.
           </p>
 
+          <figure className="my-6 sm:my-8 -mx-2 sm:-mx-4">
+            <img 
+              src={article.galleryImages[4]}
+              alt="Timothée Chalamet in his striking sequined Louis Vuitton suit showcasing gender-fluid fashion at the Oscars"
+              className="w-full h-48 sm:h-64 md:h-96 object-cover rounded-lg shadow-lg"
+            />
+            <figcaption className="text-sm text-gray-600 mt-3 text-center italic px-2">
+              Elegant red carpet fashion moments showcasing stunning designer gowns and sophisticated celebrity styling
+            </figcaption>
+          </figure>
+
+          <h3 className="text-2xl font-serif font-bold text-gray-900 mt-10 mb-6">
+            Spiderman Wonderboy - Andrew Garfield
+          </h3>
+
+          <p className="text-lg text-gray-800 leading-relaxed mb-6">
+            The Spiderman wonderboy and equally talented actor, Andrew Garfield was nominated as best actor for his role in "Tick, Tick... Boom!" Opting for Saint Laurent's burgundy velvet blazer, black silky shirt and black gabardine pants, accessorizing the look with an Omega watch, Garfield rocked the night.
+          </p>
+
+          <figure className="my-6 sm:my-8 -mx-2 sm:-mx-4">
+            <img 
+              src={article.galleryImages[5]}
+              alt="Andrew Garfield in his sophisticated Saint Laurent burgundy velvet ensemble at the Academy Awards"
+              className="w-full h-48 sm:h-64 md:h-96 object-cover rounded-lg shadow-lg"
+            />
+            <figcaption className="text-sm text-gray-600 mt-3 text-center italic px-2">
+              Academy Awards fashion excellence featuring luxury designer collaborations and statement accessories
+            </figcaption>
+          </figure>
+
           <h3 className="text-2xl font-serif font-bold text-gray-900 mt-10 mb-6">
             The Showstopper - Jason Momoa
           </h3>
