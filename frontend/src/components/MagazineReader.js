@@ -121,11 +121,11 @@ const MagazineReader = ({ isOpen, onClose }) => {
   // Debug logging
   console.log(`Current page: ${currentPage}, Free pages: ${FREE_PREVIEW_PAGES}, Total pages: ${pages.length}, Can read premium: ${canReadPremium}, Show subscription gate: ${showSubscriptionGate}`);
 
-  // Force subscription gate to show after 3 pages for testing
-  const showSubscriptionGate = !canReadPremium && currentPage >= 3;
+  // Force subscription gate to show after 3 pages
+  const showSubscriptionGate = !canReadPremium && currentPage >= 2; // Trigger after page 2 (0-indexed)
   const currentPageData = pages[Math.min(currentPage, pages.length - 1)] || pages[0];
 
-  console.log(`DEBUG: currentPage=${currentPage}, showSubscriptionGate=${showSubscriptionGate}, canReadPremium=${canReadPremium}`);
+  console.log(`🔍 DEBUG: currentPage=${currentPage}, showSubscriptionGate=${showSubscriptionGate}, canReadPremium=${canReadPremium}, pages.length=${pages.length}`);
 
   return (
     <div className="fixed inset-0 bg-black z-50 flex items-center justify-center">
