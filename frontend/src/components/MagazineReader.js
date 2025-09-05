@@ -229,92 +229,6 @@ const MagazineReader = ({ articles, isOpen, onClose, initialPageIndex = 0 }) => 
             </div>
           </motion.div>
         </div>
-            minWidth={300}
-            maxWidth={800}
-            minHeight={450}
-            maxHeight={1200}
-            maxShadowOpacity={0.5}
-            showCover={true}
-            mobileScrollSupport={false}
-            onFlip={handlePageFlip}
-            className="magazine-flipbook"
-            style={{
-              boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.8)',
-            }}
-          >
-            {/* Cover Page */}
-            <div className="magazine-page bg-gradient-to-br from-slate-900 via-slate-800 to-black text-white">
-              <MagazineCover />
-            </div>
-
-            {/* Article Pages */}
-            {articles.map((article, index) => {
-              const pageIndex = index * 2 + 1; // Starting from page 1 (after cover)
-              const isPageLocked = !canReadPremium && pageIndex >= FREE_PREVIEW_PAGES;
-              
-              return (
-                <React.Fragment key={article.id}>
-                  {/* Left Page - Article Content */}
-                  <div className="magazine-page bg-white">
-                    {isPageLocked ? (
-                      <SubscriptionGatePage 
-                        onSubscribe={() => setShowSubscriptionModal(true)}
-                        pageNumber={pageIndex + 1}
-                      />
-                    ) : (
-                      <ArticlePageLeft article={article} pageNumber={pageIndex + 1} />
-                    )}
-                  </div>
-                  
-                  {/* Right Page - Article Continued or Images */}
-                  <div className="magazine-page bg-white">
-                    {isPageLocked ? (
-                      <SubscriptionPromotionPage />
-                    ) : (
-                      <ArticlePageRight article={article} pageNumber={pageIndex + 2} />
-                    )}
-                  </div>
-                </React.Fragment>
-              );
-            })}
-
-            {/* Back Cover */}
-            <div className="magazine-page bg-gradient-to-br from-amber-600 via-amber-700 to-amber-900 text-white">
-              <BackCover />
-            </div>
-          </HTMLFlipBook>
-        </div>
-
-        {/* Navigation Controls */}
-        <AnimatePresence>
-          {showControls && (
-            <>
-              {/* Left Navigation */}
-              <motion.button
-                initial={{ opacity: 0, x: -50 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -50 }}
-                onClick={prevPage}
-                className="absolute left-4 top-1/2 transform -translate-y-1/2 z-20 p-4 bg-black/50 hover:bg-black/70 text-white rounded-full transition-all duration-200 backdrop-blur-sm"
-                disabled={currentPage === 0}
-              >
-                <ChevronLeft className="h-6 w-6" />
-              </motion.button>
-
-              {/* Right Navigation */}
-              <motion.button
-                initial={{ opacity: 0, x: 50 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: 50 }}
-                onClick={nextPage}
-                className="absolute right-4 top-1/2 transform -translate-y-1/2 z-20 p-4 bg-black/50 hover:bg-black/70 text-white rounded-full transition-all duration-200 backdrop-blur-sm"
-                disabled={currentPage >= totalPages - 1}
-              >
-                <ChevronRight className="h-6 w-6" />
-              </motion.button>
-            </>
-          )}
-        </AnimatePresence>
 
         {/* Bottom Controls Bar */}
         <AnimatePresence>
@@ -323,20 +237,43 @@ const MagazineReader = ({ articles, isOpen, onClose, initialPageIndex = 0 }) => 
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 50 }}
-              className="absolute bottom-0 left-0 right-0 z-20 bg-gradient-to-t from-black/80 via-black/60 to-transparent p-6"
+              className="absolute bottom-0 left-0 right-0 z-20 bg-gradient-to-t from-black/90 via-black/70 to-transparent p-4"
             >
               <div className="flex items-center justify-center text-white">
-                <div className="flex items-center space-x-4 bg-black/40 backdrop-blur-sm px-6 py-3 rounded-full">
-                  <span className="text-sm">
-                    Page {currentPage + 1} of {totalPages}
-                  </span>
+                <div className="flex items-center space-x-6 bg-black/50 backdrop-blur-sm px-6 py-3 rounded-2xl">
+                  <div className="flex items-center space-x-2">
+                    <div className="w-2 h-2 bg-amber-400 rounded-full"></div>
+                    <span className="text-sm font-medium">Just Urbane • August 2025</span>
+                  </div>
+                  <div className="w-px h-6 bg-white/20"></div>
+                  <div className="flex items-center space-x-2 text-sm">
+                    <span>Digital Magazine</span>
+                    <span className="text-amber-400">•</span>
+                    <span>A4 Format</span>
+                    <span className="text-amber-400">•</span>
+                    <span>High Resolution PDF</span>
+                  </div>
                   <div className="w-px h-6 bg-white/20"></div>
                   <div className="flex space-x-2">
-                    <button className="p-2 hover:bg-white/10 rounded-full transition-colors">
-                      <Bookmark className="h-4 w-4" />
+                    <button 
+                      onClick={handleDownload}
+                      className="p-2 hover:bg-white/10 rounded-lg transition-colors"
+                      title="Download PDF"
+                    >
+                      <Download className="h-4 w-4" />
                     </button>
-                    <button className="p-2 hover:bg-white/10 rounded-full transition-colors">
-                      <Share2 className="h-4 w-4" />
+                    <button 
+                      onClick={handleRotate}
+                      className="p-2 hover:bg-white/10 rounded-lg transition-colors"
+                      title="Rotate"
+                    >
+                      <RotateCw className="h-4 w-4" />
+                    </button>
+                    <button 
+                      className="p-2 hover:bg-white/10 rounded-lg transition-colors"
+                      title="Print"
+                    >
+                      <Printer className="h-4 w-4" />
                     </button>
                   </div>
                 </div>
