@@ -36,6 +36,7 @@ import CeliniFoodReviewPage from './pages/CeliniFoodReviewPage';
 import ScottishLeaderReviewPage from './pages/ScottishLeaderReviewPage';
 import FranceTravelPage from './pages/FranceTravelPage';
 import SustainableTravelPage from './pages/SustainableTravelPage';
+import MensFashionSuitGuidePage from './pages/MensFashionSuitGuidePage';
 import PrivacyPage from './pages/PrivacyPage';
 import TermsPage from './pages/TermsPage';
 
