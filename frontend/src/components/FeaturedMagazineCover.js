@@ -177,7 +177,7 @@ const FeaturedMagazineCover = ({ issue, onReadClick, canRead }) => {
           <div className="text-center mb-6">
             <div className="text-gray-600 mb-4">OR</div>
             <button
-              onClick={() => setIsMagazineOpen(true)}
+              onClick={() => canRead ? onReadClick(issue.articles) : null}
               className="bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white px-8 py-4 rounded-xl font-bold transition-all duration-300 transform hover:scale-105"
             >
               VIEW DIGITAL MAGAZINE
