@@ -135,37 +135,23 @@ const FeaturedMagazineCover = ({ issue, onReadClick, canRead }) => {
               { title: "Technology Reviews", category: "technology", description: "Cutting-edge gadgets and innovations" },
               { title: "Travel Destinations", category: "travel", description: "Exclusive locations and experiences" }
             ].map((item, index) => (
-              <div key={article.id} className="flex items-start space-x-4 p-4 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors">
-                <div className="w-16 h-16 bg-gray-200 rounded-lg overflow-hidden flex-shrink-0">
-                  {article.hero_image ? (
-                    <img 
-                      src={article.hero_image} 
-                      alt={article.title}
-                      className="w-full h-full object-cover"
-                      onError={(e) => {
-                        e.target.src = 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop';
-                      }}
-                    />
-                  ) : (
-                    <div className="w-full h-full bg-gradient-to-br from-gray-300 to-gray-400 flex items-center justify-center">
-                      <BookOpen className="h-6 w-6 text-gray-600" />
-                    </div>
-                  )}
+              <div key={index} className="flex items-start space-x-4 p-4 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors">
+                <div className="w-16 h-16 bg-gradient-to-br from-amber-100 to-amber-200 rounded-lg overflow-hidden flex-shrink-0 flex items-center justify-center">
+                  <BookOpen className="h-8 w-8 text-amber-600" />
                 </div>
                 <div className="flex-1 min-w-0">
                   <h5 className="font-semibold text-gray-900 text-sm line-clamp-2 mb-1">
-                    {article.title}
+                    {item.title}
                   </h5>
+                  <p className="text-xs text-gray-600 mb-2">{item.description}</p>
                   <div className="flex items-center space-x-3 text-xs text-gray-500">
-                    <span className="capitalize bg-gray-200 px-2 py-1 rounded">
-                      {article.category}
+                    <span className="capitalize bg-amber-100 text-amber-700 px-2 py-1 rounded">
+                      {item.category}
                     </span>
-                    {article.is_premium && (
-                      <div className="flex items-center text-amber-600">
-                        <Crown className="h-3 w-3 mr-1" />
-                        <span className="font-medium">Premium</span>
-                      </div>
-                    )}
+                    <div className="flex items-center text-amber-600">
+                      <Crown className="h-3 w-3 mr-1" />
+                      <span className="font-medium">Premium</span>
+                    </div>
                   </div>
                 </div>
               </div>
