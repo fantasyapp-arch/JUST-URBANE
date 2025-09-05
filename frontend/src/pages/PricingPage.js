@@ -354,23 +354,57 @@ const PricingPage = () => {
                         </ul>
                       </div>
 
-                      {/* CTA Button - Professional Design */}
-                      <div className="mt-auto">
+                      {/* Payment Options - Razorpay and Stripe */}
+                      <div className="mt-auto space-y-3">
+                        {/* Razorpay Button */}
                         <motion.button
-                          onClick={() => handlePlanSelect(plan)}
+                          onClick={() => handleRazorpayPayment(plan.packageId)}
+                          disabled={paymentLoading === `razorpay-${plan.packageId}`}
                           className={`relative w-full py-3 lg:py-4 px-6 rounded-xl lg:rounded-2xl font-bold text-base lg:text-lg transition-all duration-300 overflow-hidden ${
                             plan.buttonVariant === 'premium'
                               ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-lg hover:shadow-xl hover:from-blue-700 hover:to-indigo-700'
                               : plan.buttonVariant === 'primary'
                               ? 'bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-lg hover:shadow-xl hover:from-blue-700 hover:to-blue-800'
                               : 'bg-gradient-to-r from-gray-800 to-gray-900 text-white shadow-lg hover:shadow-xl hover:from-gray-900 hover:to-black'
-                          }`}
-                          whileHover={{ scale: 1.02, y: -2 }}
+                          } disabled:opacity-50 disabled:cursor-not-allowed`}
+                          whileHover={{ scale: paymentLoading === `razorpay-${plan.packageId}` ? 1 : 1.02, y: paymentLoading === `razorpay-${plan.packageId}` ? 0 : -2 }}
                           whileTap={{ scale: 0.98 }}
                         >
                           <span className="relative flex items-center justify-center">
-                            {plan.buttonText}
-                            <ChevronRight className="h-5 w-5 ml-2 transition-transform group-hover:translate-x-1" />
+                            {paymentLoading === `razorpay-${plan.packageId}` ? (
+                              <>
+                                <div className="animate-spin rounded-full h-5 w-5 border-2 border-white border-t-transparent mr-2"></div>
+                                Processing...
+                              </>
+                            ) : (
+                              <>
+                                Pay with Razorpay
+                                <CreditCard className="h-5 w-5 ml-2" />
+                              </>
+                            )}
+                          </span>
+                        </motion.button>
+
+                        {/* Stripe Button */}
+                        <motion.button
+                          onClick={() => handleStripePayment(plan.packageId)}
+                          disabled={paymentLoading === `stripe-${plan.packageId}`}
+                          className="relative w-full py-2.5 lg:py-3 px-6 rounded-lg lg:rounded-xl font-semibold text-sm lg:text-base transition-all duration-300 border-2 border-gray-300 text-gray-700 hover:border-gray-400 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+                          whileHover={{ scale: paymentLoading === `stripe-${plan.packageId}` ? 1 : 1.01 }}
+                          whileTap={{ scale: 0.98 }}
+                        >
+                          <span className="relative flex items-center justify-center">
+                            {paymentLoading === `stripe-${plan.packageId}` ? (
+                              <>
+                                <div className="animate-spin rounded-full h-4 w-4 border-2 border-gray-700 border-t-transparent mr-2"></div>
+                                Processing...
+                              </>
+                            ) : (
+                              <>
+                                Pay with Stripe
+                                <ChevronRight className="h-4 w-4 ml-2" />
+                              </>
+                            )}
                           </span>
                         </motion.button>
 
