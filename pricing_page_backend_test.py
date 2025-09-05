@@ -11,7 +11,7 @@ from datetime import datetime
 from typing import Dict, Any, Optional
 
 class PricingPageBackendTester:
-    def __init__(self, base_url: str = "https://urbane-ui-revamp.preview.emergentagent.com/api"):
+    def __init__(self, base_url: str = "https://luxmag-platform.preview.emergentagent.com/api"):
         self.base_url = base_url
         self.session = requests.Session()
         self.auth_token = None
@@ -235,7 +235,7 @@ class PricingPageBackendTester:
             preflight_response = self.session.options(
                 f"{self.base_url}/health",
                 headers={
-                    "Origin": "https://urbane-ui-revamp.preview.emergentagent.com",
+                    "Origin": "https://luxmag-platform.preview.emergentagent.com",
                     "Access-Control-Request-Method": "GET",
                     "Access-Control-Request-Headers": "Content-Type,Authorization"
                 },
@@ -254,7 +254,7 @@ class PricingPageBackendTester:
                     # Test actual request with CORS headers
                     actual_response = self.session.get(
                         f"{self.base_url}/health",
-                        headers={"Origin": "https://urbane-ui-revamp.preview.emergentagent.com"},
+                        headers={"Origin": "https://luxmag-platform.preview.emergentagent.com"},
                         timeout=10
                     )
                     
