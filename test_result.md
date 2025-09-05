@@ -1216,6 +1216,18 @@ backend:
         agent: "testing"
         comment: "✅ TICK MARK ANIMATIONS REMOVAL BACKEND VERIFICATION COMPLETED: Comprehensive testing confirms that removing tick mark animations from the pricing page frontend did NOT affect any backend functionality. All 4 priority APIs working correctly: Payment Packages API (Digital ₹499, Print ₹499, Print+Digital ₹999), API Health Check (/api/health responding), Articles API (20 articles retrieved, category filtering functional), Authentication System (JWT login/registration working). 95.3% success rate (41/43 tests passed). Only minor issues: UUID/Slug consistency and known Stripe checkout library issue. CRITICAL: Frontend changes are completely isolated from backend services."
 
+  - task: "Fashion Men Subcategory Cleanup and Image Fix"
+    implemented: true
+    working: false
+    file: "backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: false
+        agent: "testing"
+        comment: "❌ FASHION MEN CLEANUP AND IMAGE FIX TESTING COMPLETED: Found 3 articles in Fashion > Men subcategory instead of expected 1 article. Perfect Suit Guide for Men article exists with proper data integrity (2562 characters content, all required fields present), but hero image URL (https://images.shutterstock.com/image-photo/confident-businessman-perfect-tailored-suit-600nw-2234567890.jpg) returns HTTP 422 (Unprocessable Entity) - SAME ISSUE AS BEFORE. Cleanup needed: remove 2 extra articles ('The Art of Timeless Tailoring' and 'Modern Gentleman's Grooming Essentials') and fix hero image URL for Perfect Suit Guide article. Success rate: 80% (8/10 tests passed)."
+
   - task: "Account Page Backend Integration"
     implemented: true
     working: true
