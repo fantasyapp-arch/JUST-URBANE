@@ -64,7 +64,6 @@ const MagazineReader = ({ articles, isOpen, onClose, initialPageIndex = 0 }) => 
   };
 
   if (!isOpen) return null;
-  }
 
   return (
     <AnimatePresence>
