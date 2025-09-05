@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { createRazorpayOrder, initializeRazorpayPayment } from '../utils/payment';
 
 const CustomerDetailsModal = ({ isOpen, onClose, selectedPlan, onPaymentSuccess }) => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: '',
     full_name: '',
