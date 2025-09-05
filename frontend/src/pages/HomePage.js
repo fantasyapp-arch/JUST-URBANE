@@ -1,11 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Clock, User, Play, Star, Calendar } from 'lucide-react';
 import { useArticles } from '../hooks/useArticles';
 import { formatDateShort } from '../utils/formatters';
-import MagazineThumbnail from '../components/MagazineThumbnail';
-import DigitalMagazineViewer from '../components/DigitalMagazineViewer';
 
 const HomePage = () => {
   // Fetch real articles from database
