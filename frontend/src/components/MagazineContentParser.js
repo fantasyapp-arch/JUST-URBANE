@@ -57,7 +57,7 @@ export const parseMagazineContent = () => {
     }
   ];
 
-  console.log('📖 UPDATED magazine pages loaded from your new PDF:', magazinePages.length, 'pages from Just Urbane August 2025 - Updated Version');
+  console.log('📖 ORIGINAL magazine pages loaded from your PDF:', magazinePages.length, 'pages from Just Urbane August 2025 - Original Version');
   return magazinePages;
 };
 
