@@ -416,29 +416,35 @@ const PricingPage = () => {
           </div>
         </motion.div>
 
-        {/* FAQ Section */}
+        {/* FAQ Section - Simplified */}
         <motion.div 
-          className="text-center max-w-4xl mx-auto"
-          initial={{ opacity: 0, y: 30 }}
+          className="text-center max-w-3xl mx-auto"
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 1.4 }}
         >
-          <h3 className="text-2xl font-serif font-semibold text-gray-900 mb-6">
+          <h3 className="text-xl lg:text-2xl font-serif font-semibold text-gray-900 mb-6">
             Questions? We're Here to Help
           </h3>
           
           <div className="flex flex-wrap justify-center gap-4 mb-8">
-            <Link to="/faq" className="inline-flex items-center px-6 py-3 bg-gray-100 hover:bg-gray-200 rounded-full text-gray-700 font-medium transition-colors">
-              View FAQ
+            <Link 
+              to="/contact" 
+              className="inline-flex items-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-medium transition-all duration-200 hover:shadow-lg"
+            >
+              Contact Support
               <ChevronRight className="h-4 w-4 ml-2" />
             </Link>
-            <Link to="/contact" className="inline-flex items-center px-6 py-3 bg-primary-100 hover:bg-primary-200 rounded-full text-primary-700 font-medium transition-colors">
-              Contact Support
+            <Link 
+              to="/terms" 
+              className="inline-flex items-center px-6 py-3 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-xl font-medium transition-all duration-200"
+            >
+              Terms & FAQ
               <ChevronRight className="h-4 w-4 ml-2" />
             </Link>
           </div>
           
-          <div className="flex justify-center items-center space-x-8 text-sm text-gray-500">
+          <div className="flex flex-wrap justify-center items-center gap-6 text-sm text-gray-500">
             <div className="flex items-center">
               <div className="w-2 h-2 bg-green-500 rounded-full mr-2"></div>
               <span>SSL Secured</span>
