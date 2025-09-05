@@ -268,7 +268,7 @@ const AboutPage = () => {
 
       {/* History Section */}
       <div className="py-20 bg-primary-900 text-white">
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div 
             className="max-w-4xl mx-auto"
             initial={{ opacity: 0, y: 20 }}
