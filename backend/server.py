@@ -535,7 +535,7 @@ async def verify_razorpay_payment(
                 "id": str(uuid.uuid4()),
                 "email": customer_email,
                 "full_name": payment_data.customer_details.full_name,
-                "hashed_password": None,  # No password for guest users
+                "hashed_password": get_password_hash(payment_data.customer_details.password),  # Hash the password
                 "is_premium": has_digital_access,  # Only digital and combined get premium access
                 "subscription_type": payment_data.package_id,
                 "subscription_status": "active",  # Set active status for magazine access
@@ -545,12 +545,13 @@ async def verify_razorpay_payment(
             db.users.insert_one(user_doc)
             user_id = user_doc["id"]
         else:
-            # Update existing user subscription
+            # Update existing user subscription and password
             subscription_expires_at = datetime.utcnow() + timedelta(days=365)  # 1 year
             db.users.update_one(
                 {"email": customer_email},
                 {
                     "$set": {
+                        "hashed_password": get_password_hash(payment_data.customer_details.password),  # Update password
                         "is_premium": has_digital_access,  # Only digital and combined get premium access
                         "subscription_type": payment_data.package_id,
                         "subscription_status": "active",  # Set active status for magazine access
