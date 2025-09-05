@@ -576,13 +576,27 @@ async def verify_razorpay_payment(
         
         db.transactions.insert_one(transaction_doc)
         
+        # Generate access token for the user (auto-login after payment)
+        access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
+        access_token = create_access_token(
+            data={"sub": customer_email}, expires_delta=access_token_expires
+        )
+        
+        # Get full user data for response
+        user_data = db.users.find_one({"email": customer_email})
+        user_response = {k: v for k, v in user_data.items() if k != "hashed_password"}
+        user_response = prepare_item_response(user_response)
+        
         return {
             "status": "success",
             "message": "Payment verified and subscription activated",
             "subscription_type": payment_data.package_id,
             "has_digital_access": has_digital_access,
             "expires_at": (datetime.utcnow() + timedelta(days=365)).isoformat(),
-            "user_created": existing_user is None
+            "user_created": existing_user is None,
+            "access_token": access_token,
+            "token_type": "bearer",
+            "user": user_response
         }
         
     except HTTPException:
