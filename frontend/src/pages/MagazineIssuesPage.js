@@ -176,7 +176,7 @@ const FeaturedMagazineCover = ({ issue, onReadClick, canRead }) => {
       {/* Left Side - Magazine Cover */}
       <div className="relative">
         <div 
-          className="aspect-[3/4] rounded-lg overflow-hidden shadow-2xl bg-cover bg-center relative group cursor-pointer transform transition-transform duration-300 hover:scale-105"
+          className="aspect-[5/7] rounded-lg overflow-hidden shadow-2xl bg-cover bg-center relative group cursor-pointer transform transition-transform duration-300 hover:scale-105"
           style={{
             backgroundImage: `linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.5)), url(${heroArticle?.hero_image || '/placeholder-magazine.jpg'})`
           }}
