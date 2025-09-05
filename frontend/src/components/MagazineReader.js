@@ -6,18 +6,20 @@ import {
 } from 'lucide-react';
 
 const MagazineReader = ({ articles, isOpen, onClose, initialPageIndex = 0 }) => {
-  const flipBookRef = useRef();
-  const [currentPage, setCurrentPage] = useState(0);
-  const [totalPages, setTotalPages] = useState(0);
-  const [isFullscreen, setIsFullscreen] = useState(false);
+  const containerRef = useRef();
   const [zoom, setZoom] = useState(1);
+  const [isFullscreen, setIsFullscreen] = useState(false);
   const [showControls, setShowControls] = useState(true);
-  const [showTableOfContents, setShowTableOfContents] = useState(false);
-  const [showSubscriptionModal, setShowSubscriptionModal] = useState(false);
-  const { user, isAuthenticated } = useAuth();
+  const [rotation, setRotation] = useState(0);
 
-  const canReadPremium = isAuthenticated && user?.is_premium && user?.subscription_status === 'active';
-  const FREE_PREVIEW_PAGES = 3; // Number of pages to show as free preview (cover + 1 article page)
+  // Real magazine PDF URL
+  const magazinePdfUrl = "https://customer-assets.emergentagent.com/job_luxmag-tech-nav-fix/artifacts/qhmo66rl_Just%20Urbane%20August%202025%20-%20E-Magazine-2.pdf";
+  
+  // A4 dimensions for proper display
+  const A4_WIDTH = 595;
+  const A4_HEIGHT = 842;
+  const DISPLAY_WIDTH = 800;
+  const DISPLAY_HEIGHT = Math.round((A4_HEIGHT / A4_WIDTH) * DISPLAY_WIDTH);
 
   useEffect(() => {
     if (articles && articles.length > 0) {
