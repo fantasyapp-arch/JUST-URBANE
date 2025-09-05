@@ -6,18 +6,18 @@ import { motion } from 'framer-motion';
 const AboutPage = () => {
   const teamMembers = [
     {
-      name: 'Ananya Krishnan',
-      role: 'Travel & Lifestyle Editor',
-      image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=300',
-      bio: 'Luxury travel expert with 8 years covering premium destinations worldwide.',
-      social: { twitter: '@ananyak_travel', instagram: '@ananyatravels' }
+      name: 'Harshit Srinivas',
+      role: 'Senior Editor & Style Expert',
+      image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300',
+      bio: 'Expert in luxury lifestyle, men\'s fashion, and premium experiences. Author of our acclaimed Perfect Suit Guide and luxury yacht reviews.',
+      social: { twitter: '@harshit_urbane', instagram: '@harshitsrinivas' }
     },
     {
-      name: 'Vikram Singh',
-      role: 'Technology Journalist',
-      image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300',
-      bio: 'Tech reviewer specializing in luxury gadgets and innovative technology.',
-      social: { twitter: '@vikramsingh_tech', instagram: '@vikramtech' }
+      name: 'Amisha Shirgave',
+      role: 'Travel & Entertainment Editor',
+      image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=300',
+      bio: 'Travel journalist and celebrity interviewer. Known for exclusive coverage of France destinations and entertainment industry insights.',
+      social: { twitter: '@amisha_travel', instagram: '@amishashirgave' }
     },
     {
       name: 'Rahul Sharma',
