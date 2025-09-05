@@ -30,75 +30,84 @@ const MensFashionSuitGuidePage = () => {
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Navigation Bar */}
-      <nav className="bg-white border-b border-gray-200 sticky top-0 z-50">
+      {/* Breadcrumb */}
+      <div className="bg-white py-4 border-b border-gray-100">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center py-4">
-            <Link to="/fashion/men" className="inline-flex items-center text-gray-600 hover:text-gray-900 transition-colors">
-              <ArrowLeft className="h-5 w-5 mr-2" />
-              Back to Men's Fashion
-            </Link>
-            <div className="flex items-center space-x-4">
-              <button className="p-2 text-gray-600 hover:text-red-500 transition-colors">
-                <Heart className="h-5 w-5" />
-              </button>
-              <button className="p-2 text-gray-600 hover:text-gray-900 transition-colors">
-                <Share2 className="h-5 w-5" />
-              </button>
-            </div>
-          </div>
-        </div>
-      </nav>
-
-      {/* Hero Section */}
-      <div className="relative h-[70vh] overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/20 to-black/60"></div>
-        <img 
-          src="https://customer-assets.emergentagent.com/job_premium-urbane-1/artifacts/7cp5zt1z_shutterstock_516918613.jpg"
-          alt="Perfect suit combinations for the modern professional man"
-          className="w-full h-full object-cover"
-        />
-        <div className="absolute bottom-0 left-0 right-0 p-8 lg:p-12">
-          <div className="max-w-4xl mx-auto text-white">
-            <div className="flex flex-wrap items-center gap-4 mb-6">
-              <span className="bg-blue-600 text-white px-4 py-2 rounded-full text-sm font-medium">
-                Men's Fashion
-              </span>
-              <span className="bg-white/20 backdrop-blur-sm text-white px-4 py-2 rounded-full text-sm">
-                Style Guide
-              </span>
-            </div>
-            <h1 className="text-4xl lg:text-6xl font-serif font-bold mb-6 leading-tight">
-              Perfect Suit Guide for Men
-            </h1>
-            <p className="text-xl lg:text-2xl text-gray-200 max-w-3xl leading-relaxed">
-              Master the art of corporate dressing with this comprehensive guide to building the perfect suit wardrobe. Learn from style icon Steve Harvey's insights.
-            </p>
-          </div>
+          <nav className="flex items-center space-x-2 text-sm text-gray-500">
+            <Link to="/" className="hover:text-gray-900 font-medium">Home</Link>
+            <span>/</span>
+            <Link to="/category/fashion" className="hover:text-gray-900 font-medium">Fashion</Link>
+            <span>/</span>
+            <Link to="/category/fashion/men" className="hover:text-gray-900 font-medium">Men</Link>
+            <span>/</span>
+            <span className="text-gray-900 font-bold">Perfect Suit Guide</span>
+          </nav>
         </div>
       </div>
 
+      {/* Hero Image */}
+      <div className="relative h-96 md:h-[500px] overflow-hidden">
+        <img 
+          src={article.heroImage}
+          alt="Perfect suit combinations for the modern professional man"
+          className="w-full h-full object-cover"
+        />
+      </div>
+
       {/* Article Content */}
-      <div className="max-w-4xl mx-auto px-6 lg:px-8 py-12">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+        
+        {/* Article Title Section */}
+        <motion.div 
+          className="text-center mb-8 sm:mb-12 px-2"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
+          <div className="mb-4">
+            <span className="inline-block bg-blue-600 text-white px-4 py-2 rounded-full text-sm font-medium uppercase tracking-wide">
+              {article.category} • {article.subcategory}
+            </span>
+          </div>
+          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-serif font-bold mb-4 leading-tight text-gray-900 px-2">
+            {article.title}
+          </h1>
+          <p className="text-lg sm:text-xl md:text-2xl text-gray-600 leading-relaxed px-2">
+            {article.subtitle}
+          </p>
+        </motion.div>
+
         {/* Article Meta */}
-        <div className="flex flex-wrap items-center gap-6 mb-12 pb-6 border-b border-gray-200">
+        <motion.div 
+          className="flex flex-wrap items-center gap-4 sm:gap-6 mb-6 sm:mb-8 pb-6 sm:pb-8 border-b border-gray-200 px-2"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+        >
           <div className="flex items-center text-gray-600">
-            <User className="h-5 w-5 mr-2" />
-            <span className="font-medium">Harshit Srinivas</span>
+            <User className="h-4 w-4 mr-2" />
+            <span className="font-medium">{article.author}</span>
           </div>
           <div className="flex items-center text-gray-600">
-            <Calendar className="h-5 w-5 mr-2" />
-            <span>Fashion Guide</span>
+            <Calendar className="h-4 w-4 mr-2" />
+            <span>{article.date}</span>
           </div>
           <div className="flex items-center text-gray-600">
-            <Clock className="h-5 w-5 mr-2" />
-            <span>5 min read</span>
+            <Clock className="h-4 w-4 mr-2" />
+            <span>{article.readTime}</span>
           </div>
-          <div className="flex items-center text-gray-600">
-            <BookOpen className="h-5 w-5 mr-2" />
-            <span>Style Guide</span>
+          <div className="flex items-center gap-2 ml-auto">
+            <button 
+              onClick={shareArticle}
+              className="p-2 text-gray-600 hover:text-blue-600 transition-colors"
+            >
+              <Share2 className="h-5 w-5" />
+            </button>
+            <button className="p-2 text-gray-600 hover:text-blue-600 transition-colors">
+              <Bookmark className="h-5 w-5" />
+            </button>
           </div>
-        </div>
+        </motion.div>
 
         {/* Article Body */}
         <div className="prose prose-lg max-w-none">
