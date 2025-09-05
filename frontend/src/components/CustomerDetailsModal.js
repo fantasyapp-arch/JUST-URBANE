@@ -95,8 +95,17 @@ const CustomerDetailsModal = ({ isOpen, onClose, selectedPlan, onPaymentSuccess 
       if (result.status === 'success') {
         onPaymentSuccess(result);
         onClose();
+        
         // Show success message
         alert('Payment successful! Your subscription is now active.');
+        
+        // Redirect to magazine page if user has digital access
+        if (result.has_digital_access) {
+          // Small delay to allow success message to be seen
+          setTimeout(() => {
+            navigate('/issues');
+          }, 1500);
+        }
       }
     } catch (error) {
       console.error('Payment error details:', {
