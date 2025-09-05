@@ -71,10 +71,10 @@ const FeaturedMagazineCover = ({ issue, onReadClick, canRead }) => {
             </div>
           </div>
 
-          {/* Premium Badge */}
+          {/* PDF Badge */}
           <div className="absolute top-8 right-8">
             <div className="bg-gradient-to-r from-amber-500 to-amber-600 text-white text-xs font-bold px-3 py-1 rounded-full">
-              PREMIUM
+              PDF • A4
             </div>
           </div>
         </div>
