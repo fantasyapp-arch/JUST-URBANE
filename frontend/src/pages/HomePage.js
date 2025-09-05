@@ -190,49 +190,61 @@ const HomePage = () => {
         </section>
       )}
 
-      {/* WATCHES SECTION */}
-      <section className="bg-white py-16">
-        <div className="max-w-6xl mx-auto px-6">
-          <div className="mb-12">
-            <h2 className="text-3xl font-serif font-bold text-gray-900 mb-4">Watches</h2>
-            <p className="text-gray-600 text-lg">Luxury timepieces and horological excellence</p>
-          </div>
-          
-          <div className="grid md:grid-cols-2 gap-8">
-            {watchesArticles.map((article, index) => (
-              <motion.article 
-                key={index}
-                initial={{ opacity: 0, x: index % 2 === 0 ? -20 : 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.2 }}
-                className="bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-lg transition-shadow group"
-              >
-                <div className="md:flex">
-                  <div className="md:w-1/2">
-                    <img 
-                      src={article.image}
-                      alt={article.title}
-                      className="w-full h-48 md:h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                    />
-                  </div>
-                  <div className="md:w-1/2 p-6">
-                    <h3 className="text-xl font-serif font-bold text-gray-900 mb-3 group-hover:text-gray-600 transition-colors">
-                      {article.title}
-                    </h3>
-                    <p className="text-gray-600 mb-4 leading-relaxed">
-                      {article.excerpt}
-                    </p>
-                    <div className="flex items-center justify-between text-sm text-gray-500">
-                      <span>{article.author}</span>
-                      <span>{article.readTime}</span>
+      {/* TECHNOLOGY SECTION */}
+      {technologyArticles.length > 0 && (
+        <section className="bg-white py-16">
+          <div className="max-w-6xl mx-auto px-6">
+            <div className="mb-12">
+              <h2 className="text-3xl font-serif font-bold text-gray-900 mb-4">Technology</h2>
+              <p className="text-gray-600 text-lg">Innovation, gadgets, and the future of luxury tech</p>
+            </div>
+            
+            <div className="grid md:grid-cols-2 gap-8">
+              {technologyArticles.slice(0, 2).map((article, index) => (
+                <motion.article 
+                  key={article.id}
+                  initial={{ opacity: 0, x: index % 2 === 0 ? -20 : 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.6, delay: index * 0.2 }}
+                  className="bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-lg transition-shadow group"
+                >
+                  <Link to={getArticleRoute(article)}>
+                    <div className="md:flex">
+                      <div className="md:w-1/2">
+                        <img 
+                          src={article.hero_image}
+                          alt={article.title}
+                          className="w-full h-48 md:h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                          onError={(e) => {
+                            e.target.src = 'https://images.unsplash.com/photo-1604242692760-2f7b0c26856d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80';
+                          }}
+                        />
+                      </div>
+                      <div className="md:w-1/2 p-6">
+                        <div className="mb-2">
+                          <span className="bg-green-600 text-white px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wide">
+                            {article.subcategory}
+                          </span>
+                        </div>
+                        <h3 className="text-xl font-serif font-bold text-gray-900 mb-3 group-hover:text-gray-600 transition-colors">
+                          {article.title}
+                        </h3>
+                        <p className="text-gray-600 mb-4 leading-relaxed">
+                          {article.body.substring(0, 150)}...
+                        </p>
+                        <div className="flex items-center justify-between text-sm text-gray-500">
+                          <span>{article.author_name}</span>
+                          <span>{article.reading_time} min read</span>
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                </div>
-              </motion.article>
-            ))}
+                  </Link>
+                </motion.article>
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* LUXURY TRAVEL SECTION */}
       <section className="bg-gray-50 py-16">
