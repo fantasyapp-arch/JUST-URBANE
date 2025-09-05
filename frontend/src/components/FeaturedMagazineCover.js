@@ -200,12 +200,6 @@ const FeaturedMagazineCover = ({ issue, onReadClick, canRead }) => {
           View Digital Magazine
         </button>
       </motion.div>
-      
-      {/* Digital Magazine Viewer */}
-      <DigitalMagazineViewer 
-        isOpen={isMagazineOpen} 
-        onClose={() => setIsMagazineOpen(false)} 
-      />
     </div>
   );
 };
