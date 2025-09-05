@@ -30,42 +30,50 @@ const MagazineReaderPage = () => {
   // Keyboard Navigation Support
   useEffect(() => {
     const handleKeyPress = (e) => {
-      if (e.key === 'Escape') {
+      if (e.key === 'ArrowRight' || e.key === ' ') {
+        e.preventDefault();
+        nextPage();
+      } else if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        prevPage();
+      } else if (e.key === 'Escape') {
         closeReader();
       }
     };
 
     window.addEventListener('keydown', handleKeyPress);
     return () => window.removeEventListener('keydown', handleKeyPress);
-  }, []);
+  }, [currentPage, totalPages, canReadPremium]);
 
-  const handleZoomIn = () => {
-    setZoom(Math.min(zoom + 0.25, 3));
+  const nextPage = () => {
+    if (isFlipping) return;
+    
+    if (!canReadPremium && currentPage >= FREE_PREVIEW_PAGES - 1) {
+      setShowSubscriptionModal(true);
+      return;
+    }
+    
+    if (currentPage < totalPages - 1) {
+      setIsFlipping(true);
+      setCurrentPage(currentPage + 1);
+      
+      setTimeout(() => {
+        setIsFlipping(false);
+      }, 250);
+    }
   };
 
-  const handleZoomOut = () => {
-    setZoom(Math.max(zoom - 0.25, 0.5));
-  };
-
-  const handleRotate = () => {
-    setRotation((prev) => (prev + 90) % 360);
-  };
-
-  const toggleFullscreen = () => {
-    setIsFullscreen(!isFullscreen);
-  };
-
-  const toggleControls = () => {
-    setShowControls(!showControls);
-  };
-
-  const handleDownload = () => {
-    const link = document.createElement('a');
-    link.href = magazinePdfUrl;
-    link.download = 'Just Urbane August 2025 - Digital Magazine.pdf';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+  const prevPage = () => {
+    if (isFlipping) return;
+    
+    if (currentPage > 0) {
+      setIsFlipping(true);
+      setCurrentPage(currentPage - 1);
+      
+      setTimeout(() => {
+        setIsFlipping(false);
+      }, 250);
+    }
   };
 
   useEffect(() => {
