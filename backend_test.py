@@ -2754,16 +2754,16 @@ class JustUrbaneAPITester:
         return self.generate_report()
 
 def main():
-    """Main testing function for Men's Fashion Article Integration"""
-    print("👔 Starting Men's Fashion Article Integration Testing")
+    """Main testing function for CSS Alignment Fix Verification"""
+    print("🎨 Starting Backend Verification After CSS Alignment Fixes")
     print("=" * 70)
     
     # Use the backend URL from frontend environment (production URL) with /api prefix
     backend_url = "https://urbane-refresh.preview.emergentagent.com/api"
     tester = JustUrbaneAPITester(backend_url)
     
-    # Run men's fashion article integration tests
-    report = tester.run_mens_fashion_integration_tests()
+    # Run CSS alignment verification tests
+    report = tester.run_css_alignment_verification_tests()
     
     # Save detailed report
     with open("/app/backend_test_report.json", "w") as f:
@@ -2777,7 +2777,7 @@ def main():
 if __name__ == "__main__":
     success = main()
     if success:
-        print("✅ System ready for scaling with new articles!")
+        print("✅ Backend functionality verified - CSS fixes did not break APIs!")
     else:
-        print("❌ System needs fixes before scaling")
+        print("❌ Backend issues detected - investigation required")
     exit(0 if success else 1)
