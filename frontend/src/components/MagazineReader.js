@@ -130,7 +130,7 @@ const MagazineReader = ({ isOpen, onClose }) => {
 
   // Show subscription gate for premium pages
   const showSubscriptionGate = !canReadPremium && currentPage >= FREE_PREVIEW_PAGES;
-  const currentPageData = pages[currentPage] || pages[0];
+  const currentPageData = pages[Math.min(currentPage, pages.length - 1)] || pages[0];
 
   return (
     <div className="fixed inset-0 bg-black z-50 flex items-center justify-center">
