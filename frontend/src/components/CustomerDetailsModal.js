@@ -7,6 +7,7 @@ import { createRazorpayOrder, initializeRazorpayPayment } from '../utils/payment
 
 const CustomerDetailsModal = ({ isOpen, onClose, selectedPlan, onPaymentSuccess }) => {
   const navigate = useNavigate();
+  const { refreshUser } = useAuth();
   const [formData, setFormData] = useState({
     email: '',
     full_name: '',
