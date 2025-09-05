@@ -350,6 +350,9 @@ async def register(user: UserCreate):
     user_dict["hashed_password"] = get_password_hash(user.password)
     user_dict["id"] = str(uuid.uuid4())
     user_dict["is_premium"] = False
+    user_dict["subscription_type"] = None
+    user_dict["subscription_status"] = None
+    user_dict["subscription_expires_at"] = None
     user_dict["created_at"] = datetime.utcnow()
     del user_dict["password"]
     
