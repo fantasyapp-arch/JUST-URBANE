@@ -34,6 +34,18 @@ const CustomerDetailsModal = ({ isOpen, onClose, selectedPlan, onPaymentSuccess 
     if (!formData.email.trim()) newErrors.email = 'Email is required';
     if (!formData.full_name.trim()) newErrors.full_name = 'Full name is required';
     if (!formData.phone.trim()) newErrors.phone = 'Phone number is required';
+    if (!formData.password.trim()) newErrors.password = 'Password is required';
+    if (!formData.confirm_password.trim()) newErrors.confirm_password = 'Please confirm your password';
+    
+    // Password validation
+    if (formData.password && formData.password.length < 6) {
+      newErrors.password = 'Password must be at least 6 characters';
+    }
+    
+    // Confirm password validation
+    if (formData.password && formData.confirm_password && formData.password !== formData.confirm_password) {
+      newErrors.confirm_password = 'Passwords do not match';
+    }
     
     // Address validation for print subscriptions
     if (requiresAddress) {
