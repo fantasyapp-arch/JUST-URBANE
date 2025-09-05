@@ -87,13 +87,20 @@ const Header = () => {
 
           {/* CENTER NAVIGATION - EXACT GQ STYLE */}
           <nav className="hidden md:flex items-center space-x-12 flex-1 justify-center">
-            {['FASHION', 'TECH', 'LIFESTYLE', 'WATCHES', 'CULTURE', 'VIDEOS'].map((categoryName) => (
+            {[
+              { name: 'FASHION', slug: 'fashion' },
+              { name: 'TECH', slug: 'technology' },
+              { name: 'LIFESTYLE', slug: 'lifestyle' },
+              { name: 'WATCHES', slug: 'watches' },
+              { name: 'CULTURE', slug: 'culture' },
+              { name: 'VIDEOS', slug: 'videos' }
+            ].map((category) => (
               <Link
-                key={categoryName}
-                to={`/category/${categoryName.toLowerCase()}`}
+                key={category.name}
+                to={`/category/${category.slug}`}
                 className="text-gray-900 hover:text-black font-medium text-sm uppercase tracking-wide transition-colors duration-200"
               >
-                {categoryName}
+                {category.name}
               </Link>
             ))}
           </nav>
