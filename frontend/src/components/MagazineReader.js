@@ -34,60 +34,36 @@ const MagazineReader = ({ articles, isOpen, onClose, initialPageIndex = 0 }) => 
     }
   }, [isOpen, onClose]);
 
-  const handlePageFlip = (e) => {
-    const newPage = e.data;
-    setCurrentPage(newPage);
-    
-    // Show subscription modal when user tries to go beyond free preview
-    if (!canReadPremium && newPage >= FREE_PREVIEW_PAGES) {
-      setTimeout(() => {
-        setShowSubscriptionModal(true);
-      }, 500);
-    }
+  const handleZoomIn = () => {
+    setZoom(Math.min(zoom + 0.25, 3));
   };
 
-  const nextPage = () => {
-    if (flipBookRef.current) {
-      // Prevent going beyond free preview for non-premium users
-      if (!canReadPremium && currentPage >= FREE_PREVIEW_PAGES - 1) {
-        setShowSubscriptionModal(true);
-        return;
-      }
-      flipBookRef.current.pageFlip().flipNext();
-    }
+  const handleZoomOut = () => {
+    setZoom(Math.max(zoom - 0.25, 0.5));
   };
 
-  const prevPage = () => {
-    if (flipBookRef.current) {
-      flipBookRef.current.pageFlip().flipPrev();
-    }
-  };
-
-  const goToPage = (pageIndex) => {
-    if (flipBookRef.current) {
-      flipBookRef.current.pageFlip().flip(pageIndex);
-    }
-    setShowTableOfContents(false);
+  const handleRotate = () => {
+    setRotation((prev) => (prev + 90) % 360);
   };
 
   const toggleFullscreen = () => {
     setIsFullscreen(!isFullscreen);
   };
 
-  const zoomIn = () => {
-    setZoom(Math.min(zoom + 0.2, 2));
-  };
-
-  const zoomOut = () => {
-    setZoom(Math.max(zoom - 0.2, 0.6));
-  };
-
   const toggleControls = () => {
     setShowControls(!showControls);
   };
 
-  if (!isOpen || !articles || articles.length === 0) {
-    return null;
+  const handleDownload = () => {
+    const link = document.createElement('a');
+    link.href = magazinePdfUrl;
+    link.download = 'Just Urbane August 2025 - Digital Magazine.pdf';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
+  if (!isOpen) return null;
   }
 
   return (
