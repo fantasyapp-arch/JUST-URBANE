@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import { MapPin, Calendar, Star, Camera, Plane, Filter, Search, Globe, Mountain, Waves, Building } from 'lucide-react';
 import { motion } from 'framer-motion';
 import LoadingSpinner, { SkeletonCard } from '../components/LoadingSpinner';
+import { useArticles } from '../hooks/useArticles';
+import { formatDateShort } from '../utils/formatters';
 
 const TravelPage = () => {
   const [selectedRegion, setSelectedRegion] = useState('all');
