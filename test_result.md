@@ -1710,6 +1710,16 @@ test_plan:
   stuck_tasks:
   test_all: true
   test_priority: "high_first"
+  razorpay_integration_tested: true
+  razorpay_integration_success_rate: "100.0%"
+  razorpay_integration_testing_date: "2025-01-30T20:15:00"
+  razorpay_configuration_verified: true
+  razorpay_order_creation_verified: true
+  razorpay_payment_verification_verified: true
+  razorpay_package_integration_verified: true
+  razorpay_database_tracking_verified: true
+  razorpay_error_handling_verified: true
+  razorpay_webhook_verified: true
   pricing_page_backend_tested: true
   pricing_page_backend_success_rate: "100.0%"
   pricing_page_backend_testing_date: "2025-01-30T15:30:00"
