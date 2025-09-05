@@ -376,9 +376,12 @@ const Footer = () => {
           </div>
           
           {/* Mobile Bottom Bar - GQ Style */}
-          <div className="md:hidden text-center">
+          <div className="md:hidden text-center space-y-3">
             <p className="text-gray-400 text-xs leading-relaxed">
               © {currentYear} Just Urbane. All rights reserved. Use of this website constitutes acceptance of our Terms of Service and Privacy Policy.
+            </p>
+            <p className="text-gray-500 text-xs">
+              Designed and Developed by <span className="text-gray-300 font-semibold">satmat group</span>
             </p>
           </div>
         </div>
