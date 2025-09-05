@@ -118,7 +118,7 @@ const PricingPage = () => {
       savings: '50% OFF'
     },
     {
-      id: 'combined',
+      id: 'combined_annual',
       name: 'Print + Digital Subscription',
       shortName: 'Complete',
       price: '₹999',
