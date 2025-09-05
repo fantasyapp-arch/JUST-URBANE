@@ -99,25 +99,27 @@ const CustomerDetailsModal = ({ isOpen, onClose, selectedPlan, onPaymentSuccess 
         
         // Handle auto-login after payment
         if (result.access_token) {
-          console.log('🔑 Setting new access token...');
+          console.log('🔑 Updating token and user data...');
           
-          // Store the token and user data (auto-login)
-          localStorage.setItem('token', result.access_token);
+          // Update token and refresh user data
+          await updateTokenAndUser(result.access_token);
           
-          // Update API auth header
-          const { api } = await import('../utils/api');
-          api.defaults.headers.common['Authorization'] = `Bearer ${result.access_token}`;
-          
-          console.log('🔄 Refreshing user context...');
-          // Force token update and refresh user context
-          window.location.reload(); // Simple solution to ensure fresh auth state
+          console.log('✅ User authenticated and updated');
         }
         
         onPaymentSuccess(result);
         onClose();
         
         // Show success message
-        alert('Payment successful! Your subscription is now active. Page will refresh to update your access.');
+        alert('Payment successful! Your subscription is now active.');
+        
+        // Redirect to magazine page if user has digital access
+        if (result.has_digital_access) {
+          console.log('📖 Redirecting to magazine page...');
+          setTimeout(() => {
+            navigate('/issues');
+          }, 1000);
+        }
       }
     } catch (error) {
       console.error('Payment error details:', {
