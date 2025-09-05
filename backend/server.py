@@ -57,7 +57,7 @@ if RAZORPAY_KEY_ID and RAZORPAY_KEY_SECRET:
 subscription_packages = {
     "digital_annual": {
         "name": "Digital Subscription",
-        "price": 499.0,  # INR
+        "price": 1.0,  # INR - Trial price
         "currency": "INR",
         "features": [
             "Unlimited premium articles access",
