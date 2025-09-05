@@ -231,7 +231,7 @@ const PricingPage = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.8 }}
-          className="mt-16 lg:mt-24 text-center z-30 relative"
+          className="mt-16 lg:mt-24 text-center relative z-20 bg-white rounded-2xl p-8 shadow-lg"
         >
           <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-8">
             Why Choose Just Urbane?
