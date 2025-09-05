@@ -117,13 +117,13 @@ const MagazineReader = ({ articles, isOpen, onClose, initialPageIndex = 0 }) => 
                     <Menu className="h-5 w-5" />
                   </button>
                   <button
-                    onClick={zoomOut}
+                    onClick={handleZoomOut}
                     className="p-2 hover:bg-white/10 rounded-full transition-colors"
                   >
                     <ZoomOut className="h-5 w-5" />
                   </button>
                   <button
-                    onClick={zoomIn}
+                    onClick={handleZoomIn}
                     className="p-2 hover:bg-white/10 rounded-full transition-colors"
                   >
                     <ZoomIn className="h-5 w-5" />
