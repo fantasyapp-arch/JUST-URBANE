@@ -41,47 +41,34 @@ const MagazineReaderPage = () => {
     return () => window.removeEventListener('keydown', handleKeyPress);
   }, []);
 
-  // Touch/Swipe Gesture Support
-  useEffect(() => {
-    let startX = 0;
-    let startY = 0;
+  const handleZoomIn = () => {
+    setZoom(Math.min(zoom + 0.25, 3));
+  };
 
-    const handleTouchStart = (e) => {
-      startX = e.touches[0].clientX;
-      startY = e.touches[0].clientY;
-    };
+  const handleZoomOut = () => {
+    setZoom(Math.max(zoom - 0.25, 0.5));
+  };
 
-    const handleTouchEnd = (e) => {
-      const endX = e.changedTouches[0].clientX;
-      const endY = e.changedTouches[0].clientY;
-      const diffX = startX - endX;
-      const diffY = startY - endY;
+  const handleRotate = () => {
+    setRotation((prev) => (prev + 90) % 360);
+  };
 
-      // Only respond to horizontal swipes (not vertical scrolling)
-      if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 50) {
-        if (diffX > 0) {
-          // Swipe left - next page
-          nextPage();
-        } else {
-          // Swipe right - previous page
-          prevPage();
-        }
-      }
-    };
+  const toggleFullscreen = () => {
+    setIsFullscreen(!isFullscreen);
+  };
 
-    const container = document.querySelector('.magazine-container');
-    if (container) {
-      container.addEventListener('touchstart', handleTouchStart, { passive: true });
-      container.addEventListener('touchend', handleTouchEnd, { passive: true });
-    }
+  const toggleControls = () => {
+    setShowControls(!showControls);
+  };
 
-    return () => {
-      if (container) {
-        container.removeEventListener('touchstart', handleTouchStart);
-        container.removeEventListener('touchend', handleTouchEnd);
-      }
-    };
-  }, [currentPage, totalPages, canReadPremium]);
+  const handleDownload = () => {
+    const link = document.createElement('a');
+    link.href = magazinePdfUrl;
+    link.download = 'Just Urbane August 2025 - Digital Magazine.pdf';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
 
   useEffect(() => {
     // COMPLETE full-screen experience - lock body scroll and remove all browser elements
