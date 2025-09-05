@@ -135,8 +135,8 @@ const ReviewsPage = () => {
 
       {/* Filters */}
       <section className="bg-gray-50 py-8">
-        <div className="container mx-auto px-4">
-          <div className="flex flex-wrap items-center justify-between gap-4">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col sm:flex-row flex-wrap items-center justify-between gap-4">
             {/* Search */}
             <div className="relative flex-1 max-w-md">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
