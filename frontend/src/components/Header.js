@@ -18,7 +18,7 @@ const Header = () => {
     },
     {
       name: 'Tech', 
-      slug: 'tech',
+      slug: 'technology',
       subcategories: ['Gadgets', 'Mobile', 'Smart', 'Future', 'Reviews']
     },
     {
