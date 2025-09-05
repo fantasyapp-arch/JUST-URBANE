@@ -30,11 +30,8 @@ const FeaturedMagazineCover = ({ issue, onReadClick, canRead }) => {
         className="relative group"
       >
         <div 
-          className="aspect-[3/4] rounded-2xl overflow-hidden shadow-2xl bg-cover bg-center relative cursor-pointer transform transition-transform duration-500 hover:scale-105"
-          style={{
-            backgroundImage: `linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.6)), url(${heroArticle?.hero_image || 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&h=1200&fit=crop&crop=face'})`
-          }}
-          onClick={() => canRead ? onReadClick(issue.articles) : null}
+          className="aspect-[3/4] rounded-2xl overflow-hidden shadow-2xl bg-gradient-to-br from-slate-900 via-slate-800 to-black relative cursor-pointer transform transition-transform duration-500 hover:scale-105"
+          onClick={() => setIsMagazineOpen(true)}
         >
           {/* Magazine Header - GQ Style */}
           <div className="absolute top-8 left-8 right-8">
