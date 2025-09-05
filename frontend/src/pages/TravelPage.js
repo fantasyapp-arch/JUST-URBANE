@@ -353,7 +353,7 @@ const TravelPage = () => {
 
       {/* Filters and Search */}
       <div className="bg-white border-b border-gray-200 sticky top-20 z-40">
-        <div className="container mx-auto px-4 py-6">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <motion.div 
             className="flex flex-col lg:flex-row gap-4 items-center justify-between"
             initial={{ opacity: 0, y: -20 }}
