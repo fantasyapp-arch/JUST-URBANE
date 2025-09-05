@@ -36,9 +36,17 @@ export const AuthProvider = ({ children }) => {
   // Refresh user data (call after payment success)
   const refreshUser = async () => {
     if (token) {
+      console.log('🔄 Refreshing user data after payment...');
       const userData = await fetchUserData();
-      setUser(userData);
-      return userData;
+      if (userData) {
+        console.log('✅ User data refreshed:', userData);
+        setUser(userData);
+        return userData;
+      } else {
+        console.log('❌ Failed to refresh user data');
+      }
+    } else {
+      console.log('❌ No token available for refresh');
     }
     return null;
   };
