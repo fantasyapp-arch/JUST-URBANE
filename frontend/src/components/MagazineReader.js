@@ -1,289 +1,188 @@
-import React, { useRef, useEffect, useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Link } from 'react-router-dom';
-import HTMLFlipBook from 'react-pageflip';
-import { 
-  X, ZoomIn, ZoomOut, Download, Maximize, Minimize,
-  RotateCw, BookOpen, Printer, Crown, Menu, ChevronLeft, 
-  ChevronRight, Bookmark, Share2
-} from 'lucide-react';
+import React, { useState, useEffect, useCallback } from 'react';
+import { X, ChevronLeft, ChevronRight, Crown } from 'lucide-react';
+import parseMagazineContent from './MagazineContentParser';
 
-const MagazineReader = ({ articles, isOpen, onClose, initialPageIndex = 0 }) => {
-  const containerRef = useRef();
-  const flipBookRef = useRef();
-  const [zoom, setZoom] = useState(1);
-  const [isFullscreen, setIsFullscreen] = useState(false);
-  const [showControls, setShowControls] = useState(true);
-  const [rotation, setRotation] = useState(0);
+const MagazineReader = ({ isOpen, onClose }) => {
   const [currentPage, setCurrentPage] = useState(0);
-  const [showSubscriptionModal, setShowSubscriptionModal] = useState(false);
-  const [showTableOfContents, setShowTableOfContents] = useState(false);
-  
-  // Premium access control
-  const canReadPremium = true; // This should come from user context
-  const FREE_PREVIEW_PAGES = 3;
-  const totalPages = articles ? articles.length * 2 + 2 : 2; // Cover + articles + back cover
+  const [pages, setPages] = useState([]);
+  const [imagesLoaded, setImagesLoaded] = useState(new Set());
 
-  // Real magazine PDF URL
-  const magazinePdfUrl = "https://customer-assets.emergentagent.com/job_luxmag-tech-nav-fix/artifacts/qhmo66rl_Just%20Urbane%20August%202025%20-%20E-Magazine-2.pdf";
-  
-  // A4 dimensions for proper display
-  const A4_WIDTH = 595;
-  const A4_HEIGHT = 842;
-  const DISPLAY_WIDTH = 800;
-  const DISPLAY_HEIGHT = Math.round((A4_HEIGHT / A4_WIDTH) * DISPLAY_WIDTH);
-
+  // Load magazine pages immediately
   useEffect(() => {
-    const handleEscape = (e) => {
-      if (e.key === 'Escape') {
-        onClose();
+    const magazinePages = parseMagazineContent();
+    setPages(magazinePages);
+    
+    // Preload all images for instant page turns
+    magazinePages.forEach((page, index) => {
+      const img = new Image();
+      img.onload = () => {
+        setImagesLoaded(prev => new Set([...prev, index]));
+      };
+      img.src = page.pageImage;
+    });
+  }, []);
+
+  // Keyboard navigation for instant response
+  useEffect(() => {
+    const handleKeyPress = (e) => {
+      if (!isOpen) return;
+      
+      switch (e.key) {
+        case 'Escape':
+          onClose();
+          break;
+        case 'ArrowLeft':
+          e.preventDefault();
+          prevPage();
+          break;
+        case 'ArrowRight':
+          e.preventDefault();
+          nextPage();
+          break;
       }
     };
     
-    if (isOpen) {
-      document.addEventListener('keydown', handleEscape);
-      return () => document.removeEventListener('keydown', handleEscape);
+    document.addEventListener('keydown', handleKeyPress);
+    return () => document.removeEventListener('keydown', handleKeyPress);
+  }, [isOpen, currentPage]);
+
+  // Instant page navigation
+  const nextPage = useCallback(() => {
+    if (currentPage < pages.length - 1) {
+      setCurrentPage(currentPage + 1);
     }
-  }, [isOpen, onClose]);
+  }, [currentPage, pages.length]);
 
-  const handleZoomIn = () => {
-    setZoom(Math.min(zoom + 0.25, 3));
+  const prevPage = useCallback(() => {
+    if (currentPage > 0) {
+      setCurrentPage(currentPage - 1);
+    }
+  }, [currentPage]);
+
+  // Touch/swipe support for mobile
+  const [touchStart, setTouchStart] = useState(null);
+
+  const handleTouchStart = (e) => {
+    setTouchStart(e.touches[0].clientX);
   };
 
-  const handleZoomOut = () => {
-    setZoom(Math.max(zoom - 0.25, 0.5));
-  };
-
-  const handleRotate = () => {
-    setRotation((prev) => (prev + 90) % 360);
-  };
-
-  const toggleFullscreen = () => {
-    setIsFullscreen(!isFullscreen);
-  };
-
-  const toggleControls = () => {
-    setShowControls(!showControls);
-  };
-
-  const handleDownload = () => {
-    const link = document.createElement('a');
-    link.href = magazinePdfUrl;
-    link.download = 'Just Urbane August 2025 - Digital Magazine.pdf';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  };
-
-  const handlePageFlip = (e) => {
-    const newPage = e.data;
-    setCurrentPage(newPage);
+  const handleTouchEnd = (e) => {
+    if (!touchStart) return;
     
-    // Show subscription modal when user tries to go beyond free preview
-    if (!canReadPremium && newPage >= FREE_PREVIEW_PAGES) {
-      setTimeout(() => {
-        setShowSubscriptionModal(true);
-      }, 500);
-    }
-  };
-
-  const nextPage = () => {
-    if (flipBookRef.current) {
-      // Prevent going beyond free preview for non-premium users
-      if (!canReadPremium && currentPage >= FREE_PREVIEW_PAGES - 1) {
-        setShowSubscriptionModal(true);
-        return;
+    const touchEnd = e.changedTouches[0].clientX;
+    const diff = touchStart - touchEnd;
+    
+    if (Math.abs(diff) > 50) { // Minimum swipe distance
+      if (diff > 0) {
+        nextPage(); // Swipe left = next page
+      } else {
+        prevPage(); // Swipe right = prev page
       }
-      flipBookRef.current.pageFlip().flipNext();
     }
+    setTouchStart(null);
   };
 
-  const prevPage = () => {
-    if (flipBookRef.current) {
-      flipBookRef.current.pageFlip().flipPrev();
-    }
-  };
+  if (!isOpen || pages.length === 0) return null;
 
-  const goToPage = (pageIndex) => {
-    if (flipBookRef.current) {
-      flipBookRef.current.pageFlip().flip(pageIndex);
-    }
-    setShowTableOfContents(false);
-  };
-
-  if (!isOpen) return null;
+  const currentPageData = pages[currentPage];
 
   return (
-    <AnimatePresence>
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        className={`fixed inset-0 bg-black z-50 overflow-hidden ${
-          isFullscreen ? 'z-[100]' : ''
-        }`}
-      >
-        {/* Background Pattern */}
-        <div className="absolute inset-0 opacity-10">
-          <div 
-            className="w-full h-full"
-            style={{
-              backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.02'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-            }}
-          />
-        </div>
-
-        {/* Top Controls Bar */}
-        <AnimatePresence>
-          {showControls && (
-            <motion.div
-              initial={{ opacity: 0, y: -50 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -50 }}
-              className="absolute top-0 left-0 right-0 z-20 bg-gradient-to-b from-black/80 via-black/60 to-transparent p-6"
-            >
-              <div className="flex items-center justify-between text-white">
-                <div className="flex items-center space-x-4">
-                  <button
-                    onClick={onClose}
-                    className="p-2 hover:bg-white/10 rounded-full transition-colors"
-                  >
-                    <X className="h-6 w-6" />
-                  </button>
-                  <div className="flex items-center space-x-2">
-                    <Crown className="h-5 w-5 text-amber-400" />
-                    <h1 className="text-xl font-bold">JUST URBANE</h1>
-                  </div>
-                </div>
-
-                <div className="flex items-center space-x-2">
-                  <button
-                    onClick={() => setShowTableOfContents(true)}
-                    className="p-2 hover:bg-white/10 rounded-full transition-colors"
-                  >
-                    <Menu className="h-5 w-5" />
-                  </button>
-                  <button
-                    onClick={handleZoomOut}
-                    className="p-2 hover:bg-white/10 rounded-full transition-colors"
-                  >
-                    <ZoomOut className="h-5 w-5" />
-                  </button>
-                  <button
-                    onClick={handleZoomIn}
-                    className="p-2 hover:bg-white/10 rounded-full transition-colors"
-                  >
-                    <ZoomIn className="h-5 w-5" />
-                  </button>
-                  <button
-                    onClick={toggleFullscreen}
-                    className="p-2 hover:bg-white/10 rounded-full transition-colors"
-                  >
-                    {isFullscreen ? <Minimize className="h-5 w-5" /> : <Maximize className="h-5 w-5" />}
-                  </button>
-                </div>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-
-        {/* Magazine Container */}
-        <div 
-          ref={containerRef}
-          className="flex items-center justify-center h-full p-4 pt-20 pb-20"
-          onClick={toggleControls}
-        >
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            className="relative bg-white shadow-2xl rounded-lg overflow-hidden"
-            style={{
-              width: DISPLAY_WIDTH * zoom,
-              height: DISPLAY_HEIGHT * zoom,
-              transform: `rotate(${rotation}deg)`,
-              maxWidth: '95vw',
-              maxHeight: '95vh'
-            }}
+    <div className="fixed inset-0 bg-black z-50 flex items-center justify-center">
+      {/* Header with minimal controls */}
+      <div className="absolute top-0 left-0 right-0 z-10 bg-gradient-to-b from-black/80 to-transparent p-4">
+        <div className="flex items-center justify-between text-white">
+          <div className="flex items-center space-x-3">
+            <Crown className="h-5 w-5 text-amber-400" />
+            <span className="text-lg font-bold">JUST URBANE</span>
+          </div>
+          <button
+            onClick={onClose}
+            className="p-2 hover:bg-white/10 rounded-full transition-colors"
           >
-            {/* PDF Display with A4 Proportions */}
-            <iframe
-              src={`${magazinePdfUrl}#toolbar=0&navpanes=0&scrollbar=0&view=FitH`}
-              className="w-full h-full border-0"
-              title="Just Urbane August 2025 Digital Magazine"
-              style={{
-                filter: 'drop-shadow(0 25px 50px rgba(0, 0, 0, 0.5))'
-              }}
-            />
-            
-            {/* A4 Size Info Badge */}
-            <div className="absolute bottom-4 left-4 bg-black/70 backdrop-blur-sm text-white px-3 py-2 rounded-lg text-sm">
-              <div className="flex items-center space-x-2">
-                <BookOpen className="h-4 w-4 text-amber-400" />
-                <span>A4 Format • {DISPLAY_WIDTH}×{DISPLAY_HEIGHT}px</span>
-              </div>
-            </div>
-
-            {/* Resolution Badge */}
-            <div className="absolute top-4 right-4 bg-gradient-to-r from-amber-500 to-amber-600 text-white px-3 py-2 rounded-lg text-sm font-medium">
-              High Resolution PDF
-            </div>
-          </motion.div>
+            <X className="h-6 w-6" />
+          </button>
         </div>
+      </div>
 
-        {/* Bottom Controls Bar */}
-        <AnimatePresence>
-          {showControls && (
-            <motion.div
-              initial={{ opacity: 0, y: 50 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 50 }}
-              className="absolute bottom-0 left-0 right-0 z-20 bg-gradient-to-t from-black/90 via-black/70 to-transparent p-4"
-            >
-              <div className="flex items-center justify-center text-white">
-                <div className="flex items-center space-x-6 bg-black/50 backdrop-blur-sm px-6 py-3 rounded-2xl">
-                  <div className="flex items-center space-x-2">
-                    <div className="w-2 h-2 bg-amber-400 rounded-full"></div>
-                    <span className="text-sm font-medium">Just Urbane • August 2025</span>
-                  </div>
-                  <div className="w-px h-6 bg-white/20"></div>
-                  <div className="flex items-center space-x-2 text-sm">
-                    <span>Digital Magazine</span>
-                    <span className="text-amber-400">•</span>
-                    <span>A4 Format</span>
-                    <span className="text-amber-400">•</span>
-                    <span>High Resolution PDF</span>
-                  </div>
-                  <div className="w-px h-6 bg-white/20"></div>
-                  <div className="flex space-x-2">
-                    <button 
-                      onClick={handleDownload}
-                      className="p-2 hover:bg-white/10 rounded-lg transition-colors"
-                      title="Download PDF"
-                    >
-                      <Download className="h-4 w-4" />
-                    </button>
-                    <button 
-                      onClick={handleRotate}
-                      className="p-2 hover:bg-white/10 rounded-lg transition-colors"
-                      title="Rotate"
-                    >
-                      <RotateCw className="h-4 w-4" />
-                    </button>
-                    <button 
-                      className="p-2 hover:bg-white/10 rounded-lg transition-colors"
-                      title="Print"
-                    >
-                      <Printer className="h-4 w-4" />
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
+      {/* Main magazine display - optimized for speed */}
+      <div 
+        className="relative w-full h-full flex items-center justify-center cursor-pointer"
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
+      >
+        {/* Previous page click area */}
+        <div 
+          className="absolute left-0 top-0 bottom-0 w-1/3 z-10 cursor-w-resize"
+          onClick={prevPage}
+        />
+        
+        {/* Next page click area */}
+        <div 
+          className="absolute right-0 top-0 bottom-0 w-1/3 z-10 cursor-e-resize"
+          onClick={nextPage}
+        />
+
+        {/* Magazine page - instant display */}
+        <div className="relative max-w-4xl max-h-full mx-4 my-16">
+          <img
+            src={currentPageData.pageImage}
+            alt={currentPageData.title}
+            className="w-full h-auto shadow-2xl rounded-lg"
+            style={{
+              aspectRatio: '2622/3236', // Your custom dimensions
+              objectFit: 'contain',
+              maxHeight: '90vh'
+            }}
+            loading="eager" // Force immediate loading
+            decoding="sync" // Synchronous decoding for instant display
+          />
+          
+          {/* Page loading indicator only for unloaded images */}
+          {!imagesLoaded.has(currentPage) && (
+            <div className="absolute inset-0 bg-gray-200 animate-pulse rounded-lg flex items-center justify-center">
+              <div className="text-gray-500">Loading page {currentPage + 1}...</div>
+            </div>
           )}
-        </AnimatePresence>
+        </div>
+      </div>
 
-      </motion.div>
-    </AnimatePresence>
+      {/* Navigation arrows - always visible for instant access */}
+      {currentPage > 0 && (
+        <button
+          onClick={prevPage}
+          className="absolute left-4 top-1/2 -translate-y-1/2 p-3 bg-black/60 hover:bg-black/80 text-white rounded-full transition-colors z-20"
+        >
+          <ChevronLeft className="h-6 w-6" />
+        </button>
+      )}
+      
+      {currentPage < pages.length - 1 && (
+        <button
+          onClick={nextPage}
+          className="absolute right-4 top-1/2 -translate-y-1/2 p-3 bg-black/60 hover:bg-black/80 text-white rounded-full transition-colors z-20"
+        >
+          <ChevronRight className="h-6 w-6" />
+        </button>
+      )}
+
+      {/* Bottom page indicator */}
+      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/60 text-white px-4 py-2 rounded-full text-sm z-10">
+        Page {currentPage + 1} of {pages.length}
+      </div>
+
+      {/* Page dots indicator */}
+      <div className="absolute bottom-16 left-1/2 -translate-x-1/2 flex space-x-2 z-10">
+        {pages.map((_, index) => (
+          <button
+            key={index}
+            onClick={() => setCurrentPage(index)}
+            className={`w-2 h-2 rounded-full transition-colors ${
+              index === currentPage ? 'bg-amber-400' : 'bg-white/40 hover:bg-white/60'
+            }`}
+          />
+        ))}
+      </div>
+    </div>
   );
 };
 
