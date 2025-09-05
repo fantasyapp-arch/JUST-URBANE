@@ -41,29 +41,29 @@ const IssuesPage = () => {
         <div className="absolute inset-0 bg-gradient-to-r from-black via-gray-900 to-black opacity-90"></div>
         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1586953135225-fc4e67e98b90?w=1920&h=1080')] bg-cover bg-center"></div>
         
-        <div className="relative z-10 container mx-auto px-4 py-20">
+        <div className="relative z-10 container mx-auto px-6 md:px-8 py-24">
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1 }}
-            className="text-center max-w-4xl mx-auto"
+            className="text-center max-w-5xl mx-auto"
           >
-            <div className="flex justify-center mb-6">
-              <div className="bg-gradient-to-r from-amber-400 to-gold-500 text-black px-6 py-2 rounded-full text-sm font-bold tracking-wide">
-                <Sparkles className="inline h-4 w-4 mr-2" />
+            <div className="flex justify-center mb-8">
+              <div className="bg-gradient-to-r from-amber-400 to-gold-500 text-black px-8 py-3 rounded-full text-lg font-bold tracking-wide shadow-lg">
+                <Sparkles className="inline h-5 w-5 mr-3" />
                 PREMIUM DIGITAL MAGAZINE
               </div>
             </div>
             
-            <h1 className="text-5xl md:text-7xl font-bold mb-8 bg-gradient-to-r from-white via-amber-200 to-gold-300 bg-clip-text text-transparent leading-tight">
+            <h1 className="text-6xl md:text-8xl font-bold mb-10 bg-gradient-to-r from-white via-amber-200 to-gold-300 bg-clip-text text-transparent leading-tight">
               Just Urbane
             </h1>
             
-            <p className="text-xl md:text-2xl text-gray-300 mb-4 font-light">
+            <p className="text-2xl md:text-3xl text-gray-300 mb-6 font-light">
               {currentIssue.subtitle}
             </p>
             
-            <p className="text-lg text-gray-400 max-w-2xl mx-auto leading-relaxed">
+            <p className="text-xl md:text-2xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
               {currentIssue.description}
             </p>
           </motion.div>
