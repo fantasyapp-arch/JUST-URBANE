@@ -67,34 +67,129 @@ const ReviewsPage = () => {
     }))
   ];
 
-  // Mock fallback review (can be removed when not needed)
-  const mockReview = {
-    id: '1',
-    title: 'Luxury Experience Review',
-    slug: 'luxury-experience-review',
-    product: 'Premium Service',
-      brand: 'Apple',
-      score: 9.2,
-      pros: ['Premium titanium build', 'Exceptional battery life', 'Comprehensive health tracking', 'Bright Always-On display'],
-      cons: ['High price point', 'Limited customization', 'Size may be too large for some'],
-      specs: {
-        'Display': '49mm Always-On Retina',
-        'Material': 'Titanium',
-        'Battery Life': 'Up to 36 hours',
-        'Water Resistance': '100m'
-      },
-      price_inr: 89900,
-      affiliate_links: {
-        'Apple Store': 'https://apple.com',
-        'Amazon': 'https://amazon.in'
-      },
-      body: 'The Apple Watch Ultra 2 represents the pinnacle of smartwatch engineering, combining luxury materials with cutting-edge technology.',
-      images: ['https://images.unsplash.com/photo-1551816230-ef5deaed4a26?w=800'],
-      category: 'tech',
-      author_name: 'Vikram Singh',
-      created_at: '2024-11-15T10:00:00Z',
-      featured: true
-    },
+  // Filter and sort reviews
+  const filteredReviews = useMemo(() => {
+    let filtered = reviews;
+
+    if (searchQuery.trim()) {
+      const query = searchQuery.toLowerCase();
+      filtered = filtered.filter(review =>
+        review.title.toLowerCase().includes(query) ||
+        review.product.toLowerCase().includes(query) ||
+        review.brand.toLowerCase().includes(query)
+      );
+    }
+
+    if (selectedCategory !== 'all') {
+      filtered = filtered.filter(review => review.category === selectedCategory);
+    }
+
+    switch (sortBy) {
+      case 'rating':
+        filtered.sort((a, b) => b.score - a.score);
+        break;
+      case 'price-low':
+        filtered.sort((a, b) => a.price_inr - b.price_inr);
+        break;
+      case 'price-high':
+        filtered.sort((a, b) => b.price_inr - a.price_inr);
+        break;
+      default:
+        filtered.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+        break;
+    }
+
+    return filtered;
+  }, [reviews, searchQuery, selectedCategory, sortBy]);
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-white">
+        <div className="container mx-auto px-4 py-16">
+          <div className="text-center mb-12">
+            <h1 className="text-4xl font-bold text-gray-900 mb-4">Loading Reviews...</h1>
+            <LoadingSpinner />
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="min-h-screen bg-white">
+      {/* Hero Section */}
+      <section className="bg-gradient-to-r from-gray-900 to-gray-800 text-white py-20">
+        <div className="container mx-auto px-4 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+          >
+            <h1 className="text-5xl font-bold mb-6">Premium Reviews</h1>
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+              In-depth reviews of luxury products, premium experiences, and lifestyle essentials from our expert team
+            </p>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Reviews Grid */}
+      <section className="py-16">
+        <div className="container mx-auto px-4">
+          <div className="grid gap-8">
+            {filteredReviews.map((review, index) => (
+              <motion.article
+                key={review.id}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                className="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-shadow"
+              >
+                <Link to={getArticleRoute(review)} className="block">
+                  <div className="md:flex">
+                    <div className="md:w-1/3">
+                      <img
+                        src={review.images[0]}
+                        alt={review.product}
+                        className="w-full h-64 md:h-full object-cover"
+                        onError={(e) => {
+                          e.target.src = 'https://images.unsplash.com/photo-1551816230-ef5deaed4a26?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80';
+                        }}
+                      />
+                    </div>
+                    <div className="md:w-2/3 p-8">
+                      <div className="flex items-center justify-between mb-4">
+                        <span className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">
+                          {review.category}
+                        </span>
+                        <div className="flex items-center">
+                          <Star className="h-5 w-5 fill-yellow-400 text-yellow-400 mr-1" />
+                          <span className="font-bold text-lg">{review.score}</span>
+                        </div>
+                      </div>
+                      <h2 className="text-2xl font-bold text-gray-900 mb-3 hover:text-blue-600 transition-colors">
+                        {review.title}
+                      </h2>
+                      <p className="text-gray-600 mb-4 leading-relaxed">
+                        {review.body.substring(0, 200)}...
+                      </p>
+                      <div className="flex items-center justify-between text-sm text-gray-500">
+                        <span>By {review.author_name}</span>
+                        <span>{formatDateShort(review.created_at)}</span>
+                      </div>
+                    </div>
+                  </div>
+                </Link>
+              </motion.article>
+            ))}
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+};
+
+export default ReviewsPage;
     {
       id: '2',
       title: 'Rolex Submariner: Timeless Diving Excellence',
