@@ -474,10 +474,9 @@ async def create_razorpay_order(
 
 @app.post("/api/payments/razorpay/verify")
 async def verify_razorpay_payment(
-    payment_data: RazorpayPaymentVerification,
-    current_user: dict = Depends(get_current_user)
+    payment_data: RazorpayPaymentVerification
 ):
-    """Verify Razorpay payment signature and update subscription"""
+    """Verify Razorpay payment signature and create/update subscription - Guest checkout supported"""
     
     if not razorpay_client:
         raise HTTPException(status_code=500, detail="Razorpay not configured")
@@ -516,23 +515,43 @@ async def verify_razorpay_payment(
             }
         )
         
-        # Update user subscription
-        subscription_expires_at = datetime.utcnow() + timedelta(days=365)  # 1 year
-        db.users.update_one(
-            {"id": current_user["id"]},
-            {
-                "$set": {
-                    "is_premium": True,
-                    "subscription_type": payment_data.package_id,
-                    "subscription_expires_at": subscription_expires_at
-                }
+        # Check if user exists, if not create a new user
+        customer_email = payment_data.customer_details.email
+        existing_user = db.users.find_one({"email": customer_email})
+        
+        if not existing_user:
+            # Create new user from customer details
+            user_doc = {
+                "id": str(uuid.uuid4()),
+                "email": customer_email,
+                "full_name": payment_data.customer_details.full_name,
+                "hashed_password": None,  # No password for guest users
+                "is_premium": True,
+                "subscription_type": payment_data.package_id,
+                "subscription_expires_at": datetime.utcnow() + timedelta(days=365),
+                "created_at": datetime.utcnow()
             }
-        )
+            db.users.insert_one(user_doc)
+            user_id = user_doc["id"]
+        else:
+            # Update existing user subscription
+            subscription_expires_at = datetime.utcnow() + timedelta(days=365)  # 1 year
+            db.users.update_one(
+                {"email": customer_email},
+                {
+                    "$set": {
+                        "is_premium": True,
+                        "subscription_type": payment_data.package_id,
+                        "subscription_expires_at": subscription_expires_at
+                    }
+                }
+            )
+            user_id = existing_user["id"]
         
         # Store transaction record
         transaction_doc = {
             "id": str(uuid.uuid4()),
-            "user_id": current_user["id"],
+            "user_id": user_id,
             "customer_details": payment_data.customer_details.dict(),
             "razorpay_order_id": order_id,
             "razorpay_payment_id": payment_id,
@@ -550,7 +569,8 @@ async def verify_razorpay_payment(
             "status": "success",
             "message": "Payment verified and subscription activated",
             "subscription_type": payment_data.package_id,
-            "expires_at": subscription_expires_at.isoformat()
+            "expires_at": (datetime.utcnow() + timedelta(days=365)).isoformat(),
+            "user_created": existing_user is None
         }
         
     except HTTPException:
