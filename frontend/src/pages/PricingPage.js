@@ -78,8 +78,11 @@ const PricingPage = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
+      {/* Highlight Overlay */}
+      <div className="fixed inset-0 bg-black bg-opacity-20 z-10 pointer-events-none animate-fade-in"></div>
+      
       {/* Header Section */}
-      <div className="relative overflow-hidden bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800">
+      <div className="relative overflow-hidden bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 z-20">
         <div className="absolute inset-0 bg-black opacity-20"></div>
         <div className="relative max-w-6xl mx-auto px-6 lg:px-8 py-12 lg:py-20">
           <motion.div
