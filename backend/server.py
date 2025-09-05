@@ -638,7 +638,7 @@ async def create_article(article: ArticleCreate, current_user: dict = Depends(ge
     if not article_dict.get("slug"):
         article_dict["slug"] = article_dict["title"].lower().replace(" ", "-").replace(",", "")
     
-    await db.articles.insert_one(article_dict)
+    db.articles.insert_one(article_dict)
     return prepare_item_response(article_dict)
 
 @app.get("/api/categories", response_model=List[Category])
