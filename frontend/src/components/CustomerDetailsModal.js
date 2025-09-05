@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { X, CreditCard, MapPin, User, Mail, Phone, Home } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 import { createRazorpayOrder, initializeRazorpayPayment } from '../utils/payment';
 
 const CustomerDetailsModal = ({ isOpen, onClose, selectedPlan, onPaymentSuccess }) => {
