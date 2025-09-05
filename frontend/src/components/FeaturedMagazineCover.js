@@ -27,7 +27,7 @@ const FeaturedMagazineCover = ({ issue, onReadClick, canRead }) => {
       >
         <div 
           className="aspect-[210/297] rounded-2xl overflow-hidden shadow-2xl bg-gradient-to-br from-slate-900 via-slate-800 to-black relative cursor-pointer transform transition-transform duration-500 hover:scale-105"
-          onClick={() => setIsMagazineOpen(true)}
+          onClick={() => canRead ? onReadClick(issue.articles) : null}
         >
           {/* Magazine Header - GQ Style */}
           <div className="absolute top-8 left-8 right-8">
