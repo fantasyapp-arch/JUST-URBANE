@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   X, ZoomIn, ZoomOut, RotateCw, Download, Maximize, Minimize,
-  ChevronLeft, ChevronRight, Home, Share2, Print, BookOpen
+  Share2, Printer, BookOpen
 } from 'lucide-react';
 
 const DigitalMagazineViewer = ({ isOpen, onClose }) => {
