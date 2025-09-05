@@ -1,49 +1,70 @@
 {
-  "total": 6,
-  "passed": 3,
-  "failed": 3,
-  "success_rate": 50.0,
+  "total": 9,
+  "passed": 9,
+  "failed": 0,
+  "success_rate": 100.0,
   "results": [
     {
       "test": "Health Check",
       "success": true,
       "message": "API is healthy and responding",
-      "timestamp": "2025-09-05T10:49:05.494352",
+      "timestamp": "2025-09-05T10:50:30.253032",
       "response_data": null
     },
     {
       "test": "Fashion Category Articles",
       "success": true,
-      "message": "Retrieved 6 fashion articles",
-      "timestamp": "2025-09-05T10:49:05.505192",
+      "message": "Retrieved 7 fashion articles",
+      "timestamp": "2025-09-05T10:50:30.263656",
       "response_data": null
     },
     {
       "test": "Men's Fashion Article in Category",
-      "success": false,
-      "message": "Perfect Suit Guide for Men not found in fashion category",
-      "timestamp": "2025-09-05T10:49:05.505228",
+      "success": true,
+      "message": "Found 'Perfect Suit Guide for Men' in fashion category",
+      "timestamp": "2025-09-05T10:50:30.263713",
       "response_data": null
     },
     {
       "test": "Men Subcategory Articles",
       "success": true,
-      "message": "Retrieved 2 men's fashion articles",
-      "timestamp": "2025-09-05T10:49:05.514886",
+      "message": "Retrieved 3 men's fashion articles",
+      "timestamp": "2025-09-05T10:50:30.275129",
       "response_data": null
     },
     {
       "test": "Men's Suit Article in Subcategory",
-      "success": false,
-      "message": "Perfect Suit Guide not found in men subcategory",
-      "timestamp": "2025-09-05T10:49:05.514928",
+      "success": true,
+      "message": "Perfect Suit Guide found in fashion/men subcategory",
+      "timestamp": "2025-09-05T10:50:30.275164",
       "response_data": null
     },
     {
       "test": "Single Article Retrieval by Slug",
-      "success": false,
-      "message": "HTTP 404: {\"detail\":\"Article not found\"}",
-      "timestamp": "2025-09-05T10:49:05.563742",
+      "success": true,
+      "message": "Successfully retrieved article: Perfect Suit Guide for Men: Corporate Dressing Excellence",
+      "timestamp": "2025-09-05T10:50:30.284324",
+      "response_data": null
+    },
+    {
+      "test": "Article Content Verification",
+      "success": true,
+      "message": "All 7 fields verified correctly: title, author_name, category, subcategory, slug, hero_image, body",
+      "timestamp": "2025-09-05T10:50:30.284390",
+      "response_data": null
+    },
+    {
+      "test": "Fashion Category in Categories API",
+      "success": true,
+      "message": "Fashion category found: Fashion",
+      "timestamp": "2025-09-05T10:50:30.295305",
+      "response_data": null
+    },
+    {
+      "test": "Men Subcategory in Fashion",
+      "success": true,
+      "message": "Men subcategory functional (verified via articles)",
+      "timestamp": "2025-09-05T10:50:30.306165",
       "response_data": null
     }
   ]
