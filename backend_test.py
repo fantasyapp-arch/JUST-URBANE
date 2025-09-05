@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-Just Urbane Magazine API Testing Suite
-Comprehensive backend API testing for the premium digital magazine platform
+Just Urbane Magazine API Testing Suite - CSS Alignment Fix Verification
+Comprehensive backend API testing after CSS alignment fixes to ensure backend functionality remains intact
 """
 
 import requests
@@ -16,6 +16,7 @@ class JustUrbaneAPITester:
         self.session = requests.Session()
         self.auth_token = None
         self.test_results = []
+        self.razorpay_key_id = "rzp_live_RDvDvJ94tbQgS1"
         
     def log_test(self, test_name: str, success: bool, message: str, response_data: Any = None):
         """Log test results"""
