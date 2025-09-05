@@ -441,7 +441,16 @@ class AccountPageBackendTester:
             
             for section_name, section_info in account_sections.items():
                 required_fields = section_info["fields"]
-                missing_fields = [field for field in required_fields if field not in user_data or user_data[field] is None]
+                missing_fields = []
+                
+                for field in required_fields:
+                    if field not in user_data:
+                        missing_fields.append(field)
+                    elif field in ["subscription_type", "subscription_status", "subscription_expires_at"]:
+                        # These fields can be None for free users - that's valid
+                        continue
+                    elif user_data[field] is None:
+                        missing_fields.append(field)
                 
                 if not missing_fields:
                     sections_ready += 1
