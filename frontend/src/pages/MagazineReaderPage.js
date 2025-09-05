@@ -105,69 +105,94 @@ const MagazineReaderPage = () => {
 
 
   return (
-    <>
-      <style>{`
-        .hover-visible {
-          opacity: 0 !important;
-          transition: opacity 0.3s ease;
-        }
-        
-        .magazine-container:hover .hover-visible {
-          opacity: 1 !important;
-        }
-        
-        .magazine-container {
-          width: 100vw;
-          height: 100vh;
-        }
-      `}</style>
-      
-      <div className="magazine-container" style={{
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        width: '100vw',
-        height: '100vh',
-        backgroundColor: '#000',
-        margin: 0,
-        padding: 0,
-        overflow: 'hidden',
-        zIndex: 999999
-      }}>
-        {/* Hidden Close Button - Appears on hover */}
-      <button
-        onClick={closeReader}
-        style={{
-          position: 'absolute',
-          top: '20px',
-          right: '20px',
-          padding: '12px',
-          backgroundColor: 'rgba(0,0,0,0.7)',
-          color: 'white',
-          border: 'none',
-          borderRadius: '50%',
-          cursor: 'pointer',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          width: '50px',
-          height: '50px',
-          opacity: 0,
-          transition: 'all 0.3s ease',
-          zIndex: 1000000
-        }}
-        onMouseEnter={(e) => {
-          e.target.style.backgroundColor = 'rgba(0,0,0,0.9)';
-          e.target.style.transform = 'scale(1.1)';
-        }}
-        onMouseLeave={(e) => {
-          e.target.style.backgroundColor = 'rgba(0,0,0,0.7)';
-          e.target.style.transform = 'scale(1)';
-        }}
-        className="hover-visible"
-      >
-        <X size={24} />
-      </button>
+    <div
+      className={`fixed inset-0 bg-black/95 z-50 overflow-hidden ${
+        isFullscreen ? 'z-[100]' : ''
+      }`}
+      style={{ margin: 0, padding: 0 }}
+    >
+      {/* Background Pattern */}
+      <div className="absolute inset-0 opacity-5">
+        <div 
+          className="w-full h-full"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+          }}
+        />
+      </div>
+
+      {/* Top Controls Bar */}
+      <AnimatePresence>
+        {showControls && (
+          <motion.div
+            initial={{ opacity: 0, y: -50 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -50 }}
+            className="absolute top-0 left-0 right-0 z-20 bg-gradient-to-b from-black/90 via-black/70 to-transparent p-4"
+          >
+            <div className="flex items-center justify-between text-white max-w-7xl mx-auto">
+              <div className="flex items-center space-x-4">
+                <button
+                  onClick={closeReader}
+                  className="p-3 hover:bg-white/10 rounded-full transition-colors"
+                  title="Close"
+                >
+                  <X className="h-6 w-6" />
+                </button>
+                <div className="flex items-center space-x-3">
+                  <BookOpen className="h-6 w-6 text-amber-400" />
+                  <div>
+                    <h1 className="text-xl font-bold">JUST URBANE</h1>
+                    <p className="text-sm text-gray-300">August 2025 • Digital Magazine</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex items-center space-x-2">
+                <button
+                  onClick={handleZoomOut}
+                  className="p-2 hover:bg-white/10 rounded-lg transition-colors"
+                  title="Zoom Out"
+                >
+                  <ZoomOut className="h-5 w-5" />
+                </button>
+                <span className="text-sm px-2 py-1 bg-white/10 rounded">
+                  {Math.round(zoom * 100)}%
+                </span>
+                <button
+                  onClick={handleZoomIn}
+                  className="p-2 hover:bg-white/10 rounded-lg transition-colors"
+                  title="Zoom In"
+                >
+                  <ZoomIn className="h-5 w-5" />
+                </button>
+                <div className="w-px h-6 bg-white/20 mx-2"></div>
+                <button
+                  onClick={handleRotate}
+                  className="p-2 hover:bg-white/10 rounded-lg transition-colors"
+                  title="Rotate"
+                >
+                  <RotateCw className="h-5 w-5" />
+                </button>
+                <button
+                  onClick={toggleFullscreen}
+                  className="p-2 hover:bg-white/10 rounded-lg transition-colors"
+                  title="Toggle Fullscreen"
+                >
+                  {isFullscreen ? <Minimize className="h-5 w-5" /> : <Maximize className="h-5 w-5" />}
+                </button>
+                <button
+                  onClick={handleDownload}
+                  className="p-2 hover:bg-white/10 rounded-lg transition-colors"
+                  title="Download PDF"
+                >
+                  <Download className="h-5 w-5" />
+                </button>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Magazine Display Area - Full Screen Smooth Page Turn */}
       <div style={{
