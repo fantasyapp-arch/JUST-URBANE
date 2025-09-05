@@ -225,16 +225,44 @@ const MagazineReaderPage = () => {
               backgroundColor: '#fff'
             }}
           >
-            <iframe
+            <img
               src={currentPageData?.pageImage}
               alt={`${currentPageData?.title} - Page ${currentPage + 1}`}
               style={{
                 width: '100%',
                 height: '100%',
-                border: 'none',
+                objectFit: 'contain',
+                objectPosition: 'center',
                 filter: isPageLocked ? 'blur(15px)' : 'none'
               }}
-              title={`Page ${currentPage + 1}`}
+              onError={(e) => {
+                e.target.style.display = 'none';
+                e.target.parentNode.innerHTML = `
+                  <div style="
+                    width: 100%; 
+                    height: 100%; 
+                    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); 
+                    display: flex; 
+                    flex-direction: column;
+                    align-items: center; 
+                    justify-content: center;
+                    color: #666;
+                    font-size: 48px;
+                    font-weight: 600;
+                    text-align: center;
+                    padding: 60px;
+                  ">
+                    <div style="font-size: 120px; margin-bottom: 40px;">📖</div>
+                    <div>Page ${currentPage + 1}</div>
+                    <div style="font-size: 32px; color: #999; margin-top: 30px; font-weight: 400;">
+                      ${currentPageData?.title}
+                    </div>
+                    <div style="font-size: 24px; color: #bbb; margin-top: 40px; font-weight: 300;">
+                      Just Urbane Magazine - August 2025
+                    </div>
+                  </div>
+                `;
+              }}
             />
             
             {/* Premium Lock Overlay */}
