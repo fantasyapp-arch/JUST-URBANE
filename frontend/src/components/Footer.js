@@ -357,12 +357,17 @@ const Footer = () => {
           </div>
           
           {/* Mobile Bottom Bar - GQ Style */}
-          <div className="md:hidden text-center space-y-3">
+          <div className="md:hidden text-center">
             <p className="text-gray-400 text-xs leading-relaxed">
-              © {currentYear} Just Urbane. All rights reserved. Use of this website constitutes acceptance of our Terms of Service and Privacy Policy.
-            </p>
-            <p className="text-gray-500 text-xs">
-              Designed and Developed by <span className="text-gray-300 font-semibold">satmat group</span>
+              © {currentYear} Just Urbane. Designed and Developed by{' '}
+              <a 
+                href="https://satmatgroup.com" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-gray-300 font-semibold hover:text-white transition-colors duration-200"
+              >
+                Satmat Group
+              </a>
             </p>
           </div>
         </div>
