@@ -97,7 +97,13 @@ const CustomerDetailsModal = ({ isOpen, onClose, selectedPlan, onPaymentSuccess 
     try {
       console.log('Creating Razorpay order with data:', {
         packageId: selectedPlan.id,
-        customerDetails: formData
+        customerDetails: {
+          email: formData.email,
+          full_name: formData.full_name,
+          phone: formData.phone,
+          password: '***hidden***', // Don't log password
+          ...formData
+        }
       });
       
       // Create Razorpay order
