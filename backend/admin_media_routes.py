@@ -224,13 +224,13 @@ def get_media_files(
         raise HTTPException(status_code=500, detail=f"Failed to get media files: {str(e)}")
 
 @media_router.get("/{media_id}")
-async def get_media_file(
+def get_media_file(
     media_id: str,
     current_admin: AdminUser = Depends(get_current_admin_user)
 ):
     """Get specific media file details"""
     try:
-        media_file = await db.media_files.find_one({"id": media_id})
+        media_file = db.media_files.find_one({"id": media_id})
         
         if not media_file:
             raise HTTPException(status_code=404, detail="Media file not found")
