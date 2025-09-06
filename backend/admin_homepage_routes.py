@@ -89,7 +89,7 @@ def set_hero_article(
         raise HTTPException(status_code=500, detail=f"Failed to set hero article: {str(e)}")
 
 @homepage_router.put("/section/{section_name}")
-async def update_homepage_section(
+def update_homepage_section(
     section_name: str,
     article_ids: str = Form(...),  # Comma-separated article IDs
     current_admin: AdminUser = Depends(get_current_admin_user)
@@ -111,12 +111,12 @@ async def update_homepage_section(
         
         # Verify all articles exist
         for article_id in article_id_list:
-            article = await db.articles.find_one({"id": article_id})
+            article = db.articles.find_one({"id": article_id})
             if not article:
                 raise HTTPException(status_code=404, detail=f"Article {article_id} not found")
         
         # Update homepage configuration
-        result = await db.homepage_config.update_one(
+        result = db.homepage_config.update_one(
             {"active": True},
             {
                 "$set": {
