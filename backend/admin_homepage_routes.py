@@ -212,7 +212,7 @@ def reorder_homepage_categories(
         raise HTTPException(status_code=500, detail=f"Failed to reorder categories: {str(e)}")
 
 @homepage_router.post("/auto-populate")
-async def auto_populate_homepage(
+def auto_populate_homepage(
     current_admin: AdminUser = Depends(get_current_admin_user)
 ):
     """Auto-populate homepage with smart article selection"""
@@ -227,28 +227,28 @@ async def auto_populate_homepage(
         }
         
         # Get trending articles (highest views)
-        trending = await db.articles.find({}).sort([("views", -1)]).limit(4).to_list(4)
+        trending = list(db.articles.find({}).sort([("views", -1)]).limit(4))
         homepage_config["trending_articles"] = [article.get("id", str(article["_id"])) for article in trending]
         
         # Get latest articles
-        latest = await db.articles.find({}).sort([("created_at", -1)]).limit(6).to_list(6)
+        latest = list(db.articles.find({}).sort([("created_at", -1)]).limit(6))
         homepage_config["latest_articles"] = [article.get("id", str(article["_id"])) for article in latest]
         
         # Get featured articles
-        featured = await db.articles.find({"featured": True}).limit(3).to_list(3)
+        featured = list(db.articles.find({"featured": True}).limit(3))
         if not featured:
             # If no featured articles, use most viewed
-            featured = await db.articles.find({}).sort([("views", -1)]).limit(3).to_list(3)
+            featured = list(db.articles.find({}).sort([("views", -1)]).limit(3))
         homepage_config["featured_articles"] = [article.get("id", str(article["_id"])) for article in featured]
         
         # Set hero article (most viewed article)
-        hero_articles = await db.articles.find({}).sort([("views", -1)]).limit(1).to_list(1)
+        hero_articles = list(db.articles.find({}).sort([("views", -1)]).limit(1))
         if hero_articles:
             homepage_config["hero_article"] = hero_articles[0].get("id", str(hero_articles[0]["_id"]))
         
         # Populate category sections
         for category in categories:
-            category_articles = await db.articles.find({"category": category}).sort([("views", -1)]).limit(4).to_list(4)
+            category_articles = list(db.articles.find({"category": category}).sort([("views", -1)]).limit(4))
             section_name = f"{category}_articles"
             homepage_config[section_name] = [article.get("id", str(article["_id"])) for article in category_articles]
         
@@ -260,7 +260,7 @@ async def auto_populate_homepage(
             "auto_populated": True
         }
         
-        result = await db.homepage_config.update_one(
+        result = db.homepage_config.update_one(
             {"active": True},
             {"$set": update_data},
             upsert=True
