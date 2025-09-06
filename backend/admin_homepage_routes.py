@@ -289,18 +289,18 @@ def preview_homepage(current_admin: AdminUser = Depends(get_current_admin_user))
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Failed to get homepage preview: {str(e)}")
 
-async def populate_homepage_articles(config: dict) -> dict:
+def populate_homepage_articles(config: dict) -> dict:
     """Helper function to populate homepage configuration with actual article data"""
     populated_config = dict(config)
     
     # Helper function to get article data
-    async def get_articles_data(article_ids: List[str]) -> List[dict]:
+    def get_articles_data(article_ids: List[str]) -> List[dict]:
         if not article_ids:
             return []
         
         articles = []
         for article_id in article_ids:
-            article = await db.articles.find_one({"id": article_id})
+            article = db.articles.find_one({"id": article_id})
             if article:
                 formatted_article = {
                     "id": article.get("id", str(article["_id"])),
@@ -319,7 +319,7 @@ async def populate_homepage_articles(config: dict) -> dict:
     
     # Populate hero article
     if config.get("hero_article"):
-        hero_article = await db.articles.find_one({"id": config["hero_article"]})
+        hero_article = db.articles.find_one({"id": config["hero_article"]})
         if hero_article:
             populated_config["hero_article_data"] = {
                 "id": hero_article.get("id", str(hero_article["_id"])),
@@ -340,6 +340,6 @@ async def populate_homepage_articles(config: dict) -> dict:
     
     for section in sections:
         if section in config and config[section]:
-            populated_config[f"{section}_data"] = await get_articles_data(config[section])
+            populated_config[f"{section}_data"] = get_articles_data(config[section])
     
     return populated_config
