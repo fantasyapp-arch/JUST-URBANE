@@ -14,7 +14,8 @@ import {
   Plus,
   Search,
   Filter,
-  Home
+  Home,
+  Image
 } from 'lucide-react';
 import toast from 'react-hot-toast';
 
