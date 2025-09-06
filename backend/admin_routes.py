@@ -138,7 +138,7 @@ def get_dashboard_stats(current_admin: AdminUser = Depends(get_current_admin_use
 
 # Content Management Endpoints
 @admin_router.get("/articles")
-async def get_all_articles_admin(
+def get_all_articles_admin(
     current_admin: AdminUser = Depends(get_current_admin_user),
     page: int = Query(1, ge=1),
     limit: int = Query(20, ge=1, le=100),
@@ -158,8 +158,8 @@ async def get_all_articles_admin(
             {"author_name": {"$regex": search, "$options": "i"}}
         ]
     
-    articles = await db.articles.find(query).skip(skip).limit(limit).sort([("created_at", -1)]).to_list(limit)
-    total_count = await db.articles.count_documents(query)
+    articles = list(db.articles.find(query).skip(skip).limit(limit).sort([("created_at", -1)]))
+    total_count = db.articles.count_documents(query)
     
     # Convert ObjectId to string
     for article in articles:
@@ -175,20 +175,20 @@ async def get_all_articles_admin(
     }
 
 @admin_router.delete("/articles/{article_id}")
-async def delete_article_admin(
+def delete_article_admin(
     article_id: str,
     current_admin: AdminUser = Depends(get_current_admin_user)
 ):
     # Delete article
-    result = await db.articles.delete_one({"id": article_id})
+    result = db.articles.delete_one({"id": article_id})
     if result.deleted_count == 0:
         raise HTTPException(status_code=404, detail="Article not found")
     
     return {"message": "Article deleted successfully"}
 
 @admin_router.get("/magazines")
-async def get_all_magazines_admin(current_admin: AdminUser = Depends(get_current_admin_user)):
-    magazines = await db.issues.find({}).sort([("year", -1), ("month", -1)]).to_list(100)
+def get_all_magazines_admin(current_admin: AdminUser = Depends(get_current_admin_user)):
+    magazines = list(db.issues.find({}).sort([("year", -1), ("month", -1)]))
     
     # Convert ObjectId to string
     for magazine in magazines:
@@ -198,12 +198,12 @@ async def get_all_magazines_admin(current_admin: AdminUser = Depends(get_current
     return {"magazines": magazines}
 
 @admin_router.delete("/magazines/{magazine_id}")
-async def delete_magazine_admin(
+def delete_magazine_admin(
     magazine_id: str,
     current_admin: AdminUser = Depends(get_current_admin_user)
 ):
     # Delete magazine
-    result = await db.issues.delete_one({"id": magazine_id})
+    result = db.issues.delete_one({"id": magazine_id})
     if result.deleted_count == 0:
         raise HTTPException(status_code=404, detail="Magazine not found")
     
