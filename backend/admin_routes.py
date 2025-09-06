@@ -125,7 +125,7 @@ def get_dashboard_stats(current_admin: AdminUser = Depends(get_current_admin_use
     recent_activities.sort(key=lambda x: x["timestamp"], reverse=True)
     recent_activities = recent_activities[:10]  # Keep only top 10
     
-    return DashboardStats(
+    dashboard_stats = DashboardStats(
         total_articles=total_articles,
         total_magazines=total_magazines,
         total_users=total_users,
@@ -135,6 +135,12 @@ def get_dashboard_stats(current_admin: AdminUser = Depends(get_current_admin_use
         popular_articles=popular_articles,
         recent_activities=recent_activities
     )
+    
+    # Convert to dict and add revenue field for compatibility
+    stats_dict = dashboard_stats.dict()
+    stats_dict["revenue"] = total_revenue  # Add revenue field for test compatibility
+    
+    return stats_dict
 
 # Content Management Endpoints
 @admin_router.get("/articles")
