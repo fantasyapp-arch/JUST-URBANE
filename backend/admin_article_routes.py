@@ -183,7 +183,7 @@ async def update_article(
             update_data["status"] = status
         
         # Update article
-        result = await db.articles.update_one(
+        result = db.articles.update_one(
             {"id": article_id},
             {"$set": update_data}
         )
