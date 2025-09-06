@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Clock, Eye, ArrowRight } from 'lucide-react';
+import { HeroImage } from './OptimizedImage';
 import { formatDateShort, formatReadingTime } from '../utils/formatters';
 
 const HeroSection = ({ featuredArticle, trendingArticles = [] }) => {
