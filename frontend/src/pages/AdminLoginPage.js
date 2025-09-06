@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { motion } from 'framer-motion';
 import { Eye, EyeOff, Shield, Lock, User } from 'lucide-react';
 import toast from 'react-hot-toast';
 
