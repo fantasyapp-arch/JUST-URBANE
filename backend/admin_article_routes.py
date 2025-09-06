@@ -351,7 +351,7 @@ async def bulk_update_articles(
             raise HTTPException(status_code=400, detail="Invalid action")
         
         # Update articles
-        result = await db.articles.update_many(
+        result = db.articles.update_many(
             {"id": {"$in": ids}},
             {"$set": update_data}
         )
