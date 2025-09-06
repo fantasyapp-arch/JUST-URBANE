@@ -29,6 +29,7 @@ app = FastAPI(title="Just Urbane API", version="1.0.0")
 
 # Include admin routes
 app.include_router(admin_router)
+app.include_router(magazine_router)
 
 # CORS configuration
 app.add_middleware(
