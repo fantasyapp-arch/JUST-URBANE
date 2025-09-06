@@ -140,19 +140,42 @@ def get_magazine(
     current_admin: AdminUser = Depends(get_current_admin_user)
 ):
     """Get a specific magazine by ID"""
-    magazine = db.magazines.find_one({"id": magazine_id})
-    
-    if not magazine:
-        # Try issues collection
-        magazine = db.issues.find_one({"id": magazine_id})
-    
-    if not magazine:
-        raise HTTPException(status_code=404, detail="Magazine not found")
-    
-    magazine["id"] = str(magazine["_id"])
-    del magazine["_id"]
-    
-    return magazine
+    try:
+        # Try both custom id field and MongoDB _id field
+        magazine = db.magazines.find_one({"id": magazine_id})
+        
+        if not magazine:
+            # Try with ObjectId for MongoDB _id field
+            try:
+                magazine = db.magazines.find_one({"_id": ObjectId(magazine_id)})
+            except:
+                pass
+        
+        if not magazine:
+            # Try issues collection with custom id
+            magazine = db.issues.find_one({"id": magazine_id})
+        
+        if not magazine:
+            # Try issues collection with ObjectId
+            try:
+                magazine = db.issues.find_one({"_id": ObjectId(magazine_id)})
+            except:
+                pass
+        
+        if not magazine:
+            raise HTTPException(status_code=404, detail="Magazine not found")
+        
+        # Convert ObjectId to string
+        magazine["id"] = str(magazine.get("_id", magazine.get("id")))
+        if "_id" in magazine:
+            del magazine["_id"]
+        
+        return magazine
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to get magazine: {str(e)}")
 
 @magazine_router.put("/{magazine_id}")
 def update_magazine(
