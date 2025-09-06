@@ -76,7 +76,7 @@ async def upload_article(
         slug = generate_article_slug(title)
         
         # Check if slug already exists
-        existing_article = await db.articles.find_one({"slug": slug})
+        existing_article = db.articles.find_one({"slug": slug})
         if existing_article:
             slug = f"{slug}-{str(uuid.uuid4())[:8]}"
         
