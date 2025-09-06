@@ -151,7 +151,7 @@ async def update_article(
             update_data["title"] = title
             # Update slug if title changed
             new_slug = generate_article_slug(title)
-            existing_with_slug = await db.articles.find_one({"slug": new_slug, "id": {"$ne": article_id}})
+            existing_with_slug = db.articles.find_one({"slug": new_slug, "id": {"$ne": article_id}})
             if existing_with_slug:
                 new_slug = f"{new_slug}-{str(uuid.uuid4())[:8]}"
             update_data["slug"] = new_slug
