@@ -37,6 +37,13 @@ def verify_admin_password(plain_password, hashed_password):
     return admin_pwd_context.verify(plain_password, hashed_password)
 
 async def get_current_admin_user(credentials: HTTPAuthorizationCredentials = Depends(admin_security)):
+    from pymongo import MongoClient
+    
+    # Database connection
+    mongo_url = os.getenv("MONGO_URL", "mongodb://localhost:27017/just_urbane")
+    client = MongoClient(mongo_url)
+    db = client.just_urbane
+    
     credentials_exception = HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
         detail="Could not validate admin credentials",
@@ -52,7 +59,7 @@ async def get_current_admin_user(credentials: HTTPAuthorizationCredentials = Dep
         raise credentials_exception
     
     # Get admin user from database
-    admin_user = await db.admin_users.find_one({"username": username})
+    admin_user = db.admin_users.find_one({"username": username})
     if admin_user is None:
         raise credentials_exception
     
@@ -64,7 +71,14 @@ async def get_current_admin_user(credentials: HTTPAuthorizationCredentials = Dep
 
 async def create_default_admin():
     """Create default admin user if none exists"""
-    existing_admin = await db.admin_users.find_one({"username": "admin"})
+    from pymongo import MongoClient
+    
+    # Database connection
+    mongo_url = os.getenv("MONGO_URL", "mongodb://localhost:27017/just_urbane")
+    client = MongoClient(mongo_url)
+    db = client.just_urbane
+    
+    existing_admin = db.admin_users.find_one({"username": "admin"})
     if not existing_admin:
         default_admin = {
             "username": "admin",
@@ -74,7 +88,7 @@ async def create_default_admin():
             "is_super_admin": True,
             "created_at": datetime.utcnow()
         }
-        result = await db.admin_users.insert_one(default_admin)
+        result = db.admin_users.insert_one(default_admin)
         print(f"Created default admin user: admin/admin123")
         return result.inserted_id
     return None
