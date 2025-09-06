@@ -11,11 +11,11 @@ from server import db
 homepage_router = APIRouter(prefix="/api/admin/homepage", tags=["admin-homepage"])
 
 @homepage_router.get("/content")
-async def get_homepage_content(current_admin: AdminUser = Depends(get_current_admin_user)):
+def get_homepage_content(current_admin: AdminUser = Depends(get_current_admin_user)):
     """Get current homepage content configuration"""
     try:
         # Get homepage configuration
-        homepage_config = await db.homepage_config.find_one({"active": True})
+        homepage_config = db.homepage_config.find_one({"active": True})
         
         if not homepage_config:
             # Create default homepage configuration
@@ -42,7 +42,7 @@ async def get_homepage_content(current_admin: AdminUser = Depends(get_current_ad
                 "updated_by": current_admin.username
             }
             
-            result = await db.homepage_config.insert_one(default_config)
+            result = db.homepage_config.insert_one(default_config)
             homepage_config = default_config
         
         # Convert ObjectId to string
@@ -51,7 +51,7 @@ async def get_homepage_content(current_admin: AdminUser = Depends(get_current_ad
             del homepage_config["_id"]
         
         # Get actual article data for configured articles
-        homepage_data = await populate_homepage_articles(homepage_config)
+        homepage_data = populate_homepage_articles(homepage_config)
         
         return homepage_data
         
