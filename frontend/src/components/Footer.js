@@ -6,15 +6,14 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
   const [isCategoriesExpanded, setIsCategoriesExpanded] = useState(false);
 
+  // Using the same categories as Header.js main navigation for consistency
   const categories = [
     { name: 'Fashion', slug: 'fashion' },
     { name: 'Technology', slug: 'technology' },
     { name: 'Travel', slug: 'travel' },
     { name: 'People', slug: 'people' },
-    { name: 'Business', slug: 'business' },
-    { name: 'Culture', slug: 'culture' },
-    { name: 'Entertainment', slug: 'entertainment' },
-    { name: 'Health', slug: 'health' },
+    { name: 'Luxury', slug: 'luxury' },
+    { name: 'Auto', slug: 'auto' },
   ];
 
   const companyLinks = [
