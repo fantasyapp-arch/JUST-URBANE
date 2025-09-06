@@ -135,12 +135,7 @@ const AdminDashboardPage = () => {
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Stats Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            className="bg-white rounded-xl shadow-sm p-6 border"
-          >
+          <div className="bg-white rounded-xl shadow-sm p-6 border">
             <div className="flex items-center">
               <div className="p-2 bg-blue-100 rounded-lg">
                 <FileText className="w-6 h-6 text-blue-600" />
@@ -150,14 +145,9 @@ const AdminDashboardPage = () => {
                 <p className="text-2xl font-bold text-gray-900">{stats?.total_articles || 0}</p>
               </div>
             </div>
-          </motion.div>
+          </div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="bg-white rounded-xl shadow-sm p-6 border"
-          >
+          <div className="bg-white rounded-xl shadow-sm p-6 border">
             <div className="flex items-center">
               <div className="p-2 bg-green-100 rounded-lg">
                 <BookOpen className="w-6 h-6 text-green-600" />
@@ -167,14 +157,9 @@ const AdminDashboardPage = () => {
                 <p className="text-2xl font-bold text-gray-900">{stats?.total_magazines || 0}</p>
               </div>
             </div>
-          </motion.div>
+          </div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
-            className="bg-white rounded-xl shadow-sm p-6 border"
-          >
+          <div className="bg-white rounded-xl shadow-sm p-6 border">
             <div className="flex items-center">
               <div className="p-2 bg-purple-100 rounded-lg">
                 <Users className="w-6 h-6 text-purple-600" />
@@ -184,14 +169,9 @@ const AdminDashboardPage = () => {
                 <p className="text-2xl font-bold text-gray-900">{stats?.total_subscribers || 0}</p>
               </div>
             </div>
-          </motion.div>
+          </div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4 }}
-            className="bg-white rounded-xl shadow-sm p-6 border"
-          >
+          <div className="bg-white rounded-xl shadow-sm p-6 border">
             <div className="flex items-center">
               <div className="p-2 bg-amber-100 rounded-lg">
                 <DollarSign className="w-6 h-6 text-amber-600" />
@@ -201,7 +181,7 @@ const AdminDashboardPage = () => {
                 <p className="text-2xl font-bold text-gray-900">{formatCurrency(stats?.total_revenue || 0)}</p>
               </div>
             </div>
-          </motion.div>
+          </div>
         </div>
 
         {/* Quick Actions */}
