@@ -1,16 +1,21 @@
 #!/usr/bin/env python3
 """
-Just Urbane - Image Optimization Utility
-Handles image compression, resizing, and format optimization for better performance
+Just Urbane - Advanced Image Optimization Utility
+Enhanced with WebP, AVIF, progressive JPEG, and next-generation image optimization
 """
 
 import os
 import uuid
-from PIL import Image, ImageOps
-from typing import Tuple, Dict, List, Optional
+from PIL import Image, ImageOps, ImageEnhance
+from typing import Tuple, Dict, List, Optional, Any
 import io
 import asyncio
 from concurrent.futures import ThreadPoolExecutor
+import piexif
+import pillow_heif
+
+# Register HEIF/AVIF support
+pillow_heif.register_heif_opener()
 
 class ImageOptimizer:
     """Professional image optimization for Just Urbane magazine platform"""
