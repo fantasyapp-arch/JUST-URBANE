@@ -44,6 +44,10 @@ import AasthaGillPage from './pages/AasthaGillPage';
 import PrivacyPage from './pages/PrivacyPage';
 import TermsPage from './pages/TermsPage';
 
+// Admin Pages
+import AdminLoginPage from './pages/AdminLoginPage';
+import AdminDashboardPage from './pages/AdminDashboardPage';
+
 // Suppress React Router v7 future flag warnings
 const originalWarn = console.warn;
 console.warn = (...args) => {
