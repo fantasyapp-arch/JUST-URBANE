@@ -201,17 +201,17 @@ def update_magazine(
     return {"message": "Magazine updated successfully"}
 
 @magazine_router.delete("/{magazine_id}")
-async def delete_magazine(
+def delete_magazine(
     magazine_id: str,
     current_admin: AdminUser = Depends(get_current_admin_user)
 ):
     """Delete a magazine and its PDF file"""
     # Get magazine to find PDF path
-    magazine = await db.magazines.find_one({"id": magazine_id})
+    magazine = db.magazines.find_one({"id": magazine_id})
     
     if not magazine:
         # Try issues collection
-        magazine = await db.issues.find_one({"id": magazine_id})
+        magazine = db.issues.find_one({"id": magazine_id})
     
     if not magazine:
         raise HTTPException(status_code=404, detail="Magazine not found")
@@ -223,8 +223,8 @@ async def delete_magazine(
             pdf_path.unlink()
     
     # Delete from both databases
-    await db.magazines.delete_one({"id": magazine_id})
-    await db.issues.delete_one({"id": magazine_id})
+    db.magazines.delete_one({"id": magazine_id})
+    db.issues.delete_one({"id": magazine_id})
     
     return {"message": "Magazine deleted successfully"}
 
