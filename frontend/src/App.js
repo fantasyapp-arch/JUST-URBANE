@@ -145,6 +145,10 @@ const router = createBrowserRouter([
   {
     path: "/admin/dashboard",
     element: <AdminDashboardPage />
+  },
+  {
+    path: "/admin/articles",
+    element: <AdminArticlesPage />
   }
 ]);
 
