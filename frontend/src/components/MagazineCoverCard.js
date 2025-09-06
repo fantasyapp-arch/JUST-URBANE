@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Play, Lock, Crown, Calendar, Eye, BookOpen } from 'lucide-react';
+import { CardImage } from './OptimizedImage';
 
 const MagazineCoverCard = ({ issue, onReadClick, canRead, index = 0 }) => {
   if (!issue || !issue.articles || issue.articles.length === 0) {
