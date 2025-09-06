@@ -7,6 +7,7 @@ import uuid
 import shutil
 from pathlib import Path
 import json
+from bson import ObjectId
 
 from admin_models import *
 from admin_auth import get_current_admin_user
