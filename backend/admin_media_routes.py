@@ -177,7 +177,7 @@ async def upload_media(
         raise HTTPException(status_code=500, detail=f"Upload failed: {str(e)}")
 
 @media_router.get("/")
-async def get_media_files(
+def get_media_files(
     current_admin: AdminUser = Depends(get_current_admin_user),
     file_type: Optional[str] = Query(None),  # image, video
     tags: Optional[str] = Query(None),
@@ -204,8 +204,8 @@ async def get_media_files(
                 {"tags": {"$in": [search]}}
             ]
         
-        media_files = await db.media_files.find(query).skip(skip).limit(limit).sort([("uploaded_at", -1)]).to_list(limit)
-        total_count = await db.media_files.count_documents(query)
+        media_files = list(db.media_files.find(query).skip(skip).limit(limit).sort([("uploaded_at", -1)]))
+        total_count = db.media_files.count_documents(query)
         
         # Convert ObjectId to string
         for media_file in media_files:
