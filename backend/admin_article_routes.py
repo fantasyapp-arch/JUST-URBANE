@@ -203,7 +203,7 @@ async def get_article_for_edit(
 ):
     """Get article data for editing"""
     try:
-        article = await db.articles.find_one({"id": article_id})
+        article = db.articles.find_one({"id": article_id})
         
         if not article:
             raise HTTPException(status_code=404, detail="Article not found")
