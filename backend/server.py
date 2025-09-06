@@ -46,6 +46,11 @@ UPLOAD_DIR = Path("/app/uploads")
 UPLOAD_DIR.mkdir(exist_ok=True)
 app.mount("/uploads", StaticFiles(directory="/app/uploads"), name="uploads")
 
+# Mount optimized images directory
+OPTIMIZED_DIR = Path("/app/uploads/media/images/optimized")
+OPTIMIZED_DIR.mkdir(parents=True, exist_ok=True)
+app.mount("/api/media/optimized", StaticFiles(directory=str(OPTIMIZED_DIR)), name="optimized-media")
+
 # CORS configuration
 app.add_middleware(
     CORSMiddleware,
