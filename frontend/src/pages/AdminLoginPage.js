@@ -64,9 +64,13 @@ const AdminLoginPage = () => {
         <div className="text-center mb-8">
           <div className="inline-flex items-center justify-center mb-4">
             <img 
-              src="https://customer-assets.emergentagent.com/job_urbane-nexus/artifacts/w4pbaa92_Untitled%20design-10.png" 
+              src="https://customer-assets.emergentagent.com/job_gq-style-mag/artifacts/zuxg2ei2_Untitled%20design-15.png" 
               alt="Just Urbane" 
-              className="h-20 w-auto object-contain"
+              className="h-20 w-auto object-contain filter brightness-0 invert"
+              style={{
+                filter: 'brightness(0) invert(1)',
+                maxHeight: '80px'
+              }}
               onError={(e) => {
                 e.target.style.display = 'none';
                 e.target.nextSibling.style.display = 'block';
