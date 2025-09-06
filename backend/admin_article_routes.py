@@ -109,7 +109,7 @@ async def upload_article(
         }
         
         # Save to database
-        result = await db.articles.insert_one(article_data)
+        result = db.articles.insert_one(article_data)
         
         return {
             "message": "Article uploaded successfully",
