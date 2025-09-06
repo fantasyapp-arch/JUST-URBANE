@@ -185,7 +185,7 @@ def get_available_articles(
         raise HTTPException(status_code=500, detail=f"Failed to get articles: {str(e)}")
 
 @homepage_router.post("/categories/reorder")
-async def reorder_homepage_categories(
+def reorder_homepage_categories(
     category_order: str = Form(...),  # Comma-separated category names
     current_admin: AdminUser = Depends(get_current_admin_user)
 ):
@@ -194,7 +194,7 @@ async def reorder_homepage_categories(
         categories = [cat.strip().lower() for cat in category_order.split(",") if cat.strip()]
         
         # Update homepage configuration
-        result = await db.homepage_config.update_one(
+        result = db.homepage_config.update_one(
             {"active": True},
             {
                 "$set": {
