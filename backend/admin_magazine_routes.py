@@ -229,22 +229,22 @@ def delete_magazine(
     return {"message": "Magazine deleted successfully"}
 
 @magazine_router.post("/{magazine_id}/feature")
-async def toggle_featured_magazine(
+def toggle_featured_magazine(
     magazine_id: str,
     current_admin: AdminUser = Depends(get_current_admin_user)
 ):
     """Toggle featured status of a magazine"""
     # First, unfeature all magazines
-    await db.magazines.update_many({}, {"$set": {"is_featured": False}})
-    await db.issues.update_many({}, {"$set": {"is_featured": False}})
+    db.magazines.update_many({}, {"$set": {"is_featured": False}})
+    db.issues.update_many({}, {"$set": {"is_featured": False}})
     
     # Feature the selected magazine
-    result = await db.magazines.update_one(
+    result = db.magazines.update_one(
         {"id": magazine_id}, 
         {"$set": {"is_featured": True, "updated_by": current_admin.username}}
     )
     
-    await db.issues.update_one(
+    db.issues.update_one(
         {"id": magazine_id}, 
         {"$set": {"is_featured": True}}
     )
