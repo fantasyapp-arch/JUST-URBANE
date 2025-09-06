@@ -23,6 +23,7 @@ import hashlib
 from admin_routes import admin_router
 from admin_magazine_routes import magazine_router
 from admin_homepage_routes import homepage_router
+from admin_article_routes import article_router
 
 load_dotenv()
 
