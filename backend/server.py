@@ -19,6 +19,9 @@ import razorpay
 import hmac
 import hashlib
 
+# Import admin functionality
+from admin_routes import admin_router
+
 load_dotenv()
 
 app = FastAPI(title="Just Urbane API", version="1.0.0")
