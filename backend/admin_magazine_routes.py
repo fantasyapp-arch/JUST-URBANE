@@ -255,7 +255,7 @@ def toggle_featured_magazine(
     return {"message": "Magazine featured successfully"}
 
 @magazine_router.get("/{magazine_id}/analytics")
-async def get_magazine_analytics(
+def get_magazine_analytics(
     magazine_id: str,
     current_admin: AdminUser = Depends(get_current_admin_user)
 ):
