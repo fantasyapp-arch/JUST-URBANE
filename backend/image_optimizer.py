@@ -338,7 +338,7 @@ class AdvancedImageOptimizer:
         
         return urls
 
-    def bulk_optimize_directory(self, directory_path: str, file_extensions: List[str] = ['.jpg', '.jpeg', '.png']) -> Dict[str, Any]:
+    def bulk_optimize_directory(self, directory_path: str, file_extensions: List[str] = ['.jpg', '.jpeg', '.png']) -> dict:
         """
         Bulk optimize all images in a directory
         """
