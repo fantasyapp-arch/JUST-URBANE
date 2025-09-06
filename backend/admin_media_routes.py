@@ -277,14 +277,14 @@ def update_media_file(
         raise HTTPException(status_code=500, detail=f"Update failed: {str(e)}")
 
 @media_router.delete("/{media_id}")
-async def delete_media_file(
+def delete_media_file(
     media_id: str,
     current_admin: AdminUser = Depends(get_current_admin_user)
 ):
     """Delete media file and all its resolutions"""
     try:
         # Get media file info
-        media_file = await db.media_files.find_one({"id": media_id})
+        media_file = db.media_files.find_one({"id": media_id})
         
         if not media_file:
             raise HTTPException(status_code=404, detail="Media file not found")
@@ -302,7 +302,7 @@ async def delete_media_file(
                     resolution_path.unlink()
         
         # Delete from database
-        await db.media_files.delete_one({"id": media_id})
+        db.media_files.delete_one({"id": media_id})
         
         return {"message": "Media file deleted successfully"}
         
