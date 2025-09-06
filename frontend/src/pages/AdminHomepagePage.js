@@ -234,7 +234,19 @@ const AdminHomepagePage = () => {
               </button>
               <div className="h-6 w-px bg-gray-300"></div>
               <div className="flex items-center space-x-3">
-                <Home className="w-6 h-6 text-amber-500" />
+                <img 
+                  src="https://customer-assets.emergentagent.com/job_urbane-nexus/artifacts/w4pbaa92_Untitled%20design-10.png" 
+                  alt="Just Urbane" 
+                  className="h-6 w-auto object-contain"
+                  onError={(e) => {
+                    e.target.style.display = 'none';
+                    e.target.nextSibling.style.display = 'block';
+                  }}
+                />
+                <Home 
+                  className="w-6 h-6 text-amber-500"
+                  style={{ display: 'none' }}
+                />
                 <h1 className="text-xl font-bold text-gray-900">Homepage Management</h1>
               </div>
             </div>
