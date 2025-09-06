@@ -21,6 +21,7 @@ import hashlib
 
 # Import admin functionality
 from admin_routes import admin_router
+from admin_magazine_routes import magazine_router
 
 load_dotenv()
 
