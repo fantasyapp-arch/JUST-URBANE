@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Just Urbane - Advanced Image Optimization Utility
-Enhanced with WebP, AVIF, progressive JPEG, and next-generation image optimization
+Enhanced with WebP, progressive JPEG, and next-generation image optimization
 """
 
 import os
