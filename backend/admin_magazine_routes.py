@@ -154,7 +154,7 @@ def get_magazine(
     return magazine
 
 @magazine_router.put("/{magazine_id}")
-async def update_magazine(
+def update_magazine(
     magazine_id: str,
     current_admin: AdminUser = Depends(get_current_admin_user),
     title: Optional[str] = Form(None),
@@ -184,13 +184,13 @@ async def update_magazine(
     update_data["updated_by"] = current_admin.username
     
     # Update in magazines collection
-    result = await db.magazines.update_one(
+    result = db.magazines.update_one(
         {"id": magazine_id}, 
         {"$set": update_data}
     )
     
     # Also update in issues collection for compatibility
-    await db.issues.update_one(
+    db.issues.update_one(
         {"id": magazine_id}, 
         {"$set": update_data}
     )
