@@ -255,27 +255,53 @@ def delete_magazine(
     current_admin: AdminUser = Depends(get_current_admin_user)
 ):
     """Delete a magazine and its PDF file"""
-    # Get magazine to find PDF path
-    magazine = db.magazines.find_one({"id": magazine_id})
-    
-    if not magazine:
-        # Try issues collection
-        magazine = db.issues.find_one({"id": magazine_id})
-    
-    if not magazine:
-        raise HTTPException(status_code=404, detail="Magazine not found")
-    
-    # Delete PDF file if it exists
-    if "pdf_path" in magazine and magazine["pdf_path"]:
-        pdf_path = Path(magazine["pdf_path"])
-        if pdf_path.exists():
-            pdf_path.unlink()
-    
-    # Delete from both databases
-    db.magazines.delete_one({"id": magazine_id})
-    db.issues.delete_one({"id": magazine_id})
-    
-    return {"message": "Magazine deleted successfully"}
+    try:
+        # Get magazine to find PDF path (try multiple ways)
+        magazine = db.magazines.find_one({"id": magazine_id})
+        
+        if not magazine:
+            try:
+                magazine = db.magazines.find_one({"_id": ObjectId(magazine_id)})
+            except:
+                pass
+        
+        if not magazine:
+            magazine = db.issues.find_one({"id": magazine_id})
+        
+        if not magazine:
+            try:
+                magazine = db.issues.find_one({"_id": ObjectId(magazine_id)})
+            except:
+                pass
+        
+        if not magazine:
+            raise HTTPException(status_code=404, detail="Magazine not found")
+        
+        # Delete PDF file if it exists
+        if "pdf_path" in magazine and magazine["pdf_path"]:
+            pdf_path = Path(magazine["pdf_path"])
+            if pdf_path.exists():
+                pdf_path.unlink()
+        
+        # Delete from both databases using multiple query methods
+        db.magazines.delete_one({"id": magazine_id})
+        try:
+            db.magazines.delete_one({"_id": ObjectId(magazine_id)})
+        except:
+            pass
+            
+        db.issues.delete_one({"id": magazine_id})
+        try:
+            db.issues.delete_one({"_id": ObjectId(magazine_id)})
+        except:
+            pass
+        
+        return {"message": "Magazine deleted successfully"}
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to delete magazine: {str(e)}")
 
 @magazine_router.post("/{magazine_id}/feature")
 def toggle_featured_magazine(
