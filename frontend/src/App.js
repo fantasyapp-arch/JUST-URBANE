@@ -50,6 +50,7 @@ import AdminDashboardPage from './pages/AdminDashboardPage';
 import AdminArticlesPage from './pages/AdminArticlesPage';
 import AdminMagazinesPage from './pages/AdminMagazinesPage';
 import AdminHomepagePage from './pages/AdminHomepagePage';
+import AdminArticleEditorPage from './pages/AdminArticleEditorPage';
 
 // Suppress React Router v7 future flag warnings
 const originalWarn = console.warn;
