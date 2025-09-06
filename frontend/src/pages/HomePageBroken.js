@@ -590,21 +590,21 @@ const HomePage = () => {
             {[
               {
                 title: 'Inside India\'s Most Exclusive Business Club',
-                thumbnail: 'https://images.unsplash.com/photo-1573164713988-8665fc963095?w=800&h=600&fit=crop&crop=faces,center&auto=format&q=80',
+                thumbnail: 'https://images.unsplash.com/photo-1573164713988-8665fc963095?w=150&h=150&fit=crop&crop=faces,center&auto=format&q=70',
                 duration: '12:45',
                 category: 'Business Exclusive',
                 views: '89K'
               },
               {
                 title: 'Luxury Watch Collection Worth ₹50 Crores',
-                thumbnail: 'https://images.unsplash.com/photo-1603189343302-e603f7add05a?w=800&h=600&fit=crop&crop=faces,center&auto=format&q=80',
+                thumbnail: 'https://images.unsplash.com/photo-1603189343302-e603f7add05a?w=150&h=150&fit=crop&crop=faces,center&auto=format&q=70',
                 duration: '8:30',
                 category: 'Fashion & Style',
                 views: '156K'
               },
               {
                 title: 'AI Billionaire\'s Daily Routine Revealed',
-                thumbnail: 'https://images.unsplash.com/photo-1557426272-fc759fdf7a8d?w=800&h=600&fit=crop&crop=faces,center&auto=format&q=80',
+                thumbnail: 'https://images.unsplash.com/photo-1557426272-fc759fdf7a8d?w=150&h=150&fit=crop&crop=faces,center&auto=format&q=70',
                 duration: '15:20',
                 category: 'Technology',
                 views: '234K'

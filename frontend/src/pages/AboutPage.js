@@ -36,7 +36,7 @@ const AboutPage = () => {
     {
       name: 'Komal Bhandekar',
       role: 'Sustainable Travel Expert',
-      image: 'https://images.unsplash.com/photo-1494790108755-2616b612b1bb?w=1920&h=1080&fit=crop&crop=faces,center&auto=format&q=90',
+      image: 'https://images.unsplash.com/photo-1494790108755-2616b612b1bb?w=800&h=600&fit=crop&crop=faces,center&auto=format&q=80',
       bio: 'Environmental travel journalist promoting conscious tourism and sustainable luxury experiences.',
       social: { twitter: '@komal_travel', instagram: '@komalbhandekar' }
     }

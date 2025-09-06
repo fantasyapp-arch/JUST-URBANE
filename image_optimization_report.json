@@ -1,105 +1,12 @@
 [
   {
-    "file": "/app/frontend/src/pages/IssuesPage.js",
-    "changes": [
-      {
-        "original": "https://images.unsplash.com/photo-1586953135225-fc4e67e98b90?w=600&h=800",
-        "optimized": "https://images.unsplash.com/photo-1586953135225-fc4e67e98b90?w=1200&h=800&fit=crop&crop=faces,center&auto=format&q=85",
-        "size_type": "large",
-        "context": "src={featuredMagazine?.pageImage || 'https://images.unsplash.com/photo-1586953135225-fc4e67e98b90?w=600&h=800'}"
-      }
-    ]
-  },
-  {
     "file": "/app/frontend/src/pages/HomePage.js",
     "changes": [
       {
-        "original": "https://images.unsplash.com/photo-1594534475808-b18fc33b045e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
-        "optimized": "https://images.unsplash.com/photo-1594534475808-b18fc33b045e?w=150&h=150&fit=crop&crop=faces,center&auto=format&q=70",
-        "size_type": "thumbnail",
-        "context": "thumbnail: \"https://images.unsplash.com/photo-1594534475808-b18fc33b045e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80\""
-      },
-      {
-        "original": "https://images.unsplash.com/photo-1558769132-cb1aea458c5e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
-        "optimized": "https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=150&h=150&fit=crop&crop=faces,center&auto=format&q=70",
-        "size_type": "thumbnail",
-        "context": "thumbnail: \"https://images.unsplash.com/photo-1558769132-cb1aea458c5e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80\""
-      },
-      {
-        "original": "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
-        "optimized": "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=150&h=150&fit=crop&crop=faces,center&auto=format&q=70",
-        "size_type": "thumbnail",
-        "context": "thumbnail: \"https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80\""
-      },
-      {
-        "original": "https://images.unsplash.com/photo-1559839049-2b350c4284cb?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-        "optimized": "https://images.unsplash.com/photo-1559839049-2b350c4284cb?w=1920&h=1080&fit=crop&crop=faces,center&auto=format&q=90",
-        "size_type": "hero",
-        "context": "src={heroArticle?.hero_image || 'https://images.unsplash.com/photo-1559839049-2b350c4284cb?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80'}"
-      },
-      {
-        "original": "https://images.unsplash.com/photo-1559839049-2b350c4284cb?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+        "original": "https://images.unsplash.com/photo-1559839049-2b350c4284cb?w=1920&h=1080&fit=crop&crop=faces,center&auto=format&q=90",
         "optimized": "https://images.unsplash.com/photo-1559839049-2b350c4284cb?w=800&h=600&fit=crop&crop=faces,center&auto=format&q=80",
         "size_type": "medium",
-        "context": "onError={(e) => {\n                  e.target.src = 'https://images.unsplash.com/photo-1559839049-2b350c4284cb?w=1920&h=1080&fit=crop&crop=faces,center&auto=format&q=90';"
-      },
-      {
-        "original": "https://images.unsplash.com/photo-1613909671501-f9678ffc1d33?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-        "optimized": "https://images.unsplash.com/photo-1613909671501-f9678ffc1d33?w=800&h=600&fit=crop&crop=faces,center&auto=format&q=80",
-        "size_type": "medium",
-        "context": "onError={(e) => {\n                          e.target.src = 'https://images.unsplash.com/photo-1613909671501-f9678ffc1d33?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80';"
-      },
-      {
-        "original": "https://images.unsplash.com/photo-1604242692760-2f7b0c26856d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-        "optimized": "https://images.unsplash.com/photo-1604242692760-2f7b0c26856d?w=800&h=600&fit=crop&crop=faces,center&auto=format&q=80",
-        "size_type": "medium",
-        "context": "onError={(e) => {\n                            e.target.src = 'https://images.unsplash.com/photo-1604242692760-2f7b0c26856d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80';"
-      },
-      {
-        "original": "https://images.unsplash.com/photo-1488646953014-85cb44e25828?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-        "optimized": "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=800&h=600&fit=crop&crop=faces,center&auto=format&q=80",
-        "size_type": "medium",
-        "context": "onError={(e) => {\n                          e.target.src = 'https://images.unsplash.com/photo-1488646953014-85cb44e25828?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80';"
-      },
-      {
-        "original": "https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-        "optimized": "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop&crop=faces,center&auto=format&q=80",
-        "size_type": "medium",
-        "context": "onError={(e) => {\n                          e.target.src = 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80';"
-      },
-      {
-        "original": "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-        "optimized": "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&h=600&fit=crop&crop=faces,center&auto=format&q=80",
-        "size_type": "medium",
-        "context": "onError={(e) => {\n                          e.target.src = 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80';"
-      },
-      {
-        "original": "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-        "optimized": "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1920&h=1080&fit=crop&crop=faces,center&auto=format&q=90",
-        "size_type": "hero",
-        "context": "className=\"w-full aspect-square object-cover group-hover:scale-105 transition-transform duration-300\"\n                      onError={(e) => {\n                        e.target.src = 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&h=600&fit=crop&crop=faces,center&auto=format&q=80';"
-      }
-    ]
-  },
-  {
-    "file": "/app/frontend/src/pages/MensFashionSuitGuidePage.js",
-    "changes": [
-      {
-        "original": "https://images.unsplash.com/photo-1617127365659-c47fa864d8bc?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1NzZ8MHwxfHNlYXJjaHw0fHxtZW4lMjBmYXNoaW9ufGVufDB8fHx8MTc1NjM4NjA4Mnww&ixlib=rb-4.1.0&q=85",
-        "optimized": "https://images.unsplash.com/photo-1617127365659-c47fa864d8bc?w=1920&h=1080&fit=crop&crop=faces,center&auto=format&q=90",
-        "size_type": "hero",
-        "context": "heroImage: \"https://images.unsplash.com/photo-1617127365659-c47fa864d8bc?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1NzZ8MHwxfHNlYXJjaHw0fHxtZW4lMjBmYXNoaW9ufGVufDB8fHx8MTc1NjM4NjA4Mnww&ixlib=rb-4.1.0&q=85\","
-      }
-    ]
-  },
-  {
-    "file": "/app/frontend/src/pages/ReviewsPage.js",
-    "changes": [
-      {
-        "original": "https://images.unsplash.com/photo-1551816230-ef5deaed4a26?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-        "optimized": "https://images.unsplash.com/photo-1551816230-ef5deaed4a26?w=800&h=600&fit=crop&crop=faces,center&auto=format&q=80",
-        "size_type": "medium",
-        "context": "e.target.src = 'https://images.unsplash.com/photo-1551816230-ef5deaed4a26?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80';"
+        "context": "e.target.src = 'https://images.unsplash.com/photo-1559839049-2b350c4284cb?w=1920&h=1080&fit=crop&crop=faces,center&auto=format&q=90';"
       }
     ]
   },
@@ -107,40 +14,22 @@
     "file": "/app/frontend/src/pages/HomePageBroken.js",
     "changes": [
       {
-        "original": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&h=600&fit=crop",
-        "optimized": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&h=600&fit=crop&crop=faces,center&auto=format&q=80",
-        "size_type": "medium",
-        "context": "image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&h=600&fit=crop',"
+        "original": "https://images.unsplash.com/photo-1573164713988-8665fc963095?w=800&h=600&fit=crop&crop=faces,center&auto=format&q=80",
+        "optimized": "https://images.unsplash.com/photo-1573164713988-8665fc963095?w=150&h=150&fit=crop&crop=faces,center&auto=format&q=70",
+        "size_type": "thumbnail",
+        "context": "thumbnail: 'https://images.unsplash.com/photo-1573164713988-8665fc963095?w=800&h=600&fit=crop&crop=faces,center&auto=format&q=80',"
       },
       {
-        "original": "https://images.unsplash.com/photo-1494790108755-2616b612b1bb?w=500&h=600&fit=crop",
-        "optimized": "https://images.unsplash.com/photo-1494790108755-2616b612b1bb?w=800&h=600&fit=crop&crop=faces,center&auto=format&q=80",
-        "size_type": "medium",
-        "context": "title: 'Global Icon',\n                image: 'https://images.unsplash.com/photo-1494790108755-2616b612b1bb?w=500&h=600&fit=crop',"
+        "original": "https://images.unsplash.com/photo-1603189343302-e603f7add05a?w=800&h=600&fit=crop&crop=faces,center&auto=format&q=80",
+        "optimized": "https://images.unsplash.com/photo-1603189343302-e603f7add05a?w=150&h=150&fit=crop&crop=faces,center&auto=format&q=70",
+        "size_type": "thumbnail",
+        "context": "thumbnail: 'https://images.unsplash.com/photo-1603189343302-e603f7add05a?w=800&h=600&fit=crop&crop=faces,center&auto=format&q=80',"
       },
       {
-        "original": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=500&h=600&fit=crop",
-        "optimized": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=800&h=600&fit=crop&crop=faces,center&auto=format&q=80",
-        "size_type": "medium",
-        "context": "name: 'Byju Raveendran',\n                title: 'Tech Revolutionary',\n                image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=500&h=600&fit=crop',"
-      },
-      {
-        "original": "https://images.unsplash.com/photo-1573164713988-8665fc963095?w=800",
-        "optimized": "https://images.unsplash.com/photo-1573164713988-8665fc963095?w=800&h=600&fit=crop&crop=faces,center&auto=format&q=80",
-        "size_type": "medium",
-        "context": "{\n                title: 'Inside India\\'s Most Exclusive Business Club',"
-      },
-      {
-        "original": "https://images.unsplash.com/photo-1603189343302-e603f7add05a?w=800",
-        "optimized": "https://images.unsplash.com/photo-1603189343302-e603f7add05a?w=800&h=600&fit=crop&crop=faces,center&auto=format&q=80",
-        "size_type": "medium",
-        "context": "views: '89K'\n              },\n              {\n                title: 'Luxury Watch Collection Worth \u20b950 Crores',"
-      },
-      {
-        "original": "https://images.unsplash.com/photo-1557426272-fc759fdf7a8d?w=800",
-        "optimized": "https://images.unsplash.com/photo-1557426272-fc759fdf7a8d?w=800&h=600&fit=crop&crop=faces,center&auto=format&q=80",
-        "size_type": "medium",
-        "context": "duration: '8:30',\n                category: 'Fashion & Style',\n                views: '156K'"
+        "original": "https://images.unsplash.com/photo-1557426272-fc759fdf7a8d?w=800&h=600&fit=crop&crop=faces,center&auto=format&q=80",
+        "optimized": "https://images.unsplash.com/photo-1557426272-fc759fdf7a8d?w=150&h=150&fit=crop&crop=faces,center&auto=format&q=70",
+        "size_type": "thumbnail",
+        "context": "thumbnail: 'https://images.unsplash.com/photo-1557426272-fc759fdf7a8d?w=800&h=600&fit=crop&crop=faces,center&auto=format&q=80',"
       }
     ]
   },
@@ -148,82 +37,52 @@
     "file": "/app/frontend/src/pages/TravelPage.js",
     "changes": [
       {
-        "original": "https://images.unsplash.com/photo-1545558014-8692077e9b5c?w=1200",
-        "optimized": "https://images.unsplash.com/photo-1545558014-8692077e9b5c?w=1920&h=1080&fit=crop&crop=faces,center&auto=format&q=90",
-        "size_type": "hero",
-        "context": "hero_image: 'https://images.unsplash.com/photo-1545558014-8692077e9b5c?w=1200',"
-      },
-      {
-        "original": "https://images.unsplash.com/photo-1545558014-8692077e9b5c?w=800",
-        "optimized": "https://images.unsplash.com/photo-1545558014-8692077e9b5c?w=1920&h=1080&fit=crop&crop=faces,center&auto=format&q=90",
-        "size_type": "hero",
-        "context": "hero_image: 'https://images.unsplash.com/photo-1545558014-8692077e9b5c?w=1920&h=1080&fit=crop&crop=faces,center&auto=format&q=90',\n      gallery: [\n        'https://images.unsplash.com/photo-1545558014-8692077e9b5c?w=800',"
-      },
-      {
-        "original": "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800",
-        "optimized": "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop&crop=faces,center&auto=format&q=80",
+        "original": "https://images.unsplash.com/photo-1545558014-8692077e9b5c?w=1920&h=1080&fit=crop&crop=faces,center&auto=format&q=90",
+        "optimized": "https://images.unsplash.com/photo-1545558014-8692077e9b5c?w=800&h=600&fit=crop&crop=faces,center&auto=format&q=80",
         "size_type": "medium",
         "context": "'https://images.unsplash.com/photo-1545558014-8692077e9b5c?w=1920&h=1080&fit=crop&crop=faces,center&auto=format&q=90',"
       },
       {
-        "original": "https://images.unsplash.com/photo-1570641963303-92ce4845ed4c?w=800",
-        "optimized": "https://images.unsplash.com/photo-1570641963303-92ce4845ed4c?w=800&h=600&fit=crop&crop=faces,center&auto=format&q=80",
-        "size_type": "medium",
-        "context": "'https://images.unsplash.com/photo-1545558014-8692077e9b5c?w=1920&h=1080&fit=crop&crop=faces,center&auto=format&q=90',\n        'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop&crop=faces,center&auto=format&q=80',"
-      },
-      {
-        "original": "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=1200",
+        "original": "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop&crop=faces,center&auto=format&q=80&h=600&fit=crop&crop=faces,center&auto=format&q=80",
         "optimized": "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop&crop=faces,center&auto=format&q=80",
         "size_type": "medium",
-        "context": "author: 'Ananya Krishnan'\n    },\n    {\n      id: '2',\n      name: 'Kerala Backwater Luxury',"
+        "context": "'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop&crop=faces,center&auto=format&q=80&h=600&fit=crop&crop=faces,center&auto=format&q=80',\n        'https://images.unsplash.com/photo-1570641963303-92ce4845ed4c?w=800&h=600&fit=crop&crop=faces,center&auto=format&q=80'"
       },
       {
-        "original": "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800",
-        "optimized": "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop&crop=faces,center&auto=format&q=80",
-        "size_type": "medium",
-        "context": "slug: 'kerala-backwaters-luxury',\n      region: 'India',\n      type: 'Nature & Wellness',"
-      },
-      {
-        "original": "https://images.unsplash.com/photo-1586500036706-41963de24d8b?w=800",
-        "optimized": "https://images.unsplash.com/photo-1586500036706-41963de24d8b?w=1920&h=1080&fit=crop&crop=faces,center&auto=format&q=90",
+        "original": "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop&crop=faces,center&auto=format&q=80&h=600&fit=crop&crop=faces,center&auto=format&q=80",
+        "optimized": "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=1920&h=1080&fit=crop&crop=faces,center&auto=format&q=90",
         "size_type": "hero",
-        "context": "slug: 'kerala-backwaters-luxury',\n      region: 'India',\n      type: 'Nature & Wellness',\n      hero_image: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop&crop=faces,center&auto=format&q=80&h=600&fit=crop&crop=faces,center&auto=format&q=80',"
+        "context": "hero_image: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop&crop=faces,center&auto=format&q=80',\n      gallery: [\n        'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop&crop=faces,center&auto=format&q=80',"
       },
       {
-        "original": "https://images.unsplash.com/photo-1551524164-d526ff10480d?w=1200",
-        "optimized": "https://images.unsplash.com/photo-1551524164-d526ff10480d?w=800&h=600&fit=crop&crop=faces,center&auto=format&q=80",
+        "original": "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop&crop=faces,center&auto=format&q=80&h=600&fit=crop&crop=faces,center&auto=format&q=80",
+        "optimized": "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop&crop=faces,center&auto=format&q=80",
         "size_type": "medium",
-        "context": "experiences: ['Luxury houseboat cruises', 'Ayurvedic spa treatments', 'Local cuisine tasting', 'Village cultural tours', 'Bird watching'],"
+        "context": "'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop&crop=faces,center&auto=format&q=80',\n        'https://images.unsplash.com/photo-1586500036706-41963de24d8b?w=1920&h=1080&fit=crop&crop=faces,center&auto=format&q=90'\n      ],\n      description: 'Serene luxury houseboats navigating the tranquil backwaters of God\\'s Own Country, offering unparalleled relaxation.',"
       },
       {
-        "original": "https://images.unsplash.com/photo-1551524164-d526ff10480d?w=800",
-        "optimized": "https://images.unsplash.com/photo-1551524164-d526ff10480d?w=800&h=600&fit=crop&crop=faces,center&auto=format&q=80",
+        "original": "https://images.unsplash.com/photo-1586500036706-41963de24d8b?w=1920&h=1080&fit=crop&crop=faces,center&auto=format&q=90",
+        "optimized": "https://images.unsplash.com/photo-1586500036706-41963de24d8b?w=800&h=600&fit=crop&crop=faces,center&auto=format&q=80",
         "size_type": "medium",
-        "context": "experiences: ['Luxury houseboat cruises', 'Ayurvedic spa treatments', 'Local cuisine tasting', 'Village cultural tours', 'Bird watching'],\n      best_time_to_visit: 'December to February',"
+        "context": "description: 'Serene luxury houseboats navigating the tranquil backwaters of God\\'s Own Country, offering unparalleled relaxation.',\n      experiences: ['Luxury houseboat cruises', 'Ayurvedic spa treatments', 'Local cuisine tasting', 'Village cultural tours', 'Bird watching'],"
       },
       {
-        "original": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800",
-        "optimized": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&h=800&fit=crop&crop=faces,center&auto=format&q=85",
-        "size_type": "large",
-        "context": "price_range: '\u20b98,000 - \u20b925,000 per night',\n      rating: 4.7,\n      featured: true,"
+        "original": "https://images.unsplash.com/photo-1551524164-d526ff10480d?w=800&h=600&fit=crop&crop=faces,center&auto=format&q=80&h=600&fit=crop&crop=faces,center&auto=format&q=80",
+        "optimized": "https://images.unsplash.com/photo-1551524164-d526ff10480d?w=1920&h=1080&fit=crop&crop=faces,center&auto=format&q=90",
+        "size_type": "hero",
+        "context": "hero_image: 'https://images.unsplash.com/photo-1551524164-d526ff10480d?w=800&h=600&fit=crop&crop=faces,center&auto=format&q=80&h=600&fit=crop&crop=faces,center&auto=format&q=80',\n      gallery: [\n        'https://images.unsplash.com/photo-1551524164-d526ff10480d?w=800&h=600&fit=crop&crop=faces,center&auto=format&q=80',\n        'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&h=800&fit=crop&crop=faces,center&auto=format&q=85'"
       },
       {
-        "original": "https://images.unsplash.com/photo-1573843981267-be1999ff37cd?w=1200",
-        "optimized": "https://images.unsplash.com/photo-1573843981267-be1999ff37cd?w=800&h=600&fit=crop&crop=faces,center&auto=format&q=80",
-        "size_type": "medium",
-        "context": "description: 'World-class alpine resorts offering breathtaking mountain views, Michelin-starred dining, and exclusive ski access.',"
-      },
-      {
-        "original": "https://images.unsplash.com/photo-1573843981267-be1999ff37cd?w=800",
-        "optimized": "https://images.unsplash.com/photo-1573843981267-be1999ff37cd?w=800&h=600&fit=crop&crop=faces,center&auto=format&q=80",
+        "original": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&h=800&fit=crop&crop=faces,center&auto=format&q=85",
+        "optimized": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop&crop=faces,center&auto=format&q=80",
         "size_type": "medium",
         "context": "description: 'World-class alpine resorts offering breathtaking mountain views, Michelin-starred dining, and exclusive ski access.',\n      experiences: ['Private ski lessons', 'Michelin-starred dining', 'Helicopter tours', 'Luxury spa treatments', 'Mountain hiking'],"
       },
       {
-        "original": "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800",
-        "optimized": "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800&h=600&fit=crop&crop=faces,center&auto=format&q=80",
+        "original": "https://images.unsplash.com/photo-1573843981267-be1999ff37cd?w=800&h=600&fit=crop&crop=faces,center&auto=format&q=80&h=600&fit=crop&crop=faces,center&auto=format&q=80",
+        "optimized": "https://images.unsplash.com/photo-1573843981267-be1999ff37cd?w=800&h=600&fit=crop&crop=faces,center&auto=format&q=80",
         "size_type": "medium",
-        "context": "experiences: ['Private ski lessons', 'Michelin-starred dining', 'Helicopter tours', 'Luxury spa treatments', 'Mountain hiking'],"
+        "context": "'https://images.unsplash.com/photo-1573843981267-be1999ff37cd?w=800&h=600&fit=crop&crop=faces,center&auto=format&q=80',\n        'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800&h=600&fit=crop&crop=faces,center&auto=format&q=80'"
       }
     ]
   },
@@ -231,125 +90,63 @@
     "file": "/app/frontend/src/pages/AboutPage.js",
     "changes": [
       {
-        "original": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300",
-        "optimized": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=800&h=600&fit=crop&crop=faces,center&auto=format&q=80",
+        "original": "https://images.unsplash.com/photo-1494790108755-2616b612b1bb?w=1920&h=1080&fit=crop&crop=faces,center&auto=format&q=90",
+        "optimized": "https://images.unsplash.com/photo-1494790108755-2616b612b1bb?w=800&h=600&fit=crop&crop=faces,center&auto=format&q=80",
         "size_type": "medium",
-        "context": "image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300',"
-      },
+        "context": "image: 'https://images.unsplash.com/photo-1494790108755-2616b612b1bb?w=1920&h=1080&fit=crop&crop=faces,center&auto=format&q=90',"
+      }
+    ]
+  },
+  {
+    "file": "/app/frontend/src/components/ImagePerformanceTest.js",
+    "changes": [
       {
-        "original": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=300",
-        "optimized": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=800&h=600&fit=crop&crop=faces,center&auto=format&q=80",
-        "size_type": "medium",
-        "context": "role: 'Travel & Entertainment Editor',\n      image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=300',"
-      },
-      {
-        "original": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300",
+        "original": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
         "optimized": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&h=600&fit=crop&crop=faces,center&auto=format&q=80",
         "size_type": "medium",
-        "context": "social: { twitter: '@amisha_travel', instagram: '@amishashirgave' }\n    },\n    {\n      name: 'Rugved Marathe',\n      role: 'Fashion & Celebrity Editor',"
+        "context": "original: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',"
       },
       {
-        "original": "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=300",
-        "optimized": "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=800&h=600&fit=crop&crop=faces,center&auto=format&q=80",
+        "original": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=1920&h=1080&fit=crop&crop=faces,center&auto=format&q=90",
+        "optimized": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&h=600&fit=crop&crop=faces,center&auto=format&q=80",
         "size_type": "medium",
-        "context": "social: { twitter: '@rugved_fashion', instagram: '@rugvedmarathe' }\n    },\n    {\n      name: 'Krishna Mohod',"
+        "context": "optimized: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=1920&h=1080&fit=crop&crop=faces,center&auto=format&q=90'\n    },\n    {\n      name: 'Article Image',\n      original: 'https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1374&q=80',"
       },
       {
-        "original": "https://images.unsplash.com/photo-1494790108755-2616b612b1bb?w=300",
-        "optimized": "https://images.unsplash.com/photo-1494790108755-2616b612b1bb?w=1920&h=1080&fit=crop&crop=faces,center&auto=format&q=90",
-        "size_type": "hero",
-        "context": "bio: 'Technology journalist specializing in luxury gadgets and wearable tech. Known for trend-setting coverage of smartwatch innovations.',\n      social: { twitter: '@krishna_tech', instagram: '@krishnamohod' }"
-      }
-    ]
-  },
-  {
-    "file": "/app/frontend/src/pages/ArticlePage.js",
-    "changes": [
-      {
-        "original": "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-        "optimized": "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=1920&h=1080&fit=crop&crop=faces,center&auto=format&q=90",
-        "size_type": "hero",
-        "context": "heroImage: 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',"
-      },
-      {
-        "original": "https://images.unsplash.com/photo-1613395877344-13d4a8e0d49e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-        "optimized": "https://images.unsplash.com/photo-1613395877344-13d4a8e0d49e?w=800&h=600&fit=crop&crop=faces,center&auto=format&q=80",
+        "original": "https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1374&q=80",
+        "optimized": "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=800&h=600&fit=crop&crop=faces,center&auto=format&q=80",
         "size_type": "medium",
-        "context": "<img src=\"https://images.unsplash.com/photo-1613395877344-13d4a8e0d49e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80\" alt=\"The iconic Atlantis The Palm Dubai with its majestic architecture\" class=\"article-image\" />"
+        "context": "original: 'https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1374&q=80',\n      optimized: 'https://images.unsplash.com/photo-1557804506-669a67965ba0?w=800&h=600&fit=crop&crop=faces,center&auto=format&q=80'"
       },
       {
-        "original": "https://images.unsplash.com/photo-1583212292454-1fe6229603b7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-        "optimized": "https://images.unsplash.com/photo-1583212292454-1fe6229603b7?w=800&h=600&fit=crop&crop=faces,center&auto=format&q=80",
-        "size_type": "medium",
-        "context": "<p>The legend of Atlantis truly comes alive amidst the intriguing tunnels and passageways. There is adventure and education in equal measure here. Not only can you spend hours watching the magical sea creatures, but in the chambers, you'll learn about the history of Atlantis, which has been lost for thousands of years.</p>\n\n<img src=\"https://images.unsplash.com/photo-1583212292454-1fe6229603b7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80\" alt=\"The Lost Chambers Aquarium brings the myth of Atlantis to life\" class=\"article-image\" />"
-      }
-    ]
-  },
-  {
-    "file": "/app/frontend/src/pages/ReviewsPageOld.js",
-    "changes": [
+        "original": "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=800&h=600&fit=crop&crop=faces,center&auto=format&q=80",
+        "optimized": "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=400&h=300&fit=crop&crop=faces,center&auto=format&q=75",
+        "size_type": "small",
+        "context": "optimized: 'https://images.unsplash.com/photo-1557804506-669a67965ba0?w=800&h=600&fit=crop&crop=faces,center&auto=format&q=80'\n    },\n    {\n      name: 'Card Image',\n      original: 'https://images.unsplash.com/photo-1551816230-ef5deaed4a26?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',"
+      },
       {
         "original": "https://images.unsplash.com/photo-1551816230-ef5deaed4a26?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
         "optimized": "https://images.unsplash.com/photo-1551816230-ef5deaed4a26?w=800&h=600&fit=crop&crop=faces,center&auto=format&q=80",
         "size_type": "medium",
-        "context": "e.target.src = 'https://images.unsplash.com/photo-1551816230-ef5deaed4a26?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80';"
+        "context": "original: 'https://images.unsplash.com/photo-1551816230-ef5deaed4a26?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',\n      optimized: 'https://images.unsplash.com/photo-1551816230-ef5deaed4a26?w=400&h=300&fit=crop&crop=faces,center&auto=format&q=75'"
+      },
+      {
+        "original": "https://images.unsplash.com/photo-1551816230-ef5deaed4a26?w=400&h=300&fit=crop&crop=faces,center&auto=format&q=75",
+        "optimized": "https://images.unsplash.com/photo-1551816230-ef5deaed4a26?w=150&h=150&fit=crop&crop=faces,center&auto=format&q=70",
+        "size_type": "thumbnail",
+        "context": "optimized: 'https://images.unsplash.com/photo-1551816230-ef5deaed4a26?w=400&h=300&fit=crop&crop=faces,center&auto=format&q=75'\n    },\n    {\n      name: 'Thumbnail',"
       },
       {
         "original": "https://images.unsplash.com/photo-1524592094714-0f0654e20314?w=800",
         "optimized": "https://images.unsplash.com/photo-1524592094714-0f0654e20314?w=800&h=600&fit=crop&crop=faces,center&auto=format&q=80",
         "size_type": "medium",
-        "context": "images: ['https://images.unsplash.com/photo-1524592094714-0f0654e20314?w=800'],"
+        "context": "original: 'https://images.unsplash.com/photo-1524592094714-0f0654e20314?w=800',\n      optimized: 'https://images.unsplash.com/photo-1524592094714-0f0654e20314?w=150&h=150&fit=crop&crop=faces,center&auto=format&q=70'"
       },
       {
-        "original": "https://images.unsplash.com/photo-1541643600914-78b084683601?w=800",
-        "optimized": "https://images.unsplash.com/photo-1541643600914-78b084683601?w=800&h=600&fit=crop&crop=faces,center&auto=format&q=80",
+        "original": "https://images.unsplash.com/photo-1524592094714-0f0654e20314?w=150&h=150&fit=crop&crop=faces,center&auto=format&q=70",
+        "optimized": "https://images.unsplash.com/photo-1524592094714-0f0654e20314?w=800&h=600&fit=crop&crop=faces,center&auto=format&q=80",
         "size_type": "medium",
-        "context": "body: 'Tom Ford Oud Wood is a masterclass in luxury fragrance composition, perfect for the discerning gentleman.',\n      images: ['https://images.unsplash.com/photo-1541643600914-78b084683601?w=800'],"
-      },
-      {
-        "original": "https://images.unsplash.com/photo-1484704849700-f032a568e944?w=800",
-        "optimized": "https://images.unsplash.com/photo-1484704849700-f032a568e944?w=800&h=600&fit=crop&crop=faces,center&auto=format&q=80",
-        "size_type": "medium",
-        "context": "body: 'The Sony WH-1000XM5 sets the benchmark for premium wireless headphones with exceptional audio quality.',"
-      }
-    ]
-  },
-  {
-    "file": "/app/frontend/src/components/SearchModal.js",
-    "changes": [
-      {
-        "original": "https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80",
-        "optimized": "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=800&h=600&fit=crop&crop=faces,center&auto=format&q=80",
-        "size_type": "medium",
-        "context": "e.target.src = 'https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80';"
-      }
-    ]
-  },
-  {
-    "file": "/app/frontend/src/components/OfferBanner.js",
-    "changes": [
-      {
-        "original": "https://images.unsplash.com/photo-1586953208448-b95a79798f07?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=150&h=200&q=80",
-        "optimized": "https://images.unsplash.com/photo-1586953208448-b95a79798f07?w=1920&h=1080&fit=crop&crop=faces,center&auto=format&q=90",
-        "size_type": "hero",
-        "context": "src=\"https://images.unsplash.com/photo-1586953208448-b95a79798f07?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=150&h=200&q=80\""
-      }
-    ]
-  },
-  {
-    "file": "/app/frontend/src/components/MagazineCoverCard.js",
-    "changes": [
-      {
-        "original": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=800&fit=crop&crop=face",
-        "optimized": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=1920&h=1080&fit=crop&crop=faces,center&auto=format&q=90",
-        "size_type": "hero",
-        "context": "backgroundImage: `linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.6)), url(${heroArticle?.hero_image || 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=800&fit=crop&crop=face'})`"
-      },
-      {
-        "original": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=50&h=50&fit=crop",
-        "optimized": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=300&fit=crop&crop=faces,center&auto=format&q=75",
-        "size_type": "small",
-        "context": "e.target.src = 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=50&h=50&fit=crop';"
+        "context": "optimized: 'https://images.unsplash.com/photo-1524592094714-0f0654e20314?w=150&h=150&fit=crop&crop=faces,center&auto=format&q=70'"
       }
     ]
   }
