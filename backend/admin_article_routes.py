@@ -270,7 +270,7 @@ async def update_article_status(
         if status not in valid_statuses:
             raise HTTPException(status_code=400, detail="Invalid status")
         
-        result = await db.articles.update_one(
+        result = db.articles.update_one(
             {"id": article_id},
             {
                 "$set": {
