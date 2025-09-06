@@ -253,12 +253,9 @@ const AdminDashboardPage = () => {
 
         {/* Navigation Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          <motion.button
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.8 }}
+          <button
             onClick={() => navigate('/admin/articles')}
-            className="bg-white rounded-xl shadow-sm p-6 border hover:shadow-md transition-shadow text-left"
+            className="bg-white rounded-xl shadow-sm p-6 border hover:shadow-md transition-shadow text-left hover:scale-105 transform transition-transform"
           >
             <div className="flex items-center space-x-4">
               <div className="p-3 bg-blue-100 rounded-lg">
@@ -269,14 +266,11 @@ const AdminDashboardPage = () => {
                 <p className="text-sm text-gray-600">Manage content</p>
               </div>
             </div>
-          </motion.button>
+          </button>
 
-          <motion.button
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.9 }}
+          <button
             onClick={() => navigate('/admin/magazines')}
-            className="bg-white rounded-xl shadow-sm p-6 border hover:shadow-md transition-shadow text-left"
+            className="bg-white rounded-xl shadow-sm p-6 border hover:shadow-md transition-shadow text-left hover:scale-105 transform transition-transform"
           >
             <div className="flex items-center space-x-4">
               <div className="p-3 bg-green-100 rounded-lg">
@@ -287,14 +281,11 @@ const AdminDashboardPage = () => {
                 <p className="text-sm text-gray-600">Digital issues</p>
               </div>
             </div>
-          </motion.button>
+          </button>
 
-          <motion.button
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.0 }}
+          <button
             onClick={() => navigate('/admin/users')}
-            className="bg-white rounded-xl shadow-sm p-6 border hover:shadow-md transition-shadow text-left"
+            className="bg-white rounded-xl shadow-sm p-6 border hover:shadow-md transition-shadow text-left hover:scale-105 transform transition-transform"
           >
             <div className="flex items-center space-x-4">
               <div className="p-3 bg-purple-100 rounded-lg">
@@ -305,14 +296,11 @@ const AdminDashboardPage = () => {
                 <p className="text-sm text-gray-600">Manage subscribers</p>
               </div>
             </div>
-          </motion.button>
+          </button>
 
-          <motion.button
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.1 }}
+          <button
             onClick={() => navigate('/admin/analytics')}
-            className="bg-white rounded-xl shadow-sm p-6 border hover:shadow-md transition-shadow text-left"
+            className="bg-white rounded-xl shadow-sm p-6 border hover:shadow-md transition-shadow text-left hover:scale-105 transform transition-transform"
           >
             <div className="flex items-center space-x-4">
               <div className="p-3 bg-amber-100 rounded-lg">
@@ -323,7 +311,7 @@ const AdminDashboardPage = () => {
                 <p className="text-sm text-gray-600">Performance insights</p>
               </div>
             </div>
-          </motion.button>
+          </button>
         </div>
       </main>
     </div>
