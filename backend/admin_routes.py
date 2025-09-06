@@ -32,14 +32,14 @@ admin_router = APIRouter(prefix="/api/admin", tags=["admin"])
 
 # Initialize default admin on startup
 @admin_router.on_event("startup")
-async def startup_event():
-    await create_default_admin()
+def startup_event():
+    create_default_admin()
 
 # Admin Authentication Endpoints
 @admin_router.post("/login", response_model=AdminToken)
-async def admin_login(admin_credentials: AdminLogin):
+def admin_login(admin_credentials: AdminLogin):
     # Find admin user
-    admin_user = await db.admin_users.find_one({"username": admin_credentials.username})
+    admin_user = db.admin_users.find_one({"username": admin_credentials.username})
     if not admin_user or not verify_admin_password(admin_credentials.password, admin_user["hashed_password"]):
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
@@ -48,7 +48,7 @@ async def admin_login(admin_credentials: AdminLogin):
         )
     
     # Update last login
-    await db.admin_users.update_one(
+    db.admin_users.update_one(
         {"_id": admin_user["_id"]},
         {"$set": {"last_login": datetime.utcnow()}}
     )
