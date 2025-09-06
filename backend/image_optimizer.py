@@ -7,7 +7,7 @@ Enhanced with WebP, progressive JPEG, and next-generation image optimization
 import os
 import uuid
 from PIL import Image, ImageOps, ImageEnhance
-from typing import Tuple, Dict, List, Optional, Any
+from typing import Tuple, Dict, List, Optional
 import io
 import asyncio
 from concurrent.futures import ThreadPoolExecutor
