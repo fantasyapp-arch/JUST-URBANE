@@ -2069,6 +2069,18 @@ backend:
         agent: "testing"
         comment: "✅ System health API working perfectly. Database connectivity check working (status: connected), Razorpay integration status reporting (not_configured but functional), system status reporting as healthy. All health monitoring endpoints functional."
 
+  - task: "Magazine Management System Critical Issues - January 30, 2025"
+    implemented: true
+    working: false
+    file: "backend/admin_magazine_routes.py"
+    stuck_count: 1
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: false
+        agent: "testing"
+        comment: "❌ CRITICAL MAGAZINE MANAGEMENT BUG IDENTIFIED: Individual magazine operations (GET, UPDATE, DELETE, FEATURE) fail with HTTP 404 errors due to incorrect database query. Admin magazine routes use {\"id\": magazine_id} but should use {\"_id\": ObjectId(magazine_id)} since IDs are MongoDB ObjectIds. This prevents editing existing magazines in admin panel. Magazine listing (84.2% success rate), analytics, upload validation, and real-time sync all work correctly. ROOT CAUSE: Lines 142, 187, 243 in admin_magazine_routes.py need ObjectId lookup fix."
+
 frontend:
   - task: "Privacy Policy Page Implementation"
     implemented: true
