@@ -13,7 +13,8 @@ import {
   LogOut,
   Plus,
   Search,
-  Filter
+  Filter,
+  Home
 } from 'lucide-react';
 import toast from 'react-hot-toast';
 
