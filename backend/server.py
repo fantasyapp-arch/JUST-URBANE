@@ -343,6 +343,113 @@ def prepare_list_response(items):
     return [prepare_item_response(item) for item in items]
 
 # Health check
+@app.get("/api/homepage/content")
+async def get_public_homepage_content():
+    """Get homepage content for public display"""
+    try:
+        # Get active homepage configuration
+        homepage_config = await db.homepage_config.find_one({"active": True})
+        
+        if not homepage_config:
+            # Return default structure if no config exists
+            return {
+                "hero_article": None,
+                "featured_articles": [],
+                "trending_articles": [],
+                "latest_articles": [],
+                "category_sections": {}
+            }
+        
+        # Helper function to get articles by IDs
+        async def get_articles_by_ids(article_ids):
+            if not article_ids:
+                return []
+            articles = []
+            for article_id in article_ids[:6]:  # Limit to 6 articles max per section
+                article = await db.articles.find_one({"id": article_id})
+                if article:
+                    # Convert ObjectId to string for JSON serialization
+                    article["id"] = str(article.get("_id", article.get("id")))
+                    if "_id" in article:
+                        del article["_id"]
+                    articles.append(article)
+            return articles
+        
+        # Get hero article
+        hero_article = None
+        if homepage_config.get("hero_article"):
+            hero_data = await db.articles.find_one({"id": homepage_config["hero_article"]})
+            if hero_data:
+                hero_article = hero_data
+                hero_article["id"] = str(hero_article.get("_id", hero_article.get("id")))
+                if "_id" in hero_article:
+                    del hero_article["_id"]
+        
+        # Get articles for each section
+        sections_data = {}
+        
+        # Featured articles
+        if homepage_config.get("featured_articles"):
+            sections_data["featured"] = await get_articles_by_ids(homepage_config["featured_articles"])
+        
+        # Trending articles  
+        if homepage_config.get("trending_articles"):
+            sections_data["trending"] = await get_articles_by_ids(homepage_config["trending_articles"])
+        
+        # Latest articles
+        if homepage_config.get("latest_articles"):
+            sections_data["latest"] = await get_articles_by_ids(homepage_config["latest_articles"])
+        
+        # Category sections
+        categories = ["fashion", "people", "business", "technology", "travel", "culture", "entertainment"]
+        for category in categories:
+            section_key = f"{category}_articles"
+            if homepage_config.get(section_key):
+                sections_data[category] = await get_articles_by_ids(homepage_config[section_key])
+        
+        return {
+            "hero_article": hero_article,
+            "sections": sections_data,
+            "last_updated": homepage_config.get("updated_at", datetime.utcnow()).isoformat()
+        }
+        
+    except Exception as e:
+        # Return fallback data in case of error
+        print(f"Homepage content error: {str(e)}")
+        
+        # Fallback: get some articles automatically
+        try:
+            # Get trending articles (by views)
+            trending = await db.articles.find({}).sort([("views", -1)]).limit(4).to_list(4)
+            
+            # Get latest articles
+            latest = await db.articles.find({}).sort([("created_at", -1)]).limit(6).to_list(6)
+            
+            # Get featured articles
+            featured = await db.articles.find({"featured": True}).limit(3).to_list(3)
+            if not featured:
+                featured = await db.articles.find({}).sort([("views", -1)]).limit(3).to_list(3)
+            
+            # Convert ObjectIds
+            for articles_list in [trending, latest, featured]:
+                for article in articles_list:
+                    article["id"] = str(article.get("_id", article.get("id")))
+                    if "_id" in article:
+                        del article["_id"]
+            
+            return {
+                "hero_article": featured[0] if featured else None,
+                "sections": {
+                    "featured": featured,
+                    "trending": trending,
+                    "latest": latest
+                },
+                "fallback": True
+            }
+        except Exception as fallback_error:
+            print(f"Fallback error: {str(fallback_error)}")
+            return {"error": "Failed to load homepage content"}
+
 @app.get("/api/health")
 async def health_check():
     return {"status": "healthy", "message": "Just Urbane API is running"}
