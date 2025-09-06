@@ -252,13 +252,7 @@ const AdminArticlesPage = () => {
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
                 {articles.map((article, index) => (
-                  <motion.tr
-                    key={article.id}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: index * 0.1 }}
-                    className="hover:bg-gray-50"
-                  >
+                  <tr key={article.id} className="hover:bg-gray-50">
                     <td className="px-6 py-4">
                       <div className="flex items-center">
                         <div className="flex-shrink-0 w-12 h-12">
