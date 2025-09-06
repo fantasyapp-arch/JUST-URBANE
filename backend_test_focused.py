@@ -10,7 +10,7 @@ import time
 from datetime import datetime
 
 class FocusedAPITester:
-    def __init__(self, base_url: str = "https://just-urbane-ux.preview.emergentagent.com"):
+    def __init__(self, base_url: str = "https://urbane-dashboard.preview.emergentagent.com"):
         self.base_url = base_url
         self.session = requests.Session()
         self.test_results = []
@@ -226,7 +226,7 @@ class FocusedAPITester:
             response = self.session.options(
                 f"{self.base_url}/api/articles",
                 headers={
-                    "Origin": "https://just-urbane-ux.preview.emergentagent.com",
+                    "Origin": "https://urbane-dashboard.preview.emergentagent.com",
                     "Access-Control-Request-Method": "GET"
                 },
                 timeout=10
