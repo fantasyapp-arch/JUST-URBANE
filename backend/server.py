@@ -39,6 +39,12 @@ app.include_router(homepage_router)
 app.include_router(article_router)
 app.include_router(media_router)
 
+# Mount static files for media serving
+from pathlib import Path
+UPLOAD_DIR = Path("/app/uploads")
+UPLOAD_DIR.mkdir(exist_ok=True)
+app.mount("/uploads", StaticFiles(directory="/app/uploads"), name="uploads")
+
 # CORS configuration
 app.add_middleware(
     CORSMiddleware,
