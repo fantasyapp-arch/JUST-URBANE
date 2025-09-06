@@ -12,6 +12,7 @@ import mimetypes
 
 from admin_models import *
 from admin_auth import get_current_admin_user
+from image_optimizer import image_optimizer
 from pymongo import MongoClient
 import os
 
