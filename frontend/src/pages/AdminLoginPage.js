@@ -55,35 +55,22 @@ const AdminLoginPage = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black flex items-center justify-center px-4">
       {/* Background Pattern */}
-      <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23ffffff" fill-opacity="0.03"%3E%3Ccircle cx="30" cy="30" r="1"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-30"></div>
+      <div className="absolute inset-0 opacity-30" style={{
+        backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Ccircle cx='30' cy='30' r='1'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`
+      }}></div>
       
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        className="relative w-full max-w-md"
-      >
+      <div className="relative w-full max-w-md">
         {/* Admin Panel Header */}
         <div className="text-center mb-8">
-          <motion.div
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
-            className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-r from-amber-400 to-amber-600 rounded-full mb-4 shadow-2xl"
-          >
+          <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-r from-amber-400 to-amber-600 rounded-full mb-4 shadow-2xl">
             <Shield className="w-10 h-10 text-white" />
-          </motion.div>
+          </div>
           <h1 className="text-3xl font-bold text-white mb-2">Just Urbane</h1>
           <p className="text-gray-400 text-lg">Master Admin Panel</p>
         </div>
 
         {/* Login Form */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.3, duration: 0.5 }}
-          className="bg-white/10 backdrop-blur-xl rounded-2xl shadow-2xl border border-white/20 p-8"
-        >
+        <div className="bg-white bg-opacity-10 backdrop-blur-xl rounded-2xl shadow-2xl border border-white border-opacity-20 p-8">
           <form onSubmit={handleSubmit} className="space-y-6">
             {/* Username Field */}
             <div>
@@ -98,7 +85,7 @@ const AdminLoginPage = () => {
                   value={credentials.username}
                   onChange={handleChange}
                   required
-                  className="w-full pl-12 pr-4 py-3 bg-white/5 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all duration-200"
+                  className="w-full pl-12 pr-4 py-3 bg-white bg-opacity-5 border border-white border-opacity-20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all duration-200"
                   placeholder="Enter your username"
                 />
               </div>
@@ -117,7 +104,7 @@ const AdminLoginPage = () => {
                   value={credentials.password}
                   onChange={handleChange}
                   required
-                  className="w-full pl-12 pr-12 py-3 bg-white/5 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all duration-200"
+                  className="w-full pl-12 pr-12 py-3 bg-white bg-opacity-5 border border-white border-opacity-20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all duration-200"
                   placeholder="Enter your password"
                 />
                 <button
@@ -131,12 +118,10 @@ const AdminLoginPage = () => {
             </div>
 
             {/* Login Button */}
-            <motion.button
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
+            <button
               type="submit"
               disabled={isLoading}
-              className="w-full bg-gradient-to-r from-amber-500 to-amber-600 text-white font-semibold py-3 px-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full bg-gradient-to-r from-amber-500 to-amber-600 text-white font-semibold py-3 px-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed hover:scale-105 transform"
             >
               {isLoading ? (
                 <div className="flex items-center justify-center">
@@ -146,16 +131,16 @@ const AdminLoginPage = () => {
               ) : (
                 'Access Admin Panel'
               )}
-            </motion.button>
+            </button>
           </form>
 
           {/* Security Notice */}
-          <div className="mt-6 p-4 bg-amber-500/10 border border-amber-500/20 rounded-lg">
+          <div className="mt-6 p-4 bg-amber-500 bg-opacity-10 border border-amber-500 border-opacity-20 rounded-lg">
             <p className="text-amber-200 text-sm text-center">
               🔒 Secure admin access - Only authorized personnel
             </p>
           </div>
-        </motion.div>
+        </div>
 
         {/* Footer */}
         <div className="text-center mt-8">
@@ -163,7 +148,7 @@ const AdminLoginPage = () => {
             Just Urbane Admin Panel © 2025
           </p>
         </div>
-      </motion.div>
+      </div>
     </div>
   );
 };
