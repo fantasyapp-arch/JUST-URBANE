@@ -36,7 +36,7 @@ def get_admin_password_hash(password):
 def verify_admin_password(plain_password, hashed_password):
     return admin_pwd_context.verify(plain_password, hashed_password)
 
-async def get_current_admin_user(credentials: HTTPAuthorizationCredentials = Depends(admin_security)):
+def get_current_admin_user(credentials: HTTPAuthorizationCredentials = Depends(admin_security)):
     from pymongo import MongoClient
     
     # Database connection
