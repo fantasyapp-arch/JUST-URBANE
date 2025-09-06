@@ -1,0 +1,90 @@
+{
+  "total_processed": 8,
+  "successfully_optimized": 8,
+  "errors": 0,
+  "total_size_before": 147558,
+  "total_size_after": 148900,
+  "webp_generated": 8,
+  "file_details": [
+    {
+      "file": "74caa3ba-3846-4daf-9c76-ae5f1625bd91.jpg",
+      "original_size": 13074,
+      "jpeg_size": 7121,
+      "webp_size": 2024,
+      "savings_percent": 45.5,
+      "webp_savings_percent": 71.6,
+      "size_preset": "medium",
+      "dimensions": "800x600"
+    },
+    {
+      "file": "b03db7bc-c2e8-4eef-962b-0603666983e6_hero.jpg",
+      "original_size": 28321,
+      "jpeg_size": 35562,
+      "webp_size": 9414,
+      "savings_percent": -25.6,
+      "webp_savings_percent": 73.5,
+      "size_preset": "hero",
+      "dimensions": "1920x1080"
+    },
+    {
+      "file": "b03db7bc-c2e8-4eef-962b-0603666983e6_square.jpg",
+      "original_size": 6296,
+      "jpeg_size": 3984,
+      "webp_size": 1444,
+      "savings_percent": 36.7,
+      "webp_savings_percent": 63.8,
+      "size_preset": "medium",
+      "dimensions": "500x500"
+    },
+    {
+      "file": "97167f7f-cf45-4ea3-aa8a-09e0ec2c1144.jpg",
+      "original_size": 35758,
+      "jpeg_size": 39920,
+      "webp_size": 10074,
+      "savings_percent": -11.6,
+      "webp_savings_percent": 74.8,
+      "size_preset": "hero",
+      "dimensions": "1920x1080"
+    },
+    {
+      "file": "eeafb383-102d-4689-beea-25d5f09285a6.jpg",
+      "original_size": 5130,
+      "jpeg_size": 2780,
+      "webp_size": 834,
+      "savings_percent": 45.8,
+      "webp_savings_percent": 70.0,
+      "size_preset": "small",
+      "dimensions": "400x300"
+    },
+    {
+      "file": "b03db7bc-c2e8-4eef-962b-0603666983e6.jpg",
+      "original_size": 21358,
+      "jpeg_size": 20705,
+      "webp_size": 5330,
+      "savings_percent": 3.1,
+      "webp_savings_percent": 74.3,
+      "size_preset": "large",
+      "dimensions": "1200x800"
+    },
+    {
+      "file": "b03db7bc-c2e8-4eef-962b-0603666983e6_cover.jpg",
+      "original_size": 13271,
+      "jpeg_size": 13118,
+      "webp_size": 3598,
+      "savings_percent": 1.2,
+      "webp_savings_percent": 72.6,
+      "size_preset": "hero",
+      "dimensions": "800x1200"
+    },
+    {
+      "file": "1e45ec2e-73db-49c7-b428-1044b6474f80.jpg",
+      "original_size": 24350,
+      "jpeg_size": 25710,
+      "webp_size": 6886,
+      "savings_percent": -5.6,
+      "webp_savings_percent": 73.2,
+      "size_preset": "hero",
+      "dimensions": "1080x1080"
+    }
+  ]
+}
