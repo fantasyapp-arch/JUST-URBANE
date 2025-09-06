@@ -59,19 +59,19 @@ def get_homepage_content(current_admin: AdminUser = Depends(get_current_admin_us
         raise HTTPException(status_code=500, detail=f"Failed to get homepage content: {str(e)}")
 
 @homepage_router.put("/hero")
-async def set_hero_article(
+def set_hero_article(
     article_id: str = Form(...),
     current_admin: AdminUser = Depends(get_current_admin_user)
 ):
     """Set the hero article for homepage"""
     try:
         # Verify article exists
-        article = await db.articles.find_one({"id": article_id})
+        article = db.articles.find_one({"id": article_id})
         if not article:
             raise HTTPException(status_code=404, detail="Article not found")
         
         # Update homepage configuration
-        result = await db.homepage_config.update_one(
+        result = db.homepage_config.update_one(
             {"active": True},
             {
                 "$set": {
