@@ -189,40 +189,65 @@ def update_magazine(
     is_published: Optional[bool] = Form(None)
 ):
     """Update magazine metadata"""
-    update_data = {}
-    
-    if title is not None:
-        update_data["title"] = title
-    if description is not None:
-        update_data["description"] = description
-    if month is not None:
-        update_data["month"] = month
-    if year is not None:
-        update_data["year"] = year
-    if is_featured is not None:
-        update_data["is_featured"] = is_featured
-    if is_published is not None:
-        update_data["is_published"] = is_published
-    
-    update_data["updated_at"] = datetime.utcnow()
-    update_data["updated_by"] = current_admin.username
-    
-    # Update in magazines collection
-    result = db.magazines.update_one(
-        {"id": magazine_id}, 
-        {"$set": update_data}
-    )
-    
-    # Also update in issues collection for compatibility
-    db.issues.update_one(
-        {"id": magazine_id}, 
-        {"$set": update_data}
-    )
-    
-    if result.matched_count == 0:
-        raise HTTPException(status_code=404, detail="Magazine not found")
-    
-    return {"message": "Magazine updated successfully"}
+    try:
+        update_data = {}
+        
+        if title is not None:
+            update_data["title"] = title
+        if description is not None:
+            update_data["description"] = description
+        if month is not None:
+            update_data["month"] = month
+        if year is not None:
+            update_data["year"] = year
+        if is_featured is not None:
+            update_data["is_featured"] = is_featured
+        if is_published is not None:
+            update_data["is_published"] = is_published
+        
+        update_data["updated_at"] = datetime.utcnow()
+        update_data["updated_by"] = current_admin.username
+        
+        # Try updating with custom id first
+        result = db.magazines.update_one(
+            {"id": magazine_id}, 
+            {"$set": update_data}
+        )
+        
+        # If no match, try with ObjectId
+        if result.matched_count == 0:
+            try:
+                result = db.magazines.update_one(
+                    {"_id": ObjectId(magazine_id)}, 
+                    {"$set": update_data}
+                )
+            except:
+                pass
+        
+        # Also update in issues collection for compatibility
+        db.issues.update_one(
+            {"id": magazine_id}, 
+            {"$set": update_data}
+        )
+        
+        # Try issues with ObjectId if needed
+        try:
+            db.issues.update_one(
+                {"_id": ObjectId(magazine_id)}, 
+                {"$set": update_data}
+            )
+        except:
+            pass
+        
+        if result.matched_count == 0:
+            raise HTTPException(status_code=404, detail="Magazine not found")
+        
+        return {"message": "Magazine updated successfully"}
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to update magazine: {str(e)}")
 
 @magazine_router.delete("/{magazine_id}")
 def delete_magazine(
