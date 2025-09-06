@@ -72,7 +72,7 @@ async def upload_magazine(
         }
         
         # Save to database
-        result = await db.magazines.insert_one(magazine_data)
+        result = db.magazines.insert_one(magazine_data)
         
         # Update issues collection for compatibility
         issue_data = {
@@ -87,7 +87,7 @@ async def upload_magazine(
             "published_at": datetime.utcnow(),
             "pdf_url": magazine_data["pdf_url"]
         }
-        await db.issues.insert_one(issue_data)
+        db.issues.insert_one(issue_data)
         
         return {
             "message": "Magazine uploaded successfully",
