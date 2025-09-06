@@ -309,25 +309,50 @@ def toggle_featured_magazine(
     current_admin: AdminUser = Depends(get_current_admin_user)
 ):
     """Toggle featured status of a magazine"""
-    # First, unfeature all magazines
-    db.magazines.update_many({}, {"$set": {"is_featured": False}})
-    db.issues.update_many({}, {"$set": {"is_featured": False}})
-    
-    # Feature the selected magazine
-    result = db.magazines.update_one(
-        {"id": magazine_id}, 
-        {"$set": {"is_featured": True, "updated_by": current_admin.username}}
-    )
-    
-    db.issues.update_one(
-        {"id": magazine_id}, 
-        {"$set": {"is_featured": True}}
-    )
-    
-    if result.matched_count == 0:
-        raise HTTPException(status_code=404, detail="Magazine not found")
-    
-    return {"message": "Magazine featured successfully"}
+    try:
+        # First, unfeature all magazines
+        db.magazines.update_many({}, {"$set": {"is_featured": False}})
+        db.issues.update_many({}, {"$set": {"is_featured": False}})
+        
+        # Feature the selected magazine (try multiple query methods)
+        result = db.magazines.update_one(
+            {"id": magazine_id}, 
+            {"$set": {"is_featured": True, "updated_by": current_admin.username}}
+        )
+        
+        # Try with ObjectId if custom id didn't work
+        if result.matched_count == 0:
+            try:
+                result = db.magazines.update_one(
+                    {"_id": ObjectId(magazine_id)}, 
+                    {"$set": {"is_featured": True, "updated_by": current_admin.username}}
+                )
+            except:
+                pass
+        
+        # Update issues collection too
+        db.issues.update_one(
+            {"id": magazine_id}, 
+            {"$set": {"is_featured": True}}
+        )
+        
+        try:
+            db.issues.update_one(
+                {"_id": ObjectId(magazine_id)}, 
+                {"$set": {"is_featured": True}}
+            )
+        except:
+            pass
+        
+        if result.matched_count == 0:
+            raise HTTPException(status_code=404, detail="Magazine not found")
+        
+        return {"message": "Magazine featured successfully"}
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to feature magazine: {str(e)}")
 
 @magazine_router.get("/{magazine_id}/analytics")
 def get_magazine_analytics(
