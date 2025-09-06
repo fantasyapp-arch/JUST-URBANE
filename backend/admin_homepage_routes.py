@@ -272,17 +272,17 @@ def auto_populate_homepage(
         raise HTTPException(status_code=500, detail=f"Failed to auto-populate homepage: {str(e)}")
 
 @homepage_router.get("/preview")
-async def preview_homepage(current_admin: AdminUser = Depends(get_current_admin_user)):
+def preview_homepage(current_admin: AdminUser = Depends(get_current_admin_user)):
     """Get homepage preview data"""
     try:
         # Get current homepage configuration
-        homepage_config = await db.homepage_config.find_one({"active": True})
+        homepage_config = db.homepage_config.find_one({"active": True})
         
         if not homepage_config:
             return {"message": "No homepage configuration found"}
         
         # Get populated article data
-        preview_data = await populate_homepage_articles(homepage_config)
+        preview_data = populate_homepage_articles(homepage_config)
         
         return preview_data
         
