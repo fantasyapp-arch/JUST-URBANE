@@ -310,7 +310,7 @@ def delete_media_file(
         raise HTTPException(status_code=500, detail=f"Delete failed: {str(e)}")
 
 @media_router.post("/{media_id}/generate-resolutions")
-async def generate_resolutions(
+def generate_resolutions(
     media_id: str,
     resolutions: str = Form(...),  # Comma-separated resolution names
     current_admin: AdminUser = Depends(get_current_admin_user)
@@ -318,7 +318,7 @@ async def generate_resolutions(
     """Generate new resolutions for an existing image"""
     try:
         # Get media file
-        media_file = await db.media_files.find_one({"id": media_id})
+        media_file = db.media_files.find_one({"id": media_id})
         
         if not media_file:
             raise HTTPException(status_code=404, detail="Media file not found")
@@ -357,7 +357,7 @@ async def generate_resolutions(
         current_resolutions = media_file.get("resolutions", {})
         current_resolutions.update(resolutions_generated)
         
-        await db.media_files.update_one(
+        db.media_files.update_one(
             {"id": media_id},
             {
                 "$set": {
