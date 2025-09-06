@@ -48,6 +48,7 @@ import TermsPage from './pages/TermsPage';
 import AdminLoginPage from './pages/AdminLoginPage';
 import AdminDashboardPage from './pages/AdminDashboardPage';
 import AdminArticlesPage from './pages/AdminArticlesPage';
+import AdminMagazinesPage from './pages/AdminMagazinesPage';
 
 // Suppress React Router v7 future flag warnings
 const originalWarn = console.warn;
