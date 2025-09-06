@@ -27,7 +27,7 @@ from admin_magazine_routes import magazine_router
 from admin_homepage_routes import homepage_router
 from admin_article_routes import article_router
 from admin_media_routes import media_router
-from image_optimizer import image_optimizer
+from image_optimizer import advanced_image_optimizer
 
 load_dotenv()
 
