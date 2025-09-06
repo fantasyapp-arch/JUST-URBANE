@@ -169,6 +169,10 @@ const router = createBrowserRouter([
   {
     path: "/admin/homepage",
     element: <AdminHomepagePage />
+  },
+  {
+    path: "/admin/media",
+    element: <AdminMediaPage />
   }
 ]);
 
