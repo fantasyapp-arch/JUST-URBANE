@@ -211,14 +211,14 @@ def delete_magazine_admin(
 
 # User Management Endpoints
 @admin_router.get("/users")
-async def get_all_users_admin(
+def get_all_users_admin(
     current_admin: AdminUser = Depends(get_current_admin_user),
     page: int = Query(1, ge=1),
     limit: int = Query(20, ge=1, le=100)
 ):
     skip = (page - 1) * limit
-    users = await db.users.find({}, {"hashed_password": 0}).skip(skip).limit(limit).sort([("created_at", -1)]).to_list(limit)
-    total_count = await db.users.count_documents({})
+    users = list(db.users.find({}, {"hashed_password": 0}).skip(skip).limit(limit).sort([("created_at", -1)]))
+    total_count = db.users.count_documents({})
     
     # Convert ObjectId to string
     for user in users:
@@ -235,10 +235,10 @@ async def get_all_users_admin(
 
 # Payment Analytics Endpoints
 @admin_router.get("/payments/analytics")
-async def get_payment_analytics(current_admin: AdminUser = Depends(get_current_admin_user)):
+def get_payment_analytics(current_admin: AdminUser = Depends(get_current_admin_user)):
     # Monthly revenue calculation
     monthly_revenue = {}
-    transactions = await db.transactions.find({"status": "success"}).to_list(1000)
+    transactions = list(db.transactions.find({"status": "success"}))
     
     for transaction in transactions:
         created_at = transaction.get("created_at", datetime.utcnow())
@@ -268,20 +268,20 @@ async def get_payment_analytics(current_admin: AdminUser = Depends(get_current_a
 
 # System Health Endpoints
 @admin_router.get("/system/health")
-async def admin_system_health(current_admin: AdminUser = Depends(get_current_admin_user)):
+def admin_system_health(current_admin: AdminUser = Depends(get_current_admin_user)):
     # Check database connection
     try:
-        await db.command("ping")
-        db_status = "healthy"
+        db.command("ping")
+        db_status = {"status": "connected", "message": "Database connection healthy"}
     except Exception as e:
-        db_status = f"error: {str(e)}"
+        db_status = {"status": "error", "message": f"Database error: {str(e)}"}
     
     # Check Razorpay connection
-    razorpay_status = "configured" if razorpay_client else "not configured"
+    razorpay_status = {"status": "configured", "message": "Razorpay client initialized"} if razorpay_client else {"status": "not_configured", "message": "Razorpay not configured"}
     
     return {
         "database": db_status,
         "razorpay": razorpay_status,
         "server_time": datetime.utcnow().isoformat(),
-        "admin_session": "active"
+        "system_status": "healthy"
     }
