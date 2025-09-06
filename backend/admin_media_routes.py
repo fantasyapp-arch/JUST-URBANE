@@ -377,12 +377,12 @@ def generate_resolutions(
         raise HTTPException(status_code=500, detail=f"Resolution generation failed: {str(e)}")
 
 @media_router.get("/stats/overview")
-async def get_media_stats(current_admin: AdminUser = Depends(get_current_admin_user)):
+def get_media_stats(current_admin: AdminUser = Depends(get_current_admin_user)):
     """Get media library statistics"""
     try:
         # Total counts by type
-        total_images = await db.media_files.count_documents({"file_type": "image"})
-        total_videos = await db.media_files.count_documents({"file_type": "video"})
+        total_images = db.media_files.count_documents({"file_type": "image"})
+        total_videos = db.media_files.count_documents({"file_type": "video"})
         
         # Storage usage
         pipeline = [
@@ -395,7 +395,7 @@ async def get_media_stats(current_admin: AdminUser = Depends(get_current_admin_u
             }
         ]
         
-        storage_stats = await db.media_files.aggregate(pipeline).to_list(None)
+        storage_stats = list(db.media_files.aggregate(pipeline))
         
         # Most used tags
         tag_pipeline = [
@@ -405,7 +405,7 @@ async def get_media_stats(current_admin: AdminUser = Depends(get_current_admin_u
             {"$limit": 10}
         ]
         
-        popular_tags = await db.media_files.aggregate(tag_pipeline).to_list(10)
+        popular_tags = list(db.media_files.aggregate(tag_pipeline))
         
         return {
             "total_files": total_images + total_videos,
