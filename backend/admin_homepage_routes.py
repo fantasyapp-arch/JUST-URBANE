@@ -137,7 +137,7 @@ def update_homepage_section(
         raise HTTPException(status_code=500, detail=f"Failed to update section: {str(e)}")
 
 @homepage_router.get("/articles/available")
-async def get_available_articles(
+def get_available_articles(
     current_admin: AdminUser = Depends(get_current_admin_user),
     category: Optional[str] = None,
     search: Optional[str] = None,
@@ -157,7 +157,7 @@ async def get_available_articles(
                 {"author_name": {"$regex": search, "$options": "i"}}
             ]
         
-        articles = await db.articles.find(query).limit(limit).sort([("created_at", -1)]).to_list(limit)
+        articles = list(db.articles.find(query).limit(limit).sort([("created_at", -1)]))
         
         # Convert ObjectId to string and format for frontend
         formatted_articles = []
