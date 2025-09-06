@@ -1,6 +1,8 @@
 from fastapi import FastAPI, HTTPException, Depends, status, File, UploadFile, Query, Request, Response
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
+from fastapi.responses import JSONResponse, StreamingResponse, FileResponse
+from fastapi.staticfiles import StaticFiles
 from pymongo import MongoClient
 from bson import ObjectId
 from datetime import datetime, timedelta
