@@ -62,8 +62,22 @@ const AdminLoginPage = () => {
       <div className="relative w-full max-w-md">
         {/* Admin Panel Header */}
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-r from-amber-400 to-amber-600 rounded-full mb-4 shadow-2xl">
-            <Shield className="w-10 h-10 text-white" />
+          <div className="inline-flex items-center justify-center mb-4">
+            <img 
+              src="https://customer-assets.emergentagent.com/job_urbane-nexus/artifacts/w4pbaa92_Untitled%20design-10.png" 
+              alt="Just Urbane" 
+              className="h-20 w-auto object-contain"
+              onError={(e) => {
+                e.target.style.display = 'none';
+                e.target.nextSibling.style.display = 'block';
+              }}
+            />
+            <div 
+              className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-r from-amber-400 to-amber-600 rounded-full shadow-2xl"
+              style={{ display: 'none' }}
+            >
+              <Shield className="w-10 h-10 text-white" />
+            </div>
           </div>
           <h1 className="text-3xl font-bold text-white mb-2">Just Urbane</h1>
           <p className="text-gray-400 text-lg">Master Admin Panel</p>
