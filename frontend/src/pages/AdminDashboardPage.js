@@ -186,12 +186,7 @@ const AdminDashboardPage = () => {
 
         {/* Quick Actions */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5 }}
-            className="bg-white rounded-xl shadow-sm p-6 border"
-          >
+          <div className="bg-white rounded-xl shadow-sm p-6 border">
             <h3 className="text-lg font-semibold text-gray-900 mb-4">Quick Actions</h3>
             <div className="space-y-3">
               <button
@@ -216,14 +211,9 @@ const AdminDashboardPage = () => {
                 <span className="text-gray-700">Manage Content</span>
               </button>
             </div>
-          </motion.div>
+          </div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6 }}
-            className="bg-white rounded-xl shadow-sm p-6 border"
-          >
+          <div className="bg-white rounded-xl shadow-sm p-6 border">
             <h3 className="text-lg font-semibold text-gray-900 mb-4">Popular Articles</h3>
             <div className="space-y-3">
               {stats?.popular_articles?.slice(0, 3).map((article, index) => (
@@ -243,14 +233,9 @@ const AdminDashboardPage = () => {
                 </div>
               ))}
             </div>
-          </motion.div>
+          </div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.7 }}
-            className="bg-white rounded-xl shadow-sm p-6 border"
-          >
+          <div className="bg-white rounded-xl shadow-sm p-6 border">
             <h3 className="text-lg font-semibold text-gray-900 mb-4">Recent Activity</h3>
             <div className="space-y-3">
               {stats?.recent_activities?.slice(0, 3).map((activity, index) => (
@@ -263,7 +248,7 @@ const AdminDashboardPage = () => {
                 </div>
               ))}
             </div>
-          </motion.div>
+          </div>
         </div>
 
         {/* Navigation Cards */}
