@@ -10,7 +10,23 @@ import json
 
 from admin_models import *
 from admin_auth import *
-from server import db, razorpay_client
+from pymongo import MongoClient
+import razorpay
+import os
+
+# Database connection
+mongo_url = os.getenv("MONGO_URL", "mongodb://localhost:27017/just_urbane")
+client = MongoClient(mongo_url)
+db = client.just_urbane
+
+# Razorpay Configuration
+RAZORPAY_KEY_ID = os.getenv("RAZORPAY_KEY_ID")
+RAZORPAY_KEY_SECRET = os.getenv("RAZORPAY_KEY_SECRET")
+
+# Initialize Razorpay client
+razorpay_client = None
+if RAZORPAY_KEY_ID and RAZORPAY_KEY_SECRET:
+    razorpay_client = razorpay.Client(auth=(RAZORPAY_KEY_ID, RAZORPAY_KEY_SECRET))
 
 admin_router = APIRouter(prefix="/api/admin", tags=["admin"])
 
