@@ -113,23 +113,24 @@ async def upload_media(
                     with Image.open(file_path) as img:
                         dimensions = {"width": img.width, "height": img.height}
                         
-                        # Generate different resolutions
-                        for resolution_name in resolution_list:
-                            if resolution_name in IMAGE_RESOLUTIONS:
-                                target_size = IMAGE_RESOLUTIONS[resolution_name]
-                                resized_filename = f"{file_id}_{resolution_name}{file_extension}"
-                                resized_path = IMAGES_DIR / resized_filename
+                        # Generate responsive images using the optimizer
+                        responsive_images = image_optimizer.create_responsive_images(
+                            file_content, file.filename
+                        )
+                        
+                        # Convert to the expected format
+                        for size_name, url in responsive_images.items():
+                            if size_name in IMAGE_RESOLUTIONS:
+                                # Extract filename from URL
+                                filename = url.split('/')[-1]
+                                file_path_obj = Path(f"/app/uploads/media/images/optimized/{filename}")
                                 
-                                # Resize image maintaining aspect ratio
-                                resized_img = ImageOps.fit(img, target_size, Image.Resampling.LANCZOS)
-                                resized_img.save(resized_path, optimize=True, quality=85)
-                                
-                                resolutions_generated[resolution_name] = {
-                                    "filename": resized_filename,
-                                    "path": str(resized_path),
-                                    "url": f"/uploads/media/images/{resized_filename}",
-                                    "size": target_size,
-                                    "file_size": resized_path.stat().st_size
+                                resolutions_generated[size_name] = {
+                                    "filename": filename,
+                                    "path": str(file_path_obj),
+                                    "url": url,
+                                    "size": IMAGE_RESOLUTIONS[size_name],
+                                    "file_size": file_path_obj.stat().st_size if file_path_obj.exists() else 0
                                 }
                         
                         # Generate thumbnail for videos
