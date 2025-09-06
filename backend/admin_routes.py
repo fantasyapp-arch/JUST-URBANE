@@ -79,7 +79,7 @@ def get_current_admin(current_admin: AdminUser = Depends(get_current_admin_user)
     return current_admin
 
 # Dashboard Analytics Endpoints
-@admin_router.get("/dashboard/stats", response_model=DashboardStats)
+@admin_router.get("/dashboard/stats")
 def get_dashboard_stats(current_admin: AdminUser = Depends(get_current_admin_user)):
     # Get basic counts
     total_articles = db.articles.count_documents({})
