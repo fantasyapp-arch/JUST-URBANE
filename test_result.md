@@ -2697,6 +2697,9 @@ test_plan:
   image_optimization_tested: true
   image_optimization_success_rate: "93.8%"
   image_optimization_testing_date: "2025-09-06T05:50:00"
+  enhanced_image_optimization_tested: true
+  enhanced_image_optimization_success_rate: "82.6%"
+  enhanced_image_optimization_testing_date: "2025-09-06T06:06:00"
   image_optimizer_utility_verified: true
   optimized_image_serving_verified: true
   admin_media_upload_verified: true
