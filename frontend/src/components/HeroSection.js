@@ -25,13 +25,11 @@ const HeroSection = ({ featuredArticle, trendingArticles = [] }) => {
       <div className="relative h-screen max-h-[800px] flex items-center">
         {/* Background Image */}
         <div className="absolute inset-0">
-          <img
+          <HeroImage
             src={featuredArticle.hero_image || '/placeholder-hero.jpg'}
             alt={featuredArticle.title}
             className="w-full h-full object-cover"
-            onError={(e) => {
-              e.target.src = '/placeholder-hero.jpg';
-            }}
+            fallback="/placeholder-hero.jpg"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-transparent"></div>
         </div>
