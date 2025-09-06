@@ -253,7 +253,7 @@ const AdminDashboardPage = () => {
         </div>
 
         {/* Navigation Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
           <button
             onClick={() => navigate('/admin/homepage')}
             className="bg-white rounded-xl shadow-sm p-6 border hover:shadow-md transition-shadow text-left hover:scale-105 transform transition-transform"
@@ -295,6 +295,21 @@ const AdminDashboardPage = () => {
               <div>
                 <h3 className="font-semibold text-gray-900">Magazines</h3>
                 <p className="text-sm text-gray-600">Digital issues</p>
+              </div>
+            </div>
+          </button>
+
+          <button
+            onClick={() => navigate('/admin/media')}
+            className="bg-white rounded-xl shadow-sm p-6 border hover:shadow-md transition-shadow text-left hover:scale-105 transform transition-transform"
+          >
+            <div className="flex items-center space-x-4">
+              <div className="p-3 bg-pink-100 rounded-lg">
+                <Image className="w-6 h-6 text-pink-600" />
+              </div>
+              <div>
+                <h3 className="font-semibold text-gray-900">Media</h3>
+                <p className="text-sm text-gray-600">Images & videos</p>
               </div>
             </div>
           </button>
