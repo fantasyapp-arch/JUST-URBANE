@@ -478,21 +478,21 @@ const HomePage = () => {
               {
                 name: 'Ratan Tata',
                 title: 'Business Visionary',
-                image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&h=600&fit=crop',
+                image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&h=600&fit=crop&crop=faces,center&auto=format&q=80',
                 category: 'Business Leader',
                 achievement: 'Transforming Indian business with ethical leadership and philanthropy'
               },
               {
                 name: 'Priyanka Chopra',
                 title: 'Global Icon',
-                image: 'https://images.unsplash.com/photo-1494790108755-2616b612b1bb?w=500&h=600&fit=crop',
+                image: 'https://images.unsplash.com/photo-1494790108755-2616b612b1bb?w=800&h=600&fit=crop&crop=faces,center&auto=format&q=80',
                 category: 'Entertainment',
                 achievement: 'Breaking barriers globally while championing Indian culture'
               },
               {
                 name: 'Byju Raveendran',
                 title: 'Tech Revolutionary',
-                image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=500&h=600&fit=crop',
+                image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=800&h=600&fit=crop&crop=faces,center&auto=format&q=80',
                 category: 'Technology',
                 achievement: 'Revolutionizing education through innovation and accessibility'
               }
@@ -590,21 +590,21 @@ const HomePage = () => {
             {[
               {
                 title: 'Inside India\'s Most Exclusive Business Club',
-                thumbnail: 'https://images.unsplash.com/photo-1573164713988-8665fc963095?w=800',
+                thumbnail: 'https://images.unsplash.com/photo-1573164713988-8665fc963095?w=800&h=600&fit=crop&crop=faces,center&auto=format&q=80',
                 duration: '12:45',
                 category: 'Business Exclusive',
                 views: '89K'
               },
               {
                 title: 'Luxury Watch Collection Worth ₹50 Crores',
-                thumbnail: 'https://images.unsplash.com/photo-1603189343302-e603f7add05a?w=800',
+                thumbnail: 'https://images.unsplash.com/photo-1603189343302-e603f7add05a?w=800&h=600&fit=crop&crop=faces,center&auto=format&q=80',
                 duration: '8:30',
                 category: 'Fashion & Style',
                 views: '156K'
               },
               {
                 title: 'AI Billionaire\'s Daily Routine Revealed',
-                thumbnail: 'https://images.unsplash.com/photo-1557426272-fc759fdf7a8d?w=800',
+                thumbnail: 'https://images.unsplash.com/photo-1557426272-fc759fdf7a8d?w=800&h=600&fit=crop&crop=faces,center&auto=format&q=80',
                 duration: '15:20',
                 category: 'Technology',
                 views: '234K'

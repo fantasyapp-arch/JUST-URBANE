@@ -13,7 +13,7 @@ const OfferBanner = ({ isVisible, onClose }) => {
           <div className="flex items-center space-x-4">
             <div className="w-16 h-20 bg-gray-200 rounded overflow-hidden shadow-sm">
               <img 
-                src="https://images.unsplash.com/photo-1586953208448-b95a79798f07?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=150&h=200&q=80"
+                src="https://images.unsplash.com/photo-1586953208448-b95a79798f07?w=1920&h=1080&fit=crop&crop=faces,center&auto=format&q=90"
                 alt="Latest Magazine Issue" 
                 className="w-full h-full object-cover"
               />

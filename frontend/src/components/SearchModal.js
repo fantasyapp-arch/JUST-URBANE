@@ -233,7 +233,7 @@ const SearchModal = ({ isOpen, onClose }) => {
                               alt={article.title}
                               className="w-16 h-16 object-cover rounded-lg"
                               onError={(e) => {
-                                e.target.src = 'https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80';
+                                e.target.src = 'https://images.unsplash.com/photo-1557804506-669a67965ba0?w=800&h=600&fit=crop&crop=faces,center&auto=format&q=80';
                               }}
                             />
                             <div className="flex-1 min-w-0">

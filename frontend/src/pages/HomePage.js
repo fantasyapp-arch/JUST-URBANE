@@ -53,19 +53,19 @@ const HomePage = () => {
       title: "Inside Swiss Watch Manufacturing",
       duration: "15:42",
       category: "Watches",
-      thumbnail: "https://images.unsplash.com/photo-1594534475808-b18fc33b045e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+      thumbnail: "https://images.unsplash.com/photo-1594534475808-b18fc33b045e?w=150&h=150&fit=crop&crop=faces,center&auto=format&q=70"
     },
     {
       title: "Fashion Week Runway Review",
       duration: "10:30",
       category: "Fashion",
-      thumbnail: "https://images.unsplash.com/photo-1558769132-cb1aea458c5e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+      thumbnail: "https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=150&h=150&fit=crop&crop=faces,center&auto=format&q=70"
     },
     {
       title: "Luxury Home Design Tour",
       duration: "12:15",
       category: "Lifestyle",
-      thumbnail: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+      thumbnail: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=150&h=150&fit=crop&crop=faces,center&auto=format&q=70"
     }
   ];
 
@@ -124,11 +124,11 @@ const HomePage = () => {
               className="relative"
             >
               <img 
-                src={heroArticle?.hero_image || 'https://images.unsplash.com/photo-1559839049-2b350c4284cb?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80'}
+                src={heroArticle?.hero_image || 'https://images.unsplash.com/photo-1559839049-2b350c4284cb?w=1920&h=1080&fit=crop&crop=faces,center&auto=format&q=90'}
                 alt={heroArticle?.title || 'Just Urbane'}
                 className="w-full h-96 lg:h-[500px] object-cover rounded-lg shadow-lg"
                 onError={(e) => {
-                  e.target.src = 'https://images.unsplash.com/photo-1559839049-2b350c4284cb?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80';
+                  e.target.src = 'https://images.unsplash.com/photo-1559839049-2b350c4284cb?w=1920&h=1080&fit=crop&crop=faces,center&auto=format&q=90';
                 }}
               />
             </motion.div>
@@ -161,7 +161,7 @@ const HomePage = () => {
                         alt={article.title}
                         className="w-full aspect-square object-cover group-hover:scale-105 transition-transform duration-300"
                         onError={(e) => {
-                          e.target.src = 'https://images.unsplash.com/photo-1613909671501-f9678ffc1d33?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80';
+                          e.target.src = 'https://images.unsplash.com/photo-1613909671501-f9678ffc1d33?w=800&h=600&fit=crop&crop=faces,center&auto=format&q=80';
                         }}
                       />
                       <div className="absolute top-4 left-4">
@@ -216,7 +216,7 @@ const HomePage = () => {
                           alt={article.title}
                           className="w-full h-48 md:h-full object-cover group-hover:scale-105 transition-transform duration-300"
                           onError={(e) => {
-                            e.target.src = 'https://images.unsplash.com/photo-1604242692760-2f7b0c26856d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80';
+                            e.target.src = 'https://images.unsplash.com/photo-1604242692760-2f7b0c26856d?w=800&h=600&fit=crop&crop=faces,center&auto=format&q=80';
                           }}
                         />
                       </div>
@@ -271,7 +271,7 @@ const HomePage = () => {
                         alt={article.title}
                         className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300"
                         onError={(e) => {
-                          e.target.src = 'https://images.unsplash.com/photo-1488646953014-85cb44e25828?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80';
+                          e.target.src = 'https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=800&h=600&fit=crop&crop=faces,center&auto=format&q=80';
                         }}
                       />
                       <div className="absolute top-4 left-4">
@@ -325,7 +325,7 @@ const HomePage = () => {
                         alt={article.title}
                         className="w-full aspect-square object-cover group-hover:scale-105 transition-transform duration-300"
                         onError={(e) => {
-                          e.target.src = 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80';
+                          e.target.src = 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop&crop=faces,center&auto=format&q=80';
                         }}
                       />
                       <div className="absolute top-4 left-4">
@@ -379,7 +379,7 @@ const HomePage = () => {
                         alt={article.title}
                         className="w-full aspect-square object-cover group-hover:scale-105 transition-transform duration-300"
                         onError={(e) => {
-                          e.target.src = 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80';
+                          e.target.src = 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&h=600&fit=crop&crop=faces,center&auto=format&q=80';
                         }}
                       />
                       <div className="absolute top-4 left-4">
@@ -432,7 +432,7 @@ const HomePage = () => {
                       alt={article.title}
                       className="w-full aspect-square object-cover group-hover:scale-105 transition-transform duration-300"
                       onError={(e) => {
-                        e.target.src = 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80';
+                        e.target.src = 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&h=600&fit=crop&crop=faces,center&auto=format&q=80';
                       }}
                     />
                     <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">

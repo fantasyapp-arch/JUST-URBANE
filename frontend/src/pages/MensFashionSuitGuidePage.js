@@ -12,7 +12,7 @@ const MensFashionSuitGuidePage = () => {
     author: "Harshit Srinivas",
     date: "September 2025",
     readTime: "5 min read",
-    heroImage: "https://images.unsplash.com/photo-1617127365659-c47fa864d8bc?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1NzZ8MHwxfHNlYXJjaHw0fHxtZW4lMjBmYXNoaW9ufGVufDB8fHx8MTc1NjM4NjA4Mnww&ixlib=rb-4.1.0&q=85",
+    heroImage: "https://images.unsplash.com/photo-1617127365659-c47fa864d8bc?w=1920&h=1080&fit=crop&crop=faces,center&auto=format&q=90",
     tags: ['Men\'s Fashion', 'Corporate Dressing', 'Suit Guide', 'Steve Harvey', 'Professional Style', 'Wardrobe Essentials', 'Business Attire', 'Style Tips', 'Fashion Guide', 'Corporate Fashion']
   };
 

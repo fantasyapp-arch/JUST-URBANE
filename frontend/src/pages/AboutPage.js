@@ -8,35 +8,35 @@ const AboutPage = () => {
     {
       name: 'Harshit Srinivas',
       role: 'Senior Editor & Style Expert',
-      image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300',
+      image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=800&h=600&fit=crop&crop=faces,center&auto=format&q=80',
       bio: 'Expert in luxury lifestyle, men\'s fashion, and premium experiences. Author of our acclaimed Perfect Suit Guide and luxury yacht reviews.',
       social: { twitter: '@harshit_urbane', instagram: '@harshitsrinivas' }
     },
     {
       name: 'Amisha Shirgave',
       role: 'Travel & Entertainment Editor',
-      image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=300',
+      image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=800&h=600&fit=crop&crop=faces,center&auto=format&q=80',
       bio: 'Travel journalist and celebrity interviewer. Known for exclusive coverage of France destinations and entertainment industry insights.',
       social: { twitter: '@amisha_travel', instagram: '@amishashirgave' }
     },
     {
       name: 'Rugved Marathe',
       role: 'Fashion & Celebrity Editor',
-      image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300',
+      image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&h=600&fit=crop&crop=faces,center&auto=format&q=80',
       bio: 'Fashion correspondent covering red carpet events and celebrity style. Expert coverage of awards ceremonies and Hollywood fashion.',
       social: { twitter: '@rugved_fashion', instagram: '@rugvedmarathe' }
     },
     {
       name: 'Krishna Mohod',
       role: 'Technology & Innovation Editor',
-      image: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=300',
+      image: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=800&h=600&fit=crop&crop=faces,center&auto=format&q=80',
       bio: 'Technology journalist specializing in luxury gadgets and wearable tech. Known for trend-setting coverage of smartwatch innovations.',
       social: { twitter: '@krishna_tech', instagram: '@krishnamohod' }
     },
     {
       name: 'Komal Bhandekar',
       role: 'Sustainable Travel Expert',
-      image: 'https://images.unsplash.com/photo-1494790108755-2616b612b1bb?w=300',
+      image: 'https://images.unsplash.com/photo-1494790108755-2616b612b1bb?w=1920&h=1080&fit=crop&crop=faces,center&auto=format&q=90',
       bio: 'Environmental travel journalist promoting conscious tourism and sustainable luxury experiences.',
       social: { twitter: '@komal_travel', instagram: '@komalbhandekar' }
     }

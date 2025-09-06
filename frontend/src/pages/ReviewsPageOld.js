@@ -153,7 +153,7 @@ const ReviewsPage = () => {
                         alt={review.product}
                         className="w-full h-64 md:h-full object-cover"
                         onError={(e) => {
-                          e.target.src = 'https://images.unsplash.com/photo-1551816230-ef5deaed4a26?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80';
+                          e.target.src = 'https://images.unsplash.com/photo-1551816230-ef5deaed4a26?w=800&h=600&fit=crop&crop=faces,center&auto=format&q=80';
                         }}
                       />
                     </div>
@@ -201,7 +201,7 @@ export default ReviewsPage;
         'Rolex Authorized Dealer': 'https://rolex.com'
       },
       body: 'The Rolex Submariner remains the gold standard for luxury dive watches, combining functionality with timeless elegance.',
-      images: ['https://images.unsplash.com/photo-1524592094714-0f0654e20314?w=800'],
+      images: ['https://images.unsplash.com/photo-1524592094714-0f0654e20314?w=800&h=600&fit=crop&crop=faces,center&auto=format&q=80'],
       category: 'watches',
       author_name: 'Rahul Sharma',
       created_at: '2024-11-10T14:30:00Z',
@@ -228,7 +228,7 @@ export default ReviewsPage;
         'Sephora': 'https://sephora.com'
       },
       body: 'Tom Ford Oud Wood is a masterclass in luxury fragrance composition, perfect for the discerning gentleman.',
-      images: ['https://images.unsplash.com/photo-1541643600914-78b084683601?w=800'],
+      images: ['https://images.unsplash.com/photo-1541643600914-78b084683601?w=800&h=600&fit=crop&crop=faces,center&auto=format&q=80'],
       category: 'grooming',
       author_name: 'Priya Nair',
       created_at: '2024-11-08T09:15:00Z',
@@ -256,7 +256,7 @@ export default ReviewsPage;
         'Flipkart': 'https://flipkart.com'
       },
       body: 'The Sony WH-1000XM5 sets the benchmark for premium wireless headphones with exceptional audio quality.',
-      images: ['https://images.unsplash.com/photo-1484704849700-f032a568e944?w=800'],
+      images: ['https://images.unsplash.com/photo-1484704849700-f032a568e944?w=800&h=600&fit=crop&crop=faces,center&auto=format&q=80'],
       category: 'tech',
       author_name: 'Vikram Singh',
       created_at: '2024-11-05T16:20:00Z',

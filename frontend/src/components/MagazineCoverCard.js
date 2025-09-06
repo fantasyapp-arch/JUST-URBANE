@@ -27,7 +27,7 @@ const MagazineCoverCard = ({ issue, onReadClick, canRead, index = 0 }) => {
         <div 
           className="aspect-[210/297] rounded-xl overflow-hidden shadow-lg bg-cover bg-center relative transform transition-all duration-500 group-hover:scale-105 group-hover:shadow-2xl"
           style={{
-            backgroundImage: `linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.6)), url(${heroArticle?.hero_image || 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=800&fit=crop&crop=face'})`
+            backgroundImage: `linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.6)), url(${heroArticle?.hero_image || 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=1920&h=1080&fit=crop&crop=faces,center&auto=format&q=90'})`
           }}
         >
           {/* Magazine Header */}
@@ -126,7 +126,7 @@ const MagazineCoverCard = ({ issue, onReadClick, canRead, index = 0 }) => {
                       alt=""
                       className="w-full h-full object-cover"
                       onError={(e) => {
-                        e.target.src = 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=50&h=50&fit=crop';
+                        e.target.src = 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=300&fit=crop&crop=faces,center&auto=format&q=75';
                       }}
                     />
                   ) : (

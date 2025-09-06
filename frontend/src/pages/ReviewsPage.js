@@ -200,7 +200,7 @@ const ReviewsPage = () => {
                         alt={review.product}
                         className="w-full h-64 md:h-full object-cover"
                         onError={(e) => {
-                          e.target.src = 'https://images.unsplash.com/photo-1551816230-ef5deaed4a26?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80';
+                          e.target.src = 'https://images.unsplash.com/photo-1551816230-ef5deaed4a26?w=800&h=600&fit=crop&crop=faces,center&auto=format&q=80';
                         }}
                       />
                     </div>
