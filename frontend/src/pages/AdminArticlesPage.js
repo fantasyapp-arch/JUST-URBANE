@@ -322,7 +322,7 @@ const AdminArticlesPage = () => {
                         </button>
                       </div>
                     </td>
-                  </motion.tr>
+                  </tr>
                 ))}
               </tbody>
             </table>
