@@ -247,7 +247,7 @@ async def duplicate_article(
             del new_article["_id"]
         
         # Save duplicate
-        result = await db.articles.insert_one(new_article)
+        result = db.articles.insert_one(new_article)
         
         return {
             "message": "Article duplicated successfully",
