@@ -35,6 +35,7 @@ app.include_router(admin_router)
 app.include_router(magazine_router)
 app.include_router(homepage_router)
 app.include_router(article_router)
+app.include_router(media_router)
 
 # CORS configuration
 app.add_middleware(
