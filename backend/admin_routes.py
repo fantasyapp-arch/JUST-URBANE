@@ -75,34 +75,34 @@ def admin_login(admin_credentials: AdminLogin):
     }
 
 @admin_router.get("/me")
-async def get_current_admin(current_admin: AdminUser = Depends(get_current_admin_user)):
+def get_current_admin(current_admin: AdminUser = Depends(get_current_admin_user)):
     return current_admin
 
 # Dashboard Analytics Endpoints
 @admin_router.get("/dashboard/stats", response_model=DashboardStats)
-async def get_dashboard_stats(current_admin: AdminUser = Depends(get_current_admin_user)):
+def get_dashboard_stats(current_admin: AdminUser = Depends(get_current_admin_user)):
     # Get basic counts
-    total_articles = await db.articles.count_documents({})
-    total_magazines = await db.issues.count_documents({})
-    total_users = await db.users.count_documents({})
-    total_subscribers = await db.users.count_documents({"is_premium": True})
+    total_articles = db.articles.count_documents({})
+    total_magazines = db.issues.count_documents({})
+    total_users = db.users.count_documents({})
+    total_subscribers = db.users.count_documents({"is_premium": True})
     
     # Calculate total revenue from transactions
     revenue_pipeline = [
         {"$group": {"_id": None, "total": {"$sum": "$amount"}}}
     ]
-    revenue_result = await db.transactions.aggregate(revenue_pipeline).to_list(1)
+    revenue_result = list(db.transactions.aggregate(revenue_pipeline))
     total_revenue = revenue_result[0]["total"] / 100 if revenue_result else 0  # Convert from paise
     
     # Get popular articles (top 5 by views)
-    popular_articles = await db.articles.find({}, {"title": 1, "views": 1, "category": 1}).sort([("views", -1)]).limit(5).to_list(5)
+    popular_articles = list(db.articles.find({}, {"title": 1, "views": 1, "category": 1}).sort([("views", -1)]).limit(5))
     for article in popular_articles:
         article["id"] = str(article["_id"])
         del article["_id"]
     
     # Get recent activities (recent articles and transactions)
-    recent_articles = await db.articles.find({}).sort([("created_at", -1)]).limit(3).to_list(3)
-    recent_transactions = await db.transactions.find({}).sort([("created_at", -1)]).limit(3).to_list(3)
+    recent_articles = list(db.articles.find({}).sort([("created_at", -1)]).limit(3))
+    recent_transactions = list(db.transactions.find({}).sort([("created_at", -1)]).limit(3))
     
     recent_activities = []
     for article in recent_articles:
