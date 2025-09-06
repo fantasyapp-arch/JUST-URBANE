@@ -244,7 +244,7 @@ def get_media_file(
         raise HTTPException(status_code=500, detail=f"Failed to get media file: {str(e)}")
 
 @media_router.put("/{media_id}")
-async def update_media_file(
+def update_media_file(
     media_id: str,
     current_admin: AdminUser = Depends(get_current_admin_user),
     alt_text: Optional[str] = Form(None),
@@ -263,7 +263,7 @@ async def update_media_file(
         if tags is not None:
             update_data["tags"] = [tag.strip() for tag in tags.split(",") if tag.strip()]
         
-        result = await db.media_files.update_one(
+        result = db.media_files.update_one(
             {"id": media_id},
             {"$set": update_data}
         )
