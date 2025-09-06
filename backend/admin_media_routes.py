@@ -420,7 +420,7 @@ def get_media_stats(current_admin: AdminUser = Depends(get_current_admin_user)):
         raise HTTPException(status_code=500, detail=f"Failed to get stats: {str(e)}")
 
 @media_router.post("/bulk-tag")
-async def bulk_tag_media(
+def bulk_tag_media(
     media_ids: str = Form(...),  # Comma-separated IDs
     tags: str = Form(...),  # Comma-separated tags
     action: str = Form("add"),  # add, remove, replace
@@ -436,7 +436,7 @@ async def bulk_tag_media(
         
         if action == "add":
             # Add tags to existing tags
-            result = await db.media_files.update_many(
+            result = db.media_files.update_many(
                 {"id": {"$in": ids}},
                 {
                     "$addToSet": {"tags": {"$each": tag_list}},
@@ -448,7 +448,7 @@ async def bulk_tag_media(
             )
         elif action == "remove":
             # Remove specified tags
-            result = await db.media_files.update_many(
+            result = db.media_files.update_many(
                 {"id": {"$in": ids}},
                 {
                     "$pullAll": {"tags": tag_list},
@@ -460,7 +460,7 @@ async def bulk_tag_media(
             )
         elif action == "replace":
             # Replace all tags with new tags
-            result = await db.media_files.update_many(
+            result = db.media_files.update_many(
                 {"id": {"$in": ids}},
                 {
                     "$set": {
