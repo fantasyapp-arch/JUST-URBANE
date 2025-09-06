@@ -10,4 +10,4 @@ bcrypt==4.1.2
 email-validator==2.1.0
 Pillow==10.1.0
 emergentintegrations
-razorpay==1.4.2
+striprtf==0.0.26
