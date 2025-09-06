@@ -12,7 +12,13 @@ from striprtf import striprtf
 
 from admin_models import *
 from admin_auth import get_current_admin_user
-from server import db
+from pymongo import MongoClient
+import os
+
+# Database connection
+mongo_url = os.getenv("MONGO_URL", "mongodb://localhost:27017/just_urbane")
+client = MongoClient(mongo_url)
+db = client.just_urbane
 
 article_router = APIRouter(prefix="/api/admin/articles", tags=["admin-articles"])
 
