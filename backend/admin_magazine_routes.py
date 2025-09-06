@@ -134,16 +134,16 @@ def get_magazines(
     }
 
 @magazine_router.get("/{magazine_id}")
-async def get_magazine(
+def get_magazine(
     magazine_id: str,
     current_admin: AdminUser = Depends(get_current_admin_user)
 ):
     """Get a specific magazine by ID"""
-    magazine = await db.magazines.find_one({"id": magazine_id})
+    magazine = db.magazines.find_one({"id": magazine_id})
     
     if not magazine:
         # Try issues collection
-        magazine = await db.issues.find_one({"id": magazine_id})
+        magazine = db.issues.find_one({"id": magazine_id})
     
     if not magazine:
         raise HTTPException(status_code=404, detail="Magazine not found")
