@@ -84,9 +84,25 @@ async def upload_media(
             target_dir = IMAGES_DIR if is_image else VIDEOS_DIR
             file_path = target_dir / safe_filename
             
-            # Save original file
-            with open(file_path, "wb") as buffer:
-                shutil.copyfileobj(file.file, buffer)
+            # Save original file with optimization
+            file_content = await file.read()
+            await file.seek(0)  # Reset file pointer
+            
+            if is_image:
+                # Optimize the original image before saving
+                optimized_content = image_optimizer.optimize_image(
+                    file_content, 
+                    file.filename, 
+                    max_width=1920, 
+                    max_height=1080, 
+                    quality=90
+                )
+                with open(file_path, "wb") as buffer:
+                    buffer.write(optimized_content)
+            else:
+                # For videos, save as-is
+                with open(file_path, "wb") as buffer:
+                    buffer.write(file_content)
             
             # Get file dimensions for images/videos
             dimensions = None
