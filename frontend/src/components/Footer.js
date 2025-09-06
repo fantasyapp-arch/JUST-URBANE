@@ -8,10 +8,13 @@ const Footer = () => {
 
   const categories = [
     { name: 'Fashion', slug: 'fashion' },
-    { name: 'Watches', slug: 'watches' },
-    { name: 'Lifestyle', slug: 'lifestyle' },
+    { name: 'Technology', slug: 'technology' },
+    { name: 'Travel', slug: 'travel' },
+    { name: 'People', slug: 'people' },
+    { name: 'Business', slug: 'business' },
     { name: 'Culture', slug: 'culture' },
-    { name: 'Videos', slug: 'videos' },
+    { name: 'Entertainment', slug: 'entertainment' },
+    { name: 'Health', slug: 'health' },
   ];
 
   const companyLinks = [
