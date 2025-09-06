@@ -69,7 +69,7 @@ async def get_current_admin_user(credentials: HTTPAuthorizationCredentials = Dep
     
     return AdminUser(**admin_user)
 
-async def create_default_admin():
+def create_default_admin():
     """Create default admin user if none exists"""
     from pymongo import MongoClient
     
