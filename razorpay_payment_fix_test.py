@@ -11,7 +11,7 @@ from datetime import datetime
 from typing import Dict, Any, Optional
 
 class RazorpayPaymentFixTester:
-    def __init__(self, base_url: str = "https://urbane-refresh.preview.emergentagent.com/api"):
+    def __init__(self, base_url: str = "https://just-urbane-ux.preview.emergentagent.com/api"):
         self.base_url = base_url
         self.session = requests.Session()
         self.test_results = []
