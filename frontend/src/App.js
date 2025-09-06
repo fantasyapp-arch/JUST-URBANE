@@ -135,6 +135,15 @@ const router = createBrowserRouter([
   {
     path: "/magazine-reader",
     element: <MagazineReaderPage />
+  },
+  // Admin routes - separate from main layout
+  {
+    path: "/admin/login",
+    element: <AdminLoginPage />
+  },
+  {
+    path: "/admin/dashboard",
+    element: <AdminDashboardPage />
   }
 ]);
 
