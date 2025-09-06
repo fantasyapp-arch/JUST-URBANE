@@ -306,7 +306,7 @@ async def get_category_stats(current_admin: AdminUser = Depends(get_current_admi
             {"$sort": {"count": -1}}
         ]
         
-        stats = await db.articles.aggregate(pipeline).to_list(None)
+        stats = list(db.articles.aggregate(pipeline))
         
         return {"category_stats": stats}
         
