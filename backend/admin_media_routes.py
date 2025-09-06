@@ -152,7 +152,7 @@ async def upload_media(
             }
             
             # Save to database
-            result = await db.media_files.insert_one(media_data)
+            result = db.media_files.insert_one(media_data)
             uploaded_files.append({
                 "id": file_id,
                 "filename": file.filename,
