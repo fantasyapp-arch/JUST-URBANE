@@ -51,6 +51,11 @@ OPTIMIZED_DIR = Path("/app/uploads/media/images/optimized")
 OPTIMIZED_DIR.mkdir(parents=True, exist_ok=True)
 app.mount("/api/media/optimized", StaticFiles(directory=str(OPTIMIZED_DIR)), name="optimized-media")
 
+# Mount WebP images directory
+WEBP_DIR = Path("/app/uploads/media/images/webp")
+WEBP_DIR.mkdir(parents=True, exist_ok=True)
+app.mount("/api/media/webp", StaticFiles(directory=str(WEBP_DIR)), name="webp-media")
+
 # CORS configuration
 app.add_middleware(
     CORSMiddleware,
