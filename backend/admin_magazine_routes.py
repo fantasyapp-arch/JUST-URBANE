@@ -103,7 +103,7 @@ async def upload_magazine(
         raise HTTPException(status_code=500, detail=f"Upload failed: {str(e)}")
 
 @magazine_router.get("/")
-async def get_magazines(
+def get_magazines(
     current_admin: AdminUser = Depends(get_current_admin_user),
     page: int = 1,
     limit: int = 10
@@ -112,13 +112,13 @@ async def get_magazines(
     skip = (page - 1) * limit
     
     # Get magazines from both collections
-    magazines = await db.magazines.find({}).skip(skip).limit(limit).sort([("upload_date", -1)]).to_list(limit)
-    total_count = await db.magazines.count_documents({})
+    magazines = list(db.magazines.find({}).skip(skip).limit(limit).sort([("upload_date", -1)]))
+    total_count = db.magazines.count_documents({})
     
     # If no magazines in magazines collection, fall back to issues
     if not magazines:
-        magazines = await db.issues.find({}).skip(skip).limit(limit).sort([("published_at", -1)]).to_list(limit)
-        total_count = await db.issues.count_documents({})
+        magazines = list(db.issues.find({}).skip(skip).limit(limit).sort([("published_at", -1)]))
+        total_count = db.issues.count_documents({})
     
     # Convert ObjectId to string
     for magazine in magazines:
