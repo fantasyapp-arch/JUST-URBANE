@@ -226,7 +226,7 @@ async def duplicate_article(
     """Duplicate an existing article"""
     try:
         # Get original article
-        original_article = await db.articles.find_one({"id": article_id})
+        original_article = db.articles.find_one({"id": article_id})
         
         if not original_article:
             raise HTTPException(status_code=404, detail="Article not found")
