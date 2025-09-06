@@ -154,6 +154,14 @@ const router = createBrowserRouter([
     element: <AdminArticlesPage />
   },
   {
+    path: "/admin/articles/new",
+    element: <AdminArticleEditorPage />
+  },
+  {
+    path: "/admin/articles/edit/:articleId",
+    element: <AdminArticleEditorPage />
+  },
+  {
     path: "/admin/magazines",
     element: <AdminMagazinesPage />
   },
