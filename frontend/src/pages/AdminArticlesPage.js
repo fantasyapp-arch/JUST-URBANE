@@ -381,11 +381,7 @@ const AdminArticlesPage = () => {
       {/* Delete Confirmation Modal */}
       {showDeleteModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            className="bg-white rounded-lg p-6 max-w-sm w-full"
-          >
+          <div className="bg-white rounded-lg p-6 max-w-sm w-full transform scale-100 transition-all">
             <div className="flex items-center space-x-3">
               <div className="flex-shrink-0">
                 <div className="w-10 h-10 bg-red-100 rounded-full flex items-center justify-center">
@@ -417,7 +413,7 @@ const AdminArticlesPage = () => {
                 Cancel
               </button>
             </div>
-          </motion.div>
+          </div>
         </div>
       )}
     </div>
