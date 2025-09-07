@@ -19,13 +19,13 @@ const ImagePerformanceTest = () => {
     },
     {
       name: 'Article Image',
-      original: 'https://images.unsplash.com/photo-1557804506-669a67965ba0?w=400&h=300&fit=crop&crop=faces,center&auto=format&q=75',
-      optimized: 'https://images.unsplash.com/photo-1557804506-669a67965ba0?w=400&h=300&fit=crop&crop=faces,center&auto=format&q=75'
+      original: 'https://images.unsplash.com/photo-1557804506-669a67965ba0?w=800&h=600&fit=crop&crop=faces,center&auto=format&q=80',
+      optimized: 'https://images.unsplash.com/photo-1557804506-669a67965ba0?w=800&h=600&fit=crop&crop=faces,center&auto=format&q=80'
     },
     {
       name: 'Card Image',
       original: 'https://images.unsplash.com/photo-1551816230-ef5deaed4a26?w=800&h=600&fit=crop&crop=faces,center&auto=format&q=80',
-      optimized: 'https://images.unsplash.com/photo-1551816230-ef5deaed4a26?w=150&h=150&fit=crop&crop=faces,center&auto=format&q=70'
+      optimized: 'https://images.unsplash.com/photo-1551816230-ef5deaed4a26?w=800&h=600&fit=crop&crop=faces,center&auto=format&q=80'
     },
     {
       name: 'Thumbnail',

@@ -1,4 +1,5 @@
 import React from 'react';
+import { NextGenImage } from './OptimizedImage';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Calendar, Clock, User, Share2, Bookmark, ArrowLeft } from 'lucide-react';
@@ -125,11 +126,10 @@ const MensFashionSuitGuidePage = () => {
           </p>
 
           <figure className="my-6 sm:my-8 -mx-2 sm:-mx-4">
-            <img 
-              src="https://customer-assets.emergentagent.com/job_justurbane-luxury/artifacts/t9lw0ha9_mohamad-khosravi-YGJ9vfuwyUg-unsplash.jpg"
+            <NextGenImage src="https://customer-assets.emergentagent.com/job_justurbane-luxury/artifacts/t9lw0ha9_mohamad-khosravi-YGJ9vfuwyUg-unsplash.jpg?w=1920&h=1080&fit=crop&crop=faces,center&auto=format&q=90"
               alt="Professional businessman in a perfectly tailored suit demonstrating corporate excellence and modern fashion"
               className="w-full h-48 sm:h-64 md:h-96 object-cover rounded-lg shadow-lg"
-            />
+            / enableWebP={true} />
             <figcaption className="text-sm text-gray-600 mt-3 text-center italic px-2">
               The perfect example of corporate dressing excellence - confidence meets style in professional attire
             </figcaption>
@@ -148,11 +148,10 @@ const MensFashionSuitGuidePage = () => {
           </p>
 
           <figure className="my-6 sm:my-8 -mx-2 sm:-mx-4">
-            <img 
-              src="https://customer-assets.emergentagent.com/job_justurbane-luxury/artifacts/8g715xvh_mohamad-khosravi-vS0Kya7E5V4-unsplash.jpg"
+            <NextGenImage src="https://customer-assets.emergentagent.com/job_justurbane-luxury/artifacts/8g715xvh_mohamad-khosravi-vS0Kya7E5V4-unsplash.jpg?w=1920&h=1080&fit=crop&crop=faces,center&auto=format&q=90"
               alt="Elegant businessman in formal attire showcasing the refined style and sophisticated fashion choices for corporate professionals"
               className="w-full h-48 sm:h-64 md:h-96 object-cover rounded-lg shadow-lg"
-            />
+            / enableWebP={true} />
             <figcaption className="text-sm text-gray-600 mt-3 text-center italic px-2">
               Sophisticated styling and attention to detail - the hallmarks of a well-dressed professional
             </figcaption>
@@ -211,11 +210,10 @@ const MensFashionSuitGuidePage = () => {
           </p>
 
           <figure className="my-6 sm:my-8 -mx-2 sm:-mx-4">
-            <img 
-              src="https://customer-assets.emergentagent.com/job_justurbane-luxury/artifacts/qx8ns45s_mohamad-khosravi--eb0moHDPBI-unsplash.jpg"
+            <NextGenImage src="https://customer-assets.emergentagent.com/job_justurbane-luxury/artifacts/qx8ns45s_mohamad-khosravi--eb0moHDPBI-unsplash.jpg?w=1920&h=1080&fit=crop&crop=faces,center&auto=format&q=90"
               alt="Modern professional man in a navy blue suit demonstrating the perfect balance of style and sophistication in corporate fashion"
               className="w-full h-48 sm:h-64 md:h-96 object-cover rounded-lg shadow-lg"
-            />
+            / enableWebP={true} />
             <figcaption className="text-sm text-gray-600 mt-3 text-center italic px-2">
               Navy blue sophistication - one of the essential colors every professional wardrobe needs
             </figcaption>

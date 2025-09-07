@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { NextGenImage } from './OptimizedImage';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { Calendar, Clock, Eye, User, Tag, Crown, Share2, Heart, ArrowLeft, BookOpen } from 'lucide-react';
 import { motion } from 'framer-motion';
@@ -56,7 +57,7 @@ const ArticlePage = () => {
 
 <p>This resort is a crown on the apex of Palm Jumeirah, it's a city in its own right only this place is not lost. Atlantis' towers of red bricks remind me of a castle set in a fairy tale, its iconic central arch opens a gateway to a magical kingdom.</p>
 
-<img src="https://images.unsplash.com/photo-1613395877344-13d4a8e0d49e?w=800&h=600&fit=crop&crop=faces,center&auto=format&q=80" alt="The iconic Atlantis The Palm Dubai with its majestic architecture" class="article-image" />
+<NextGenImage src="https://images.unsplash.com/photo-1613395877344-13d4a8e0d49e?w=800&h=600&fit=crop&crop=faces,center&auto=format&q=80" alt="The iconic Atlantis The Palm Dubai with its majestic architecture" class="article-image" / enableWebP={true} />
 
 <p>Either side of this arch looks like wings extended to embrace its grandeur with elaborate playgrounds, gardens filled with butterflies and birds, and water bodies to soothe the soul every few steps. The lobby is dominated by a ceiling-high, multicoloured glass sculpture that looks like Medusa's head filled with colourful snakes rising from a fountain.</p>
 
@@ -74,7 +75,7 @@ const ArticlePage = () => {
 
 <p>The legend of Atlantis truly comes alive amidst the intriguing tunnels and passageways. There is adventure and education in equal measure here. Not only can you spend hours watching the magical sea creatures, but in the chambers, you'll learn about the history of Atlantis, which has been lost for thousands of years.</p>
 
-<img src="https://images.unsplash.com/photo-1583212292454-1fe6229603b7?w=800&h=600&fit=crop&crop=faces,center&auto=format&q=80" alt="The Lost Chambers Aquarium brings the myth of Atlantis to life" class="article-image" />
+<NextGenImage src="https://images.unsplash.com/photo-1583212292454-1fe6229603b7?w=800&h=600&fit=crop&crop=faces,center&auto=format&q=80" alt="The Lost Chambers Aquarium brings the myth of Atlantis to life" class="article-image" / enableWebP={true} />
 
 <h3>Aquaventure Waterpark Adventures</h3>
 

@@ -124,11 +124,11 @@ const HomePage = () => {
               className="relative"
             >
               <img 
-                src={heroArticle?.hero_image || 'https://images.unsplash.com/photo-1559839049-2b350c4284cb?w=800&h=600&fit=crop&crop=faces,center&auto=format&q=80'}
+                src={heroArticle?.hero_image || 'https://images.unsplash.com/photo-1559839049-2b350c4284cb?w=1920&h=1080&fit=crop&crop=faces,center&auto=format&q=90'}
                 alt={heroArticle?.title || 'Just Urbane'}
                 className="w-full h-96 lg:h-[500px] object-cover rounded-lg shadow-lg"
                 onError={(e) => {
-                  e.target.src = 'https://images.unsplash.com/photo-1559839049-2b350c4284cb?w=800&h=600&fit=crop&crop=faces,center&auto=format&q=80';
+                  e.target.src = 'https://images.unsplash.com/photo-1559839049-2b350c4284cb?w=1920&h=1080&fit=crop&crop=faces,center&auto=format&q=90';
                 }}
               />
             </motion.div>

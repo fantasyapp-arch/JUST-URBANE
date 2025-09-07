@@ -50,10 +50,10 @@ const TravelPage = () => {
       slug: 'rajasthan-palace-hotels',
       region: 'India',
       type: 'Luxury Hotels',
-      hero_image: 'https://images.unsplash.com/photo-1545558014-8692077e9b5c?w=800&h=600&fit=crop&crop=faces,center&auto=format&q=80',
+      hero_image: 'https://images.unsplash.com/photo-1545558014-8692077e9b5c?w=1920&h=1080&fit=crop&crop=faces,center&auto=format&q=90',
       gallery: [
-        'https://images.unsplash.com/photo-1545558014-8692077e9b5c?w=800&h=600&fit=crop&crop=faces,center&auto=format&q=80',
-        'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop&crop=faces,center&auto=format&q=80',
+        'https://images.unsplash.com/photo-1545558014-8692077e9b5c?w=1920&h=1080&fit=crop&crop=faces,center&auto=format&q=90',
+        'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=1920&h=1080&fit=crop&crop=faces,center&auto=format&q=90',
         'https://images.unsplash.com/photo-1570641963303-92ce4845ed4c?w=800&h=600&fit=crop&crop=faces,center&auto=format&q=80'
       ],
       description: 'Experience royal luxury in converted palace hotels across Rajasthan, where maharajas once lived and legends were born.',
@@ -71,9 +71,9 @@ const TravelPage = () => {
       slug: 'kerala-backwaters-luxury',
       region: 'India',
       type: 'Nature & Wellness',
-      hero_image: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop&crop=faces,center&auto=format&q=80',
+      hero_image: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=1920&h=1080&fit=crop&crop=faces,center&auto=format&q=90',
       gallery: [
-        'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop&crop=faces,center&auto=format&q=80',
+        'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=1920&h=1080&fit=crop&crop=faces,center&auto=format&q=90',
         'https://images.unsplash.com/photo-1586500036706-41963de24d8b?w=800&h=600&fit=crop&crop=faces,center&auto=format&q=80'
       ],
       description: 'Serene luxury houseboats navigating the tranquil backwaters of God\'s Own Country, offering unparalleled relaxation.',
@@ -93,7 +93,7 @@ const TravelPage = () => {
       type: 'Mountain Resorts',
       hero_image: 'https://images.unsplash.com/photo-1551524164-d526ff10480d?w=1920&h=1080&fit=crop&crop=faces,center&auto=format&q=90',
       gallery: [
-        'https://images.unsplash.com/photo-1551524164-d526ff10480d?w=800&h=600&fit=crop&crop=faces,center&auto=format&q=80',
+        'https://images.unsplash.com/photo-1551524164-d526ff10480d?w=1200&h=800&fit=crop&crop=faces,center&auto=format&q=85',
         'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop&crop=faces,center&auto=format&q=80'
       ],
       description: 'World-class alpine resorts offering breathtaking mountain views, Michelin-starred dining, and exclusive ski access.',
@@ -111,9 +111,9 @@ const TravelPage = () => {
       slug: 'maldives-overwater-villas',
       region: 'Asia Pacific',
       type: 'Beach & Island',
-      hero_image: 'https://images.unsplash.com/photo-1573843981267-be1999ff37cd?w=800&h=600&fit=crop&crop=faces,center&auto=format&q=80',
+      hero_image: 'https://images.unsplash.com/photo-1573843981267-be1999ff37cd?w=1920&h=1080&fit=crop&crop=faces,center&auto=format&q=90',
       gallery: [
-        'https://images.unsplash.com/photo-1573843981267-be1999ff37cd?w=800&h=600&fit=crop&crop=faces,center&auto=format&q=80',
+        'https://images.unsplash.com/photo-1573843981267-be1999ff37cd?w=1920&h=1080&fit=crop&crop=faces,center&auto=format&q=90',
         'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800&h=600&fit=crop&crop=faces,center&auto=format&q=80'
       ],
       description: 'Ultimate tropical luxury in overwater villas surrounded by crystal-clear lagoons and pristine coral reefs.',

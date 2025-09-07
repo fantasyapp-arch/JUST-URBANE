@@ -58,7 +58,7 @@ const IssuesPage = () => {
             <div className="relative group cursor-pointer" onClick={openMagazineReader}>
               <div className="bg-gradient-to-br from-gray-100 to-gray-200 rounded-2xl p-6 shadow-2xl group-hover:shadow-3xl transition-all duration-500">
                 <img
-                  src={featuredMagazine?.pageImage || 'https://images.unsplash.com/photo-1586953135225-fc4e67e98b90?w=1200&h=800&fit=crop&crop=faces,center&auto=format&q=85'}
+                  src={featuredMagazine?.pageImage || 'https://images.unsplash.com/photo-1586953135225-fc4e67e98b90?w=1920&h=1080&fit=crop&crop=faces,center&auto=format&q=90'}
                   alt="Just Urbane Magazine"
                   className="w-full aspect-[2622/3236] object-cover rounded-xl group-hover:scale-[1.02] transition-transform duration-500"
                 />

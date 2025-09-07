@@ -126,7 +126,7 @@ const MagazineCoverCard = ({ issue, onReadClick, canRead, index = 0 }) => {
                       alt=""
                       className="w-full h-full object-cover"
                       onError={(e) => {
-                        e.target.src = 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=300&fit=crop&crop=faces,center&auto=format&q=75';
+                        e.target.src = 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=1920&h=1080&fit=crop&crop=faces,center&auto=format&q=90';
                       }}
                     />
                   ) : (
