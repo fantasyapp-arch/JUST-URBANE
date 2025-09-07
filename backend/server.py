@@ -40,6 +40,7 @@ app.include_router(magazine_router)
 app.include_router(homepage_router)
 app.include_router(article_router)
 app.include_router(media_router)
+app.include_router(optimization_api)
 
 # Mount static files for media serving
 from pathlib import Path
