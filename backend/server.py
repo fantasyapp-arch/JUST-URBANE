@@ -28,6 +28,7 @@ from admin_homepage_routes import homepage_router
 from admin_article_routes import article_router
 from admin_media_routes import media_router
 from image_optimizer import advanced_image_optimizer
+from image_optimization_api import optimization_api
 
 load_dotenv()
 
