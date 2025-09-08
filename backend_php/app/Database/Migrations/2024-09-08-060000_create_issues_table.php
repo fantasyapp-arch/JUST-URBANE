@@ -42,7 +42,7 @@ class CreateIssuesTable extends Migration
             ],
             'published_at' => [
                 'type'           => 'DATETIME',
-                'default'        => 'CURRENT_TIMESTAMP',
+                'null'           => true,
             ],
             'created_at' => [
                 'type'           => 'DATETIME',
