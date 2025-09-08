@@ -1,5 +1,5 @@
 import React from 'react';
-import { NextGenImage } from './OptimizedImage';
+import { NextGenImage } from '../components/OptimizedImage';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Calendar, Clock, User, Share2, Bookmark, ArrowLeft } from 'lucide-react';
