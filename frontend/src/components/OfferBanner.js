@@ -16,7 +16,7 @@ const OfferBanner = ({ isVisible, onClose }) => {
               <NextGenImage src="https://images.unsplash.com/photo-1586953208448-b95a79798f07?w=1920&h=1080&fit=crop&crop=faces,center&auto=format&q=90"
                 alt="Latest Magazine Issue" 
                 className="w-full h-full object-cover"
-              / enableWebP={true} />
+                enableWebP={true} />
             </div>
             <div>
               <p className="text-sm text-gray-600 uppercase tracking-wide font-medium">
