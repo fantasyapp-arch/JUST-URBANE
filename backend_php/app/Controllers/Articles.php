@@ -4,6 +4,9 @@ namespace App\Controllers;
 
 use CodeIgniter\RESTful\ResourceController;
 use App\Models\ArticleModel;
+use Firebase\JWT\JWT;
+use Firebase\JWT\Key;
+use Exception;
 
 class Articles extends ResourceController
 {
