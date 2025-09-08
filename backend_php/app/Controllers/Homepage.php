@@ -5,6 +5,7 @@ namespace App\Controllers;
 use CodeIgniter\RESTful\ResourceController;
 use App\Models\ArticleModel;
 use App\Models\HomepageConfigModel;
+use Exception;
 
 class Homepage extends ResourceController
 {
