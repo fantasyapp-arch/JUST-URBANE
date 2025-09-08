@@ -445,15 +445,19 @@ async def get_public_homepage_content():
         # Fallback: get some articles automatically
         try:
             # Get trending articles (by views)
-            trending = await db.articles.find({}).sort([("views", -1)]).limit(4).to_list(4)
+            trending_cursor = db.articles.find({}).sort([("views", -1)]).limit(4)
+            trending = await trending_cursor.to_list(length=4)
             
             # Get latest articles
-            latest = await db.articles.find({}).sort([("created_at", -1)]).limit(6).to_list(6)
+            latest_cursor = db.articles.find({}).sort([("created_at", -1)]).limit(6)
+            latest = await latest_cursor.to_list(length=6)
             
             # Get featured articles
-            featured = await db.articles.find({"featured": True}).limit(3).to_list(3)
+            featured_cursor = db.articles.find({"featured": True}).limit(3)
+            featured = await featured_cursor.to_list(length=3)
             if not featured:
-                featured = await db.articles.find({}).sort([("views", -1)]).limit(3).to_list(3)
+                featured_cursor = db.articles.find({}).sort([("views", -1)]).limit(3)
+                featured = await featured_cursor.to_list(length=3)
             
             # Convert ObjectIds
             for articles_list in [trending, latest, featured]:
