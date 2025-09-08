@@ -373,23 +373,12 @@ async def get_public_homepage_content():
     """Get homepage content for public display"""
     try:
         # For now, just return all articles organized by category
-        # Get all articles using proper Motor syntax
-        all_articles = []
-        cursor = db.articles.find({})
-        
-        # Use different approach based on Motor version
-        try:
-            # Try the new Motor syntax first
-            articles_list = await cursor.to_list(length=None)
-        except AttributeError:
-            # Fall back to the old syntax
-            articles_list = []
-            while await cursor.fetch_next():
-                doc = cursor.next_object()
-                articles_list.append(doc)
+        # Get all articles using the same approach as the working articles API
+        all_articles_raw = list(db.articles.find({}))
         
         # Convert ObjectIds and organize
-        for article in articles_list:
+        all_articles = []
+        for article in all_articles_raw:
             article["id"] = str(article.get("_id", article.get("id", "")))
             if "_id" in article:
                 del article["_id"]
