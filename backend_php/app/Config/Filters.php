@@ -38,7 +38,7 @@ class Filters extends BaseFilters
         ],
         'after' => [
             'cors',
-            'toolbar',
+            // 'toolbar',
             // 'honeypot',
             // 'secureheaders',
         ],
