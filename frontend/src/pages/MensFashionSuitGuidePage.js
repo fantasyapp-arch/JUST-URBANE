@@ -151,7 +151,7 @@ const MensFashionSuitGuidePage = () => {
             <NextGenImage src="https://customer-assets.emergentagent.com/job_justurbane-luxury/artifacts/8g715xvh_mohamad-khosravi-vS0Kya7E5V4-unsplash.jpg?w=1920&h=1080&fit=crop&crop=faces,center&auto=format&q=90"
               alt="Elegant businessman in formal attire showcasing the refined style and sophisticated fashion choices for corporate professionals"
               className="w-full h-48 sm:h-64 md:h-96 object-cover rounded-lg shadow-lg"
-            / enableWebP={true} />
+              enableWebP={true} />
             <figcaption className="text-sm text-gray-600 mt-3 text-center italic px-2">
               Sophisticated styling and attention to detail - the hallmarks of a well-dressed professional
             </figcaption>
