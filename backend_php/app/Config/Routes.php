@@ -16,6 +16,9 @@ $routes->group('api', function($routes) {
     // Health check
     $routes->get('health', 'Health::index');
     
+    // Test endpoint
+    $routes->get('test/articles', 'Test::articles');
+    
     // Authentication
     $routes->post('auth/register', 'Auth::register');
     $routes->post('auth/login', 'Auth::login');
