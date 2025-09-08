@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { NextGenImage } from './OptimizedImage';
 
 /**
  * OptimizedImage Component
