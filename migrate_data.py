@@ -297,7 +297,7 @@ def main():
     mongo_db = connect_mongo()
     mysql_conn = connect_mysql()
     
-    if not mongo_db or not mysql_conn:
+    if mongo_db is None or mysql_conn is None:
         print("❌ Database connection failed. Exiting.")
         return
     
