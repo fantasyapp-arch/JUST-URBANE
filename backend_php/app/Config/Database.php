@@ -26,10 +26,10 @@ class Database extends Config
      */
     public array $default = [
         'DSN'      => '',
-        'hostname' => $_ENV['database.default.hostname'] ?? 'localhost',
-        'username' => $_ENV['database.default.username'] ?? 'urbane_user',
-        'password' => $_ENV['database.default.password'] ?? 'urbane_password',
-        'database' => $_ENV['database.default.database'] ?? 'just_urbane_php',
+        'hostname' => 'localhost',
+        'username' => 'urbane_user',
+        'password' => 'urbane_password',
+        'database' => 'just_urbane_php',
         'DBDriver' => 'MySQLi',
         'DBPrefix' => '',
         'pConnect' => false,
