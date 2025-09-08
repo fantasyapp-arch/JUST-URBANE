@@ -213,7 +213,7 @@ const MensFashionSuitGuidePage = () => {
             <NextGenImage src="https://customer-assets.emergentagent.com/job_justurbane-luxury/artifacts/qx8ns45s_mohamad-khosravi--eb0moHDPBI-unsplash.jpg?w=1920&h=1080&fit=crop&crop=faces,center&auto=format&q=90"
               alt="Modern professional man in a navy blue suit demonstrating the perfect balance of style and sophistication in corporate fashion"
               className="w-full h-48 sm:h-64 md:h-96 object-cover rounded-lg shadow-lg"
-            / enableWebP={true} />
+              enableWebP={true} />
             <figcaption className="text-sm text-gray-600 mt-3 text-center italic px-2">
               Navy blue sophistication - one of the essential colors every professional wardrobe needs
             </figcaption>
