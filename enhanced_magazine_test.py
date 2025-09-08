@@ -11,7 +11,7 @@ from datetime import datetime
 from typing import Dict, Any, Optional
 
 class EnhancedMagazineAPITester:
-    def __init__(self, base_url: str = "https://urbane-dashboard.preview.emergentagent.com"):
+    def __init__(self, base_url: str = "https://magazine-admin.preview.emergentagent.com"):
         self.base_url = base_url
         self.session = requests.Session()
         self.auth_token = None
@@ -436,7 +436,7 @@ class EnhancedMagazineAPITester:
         try:
             checkout_data = {
                 "package_id": "digital_annual",
-                "origin_url": "https://urbane-dashboard.preview.emergentagent.com"
+                "origin_url": "https://magazine-admin.preview.emergentagent.com"
             }
             
             response = self.session.post(

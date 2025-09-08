@@ -11,7 +11,7 @@ from datetime import datetime
 from typing import Dict, Any, Optional
 
 class JustUrbaneAPITester:
-    def __init__(self, base_url: str = "https://urbane-dashboard.preview.emergentagent.com"):
+    def __init__(self, base_url: str = "https://magazine-admin.preview.emergentagent.com"):
         self.base_url = base_url
         self.session = requests.Session()
         self.auth_token = None
@@ -920,7 +920,7 @@ class JustUrbaneAPITester:
             response = self.session.options(
                 f"{self.base_url}/health",
                 headers={
-                    "Origin": "https://urbane-dashboard.preview.emergentagent.com",
+                    "Origin": "https://magazine-admin.preview.emergentagent.com",
                     "Access-Control-Request-Method": "GET",
                     "Access-Control-Request-Headers": "Content-Type,Authorization"
                 },
@@ -1343,7 +1343,7 @@ class JustUrbaneAPITester:
         try:
             checkout_data = {
                 "package_id": "digital_annual",
-                "origin_url": "https://urbane-dashboard.preview.emergentagent.com"
+                "origin_url": "https://magazine-admin.preview.emergentagent.com"
             }
             
             response = self.session.post(
@@ -2759,7 +2759,7 @@ def main():
     print("=" * 70)
     
     # Use the backend URL from frontend environment (production URL)
-    backend_url = "https://urbane-dashboard.preview.emergentagent.com"
+    backend_url = "https://magazine-admin.preview.emergentagent.com"
     tester = JustUrbaneAPITester(backend_url)
     
     # Run CSS alignment verification tests
