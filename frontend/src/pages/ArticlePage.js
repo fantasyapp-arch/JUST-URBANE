@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { NextGenImage } from './OptimizedImage';
+import { NextGenImage } from '../components/OptimizedImage';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { Calendar, Clock, Eye, User, Tag, Crown, Share2, Heart, ArrowLeft, BookOpen } from 'lucide-react';
 import { motion } from 'framer-motion';
