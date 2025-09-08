@@ -374,37 +374,33 @@ async def get_public_homepage_content():
     try:
         # For now, just return all articles organized by category
         # Get all articles
-        all_articles_cursor = db.articles.find({})
-        all_articles = await all_articles_cursor.to_list(length=None)
-        
-        # Convert ObjectIds and organize
-        articles = []
-        for article in all_articles:
+        all_articles = []
+        async for article in db.articles.find({}):
             article["id"] = str(article.get("_id", article.get("id", "")))
             if "_id" in article:
                 del article["_id"]
-            articles.append(article)
+            all_articles.append(article)
         
         # Organize by category
-        hero_article = articles[0] if articles else None
+        hero_article = all_articles[0] if all_articles else None
         
         return {
             "hero_article": hero_article,
             "sections": {
-                "featured": articles[:4],
-                "trending": articles[:6], 
-                "latest": articles[:8],
-                "food": [a for a in articles if a.get("category") == "food"][:4],
-                "travel": [a for a in articles if a.get("category") == "travel"][:4],
-                "fashion": [a for a in articles if a.get("category") == "fashion"][:4],
-                "people": [a for a in articles if a.get("category") == "people"][:4],
-                "luxury": [a for a in articles if a.get("category") == "luxury"][:4],
-                "technology": [a for a in articles if a.get("category") == "technology"][:4],
-                "business": [a for a in articles if a.get("category") == "business"][:4],
-                "culture": [a for a in articles if a.get("category") == "culture"][:4],
-                "entertainment": [a for a in articles if a.get("category") == "entertainment"][:4]
+                "featured": all_articles[:4],
+                "trending": all_articles[:6], 
+                "latest": all_articles[:8],
+                "food": [a for a in all_articles if a.get("category") == "food"][:4],
+                "travel": [a for a in all_articles if a.get("category") == "travel"][:4],
+                "fashion": [a for a in all_articles if a.get("category") == "fashion"][:4],
+                "people": [a for a in all_articles if a.get("category") == "people"][:4],
+                "luxury": [a for a in all_articles if a.get("category") == "luxury"][:4],
+                "technology": [a for a in all_articles if a.get("category") == "technology"][:4],
+                "business": [a for a in all_articles if a.get("category") == "business"][:4],
+                "culture": [a for a in all_articles if a.get("category") == "culture"][:4],
+                "entertainment": [a for a in all_articles if a.get("category") == "entertainment"][:4]
             },
-            "total_articles": len(articles),
+            "total_articles": len(all_articles),
             "last_updated": datetime.utcnow().isoformat()
         }
         
