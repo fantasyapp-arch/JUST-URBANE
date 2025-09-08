@@ -129,7 +129,7 @@ const MensFashionSuitGuidePage = () => {
             <NextGenImage src="https://customer-assets.emergentagent.com/job_justurbane-luxury/artifacts/t9lw0ha9_mohamad-khosravi-YGJ9vfuwyUg-unsplash.jpg?w=1920&h=1080&fit=crop&crop=faces,center&auto=format&q=90"
               alt="Professional businessman in a perfectly tailored suit demonstrating corporate excellence and modern fashion"
               className="w-full h-48 sm:h-64 md:h-96 object-cover rounded-lg shadow-lg"
-            / enableWebP={true} />
+              enableWebP={true} />
             <figcaption className="text-sm text-gray-600 mt-3 text-center italic px-2">
               The perfect example of corporate dressing excellence - confidence meets style in professional attire
             </figcaption>
