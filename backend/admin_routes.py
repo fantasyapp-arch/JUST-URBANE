@@ -224,6 +224,41 @@ def delete_magazine_admin(
     
     return {"message": "Magazine deleted successfully"}
 
+@admin_router.put("/magazines/{magazine_id}")
+def update_magazine_admin(
+    magazine_id: str,
+    magazine_update: dict,
+    current_admin: AdminUser = Depends(get_current_admin_user)
+):
+    """Update magazine metadata"""
+    # Remove None values and prepare update data
+    update_data = {k: v for k, v in magazine_update.items() if v is not None}
+    
+    if not update_data:
+        raise HTTPException(status_code=400, detail="No update data provided")
+    
+    # Try updating with custom id first
+    result = db.issues.update_one(
+        {"id": magazine_id}, 
+        {"$set": update_data}
+    )
+    
+    # If not found with custom id, try with MongoDB ObjectId
+    if result.matched_count == 0:
+        try:
+            from bson import ObjectId
+            result = db.issues.update_one(
+                {"_id": ObjectId(magazine_id)}, 
+                {"$set": update_data}
+            )
+        except:
+            pass
+    
+    if result.matched_count == 0:
+        raise HTTPException(status_code=404, detail="Magazine not found")
+    
+    return {"message": "Magazine updated successfully"}
+
 # User Management Endpoints
 @admin_router.get("/users")
 def get_all_users_admin(
