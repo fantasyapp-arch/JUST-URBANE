@@ -1074,11 +1074,11 @@ class JustUrbaneAPITester:
                 self.log_test("Admin Magazine Update", False, "No magazine ID found")
                 return
             
-            # Test update with form data
+            # Test update with form data (as expected by the endpoint)
             update_data = {
                 "title": "Updated Test Magazine Title",
                 "description": "Updated test description",
-                "is_featured": True
+                "is_featured": "true"  # Form data expects string
             }
                 
             response = self.session.put(
