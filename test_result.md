@@ -2149,6 +2149,18 @@ backend:
         agent: "testing"
         comment: "🎯 3D MAGAZINE FUNCTIONALITY VERIFICATION COMPLETED - 90.5% SUCCESS RATE (19/21 comprehensive tests + 8/10 focused tests passed). ✅ Magazine Reader Backend: APIs fully support 3D flip book reader with all required fields (id, title, body, author_name, category, published_at, is_premium) present in 20 articles. Response time excellent at 0.13s. ✅ Content Delivery: Magazine content properly structured for 3D display with good category distribution (tech, fashion, auto, travel, people, grooming). ✅ Premium Gating: 3-page free preview limit correctly enforced - premium content limited to ~1.1 pages (532 chars) with '[Premium content continues...]' markers. ✅ User Authentication: JWT system fully functional for subscription access - token generation, login, and authentication working correctly. ✅ Performance: Excellent API response times - Articles (0.01s), Categories (0.01s), Issues (0.05s), Packages (0.05s). Average response time 0.03s. ✅ Magazine Issues API: 2 magazine issues retrieved with proper structure for month/year grouping and digital availability flags. ❌ Minor Issues: Some test articles have insufficient content length (non-critical), premium articles endpoint returns 401 for non-premium users (expected behavior). CRITICAL: All 5 priority areas from review request working correctly - 3D magazine functionality is production-ready."
 
+  - task: "Magazine Admin Panel Management"
+    implemented: true
+    working: false
+    file: "backend/admin_routes.py"
+    stuck_count: 1
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: false
+        agent: "testing"
+        comment: "🚨 MAGAZINE ADMIN PANEL TESTING COMPLETED - 83.3% SUCCESS RATE (15/18 tests passed). ✅ Issue #2 RESOLVED: Existing magazines ARE showing in admin panel - Retrieved 1 magazine successfully with proper structure (ID, title, description, month, year). ❌ Issue #1 CONFIRMED: Delete option NOT working in admin panel - DELETE API returns 404 'Magazine not found'. 🔍 ROOT CAUSE IDENTIFIED: ID mismatch between admin listing and delete operations. Admin listing converts MongoDB '_id' to 'id' field (68bbc05e380db30c10043bc1), but delete API searches for document with custom 'id' field instead of '_id' field. Database shows: Magazine exists with _id=68bbc05e380db30c10043bc1 but has different custom id=59b1c167-19b3-422a-8a2d-69a1f33bcf8f. Query {'id': '68bbc05e380db30c10043bc1'} returns NOT FOUND, but query {'_id': ObjectId('68bbc05e380db30c10043bc1')} returns FOUND. ✅ Admin Authentication: Working correctly with admin/admin123 credentials. ✅ Magazine Listing: Proper data structure and collection consistency verified. ✅ Update API: Also affected by same ID mismatch issue. CRITICAL FIX NEEDED: admin_routes.py line 212 should use {'_id': ObjectId(magazine_id)} instead of {'id': magazine_id} for delete operations."
+
   - task: "Image Optimization System"
     implemented: true
     working: true
