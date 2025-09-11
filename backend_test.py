@@ -853,7 +853,7 @@ class JustUrbaneAPITester:
             
             # Test 3: Webhook Endpoint Accessibility
             response = self.session.post(
-                f"{self.base_url}/payments/razorpay/webhook",
+                f"{self.base_url}/api/payments/razorpay/webhook",
                 json={"event": "test", "payload": {}},
                 headers={"Content-Type": "application/json", "X-Razorpay-Signature": "test"},
                 timeout=10
