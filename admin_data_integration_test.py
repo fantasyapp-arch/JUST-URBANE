@@ -11,7 +11,7 @@ from datetime import datetime
 from typing import Dict, Any, Optional, List
 
 class AdminDataIntegrationTester:
-    def __init__(self, base_url: str = "https://urbane-admin-fix.preview.emergentagent.com"):
+    def __init__(self, base_url: str = "https://urbane-admin-fix-1.preview.emergentagent.com"):
         self.base_url = base_url
         self.session = requests.Session()
         self.admin_token = None
