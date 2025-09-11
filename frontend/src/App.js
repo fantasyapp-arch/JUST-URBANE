@@ -168,6 +168,14 @@ const router = createBrowserRouter([
     element: <AdminMagazinesPage />
   },
   {
+    path: "/admin/magazines/new",
+    element: <AdminMagazineEditorPage />
+  },
+  {
+    path: "/admin/magazines/edit/:magazineId",
+    element: <AdminMagazineEditorPage />
+  },
+  {
     path: "/admin/homepage",
     element: <AdminHomepagePage />
   },
