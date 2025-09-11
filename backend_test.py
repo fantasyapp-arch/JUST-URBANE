@@ -783,7 +783,7 @@ class JustUrbaneAPITester:
         
         try:
             # Test 1: Payment Packages API
-            response = self.session.get(f"{self.base_url}/payments/packages", timeout=10)
+            response = self.session.get(f"{self.base_url}/api/payments/packages", timeout=10)
             if response.status_code == 200:
                 data = response.json()
                 packages = data.get("packages", [])
