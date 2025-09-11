@@ -73,9 +73,8 @@ class MagazineDeleteTester:
             if response.status_code == 200:
                 data = response.json()
                 magazines = data.get("magazines", [])
-                total_count = data.get("total_count", 0)
                 
-                self.log_test("Get Magazines List", True, f"Retrieved {len(magazines)} magazines (total: {total_count})")
+                self.log_test("Get Magazines List", True, f"Retrieved {len(magazines)} magazines")
                 
                 # Return magazines for further testing
                 return magazines
