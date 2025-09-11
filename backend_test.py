@@ -920,7 +920,7 @@ class JustUrbaneAPITester:
             response = self.session.options(
                 f"{self.base_url}/health",
                 headers={
-                    "Origin": "https://backend-restore-2.preview.emergentagent.com",
+                    "Origin": "https://urbane-admin-fix.preview.emergentagent.com",
                     "Access-Control-Request-Method": "GET",
                     "Access-Control-Request-Headers": "Content-Type,Authorization"
                 },
@@ -1730,7 +1730,7 @@ class JustUrbaneAPITester:
         try:
             checkout_data = {
                 "package_id": "digital_annual",
-                "origin_url": "https://backend-restore-2.preview.emergentagent.com"
+                "origin_url": "https://urbane-admin-fix.preview.emergentagent.com"
             }
             
             response = self.session.post(
@@ -3146,7 +3146,7 @@ def main():
     print("=" * 70)
     
     # Use the backend URL from frontend environment (production URL)
-    backend_url = "https://backend-restore-2.preview.emergentagent.com"
+    backend_url = "https://urbane-admin-fix.preview.emergentagent.com"
     tester = JustUrbaneAPITester(backend_url)
     
     # Run CSS alignment verification tests
