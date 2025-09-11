@@ -1,0 +1,110 @@
+[
+  {
+    "_id": "68bbbd9415ed2bceb45eca65",
+    "id": "0a6c4cad-5688-42d6-a934-7b6698f390b3",
+    "active": true,
+    "hero_article": "7f189eae-4042-4823-a74a-d74819bf968e",
+    "featured_articles": [
+      "c283f961-69a9-4c92-85a0-930f418c8252"
+    ],
+    "fashion_articles": [
+      "7f189eae-4042-4823-a74a-d74819bf968e",
+      "6cebea4f-3afe-4d6f-87da-cdb5b9655d4e"
+    ],
+    "people_articles": [
+      "c283f961-69a9-4c92-85a0-930f418c8252"
+    ],
+    "business_articles": [],
+    "technology_articles": [
+      "3c346b71-6a0b-4380-a020-f030dfed796e"
+    ],
+    "travel_articles": [
+      "73cd2c94-d91b-47a8-9b32-d254edb80456",
+      "c3de336a-571c-4d8c-97c2-48ffa1d63b4e"
+    ],
+    "culture_articles": [],
+    "entertainment_articles": [],
+    "trending_articles": [
+      "7f189eae-4042-4823-a74a-d74819bf968e",
+      "6cebea4f-3afe-4d6f-87da-cdb5b9655d4e",
+      "c283f961-69a9-4c92-85a0-930f418c8252",
+      "3c346b71-6a0b-4380-a020-f030dfed796e"
+    ],
+    "latest_articles": [
+      "55ac5fb1-04f4-41e8-a212-6f519182a79e",
+      "7f189eae-4042-4823-a74a-d74819bf968e",
+      "6cebea4f-3afe-4d6f-87da-cdb5b9655d4e",
+      "c3de336a-571c-4d8c-97c2-48ffa1d63b4e",
+      "73cd2c94-d91b-47a8-9b32-d254edb80456",
+      "dc2b9146-775f-4c4b-8ce9-3d6b3bab970d"
+    ],
+    "category_priorities": [
+      "fashion",
+      "people",
+      "business",
+      "technology",
+      "travel",
+      "culture",
+      "art",
+      "entertainment"
+    ],
+    "created_at": "2025-09-06 04:50:28.871000",
+    "updated_at": "2025-09-06 04:58:13.336000",
+    "updated_by": "admin",
+    "art_articles": [],
+    "auto_populated": true
+  },
+  {
+    "_id": "68be7dbf30c96a3e512b925c",
+    "id": "homepage-config-1",
+    "active": true,
+    "hero_article": null,
+    "featured_articles": [
+      null,
+      "dc2b9146-775f-4c4b-8ce9-3d6b3bab970d",
+      "73cd2c94-d91b-47a8-9b32-d254edb80456",
+      "c3de336a-571c-4d8c-97c2-48ffa1d63b4e"
+    ],
+    "trending_articles": [
+      "dc2b9146-775f-4c4b-8ce9-3d6b3bab970d",
+      "73cd2c94-d91b-47a8-9b32-d254edb80456",
+      "c3de336a-571c-4d8c-97c2-48ffa1d63b4e",
+      null,
+      null,
+      null
+    ],
+    "latest_articles": [
+      null,
+      "dc2b9146-775f-4c4b-8ce9-3d6b3bab970d",
+      "73cd2c94-d91b-47a8-9b32-d254edb80456",
+      "c3de336a-571c-4d8c-97c2-48ffa1d63b4e",
+      null,
+      null,
+      null,
+      "3c346b71-6a0b-4380-a020-f030dfed796e"
+    ],
+    "fashion_articles": [
+      null,
+      null
+    ],
+    "food_articles": [
+      null,
+      "dc2b9146-775f-4c4b-8ce9-3d6b3bab970d"
+    ],
+    "travel_articles": [
+      "73cd2c94-d91b-47a8-9b32-d254edb80456",
+      "c3de336a-571c-4d8c-97c2-48ffa1d63b4e"
+    ],
+    "business_articles": [],
+    "technology_articles": [
+      "3c346b71-6a0b-4380-a020-f030dfed796e"
+    ],
+    "people_articles": [
+      "c283f961-69a9-4c92-85a0-930f418c8252"
+    ],
+    "culture_articles": [],
+    "entertainment_articles": [],
+    "created_at": "2025-09-08 06:54:55.399000",
+    "updated_at": "2025-09-08 06:54:55.399000"
+  }
+]

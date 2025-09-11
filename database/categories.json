@@ -1,0 +1,272 @@
+[
+  {
+    "_id": "b8d11bf5-44d5-4179-82be-8932a972bee8",
+    "name": "Fashion",
+    "slug": "fashion",
+    "description": "Expert insights on style, elegance, and luxury fashion for modern living",
+    "hero_image": "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800",
+    "color": "from-purple-600 to-pink-600",
+    "created_at": "2025-08-26 13:41:06.136000",
+    "subcategories": [
+      "men",
+      "women",
+      "luxury",
+      "accessories",
+      "trends"
+    ],
+    "updated_at": "2025-09-04 15:58:11.340000"
+  },
+  {
+    "_id": "467dfe18-00c5-4ce3-9218-9785db862478",
+    "name": "Business",
+    "slug": "business",
+    "description": "Entrepreneurship, leadership insights, and success stories from industry leaders",
+    "hero_image": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800",
+    "color": "from-blue-600 to-indigo-600",
+    "created_at": "2025-08-26 13:41:06.136000",
+    "subcategories": [
+      "entrepreneurship",
+      "leadership",
+      "finance",
+      "startups",
+      "corporate"
+    ],
+    "updated_at": "2025-09-04 15:58:11.342000"
+  },
+  {
+    "_id": "6f0ee892-8594-4ea6-8e83-b0044a34727d",
+    "name": "Technology",
+    "slug": "technology",
+    "description": "Latest gadgets, innovations, and tech trends for the luxury lifestyle",
+    "hero_image": "https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=800",
+    "color": "from-cyan-600 to-blue-600",
+    "created_at": "2025-08-26 13:41:06.136000",
+    "subcategories": [
+      "gadgets",
+      "innovations",
+      "mobile",
+      "reviews",
+      "smart",
+      "ai"
+    ],
+    "updated_at": "2025-09-04 15:58:11.343000"
+  },
+  {
+    "_id": "f88b62f0-63ac-4b3b-bce6-59f83b4fb614",
+    "name": "Finance",
+    "slug": "finance",
+    "description": "Investment strategies, wealth management, and financial insights for affluent readers",
+    "hero_image": "https://images.unsplash.com/photo-1559526324-4b87b5e36e44?w=800",
+    "color": "from-green-600 to-emerald-600",
+    "created_at": "2025-08-26 13:41:06.136000",
+    "subcategories": [
+      "investment",
+      "wealth",
+      "crypto",
+      "markets",
+      "planning"
+    ],
+    "updated_at": "2025-09-04 15:58:11.345000"
+  },
+  {
+    "_id": "da1facda-de9a-4377-9dbb-30c08dc41327",
+    "name": "Travel",
+    "slug": "travel",
+    "description": "Luxury destinations, exclusive experiences, and premium travel insights",
+    "hero_image": "https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=800",
+    "color": "from-teal-600 to-cyan-600",
+    "created_at": "2025-08-26 13:41:06.136000",
+    "subcategories": [
+      "destinations",
+      "luxury",
+      "adventure",
+      "resorts",
+      "culture",
+      "guides"
+    ],
+    "updated_at": "2025-09-04 15:58:11.346000"
+  },
+  {
+    "_id": "b0f4bca6-e722-4f17-8c9c-6d62ae768d4d",
+    "name": "Health",
+    "slug": "health",
+    "description": "Wellness, fitness, and health optimization for peak performance",
+    "hero_image": "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800",
+    "color": "from-red-600 to-rose-600",
+    "created_at": "2025-08-26 13:41:06.136000",
+    "subcategories": [
+      "fitness",
+      "nutrition",
+      "wellness",
+      "mental",
+      "longevity"
+    ],
+    "updated_at": "2025-09-04 15:58:11.347000"
+  },
+  {
+    "_id": "9478e311-79b6-4f4a-9173-12b718f4c1e4",
+    "name": "Culture",
+    "slug": "culture",
+    "description": "Arts, music, literature, and cultural movements shaping our world",
+    "hero_image": "https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=800",
+    "color": "from-amber-600 to-orange-600",
+    "created_at": "2025-08-26 13:41:06.136000",
+    "subcategories": [
+      "arts",
+      "music",
+      "literature",
+      "events",
+      "heritage"
+    ],
+    "updated_at": "2025-09-04 15:58:11.349000"
+  },
+  {
+    "_id": "7e83d047-696d-44f6-bb8d-759c9177115c",
+    "name": "Art",
+    "slug": "art",
+    "description": "Contemporary art, gallery exhibitions, and artistic expressions worldwide",
+    "hero_image": "https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=800",
+    "color": "from-indigo-600 to-purple-600",
+    "created_at": "2025-08-26 13:41:06.136000",
+    "subcategories": [
+      "contemporary",
+      "classical",
+      "galleries",
+      "artists",
+      "collections"
+    ],
+    "updated_at": "2025-09-04 15:58:11.350000"
+  },
+  {
+    "_id": "380fcc98-2ca0-4142-bfa6-360079c03b3a",
+    "name": "Entertainment",
+    "slug": "entertainment",
+    "description": "Movies, shows, celebrities, and entertainment industry insights",
+    "hero_image": "https://images.unsplash.com/photo-1489599735225-8e6c9b2b8e6e?w=800",
+    "color": "from-violet-600 to-fuchsia-600",
+    "created_at": "2025-08-26 13:41:06.136000",
+    "subcategories": [
+      "movies",
+      "shows",
+      "celebrities",
+      "music",
+      "events"
+    ],
+    "updated_at": "2025-09-04 15:58:11.351000"
+  },
+  {
+    "_id": "0688e772-5328-4ddf-a5d0-e3e59ab4e7e4",
+    "name": "Food",
+    "slug": "food",
+    "description": "Discover culinary excellence with expert restaurant reviews, chef profiles, recipe guides, and food trends",
+    "hero_image": "https://customer-assets.emergentagent.com/job_just-urbane-revamp/artifacts/oaskh2yo_Celini.JPG",
+    "created_at": "2025-09-04 08:34:00.471000",
+    "subcategories": [
+      "chefs",
+      "dining",
+      "drinks",
+      "food review",
+      "recipes"
+    ],
+    "updated_at": "2025-09-04 15:58:11.352000"
+  },
+  {
+    "_id": "d20261a3-dcbb-46c2-871e-548cb9555432",
+    "name": "Auto",
+    "slug": "auto",
+    "description": "Luxury automobiles, performance cars, and automotive excellence",
+    "hero_image": "https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=800",
+    "subcategories": [
+      "cars",
+      "bikes",
+      "classics",
+      "concept",
+      "evs",
+      "reviews"
+    ],
+    "updated_at": "2025-09-04 15:58:11.354000",
+    "created_at": "2025-09-04 15:58:11.354000"
+  },
+  {
+    "_id": "6c3e472c-26b8-4b17-9c60-efb241f22d77",
+    "name": "Grooming",
+    "slug": "grooming",
+    "description": "Men's grooming, skincare, and personal care for the modern gentleman",
+    "hero_image": "https://images.unsplash.com/photo-1621605815971-fbc98d665033?w=800",
+    "subcategories": [
+      "skincare",
+      "hair",
+      "fragrance",
+      "style",
+      "wellness"
+    ],
+    "updated_at": "2025-09-04 15:58:11.357000",
+    "created_at": "2025-09-04 15:58:11.357000"
+  },
+  {
+    "_id": "19ad40ea-3b2c-4c08-a6dd-741f953de9a3",
+    "name": "People",
+    "slug": "people",
+    "description": "Profiles of influential leaders, entrepreneurs, and changemakers",
+    "hero_image": "https://images.unsplash.com/photo-1556157382-97eda2d62296?w=800",
+    "subcategories": [
+      "leaders",
+      "entrepreneurs",
+      "celebrities",
+      "innovators",
+      "profiles"
+    ],
+    "updated_at": "2025-09-04 15:58:11.358000",
+    "created_at": "2025-09-04 15:58:11.358000"
+  },
+  {
+    "_id": "12924d7f-b534-48b8-b2b2-375ecb1a4bc2",
+    "name": "fashion",
+    "display_name": "Fashion",
+    "description": "Latest fashion trends, style guides, and wardrobe essentials for men and women",
+    "subcategories": [
+      "men",
+      "women",
+      "accessories"
+    ],
+    "created_at": "2025-09-05 16:23:30.449000"
+  },
+  {
+    "_id": "84ceef75-e492-4fd3-b66c-18b4a48bc094",
+    "name": "luxury",
+    "display_name": "Luxury",
+    "description": "Exclusive luxury lifestyle content including yachts, private jets, high-end automobiles, and premium experiences",
+    "subcategories": [
+      "yachts",
+      "automobiles",
+      "private-jets",
+      "real-estate"
+    ],
+    "created_at": "2025-09-05 17:32:25.556000"
+  },
+  {
+    "_id": "68bb39cd743c61f9decd95bf",
+    "id": "62622356-01b7-415c-a288-bb36ccb85dd2",
+    "name": "technology",
+    "display_name": "Technology",
+    "subcategories": [
+      "gadgets",
+      "smartphones",
+      "artificial-intelligence",
+      "innovation"
+    ]
+  },
+  {
+    "_id": "68bb42a93a3a7232d98b1d4e",
+    "id": "e6ec3637-d977-4d5a-86a9-d6040714609c",
+    "name": "people",
+    "display_name": "People",
+    "subcategories": [
+      "celebrities",
+      "entrepreneurs",
+      "icons",
+      "leaders",
+      "culture"
+    ]
+  }
+]
