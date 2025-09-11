@@ -162,11 +162,11 @@ const AdminMagazinesPage = () => {
             </div>
             
             <button
-              onClick={() => setShowUploadModal(true)}
+              onClick={() => navigate('/admin/magazines/new')}
               className="flex items-center space-x-2 bg-amber-500 text-white px-4 py-2 rounded-lg hover:bg-amber-600 transition-colors"
             >
               <Plus className="w-4 h-4" />
-              <span>Upload Magazine</span>
+              <span>New Magazine</span>
             </button>
           </div>
         </div>
