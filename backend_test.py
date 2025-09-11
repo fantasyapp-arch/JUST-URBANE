@@ -3126,6 +3126,443 @@ class JustUrbaneAPITester:
             self.log_test("Men's Fashion Article Integration", False, f"Error during testing: {str(e)}")
             return False
 
+    def run_comprehensive_admin_tests(self):
+        """Run comprehensive admin functionality tests as requested"""
+        print("🎯 STARTING COMPREHENSIVE ADMIN FUNCTIONALITY TESTING")
+        print("=" * 70)
+        print("Testing admin login API and all admin-related functionality...")
+        print("Focus: Admin login, magazines CRUD, articles CRUD, dashboard stats")
+        print()
+        
+        # 1. API Health Check
+        self.test_health_check()
+        
+        # 2. Admin Authentication - PRIMARY FOCUS
+        print("\n🔐 ADMIN AUTHENTICATION TESTING")
+        print("=" * 40)
+        admin_login_success = self.test_admin_login_comprehensive()
+        
+        if not admin_login_success:
+            print("❌ Admin login failed - cannot proceed with admin tests")
+            return self.generate_comprehensive_admin_report()
+        
+        # 3. Admin Dashboard Stats
+        print("\n📊 ADMIN DASHBOARD TESTING")
+        print("=" * 30)
+        dashboard_stats = self.test_admin_dashboard_stats()
+        
+        # 4. Admin Magazine Management - COMPREHENSIVE CRUD
+        print("\n📖 ADMIN MAGAZINE MANAGEMENT TESTING")
+        print("=" * 45)
+        magazines = self.test_admin_magazines_crud_comprehensive()
+        
+        # 5. Magazine Creation Testing
+        print("\n📤 MAGAZINE CREATION TESTING")
+        print("=" * 35)
+        new_magazine_id = self.test_admin_magazine_create_comprehensive()
+        
+        # 6. Magazine Deletion Testing (if we have magazines)
+        print("\n🗑️ MAGAZINE DELETION TESTING")
+        print("=" * 35)
+        if magazines:
+            self.test_admin_magazine_delete_comprehensive(magazines)
+        
+        # 7. Admin Article Management - COMPREHENSIVE CRUD
+        print("\n📰 ADMIN ARTICLE MANAGEMENT TESTING")
+        print("=" * 45)
+        articles = self.test_admin_articles_crud_comprehensive()
+        
+        return self.generate_comprehensive_admin_report()
+
+    def generate_comprehensive_admin_report(self):
+        """Generate comprehensive admin test report"""
+        print("\n" + "="*70)
+        print("🎯 COMPREHENSIVE ADMIN FUNCTIONALITY TEST REPORT")
+        print("="*70)
+        
+        total_tests = len(self.test_results)
+        passed_tests = sum(1 for result in self.test_results if result["success"])
+        failed_tests = total_tests - passed_tests
+        success_rate = (passed_tests / total_tests * 100) if total_tests > 0 else 0
+        
+        print(f"📊 OVERALL RESULTS:")
+        print(f"   Total Tests: {total_tests}")
+        print(f"   Passed: {passed_tests}")
+        print(f"   Failed: {failed_tests}")
+        print(f"   Success Rate: {success_rate:.1f}%")
+        print()
+        
+        # Group results by category
+        categories = {
+            "Admin Authentication": [],
+            "Admin Dashboard": [],
+            "Admin Magazines": [],
+            "Admin Articles": [],
+            "System Health": []
+        }
+        
+        for result in self.test_results:
+            test_name = result["test"]
+            if "Admin Login" in test_name or "Admin Authentication" in test_name:
+                categories["Admin Authentication"].append(result)
+            elif "Dashboard" in test_name:
+                categories["Admin Dashboard"].append(result)
+            elif "Magazine" in test_name:
+                categories["Admin Magazines"].append(result)
+            elif "Article" in test_name:
+                categories["Admin Articles"].append(result)
+            elif "Health" in test_name:
+                categories["System Health"].append(result)
+        
+        # Print results by category
+        for category, tests in categories.items():
+            if tests:
+                print(f"📋 {category.upper()}:")
+                for test in tests:
+                    status = "✅ PASS" if test["success"] else "❌ FAIL"
+                    print(f"   {status} {test['test']}: {test['message']}")
+                print()
+        
+        # Critical Issues Summary
+        critical_failures = [result for result in self.test_results if not result["success"] and any(keyword in result["test"] for keyword in ["Login", "Authentication", "Health"])]
+        
+        if critical_failures:
+            print("🚨 CRITICAL ISSUES:")
+            for failure in critical_failures:
+                print(f"   ❌ {failure['test']}: {failure['message']}")
+            print()
+        
+        # Admin Panel Status Summary
+        admin_login_working = any(result["success"] for result in self.test_results if "Admin Login" in result["test"])
+        magazines_working = any(result["success"] for result in self.test_results if "Admin Magazines List" in result["test"])
+        articles_working = any(result["success"] for result in self.test_results if "Admin Articles List" in result["test"])
+        dashboard_working = any(result["success"] for result in self.test_results if "Admin Dashboard" in result["test"])
+        
+        print("🎯 ADMIN PANEL STATUS SUMMARY:")
+        print(f"   Admin Login (/api/admin/login): {'✅ Working' if admin_login_working else '❌ Failed'}")
+        print(f"   Dashboard Stats: {'✅ Working' if dashboard_working else '❌ Failed'}")
+        print(f"   Magazine Management: {'✅ Working' if magazines_working else '❌ Failed'}")
+        print(f"   Article Management: {'✅ Working' if articles_working else '❌ Failed'}")
+        print()
+        
+        # Specific endpoint status
+        print("🔍 SPECIFIC ENDPOINT STATUS:")
+        endpoints_tested = [
+            ("POST /api/admin/login", admin_login_working),
+            ("GET /api/admin/dashboard/stats", dashboard_working),
+            ("GET /api/admin/magazines", magazines_working),
+            ("POST /api/admin/magazines/upload", any("Magazine Create" in r["test"] and r["success"] for r in self.test_results)),
+            ("PUT /api/admin/magazines/{id}", any("Magazine Update" in r["test"] and r["success"] for r in self.test_results)),
+            ("DELETE /api/admin/magazines/{id}", any("Magazine Delete" in r["test"] and r["success"] for r in self.test_results)),
+            ("GET /api/admin/articles", articles_working)
+        ]
+        
+        for endpoint, working in endpoints_tested:
+            status = "✅ Working" if working else "❌ Failed"
+            print(f"   {status} {endpoint}")
+        
+        return {
+            "total_tests": total_tests,
+            "passed_tests": passed_tests,
+            "failed_tests": failed_tests,
+            "success_rate": success_rate,
+            "admin_login_working": admin_login_working,
+            "magazines_working": magazines_working,
+            "articles_working": articles_working,
+            "dashboard_working": dashboard_working,
+            "critical_failures": len(critical_failures)
+        }
+
+    def test_admin_login_comprehensive(self):
+        """Test admin login endpoint with default credentials"""
+        admin_credentials = {
+            "username": "admin",
+            "password": "admin123"
+        }
+        
+        try:
+            response = self.session.post(
+                f"{self.base_url}/api/admin/login",
+                json=admin_credentials,
+                headers={"Content-Type": "application/json"},
+                timeout=10
+            )
+            
+            if response.status_code == 200:
+                data = response.json()
+                if data.get("access_token") and data.get("token_type") == "bearer":
+                    self.admin_token = data["access_token"]
+                    admin_user = data.get("admin_user", {})
+                    self.log_test("Admin Login", True, f"Admin login successful, JWT token received. User: {admin_user.get('username', 'Unknown')}")
+                    return True
+                else:
+                    self.log_test("Admin Login", False, f"Invalid admin login response: {data}")
+                    return False
+            else:
+                self.log_test("Admin Login", False, f"HTTP {response.status_code}: {response.text}")
+                return False
+        except Exception as e:
+            self.log_test("Admin Login", False, f"Admin login error: {str(e)}")
+            return False
+
+    def test_admin_dashboard_stats(self):
+        """Test admin dashboard stats endpoint"""
+        if not self.admin_token:
+            self.log_test("Admin Dashboard Stats", False, "No admin authentication token available")
+            return None
+            
+        try:
+            response = self.session.get(
+                f"{self.base_url}/api/admin/dashboard/stats",
+                headers={"Authorization": f"Bearer {self.admin_token}"},
+                timeout=10
+            )
+            
+            if response.status_code == 200:
+                data = response.json()
+                required_fields = ["total_articles", "total_magazines", "total_users", "total_subscribers"]
+                if all(field in data for field in required_fields):
+                    self.log_test("Admin Dashboard Stats", True, f"Dashboard stats retrieved: {data['total_articles']} articles, {data['total_magazines']} magazines, {data['total_users']} users")
+                    return data
+                else:
+                    self.log_test("Admin Dashboard Stats", False, f"Missing required fields in response: {data}")
+                    return None
+            else:
+                self.log_test("Admin Dashboard Stats", False, f"HTTP {response.status_code}: {response.text}")
+                return None
+        except Exception as e:
+            self.log_test("Admin Dashboard Stats", False, f"Admin dashboard stats error: {str(e)}")
+            return None
+
+    def test_admin_magazines_crud_comprehensive(self):
+        """Test comprehensive admin magazines CRUD operations"""
+        if not self.admin_token:
+            self.log_test("Admin Magazines CRUD", False, "No admin authentication token available")
+            return None
+            
+        try:
+            # Test GET /api/admin/magazines (list magazines)
+            response = self.session.get(
+                f"{self.base_url}/api/admin/magazines",
+                headers={"Authorization": f"Bearer {self.admin_token}"},
+                timeout=10
+            )
+            
+            if response.status_code == 200:
+                data = response.json()
+                magazines = data.get("magazines", [])
+                self.log_test("Admin Magazines List", True, f"Retrieved {len(magazines)} magazines")
+                
+                # Test single magazine retrieval if magazines exist
+                if magazines:
+                    magazine_id = magazines[0].get("id")
+                    if magazine_id:
+                        # Test GET /api/admin/magazines/{id}
+                        single_response = self.session.get(
+                            f"{self.base_url}/api/admin/magazines/{magazine_id}",
+                            headers={"Authorization": f"Bearer {self.admin_token}"},
+                            timeout=10
+                        )
+                        
+                        if single_response.status_code == 200:
+                            magazine = single_response.json()
+                            self.log_test("Admin Single Magazine", True, f"Retrieved magazine: {magazine.get('title', 'Unknown')}")
+                            
+                            # Test PUT /api/admin/magazines/{id} (update magazine)
+                            update_data = {
+                                "title": "Updated Test Magazine Title",
+                                "description": "Updated test description",
+                                "is_featured": "true"
+                            }
+                            
+                            update_response = self.session.put(
+                                f"{self.base_url}/api/admin/magazines/{magazine_id}",
+                                data=update_data,
+                                headers={"Authorization": f"Bearer {self.admin_token}"},
+                                timeout=10
+                            )
+                            
+                            if update_response.status_code == 200:
+                                result = update_response.json()
+                                if result.get("message") == "Magazine updated successfully":
+                                    self.log_test("Admin Magazine Update", True, "Magazine updated successfully")
+                                else:
+                                    self.log_test("Admin Magazine Update", False, f"Unexpected update response: {result}")
+                            else:
+                                self.log_test("Admin Magazine Update", False, f"HTTP {update_response.status_code}: {update_response.text}")
+                        else:
+                            self.log_test("Admin Single Magazine", False, f"HTTP {single_response.status_code}: {single_response.text}")
+                    else:
+                        self.log_test("Admin Single Magazine", False, "No magazine ID found")
+                else:
+                    self.log_test("Admin Single Magazine", True, "No magazines available for single retrieval test")
+                    self.log_test("Admin Magazine Update", True, "No magazines available for update test")
+                
+                return magazines
+            else:
+                self.log_test("Admin Magazines List", False, f"HTTP {response.status_code}: {response.text}")
+                return None
+        except Exception as e:
+            self.log_test("Admin Magazines CRUD", False, f"Admin magazines CRUD error: {str(e)}")
+            return None
+
+    def test_admin_articles_crud_comprehensive(self):
+        """Test comprehensive admin articles CRUD operations"""
+        if not self.admin_token:
+            self.log_test("Admin Articles CRUD", False, "No admin authentication token available")
+            return None
+            
+        try:
+            # Test GET /api/admin/articles (list articles)
+            response = self.session.get(
+                f"{self.base_url}/api/admin/articles",
+                headers={"Authorization": f"Bearer {self.admin_token}"},
+                timeout=10
+            )
+            
+            if response.status_code == 200:
+                data = response.json()
+                articles = data.get("articles", [])
+                total_count = data.get("total_count", 0)
+                self.log_test("Admin Articles List", True, f"Retrieved {len(articles)} articles (total: {total_count})")
+                
+                # Test single article retrieval if articles exist
+                if articles:
+                    article_id = articles[0].get("id")
+                    if article_id:
+                        # Test GET /api/articles/{id} (using public endpoint as admin uses same)
+                        single_response = self.session.get(
+                            f"{self.base_url}/api/articles/{article_id}",
+                            headers={"Authorization": f"Bearer {self.admin_token}"},
+                            timeout=10
+                        )
+                        
+                        if single_response.status_code == 200:
+                            article = single_response.json()
+                            self.log_test("Admin Single Article", True, f"Retrieved article: {article.get('title', 'Unknown')}")
+                        else:
+                            self.log_test("Admin Single Article", False, f"HTTP {single_response.status_code}: {single_response.text}")
+                    else:
+                        self.log_test("Admin Single Article", False, "No article ID found")
+                else:
+                    self.log_test("Admin Single Article", True, "No articles available for single retrieval test")
+                
+                return articles
+            else:
+                self.log_test("Admin Articles List", False, f"HTTP {response.status_code}: {response.text}")
+                return None
+        except Exception as e:
+            self.log_test("Admin Articles CRUD", False, f"Admin articles CRUD error: {str(e)}")
+            return None
+
+    def test_admin_magazine_create_comprehensive(self):
+        """Test comprehensive admin magazine creation (POST)"""
+        if not self.admin_token:
+            self.log_test("Admin Magazine Create", False, "No admin authentication token available")
+            return
+            
+        try:
+            # Create a dummy PDF file for testing
+            import tempfile
+            import os
+            with tempfile.NamedTemporaryFile(suffix='.pdf', delete=False) as temp_file:
+                # Write minimal PDF content
+                temp_file.write(b'%PDF-1.4\n1 0 obj\n<<\n/Type /Catalog\n/Pages 2 0 R\n>>\nendobj\n2 0 obj\n<<\n/Type /Pages\n/Kids [3 0 R]\n/Count 1\n>>\nendobj\n3 0 obj\n<<\n/Type /Page\n/Parent 2 0 R\n/MediaBox [0 0 612 792]\n>>\nendobj\nxref\n0 4\n0000000000 65535 f \n0000000009 00000 n \n0000000058 00000 n \n0000000115 00000 n \ntrailer\n<<\n/Size 4\n/Root 1 0 R\n>>\nstartxref\n174\n%%EOF')
+                temp_file_path = temp_file.name
+            
+            # Prepare form data
+            form_data = {
+                "title": "Test Magazine Upload",
+                "description": "Test magazine description for admin testing",
+                "month": "January",
+                "year": "2025",
+                "is_featured": "false"
+            }
+            
+            # Upload file
+            with open(temp_file_path, 'rb') as pdf_file:
+                files = {"pdf_file": ("test_magazine.pdf", pdf_file, "application/pdf")}
+                response = self.session.post(
+                    f"{self.base_url}/api/admin/magazines/upload",
+                    data=form_data,
+                    files=files,
+                    headers={"Authorization": f"Bearer {self.admin_token}"},
+                    timeout=15
+                )
+            
+            # Cleanup temp file
+            os.unlink(temp_file_path)
+            
+            if response.status_code == 200:
+                result = response.json()
+                if result.get("message") == "Magazine uploaded successfully":
+                    magazine_id = result.get("magazine_id")
+                    self.log_test("Admin Magazine Create", True, f"Magazine created successfully: {magazine_id}")
+                    return magazine_id
+                else:
+                    self.log_test("Admin Magazine Create", False, f"Unexpected response: {result}")
+                    return None
+            else:
+                self.log_test("Admin Magazine Create", False, f"HTTP {response.status_code}: {response.text}")
+                return None
+                
+        except Exception as e:
+            self.log_test("Admin Magazine Create", False, f"Admin magazine create error: {str(e)}")
+            return None
+
+    def test_admin_magazine_delete_comprehensive(self, magazines):
+        """Test comprehensive admin magazine deletion (DELETE)"""
+        if not self.admin_token:
+            self.log_test("Admin Magazine Delete", False, "No admin authentication token available")
+            return
+            
+        if not magazines:
+            self.log_test("Admin Magazine Delete", True, "No magazines available for deletion test")
+            return
+            
+        try:
+            # Find a magazine to delete (prefer test magazines)
+            magazine_to_delete = None
+            for magazine in magazines:
+                title = magazine.get("title", "").lower()
+                if "test" in title or "updated" in title:
+                    magazine_to_delete = magazine
+                    break
+            
+            if not magazine_to_delete:
+                # Use the last magazine if no test magazine found
+                magazine_to_delete = magazines[-1] if magazines else None
+            
+            if not magazine_to_delete:
+                self.log_test("Admin Magazine Delete", True, "No suitable magazine found for deletion test")
+                return
+                
+            magazine_id = magazine_to_delete.get("id")
+            magazine_title = magazine_to_delete.get("title", "Unknown")
+            
+            if not magazine_id:
+                self.log_test("Admin Magazine Delete", False, "No magazine ID found for deletion")
+                return
+            
+            # Test DELETE /api/admin/magazines/{id}
+            response = self.session.delete(
+                f"{self.base_url}/api/admin/magazines/{magazine_id}",
+                headers={"Authorization": f"Bearer {self.admin_token}"},
+                timeout=10
+            )
+            
+            if response.status_code == 200:
+                result = response.json()
+                if result.get("message") == "Magazine deleted successfully":
+                    self.log_test("Admin Magazine Delete", True, f"Magazine deleted successfully: {magazine_title}")
+                else:
+                    self.log_test("Admin Magazine Delete", False, f"Unexpected delete response: {result}")
+            else:
+                self.log_test("Admin Magazine Delete", False, f"HTTP {response.status_code}: {response.text}")
+                
+        except Exception as e:
+            self.log_test("Admin Magazine Delete", False, f"Admin magazine delete error: {str(e)}")
+
     def run_mens_fashion_integration_tests(self):
         """Run Men's Fashion Article Integration Tests - REVIEW REQUEST FOCUS"""
         print("👔 STARTING MEN'S FASHION ARTICLE INTEGRATION TESTING")
