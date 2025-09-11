@@ -34,7 +34,7 @@ class JustUrbaneAPITester:
     def test_health_check(self):
         """Test API health endpoint"""
         try:
-            response = self.session.get(f"{self.base_url}/health", timeout=10)
+            response = self.session.get(f"{self.base_url}/api/health", timeout=10)
             if response.status_code == 200:
                 data = response.json()
                 if data.get("status") == "healthy":
