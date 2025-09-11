@@ -113,7 +113,7 @@ class MagazineDeleteTester:
     def test_update_magazine(self, magazine_id: str):
         """Test PUT /api/admin/magazines/{id} - Update magazine (NEW FEATURE)"""
         try:
-            # Prepare update data
+            # Prepare update data as JSON (not form data)
             update_data = {
                 "title": "Updated Magazine Title - Test",
                 "description": "Updated description for testing purposes",
@@ -122,7 +122,8 @@ class MagazineDeleteTester:
             
             response = self.session.put(
                 f"{self.base_url}/api/admin/magazines/{magazine_id}",
-                data=update_data,  # Using form data as per the endpoint
+                json=update_data,  # Using JSON data as per the endpoint
+                headers={"Content-Type": "application/json"},
                 timeout=10
             )
             
