@@ -2029,7 +2029,7 @@ backend:
     status_history:
       - working: true
         agent: "testing"
-        comment: "✅ ARTICLE CRUD WORKING: Admin article management working correctly. GET /api/admin/articles retrieved 9 articles with total count. Article listing and management functional for admin panel."
+        comment: "✅ SCHEMA FIX VERIFIED - ARTICLE CRUD 100% WORKING: Database schema mismatch issues completely resolved. All article CRUD operations working perfectly: GET /api/admin/articles (9 articles retrieved), GET /api/admin/articles/{id}/edit (successful article editing - was HTTP 500 before), PUT /api/admin/articles/{id} (article updates working), DELETE /api/admin/articles/{id} (proper deletion handling). Admin routes now properly handle both '_id' and 'id' fields correctly. User-reported HTTP 500 errors in article editing have been completely fixed."
 
   - task: "Master Admin Panel Data Integration"
     implemented: true
