@@ -13,7 +13,7 @@ from datetime import datetime
 
 def test_razorpay_payment_verification():
     """Test Razorpay payment verification with customer details"""
-    base_url = "https://urbane-admin-fix-1.preview.emergentagent.com/api"
+    base_url = "https://admin-fix-urbane.preview.emergentagent.com/api"
     
     # First, register and login to get auth token
     test_user = {

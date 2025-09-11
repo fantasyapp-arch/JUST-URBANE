@@ -13,7 +13,7 @@ import os
 from datetime import datetime
 
 class CompletePaymentSimulationTester:
-    def __init__(self, base_url: str = "https://urbane-admin-fix-1.preview.emergentagent.com/api"):
+    def __init__(self, base_url: str = "https://admin-fix-urbane.preview.emergentagent.com/api"):
         self.base_url = base_url
         self.session = requests.Session()
         self.test_results = []

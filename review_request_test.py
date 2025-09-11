@@ -10,7 +10,7 @@ import time
 from datetime import datetime
 
 class ReviewRequestTester:
-    def __init__(self, base_url: str = "https://urbane-admin-fix-1.preview.emergentagent.com"):
+    def __init__(self, base_url: str = "https://admin-fix-urbane.preview.emergentagent.com"):
         self.base_url = base_url
         self.session = requests.Session()
         self.test_results = []
@@ -265,7 +265,7 @@ class ReviewRequestTester:
             response = self.session.options(
                 f"{self.base_url}/api/health",
                 headers={
-                    "Origin": "https://urbane-admin-fix-1.preview.emergentagent.com",
+                    "Origin": "https://admin-fix-urbane.preview.emergentagent.com",
                     "Access-Control-Request-Method": "GET",
                     "Access-Control-Request-Headers": "Content-Type"
                 },
@@ -379,7 +379,7 @@ import time
 from datetime import datetime
 
 class ReviewRequestTester:
-    def __init__(self, base_url: str = "https://urbane-admin-fix-1.preview.emergentagent.com"):
+    def __init__(self, base_url: str = "https://admin-fix-urbane.preview.emergentagent.com"):
         self.base_url = base_url
         self.session = requests.Session()
         self.auth_token = None
@@ -622,7 +622,7 @@ class ReviewRequestTester:
             response = self.session.options(
                 f"{self.base_url}/api/health",
                 headers={
-                    "Origin": "https://urbane-admin-fix-1.preview.emergentagent.com",
+                    "Origin": "https://admin-fix-urbane.preview.emergentagent.com",
                     "Access-Control-Request-Method": "GET",
                     "Access-Control-Request-Headers": "Content-Type"
                 },
@@ -637,7 +637,7 @@ class ReviewRequestTester:
                     # Test actual CORS request
                     response = self.session.get(
                         f"{self.base_url}/api/health",
-                        headers={"Origin": "https://urbane-admin-fix-1.preview.emergentagent.com"},
+                        headers={"Origin": "https://admin-fix-urbane.preview.emergentagent.com"},
                         timeout=10
                     )
                     

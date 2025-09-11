@@ -13,7 +13,7 @@ import io
 import os
 
 class MagazineBackendTester:
-    def __init__(self, base_url: str = "https://urbane-admin-fix-1.preview.emergentagent.com"):
+    def __init__(self, base_url: str = "https://admin-fix-urbane.preview.emergentagent.com"):
         self.base_url = base_url
         self.session = requests.Session()
         self.admin_token = None
