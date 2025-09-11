@@ -258,8 +258,20 @@ async def duplicate_article(
 ):
     """Duplicate an existing article"""
     try:
-        # Get original article
+        # Get original article - try multiple query methods  
         original_article = db.articles.find_one({"id": article_id})
+        
+        if not original_article:
+            # Try with ObjectId for MongoDB _id field
+            try:
+                from bson import ObjectId
+                original_article = db.articles.find_one({"_id": ObjectId(article_id)})
+            except:
+                pass
+        
+        if not original_article:
+            # Try with _id as string
+            original_article = db.articles.find_one({"_id": article_id})
         
         if not original_article:
             raise HTTPException(status_code=404, detail="Article not found")
