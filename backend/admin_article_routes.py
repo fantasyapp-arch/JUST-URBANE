@@ -326,6 +326,36 @@ async def update_article_status(
             }
         )
         
+        # If no match with custom id, try with _id as ObjectId
+        if result.matched_count == 0:
+            try:
+                from bson import ObjectId
+                result = db.articles.update_one(
+                    {"_id": ObjectId(article_id)},
+                    {
+                        "$set": {
+                            "status": status,
+                            "updated_at": datetime.utcnow(),
+                            "updated_by": current_admin.username
+                        }
+                    }
+                )
+            except:
+                pass
+        
+        # If still no match, try with _id as string
+        if result.matched_count == 0:
+            result = db.articles.update_one(
+                {"_id": article_id},
+                {
+                    "$set": {
+                        "status": status,
+                        "updated_at": datetime.utcnow(),
+                        "updated_by": current_admin.username
+                    }
+                }
+            )
+        
         if result.matched_count == 0:
             raise HTTPException(status_code=404, detail="Article not found")
         
