@@ -11,10 +11,11 @@ from datetime import datetime
 from typing import Dict, Any, Optional
 
 class JustUrbaneAPITester:
-    def __init__(self, base_url: str = "http://localhost:8001"):
+    def __init__(self, base_url: str = "https://urbane-admin-fix.preview.emergentagent.com"):
         self.base_url = base_url
         self.session = requests.Session()
         self.auth_token = None
+        self.admin_token = None
         self.test_results = []
         self.razorpay_key_id = "rzp_live_RDvDvJ94tbQgS1"
         
