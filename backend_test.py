@@ -835,7 +835,7 @@ class JustUrbaneAPITester:
             }
             
             response = self.session.post(
-                f"{self.base_url}/payments/razorpay/create-order",
+                f"{self.base_url}/api/payments/razorpay/create-order",
                 json=order_request,
                 headers={"Content-Type": "application/json"},
                 timeout=15
