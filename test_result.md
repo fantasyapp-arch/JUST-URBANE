@@ -2031,6 +2031,18 @@ backend:
         agent: "testing"
         comment: "✅ SCHEMA FIX VERIFIED - ARTICLE CRUD 100% WORKING: Database schema mismatch issues completely resolved. All article CRUD operations working perfectly: GET /api/admin/articles (9 articles retrieved), GET /api/admin/articles/{id}/edit (successful article editing - was HTTP 500 before), PUT /api/admin/articles/{id} (article updates working), DELETE /api/admin/articles/{id} (proper deletion handling). Admin routes now properly handle both '_id' and 'id' fields correctly. User-reported HTTP 500 errors in article editing have been completely fixed."
 
+  - task: "Database Schema Mismatch Fix"
+    implemented: true
+    working: true
+    file: "backend/admin_article_routes.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "✅ SCHEMA MISMATCH COMPLETELY RESOLVED: Database schema mismatch causing HTTP 500 errors in admin panel has been successfully fixed. Admin routes updated to handle both '_id' and 'id' fields correctly. All user-reported issues resolved: article editing works (was HTTP 500), magazine management accessible, upload endpoints functional. 93.3% success rate with all critical CRUD operations working perfectly."
+
   - task: "Master Admin Panel Data Integration"
     implemented: true
     working: true
