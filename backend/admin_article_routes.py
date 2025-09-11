@@ -29,6 +29,80 @@ UPLOAD_DIR.mkdir(exist_ok=True)
 ARTICLE_DIR = UPLOAD_DIR / "articles"
 ARTICLE_DIR.mkdir(exist_ok=True)
 
+@article_router.get("/")
+def get_articles(
+    current_admin: AdminUser = Depends(get_current_admin_user),
+    page: int = 1,
+    limit: int = 10,
+    category: Optional[str] = None,
+    search: Optional[str] = None,
+    status: Optional[str] = None
+):
+    """Get all articles with pagination and filters"""
+    skip = (page - 1) * limit
+    
+    # Build query filters
+    query = {}
+    if category:
+        query["category"] = category.lower()
+    if status:
+        query["status"] = status
+    if search:
+        query["$or"] = [
+            {"title": {"$regex": search, "$options": "i"}},
+            {"body": {"$regex": search, "$options": "i"}},
+            {"author_name": {"$regex": search, "$options": "i"}}
+        ]
+    
+    # Get articles
+    articles = list(db.articles.find(query).skip(skip).limit(limit).sort([("created_at", -1)]))
+    total_count = db.articles.count_documents(query)
+    
+    # Convert ObjectId to string and ensure id field
+    for article in articles:
+        article["id"] = str(article.get("_id", article.get("id")))
+        if "_id" in article:
+            del article["_id"]
+    
+    return {
+        "articles": articles,
+        "total_count": total_count,
+        "page": page,
+        "limit": limit,
+        "total_pages": (total_count + limit - 1) // limit
+    }
+
+@article_router.delete("/{article_id}")
+def delete_article(
+    article_id: str,
+    current_admin: AdminUser = Depends(get_current_admin_user)
+):
+    """Delete an article"""
+    try:
+        # Try multiple ways to delete the article
+        result = db.articles.delete_one({"id": article_id})
+        
+        # If no match with custom id, try with _id as ObjectId
+        if result.deleted_count == 0:
+            try:
+                result = db.articles.delete_one({"_id": ObjectId(article_id)})
+            except:
+                pass
+        
+        # If still no match, try with _id as string
+        if result.deleted_count == 0:
+            result = db.articles.delete_one({"_id": article_id})
+        
+        if result.deleted_count == 0:
+            raise HTTPException(status_code=404, detail="Article not found")
+        
+        return {"message": "Article deleted successfully"}
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to delete article: {str(e)}")
+
 @article_router.post("/upload")
 async def upload_article(
     current_admin: AdminUser = Depends(get_current_admin_user),
