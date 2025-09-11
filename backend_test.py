@@ -876,12 +876,12 @@ class JustUrbaneAPITester:
         try:
             # Test multiple endpoints to verify database connectivity
             endpoints_to_test = [
-                ("/articles", "Articles Collection"),
-                ("/categories", "Categories Collection"),
-                ("/reviews", "Reviews Collection"),
-                ("/issues", "Magazine Issues Collection"),
-                ("/destinations", "Destinations Collection"),
-                ("/authors", "Authors Collection")
+                ("/api/articles", "Articles Collection"),
+                ("/api/categories", "Categories Collection"),
+                ("/api/reviews", "Reviews Collection"),
+                ("/api/issues", "Magazine Issues Collection"),
+                ("/api/destinations", "Destinations Collection"),
+                ("/api/authors", "Authors Collection")
             ]
             
             successful_connections = 0
