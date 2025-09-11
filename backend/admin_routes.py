@@ -208,8 +208,17 @@ def delete_magazine_admin(
     magazine_id: str,
     current_admin: AdminUser = Depends(get_current_admin_user)
 ):
-    # Delete magazine
+    # Delete magazine - try both custom id and ObjectId
     result = db.issues.delete_one({"id": magazine_id})
+    
+    # If not found with custom id, try with MongoDB ObjectId
+    if result.deleted_count == 0:
+        try:
+            from bson import ObjectId
+            result = db.issues.delete_one({"_id": ObjectId(magazine_id)})
+        except:
+            pass
+    
     if result.deleted_count == 0:
         raise HTTPException(status_code=404, detail="Magazine not found")
     
