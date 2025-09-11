@@ -1190,6 +1190,7 @@ class JustUrbaneAPITester:
                 self.log_test("Admin Single Article", False, "No article ID found")
                 return
                 
+            # Use the public articles endpoint (not admin-specific)
             response = self.session.get(
                 f"{self.base_url}/api/articles/{article_id}",
                 timeout=10
