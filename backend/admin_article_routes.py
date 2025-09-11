@@ -203,18 +203,33 @@ async def get_article_for_edit(
 ):
     """Get article data for editing"""
     try:
+        # Try multiple ways to find the article
         article = db.articles.find_one({"id": article_id})
+        
+        if not article:
+            # Try with ObjectId for MongoDB _id field
+            try:
+                from bson import ObjectId
+                article = db.articles.find_one({"_id": ObjectId(article_id)})
+            except:
+                pass
+        
+        if not article:
+            # Try with _id as string (common in our database)
+            article = db.articles.find_one({"_id": article_id})
         
         if not article:
             raise HTTPException(status_code=404, detail="Article not found")
         
-        # Convert ObjectId to string
+        # Convert ObjectId to string and ensure we have an id field
         article["id"] = str(article.get("_id", article.get("id")))
         if "_id" in article:
             del article["_id"]
         
         return article
         
+    except HTTPException:
+        raise
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Failed to get article: {str(e)}")
 
