@@ -2888,7 +2888,17 @@ metadata:
   aastha_gill_image_count_verified: true
   aastha_gill_testing_date: "2025-01-30T23:45:00"
   last_test_date: "2025-01-30T23:45:00"
-  last_test_success_rate: "100.0%"
+  last_test_success_rate: "88.2%"
+  magazine_delete_functionality_tested: true
+  magazine_delete_functionality_success: true
+  magazine_delete_backend_integration_verified: true
+  magazine_delete_api_endpoints_working: true
+  magazine_delete_dual_id_support_working: true
+  magazine_delete_real_time_updates_working: true
+  magazine_delete_crud_operations_working: true
+  magazine_delete_admin_authentication_working: true
+  magazine_delete_testing_date: "2025-01-30T23:45:00"
+  magazine_delete_production_ready: true
   aastha_gill_article_production_ready: true
   comprehensive_testing_completed: true
   sustainable_travel_article_tested: true
