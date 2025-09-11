@@ -203,6 +203,32 @@ def get_all_magazines_admin(current_admin: AdminUser = Depends(get_current_admin
     
     return {"magazines": magazines}
 
+@admin_router.get("/magazines/{magazine_id}")
+def get_magazine_admin(
+    magazine_id: str,
+    current_admin: AdminUser = Depends(get_current_admin_user)
+):
+    """Get a specific magazine by ID"""
+    # Try with custom id first
+    magazine = db.issues.find_one({"id": magazine_id})
+    
+    # If not found with custom id, try with MongoDB ObjectId
+    if not magazine:
+        try:
+            from bson import ObjectId
+            magazine = db.issues.find_one({"_id": ObjectId(magazine_id)})
+        except:
+            pass
+    
+    if not magazine:
+        raise HTTPException(status_code=404, detail="Magazine not found")
+    
+    # Convert ObjectId to string
+    magazine["id"] = str(magazine["_id"])
+    del magazine["_id"]
+    
+    return magazine
+
 @admin_router.delete("/magazines/{magazine_id}")
 def delete_magazine_admin(
     magazine_id: str,
