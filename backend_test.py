@@ -3160,9 +3160,19 @@ def main():
     return report["success_rate"] >= 80
 
 if __name__ == "__main__":
-    success = main()
-    if success:
-        print("✅ Backend functionality verified - CSS fixes did not break APIs!")
+    tester = JustUrbaneAPITester()
+    
+    # Run comprehensive admin magazine editor testing
+    report = tester.run_admin_magazine_editor_tests()
+    
+    print(f"\n🎯 FINAL ASSESSMENT:")
+    print(f"Success Rate: {report['success_rate']:.1f}%")
+    print(f"Admin Functionality Status: {report['admin_functionality_status'].title()}")
+    
+    if report['success_rate'] >= 80:
+        print("✅ Admin magazine editor functionality is working properly")
     else:
-        print("❌ Backend issues detected - investigation required")
-    exit(0 if success else 1)
+        print("⚠️ Admin functionality issues detected - may need investigation")
+        
+    # Exit with appropriate code
+    exit(0 if report['success_rate'] >= 80 else 1)
