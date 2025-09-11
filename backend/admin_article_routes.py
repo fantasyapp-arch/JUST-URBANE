@@ -9,6 +9,7 @@ from pathlib import Path
 import json
 import re
 from striprtf import striprtf
+from bson import ObjectId
 
 from admin_models import *
 from admin_auth import get_current_admin_user
