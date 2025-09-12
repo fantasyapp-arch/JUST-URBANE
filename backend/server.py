@@ -737,6 +737,9 @@ async def get_articles(
     limit: int = Query(20, le=100)
 ):
     filter_dict = {}
+    # Only show published articles on public API
+    filter_dict["status"] = "published"
+    
     if category:
         filter_dict["category"] = category
     if subcategory:
