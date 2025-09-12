@@ -137,7 +137,7 @@ async def upload_article(
         if file_extension == '.rtf':
             try:
                 # Parse RTF content
-                content_text = striprtf(content_bytes.decode('utf-8'))
+                content_text = rtf_to_text(content_bytes.decode('utf-8'))
             except Exception as e:
                 raise HTTPException(status_code=400, detail=f"Failed to parse RTF file: {str(e)}")
         else:
