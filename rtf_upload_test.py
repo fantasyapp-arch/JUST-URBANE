@@ -46,7 +46,7 @@ class RTFUploadTester:
                 "password": ADMIN_PASSWORD
             }
             
-            response = self.session.post(f"{BACKEND_URL}/admin/auth/login", json=auth_data)
+            response = self.session.post(f"{BACKEND_URL}/admin/login", json=auth_data)
             
             if response.status_code == 200:
                 data = response.json()
