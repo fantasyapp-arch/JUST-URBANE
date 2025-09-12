@@ -8,7 +8,7 @@ import shutil
 from pathlib import Path
 import json
 import re
-from striprtf import striprtf
+from striprtf.striprtf import rtf_to_text
 from bson import ObjectId
 
 from admin_models import *
