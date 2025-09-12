@@ -754,14 +754,11 @@ async def get_articles(
 
 @app.get("/api/articles/{article_id}")
 async def get_article(article_id: str):
-    # Try to find by ID first, then by slug - only published articles (including legacy articles without status)
+    # Try to find by ID first, then by slug - only published articles
     article = db.articles.find_one({
         "$and": [
             {"$or": [{"id": article_id}, {"_id": article_id}, {"slug": article_id}]},
-            {"$or": [
-                {"status": "published"},
-                {"status": {"$exists": False}}  # Legacy articles without status field
-            ]}
+            {"status": "published"}
         ]
     })
     if not article:
