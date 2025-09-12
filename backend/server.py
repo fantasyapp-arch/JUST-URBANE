@@ -737,11 +737,8 @@ async def get_articles(
     limit: int = Query(20, le=100)
 ):
     filter_dict = {}
-    # Only show published articles on public API - include legacy articles without status field
-    filter_dict["$or"] = [
-        {"status": "published"},
-        {"status": {"$exists": False}}  # Legacy articles without status field
-    ]
+    # Only show published articles on public API
+    filter_dict["status"] = "published"
     
     if category:
         filter_dict["category"] = category
