@@ -138,11 +138,18 @@ async def upload_article(
             try:
                 # Parse RTF content
                 content_text = rtf_to_text(content_bytes.decode('utf-8'))
+                if not content_text or content_text.strip() == "":
+                    raise HTTPException(status_code=400, detail="RTF file appears to be empty or invalid")
+            except UnicodeDecodeError as e:
+                raise HTTPException(status_code=400, detail=f"RTF file encoding error: {str(e)}")
             except Exception as e:
                 raise HTTPException(status_code=400, detail=f"Failed to parse RTF file: {str(e)}")
         else:
             # Plain text file
-            content_text = content_bytes.decode('utf-8')
+            try:
+                content_text = content_bytes.decode('utf-8')
+            except UnicodeDecodeError as e:
+                raise HTTPException(status_code=400, detail=f"Text file encoding error: {str(e)}")
         
         # Clean and format content
         content_text = clean_article_content(content_text)
