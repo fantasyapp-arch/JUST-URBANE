@@ -8,7 +8,7 @@ import json
 import time
 
 def test_working_admin_apis():
-    base_url = "https://admin-fix-urbane.preview.emergentagent.com"
+    base_url = "https://justurb-panel.preview.emergentagent.com"
     
     # Login first
     admin_credentials = {

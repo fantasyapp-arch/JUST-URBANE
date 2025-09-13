@@ -9,7 +9,7 @@ import os
 import json
 
 def test_rtf_upload_debug():
-    base_url = "https://admin-fix-urbane.preview.emergentagent.com"
+    base_url = "https://justurb-panel.preview.emergentagent.com"
     
     # Login first
     admin_credentials = {

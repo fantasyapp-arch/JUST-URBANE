@@ -12,7 +12,7 @@ from pathlib import Path
 import time
 
 # Configuration
-BACKEND_URL = "https://admin-fix-urbane.preview.emergentagent.com/api"
+BACKEND_URL = "https://justurb-panel.preview.emergentagent.com/api"
 ADMIN_USERNAME = "admin"
 ADMIN_PASSWORD = "admin123"
 
