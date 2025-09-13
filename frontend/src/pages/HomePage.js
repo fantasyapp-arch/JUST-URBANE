@@ -74,9 +74,9 @@ const HomePage = () => {
       {/* PROMOTIONAL BANNER */}
       <section className="border-t border-b border-black bg-gray-50 py-4">
         <div className="max-w-6xl mx-auto px-6">
-          <div className="flex items-center justify-between">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4 md:gap-0">
             {/* Magazine Cover Image */}
-            <div className="flex-shrink-0">
+            <div className="flex-shrink-0 order-1 md:order-1">
               <img 
                 src="https://images.unsplash.com/photo-1586953208448-b6b19f5c1b80?w=100&h=140&fit=crop&crop=faces,center&auto=format&q=80"
                 alt="Just Urbane Digital Magazine"
@@ -88,15 +88,15 @@ const HomePage = () => {
             </div>
             
             {/* Promotional Text */}
-            <div className="flex-1 text-center px-6">
-              <p className="text-lg font-bold text-gray-900">
+            <div className="flex-1 text-center px-0 md:px-6 order-2 md:order-2">
+              <p className="text-base md:text-lg font-bold text-gray-900">
                 Limited Time Offer! Get our Digital Magazine for just ₹499
               </p>
             </div>
             
             {/* CTA Button */}
-            <div className="flex-shrink-0">
-              <button className="bg-black text-white px-8 py-3 font-bold text-sm tracking-wide hover:bg-gray-800 transition-colors">
+            <div className="flex-shrink-0 order-3 md:order-3">
+              <button className="bg-black text-white px-6 md:px-8 py-2 md:py-3 font-bold text-sm tracking-wide hover:bg-gray-800 transition-colors">
                 BUY NOW!
               </button>
             </div>
