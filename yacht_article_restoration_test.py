@@ -11,7 +11,7 @@ from datetime import datetime
 from typing import Dict, Any, Optional, List
 
 class YachtArticleRestorationTester:
-    def __init__(self, base_url: str = "https://justurb-panel.preview.emergentagent.com"):
+    def __init__(self, base_url: str = "https://content-phoenix.preview.emergentagent.com"):
         self.base_url = base_url
         self.session = requests.Session()
         self.auth_token = None
