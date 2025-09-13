@@ -78,17 +78,12 @@ const HomePage = () => {
             {/* Magazine Cover Image */}
             <div className="flex-shrink-0 order-1 md:order-1">
               <img 
-                src="uploads/media/images/b03db7bc-c2e8-4eef-962b-0603666983e6_cover.jpg"
-                alt="Just Urbane Digital Magazine"
+                src="https://customer-assets.emergentagent.com/job_content-phoenix/artifacts/2d7la0nv_Untitled%20design-25.png"
+                alt="Just Urbane Digital Magazine - Tapan Singhel Cover"
                 className="h-16 w-12 object-cover rounded shadow-sm"
                 onError={(e) => {
-                  // Try the square version as fallback
-                  if (e.target.src.includes('_cover.jpg')) {
-                    e.target.src = 'uploads/media/images/b03db7bc-c2e8-4eef-962b-0603666983e6_square.jpg';
-                  } else {
-                    // Final fallback to a magazine-style image
-                    e.target.src = 'https://images.unsplash.com/photo-1586953208448-b6b19f5c1b80?w=100&h=140&fit=crop&crop=faces,center&auto=format&q=80';
-                  }
+                  // Fallback to local uploads if available
+                  e.target.src = 'uploads/media/images/b03db7bc-c2e8-4eef-962b-0603666983e6_cover.jpg';
                 }}
               />
             </div>
