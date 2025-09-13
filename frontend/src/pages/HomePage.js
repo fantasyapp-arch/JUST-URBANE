@@ -126,7 +126,7 @@ const HomePage = () => {
               <img 
                 src={heroArticle?.hero_image || 'https://images.unsplash.com/photo-1559839049-2b350c4284cb?w=1920&h=1080&fit=crop&crop=faces,center&auto=format&q=90'}
                 alt={heroArticle?.title || 'Just Urbane'}
-                className="w-full h-80 object-contain bg-gray-50 rounded-lg shadow-lg"
+                className="w-full h-[400px] lg:h-[500px] object-contain bg-gray-50 rounded-lg shadow-lg"
                 onError={(e) => {
                   e.target.src = 'https://images.unsplash.com/photo-1559839049-2b350c4284cb?w=1920&h=1080&fit=crop&crop=faces,center&auto=format&q=90';
                 }}
