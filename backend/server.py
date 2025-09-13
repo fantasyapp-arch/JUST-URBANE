@@ -372,9 +372,10 @@ def prepare_list_response(items):
 async def get_public_homepage_content():
     """Get homepage content for public display"""
     try:
-        # For now, just return all articles organized by category
-        # Get all articles using the same approach as the working articles API
-        all_articles_raw = list(db.articles.find({}))
+        # Get only published articles, sorted by featured first, then by published date
+        all_articles_raw = list(db.articles.find(
+            {"status": "published"}
+        ).sort([("featured", -1), ("published_at", -1)]))
         
         # Convert ObjectIds and organize
         all_articles = []
@@ -384,7 +385,7 @@ async def get_public_homepage_content():
                 del article["_id"]
             all_articles.append(article)
         
-        # Organize by category
+        # Hero article should be the first featured article or first published article
         hero_article = all_articles[0] if all_articles else None
         
         return {
