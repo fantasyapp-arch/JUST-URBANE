@@ -78,11 +78,11 @@ const HomePage = () => {
             {/* Magazine Cover Image */}
             <div className="flex-shrink-0">
               <img 
-                src="https://customer-assets.emergentagent.com/job_content-phoenix/artifacts/b8837pm7_Screenshot%202025-09-13%20at%2010.18.22%E2%80%AFPM.png"
+                src="https://images.unsplash.com/photo-1586953208448-b6b19f5c1b80?w=100&h=140&fit=crop&crop=faces,center&auto=format&q=80"
                 alt="Just Urbane Digital Magazine"
-                className="h-16 w-auto object-contain"
+                className="h-16 w-12 object-cover rounded shadow-sm"
                 onError={(e) => {
-                  e.target.src = 'https://images.unsplash.com/photo-1586953208448-b6b19f5c1b80?w=200&h=300&fit=crop&crop=faces,center&auto=format&q=80';
+                  e.target.src = 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=140&fit=crop&crop=faces,center&auto=format&q=80';
                 }}
               />
             </div>
