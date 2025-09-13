@@ -146,20 +146,7 @@ const ArticlePage = () => {
   const canReadPremium = isAuthenticated && user?.is_premium && user?.subscription_status === 'active';
   const isLocked = displayArticle?.is_locked || (displayArticle?.is_premium && !canReadPremium);
 
-  const openMagazineReader = () => {
-    if (allArticles && allArticles.length > 0) {
-      // Find current article's index and create a magazine starting from that article
-      const currentIndex = allArticles.findIndex(a => a.slug === displayArticle.slug || a.id === displayArticle.id);
-      const magazineArticles = currentIndex >= 0 ? 
-        [...allArticles.slice(currentIndex), ...allArticles.slice(0, currentIndex)] : 
-        allArticles;
-      setIsReaderOpen(true);
-    }
-  };
 
-  const closeMagazineReader = () => {
-    setIsReaderOpen(false);
-  };
 
   const shareArticle = () => {
     if (navigator.share) {
