@@ -750,7 +750,7 @@ async def get_articles(
     if trending is not None:
         filter_dict["trending"] = trending
 
-    articles = list(db.articles.find(filter_dict).limit(limit))
+    articles = list(db.articles.find(filter_dict).sort([("featured", -1), ("published_at", -1)]).limit(limit))
     return prepare_list_response(articles)
 
 @app.get("/api/articles/{article_id}")
