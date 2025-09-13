@@ -214,7 +214,7 @@ const HomePage = () => {
                         <img 
                           src={article.hero_image}
                           alt={article.title}
-                          className="w-full h-48 md:h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                          className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-300 min-h-[200px] max-h-[300px]"
                           onError={(e) => {
                             e.target.src = 'https://images.unsplash.com/photo-1604242692760-2f7b0c26856d?w=800&h=600&fit=crop&crop=faces,center&auto=format&q=80';
                           }}
