@@ -74,7 +74,7 @@ const HomePage = () => {
       {/* PROMOTIONAL BANNER */}
       <section className="border-t border-b border-black bg-gray-50 py-4">
         <div className="max-w-6xl mx-auto px-6">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-4 md:gap-0">
+          <div className="flex flex-col md:flex-row items-center justify-center gap-6 md:gap-8">
             {/* Magazine Cover Image */}
             <div className="flex-shrink-0 order-1 md:order-1">
               <img 
@@ -89,7 +89,7 @@ const HomePage = () => {
             </div>
             
             {/* Promotional Text */}
-            <div className="flex-1 text-center px-0 md:px-6 order-2 md:order-2">
+            <div className="text-center order-2 md:order-2">
               <p className="text-base md:text-lg font-bold text-gray-900">
                 Limited Time Offer! Get our Digital Magazine for just ₹499
               </p>
