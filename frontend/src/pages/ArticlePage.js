@@ -15,7 +15,7 @@ const ArticlePage = () => {
   const { user, isAuthenticated } = useAuth();
   const { data: article, isLoading, error } = useArticle(slug);
   const { data: allArticles } = useArticles();
-  const [isReaderOpen, setIsReaderOpen] = useState(false);
+
 
   useEffect(() => {
     window.scrollTo(0, 0);
