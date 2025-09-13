@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { NextGenImage } from '../components/OptimizedImage';
 import { useParams, Link, useNavigate } from 'react-router-dom';
-import { Calendar, Clock, Eye, User, Tag, Crown, Share2, Heart, ArrowLeft, BookOpen } from 'lucide-react';
+import { Calendar, Clock, Eye, User, Tag, Crown, Share2, Heart, ArrowLeft } from 'lucide-react';
 import { motion } from 'framer-motion';
 import LoadingSpinner, { SkeletonArticle } from '../components/LoadingSpinner';
 import PremiumContentGate from '../components/PremiumContentGate';
-import MagazineReader from '../components/MagazineReader';
 import { useAuth } from '../context/AuthContext';
 import { useArticle, useArticles } from '../hooks/useArticles';
 import { formatDate, formatReadingTime } from '../utils/formatters';
