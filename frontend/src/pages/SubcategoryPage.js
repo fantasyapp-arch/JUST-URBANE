@@ -109,7 +109,7 @@ const SubcategoryPage = () => {
           <img
             src={article.hero_image}
             alt={article.title}
-            className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500"
+            className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500 min-h-[200px] max-h-[350px]"
             onError={(e) => {
               e.target.src = '/placeholder-image.jpg';
             }}
