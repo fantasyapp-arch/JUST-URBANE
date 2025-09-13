@@ -71,6 +71,39 @@ const HomePage = () => {
 
   return (
     <div className="min-h-screen bg-white">
+      {/* PROMOTIONAL BANNER */}
+      <section className="border-t border-b border-black bg-gray-50 py-4">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="flex items-center justify-between">
+            {/* Magazine Cover Image */}
+            <div className="flex-shrink-0">
+              <img 
+                src="https://customer-assets.emergentagent.com/job_content-phoenix/artifacts/b8837pm7_Screenshot%202025-09-13%20at%2010.18.22%E2%80%AFPM.png"
+                alt="Just Urbane Digital Magazine"
+                className="h-16 w-auto object-contain"
+                onError={(e) => {
+                  e.target.src = 'https://images.unsplash.com/photo-1586953208448-b6b19f5c1b80?w=200&h=300&fit=crop&crop=faces,center&auto=format&q=80';
+                }}
+              />
+            </div>
+            
+            {/* Promotional Text */}
+            <div className="flex-1 text-center px-6">
+              <p className="text-lg font-bold text-gray-900">
+                Limited Time Offer! Get our Digital Magazine for just ₹499
+              </p>
+            </div>
+            
+            {/* CTA Button */}
+            <div className="flex-shrink-0">
+              <button className="bg-black text-white px-8 py-3 font-bold text-sm tracking-wide hover:bg-gray-800 transition-colors">
+                BUY NOW!
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* HERO SECTION */}
       <section className="relative bg-white">
         <div className="max-w-6xl mx-auto px-6 py-12">
