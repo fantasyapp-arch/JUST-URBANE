@@ -78,11 +78,11 @@ const HomePage = () => {
             {/* Magazine Cover Image */}
             <div className="flex-shrink-0 order-1 md:order-1">
               <img 
-                src="https://images.unsplash.com/photo-1586953208448-b6b19f5c1b80?w=100&h=140&fit=crop&crop=faces,center&auto=format&q=80"
+                src="/uploads/media/images/b03db7bc-c2e8-4eef-962b-0603666983e6_cover.jpg"
                 alt="Just Urbane Digital Magazine"
                 className="h-16 w-12 object-cover rounded shadow-sm"
                 onError={(e) => {
-                  e.target.src = 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=140&fit=crop&crop=faces,center&auto=format&q=80';
+                  e.target.src = 'https://images.unsplash.com/photo-1586953208448-b6b19f5c1b80?w=100&h=140&fit=crop&crop=faces,center&auto=format&q=80';
                 }}
               />
             </div>
@@ -96,9 +96,12 @@ const HomePage = () => {
             
             {/* CTA Button */}
             <div className="flex-shrink-0 order-3 md:order-3">
-              <button className="bg-black text-white px-6 md:px-8 py-2 md:py-3 font-bold text-sm tracking-wide hover:bg-gray-800 transition-colors">
+              <Link 
+                to="/pricing"
+                className="bg-black text-white px-6 md:px-8 py-2 md:py-3 font-bold text-sm tracking-wide hover:bg-gray-800 transition-colors inline-block"
+              >
                 BUY NOW!
-              </button>
+              </Link>
             </div>
           </div>
         </div>
