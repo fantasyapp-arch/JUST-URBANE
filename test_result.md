@@ -2998,6 +2998,18 @@ backend:
     status_history:
       - working: true
         agent: "testing"
+
+  - task: "Pricing/Subscription Backend API Testing"
+    implemented: true
+    working: true
+    file: "backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "🎯 PRICING/SUBSCRIPTION BACKEND API TESTING COMPLETED - PERFECT 100% SUCCESS RATE (24/24 tests passed). ✅ Payment Packages API: GET /api/payments/packages endpoint working perfectly - all 3 subscription packages (digital_annual, print_annual, combined_annual) available with correct INR pricing (Digital ₹1 trial, Print ₹499, Combined ₹999) and complete package structure with 8 features each. ✅ Subscription Plans Data Quality: All subscription plans have high-quality data for PricingPage component - proper pricing format, currency (INR), features lists, and popular flags. ✅ Razorpay Integration: Order creation working perfectly for all package types with correct amount calculations (₹499.0 for print, ₹1.0 for digital trial), proper Razorpay Key ID configuration (rzp_live_RDvDvJ94tbQgS1), and successful order ID generation. ✅ Address Validation: Smart validation implemented - digital subscriptions work without address, print/combined subscriptions correctly require address fields and return proper 400 errors when missing. ✅ Webhook Endpoint: Razorpay webhook endpoint accessible and processing requests correctly. ✅ Frontend Integration: All PricingPage API dependencies working - health check, packages API, auth endpoints accessible with proper CORS configuration. CRITICAL: All payment and subscription API endpoints that PricingPage component depends on are working perfectly. No API errors found that would cause frontend loading issues. Pricing/subscription functionality is production-ready."
         comment: "🎯 NEWSLETTER DUPLICATE REMOVAL VERIFICATION COMPLETED - PERFECT 100% SUCCESS RATE (5/5 tests passed). ✅ Single Newsletter Section: Found exactly ONE 'Stay Updated with Just Urbane' section on homepage as expected - duplicate removal successful. ✅ White Background Confirmed: Newsletter section has proper white background (rgb(255, 255, 255)) with CSS class 'bg-white' as specified. ✅ No Footer Duplicates: Footer contains NO newsletter sections - only Categories, Services, Company, and Contact sections present. ✅ Functional Form Elements: Email input field and Subscribe button both present and functional. ✅ Proper Positioning: Newsletter section positioned at 79.4% from top of page (in lower section, not header). CRITICAL FINDING: The duplicate newsletter section bug has been COMPLETELY RESOLVED. User's fix to remove duplicate from footer while keeping white homepage version was successful. All 5 verification requirements from review request met perfectly."
 
   - task: "Scroll-to-Top Navigation Behavior Fix - January 3, 2025"
