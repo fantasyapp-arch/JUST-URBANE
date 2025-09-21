@@ -3801,6 +3801,17 @@ test_plan:
   core_api_functionality_verified: true
   cors_configuration_verified: true
   frontend_redesign_impact_verified: false
+  pricing_subscription_backend_tested: true
+  pricing_subscription_backend_success_rate: "100.0%"
+  pricing_subscription_backend_testing_date: "2025-01-30T16:45:00"
+  payment_packages_endpoint_verified: true
+  subscription_plans_data_quality_verified: true
+  razorpay_order_creation_verified: true
+  digital_subscription_order_verified: true
+  address_validation_verified: true
+  webhook_endpoint_verified: true
+  pricing_page_api_dependencies_verified: true
+  cors_frontend_integration_verified: true
   sunseeker_yacht_article_tested: true
   sunseeker_yacht_article_success_rate: "86.7%"
   sunseeker_yacht_article_testing_date: "2025-09-05T17:36:00"
