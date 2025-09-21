@@ -124,6 +124,7 @@ const router = createBrowserRouter([
       { path: "reviews", element: <ReviewsPage /> },
       { path: "travel", element: <TravelPage /> },
       { path: "pricing", element: <PricingPage /> },
+      { path: "subscription", element: <PricingPage /> }, // Alias for pricing page
       { path: "account", element: <AccountPage /> },
       { path: "search", element: <SearchPage /> },
       { path: "about", element: <AboutPage /> },
