@@ -37,7 +37,7 @@ const OfferBanner = ({ isVisible, onClose }) => {
           {/* Right: CTA and Close */}
           <div className="flex items-center space-x-4">
             <button 
-              onClick={() => window.location.href = '/pricing'}
+              onClick={() => navigate('/pricing')}
               className="bg-red-600 text-white px-6 py-3 text-sm font-bold uppercase tracking-wide hover:bg-red-700 transition-colors duration-200"
             >
               SUBSCRIBE NOW
