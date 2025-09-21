@@ -1,6 +1,7 @@
 import React from 'react';
 import { NextGenImage } from './OptimizedImage';
 import { X } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const OfferBanner = ({ isVisible, onClose }) => {
   if (!isVisible) return null;
